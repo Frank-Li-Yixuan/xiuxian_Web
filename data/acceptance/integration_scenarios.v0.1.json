@@ -1,0 +1,57 @@
+{
+  "version": "v0.1",
+  "scenarios": [
+    {
+      "id": "S-A",
+      "name": "默认单人通关",
+      "mode": "single",
+      "expected": [
+        "stage_clear",
+        "receipt_created",
+        "return_to_dongfu",
+        "second_run_config"
+      ]
+    },
+    {
+      "id": "S-B",
+      "name": "本地双人救援",
+      "mode": "local_coop",
+      "expected": [
+        "p2_soul",
+        "p1_rescue",
+        "p2_revived"
+      ]
+    },
+    {
+      "id": "S-C",
+      "name": "顿悟与重 Roll",
+      "mode": "single_or_coop",
+      "expected": [
+        "insight_pause",
+        "reroll_consumed",
+        "rewards_applied",
+        "resume"
+      ]
+    },
+    {
+      "id": "S-D",
+      "name": "局内雷劫 Debug",
+      "mode": "debug",
+      "expected": [
+        "tribulation_started",
+        "warnings_visible",
+        "breakthrough_success"
+      ]
+    },
+    {
+      "id": "S-E",
+      "name": "死亡结算成长",
+      "mode": "single",
+      "expected": [
+        "death_settlement",
+        "resources_kept",
+        "outgame_upgrade_available"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "0.1.0",
+  "buildings": [
+    {
+      "id": "building_dongfu_hall",
+      "name": "洞府大殿",
+      "role": "overview",
+      "maxLevelV01": 1,
+      "levels": [
+        { "level": 1, "effects": { "recommendedActionCount": 3 } }
+      ]
+    },
+    {
+      "id": "building_scripture_library",
+      "name": "藏经阁",
+      "role": "methods_and_spells",
+      "maxLevelV01": 2,
+      "levels": [
+        { "level": 1, "effects": { "maxConcurrentMethodTraining": 2, "maxSpellMasteryLevel": 2 } },
+        { "level": 2, "cost": { "spirit_stone_low": 300, "jade_slip_fragment": 4 }, "effects": { "maxConcurrentMethodTraining": 3, "maxSpellMasteryLevel": 3 } }
+      ]
+    },
+    {
+      "id": "building_spirit_gathering_array",
+      "name": "聚灵阵",
+      "role": "idle_income",
+      "maxLevelV01": 3,
+      "levels": [
+        { "level": 1, "effects": { "cultivationPerMinute": 1.2, "spiritStonePerMinute": 0.8, "offlineCapMinutes": 240 } },
+        { "level": 2, "cost": { "spirit_stone_low": 260, "spirit_vein_seed": 1 }, "effects": { "cultivationPerMinute": 1.8, "spiritStonePerMinute": 1.1, "offlineCapMinutes": 360 } },
+        { "level": 3, "cost": { "spirit_stone_low": 680, "spirit_vein_seed": 2, "spirit_jade": 1 }, "effects": { "cultivationPerMinute": 2.6, "spiritStonePerMinute": 1.6, "offlineCapMinutes": 480 } }
+      ]
+    },
+    {
+      "id": "building_alchemy_room",
+      "name": "炼丹房",
+      "role": "alchemy",
+      "maxLevelV01": 2,
+      "levels": [
+        { "level": 1, "effects": { "unlockedRecipeTags": ["combat_pill", "minor_permanent"] } },
+        { "level": 2, "cost": { "spirit_stone_low": 360, "qingling_herb": 20, "spirit_jade": 1 }, "effects": { "unlockedRecipeTags": ["combat_pill", "minor_permanent", "breakthrough"] } }
+      ]
+    },
+    {
+      "id": "building_artifact_forge",
+      "name": "炼器阁",
+      "role": "artifact_and_treasure",
+      "maxLevelV01": 2,
+      "levels": [
+        { "level": 1, "effects": { "maxArtifactStar": 2, "maxTreasureStar": 2 } },
+        { "level": 2, "cost": { "spirit_stone_low": 420, "black_iron_essence": 20, "stone_armor_core": 2 }, "effects": { "maxArtifactStar": 3, "maxTreasureStar": 3 } }
+      ]
+    },
+    {
+      "id": "building_tribulation_altar",
+      "name": "劫雷台",
+      "role": "breakthrough_trial",
+      "maxLevelV01": 1,
+      "levels": [
+        { "level": 1, "effects": { "unlockedTrials": ["trial_qi_to_foundation_01"] } }
+      ]
+    }
+  ]
+}

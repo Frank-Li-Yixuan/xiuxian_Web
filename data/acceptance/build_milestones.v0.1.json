@@ -1,0 +1,102 @@
+{
+  "version": "v0.1",
+  "milestones": [
+    {
+      "id": "G0",
+      "order": 0,
+      "name": "内容包与数据校验",
+      "exitCriteria": [
+        "all_json_parse",
+        "content_registry_valid",
+        "default_profile_valid",
+        "debug_run_config_valid"
+      ]
+    },
+    {
+      "id": "G1",
+      "order": 1,
+      "name": "Headless 确定性模拟",
+      "exitCriteria": [
+        "fixed_tick_60fps",
+        "seeded_rng",
+        "same_seed_replay_hash_match"
+      ]
+    },
+    {
+      "id": "G2",
+      "order": 2,
+      "name": "基础 Canvas 可玩",
+      "exitCriteria": [
+        "single_player_movement",
+        "auto_attack",
+        "spell_casting",
+        "pill_digestion",
+        "segment_1_1_to_1_4_visible"
+      ]
+    },
+    {
+      "id": "G3",
+      "order": 3,
+      "name": "双人本地合作",
+      "exitCriteria": [
+        "p1_p2_controls",
+        "shared_insight_exp",
+        "coop_insight_overlay",
+        "rescue_success"
+      ]
+    },
+    {
+      "id": "G4",
+      "order": 4,
+      "name": "第一大阶段完整局内闭环",
+      "exitCriteria": [
+        "segments_1_1_to_1_5",
+        "boss_defeated",
+        "settlement_receipt"
+      ]
+    },
+    {
+      "id": "G5",
+      "order": 5,
+      "name": "双轨成长与局内雷劫 Debug",
+      "exitCriteria": [
+        "insight_not_cultivation",
+        "cultivation_not_insight",
+        "debug_tribulation_success"
+      ]
+    },
+    {
+      "id": "G6",
+      "order": 6,
+      "name": "局外洞府闭环",
+      "exitCriteria": [
+        "receipt_apply",
+        "alchemy",
+        "artifact_upgrade",
+        "method_training",
+        "second_run_config"
+      ]
+    },
+    {
+      "id": "G7",
+      "order": 7,
+      "name": "VFX 可读性与性能",
+      "exitCriteria": [
+        "hitbox_visible",
+        "enemy_bullets_visible",
+        "tribulation_warning_visible",
+        "medium_perf_ok"
+      ]
+    },
+    {
+      "id": "G8",
+      "order": 8,
+      "name": "Release Candidate",
+      "exitCriteria": [
+        "single_full_flow_3x",
+        "coop_full_flow_2x",
+        "blocker_bugs_zero"
+      ]
+    }
+  ]
+}

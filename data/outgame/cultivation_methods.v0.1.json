@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "0.1.0",
+  "methodTrainingRules": {
+    "maxConcurrentV01": 3,
+    "parallelEfficiencyByCount": { "1": 1.0, "2": 0.9, "3": 0.8, "4": 0.7 },
+    "elementConflictLoss": {
+      "metal_wood": 0.08,
+      "water_fire": 0.10,
+      "earth_water": 0.06
+    },
+    "elementGenerationBonus": {
+      "wood_fire": 0.05,
+      "fire_earth": 0.05,
+      "earth_metal": 0.05,
+      "metal_water": 0.05,
+      "water_wood": 0.05
+    }
+  },
+  "methods": [
+    {
+      "id": "method_pure_yang",
+      "name": "纯阳功",
+      "type": "main_method",
+      "element": "fire",
+      "tags": ["fire", "yang", "qi"],
+      "unlockCost": { "spirit_stone_low": 120, "jade_slip_fragment": 1 },
+      "levels": [
+        { "level": 1, "trainingRequired": 100, "effects": { "qiRoot": 1, "fireDamageMultiplier": 1.03 } },
+        { "level": 2, "trainingRequired": 220, "cost": { "spirit_stone_low": 120 }, "effects": { "qiRoot": 2, "fireDamageMultiplier": 1.05 } },
+        { "level": 3, "trainingRequired": 420, "cost": { "spirit_stone_low": 220, "jade_slip_fragment": 1 }, "effects": { "qiRoot": 3, "passiveQiRegenMultiplier": 1.04, "fireDamageMultiplier": 1.07 } },
+        { "level": 4, "trainingRequired": 760, "cost": { "spirit_stone_low": 360, "red_sun_ginseng": 2 }, "effects": { "qiRoot": 4, "fireDamageMultiplier": 1.10 } },
+        { "level": 5, "trainingRequired": 1200, "cost": { "spirit_stone_low": 600, "thunder_marow": 1 }, "effects": { "qiRoot": 5, "fireDamageMultiplier": 1.12, "redLotusDurationBonusFrames": 30 } }
+      ]
+    },
+    {
+      "id": "method_sharp_metal",
+      "name": "锐金诀",
+      "type": "main_method",
+      "element": "metal",
+      "tags": ["metal", "sword", "pierce"],
+      "unlockCost": { "spirit_stone_low": 100, "jade_slip_fragment": 1 },
+      "levels": [
+        { "level": 1, "trainingRequired": 90, "effects": { "shen": 1, "swordProjectileSpeedMultiplier": 1.04 } },
+        { "level": 2, "trainingRequired": 210, "cost": { "spirit_stone_low": 110 }, "effects": { "shen": 2, "swordProjectileSpeedMultiplier": 1.07 } },
+        { "level": 3, "trainingRequired": 410, "cost": { "spirit_stone_low": 220, "jade_slip_fragment": 1 }, "effects": { "shen": 3, "metalDamageMultiplier": 1.06 } },
+        { "level": 4, "trainingRequired": 780, "cost": { "spirit_stone_low": 380, "black_iron_essence": 10 }, "effects": { "shen": 4, "temporaryPierceProcCooldownFrames": 720 } },
+        { "level": 5, "trainingRequired": 1250, "cost": { "spirit_stone_low": 620, "spirit_jade": 2 }, "effects": { "shen": 5, "qingshuangSwordOpeningBuffFrames": 120 } }
+      ]
+    },
+    {
+      "id": "method_turtle_breath",
+      "name": "龟息功",
+      "type": "main_method",
+      "element": "water",
+      "tags": ["water", "body", "rescue"],
+      "unlockCost": { "spirit_stone_low": 110, "jade_slip_fragment": 1 },
+      "levels": [
+        { "level": 1, "trainingRequired": 100, "effects": { "jing": 1, "revivedHpPercentBonus": 0.03 } },
+        { "level": 2, "trainingRequired": 230, "cost": { "spirit_stone_low": 120 }, "effects": { "jing": 2, "revivedHpPercentBonus": 0.05 } },
+        { "level": 3, "trainingRequired": 430, "cost": { "spirit_stone_low": 240, "qingling_herb": 8 }, "effects": { "jing": 3, "rescueHpCostMultiplier": 0.95 } },
+        { "level": 4, "trainingRequired": 820, "cost": { "spirit_stone_low": 420, "spirit_spring_shard": 1 }, "effects": { "jing": 4, "healingReceivedMultiplier": 1.06 } },
+        { "level": 5, "trainingRequired": 1300, "cost": { "spirit_stone_low": 680, "spirit_jade": 2 }, "effects": { "jing": 5, "firstDownSoulMoveMultiplier": 1.15 } }
+      ]
+    },
+    {
+      "id": "method_clear_sense",
+      "name": "明目诀",
+      "type": "minor_method",
+      "element": "wood",
+      "tags": ["shen", "pickup", "lock_on"],
+      "unlockCost": { "spirit_stone_low": 80, "jade_slip_fragment": 1 },
+      "levels": [
+        { "level": 1, "trainingRequired": 80, "effects": { "shen": 1, "pickupRadiusBonus": 8 } },
+        { "level": 2, "trainingRequired": 180, "cost": { "spirit_stone_low": 80 }, "effects": { "shen": 1, "pickupRadiusBonus": 16 } },
+        { "level": 3, "trainingRequired": 360, "cost": { "spirit_stone_low": 160, "clear_mind_grass": 3 }, "effects": { "shen": 2, "pickupRadiusBonus": 24, "lockOnRangeBonus": 20 } }
+      ]
+    },
+    {
+      "id": "method_innate_root",
+      "name": "先天功",
+      "type": "minor_method",
+      "element": "earth",
+      "tags": ["constitution", "cultivation"],
+      "unlockCost": { "spirit_stone_low": 90, "jade_slip_fragment": 1 },
+      "levels": [
+        { "level": 1, "trainingRequired": 90, "effects": { "constitution": 1, "cultivationGainMultiplier": 1.02 } },
+        { "level": 2, "trainingRequired": 200, "cost": { "spirit_stone_low": 100 }, "effects": { "constitution": 2, "cultivationGainMultiplier": 1.04 } },
+        { "level": 3, "trainingRequired": 390, "cost": { "spirit_stone_low": 180, "red_sun_ginseng": 1 }, "effects": { "constitution": 3, "insightExpGainMultiplier": 1.03 } }
+      ]
+    },
+    {
+      "id": "method_silent_breath",
+      "name": "敛息术",
+      "type": "minor_method",
+      "element": "water",
+      "tags": ["karma_control", "defense"],
+      "unlockCost": { "spirit_stone_low": 70, "jade_slip_fragment": 1 },
+      "levels": [
+        { "level": 1, "trainingRequired": 80, "effects": { "karma": -1, "enemyTargetingDelayBonusFrames": 6 } },
+        { "level": 2, "trainingRequired": 180, "cost": { "spirit_stone_low": 90 }, "effects": { "karma": -2, "enemyTargetingDelayBonusFrames": 10 } },
+        { "level": 3, "trainingRequired": 360, "cost": { "spirit_stone_low": 180, "clear_mind_grass": 4 }, "effects": { "karma": -3, "tribulationIntensityReduction": 0.03 } }
+      ]
+    }
+  ]
+}

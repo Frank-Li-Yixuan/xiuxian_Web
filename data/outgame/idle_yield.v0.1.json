@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "0.1.0",
+  "rules": {
+    "requiresInjectedNowMs": true,
+    "doesNotUseInsightExp": true,
+    "defaultOfflineCapMinutes": 240,
+    "idleEventsMaxPerClaim": 1
+  },
+  "formationYieldByLevel": {
+    "1": { "cultivationPerMinute": 1.2, "spiritStonePerMinute": 0.8, "offlineCapMinutes": 240 },
+    "2": { "cultivationPerMinute": 1.8, "spiritStonePerMinute": 1.1, "offlineCapMinutes": 360 },
+    "3": { "cultivationPerMinute": 2.6, "spiritStonePerMinute": 1.6, "offlineCapMinutes": 480 }
+  },
+  "idleEvents": [
+    { "id": "idle_event_minor_trance", "name": "入定小悟", "weight": 8, "minClaimMinutes": 60, "rewards": { "cultivation": 30 } },
+    { "id": "idle_event_spring_glow", "name": "灵泉泛光", "weight": 5, "minClaimMinutes": 90, "rewards": { "clear_mind_grass": 1 } },
+    { "id": "idle_event_sword_page", "name": "剑谱残光", "weight": 3, "minClaimMinutes": 120, "rewards": { "jade_slip_fragment": 1 } },
+    { "id": "idle_event_spirit_beast", "name": "灵兽路过", "weight": 2, "minClaimMinutes": 120, "rewards": { "qingling_herb": 3 } }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "0.1.0",
+  "trials": [
+    {
+      "id": "trial_qi_to_foundation_01",
+      "name": "劫雷台·筑基三九天劫",
+      "fromRealm": "qi_refining",
+      "fromLayer": 9,
+      "toRealm": "foundation",
+      "toLayer": 1,
+      "entryRequirements": {
+        "cultivationAtBottleneck": true,
+        "resources": {
+          "foundation_pill": 1,
+          "thunder_marow": 2,
+          "spirit_stone_low": 500
+        },
+        "loadout": {
+          "requiresNatalArtifact": true
+        }
+      },
+      "rules": {
+        "noRoguelikeInsight": true,
+        "noMonsterWaves": true,
+        "loadoutLocked": true,
+        "allowPreparedPills": true,
+        "allowDefensiveTreasures": true,
+        "failureDoesNotResetCultivation": true
+      },
+      "phases": [
+        {
+          "id": "thunder_1",
+          "name": "一重雷",
+          "durationFrames": 1800,
+          "patterns": ["slow_vertical_strikes", "wide_warning_circles"],
+          "testFocus": "basic_dodge"
+        },
+        {
+          "id": "thunder_2",
+          "name": "二重雷",
+          "durationFrames": 2400,
+          "patterns": ["horizontal_thunder_lines", "tracking_strikes"],
+          "testFocus": "focus_mode_and_pill_timing"
+        },
+        {
+          "id": "thunder_3",
+          "name": "三重雷",
+          "durationFrames": 2700,
+          "patterns": ["dense_thunder_barrage", "final_punishment"],
+          "testFocus": "loadout_survival"
+        },
+        {
+          "id": "heart_demon",
+          "name": "心魔劫",
+          "durationFrames": 3600,
+          "patterns": ["mirror_player"],
+          "testFocus": "reserved_for_v02",
+          "enabledInV01": false
+        }
+      ],
+      "onSuccess": {
+        "realmChange": { "realmId": "foundation", "layer": 1 },
+        "statMultipliers": { "maxHp": 1.8, "maxQi": 1.65, "shenDerived": 1.35, "baseDamage": 1.12 },
+        "unlocks": ["building_spirit_gathering_array_level_3", "stage_02_placeholder", "recipe_qi_nourishing_pill", "recipe_spirit凝神_pill"]
+      },
+      "onFailure": {
+        "consumeOnEntry": true,
+        "refund": { "thunder_marow": 1 },
+        "cultivationStaysAtBottleneck": true,
+        "injuryDebuff": { "id": "tribulation_injury_minor", "durationRuns": 1, "effects": { "maxHpMultiplier": 0.95 } }
+      }
+    }
+  ]
+}

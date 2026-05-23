@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "v0.1",
+  "spells": {
+    "spell_five_thunder": {
+      "name": "五雷正法",
+      "element": "thunder",
+      "events": [
+        {
+          "frame": 0,
+          "effect": "thunder_gather"
+        },
+        {
+          "frame": 4,
+          "effect": "thunder_chain_hit"
+        },
+        {
+          "frame": "on_kill",
+          "effect": "thunder_kill_burst"
+        }
+      ],
+      "readability": {
+        "chainLineAlphaMax": 0.72,
+        "burstIsHollowRing": true,
+        "maxConcurrentChainLines": 18
+      }
+    },
+    "spell_bagua_sword_ring": {
+      "name": "八卦剑阵",
+      "element": "metal",
+      "events": [
+        {
+          "frame": 0,
+          "effect": "bagua_ring_open"
+        },
+        {
+          "frame": "duration",
+          "effect": "bagua_orbit_swords"
+        },
+        {
+          "frame": "on_clear_bullet",
+          "effect": "bullet_shatter_short"
+        }
+      ],
+      "readability": {
+        "ringAlphaMax": 0.38,
+        "belowEnemyBullets": true
+      }
+    },
+    "spell_red_lotus_fire": {
+      "name": "红莲业火",
+      "element": "fire",
+      "events": [
+        {
+          "frame": 0,
+          "effect": "lotus_area_warning"
+        },
+        {
+          "frame": 12,
+          "effect": "low_flame_field"
+        },
+        {
+          "frame": "on_burn_kill",
+          "effect": "burn_pop_ring"
+        }
+      ],
+      "readability": {
+        "fieldFillAlphaMax": 0.32,
+        "enemyBulletsAbove": true
+      }
+    },
+    "spell_sleeve_universe": {
+      "name": "袖里乾坤",
+      "element": "void",
+      "events": [
+        {
+          "frame": 0,
+          "effect": "void_fan_open"
+        },
+        {
+          "frame": 8,
+          "effect": "bullet_absorb_lines"
+        },
+        {
+          "frame": 120,
+          "effect": "void_core_compress"
+        },
+        {
+          "frame": 150,
+          "effect": "sword_qi_reflect"
+        }
+      ],
+      "readability": {
+        "voidFillAlphaMax": 0.55,
+        "unabsorbableBulletOutline": "#ff1f3d"
+      }
+    }
+  }
+}

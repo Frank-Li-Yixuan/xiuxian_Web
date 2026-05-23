@@ -1,0 +1,135 @@
+{
+  "version": "0.1",
+  "phases": [
+    {
+      "id": "phase_0",
+      "name": "仓库与文档接入",
+      "deliverables": [
+        "package.json",
+        "AGENTS.md",
+        "tsconfig",
+        "vite",
+        "vitest",
+        "base directories"
+      ],
+      "gate": [
+        "typecheck passes",
+        "test passes"
+      ]
+    },
+    {
+      "id": "phase_1",
+      "name": "Headless Simulation 地基",
+      "deliverables": [
+        "SeededRng",
+        "FixedTickRunner",
+        "SimState",
+        "EntityManager",
+        "StateHash",
+        "ContentRegistry"
+      ],
+      "gate": [
+        "same seed same input hash stable for 10000 frames"
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "玩家与本命法宝",
+      "deliverables": [
+        "PlayerSystem",
+        "ArtifactSystem",
+        "ProjectileSystem",
+        "3 artifacts"
+      ],
+      "gate": [
+        "auto fire works headlessly"
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "敌人与第一阶段波次",
+      "deliverables": [
+        "StageSystem",
+        "WaveSpawner",
+        "EnemySystem",
+        "1-1 to 1-4 waves"
+      ],
+      "gate": [
+        "stage 1-4 headless smoke passes"
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "法术、丹药、灵气经验",
+      "deliverables": [
+        "SpellSystem",
+        "PillDigestionSystem",
+        "Drop/Pickup",
+        "TeamInsightSystem"
+      ],
+      "gate": [
+        "insight triggers but cultivation remains separate"
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "修为、雷劫、顿悟奖励",
+      "deliverables": [
+        "CultivationSystem",
+        "TribulationSystem",
+        "RewardGenerator"
+      ],
+      "gate": [
+        "debug tribulation deterministic"
+      ]
+    },
+    {
+      "id": "phase_6",
+      "name": "Canvas 可玩表现",
+      "deliverables": [
+        "CanvasRenderer",
+        "HudPresenter",
+        "InsightOverlay"
+      ],
+      "gate": [
+        "1920x1080 playable"
+      ]
+    },
+    {
+      "id": "phase_7",
+      "name": "Boss、救援、结算",
+      "deliverables": [
+        "BossSystem",
+        "RescueSystem",
+        "Settlement"
+      ],
+      "gate": [
+        "first stage clearable"
+      ]
+    },
+    {
+      "id": "phase_8",
+      "name": "联机同步 Harness",
+      "deliverables": [
+        "two-client mock",
+        "SnapshotManager",
+        "DesyncDetector"
+      ],
+      "gate": [
+        "two clients same hash"
+      ]
+    },
+    {
+      "id": "phase_9",
+      "name": "WebSocket Relay",
+      "deliverables": [
+        "RelayClient",
+        "server relay",
+        "reconnect"
+      ],
+      "gate": [
+        "two browsers complete stage 01"
+      ]
+    }
+  ]
+}

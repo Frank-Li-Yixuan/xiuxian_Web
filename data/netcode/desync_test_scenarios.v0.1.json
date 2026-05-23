@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "0.1.0",
+  "scenarios": [
+    {
+      "id": "determinism_smoke_6000_frames",
+      "name": "6000帧确定性冒烟测试",
+      "durationFrames": 6000,
+      "players": 2,
+      "seed": 10001,
+      "expected": "all_hash_reports_match"
+    },
+    {
+      "id": "visual_rng_isolation",
+      "name": "视觉随机隔离测试",
+      "durationFrames": 3600,
+      "setup": "client_a_particles_off_client_b_particles_on",
+      "expected": "gameplay_hash_match"
+    },
+    {
+      "id": "insight_reroll_race",
+      "name": "顿悟重Roll竞态测试",
+      "setup": "p1_and_p2_press_reroll_same_ui_frame",
+      "expected": "serverDecisionSeq_produces_same_options"
+    },
+    {
+      "id": "pickup_tie_distance",
+      "name": "拾取同距离归属测试",
+      "setup": "pickup_spawned_exactly_between_two_players",
+      "expected": "team_or_playerId_tiebreak_consistent"
+    },
+    {
+      "id": "tribulation_during_boss_phase_2",
+      "name": "Boss二阶段触发局内雷劫",
+      "setup": "p1_reaches_major_bottleneck_during_boss_phase_2",
+      "expected": "tribulation_overlay_and_boss_timeline_hash_match"
+    },
+    {
+      "id": "rescue_interrupt_decay",
+      "name": "救援中断与进度衰减测试",
+      "setup": "p2_starts_rescue_leaves_radius_returns_before_decay",
+      "expected": "rescueProgress_match"
+    },
+    {
+      "id": "reconnect_from_snapshot",
+      "name": "快照重连测试",
+      "setup": "p2_disconnect_at_frame_3000_reconnect_at_frame_4200",
+      "expected": "client_resimulates_to_current_frame_and_hash_matches"
+    },
+    {
+      "id": "packet_jitter_100ms_2pct_loss",
+      "name": "100ms RTT + 2% 丢包测试",
+      "network": { "rttMs": 100, "jitterMs": 25, "packetLossPct": 2 },
+      "durationFrames": 6000,
+      "expected": "run_playable_no_unrepaired_desync"
+    }
+  ]
+}

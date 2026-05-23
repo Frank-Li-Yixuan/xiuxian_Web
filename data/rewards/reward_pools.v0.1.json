@@ -1,0 +1,208 @@
+{
+  "schema": "RewardPoolDefinition[]",
+  "version": "0.1",
+  "note": "奖励池由灵气经验触发；cultivation_boost 只是奖励类型之一，不能把顿悟等级当成境界等级。",
+  "items": [
+    {
+      "id": "reward_pool_qingyun_basic",
+      "name": "青云山基础顿悟池",
+      "rules": {
+        "choicesPerPlayer": 3,
+        "allowDuplicateAcrossPlayers": false,
+        "allowCultivationBoost": true,
+        "allowMajorRealmBreakthroughChoice": false
+      },
+      "entries": [
+        {
+          "type": "spell_new",
+          "targetId": "spell_five_thunder",
+          "weight": 12,
+          "rarity": "common",
+          "conditions": [
+            "has_empty_spell_slot"
+          ]
+        },
+        {
+          "type": "spell_new",
+          "targetId": "spell_bagua_sword_ring",
+          "weight": 10,
+          "rarity": "common",
+          "conditions": [
+            "has_empty_spell_slot"
+          ]
+        },
+        {
+          "type": "spell_new",
+          "targetId": "spell_red_lotus_fire",
+          "weight": 10,
+          "rarity": "common",
+          "conditions": [
+            "has_empty_spell_slot"
+          ]
+        },
+        {
+          "type": "spell_new",
+          "targetId": "spell_sleeve_universe",
+          "weight": 6,
+          "rarity": "rare",
+          "conditions": [
+            "has_empty_spell_slot"
+          ]
+        },
+        {
+          "type": "spell_upgrade",
+          "targetId": "owned_spell",
+          "weight": 24,
+          "rarity": "common",
+          "conditions": [
+            "has_spell_slot_filled"
+          ]
+        },
+        {
+          "type": "technique",
+          "targetId": "technique_sharp_metal",
+          "weight": 12,
+          "rarity": "common"
+        },
+        {
+          "type": "technique",
+          "targetId": "technique_turtle_breath",
+          "weight": 9,
+          "rarity": "common"
+        },
+        {
+          "type": "talent",
+          "targetId": "talent_graze_qi",
+          "weight": 9,
+          "rarity": "uncommon"
+        },
+        {
+          "type": "talent",
+          "targetId": "talent_no_hit_charge",
+          "weight": 6,
+          "rarity": "rare"
+        },
+        {
+          "type": "spirit_treasure",
+          "targetId": "treasure_minor_sword_array",
+          "weight": 8,
+          "rarity": "common",
+          "conditions": [
+            "has_inner_treasure_slot"
+          ]
+        },
+        {
+          "type": "spirit_treasure",
+          "targetId": "treasure_gold_toad",
+          "weight": 8,
+          "rarity": "common",
+          "conditions": [
+            "has_inner_treasure_slot"
+          ]
+        },
+        {
+          "type": "pill",
+          "targetId": "pill_rejuvenation",
+          "weight": 8,
+          "rarity": "common"
+        },
+        {
+          "type": "pill",
+          "targetId": "pill_burning_blood",
+          "weight": 6,
+          "rarity": "uncommon"
+        },
+        {
+          "type": "cultivation_boost",
+          "targetId": "choice_breathe_deeper",
+          "weight": 6,
+          "rarity": "uncommon",
+          "conditions": [
+            "not_in_tribulation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reward_pool_qingyun_artifact",
+      "name": "青云山局内本命法宝池",
+      "rules": {
+        "choicesPerPlayer": 3,
+        "allowDuplicateAcrossPlayers": false,
+        "allowCultivationBoost": false,
+        "allowMajorRealmBreakthroughChoice": false
+      },
+      "entries": [
+        {
+          "type": "natal_artifact_inner",
+          "targetId": "artifact_qingshuang_sword",
+          "weight": 10,
+          "rarity": "common",
+          "conditions": [
+            "inner_artifact_empty"
+          ]
+        },
+        {
+          "type": "natal_artifact_inner",
+          "targetId": "artifact_ziyang_gourd",
+          "weight": 10,
+          "rarity": "common",
+          "conditions": [
+            "inner_artifact_empty"
+          ]
+        },
+        {
+          "type": "natal_artifact_inner",
+          "targetId": "artifact_xuanyue_seal",
+          "weight": 10,
+          "rarity": "common",
+          "conditions": [
+            "inner_artifact_empty"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reward_pool_qingyun_boss",
+      "name": "青云劫灵 Boss 奖励池",
+      "rules": {
+        "choicesPerPlayer": 3,
+        "allowDuplicateAcrossPlayers": false,
+        "allowCultivationBoost": true,
+        "allowMajorRealmBreakthroughChoice": false
+      },
+      "entries": [
+        {
+          "type": "heavenly_material",
+          "targetId": "heavenly_material_creation_breath",
+          "weight": 14,
+          "rarity": "rare"
+        },
+        {
+          "type": "spirit_treasure",
+          "targetId": "treasure_tongxin_lock",
+          "weight": 9,
+          "rarity": "rare"
+        },
+        {
+          "type": "constitution",
+          "targetId": "constitution_minor_pure_yang",
+          "weight": 4,
+          "rarity": "epic"
+        },
+        {
+          "type": "talent",
+          "targetId": "talent_heavenly_blessing",
+          "weight": 8,
+          "rarity": "rare"
+        },
+        {
+          "type": "cultivation_boost",
+          "targetId": "choice_absorb_tribulation_breath",
+          "weight": 12,
+          "rarity": "rare"
+        }
+      ]
+    }
+  ]
+}

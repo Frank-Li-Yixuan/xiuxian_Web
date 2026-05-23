@@ -1,0 +1,152 @@
+{
+  "schema": "DynamicTribulationEventDefinition[]",
+  "version": "0.1",
+  "note": "局内雷劫是叠加在当前波次上的动态环境高压测试；局外雷劫是独立关卡。",
+  "dynamicInRunEvents": [
+    {
+      "id": "trib_inrun_qi_to_foundation",
+      "name": "练气破筑基·局内三九雷劫",
+      "trigger": {
+        "type": "cultivation_full",
+        "realmFrom": "realm_qi_refining",
+        "realmTo": "realm_foundation"
+      },
+      "duration": 24,
+      "overlay": {
+        "skyDarken": 0.65,
+        "edgeVignette": 0.72,
+        "bgmMood": "heavy",
+        "warningText": "天象异变 · 三九雷劫"
+      },
+      "mechanics": [
+        {
+          "at": 0,
+          "patternId": "trib_warning_columns_random",
+          "repeat": {
+            "count": 8,
+            "interval": 2.4
+          },
+          "params": {
+            "columns": 2,
+            "warningTime": 1.0,
+            "unbreakable": true,
+            "damage": 18
+          }
+        },
+        {
+          "at": 6,
+          "patternId": "trib_player_lock_columns",
+          "repeat": {
+            "count": 4,
+            "interval": 3.2
+          },
+          "params": {
+            "warningTime": 1.0,
+            "unbreakable": true,
+            "damage": 22
+          }
+        },
+        {
+          "at": 18,
+          "patternId": "trib_cross_screen_sweep",
+          "repeat": {
+            "count": 2,
+            "interval": 3.0
+          },
+          "params": {
+            "warningTime": 1.2,
+            "laneCount": 5,
+            "damage": 26
+          }
+        }
+      ],
+      "success": [
+        {
+          "effectId": "creation_breath_clear",
+          "type": "clear_bullets",
+          "params": {
+            "clearAllNormalBullets": true,
+            "damageAllEnemies": 280
+          }
+        },
+        {
+          "effectId": "breakthrough_full_restore",
+          "type": "buff",
+          "params": {
+            "fullHeal": true,
+            "fullQi": true,
+            "invulnerableTime": 2.5
+          }
+        },
+        {
+          "effectId": "foundation_stat_surge",
+          "type": "buff",
+          "params": {
+            "realmId": "realm_foundation",
+            "baseStatMultiplier": 1.65,
+            "qiPoolMultiplier": 1.8,
+            "shenMultiplier": 1.45
+          }
+        }
+      ],
+      "failure": [
+        {
+          "effectId": "tribulation_failure_wound",
+          "type": "buff",
+          "params": {
+            "tag": "heavenly_wound",
+            "duration": 45,
+            "maxHpMultiplier": 0.85
+          }
+        }
+      ]
+    }
+  ],
+  "outOfRunStages": [
+    {
+      "id": "trib_stage_qi_to_foundation",
+      "name": "劫雷台·筑基三九天劫",
+      "entryFrom": "out_of_run_breakthrough_button",
+      "realmFrom": "realm_qi_refining",
+      "realmTo": "realm_foundation",
+      "rules": {
+        "noRoguelikeInsight": true,
+        "noMonsterWaves": true,
+        "loadoutLocked": true,
+        "allowPreparedPills": true,
+        "allowDefensiveTreasures": true,
+        "failure": "breakthrough_failed_no_realm_change_materials_consumed_partial",
+        "resourceKeep": "keep_run_resources_but_consumed_breakthrough_items_not_refunded"
+      },
+      "phases": [
+        {
+          "id": "walk_test",
+          "duration": 18,
+          "purpose": "纯走位擦弹",
+          "patterns": [
+            "trib_slow_columns",
+            "trib_diagonal_lanes"
+          ]
+        },
+        {
+          "id": "resource_test",
+          "duration": 24,
+          "purpose": "护体法宝与丹药储备验证",
+          "patterns": [
+            "trib_dense_columns",
+            "trib_late_lock_on"
+          ]
+        },
+        {
+          "id": "heart_demon_mirror",
+          "duration": 40,
+          "purpose": "心魔镜像决战",
+          "patterns": [
+            "mirror_player_artifact",
+            "mirror_player_spell_sample"
+          ]
+        }
+      ]
+    }
+  ]
+}

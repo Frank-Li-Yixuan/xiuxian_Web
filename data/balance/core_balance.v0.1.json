@@ -1,0 +1,215 @@
+{
+  "version": "0.1",
+  "notes": [
+    "灵气经验用于团队顿悟抓牌；修为用于个人境界与雷劫。两者不得混用。",
+    "所有数值为第一大阶段青云山·妖潮初临的 v0.1 初始调参基准。"
+  ],
+  "playerBase": {
+    "jing": 10,
+    "qiRoot": 10,
+    "shen": 10,
+    "comprehension": 10,
+    "fortune": 10,
+    "constitution": 10,
+    "karma": 0,
+    "maxHp": 100,
+    "maxQi": 100,
+    "moveSpeed": 400,
+    "hitboxRadius": 7,
+    "pickupRadius": 90,
+    "critChance": 0.05,
+    "critDamage": 1.5,
+    "armorPierce": 0,
+    "passiveQiRegenPerSecond": 1.2,
+    "cultivationRegenPerSecond": 1.6
+  },
+  "formulas": {
+    "maxHp": "60 + jing * 4 + realmHpFlatBonus",
+    "maxQi": "50 + qiRoot * 5 + realmQiFlatBonus",
+    "passiveQiRegenPerSecond": "0.8 + qiRoot * 0.04",
+    "cultivationRegenPerSecond": "0.9 + qiRoot * 0.04 + shen * 0.02",
+    "pickupRadius": "70 + shen * 2 + treasurePickupBonus",
+    "critChance": "clamp(0.02 + shen * 0.003, 0.02, 0.35)",
+    "armorPierce": "clamp((shen - 10) * 0.0025, 0, 0.25)",
+    "lockOnRange": "260 + shen * 10",
+    "teamInsightExpGain": "baseExp * (1 + (avgConstitution - 10) * 0.015)"
+  },
+  "artifacts": {
+    "outer": {
+      "artifact_qingshuang_sword": {
+        "fireInterval": 0.16,
+        "damage": 11,
+        "effectiveSingleTargetDps": 68.8
+      },
+      "artifact_ziyang_gourd": {
+        "fireInterval": 0.42,
+        "projectileCount": 5,
+        "damagePerProjectile": 6,
+        "sameTargetHitCap": 2,
+        "effectiveSingleTargetDpsRange": [42, 58]
+      },
+      "artifact_xuanyue_seal": {
+        "fireInterval": 0.9,
+        "damage": 52,
+        "radius": 90,
+        "effectiveSingleTargetDpsRange": [55, 64]
+      }
+    },
+    "innerArtifactPower": {
+      "level1": 0.7,
+      "level2": 0.78,
+      "level3": 0.86,
+      "level4": 0.94,
+      "level5": 1.0
+    }
+  },
+  "spells": {
+    "spell_five_thunder": {
+      "costQi": 45,
+      "cooldown": 8,
+      "mainDamage": 42,
+      "chainDamage": 28,
+      "chainCount": 4,
+      "chainRadius": 220,
+      "killExplosionDamage": 34,
+      "killExplosionRadius": 85,
+      "maxSecondaryExplosions": 2
+    },
+    "spell_bagua_sword_ring": {
+      "costQi": 35,
+      "cooldown": 10,
+      "duration": 3,
+      "radius": 150,
+      "tickInterval": 0.25,
+      "tickDamage": 9,
+      "normalBulletClearPerSecondCap": 18,
+      "bossBulletSlowMultiplier": 0.65
+    },
+    "spell_red_lotus_fire": {
+      "costQi": 40,
+      "cooldown": 9,
+      "duration": 4,
+      "radius": 180,
+      "tickInterval": 0.5,
+      "tickDamage": 8,
+      "burnDuration": 3,
+      "burnDps": 6,
+      "explosionOnBurnDeathDamage": 22,
+      "explosionRadius": 70
+    },
+    "spell_sleeve_universe": {
+      "costQi": 50,
+      "cooldown": 14,
+      "absorbDuration": 2,
+      "absorbRadius": 220,
+      "maxAbsorbedBullets": 50,
+      "reflectedBladeBaseDamage": 12,
+      "reflectedBladeDamagePerAbsorbedBullet": 2.5,
+      "reflectedBladeDamageCap": 280
+    }
+  },
+  "pills": {
+    "pill_rejuvenation": {
+      "digestTime": 12,
+      "healPerSecond": 8,
+      "totalHeal": 96
+    },
+    "pill_burning_blood": {
+      "digestTime": 8,
+      "attackSpeedMultiplier": 1.35,
+      "spellDamageMultiplier": 1.25,
+      "weaknessDuration": 3,
+      "weaknessMoveSpeedMultiplier": 0.82,
+      "weaknessQiGainMultiplier": 0.75
+    },
+    "pill_clear_mind": {
+      "digestTime": 6,
+      "moveSpeedMultiplier": 1.15,
+      "cleanseTags": ["slow", "burn", "confuse"]
+    },
+    "pill_minor_breakthrough": {
+      "digestTime": 5,
+      "cultivationGain": 120,
+      "affectsInsightExp": false
+    }
+  },
+  "enemies": {
+    "enemy_mountain_imp": { "hp": 28, "speed": 125, "contactDamage": 14, "targetTtkSeconds": [0.4, 0.7] },
+    "enemy_wolf_demon": { "hp": 42, "speed": 170, "chargeSpeed": 320, "contactDamage": 18, "targetTtkSeconds": [0.6, 1.2] },
+    "enemy_rogue_cultivator_shadow": { "hp": 70, "speed": 80, "contactDamage": 12, "targetTtkSeconds": [1.0, 1.8] },
+    "enemy_stone_armor_demon": { "hp": 240, "speed": 65, "contactDamage": 22, "armor": 0.25, "targetTtkSeconds": [2.5, 4.5] }
+  },
+  "bosses": {
+    "boss_qingyun_tribulation_spirit": {
+      "singlePlayerNormalHp": 10500,
+      "twoPlayerNormalHp": 16500,
+      "targetDurationSeconds": [90, 130],
+      "phaseHpBreakpoints": [0.66, 0.33]
+    }
+  },
+  "insightExp": {
+    "thresholds": [160, 420, 680, 900, 1200, 1580],
+    "maxInsightPausesPerSegment": 1,
+    "stage01Budget": {
+      "stage_01_01": 170,
+      "stage_01_02": 210,
+      "stage_01_03": 270,
+      "stage_01_04": 620,
+      "stage_01_05_boss": 650
+    }
+  },
+  "cultivation": {
+    "qiRefiningLayerThresholds": [300, 380, 470, 580, 720, 900, 1120, 1400, 1800],
+    "minorBreakthrough": {
+      "maxHpMultiplier": 1.06,
+      "maxQiMultiplier": 1.05,
+      "baseDamageMultiplier": 1.015,
+      "instantHealPercent": 0.15,
+      "instantQiPercent": 0.15
+    },
+    "stage01Budget": {
+      "naturalApprox": 576,
+      "eliteStage02": 70,
+      "shadowMaterialStage03": 40,
+      "eliteWaveStage04": 100,
+      "bossStage05": 180,
+      "totalApprox": 966
+    }
+  },
+  "tribulation": {
+    "inRunQiToFoundation": {
+      "duration": 24,
+      "initialWarning": 2,
+      "strikeWarning": 1.0,
+      "strikeRadius": 52,
+      "strikeDamage": 26,
+      "clearable": false,
+      "bossOverlapDensityMultiplier": 0.9,
+      "successReward": {
+        "maxHpMultiplier": 1.8,
+        "maxQiMultiplier": 1.65,
+        "shenDerivedStatsMultiplier": 1.35,
+        "baseDamageMultiplier": 1.12,
+        "moveSpeedMultiplier": 1.05,
+        "fullHeal": true,
+        "fullQi": true,
+        "screenClear": true
+      }
+    }
+  },
+  "coopScaling": {
+    "normalEnemyHp": 1.4,
+    "eliteHp": 1.6,
+    "bossHp": 1.58,
+    "enemyBulletCount": 1.12,
+    "enemyBulletSpeed": 1.04,
+    "spawnCount": 1.12,
+    "insightExpTotal": 1.15,
+    "materialDropTotal": 1.2
+  },
+  "difficultyScaling": {
+    "normal": { "enemyHp": 1, "enemyDamage": 1, "bulletSpeed": 1, "bulletCount": 1, "bossHp": 1, "materials": 1, "tribulationFrequency": 1 },
+    "hard": { "enemyHp": 1.25, "enemyDamage": 1.15, "bulletSpeed": 1.08, "bulletCount": 1.15, "bossHp": 1.25, "materials": 1.35, "tribulationFrequency": 1.1 },
+    "heavenlyDao": { "enemyHp": 1.55, "enemyDamage": 1.35, "bulletSpeed": 1.18, "bulletCount": 1.3, "bossHp": 1.5, "materials": 1.75, "tribulationFrequency": 1.35 }
+  }
+}

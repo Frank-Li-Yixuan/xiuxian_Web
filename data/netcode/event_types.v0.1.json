@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "0.1.0",
+  "messageTypes": [
+    {
+      "type": "hello",
+      "direction": "client_to_server",
+      "ordered": false,
+      "fields": ["clientId", "clientVersion", "protocolVersion", "dataPackHash", "balanceHash"]
+    },
+    {
+      "type": "create_room",
+      "direction": "client_to_server",
+      "ordered": true,
+      "fields": ["clientId", "desiredMode", "maxPlayers"]
+    },
+    {
+      "type": "join_room",
+      "direction": "client_to_server",
+      "ordered": true,
+      "fields": ["clientId", "roomCode"]
+    },
+    {
+      "type": "loadout_commit",
+      "direction": "client_to_server",
+      "ordered": true,
+      "fields": ["roomId", "playerId", "loadoutHash", "loadout"]
+    },
+    {
+      "type": "run_start",
+      "direction": "server_to_clients",
+      "ordered": true,
+      "fields": ["roomId", "runId", "hostId", "seed", "stageId", "difficultyId", "players", "simFps", "inputDelayFrames", "startFrame"]
+    },
+    {
+      "type": "input_batch",
+      "direction": "client_to_server_to_clients",
+      "ordered": false,
+      "fields": ["roomId", "senderId", "seq", "baseFrame", "inputs", "ackFrame", "lastKnownStateHash"]
+    },
+    {
+      "type": "insight_decision",
+      "direction": "client_to_server",
+      "ordered": true,
+      "serverAdds": ["serverDecisionSeq"],
+      "fields": ["roomId", "playerId", "insightId", "clientDecisionSeq", "action", "optionIndex"]
+    },
+    {
+      "type": "ordered_room_event",
+      "direction": "server_to_clients",
+      "ordered": true,
+      "fields": ["roomId", "serverSeq", "eventType", "payload"]
+    },
+    {
+      "type": "hash_report",
+      "direction": "client_to_server_to_clients",
+      "ordered": false,
+      "fields": ["roomId", "playerId", "frame", "hash", "rngDigest", "entityCountDigest"]
+    },
+    {
+      "type": "snapshot_request",
+      "direction": "client_to_host_via_server",
+      "ordered": true,
+      "fields": ["roomId", "requestingPlayerId", "fromFrame", "reason"]
+    },
+    {
+      "type": "snapshot_response",
+      "direction": "host_to_client_via_server",
+      "ordered": true,
+      "fields": ["roomId", "targetPlayerId", "snapshotFrame", "snapshot", "inputHistoryAfterSnapshot"]
+    },
+    {
+      "type": "reconnect_request",
+      "direction": "client_to_server",
+      "ordered": true,
+      "fields": ["roomId", "playerId", "reconnectToken", "lastLocalFrame"]
+    },
+    {
+      "type": "run_finish",
+      "direction": "client_to_server_to_clients",
+      "ordered": true,
+      "fields": ["roomId", "runId", "finishFrame", "result", "stateHash"]
+    }
+  ],
+  "orderedRoomEventTypes": [
+    "insight_decision_ordered",
+    "pause_network_waiting",
+    "resume_from_network_waiting",
+    "peer_disconnected",
+    "peer_reconnected",
+    "desync_repair_start",
+    "desync_repair_complete"
+  ]
+}

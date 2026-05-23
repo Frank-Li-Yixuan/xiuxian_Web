@@ -1,0 +1,68 @@
+{
+  "version": "v0.1",
+  "name": "First Playable 总集成验收门槛",
+  "oneLineDefinition": "默认洞府存档进入第一大阶段，完成局内战斗、结算、局外强化，并生成第二局开局配置。",
+  "hardRules": [
+    "灵气经验只负责顿悟抓牌，修为只负责境界/雷劫/生命本质质变。",
+    "普攻自动，法术和丹药主动。",
+    "丹药持续炼化，不是瞬间血瓶。",
+    "Gameplay simulation 禁止直接使用 Math.random、DOM、Canvas、真实时间。",
+    "正式 v0.1 产物禁止外部 CDN、外部字体、外部图片、外部音频。"
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "name": "内容包与数据校验",
+      "blocking": true
+    },
+    {
+      "id": "G1",
+      "name": "Headless 确定性模拟",
+      "blocking": true
+    },
+    {
+      "id": "G2",
+      "name": "基础 Canvas 可玩",
+      "blocking": true
+    },
+    {
+      "id": "G3",
+      "name": "双人本地合作",
+      "blocking": true
+    },
+    {
+      "id": "G4",
+      "name": "第一大阶段完整局内闭环",
+      "blocking": true
+    },
+    {
+      "id": "G5",
+      "name": "双轨成长与局内雷劫 Debug",
+      "blocking": true
+    },
+    {
+      "id": "G6",
+      "name": "局外洞府闭环",
+      "blocking": true
+    },
+    {
+      "id": "G7",
+      "name": "VFX 可读性与性能",
+      "blocking": true
+    },
+    {
+      "id": "G8",
+      "name": "First Playable Release Candidate",
+      "blocking": true
+    }
+  ],
+  "successStatement": [
+    "玩家知道自己在躲什么。",
+    "玩家知道为什么要放法术。",
+    "玩家知道丹药要提前吃。",
+    "玩家能区分灵气经验和修为。",
+    "玩家知道死了也能带资源回洞府。",
+    "玩家知道下一局为什么会更强。",
+    "玩家愿意再打一局。"
+  ]
+}

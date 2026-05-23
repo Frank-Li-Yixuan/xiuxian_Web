@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "0.1.0",
+  "rules": {
+    "craftingIsInstantInV01": true,
+    "combatPillsDoNotAddPermanentToxin": true,
+    "permanentPillsAddToxin": true,
+    "toxinThresholds": [
+      { "min": 0, "max": 79, "state": "clean", "effects": {} },
+      { "min": 80, "max": 159, "state": "minor_toxin", "effects": { "passiveQiRegenMultiplier": 0.97 } },
+      { "min": 160, "max": 279, "state": "blocked_meridian", "effects": { "passiveQiRegenMultiplier": 0.94, "spellCooldownMultiplier": 1.03 } },
+      { "min": 280, "max": 399, "state": "pill_congestion", "effects": { "passiveQiRegenMultiplier": 0.90, "spellCooldownMultiplier": 1.06, "pillDigestTimeMultiplier": 1.08 } },
+      { "min": 400, "max": 9999, "state": "medicine_barrier", "effects": { "passiveQiRegenMultiplier": 0.84, "spellCooldownMultiplier": 1.12, "pillDigestTimeMultiplier": 1.15 } }
+    ]
+  },
+  "recipes": [
+    {
+      "id": "recipe_rejuvenation_pill",
+      "name": "炼制回春丹",
+      "category": "combat_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 1 },
+      "cost": { "qingling_herb": 3, "demon_core_small": 1, "spirit_stone_low": 20 },
+      "output": { "rejuvenation_pill": 1 }
+    },
+    {
+      "id": "recipe_burning_blood_pill",
+      "name": "炼制燃血丹",
+      "category": "combat_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 1 },
+      "cost": { "red_sun_ginseng": 1, "demon_core_small": 2, "spirit_stone_low": 35 },
+      "output": { "burning_blood_pill": 1 }
+    },
+    {
+      "id": "recipe_clear_mind_pill",
+      "name": "炼制清心丹",
+      "category": "combat_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 1 },
+      "cost": { "clear_mind_grass": 2, "spirit_stone_low": 25 },
+      "output": { "clear_mind_pill": 1 }
+    },
+    {
+      "id": "recipe_body_refining_pill",
+      "name": "炼制洗髓丹",
+      "category": "permanent_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 1 },
+      "cost": { "qingling_herb": 8, "stone_armor_core": 1, "spirit_stone_low": 80 },
+      "outputPermanentEffect": { "jingProgress": 100, "toxin": { "body": 12 } }
+    },
+    {
+      "id": "recipe_qi_nourishing_pill",
+      "name": "炼制益气丹",
+      "category": "permanent_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 2 },
+      "cost": { "red_sun_ginseng": 2, "spirit_jade": 1, "spirit_stone_low": 100 },
+      "outputPermanentEffect": { "qiRootProgress": 100, "toxin": { "qi": 14 } }
+    },
+    {
+      "id": "recipe_spirit凝神_pill",
+      "name": "炼制凝神丹",
+      "category": "permanent_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 2 },
+      "cost": { "clear_mind_grass": 6, "thunder_marow": 1, "spirit_stone_low": 120 },
+      "outputPermanentEffect": { "shenProgress": 100, "toxin": { "shen": 16 } }
+    },
+    {
+      "id": "recipe_minor_breakthrough_pill",
+      "name": "炼制小破境丹",
+      "category": "cultivation_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 1 },
+      "cost": { "qingling_herb": 5, "demon_core_small": 3, "spirit_stone_low": 90 },
+      "output": { "minor_breakthrough_pill": 1 },
+      "notes": "小破境丹增加修为，不增加灵气经验。"
+    },
+    {
+      "id": "recipe_foundation_pill",
+      "name": "炼制筑基丹",
+      "category": "breakthrough_pill",
+      "requiresBuildingLevel": { "building_alchemy_room": 2 },
+      "cost": { "red_sun_ginseng": 3, "thunder_marow": 2, "spirit_jade": 2, "spirit_stone_low": 400 },
+      "output": { "foundation_pill": 1 }
+    },
+    {
+      "id": "recipe_clear_toxin_minor",
+      "name": "清心化毒",
+      "category": "detox",
+      "requiresBuildingLevel": { "building_alchemy_room": 1 },
+      "cost": { "clear_mind_grass": 5, "spirit_stone_low": 100 },
+      "toxinReduction": 50
+    },
+    {
+      "id": "recipe_clear_toxin_spring",
+      "name": "灵泉祓毒",
+      "category": "detox",
+      "requiresBuildingLevel": { "building_alchemy_room": 2 },
+      "cost": { "spirit_spring_shard": 1, "spirit_stone_low": 180 },
+      "toxinReduction": 120
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "v0.1",
+  "profiles": {
+    "micro": {
+      "intensityPx": [
+        1,
+        2
+      ],
+      "durationFrames": [
+        4,
+        6
+      ],
+      "decay": "linear"
+    },
+    "small": {
+      "intensityPx": [
+        3,
+        4
+      ],
+      "durationFrames": [
+        6,
+        10
+      ],
+      "decay": "easeOut"
+    },
+    "medium": {
+      "intensityPx": [
+        5,
+        8
+      ],
+      "durationFrames": [
+        10,
+        18
+      ],
+      "decay": "easeOut"
+    },
+    "large": {
+      "intensityPx": [
+        9,
+        14
+      ],
+      "durationFrames": [
+        18,
+        30
+      ],
+      "decay": "easeOutCubic"
+    },
+    "ultimate": {
+      "intensityPx": [
+        15,
+        20
+      ],
+      "durationFrames": [
+        30,
+        45
+      ],
+      "decay": "easeOutCubic"
+    }
+  },
+  "composition": "maxIntensityNotAdditive",
+  "renderOnly": true,
+  "rules": [
+    "Do not shake during the final 30 frames before a tribulation strike warning resolves.",
+    "Do not use large shake while enemy bullets remain active unless player input is paused.",
+    "Boss death large shake must occur after gameplay clear."
+  ]
+}

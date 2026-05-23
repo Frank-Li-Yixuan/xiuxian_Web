@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "v0.1",
+  "defaultQuality": "medium",
+  "qualityProfiles": {
+    "low": {
+      "normalParticles": 350,
+      "spellParticles": 120,
+      "backgroundParticles": 80,
+      "pickupTrails": 60,
+      "audioVoices": 12,
+      "targetFps": 60
+    },
+    "medium": {
+      "normalParticles": 800,
+      "spellParticles": 280,
+      "backgroundParticles": 160,
+      "pickupTrails": 120,
+      "audioVoices": 24,
+      "targetFps": 60
+    },
+    "high": {
+      "normalParticles": 1400,
+      "spellParticles": 480,
+      "backgroundParticles": 260,
+      "pickupTrails": 180,
+      "audioVoices": 36,
+      "targetFps": 60
+    }
+  },
+  "autoDowngrade": {
+    "fpsBelow": 52,
+    "frames": 180,
+    "poolUsageAbove": 0.9
+  },
+  "autoUpgrade": {
+    "fpsAbove": 58,
+    "frames": 600
+  },
+  "mergeThresholds": {
+    "smallExplosionsSameFrame": 24,
+    "chainLinesSameFrame": 18,
+    "activeExplosionRings": 30,
+    "mediumSpellParticles": 280
+  }
+}
