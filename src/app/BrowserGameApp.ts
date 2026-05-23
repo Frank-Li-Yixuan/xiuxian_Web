@@ -111,29 +111,27 @@ function renderHud(target: HTMLElement, snapshot: BrowserGameSnapshot): void {
   target.replaceChildren();
   const title = document.createElement("div");
   title.className = "hud-title";
-  title.textContent = `${snapshot.viewState.stage.stageName} · ${snapshot.viewState.stage.segmentName}`;
-  target.append(title);
+  title.textContent = "构筑摘要";
+  target.append(
+    title,
+    row("阶段", `${snapshot.viewState.stage.stageName} · ${snapshot.viewState.stage.segmentName}`),
+    row("目标", snapshot.viewState.stage.nextEventText ?? "推进妖潮"),
+    row("调试证据", evidenceSummary(snapshot))
+  );
 
   for (const player of snapshot.viewState.players) {
     const section = document.createElement("section");
     section.className = "hud-section";
     section.dataset.playerId = player.playerId;
     section.append(
-      row(`${player.core.displayName} ${player.core.realmName}${player.core.realmLayer}`, `${Math.round(player.core.hp)} / ${player.core.maxHp}`),
-      meter("生命", player.core.hp / Math.max(1, player.core.maxHp), "hp"),
-      meter("真元", player.core.qi / Math.max(1, player.core.maxQi), "qi"),
-      meter("修为", player.cultivation.progress01, "cultivation"),
-      row("法术", player.spells.map((slot) => `${slot.keyLabel}:${slot.state}`).join("  ")),
-      row("丹药", player.pills.map((slot) => `${slot.keyLabel}:${slot.state}`).join("  "))
+      row(player.core.displayName, `${player.core.realmName}${player.core.realmLayer}`),
+      row("本命", player.artifacts.outer?.name ?? player.artifacts.outer?.itemId ?? "未装配"),
+      row("灵宝", player.treasures.slots.map((slot) => slot.name ?? slot.itemId ?? "空").join(" / ")),
+      row("法术", player.spells.map((slot) => `${slot.keyLabel}:${slot.name ?? "空"}`).join("  ")),
+      row("丹药", player.pills.map((slot) => `${slot.keyLabel}:${slot.name ?? "空"}`).join("  "))
     );
     target.append(section);
   }
-
-  target.append(
-    meter("灵气经验", snapshot.viewState.teamInsight.progress01, "insight"),
-    row("气运", String(snapshot.viewState.teamInsight.sharedFortuneReroll)),
-    row("RC", evidenceSummary(snapshot))
-  );
 
   if (snapshot.viewState.insight?.visible === true) {
     const insight = document.createElement("section");
@@ -163,8 +161,8 @@ function renderOutgame(target: HTMLElement, snapshot: BrowserGameSnapshot): void
   title.textContent = "洞府结算";
   target.append(
     title,
-    row("Receipt", snapshot.outgameSummary.receiptId),
-    row("资源", Object.entries(snapshot.outgameSummary.resourcesKept).map(([id, amount]) => `${id}:${amount}`).join("  ")),
+    row("Receipt", compactReceiptId(snapshot.outgameSummary.receiptId)),
+    row("资源", formatResourceSummary(snapshot.outgameSummary.resourcesKept)),
     row("强化", snapshot.outgameSummary.upgrades.join("  ")),
     row("第二局", `+${snapshot.outgameSummary.secondRunPowerDelta}`)
   );
@@ -215,6 +213,36 @@ function evidenceSummary(snapshot: BrowserGameSnapshot): string {
     evidence.outgameSettlementObserved
   ].filter(Boolean).length;
   return `${count}/8`;
+}
+
+function compactReceiptId(receiptId: string): string {
+  return receiptId.replace("receipt_debug_run_stage01_seed_20260522_stage_01_qingyun_", "stage01:");
+}
+
+function formatResourceSummary(resources: Readonly<Record<string, number>>): string {
+  return Object.entries(resources)
+    .slice(0, 6)
+    .map(([id, amount]) => `${resourceLabel(id)}:${amount}`)
+    .join("  ");
+}
+
+function resourceLabel(id: string): string {
+  switch (id) {
+    case "spirit_stone_low":
+      return "灵石";
+    case "qingling_herb":
+      return "青灵草";
+    case "clear_mind_grass":
+      return "清心草";
+    case "black_iron_essence":
+      return "黑铁精";
+    case "demon_core_small":
+      return "妖丹";
+    case "spirit_jade":
+      return "灵玉";
+    default:
+      return id;
+  }
 }
 
 function clamp01(value: number): number {

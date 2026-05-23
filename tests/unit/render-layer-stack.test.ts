@@ -122,6 +122,69 @@ describe("CanvasRenderer", () => {
     expect(context.operations).not.toContain("drawImage");
     expect(context.operations).not.toContain("externalFont");
   });
+
+  it("draws first playable readability surfaces for boss death, insight choices, and settlement", () => {
+    const baseViewState = createViewState();
+    const viewState: InRunUiViewState = {
+      ...baseViewState,
+      insight: {
+        visible: true,
+        mode: "coop",
+        sharedFortuneReroll: 1,
+        players: [
+          {
+            playerId: "p1",
+            selected: false,
+            guardianState: false,
+            options: [
+              {
+                optionId: "insight_01",
+                rewardType: "spell_upgrade",
+                name: "青云剑意",
+                rarity: "rare",
+                shortDescription: "飞剑穿透提升",
+                buildSynergyTags: ["metal"],
+                keyLabel: "J"
+              }
+            ]
+          }
+        ]
+      }
+    };
+    const frame: CanvasRenderFrame & {
+      readonly outgameSummary: {
+        readonly receiptId: string;
+        readonly resourcesKept: Readonly<Record<string, number>>;
+        readonly upgrades: readonly string[];
+        readonly secondRunPowerDelta: number;
+      };
+    } = {
+      viewState,
+      effectEvents: [effect("boss_death_cascade", { x: 960, y: 240 }), effect("boss_phase_shift", { x: 960, y: 240 })],
+      outgameSummary: {
+        receiptId: "receipt_debug_run_stage01_seed_20260522_stage_01_qingyun_boss_victory",
+        resourcesKept: {
+          spirit_stone_low: 370,
+          thunder_marow: 1,
+          spirit_vein_seed: 1
+        },
+        upgrades: ["五雷法页 +1"],
+        secondRunPowerDelta: 31.4
+      }
+    };
+    const context = new RecordingCanvasContext();
+
+    new CanvasRenderer().renderFrame(context, frame);
+
+    expect(context.operations).toContain("translate:6:-4");
+    expect(context.operations.some((operation) => operation.startsWith("arc:960:240:96:"))).toBe(true);
+    expect(context.operations).toContain("fillText:青云剑意:760:430");
+    expect(context.operations).toContain("fillText:归府结算:960:302");
+    expect(context.operations).toContain("fillText:灵石 +370:960:358");
+    expect(context.operations).toContain("fillText:五雷法页 +1:960:430");
+    expect(context.operations).not.toContain("drawImage");
+    expect(context.operations).not.toContain("externalFont");
+  });
 });
 
 function command(id: string, layerId: string): RenderCommand {
@@ -351,6 +414,10 @@ class RecordingCanvasContext implements CanvasLikeContext {
 
   public fillText(text: string, x: number, y: number): void {
     this.operations.push(`fillText:${text}:${x}:${y}`);
+  }
+
+  public translate(x: number, y: number): void {
+    this.operations.push(`translate:${x}:${y}`);
   }
 
   public set fillStyle(value: string | CanvasGradient | CanvasPattern) {

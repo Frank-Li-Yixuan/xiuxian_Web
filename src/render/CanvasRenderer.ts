@@ -29,6 +29,14 @@ export interface CanvasRendererOptions {
 export interface CanvasRenderFrame {
   readonly viewState: InRunUiViewState;
   readonly effectEvents: readonly EffectEvent[];
+  readonly outgameSummary?: CanvasSettlementSummary;
+}
+
+export interface CanvasSettlementSummary {
+  readonly receiptId: string;
+  readonly resourcesKept: Readonly<Record<string, number>>;
+  readonly upgrades: readonly string[];
+  readonly secondRunPowerDelta: number;
 }
 
 const DEFAULT_RENDER_LAYERS: readonly RenderLayerDefinition[] = [
@@ -128,13 +136,34 @@ export class CanvasRenderer {
         draw: (context) => drawMajorOverlay(context, frame.viewState)
       });
     }
+    const outgameSummary = frame.outgameSummary;
+    if (outgameSummary !== undefined) {
+      commands.push({
+        id: "settlement_overlay",
+        layerId: "major_overlay",
+        draw: (context) => drawSettlementOverlay(context, frame.viewState, outgameSummary)
+      });
+    } else if (isStartBannerVisible(frame.viewState)) {
+      commands.push({
+        id: "start_overlay",
+        layerId: "major_overlay",
+        draw: (context) => drawStartOverlay(context, frame.viewState)
+      });
+    }
 
     return this.layerStack.sortCommands(commands);
   }
 
   public renderFrame(context: CanvasLikeContext, frame: CanvasRenderFrame): void {
     clearCanvas(context, frame.viewState.screen.width, frame.viewState.screen.height);
-    this.renderCommands(context, this.buildRenderCommands(frame));
+    const shake = computeScreenShake(frame.effectEvents);
+    context.save();
+    try {
+      context.translate?.(shake.x, shake.y);
+      this.renderCommands(context, this.buildRenderCommands(frame));
+    } finally {
+      context.restore();
+    }
   }
 
   public renderCommands(context: CanvasLikeContext, commands: readonly RenderCommand[]): void {
@@ -194,17 +223,37 @@ function layerForEffect(effectId: string): string {
 }
 
 function drawBackgroundFar(context: CanvasLikeContext, viewState: InRunUiViewState): void {
-  fillRect(context, { x: 0, y: 0, width: viewState.screen.width, height: viewState.screen.height }, "#08111f", 1);
+  fillRect(context, { x: 0, y: 0, width: viewState.screen.width, height: viewState.screen.height }, "#060b14", 1);
+  const starCount = 42;
+  for (let index = 0; index < starCount; index += 1) {
+    const x = (index * 173 + 97) % viewState.screen.width;
+    const y = (index * 251 + viewState.stage.segmentIndex * 31) % viewState.screen.height;
+    const radius = index % 9 === 0 ? 2 : 1;
+    drawFilledCircle(context, { x, y }, radius, index % 4 === 0 ? "#fde68a" : "#bfdbfe", index % 5 === 0 ? 0.7 : 0.35);
+  }
 }
 
 function drawBackgroundNear(context: CanvasLikeContext, viewState: InRunUiViewState): void {
-  fillRect(context, viewState.screen.safeArea, "#0f1f2c", 0.28);
-  drawLine(context, { x: 360, y: 0 }, { x: 360, y: viewState.screen.height }, "#203848", 1, 0.5);
-  drawLine(context, { x: 1560, y: 0 }, { x: 1560, y: viewState.screen.height }, "#203848", 1, 0.5);
+  fillRect(context, viewState.screen.safeArea, "#0d1f26", 0.22);
+  for (let band = 0; band < 5; band += 1) {
+    const y = 180 + band * 150;
+    drawLine(context, { x: 420, y }, { x: 1500, y: y - 86 }, "#284051", 3, 0.12);
+    drawLine(context, { x: 440, y: y + 38 }, { x: 1480, y: y - 40 }, "#86efac", 1, 0.08);
+  }
+  drawLine(context, { x: 360, y: 0 }, { x: 360, y: viewState.screen.height }, "#6ee7b7", 1, 0.35);
+  drawLine(context, { x: 1560, y: 0 }, { x: 1560, y: viewState.screen.height }, "#6ee7b7", 1, 0.35);
 }
 
 function drawEffectEvent(context: CanvasLikeContext, event: EffectEvent, layerId: string): void {
   context.recordCommand?.(layerId, `effect_${event.effectId}`);
+  if (event.effectId === "boss_death_cascade") {
+    drawBossDeathCascade(context, event.position);
+    return;
+  }
+  if (event.effectId === "boss_phase_shift") {
+    drawBossPhaseShift(context, event.position);
+    return;
+  }
   switch (layerId) {
     case "enemy_bullets":
       drawEnemyBullet(context, event.position);
@@ -214,6 +263,7 @@ function drawEffectEvent(context: CanvasLikeContext, event: EffectEvent, layerId
       drawLine(context, { x: event.position.x - 8, y: 0 }, { x: event.position.x + 12, y: event.position.y }, "#a855f7", 2, 0.8);
       return;
     case "player_hitbox":
+      drawRing(context, event.position, 18, "#fef3c7", 3, 0.25);
       drawRing(context, event.position, 14, "#fefce8", 1.5, 0.85);
       drawFilledCircle(context, event.position, 7, "#ffffff", 0.95);
       return;
@@ -245,24 +295,31 @@ function drawEffectEvent(context: CanvasLikeContext, event: EffectEvent, layerId
 }
 
 function drawEnemyBullet(context: CanvasLikeContext, position: Vec2): void {
+  drawFilledCircle(context, position, 15, "#ef4444", 0.18);
   drawFilledCircle(context, position, 7, "#ef4444", 0.94);
   drawFilledCircle(context, position, 3, "#ffffff", 1);
 }
 
 function drawEnemyBody(context: CanvasLikeContext, position: Vec2): void {
+  drawFilledCircle(context, position, 24, "#f97316", 0.12);
   drawFilledCircle(context, position, 16, "#7f1d1d", 0.88);
   drawRing(context, position, 19, "#fca5a5", 1.5, 0.62);
 }
 
 function drawBossBody(context: CanvasLikeContext, position: Vec2): void {
+  drawFilledCircle(context, position, 88, "#a855f7", 0.1);
+  drawRing(context, position, 82, "#7dd3fc", 2, 0.28);
   drawFilledCircle(context, position, 58, "#581c87", 0.9);
   drawRing(context, position, 68, "#fbbf24", 4, 0.75);
+  drawRing(context, position, 48, "#f5d0fe", 2, 0.42);
   drawFilledCircle(context, { x: position.x - 20, y: position.y + 12 }, 9, "#ffffff", 0.88);
   drawFilledCircle(context, { x: position.x + 20, y: position.y + 12 }, 9, "#ffffff", 0.88);
 }
 
 function drawPlayerBody(context: CanvasLikeContext, position: Vec2): void {
+  drawFilledCircle(context, position, 30, "#14b8a6", 0.16);
   drawFilledCircle(context, position, 18, "#14b8a6", 0.86);
+  drawRing(context, position, 22, "#ccfbf1", 2, 0.55);
   drawLine(context, { x: position.x, y: position.y - 26 }, { x: position.x, y: position.y - 52 }, "#e5e7eb", 3, 0.9);
 }
 
@@ -306,11 +363,15 @@ function drawTeamInsightHud(context: CanvasLikeContext, viewState: InRunUiViewSt
 }
 
 function drawBossHud(context: CanvasLikeContext, boss: BossHudViewState): void {
-  const width = 420;
+  const width = 520;
   const ratio = boss.maxHp === undefined || boss.maxHp <= 0 ? 0 : Math.max(0, Math.min(1, (boss.hp ?? 0) / boss.maxHp));
-  fillRect(context, { x: 750, y: 58, width, height: 10 }, "#450a0a", 0.9);
-  fillRect(context, { x: 750, y: 58, width: width * ratio, height: 10 }, "#f97316", 0.9);
-  drawText(context, boss.name ?? "Boss", { x: 960, y: 48 }, "#fed7aa", undefined, "center");
+  fillRect(context, { x: 700, y: 52, width, height: 14 }, "#260617", 0.88);
+  fillRect(context, { x: 700, y: 52, width: width * ratio, height: 14 }, "#f97316", 0.92);
+  drawRing(context, { x: 960, y: 59 }, 22, "#fbbf24", 1.5, 0.3);
+  drawText(context, boss.name ?? "Boss", { x: 960, y: 38 }, "#fed7aa", "15px system-ui, sans-serif", "center");
+  if (boss.currentWarning !== undefined) {
+    drawText(context, boss.currentWarning.text, { x: 960, y: 84 }, "#fecaca", "14px system-ui, sans-serif", "center", 0.9);
+  }
 }
 
 function drawPlayerHud(context: CanvasLikeContext, player: PlayerHudViewState): void {
@@ -326,6 +387,134 @@ function drawPlayerHud(context: CanvasLikeContext, player: PlayerHudViewState): 
 }
 
 function drawMajorOverlay(context: CanvasLikeContext, viewState: InRunUiViewState): void {
-  fillRect(context, { x: 0, y: 0, width: viewState.screen.width, height: viewState.screen.height }, "#020617", 0.58);
-  drawText(context, "顿悟", { x: viewState.screen.width / 2, y: 150 }, "#a7f3d0", "28px system-ui, sans-serif", "center", 0.95);
+  fillRect(context, { x: 0, y: 0, width: viewState.screen.width, height: viewState.screen.height }, "#020617", 0.65);
+  drawText(context, "顿悟", { x: viewState.screen.width / 2, y: 150 }, "#a7f3d0", "30px system-ui, sans-serif", "center", 0.96);
+  drawText(
+    context,
+    `公共气运 ${viewState.insight?.sharedFortuneReroll ?? viewState.teamInsight.sharedFortuneReroll}`,
+    { x: viewState.screen.width / 2, y: 190 },
+    "#fef3c7",
+    "14px system-ui, sans-serif",
+    "center",
+    0.88
+  );
+  for (let playerIndex = 0; playerIndex < (viewState.insight?.players.length ?? 0); playerIndex += 1) {
+    const player = viewState.insight?.players[playerIndex];
+    if (player === undefined) {
+      continue;
+    }
+    const y = 360 + playerIndex * 150;
+    drawText(context, player.playerId.toUpperCase(), { x: 600, y: y + 70 }, "#bfdbfe", "16px system-ui, sans-serif", "center", 0.9);
+    for (let optionIndex = 0; optionIndex < player.options.length; optionIndex += 1) {
+      const option = player.options[optionIndex];
+      if (option === undefined) {
+        continue;
+      }
+      const x = 760 + optionIndex * 220;
+      fillRect(context, { x: x - 88, y: y + 28, width: 176, height: 86 }, "#10251f", option.disabled === true ? 0.45 : 0.82);
+      drawRing(context, { x, y: y + 70 }, 52, rarityColor(option.rarity), 2, player.selected ? 0.3 : 0.7);
+      drawText(context, option.name, { x, y: y + 70 }, "#ecfdf5", "14px system-ui, sans-serif", "center", option.disabled === true ? 0.55 : 0.95);
+      drawText(context, option.keyLabel, { x, y: y + 100 }, "#fef3c7", "12px system-ui, sans-serif", "center", 0.85);
+    }
+  }
+}
+
+function drawBossDeathCascade(context: CanvasLikeContext, position: Vec2): void {
+  drawFilledCircle(context, position, 118, "#ffffff", 0.18);
+  drawRing(context, position, 96, "#fde68a", 5, 0.85);
+  drawRing(context, position, 126, "#a78bfa", 3, 0.5);
+  for (let index = 0; index < 10; index += 1) {
+    const angle = (Math.PI * 2 * index) / 10;
+    const from = { x: position.x + Math.cos(angle) * 28, y: position.y + Math.sin(angle) * 28 };
+    const to = { x: position.x + Math.cos(angle) * 132, y: position.y + Math.sin(angle) * 132 };
+    drawLine(context, from, to, index % 2 === 0 ? "#fef3c7" : "#c4b5fd", 2, 0.55);
+  }
+  drawText(context, "青云劫灵崩解", { x: position.x, y: position.y - 118 }, "#fef3c7", "16px system-ui, sans-serif", "center", 0.9);
+}
+
+function drawBossPhaseShift(context: CanvasLikeContext, position: Vec2): void {
+  drawRing(context, position, 86, "#38bdf8", 3, 0.42);
+  drawRing(context, position, 112, "#f0abfc", 2, 0.28);
+}
+
+function drawSettlementOverlay(context: CanvasLikeContext, viewState: InRunUiViewState, summary: CanvasSettlementSummary): void {
+  fillRect(context, { x: 0, y: 0, width: viewState.screen.width, height: viewState.screen.height }, "#020617", 0.72);
+  fillRect(context, { x: 660, y: 252, width: 600, height: 280 }, "#102018", 0.88);
+  drawRing(context, { x: 960, y: 382 }, 168, "#fbbf24", 2, 0.32);
+  drawText(context, "归府结算", { x: 960, y: 302 }, "#fde68a", "28px system-ui, sans-serif", "center", 0.96);
+  drawText(context, formatResourceLine("spirit_stone_low", summary.resourcesKept.spirit_stone_low ?? 0), { x: 960, y: 358 }, "#ecfdf5", "16px system-ui, sans-serif", "center", 0.95);
+  drawText(context, formatRareResourceSummary(summary.resourcesKept), { x: 960, y: 386 }, "#bfdbfe", "13px system-ui, sans-serif", "center", 0.88);
+  drawText(context, `第二局战力 +${summary.secondRunPowerDelta}`, { x: 960, y: 494 }, "#a7f3d0", "14px system-ui, sans-serif", "center", 0.9);
+  for (let index = 0; index < Math.min(2, summary.upgrades.length); index += 1) {
+    const upgrade = summary.upgrades[index];
+    if (upgrade !== undefined) {
+      drawText(context, upgrade, { x: 960, y: 430 + index * 24 }, "#fef3c7", "14px system-ui, sans-serif", "center", 0.92);
+    }
+  }
+}
+
+function drawStartOverlay(context: CanvasLikeContext, viewState: InRunUiViewState): void {
+  fillRect(context, { x: 0, y: 0, width: viewState.screen.width, height: viewState.screen.height }, "#020617", 0.22);
+  drawText(context, viewState.stage.stageName, { x: viewState.screen.width / 2, y: 245 }, "#d9f99d", "26px system-ui, sans-serif", "center", 0.92);
+  drawText(context, viewState.stage.segmentName, { x: viewState.screen.width / 2, y: 282 }, "#bfdbfe", "16px system-ui, sans-serif", "center", 0.86);
+}
+
+function computeScreenShake(events: readonly EffectEvent[]): Vec2 {
+  if (events.some((event) => event.effectId === "boss_death_cascade")) {
+    return { x: 6, y: -4 };
+  }
+  if (events.some((event) => event.effectId === "boss_phase_shift")) {
+    return { x: 3, y: -2 };
+  }
+  return { x: 0, y: 0 };
+}
+
+function isStartBannerVisible(viewState: InRunUiViewState): boolean {
+  return viewState.mode === "combat" && viewState.stage.segmentIndex === 1 && (viewState.stage.timeRemaining ?? 0) > 51;
+}
+
+function rarityColor(rarity: string): string {
+  switch (rarity) {
+    case "legendary":
+      return "#fde68a";
+    case "epic":
+      return "#c4b5fd";
+    case "rare":
+      return "#93c5fd";
+    case "uncommon":
+      return "#86efac";
+    default:
+      return "#cbd5e1";
+  }
+}
+
+function formatResourceLine(resourceId: string, amount: number): string {
+  return `${resourceLabel(resourceId)} +${amount}`;
+}
+
+function formatRareResourceSummary(resources: Readonly<Record<string, number>>): string {
+  const parts = ["thunder_marow", "spirit_vein_seed", "spell_page_thunder", "spirit_jade"]
+    .map((resourceId) => {
+      const amount = resources[resourceId] ?? 0;
+      return amount > 0 ? formatResourceLine(resourceId, amount) : undefined;
+    })
+    .filter((part): part is string => part !== undefined);
+  return parts.length === 0 ? "材料已入库" : parts.join("  ");
+}
+
+function resourceLabel(resourceId: string): string {
+  switch (resourceId) {
+    case "spirit_stone_low":
+      return "灵石";
+    case "thunder_marow":
+      return "雷髓";
+    case "spirit_vein_seed":
+      return "灵脉之种";
+    case "spell_page_thunder":
+      return "五雷法页";
+    case "spirit_jade":
+      return "灵玉";
+    default:
+      return resourceId;
+  }
 }
