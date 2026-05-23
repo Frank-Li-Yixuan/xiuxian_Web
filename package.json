@@ -1,0 +1,25 @@
+{
+  "name": "xiuxian-stg",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:data": "tsx tools/validate-data.ts",
+    "check:forbidden": "node -e \"const fs=require('node:fs');const path=require('node:path');const root='src/sim';const forbidden=['Math.random','Date.now','performance.now','document.','window.','requestAnimationFrame','setTimeout','setInterval','localStorage','new Audio','CanvasRenderingContext2D'];const failures=[];function walk(dir){if(!fs.existsSync(dir))return;for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())walk(file);else if(/\\.(ts|tsx|js|jsx)$/.test(entry.name)){const text=fs.readFileSync(file,'utf8');for(const token of forbidden){const idx=text.indexOf(token);if(idx!==-1){const line=text.slice(0,idx).split('\\n').length;failures.push(file+':'+line+' contains forbidden token: '+token);}}}}}walk(root);if(failures.length){console.error(failures.join('\\n'));process.exit(1);}console.log('No forbidden gameplay patterns found.');\"",
+    "test:determinism": "vitest run tests/determinism --passWithNoTests",
+    "test:headless:stage01": "vitest run tests/integration/stage01 --passWithNoTests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vitest": "^3.2.4"
+  }
+}
