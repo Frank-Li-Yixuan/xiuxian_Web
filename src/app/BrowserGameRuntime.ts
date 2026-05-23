@@ -6,6 +6,7 @@ import pillsData from "../../data/pills/pills.v0.1.json";
 import cultivationData from "../../data/progression/cultivation_realms.v0.1.json";
 import insightExpData from "../../data/progression/insight_exp_tables.v0.1.json";
 import dropTablesData from "../../data/rewards/drop_tables.v0.1.json";
+import rewardPoolsData from "../../data/rewards/reward_pools.v0.1.json";
 import debugRunConfigData from "../../data/run/debug_run_config.v0.1.json";
 import spellsData from "../../data/spells/spells.v0.1.json";
 import stageData from "../../data/stages/stage_01_qingyun.v0.1.json";
@@ -28,8 +29,14 @@ import {
   type CultivationDataPack,
   type CultivationPlayerState
 } from "../sim/progression/CultivationSystem";
-import type { InsightSessionState } from "../sim/progression/InsightSession";
+import {
+  chooseInsightOption,
+  createInsightSession,
+  rerollInsightOptions,
+  type InsightSessionState
+} from "../sim/progression/InsightSession";
 import { applyTeamInsightExpGain, indexInsightExpTable } from "../sim/progression/TeamInsightSystem";
+import { indexRewardPools, type RewardChoice, type RewardPlayerContext, type RewardPoolPack } from "../sim/rewards/RewardGenerator";
 import { secondsToFrames } from "../sim/SimConstants";
 import type { EffectEvent } from "../sim/spells/SpellEffects";
 import { indexSpellDefinitions, stepSpellSystem, type SpellDefinitionPack, type SpellRuntimePlayerState } from "../sim/spells/SpellSystem";
@@ -138,6 +145,7 @@ const SPELLS = indexSpellDefinitions((spellsData as SpellDefinitionPack).items);
 const PILLS = indexPillDefinitions((pillsData as PillDefinitionPack).items);
 const CULTIVATION = indexCultivationData(cultivationData as unknown as CultivationDataPack);
 const INSIGHT_TABLE = indexInsightExpTable(insightExpData);
+const REWARD_POOLS = indexRewardPools((rewardPoolsData as RewardPoolPack).items);
 const TRIBULATIONS = indexDynamicTribulationEvents(tribulationsData as unknown as DynamicTribulationEventPack);
 const DROP_TABLES = (dropTablesData as DropTablePack).items.reduce<Record<string, DropTablePack["items"][number]>>((indexed, table) => {
   indexed[table.id] = table;
@@ -166,7 +174,7 @@ export class BrowserGameRuntime {
   private readonly stageRunner = new StageRunner(STAGE, { segmentIds: STAGE_COMBAT_SEGMENTS });
   private readonly rng: ReturnType<typeof createRunRngStreams>;
   private readonly waveSpawner: WaveSpawner;
-  private readonly playerLoadouts: readonly ViewPlayerLoadout[];
+  private playerLoadouts: readonly ViewPlayerLoadout[];
   private readonly rcEvidenceMutable: MutableBrowserRcEvidence;
   private frame = 0;
   private players: readonly RuntimePlayerState[];
@@ -240,6 +248,10 @@ export class BrowserGameRuntime {
   public step(frameInputs: readonly FrameInput[]): BrowserGameSnapshot {
     const inputs = normalizeInputs(frameInputs, this.frame, this.players.map((player) => player.playerId));
     this.recordInputEvidence(inputs);
+    if (this.insightSession !== undefined && !this.insightSession.completed) {
+      this.stepInsightSession(inputs);
+      return this.getSnapshot();
+    }
 
     const stageContext = this.stageRunner.getFrameContext(this.frame);
     this.spawnStageEnemies(stageContext);
@@ -322,11 +334,7 @@ export class BrowserGameRuntime {
   }
 
   public forceInsightForReview(): void {
-    this.insightSession = createStaticInsightSession(this.frame, this.players.map((player) => player.playerId), this.playerCultivations);
-    this.teamInsightExp = {
-      ...this.teamInsightExp,
-      exp: this.teamInsightExp.expToNext
-    };
+    this.insightSession = this.createInsightSession("browser_insight");
     this.rcEvidenceMutable.insightOverlayObserved = true;
   }
 
@@ -610,7 +618,286 @@ export class BrowserGameRuntime {
       insightTable: INSIGHT_TABLE
     });
     this.teamInsightExp = gained.teamInsightExp;
-    this.forceInsightForReview();
+    this.insightSession = this.createInsightSession("team_insight");
+    this.rcEvidenceMutable.insightOverlayObserved = true;
+  }
+
+  private stepInsightSession(inputs: readonly FrameInput[]): void {
+    let session = this.insightSession;
+    if (session === undefined) {
+      return;
+    }
+    for (const input of inputs) {
+      if (hasInputButton(input.pressedMask, InputButtonBit.Interact)) {
+        const rerolled = rerollInsightOptions({
+          frame: this.frame,
+          session,
+          playerId: input.playerId,
+          rewardPools: REWARD_POOLS,
+          rewardRng: this.rng.reward,
+          playerContexts: this.createRewardPlayerContexts()
+        });
+        session = rerolled.session;
+        continue;
+      }
+
+      const optionIndex = getInsightOptionIndex(input);
+      if (optionIndex === undefined) {
+        continue;
+      }
+      const panel = session.players.find((candidate) => candidate.playerId === input.playerId);
+      const option = panel?.options[optionIndex];
+      if (option === undefined) {
+        continue;
+      }
+      const chosen = chooseInsightOption({
+        frame: this.frame,
+        session,
+        playerId: input.playerId,
+        optionId: option.optionId
+      });
+      session = chosen.session;
+    }
+
+    if (session.completed) {
+      this.applyCompletedInsightRewards(session);
+      this.teamInsightExp = {
+        ...this.teamInsightExp,
+        sharedFortuneReroll: session.sharedFortuneReroll
+      };
+      this.insightSession = undefined;
+      return;
+    }
+    this.insightSession = session;
+  }
+
+  private createInsightSession(reason: string): InsightSessionState {
+    return createInsightSession({
+      frame: this.frame,
+      sessionId: `${reason}_${this.frame}`,
+      rewardPoolId: "reward_pool_qingyun_basic",
+      playerIds: this.players.map((player) => player.playerId),
+      teamInsightExp: this.teamInsightExp,
+      rewardPools: REWARD_POOLS,
+      rewardRng: this.rng.reward,
+      playerContexts: this.createRewardPlayerContexts(),
+      playerCultivations: this.playerCultivations
+    });
+  }
+
+  private createRewardPlayerContexts(): Readonly<Record<string, RewardPlayerContext>> {
+    return Object.fromEntries(
+      this.players.map((player) => {
+        const spellRuntime = this.spellState.find((state) => state.playerId === player.playerId);
+        const loadout = this.playerLoadouts.find((candidate) => candidate.playerId === player.playerId);
+        const cultivation = this.playerCultivations.find((candidate) => candidate.playerId === player.playerId);
+        const innerTreasureSlots = (loadout?.treasureSlots ?? [])
+          .filter((slot) => slot.source === "inner")
+          .map((slot) => slot.itemId);
+        return [
+          player.playerId,
+          {
+            playerId: player.playerId,
+            spellSlots: spellRuntime?.spellSlots ?? [],
+            innerTreasureSlots,
+            innerArtifactId: loadout?.innerArtifact?.itemId ?? null,
+            inTribulation: cultivation?.inTribulation === true
+          }
+        ] as const;
+      })
+    );
+  }
+
+  private applyCompletedInsightRewards(session: InsightSessionState): void {
+    const choices = session.players.flatMap((panel) => {
+      const selectedOptionId = panel.selectedOptionId;
+      const selected = panel.options.find((option) => option.optionId === selectedOptionId);
+      return selected === undefined ? [] : [selected];
+    });
+    for (const choice of choices) {
+      this.applyInsightReward(choice);
+    }
+  }
+
+  private applyInsightReward(choice: RewardChoice): void {
+    switch (choice.reward.type) {
+      case "cultivation_boost":
+        this.applyInsightCultivationBoost(choice);
+        return;
+      case "spell_new":
+        this.addSpellToPlayer(choice.playerId, choice.reward.targetId);
+        return;
+      case "spell_upgrade":
+        this.upgradePlayerSpell(choice.playerId);
+        return;
+      case "pill":
+        this.addPillToPlayer(choice.playerId, choice.reward.targetId);
+        return;
+      case "spirit_treasure":
+        this.addTreasureToPlayer(choice.playerId, choice.reward.targetId);
+        return;
+      case "natal_artifact_inner":
+        this.setInnerArtifact(choice.playerId, choice.reward.targetId);
+        return;
+      case "technique":
+        this.addBuildTag(choice.playerId, "techniqueTags", choice.reward.targetId);
+        return;
+      case "talent":
+        this.addBuildTag(choice.playerId, "talentTags", choice.reward.targetId);
+        return;
+      case "constitution":
+        this.addBuildTag(choice.playerId, "constitutionTags", choice.reward.targetId);
+        return;
+      default:
+        return;
+    }
+  }
+
+  private applyInsightCultivationBoost(choice: RewardChoice): void {
+    const result = stepCultivationSystem({
+      frame: this.frame,
+      deltaFrames: 0,
+      players: this.players,
+      playerCultivations: this.playerCultivations,
+      teamInsightExp: this.teamInsightExp,
+      cultivationData: CULTIVATION,
+      gains: [
+        {
+          playerId: choice.playerId,
+          amount: getInsightCultivationBoostAmount(choice.reward.rarity),
+          source: `insight_${choice.reward.targetId}`
+        }
+      ]
+    });
+    this.players = mergeRuntimePlayerExtras(result.players, this.players);
+    this.playerCultivations = result.playerCultivations;
+  }
+
+  private addSpellToPlayer(playerId: PlayerId, spellId: string): void {
+    this.spellState = this.spellState.map((state) => {
+      if (state.playerId !== playerId || state.spellSlots.includes(spellId)) {
+        return state;
+      }
+      const slotIndex = state.spellSlots.findIndex((slot) => slot === null);
+      if (slotIndex < 0) {
+        return state;
+      }
+      const spellSlots = replaceSlot(state.spellSlots, slotIndex, spellId);
+      return { ...state, spellSlots };
+    });
+    this.playerLoadouts = this.playerLoadouts.map((loadout) => {
+      if (loadout.playerId !== playerId || (loadout.spellSlots ?? []).includes(spellId)) {
+        return loadout;
+      }
+      const slots = loadout.spellSlots ?? [];
+      const slotIndex = slots.findIndex((slot) => slot === null);
+      if (slotIndex < 0) {
+        return loadout;
+      }
+      return {
+        ...loadout,
+        spellSlots: replaceSlot(slots, slotIndex, spellId),
+        spellLevels: { ...(loadout.spellLevels ?? {}), [spellId]: 1 }
+      };
+    });
+  }
+
+  private upgradePlayerSpell(playerId: PlayerId): void {
+    this.playerLoadouts = this.playerLoadouts.map((loadout) => {
+      if (loadout.playerId !== playerId) {
+        return loadout;
+      }
+      const spellId = (loadout.spellSlots ?? []).find((slot): slot is string => slot !== null);
+      if (spellId === undefined) {
+        return loadout;
+      }
+      const currentLevel = loadout.spellLevels?.[spellId] ?? 1;
+      return {
+        ...loadout,
+        spellLevels: {
+          ...(loadout.spellLevels ?? {}),
+          [spellId]: currentLevel + 1
+        }
+      };
+    });
+  }
+
+  private addPillToPlayer(playerId: PlayerId, pillId: string): void {
+    this.pillState = this.pillState.map((state) => {
+      if (state.playerId !== playerId) {
+        return state;
+      }
+      return {
+        ...state,
+        inventory: {
+          ...state.inventory,
+          [pillId]: (state.inventory[pillId] ?? 0) + 1
+        },
+        pillSlots: state.pillSlots.includes(pillId) ? state.pillSlots : replaceFirstEmpty(state.pillSlots, pillId)
+      };
+    });
+    this.playerLoadouts = this.playerLoadouts.map((loadout) => {
+      if (loadout.playerId !== playerId) {
+        return loadout;
+      }
+      const pillSlots = loadout.pillSlots ?? [];
+      return {
+        ...loadout,
+        pillSlots: pillSlots.includes(pillId) ? pillSlots : replaceFirstEmpty(pillSlots, pillId)
+      };
+    });
+  }
+
+  private addTreasureToPlayer(playerId: PlayerId, treasureId: string): void {
+    this.playerLoadouts = this.playerLoadouts.map((loadout) => {
+      if (loadout.playerId !== playerId) {
+        return loadout;
+      }
+      const slots = loadout.treasureSlots ?? [];
+      if (slots.some((slot) => slot.itemId === treasureId)) {
+        return loadout;
+      }
+      const slotIndex = slots.findIndex((slot) => slot.itemId === null);
+      if (slotIndex < 0) {
+        return loadout;
+      }
+      return {
+        ...loadout,
+        treasureSlots: replaceSlot(slots, slotIndex, {
+          source: slots[slotIndex]?.source ?? "inner",
+          itemId: treasureId
+        })
+      };
+    });
+  }
+
+  private setInnerArtifact(playerId: PlayerId, artifactId: string): void {
+    this.playerLoadouts = this.playerLoadouts.map((loadout) =>
+      loadout.playerId === playerId
+        ? {
+            ...loadout,
+            innerArtifact: {
+              itemId: artifactId,
+              star: 1
+            }
+          }
+        : loadout
+    );
+  }
+
+  private addBuildTag(playerId: PlayerId, field: "techniqueTags" | "talentTags" | "constitutionTags", tag: string): void {
+    this.playerLoadouts = this.playerLoadouts.map((loadout) => {
+      if (loadout.playerId !== playerId) {
+        return loadout;
+      }
+      const tags = loadout[field] ?? [];
+      return tags.includes(tag)
+        ? loadout
+        : {
+            ...loadout,
+            [field]: [...tags, tag]
+          };
+    });
   }
 
   private createSimState(): SimState {
@@ -864,6 +1151,43 @@ function normalizeInputs(inputs: readonly FrameInput[], frame: number, playerIds
   });
 }
 
+function getInsightOptionIndex(input: FrameInput): number | undefined {
+  if (hasInputButton(input.pressedMask, InputButtonBit.Spell1)) {
+    return 0;
+  }
+  if (hasInputButton(input.pressedMask, InputButtonBit.Spell2)) {
+    return 1;
+  }
+  if (hasInputButton(input.pressedMask, InputButtonBit.Spell3)) {
+    return 2;
+  }
+  return undefined;
+}
+
+function getInsightCultivationBoostAmount(rarity: RewardChoice["reward"]["rarity"]): number {
+  switch (rarity) {
+    case "common":
+      return 35;
+    case "uncommon":
+      return 60;
+    case "rare":
+      return 100;
+    case "epic":
+      return 160;
+    case "legendary":
+      return 240;
+  }
+}
+
+function replaceFirstEmpty<T>(slots: readonly (T | null)[], value: T): readonly (T | null)[] {
+  const slotIndex = slots.findIndex((slot) => slot === null);
+  return slotIndex < 0 ? slots : replaceSlot(slots, slotIndex, value);
+}
+
+function replaceSlot<T>(slots: readonly T[], slotIndex: number, value: T): readonly T[] {
+  return slots.map((slot, index) => (index === slotIndex ? value : slot));
+}
+
 function stepArtifactSystemCompat(options: {
   readonly frame: number;
   readonly players: readonly RuntimePlayerState[];
@@ -968,50 +1292,6 @@ function warningToViewInput(warning: TribulationWarningEvent): ViewLightningWarn
   };
 }
 
-function createStaticInsightSession(
-  frame: number,
-  playerIds: readonly PlayerId[],
-  playerCultivations: readonly PlayerCultivationState[]
-): InsightSessionState {
-  return {
-    sessionId: `browser_insight_${frame}`,
-    frame,
-    rewardPoolId: "reward_pool_qingyun_basic",
-    mode: playerIds.length > 1 ? "coop" : "single",
-    sharedFortuneReroll: 2,
-    players: playerIds.map((playerId) => ({
-      playerId,
-      selectedOptionId: undefined,
-      guardianState: false,
-      options: [
-        choice(playerId, 0, "spell_upgrade", "spell_five_thunder", "uncommon"),
-        choice(playerId, 1, "spirit_treasure", "treasure_tongxin_lock", "rare"),
-        choice(playerId, 2, "cultivation_boost", "cultivation_browser_boost", "common")
-      ]
-    })),
-    completed: false,
-    playerCultivations
-  };
-}
-
-function choice(
-  playerId: string,
-  index: number,
-  type: InsightSessionState["players"][number]["options"][number]["reward"]["type"],
-  targetId: string,
-  rarity: InsightSessionState["players"][number]["options"][number]["reward"]["rarity"]
-): InsightSessionState["players"][number]["options"][number] {
-  return {
-    optionId: `${playerId}_browser_choice_${index}`,
-    playerId,
-    rewardPoolId: "reward_pool_qingyun_basic",
-    reward: {
-      type,
-      targetId,
-      rarity
-    }
-  };
-}
 
 function effect(effectId: string, frame: number, ownerPlayerId: string, position: Vec2): EffectEvent {
   return {

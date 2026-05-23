@@ -55,6 +55,53 @@ describe("browser playable shell", () => {
     expect(second[1]?.pressedMask).toBe(0);
   });
 
+  it("pauses combat during insight and resumes after both players choose rewards", () => {
+    const runtime = createBrowserGameRuntime({ mode: "local_coop", seed: 20260523 });
+    runtime.forceInsightForReview();
+
+    const opened = runtime.getSnapshot();
+    const pausedFrame = opened.simState.frame;
+    const p2CultivationBefore = opened.simState.playerCultivations.find((cultivation) => cultivation.playerId === "p2")?.cultivation ?? 0;
+    expect(opened.viewState.insight?.visible).toBe(true);
+    expect(opened.viewState.insight?.players.find((player) => player.playerId === "p2")?.options[2]?.rewardType).toBe("cultivation_boost");
+    expect(opened.viewState.insight?.players.find((player) => player.playerId === "p2")?.options[2]?.keyLabel).toBe("Num5");
+
+    const idleDuringInsight = runtime.step([]);
+    expect(idleDuringInsight.simState.frame).toBe(pausedFrame);
+    expect(idleDuringInsight.viewState.insight?.visible).toBe(true);
+
+    const completed = runtime.step([
+      {
+        frame: pausedFrame,
+        playerId: "p1",
+        moveX: 0,
+        moveY: 0,
+        downMask: InputButtonBit.Spell1,
+        pressedMask: InputButtonBit.Spell1,
+        releasedMask: 0,
+        inputSeq: 10
+      },
+      {
+        frame: pausedFrame,
+        playerId: "p2",
+        moveX: 0,
+        moveY: 0,
+        downMask: InputButtonBit.Spell3,
+        pressedMask: InputButtonBit.Spell3,
+        releasedMask: 0,
+        inputSeq: 11
+      }
+    ]);
+
+    expect(completed.simState.frame).toBe(pausedFrame);
+    expect(completed.viewState.insight).toBeUndefined();
+    expect(completed.simState.playerCultivations.find((cultivation) => cultivation.playerId === "p2")?.cultivation).toBeGreaterThan(p2CultivationBefore);
+
+    const resumed = runtime.step([]);
+    expect(resumed.simState.frame).toBe(pausedFrame + 1);
+    expect(resumed.viewState.insight).toBeUndefined();
+  });
+
   it("advances a two-player browser runtime through input, renderable view state, insight, rescue, and debug tribulation evidence", () => {
     const runtime = createBrowserGameRuntime({ mode: "local_coop", seed: 20260523 });
     const before = runtime.getSnapshot();

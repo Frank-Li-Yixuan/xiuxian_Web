@@ -192,7 +192,7 @@ const P2_SPELL_KEYS = ["Num1", "Num2", "Num5", "Num6"] as const;
 const P1_PILL_KEYS = ["1", "2", "3"] as const;
 const P2_PILL_KEYS = ["7", "8", "9"] as const;
 const P1_INSIGHT_KEYS = ["J", "K", "L"] as const;
-const P2_INSIGHT_KEYS = ["Num1", "Num2", "Num3"] as const;
+const P2_INSIGHT_KEYS = ["Num1", "Num2", "Num5"] as const;
 
 export function createViewContentIndex(input: ViewContentInput): ViewContentIndex {
   return {
