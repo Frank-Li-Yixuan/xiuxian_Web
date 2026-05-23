@@ -1,0 +1,13 @@
+flowchart LR
+  Settlement[结算系统] --> Wallet[资源钱包]
+  Idle[聚灵阵] --> Wallet
+  Wallet --> Scripture[藏经阁]
+  Wallet --> Alchemy[炼丹房]
+  Wallet --> Forge[炼器阁]
+  Wallet --> Tribulation[劫雷台]
+  Scripture --> Loadout[下局 Loadout]
+  Alchemy --> Loadout
+  Forge --> Loadout
+  Tribulation --> Realm[境界状态]
+  Realm --> Loadout
+  Loadout --> RunConfig[局内 RunConfig]

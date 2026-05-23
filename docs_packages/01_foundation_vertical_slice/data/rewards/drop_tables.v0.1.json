@@ -1,0 +1,168 @@
+{
+  "schema": "DropTableDefinition[]",
+  "version": "0.1",
+  "items": [
+    {
+      "id": "drop_mountain_imp",
+      "entries": [
+        {
+          "dropId": "orb_insight_small",
+          "type": "insight_exp_orb",
+          "amount": 6,
+          "chance": 0.85
+        },
+        {
+          "dropId": "orb_qi_tiny",
+          "type": "qi_orb",
+          "amount": 3,
+          "chance": 0.18
+        }
+      ]
+    },
+    {
+      "id": "drop_wolf_demon",
+      "entries": [
+        {
+          "dropId": "orb_insight_small",
+          "type": "insight_exp_orb",
+          "amount": 9,
+          "chance": 0.9
+        },
+        {
+          "dropId": "orb_qi_small",
+          "type": "qi_orb",
+          "amount": 6,
+          "chance": 0.25
+        }
+      ]
+    },
+    {
+      "id": "drop_rogue_cultivator_shadow",
+      "entries": [
+        {
+          "dropId": "orb_insight_medium",
+          "type": "insight_exp_orb",
+          "amount": 18,
+          "chance": 0.95
+        },
+        {
+          "dropId": "orb_qi_small",
+          "type": "qi_orb",
+          "amount": 8,
+          "chance": 0.45
+        },
+        {
+          "dropId": "material_tattered_talisman",
+          "type": "outer_material",
+          "amount": 1,
+          "chance": 0.08
+        }
+      ]
+    },
+    {
+      "id": "drop_stone_armor_demon",
+      "entries": [
+        {
+          "dropId": "orb_insight_large",
+          "type": "insight_exp_orb",
+          "amount": 46,
+          "chance": 1.0
+        },
+        {
+          "dropId": "orb_qi_medium",
+          "type": "qi_orb",
+          "amount": 15,
+          "chance": 0.7
+        },
+        {
+          "dropId": "material_stone_core",
+          "type": "outer_material",
+          "amount": 1,
+          "chance": 0.45
+        },
+        {
+          "dropId": "cultivation_earth_essence",
+          "type": "cultivation_material",
+          "amount": 35,
+          "chance": 0.4
+        }
+      ]
+    },
+    {
+      "id": "drop_elite_split_wind_wolf",
+      "entries": [
+        {
+          "dropId": "orb_insight_large",
+          "type": "insight_exp_orb",
+          "amount": 90,
+          "chance": 1.0
+        },
+        {
+          "dropId": "orb_qi_medium",
+          "type": "qi_orb",
+          "amount": 22,
+          "chance": 1.0
+        },
+        {
+          "dropId": "heavenly_material_wind_bone",
+          "type": "heavenly_material",
+          "amount": 1,
+          "chance": 0.25,
+          "params": {
+            "cultivationGain": 80
+          }
+        },
+        {
+          "dropId": "reward_token_minor_jade_slip",
+          "type": "reward_token",
+          "amount": 1,
+          "chance": 1.0,
+          "params": {
+            "rewardPoolId": "reward_pool_qingyun_basic"
+          }
+        }
+      ]
+    },
+    {
+      "id": "drop_boss_qingyun_tribulation_spirit",
+      "entries": [
+        {
+          "dropId": "orb_insight_huge",
+          "type": "insight_exp_orb",
+          "amount": 180,
+          "chance": 1.0
+        },
+        {
+          "dropId": "orb_qi_large",
+          "type": "qi_orb",
+          "amount": 55,
+          "chance": 1.0
+        },
+        {
+          "dropId": "material_thunder_core",
+          "type": "outer_material",
+          "amount": 1,
+          "chance": 1.0
+        },
+        {
+          "dropId": "material_demon_core",
+          "type": "outer_material",
+          "amount": 2,
+          "chance": 1.0
+        },
+        {
+          "dropId": "heavenly_material_creation_breath",
+          "type": "heavenly_material",
+          "amount": 1,
+          "chance": 0.65,
+          "params": {
+            "cultivationGain": 180,
+            "statBonus": {
+              "qiRoot": 2
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

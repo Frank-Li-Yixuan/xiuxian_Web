@@ -1,0 +1,19 @@
+flowchart TB
+  L300[300 major_overlay\n顿悟 / 暂停 / 结算]
+  L200[200 hud\n局内 HUD]
+  L130[130 foreground_effects\n浮字 / 碎片 / 余波]
+  L120[120 rescue_and_soul\n聚灵阵 / 神魂]
+  L110[110 player_hitbox\n专注判定点]
+  L100[100 players\nP1 / P2]
+  L90[90 tribulation_strikes\n天雷实体]
+  L80[80 tribulation_warnings\n雷劫预警]
+  L70[70 enemy_bullets\n敌弹]
+  L60[60 player_projectiles_high\n法术核心线]
+  L50[50 boss\nBoss]
+  L40[40 enemies\n小怪 / 精英]
+  L30[30 player_projectiles_low\n飞剑 / 火息]
+  L20[20 pickup_trails\n吸附尾迹]
+  L10[10 background_near\n近景卷轴]
+  L0[0 background_far\n远景]
+
+  L300 --> L200 --> L130 --> L120 --> L110 --> L100 --> L90 --> L80 --> L70 --> L60 --> L50 --> L40 --> L30 --> L20 --> L10 --> L0

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.1.0",
+  "presets": [
+    {
+      "id": "preset_safe_push",
+      "name": "稳健开荒",
+      "description": "适合第一次挑战和新手双人。",
+      "loadout": {
+        "mainMethodId": "method_turtle_breath",
+        "natalArtifactId": "artifact_qingshuang_sword",
+        "spiritTreasureIds": ["treasure_bagua_jade", "treasure_gold_toad"],
+        "spellIds": ["spell_five_thunder", "spell_bagua_sword_ring", null, null],
+        "pillIds": ["rejuvenation_pill", "clear_mind_pill", null]
+      }
+    },
+    {
+      "id": "preset_fire_clear",
+      "name": "火力清怪",
+      "description": "适合刷材料和体验高密度连锁爆炸。",
+      "loadout": {
+        "mainMethodId": "method_pure_yang",
+        "natalArtifactId": "artifact_ziyang_gourd",
+        "spiritTreasureIds": ["treasure_minor_sword_array", "treasure_gold_toad"],
+        "spellIds": ["spell_red_lotus_fire", "spell_five_thunder", null, null],
+        "pillIds": ["burning_blood_pill", "rejuvenation_pill", null]
+      }
+    },
+    {
+      "id": "preset_coop_guardian",
+      "name": "双人护法",
+      "description": "适合在线双人，强调救援和真元共鸣。",
+      "loadout": {
+        "mainMethodId": "method_turtle_breath",
+        "natalArtifactId": "artifact_qingshuang_sword",
+        "spiritTreasureIds": ["treasure_tongxin_lock", "treasure_bagua_jade"],
+        "spellIds": ["spell_bagua_sword_ring", "spell_sleeve_universe", "spell_five_thunder", null],
+        "pillIds": ["rejuvenation_pill", "clear_mind_pill", "rejuvenation_pill"]
+      }
+    }
+  ]
+}

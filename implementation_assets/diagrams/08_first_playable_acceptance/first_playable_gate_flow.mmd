@@ -1,0 +1,24 @@
+flowchart TD
+    A[Default Outgame Profile] --> B[Loadout Builder]
+    B --> C[RunConfig: Stage 01 Qingyun]
+    C --> D[Headless/Canvas Combat Simulation]
+    D --> E1[Auto Attack + Spells + Pills]
+    D --> E2[Team Insight Exp]
+    D --> E3[Personal Cultivation]
+    E2 --> F[Insight Pause: P1/P2 Choices]
+    E3 --> G{Cultivation Bottleneck?}
+    G -- Debug/Yes --> H[In-run Tribulation Overlay]
+    G -- No --> I[Continue Stage]
+    F --> I
+    H --> I
+    I --> J[Boss: Qingyun Tribulation Spirit]
+    J --> K{Clear or Death}
+    K --> L[Run Settlement Receipt]
+    L --> M[Dongfu Overview]
+    M --> N[Idle Yield / Alchemy / Artifact Upgrade / Method Training]
+    N --> O[Second RunConfig]
+    O --> P[Second Run Starts Stronger]
+
+    D -.StateHash.-> Q[Determinism Harness]
+    E1 -.EffectEvent.-> R[Canvas VFX + HUD]
+    R -.View Only.-> D

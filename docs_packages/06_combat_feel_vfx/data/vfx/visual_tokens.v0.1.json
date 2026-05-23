@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "v0.1",
+  "note": "视觉语义 token。危险信息优先于爽感特效。",
+  "colors": {
+    "players": {
+      "p1": "#22d3ee",
+      "p2": "#d946ef",
+      "hitbox": "#f8fafc",
+      "invulnerable": "#facc15"
+    },
+    "resources": {
+      "insightExp": "#34d399",
+      "cultivation": "#facc15",
+      "qi": "#38bdf8",
+      "hp": "#fb7185"
+    },
+    "danger": {
+      "enemyBullet": "#ef4444",
+      "fastBullet": "#ff3b7f",
+      "bossBullet": "#f97316",
+      "tribWarning": "#ff1f3d",
+      "tribStrike": "#b91c1c",
+      "core": "#ffffff"
+    },
+    "elements": {
+      "metal": "#f8fafc",
+      "wood": "#22c55e",
+      "water": "#38bdf8",
+      "fire": "#f97316",
+      "earth": "#ca8a04",
+      "thunder": "#a78bfa",
+      "void": "#8b5cf6"
+    },
+    "rarity": {
+      "common": "#e5e7eb",
+      "rare": "#38bdf8",
+      "epic": "#a78bfa",
+      "legendary": "#facc15",
+      "mythic": "#f43f5e"
+    }
+  },
+  "alphaLimits": {
+    "largePlayerSpellFill": 0.45,
+    "enemyBulletCore": 1.0,
+    "enemyBulletOuter": 0.92,
+    "tribulationWarningOuter": 0.35,
+    "tribulationWarningInner": 0.95,
+    "screenFlashWhileBulletsAlive": 0.22,
+    "screenFlashAfterClear": 0.72,
+    "backgroundFog": 0.18
+  },
+  "hitbox": {
+    "radiusPx": 7,
+    "focusOuterRingPx": 14,
+    "protectedInnerPx": 24
+  },
+  "fonts": {
+    "defaultStack": "system-ui, Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif",
+    "externalFontsAllowed": false
+  }
+}

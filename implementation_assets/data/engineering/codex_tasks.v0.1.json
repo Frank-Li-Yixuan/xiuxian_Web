@@ -1,0 +1,180 @@
+{
+  "version": "0.1",
+  "tasks": [
+    {
+      "id": "C001",
+      "name": "仓库骨架",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C002",
+      "name": "SeededRng",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C003",
+      "name": "FixedTickRunner",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C004",
+      "name": "FrameInput 与 InputBuffer",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C005",
+      "name": "ContentRegistry 与数据校验",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C006",
+      "name": "EntityManager 与 StateHash",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C007",
+      "name": "PlayerSystem",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C008",
+      "name": "ArtifactSystem 自动普攻",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C009",
+      "name": "Enemy + WaveSpawner",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C010",
+      "name": "Collision + Damage",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C011",
+      "name": "SpellSystem",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C012",
+      "name": "PillDigestionSystem",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C013",
+      "name": "Drop/Pickup/TeamInsight",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C014",
+      "name": "Cultivation + Tribulation",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C015",
+      "name": "Insight RewardGenerator",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C016",
+      "name": "ViewStateBuilder",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C017",
+      "name": "CanvasRenderer",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C018",
+      "name": "HUD + InsightOverlay",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C019",
+      "name": "Boss 青云劫灵",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C020",
+      "name": "Soul/Rescue/Settlement",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C021",
+      "name": "Determinism Harness",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C022",
+      "name": "Two-client Lockstep Mock",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C023",
+      "name": "WebSocket Relay Prototype",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C024",
+      "name": "Balance Telemetry",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    },
+    {
+      "id": "C025",
+      "name": "First Playable Gate",
+      "status": "planned",
+      "maxScope": "single_module_or_system",
+      "requiresTests": true
+    }
+  ]
+}

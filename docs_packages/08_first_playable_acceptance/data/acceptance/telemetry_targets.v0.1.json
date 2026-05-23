@@ -1,0 +1,66 @@
+{
+  "version": "v0.1",
+  "targets": {
+    "stage01DurationSeconds": {
+      "min": 300,
+      "max": 420
+    },
+    "bossDurationSeconds": {
+      "min": 90,
+      "max": 130
+    },
+    "insightCountStage01": {
+      "min": 3,
+      "max": 4
+    },
+    "spellsCastPerMinutePerPlayer": {
+      "min": 3,
+      "max": 6
+    },
+    "playerHitsStage01": {
+      "min": 4,
+      "max": 10
+    },
+    "segment14PeakEnemies": {
+      "min": 35,
+      "max": 55
+    },
+    "stage01CultivationLayersGained": {
+      "min": 1.5,
+      "max": 2.5
+    },
+    "debugTribulationPassRateNewPlayer": {
+      "target": 0.3
+    },
+    "debugTribulationPassRateSkilled": {
+      "target": 0.65
+    },
+    "fpsMediumAt1080p": {
+      "target": 60,
+      "allowShortDrops": true
+    }
+  },
+  "eventsToLog": [
+    "run_start",
+    "segment_start",
+    "segment_end",
+    "player_hit",
+    "spell_cast",
+    "pill_swallowed",
+    "pill_digest_complete",
+    "insight_start",
+    "insight_choice",
+    "reroll",
+    "cultivation_breakthrough",
+    "tribulation_start",
+    "tribulation_end",
+    "boss_phase",
+    "boss_defeated",
+    "player_soul",
+    "rescue_start",
+    "rescue_success",
+    "settlement_created",
+    "outgame_upgrade",
+    "second_run_start"
+  ]
+}

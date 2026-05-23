@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "v0.1",
+  "layers": [
+    {
+      "id": "background_far",
+      "z": 0,
+      "description": "星空、云雾、远山"
+    },
+    {
+      "id": "background_near",
+      "z": 10,
+      "description": "地面卷轴、灵脉纹理"
+    },
+    {
+      "id": "pickup_trails",
+      "z": 20,
+      "description": "掉落吸附尾迹"
+    },
+    {
+      "id": "player_projectiles_low",
+      "z": 30,
+      "description": "普通飞剑、葫芦火苗"
+    },
+    {
+      "id": "enemies",
+      "z": 40,
+      "description": "小怪、精英"
+    },
+    {
+      "id": "boss",
+      "z": 50,
+      "description": "Boss 本体"
+    },
+    {
+      "id": "player_projectiles_high",
+      "z": 60,
+      "description": "法术核心线条，仍低于敌弹"
+    },
+    {
+      "id": "enemy_bullets",
+      "z": 70,
+      "description": "普通敌弹，高对比"
+    },
+    {
+      "id": "tribulation_warnings",
+      "z": 80,
+      "description": "雷劫预警圈/锁定光柱"
+    },
+    {
+      "id": "tribulation_strikes",
+      "z": 90,
+      "description": "天雷实体"
+    },
+    {
+      "id": "players",
+      "z": 100,
+      "description": "玩家与队友"
+    },
+    {
+      "id": "player_hitbox",
+      "z": 140,
+      "description": "专注模式判定点"
+    },
+    {
+      "id": "rescue_and_soul",
+      "z": 110,
+      "description": "聚灵阵、神魂"
+    },
+    {
+      "id": "foreground_effects",
+      "z": 120,
+      "description": "浮字、碎片、清场余波"
+    },
+    {
+      "id": "hud",
+      "z": 200,
+      "description": "局内 HUD"
+    },
+    {
+      "id": "major_overlay",
+      "z": 300,
+      "description": "顿悟、暂停、结算"
+    }
+  ],
+  "hardRules": [
+    "enemy_bullets must render above most player spell fills",
+    "tribulation_warnings must render above enemy_bullets",
+    "player_hitbox must render above players and spell effects",
+    "renderer must not mutate SimState"
+  ]
+}

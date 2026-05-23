@@ -1,0 +1,70 @@
+{
+  "schema": "RunConfig",
+  "version": "0.1",
+  "runId": "debug_run_stage01_seed_20260522",
+  "seed": 20260522,
+  "difficulty": "normal",
+  "stageId": "stage_01_qingyun",
+  "players": {
+    "p1": {
+      "selectedMainMethodId": "method_beginner_breathing",
+      "natalArtifactId": "artifact_qingshuang_sword",
+      "spiritTreasureIds": [
+        "treasure_minor_sword_array",
+        "treasure_gold_toad"
+      ],
+      "spellIds": [
+        "spell_five_thunder",
+        "spell_bagua_sword_ring",
+        null,
+        null
+      ],
+      "pillIds": [
+        "pill_rejuvenation",
+        "pill_burning_blood",
+        "pill_clear_mind"
+      ],
+      "baseStats": {
+        "jing": 100,
+        "qiRoot": 100,
+        "shen": 30,
+        "comprehension": 10,
+        "fortune": 10,
+        "constitution": 10,
+        "karma": 0
+      },
+      "startingRealmId": "realm_qi_refining",
+      "startingLayer": 1
+    },
+    "p2": {
+      "selectedMainMethodId": "method_beginner_breathing",
+      "natalArtifactId": "artifact_ziyang_gourd",
+      "spiritTreasureIds": [
+        "treasure_bagua_jade",
+        "treasure_tongxin_lock"
+      ],
+      "spellIds": [
+        "spell_red_lotus_fire",
+        null,
+        null,
+        null
+      ],
+      "pillIds": [
+        "pill_rejuvenation",
+        "pill_clear_mind",
+        null
+      ],
+      "baseStats": {
+        "jing": 110,
+        "qiRoot": 90,
+        "shen": 28,
+        "comprehension": 10,
+        "fortune": 12,
+        "constitution": 9,
+        "karma": 0
+      },
+      "startingRealmId": "realm_qi_refining",
+      "startingLayer": 1
+    }
+  }
+}

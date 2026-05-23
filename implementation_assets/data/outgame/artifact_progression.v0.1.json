@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "0.1.0",
+  "rules": {
+    "maxArtifactStarV01": 3,
+    "maxTreasureStarV01": 3,
+    "noUpgradeFailureV01": true,
+    "noRandomAffixesV01": true
+  },
+  "artifacts": [
+    {
+      "id": "artifact_qingshuang_sword",
+      "name": "青霜飞剑",
+      "unlockDefault": true,
+      "stars": [
+        { "star": 1, "effects": { "pattern": "straight_pierce", "damageMultiplier": 1.0 } },
+        { "star": 2, "cost": { "spirit_stone_low": 160, "black_iron_essence": 8, "demon_core_small": 3 }, "effects": { "everyNthShotPierce": 4, "damageMultiplier": 1.04 } },
+        { "star": 3, "cost": { "spirit_stone_low": 380, "black_iron_essence": 18, "spirit_jade": 1 }, "effects": { "openingSwordSplitCooldownFrames": 480, "openingSwordSplitDurationFrames": 120, "damageMultiplier": 1.08 } }
+      ]
+    },
+    {
+      "id": "artifact_ziyang_gourd",
+      "name": "紫阳葫芦",
+      "unlockCost": { "spirit_stone_low": 220, "red_sun_ginseng": 1, "demon_core_small": 6 },
+      "stars": [
+        { "star": 1, "effects": { "pattern": "fan_flame", "damageMultiplier": 1.0 } },
+        { "star": 2, "cost": { "spirit_stone_low": 180, "red_sun_ginseng": 2, "demon_core_small": 4 }, "effects": { "spreadAngleBonus": 10, "burnDurationFrames": 120 } },
+        { "star": 3, "cost": { "spirit_stone_low": 420, "red_sun_ginseng": 3, "thunder_marow": 1 }, "effects": { "burnKillExplosionRadius": 55, "damageMultiplier": 1.07 } }
+      ]
+    },
+    {
+      "id": "artifact_xuanyue_seal",
+      "name": "玄岳重印",
+      "unlockCost": { "spirit_stone_low": 240, "stone_armor_core": 2, "black_iron_essence": 10 },
+      "stars": [
+        { "star": 1, "effects": { "pattern": "delayed_slam", "damageMultiplier": 1.0 } },
+        { "star": 2, "cost": { "spirit_stone_low": 200, "stone_armor_core": 2, "black_iron_essence": 12 }, "effects": { "slamRadiusMultiplier": 1.12, "enemySlowDurationFrames": 90 } },
+        { "star": 3, "cost": { "spirit_stone_low": 460, "stone_armor_core": 4, "spirit_jade": 1 }, "effects": { "clearNormalBulletsCooldownFrames": 360, "damageMultiplier": 1.06 } }
+      ]
+    }
+  ],
+  "treasures": [
+    {
+      "id": "treasure_minor_sword_array",
+      "name": "小周天剑阵",
+      "unlockDefault": true,
+      "stars": [
+        { "star": 1, "effects": { "orbitSwordCount": 2 } },
+        { "star": 2, "cost": { "spirit_stone_low": 140, "black_iron_essence": 6 }, "effects": { "orbitSwordCount": 3 } },
+        { "star": 3, "cost": { "spirit_stone_low": 320, "black_iron_essence": 14, "spirit_jade": 1 }, "effects": { "miniSwordRainEveryShots": 6 } }
+      ]
+    },
+    {
+      "id": "treasure_bagua_jade",
+      "name": "八卦玉佩",
+      "unlockDefault": true,
+      "stars": [
+        { "star": 1, "effects": { "blockCooldownFrames": 210 } },
+        { "star": 2, "cost": { "spirit_stone_low": 150, "stone_armor_core": 1 }, "effects": { "blockCooldownFrames": 180 } },
+        { "star": 3, "cost": { "spirit_stone_low": 340, "stone_armor_core": 3, "spirit_jade": 1 }, "effects": { "qiOnBlock": 3 } }
+      ]
+    },
+    {
+      "id": "treasure_gold_toad",
+      "name": "聚宝金蟾",
+      "unlockCost": { "spirit_stone_low": 180, "demon_core_small": 5 },
+      "stars": [
+        { "star": 1, "effects": { "pickupRadiusBonus": 90 } },
+        { "star": 2, "cost": { "spirit_stone_low": 160, "demon_core_small": 5 }, "effects": { "materialAttractChance": 0.15 } },
+        { "star": 3, "cost": { "spirit_stone_low": 360, "spirit_jade": 1, "demon_core_small": 10 }, "effects": { "segmentEndVacuum": true } }
+      ]
+    },
+    {
+      "id": "treasure_tongxin_lock",
+      "name": "同心锁",
+      "unlockCost": { "spirit_stone_low": 220, "spirit_jade": 1 },
+      "stars": [
+        { "star": 1, "effects": { "qiEchoBonus": 0.18 } },
+        { "star": 2, "cost": { "spirit_stone_low": 220, "spirit_jade": 1 }, "effects": { "rescueDurationMultiplier": 0.80 } },
+        { "star": 3, "cost": { "spirit_stone_low": 480, "spirit_jade": 2, "thunder_marow": 1 }, "effects": { "postRescueShieldFrames": 180 } }
+      ]
+    }
+  ]
+}

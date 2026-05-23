@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "v0.1",
+  "externalAudioAllowed": false,
+  "engine": "WebAudio procedural cues",
+  "priority": [
+    "player_hit",
+    "tribulation_warning",
+    "tribulation_strike",
+    "boss_phase",
+    "insight_pause",
+    "spell_cast",
+    "enemy_death",
+    "pickup"
+  ],
+  "cues": {
+    "sword_fire": {
+      "osc": "sine",
+      "freqHz": [
+        900,
+        1400
+      ],
+      "durationMs": 45,
+      "gain": 0.08
+    },
+    "gourd_flame": {
+      "osc": "noise",
+      "filter": "lowpass",
+      "durationMs": 160,
+      "gain": 0.07
+    },
+    "seal_slam": {
+      "osc": "triangle",
+      "freqHz": [
+        80,
+        45
+      ],
+      "durationMs": 220,
+      "gain": 0.16
+    },
+    "five_thunder": {
+      "osc": "sawtooth",
+      "freqHz": [
+        500,
+        1200
+      ],
+      "durationMs": 180,
+      "gain": 0.12
+    },
+    "pill_swallow": {
+      "osc": "sine",
+      "freqHz": [
+        320,
+        520
+      ],
+      "durationMs": 100,
+      "gain": 0.07
+    },
+    "trib_warning": {
+      "osc": "sine",
+      "freqHz": [
+        120,
+        180
+      ],
+      "durationMs": 900,
+      "gain": 0.13
+    },
+    "trib_strike": {
+      "osc": "noise",
+      "filter": "bandpass",
+      "durationMs": 260,
+      "gain": 0.22
+    },
+    "insight_pause": {
+      "osc": "sine",
+      "freqHz": [
+        440,
+        880,
+        1320
+      ],
+      "durationMs": 650,
+      "gain": 0.11
+    }
+  },
+  "throttling": {
+    "sameCueMinGapFrames": 4,
+    "enemyDeathVoiceLimitPerFrame": 6,
+    "pickupCueBatchWindowFrames": 12
+  }
+}

@@ -1,0 +1,19 @@
+flowchart TD
+  A[局内结束 RunSettlementReceipt] --> B[资源入库 ResourceWallet]
+  B --> C[洞府总览]
+  C --> D[收取聚灵阵]
+  C --> E[藏经阁 修功/研法]
+  C --> F[炼丹房]
+  C --> G[炼器阁]
+  C --> H{修为瓶颈?}
+  H -- 否 --> I[配置 Loadout]
+  H -- 是 --> J[劫雷台]
+  J -- 成功 --> K[境界提升]
+  J -- 失败 --> C
+  K --> I
+  D --> I
+  E --> I
+  F --> I
+  G --> I
+  I --> L[生成 RunConfig]
+  L --> M[进入下一局]

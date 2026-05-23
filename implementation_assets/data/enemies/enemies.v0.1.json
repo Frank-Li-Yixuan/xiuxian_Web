@@ -1,0 +1,106 @@
+{
+  "schema": "EnemyDefinition[]",
+  "version": "0.1",
+  "items": [
+    {
+      "id": "enemy_mountain_imp",
+      "name": "山魈",
+      "element": "wood",
+      "hp": 22,
+      "speed": 120,
+      "contactDamage": 10,
+      "behaviorId": "straight_down",
+      "behaviorParams": {
+        "wobble": 0.0
+      },
+      "drops": "drop_mountain_imp",
+      "tags": [
+        "normal",
+        "beast",
+        "stage01"
+      ]
+    },
+    {
+      "id": "enemy_wolf_demon",
+      "name": "狼妖",
+      "element": "wood",
+      "hp": 34,
+      "speed": 170,
+      "contactDamage": 14,
+      "behaviorId": "charge_nearest_player",
+      "behaviorParams": {
+        "chargeSpeed": 310,
+        "warningTime": 0.45,
+        "chargeCooldown": 2.2
+      },
+      "drops": "drop_wolf_demon",
+      "tags": [
+        "normal",
+        "charger",
+        "beast",
+        "stage01"
+      ]
+    },
+    {
+      "id": "enemy_rogue_cultivator_shadow",
+      "name": "邪修残影",
+      "element": "void",
+      "hp": 50,
+      "speed": 80,
+      "contactDamage": 12,
+      "behaviorId": "stop_and_shoot",
+      "behaviorParams": {
+        "stopY": 210,
+        "exitAfter": 8.0
+      },
+      "bulletPatternId": "pattern_triple_down",
+      "drops": "drop_rogue_cultivator_shadow",
+      "tags": [
+        "normal",
+        "ranged",
+        "cultivator",
+        "stage01"
+      ]
+    },
+    {
+      "id": "enemy_stone_armor_demon",
+      "name": "石甲妖",
+      "element": "earth",
+      "hp": 160,
+      "speed": 65,
+      "contactDamage": 22,
+      "behaviorId": "slow_tank",
+      "behaviorParams": {
+        "armor": 0.25,
+        "canBeStunnedBySeal": true
+      },
+      "drops": "drop_stone_armor_demon",
+      "tags": [
+        "tank",
+        "elite_minor",
+        "stage01"
+      ]
+    },
+    {
+      "id": "elite_split_wind_wolf",
+      "name": "裂风狼妖",
+      "element": "wood",
+      "hp": 420,
+      "speed": 130,
+      "contactDamage": 24,
+      "behaviorId": "elite_charge",
+      "behaviorParams": {
+        "chargeCount": 3,
+        "warningLine": true,
+        "chargeSpeed": 360,
+        "restBetweenCharges": 0.6
+      },
+      "drops": "drop_elite_split_wind_wolf",
+      "tags": [
+        "elite",
+        "charger",
+        "stage01"
+      ]
+    }
+  ]
+}

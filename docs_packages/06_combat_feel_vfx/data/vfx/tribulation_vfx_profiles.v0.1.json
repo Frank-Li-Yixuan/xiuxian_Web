@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "v0.1",
+  "profiles": {
+    "trib_inrun_qi_to_foundation": {
+      "name": "练气破筑基·局内三九雷劫",
+      "timeline": [
+        {
+          "startFrame": 0,
+          "endFrame": 120,
+          "effect": "sky_darkening",
+          "params": {
+            "vignetteAlpha": 0.65
+          }
+        },
+        {
+          "startFrame": 120,
+          "endFrame": 480,
+          "effect": "single_lock_thunder",
+          "intervalFrames": 108
+        },
+        {
+          "startFrame": 480,
+          "endFrame": 960,
+          "effect": "single_lock_thunder_plus_line",
+          "intervalFrames": 84
+        },
+        {
+          "startFrame": 960,
+          "endFrame": 1320,
+          "effect": "double_lock_thunder",
+          "intervalFrames": 66
+        },
+        {
+          "startFrame": 1320,
+          "endFrame": 1440,
+          "effect": "final_heaven_punishment"
+        }
+      ],
+      "warning": {
+        "durationFrames": 60,
+        "lastFlashFrames": 15,
+        "outerAlpha": 0.35,
+        "innerAlpha": 0.95,
+        "layer": "tribulation_warnings"
+      },
+      "strike": {
+        "durationFrames": 35,
+        "layer": "tribulation_strikes",
+        "cannotBeCleared": true
+      },
+      "success": {
+        "effect": "screen_clear_fortune_qi",
+        "fullHeal": true,
+        "fullQi": true
+      }
+    }
+  }
+}

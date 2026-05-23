@@ -1,0 +1,13 @@
+flowchart LR
+  Sim[CombatSimulation\n确定性玩法系统] -->|EffectEvent| Queue[EffectEventQueue]
+  Queue --> Registry[VfxRegistry\nJSON 效果配置]
+  Registry --> Guard[ReadabilityGuard\n保护判定点/敌弹]
+  Guard --> Pool[ParticlePool\n粒子对象池]
+  Guard --> Shake[ScreenShakeManager\nrender-only]
+  Guard --> Audio[ProceduralAudioBus\nWebAudio]
+  Pool --> Renderer[CanvasRenderer\nRenderLayerStack]
+  Shake --> Renderer
+  Audio --> Output[Speakers]
+  Renderer --> Screen[屏幕]
+
+  Sim -.不会直接创建粒子/播放音效.-> Registry

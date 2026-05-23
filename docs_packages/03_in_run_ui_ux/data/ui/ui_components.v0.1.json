@@ -1,0 +1,213 @@
+{
+  "id": "ui_components_v0_1",
+  "components": [
+    {
+      "type": "PlayerCorePanel",
+      "priority": "P1",
+      "states": [
+        "normal",
+        "low_hp",
+        "soul",
+        "rescuing",
+        "dead"
+      ],
+      "reads": [
+        "hp",
+        "maxHp",
+        "qi",
+        "maxQi",
+        "aliveState",
+        "realmName",
+        "realmLayer",
+        "activeStatusTags"
+      ],
+      "mustNot": [
+        "显示灵气经验为修为",
+        "常驻显示全部副属性"
+      ]
+    },
+    {
+      "type": "TeamInsightBar",
+      "priority": "P2",
+      "states": [
+        "charging",
+        "ready",
+        "hiddenDuringBossCompact"
+      ],
+      "reads": [
+        "teamLevel",
+        "exp",
+        "expToNext",
+        "sharedFortuneReroll"
+      ],
+      "visualLanguage": "翠青、灵气流、卷轴",
+      "trigger": "InsightOverlay"
+    },
+    {
+      "type": "CultivationBar",
+      "priority": "P2",
+      "states": [
+        "circulating",
+        "minor_breakthrough_ready",
+        "major_bottleneck",
+        "tribulation_incoming"
+      ],
+      "reads": [
+        "realmName",
+        "layer",
+        "cultivation",
+        "cultivationToNext",
+        "bottleneck"
+      ],
+      "visualLanguage": "金白、丹田、周天、雷纹",
+      "trigger": "minorBreakthrough or TribulationOverlay"
+    },
+    {
+      "type": "SpellSlot",
+      "priority": "P1",
+      "states": [
+        "empty",
+        "ready",
+        "cooldown",
+        "qi_insufficient",
+        "casting",
+        "disabled"
+      ],
+      "reads": [
+        "spellId",
+        "cooldown",
+        "costQi",
+        "currentQi",
+        "keyLabel",
+        "comboCounter"
+      ]
+    },
+    {
+      "type": "PillSlot",
+      "priority": "P1",
+      "states": [
+        "empty",
+        "ready",
+        "digesting",
+        "side_effect",
+        "disabled"
+      ],
+      "reads": [
+        "pillId",
+        "remainingTime",
+        "totalTime",
+        "keyLabel",
+        "effectSummary"
+      ]
+    },
+    {
+      "type": "ArtifactPanel",
+      "priority": "P2",
+      "states": [
+        "outer_active",
+        "inner_empty",
+        "inner_active",
+        "proc_flash"
+      ],
+      "reads": [
+        "natalArtifactOuter",
+        "natalArtifactInner"
+      ]
+    },
+    {
+      "type": "SpiritTreasureRack",
+      "priority": "P2",
+      "states": [
+        "empty",
+        "active",
+        "cooldown",
+        "triggered"
+      ],
+      "reads": [
+        "spiritTreasuresOuter",
+        "spiritTreasuresInner"
+      ]
+    },
+    {
+      "type": "BossHud",
+      "priority": "P2",
+      "states": [
+        "hidden",
+        "entering",
+        "phase_active",
+        "phase_warning",
+        "defeated"
+      ],
+      "reads": [
+        "bossId",
+        "name",
+        "hp",
+        "maxHp",
+        "phaseIndex",
+        "phaseName",
+        "currentWarning"
+      ]
+    },
+    {
+      "type": "InsightOverlay",
+      "priority": "P0Modal",
+      "states": [
+        "hidden",
+        "selecting",
+        "guardian_wait",
+        "both_selected"
+      ],
+      "reads": [
+        "InsightSession",
+        "sharedFortuneReroll",
+        "playerOptions"
+      ],
+      "pausesGameplay": true
+    },
+    {
+      "type": "TribulationOverlay",
+      "priority": "P0",
+      "states": [
+        "incoming",
+        "active",
+        "final_strike",
+        "success",
+        "failed"
+      ],
+      "reads": [
+        "tribulationName",
+        "remainingTime",
+        "lightningWarnings",
+        "targetRealmName"
+      ],
+      "mustShow": [
+        "天雷不可清除",
+        "剩余时间",
+        "落雷预警"
+      ]
+    },
+    {
+      "type": "RescuePrompt",
+      "priority": "P1",
+      "states": [
+        "hidden",
+        "available",
+        "channeling",
+        "decaying",
+        "success"
+      ],
+      "reads": [
+        "downedPlayerId",
+        "rescuerPlayerId",
+        "progress01",
+        "hpCostPreviewPercent",
+        "keyLabel"
+      ]
+    }
+  ],
+  "promptThrottle": {
+    "samePromptCooldownSeconds": 2.0,
+    "lowHpPillSuggestionCooldownSeconds": 20.0,
+    "tribulationWarningNoThrottle": true
+  }
+}

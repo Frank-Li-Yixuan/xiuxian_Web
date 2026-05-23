@@ -1,0 +1,25 @@
+{
+  "receiptId": "debug_receipt_stage01_clear_001",
+  "runId": "debug_run_001",
+  "profileId": "debug_profile_001",
+  "mode": "single_player",
+  "stageId": "stage_01_qingyun",
+  "difficulty": "normal",
+  "reachedSegment": "1-5",
+  "bossKilled": "boss_qingyun_tribulation_spirit",
+  "baseRewards": {
+    "spirit_stone_low": 380,
+    "qingling_herb": 22,
+    "clear_mind_grass": 5,
+    "black_iron_essence": 13,
+    "demon_core_small": 10,
+    "spirit_jade": 2,
+    "thunder_marow": 1,
+    "jade_slip_fragment": 3
+  },
+  "firstClearBonus": {
+    "spirit_vein_seed": 1,
+    "spell_page_thunder": 1
+  },
+  "appliedAtMs": null
+}

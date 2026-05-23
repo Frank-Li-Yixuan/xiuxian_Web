@@ -1,0 +1,168 @@
+{
+  "schema": "RealmDefinition[]",
+  "version": "0.1",
+  "note": "修为只用于境界/小境界进阶。它不会触发普通顿悟三选一。",
+  "cultivationRules": {
+    "inRunBreathGainPerSecond": 1.6,
+    "inRunBreathAffectedByConstitution": true,
+    "inRunBreathAffectedByMainMethod": true,
+    "eliteMaterialCanBoost": true,
+    "bossHeavenlyMaterialCanBoost": true,
+    "majorRealmBreakthroughInRun": "dynamic_tribulation_event",
+    "majorRealmBreakthroughOutOfRun": "independent_tribulation_stage",
+    "minorLayerBreakthrough": {
+      "requiresTribulation": false,
+      "effect": "small_stat_boost_and_realm_layer_increment"
+    }
+  },
+  "items": [
+    {
+      "id": "realm_qi_refining",
+      "name": "练气",
+      "order": 1,
+      "layers": 9,
+      "baseStatMultiplier": 1.0,
+      "qiPoolMultiplier": 1.0,
+      "shenMultiplier": 1.0,
+      "unlocks": [
+        "spell_slots_4",
+        "pill_slots_3",
+        "outer_natal_artifact_1",
+        "outer_spirit_treasure_2"
+      ],
+      "breakthrough": {
+        "type": "major_realm",
+        "nextRealmId": "realm_foundation",
+        "tribulationEventId": "trib_inrun_qi_to_foundation",
+        "outOfRunTribulationStageId": "trib_stage_qi_to_foundation"
+      }
+    },
+    {
+      "id": "realm_foundation",
+      "name": "筑基",
+      "order": 2,
+      "layers": 9,
+      "baseStatMultiplier": 1.65,
+      "qiPoolMultiplier": 1.8,
+      "shenMultiplier": 1.45,
+      "unlocks": [
+        "inner_spirit_treasure_slot_plus_1_preview",
+        "foundation_realm_passives"
+      ],
+      "breakthrough": {
+        "type": "major_realm",
+        "nextRealmId": "realm_golden_core",
+        "tribulationEventId": "trib_inrun_foundation_to_golden_core",
+        "outOfRunTribulationStageId": "trib_stage_foundation_to_golden_core"
+      }
+    },
+    {
+      "id": "realm_golden_core",
+      "name": "金丹",
+      "order": 3,
+      "layers": 9,
+      "baseStatMultiplier": 2.7,
+      "qiPoolMultiplier": 3.0,
+      "shenMultiplier": 2.1,
+      "unlocks": [
+        "golden_core_aura",
+        "extra_treasure_slot_future"
+      ],
+      "breakthrough": {
+        "type": "major_realm",
+        "nextRealmId": "realm_nascent_soul",
+        "tribulationEventId": "trib_inrun_golden_core_to_nascent_soul",
+        "outOfRunTribulationStageId": "trib_stage_golden_core_to_nascent_soul"
+      }
+    }
+  ],
+  "layerProgression": [
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 1,
+      "cultivationToNext": 150,
+      "minorStatAdd": {
+        "jing": 3,
+        "qiRoot": 2,
+        "shen": 1
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 2,
+      "cultivationToNext": 190,
+      "minorStatAdd": {
+        "jing": 3,
+        "qiRoot": 2,
+        "shen": 1
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 3,
+      "cultivationToNext": 240,
+      "minorStatAdd": {
+        "jing": 4,
+        "qiRoot": 2,
+        "shen": 1
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 4,
+      "cultivationToNext": 300,
+      "minorStatAdd": {
+        "jing": 4,
+        "qiRoot": 3,
+        "shen": 1
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 5,
+      "cultivationToNext": 370,
+      "minorStatAdd": {
+        "jing": 5,
+        "qiRoot": 3,
+        "shen": 2
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 6,
+      "cultivationToNext": 450,
+      "minorStatAdd": {
+        "jing": 5,
+        "qiRoot": 3,
+        "shen": 2
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 7,
+      "cultivationToNext": 550,
+      "minorStatAdd": {
+        "jing": 6,
+        "qiRoot": 4,
+        "shen": 2
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 8,
+      "cultivationToNext": 680,
+      "minorStatAdd": {
+        "jing": 6,
+        "qiRoot": 4,
+        "shen": 2
+      }
+    },
+    {
+      "realmId": "realm_qi_refining",
+      "layer": 9,
+      "cultivationToNext": 860,
+      "majorBottleneck": true,
+      "targetRealmId": "realm_foundation"
+    }
+  ]
+}

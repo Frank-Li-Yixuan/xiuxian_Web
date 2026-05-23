@@ -1,0 +1,52 @@
+{
+  "id": "ui_tokens_v0_1",
+  "colors": {
+    "player1": "#22D3EE",
+    "player2": "#D946EF",
+    "hp": "#F87171",
+    "qi": "#38BDF8",
+    "insightExp": "#34D399",
+    "cultivation": "#FDE68A",
+    "tribulationRed": "#EF4444",
+    "tribulationPurple": "#A855F7",
+    "bossDefault": "#EF4444",
+    "panelBg": "rgba(5, 15, 30, 0.72)",
+    "panelBorder": "rgba(255,255,255,0.18)",
+    "disabled": "rgba(148,163,184,0.55)",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#CBD5E1"
+  },
+  "typography": {
+    "fontFamily": "system-ui, -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', 'Noto Sans SC', sans-serif",
+    "titleSize": 24,
+    "bodySize": 16,
+    "smallSize": 13,
+    "numberSize": 15
+  },
+  "effects": {
+    "glowSoft": {
+      "blur": 12,
+      "alpha": 0.35
+    },
+    "glowStrong": {
+      "blur": 24,
+      "alpha": 0.65
+    },
+    "panelBlur": 8,
+    "warningPulseSeconds": 0.8,
+    "hudTransitionSeconds": 0.16,
+    "modalTransitionSeconds": 0.25
+  },
+  "accessibility": {
+    "uiScales": [
+      0.85,
+      1.0,
+      1.15,
+      1.3
+    ],
+    "allowDisableShake": true,
+    "allowReduceParticles": true,
+    "allowHighContrastWarnings": true,
+    "useShapePlusColorForWarnings": true
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "version": "0.1",
+  "root": "xiuxian-stg",
+  "principles": [
+    "headless_simulation_first",
+    "deterministic_gameplay",
+    "data_driven_content",
+    "ui_reads_viewstate_only",
+    "no_external_runtime_assets"
+  ],
+  "directories": [
+    {
+      "path": "src/app",
+      "purpose": "浏览器启动、开发入口，不包含 gameplay 逻辑"
+    },
+    {
+      "path": "src/sim",
+      "purpose": "确定性战斗模拟"
+    },
+    {
+      "path": "src/sim/core",
+      "purpose": "RNG、hash、对象池、基础数学"
+    },
+    {
+      "path": "src/sim/content",
+      "purpose": "JSON 加载、校验、content hash"
+    },
+    {
+      "path": "src/sim/entities",
+      "purpose": "实体数据结构"
+    },
+    {
+      "path": "src/sim/systems",
+      "purpose": "玩法系统"
+    },
+    {
+      "path": "src/sim/view",
+      "purpose": "Simulation 到 UI/Renderer 的只读 ViewState"
+    },
+    {
+      "path": "src/render/canvas",
+      "purpose": "Canvas 2D 表现层"
+    },
+    {
+      "path": "src/ui",
+      "purpose": "HUD、顿悟、菜单 Presenter"
+    },
+    {
+      "path": "src/net",
+      "purpose": "帧同步、快照、断线重连"
+    },
+    {
+      "path": "src/debug",
+      "purpose": "开发工具与遥测"
+    },
+    {
+      "path": "data",
+      "purpose": "数据驱动内容"
+    },
+    {
+      "path": "tests",
+      "purpose": "单元、集成、确定性、联机测试"
+    },
+    {
+      "path": "tools",
+      "purpose": "数据校验、hash、回放、禁用模式检查"
+    }
+  ]
+}

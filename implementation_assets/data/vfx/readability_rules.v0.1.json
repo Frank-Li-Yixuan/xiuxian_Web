@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "v0.1",
+  "priority": [
+    "player_hitbox",
+    "tribulation_warning",
+    "enemy_bullets",
+    "boss_warning",
+    "player_position",
+    "enemies",
+    "player_spells",
+    "pickups",
+    "background_fx"
+  ],
+  "rules": {
+    "protectedHitboxRadiusPx": 24,
+    "largeSpellAlphaMax": 0.45,
+    "flashAlphaMaxWhileBulletsAlive": 0.22,
+    "enemyBulletCoreMinRadiusPx": 3,
+    "enemyBulletAlphaMin": 0.92,
+    "tribulationWarningFrames": 60,
+    "lastWarningFlashFrames": 15,
+    "pickupTrailMaxFrames": 12,
+    "maxDisplayedPickupTrailsHighPressure": 100
+  },
+  "automaticGuards": [
+    {
+      "id": "dim_player_spell_near_enemy_bullet",
+      "when": "enemy_bullet_overlap_large_spell",
+      "action": "reduce_spell_fill_alpha_by_35_percent"
+    },
+    {
+      "id": "protect_hitbox",
+      "when": "effect_intersects_player_hitbox_protected_radius",
+      "action": "punch_hole_or_lower_alpha"
+    },
+    {
+      "id": "high_pressure_pickup_compress",
+      "when": "enemy_bullets_gt_80_or_tribulation_active",
+      "action": "compress_pickup_trails"
+    },
+    {
+      "id": "boss_death_after_clear",
+      "when": "boss_death_explosion",
+      "action": "delay_large_flash_until_bullets_cleared"
+    }
+  ]
+}

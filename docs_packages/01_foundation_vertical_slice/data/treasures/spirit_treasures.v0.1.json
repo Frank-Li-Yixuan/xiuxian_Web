@@ -1,0 +1,202 @@
+{
+  "schema": "SpiritTreasureDefinition[]",
+  "version": "0.1",
+  "items": [
+    {
+      "id": "treasure_minor_sword_array",
+      "name": "小周天剑阵",
+      "role": "offense",
+      "element": "metal",
+      "rarity": "common",
+      "effect": {
+        "effectId": "orbiting_sword_companions",
+        "type": "summon_orbit",
+        "params": {
+          "orbitCount": 2,
+          "orbitRadius": 72,
+          "fireInterval": 0.75,
+          "damage": 8,
+          "projectileSpeed": 650
+        }
+      },
+      "starUpgrades": [
+        {
+          "star": 2,
+          "name": "两仪归环",
+          "description": "环绕剑数量+1。",
+          "modifiers": [
+            {
+              "stat": "treasure.orbitCount",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "star": 3,
+          "name": "剑阵加速",
+          "description": "僚机射击间隔降低。",
+          "modifiers": [
+            {
+              "stat": "treasure.fireInterval",
+              "op": "mul",
+              "value": 0.88
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "spirit_treasure",
+        "offense",
+        "orbit",
+        "sword"
+      ]
+    },
+    {
+      "id": "treasure_bagua_jade",
+      "name": "八卦玉佩",
+      "role": "defense",
+      "element": "earth",
+      "rarity": "common",
+      "effect": {
+        "effectId": "rotating_bullet_blocker",
+        "type": "clear_bullets",
+        "params": {
+          "blockCooldown": 3.5,
+          "maxCharges": 1,
+          "bulletTags": [
+            "normal"
+          ],
+          "orbitRadius": 58
+        }
+      },
+      "starUpgrades": [
+        {
+          "star": 2,
+          "name": "护体真光",
+          "description": "格挡冷却降低。",
+          "modifiers": [
+            {
+              "stat": "treasure.blockCooldown",
+              "op": "mul",
+              "value": 0.88
+            }
+          ]
+        },
+        {
+          "star": 3,
+          "name": "两重玉光",
+          "description": "最大格挡层数+1。",
+          "modifiers": [
+            {
+              "stat": "treasure.maxCharges",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "spirit_treasure",
+        "defense",
+        "bullet_block"
+      ]
+    },
+    {
+      "id": "treasure_gold_toad",
+      "name": "聚宝金蟾",
+      "role": "utility",
+      "element": "water",
+      "rarity": "common",
+      "effect": {
+        "effectId": "pickup_radius_and_material_pull",
+        "type": "pickup_radius",
+        "params": {
+          "pickupRadiusBonus": 90,
+          "materialAttractChance": 0.15,
+          "materialAttractRange": 520
+        }
+      },
+      "starUpgrades": [
+        {
+          "star": 2,
+          "name": "吞灵",
+          "description": "拾取半径额外增加。",
+          "modifiers": [
+            {
+              "stat": "pickup.radius",
+              "op": "add",
+              "value": 35
+            }
+          ]
+        },
+        {
+          "star": 3,
+          "name": "聚财",
+          "description": "材料吸附概率提高。",
+          "modifiers": [
+            {
+              "stat": "treasure.materialAttractChance",
+              "op": "add",
+              "value": 0.1
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "spirit_treasure",
+        "utility",
+        "pickup"
+      ]
+    },
+    {
+      "id": "treasure_tongxin_lock",
+      "name": "同心锁",
+      "role": "coop",
+      "element": "neutral",
+      "rarity": "rare",
+      "effect": {
+        "effectId": "coop_qi_link",
+        "type": "coop_link",
+        "params": {
+          "linkRadius": 260,
+          "qiRegenBonus": 0.18,
+          "rescueSpeedBonus": 0.35,
+          "showLinkBeam": true
+        }
+      },
+      "starUpgrades": [
+        {
+          "star": 2,
+          "name": "同气连枝",
+          "description": "连接范围扩大。",
+          "modifiers": [
+            {
+              "stat": "treasure.linkRadius",
+              "op": "add",
+              "value": 60
+            }
+          ]
+        },
+        {
+          "star": 3,
+          "name": "护法同心",
+          "description": "救援速度额外提高。",
+          "modifiers": [
+            {
+              "stat": "rescue.speed",
+              "op": "add",
+              "value": 0.2
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "spirit_treasure",
+        "coop",
+        "rescue",
+        "qi"
+      ]
+    }
+  ]
+}

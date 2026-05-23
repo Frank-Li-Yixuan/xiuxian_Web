@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+.codex-*.log
+
+# Root-level legacy demo duplicate; canonical reference copy lives in references/.
+code_artifact.html

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "0.1.0",
+  "goals": {
+    "firstRunMinimumAction": "玩家即使死在 1-2，也至少能完成一个成长动作。",
+    "firstClearPowerSpike": "第一大阶段首通后，玩家应能完成至少两个成长动作。",
+    "noResourceCompetitionInCoop": true,
+    "outgameDoesNotGenerateInsightExp": true
+  },
+  "expectedProgression": [
+    {
+      "runs": 1,
+      "expected": ["炼制 1–2 枚局内丹药", "修炼一本功法到接近 2 层", "收取一次聚灵阵收益"]
+    },
+    {
+      "runs": 2,
+      "expected": ["青霜飞剑或八卦玉佩升至 2 星", "解锁一个新的主修心法或法术"]
+    },
+    {
+      "runs": 3,
+      "expected": ["拥有稳定 3 丹药配置", "至少一本主修心法 2 层", "至少一个法术 mastery 2"]
+    },
+    {
+      "runs": 5,
+      "expected": ["准备筑基材料的一部分", "聚灵阵升级至 2 级", "炼器阁或炼丹房升级至 2 级"]
+    }
+  ],
+  "costTuningTargets": {
+    "combatPillCost": "单局中期死亡即可炼 1–2 枚。",
+    "artifactStar2Cost": "第一大阶段通关即可升 1 个。",
+    "artifactStar3Cost": "需要 2–3 次通关或一定刷取。",
+    "foundationPillCost": "不能首通即做出，应成为阶段目标。"
+  }
+}

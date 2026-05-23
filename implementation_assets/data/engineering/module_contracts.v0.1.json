@@ -1,0 +1,62 @@
+{
+  "version": "0.1",
+  "forbiddenInSim": [
+    "Math.random",
+    "Date.now",
+    "performance.now",
+    "document",
+    "window",
+    "canvas",
+    "requestAnimationFrame",
+    "setTimeout",
+    "setInterval",
+    "localStorage",
+    "Audio"
+  ],
+  "simUpdateOrder": [
+    "ApplyFrameInput",
+    "StageSystem",
+    "WaveSpawnerSystem",
+    "PlayerSystem",
+    "ArtifactSystem",
+    "SpiritTreasureSystem",
+    "SpellSystem",
+    "PillDigestionSystem",
+    "EnemySystem",
+    "BossSystem",
+    "ProjectileSystem",
+    "TribulationSystem",
+    "CollisionSystem",
+    "DamageSystem.flush",
+    "DropSystem.flush",
+    "PickupSystem",
+    "TeamInsightSystem",
+    "CultivationSystem",
+    "RescueSystem",
+    "EventQueue.flush",
+    "StateHash optional"
+  ],
+  "hashIncludes": [
+    "players",
+    "teamInsight",
+    "cultivation",
+    "boss",
+    "enemies",
+    "projectiles",
+    "pickups",
+    "cooldowns",
+    "digestion",
+    "rescue",
+    "tribulation",
+    "rngStates"
+  ],
+  "hashExcludes": [
+    "particles",
+    "floatingTexts",
+    "screenShake",
+    "audio",
+    "uiAnimation",
+    "realFps",
+    "networkRtt"
+  ]
+}

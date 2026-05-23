@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "v0.1",
+  "effects": [
+    {
+      "id": "hit_spark_small",
+      "name": "普通命中火花",
+      "category": "hit",
+      "defaultLayer": "foreground_effects",
+      "durationFrames": 12,
+      "maxInstances": 80,
+      "screenShake": null,
+      "screenFlash": null,
+      "particles": {
+        "shape": "star",
+        "count": [
+          2,
+          5
+        ],
+        "lifeFrames": [
+          6,
+          12
+        ],
+        "colors": [
+          "#ffffff",
+          "#facc15"
+        ]
+      },
+      "readability": {}
+    },
+    {
+      "id": "enemy_death_small",
+      "name": "小怪死亡爆裂",
+      "category": "death",
+      "defaultLayer": "foreground_effects",
+      "durationFrames": 28,
+      "maxInstances": 40,
+      "screenShake": "small",
+      "screenFlash": null,
+      "particles": {
+        "shape": "diamond",
+        "count": [
+          8,
+          14
+        ],
+        "lifeFrames": [
+          16,
+          28
+        ]
+      },
+      "readability": {}
+    },
+    {
+      "id": "elite_death_medium",
+      "name": "精英死亡爆裂",
+      "category": "death",
+      "defaultLayer": "foreground_effects",
+      "durationFrames": 55,
+      "maxInstances": 8,
+      "screenShake": "medium",
+      "screenFlash": {
+        "alpha": 0.18,
+        "frames": 4
+      },
+      "particles": {
+        "shape": "ring+sparks",
+        "count": [
+          28,
+          48
+        ],
+        "lifeFrames": [
+          30,
+          55
+        ]
+      },
+      "readability": {}
+    },
+    {
+      "id": "boss_death_cascade",
+      "name": "Boss 连续崩解",
+      "category": "death",
+      "defaultLayer": "foreground_effects",
+      "durationFrames": 180,
+      "maxInstances": 1,
+      "screenShake": "ultimate",
+      "screenFlash": {
+        "alpha": 0.65,
+        "frames": 8,
+        "requiresClear": true
+      },
+      "particles": {
+        "shape": "multi_ring+sparks",
+        "count": [
+          160,
+          260
+        ],
+        "lifeFrames": [
+          60,
+          120
+        ]
+      },
+      "readability": {}
+    },
+    {
+      "id": "player_hit",
+      "name": "玩家受击",
+      "category": "player",
+      "defaultLayer": "players",
+      "durationFrames": 30,
+      "maxInstances": 2,
+      "screenShake": "small",
+      "screenFlash": null,
+      "particles": {
+        "shape": "core_flash",
+        "count": [
+          6,
+          10
+        ]
+      },
+      "readability": {}
+    },
+    {
+      "id": "soul_out",
+      "name": "神魂出窍",
+      "category": "soul",
+      "defaultLayer": "rescue_and_soul",
+      "durationFrames": 60,
+      "maxInstances": 2,
+      "screenShake": "small",
+      "screenFlash": null,
+      "particles": {
+        "shape": "spirit_motes",
+        "count": [
+          24,
+          36
+        ],
+        "colors": [
+          "#d8b4fe",
+          "#ffffff"
+        ]
+      },
+      "readability": {}
+    },
+    {
+      "id": "rescue_ring",
+      "name": "精血渡魂聚灵阵",
+      "category": "coop",
+      "defaultLayer": "rescue_and_soul",
+      "durationFrames": -1,
+      "maxInstances": 2,
+      "screenShake": null,
+      "screenFlash": null,
+      "particles": {
+        "shape": "ring_runes",
+        "count": [
+          8,
+          16
+        ],
+        "lifeFrames": [
+          30,
+          45
+        ]
+      },
+      "readability": {
+        "belowEnemyBullets": true,
+        "protectedHitboxHole": true
+      }
+    },
+    {
+      "id": "pickup_magnet_trail",
+      "name": "掉落吸附尾迹",
+      "category": "pickup",
+      "defaultLayer": "pickup_trails",
+      "durationFrames": 60,
+      "maxInstances": 120,
+      "screenShake": null,
+      "screenFlash": null,
+      "particles": {
+        "shape": "short_trail",
+        "count": [
+          1,
+          2
+        ],
+        "lifeFrames": [
+          8,
+          12
+        ]
+      },
+      "readability": {}
+    },
+    {
+      "id": "screen_clear_fortune_qi",
+      "name": "造化清气清场",
+      "category": "tribulation",
+      "defaultLayer": "foreground_effects",
+      "durationFrames": 120,
+      "maxInstances": 1,
+      "screenShake": "ultimate",
+      "screenFlash": {
+        "alpha": 0.72,
+        "frames": 10,
+        "requiresClear": true
+      },
+      "particles": {
+        "shape": "gold_motes",
+        "count": [
+          120,
+          220
+        ],
+        "lifeFrames": [
+          60,
+          110
+        ]
+      },
+      "readability": {}
+    }
+  ]
+}

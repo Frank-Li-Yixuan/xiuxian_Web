@@ -1,0 +1,53 @@
+{
+  "version": "v0.1",
+  "flags": {
+    "enableLocalCoop": {
+      "default": true,
+      "scope": "must"
+    },
+    "enableOnlineRelayPrototype": {
+      "default": false,
+      "scope": "optional"
+    },
+    "enableHeadlessDeterminismHarness": {
+      "default": true,
+      "scope": "should"
+    },
+    "enableTribulationDebug": {
+      "default": true,
+      "scope": "should"
+    },
+    "enableNaturalQiToFoundationInStage01": {
+      "default": false,
+      "scope": "optional"
+    },
+    "enableOutgameBreakthroughTrialCombat": {
+      "default": false,
+      "scope": "optional"
+    },
+    "enableSoulCultivationFullBuild": {
+      "default": false,
+      "scope": "deferred"
+    },
+    "enableDisciples": {
+      "default": false,
+      "scope": "deferred"
+    },
+    "enableSectManagement": {
+      "default": false,
+      "scope": "deferred"
+    },
+    "enableExternalAssets": {
+      "default": false,
+      "scope": "forbidden"
+    },
+    "enableProceduralAudio": {
+      "default": true,
+      "scope": "should"
+    },
+    "enableLowSpecVfxMode": {
+      "default": true,
+      "scope": "should"
+    }
+  }
+}

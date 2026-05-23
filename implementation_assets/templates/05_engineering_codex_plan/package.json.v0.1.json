@@ -1,0 +1,27 @@
+{
+  "name": "xiuxian-stg",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:determinism": "vitest run tests/determinism",
+    "test:headless:stage01": "vitest run tests/integration/stage01",
+    "validate:data": "tsx tools/validate-data.ts",
+    "check:forbidden": "node scripts/check-forbidden-patterns.mjs",
+    "lint": "eslint ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "latest",
+    "typescript": "latest",
+    "vite": "latest",
+    "vitest": "latest",
+    "tsx": "latest",
+    "eslint": "latest"
+  }
+}

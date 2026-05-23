@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "0.1.0",
+  "resources": [
+    { "id": "spirit_stone_low", "name": "下品灵石", "category": "currency", "rarity": "common", "description": "洞府通用货币，用于修功、炼丹、炼器。" },
+    { "id": "qingling_herb", "name": "青灵草", "category": "herb", "rarity": "common", "description": "常见灵草，炼制回春丹与洗髓丹的基础材料。" },
+    { "id": "clear_mind_grass", "name": "清心草", "category": "herb", "rarity": "uncommon", "description": "清心定神，可炼制清心丹或化解丹毒。" },
+    { "id": "red_sun_ginseng", "name": "赤阳参", "category": "herb", "rarity": "rare", "description": "阳火充盈，常用于燃血丹、益气丹与破境配方。" },
+    { "id": "black_iron_essence", "name": "玄铁精", "category": "ore", "rarity": "common", "description": "炼器基础矿材，可强化飞剑与重印。" },
+    { "id": "spirit_jade", "name": "灵玉", "category": "ore", "rarity": "rare", "description": "蕴含灵韵的玉材，用于灵宝、法术与高阶丹药。" },
+    { "id": "demon_core_small", "name": "小妖丹", "category": "monster_material", "rarity": "common", "description": "妖兽内丹，可入药也可炼器。" },
+    { "id": "stone_armor_core", "name": "石甲妖核", "category": "monster_material", "rarity": "uncommon", "description": "石甲妖体内硬核，适合炼制重印与护体灵宝。" },
+    { "id": "thunder_marow", "name": "雷髓", "category": "boss_material", "rarity": "rare", "description": "青云劫灵遗留雷髓，是雷系法术与筑基准备的重要材料。" },
+    { "id": "jade_slip_fragment", "name": "残破玉简", "category": "scripture", "rarity": "uncommon", "description": "记录功法与神通残篇，可在藏经阁整合。" },
+    { "id": "spell_page_thunder", "name": "雷法残页", "category": "scripture", "rarity": "rare", "description": "雷系法术残页，用于研习五雷正法。" },
+    { "id": "spirit_vein_seed", "name": "灵脉之种", "category": "vein", "rarity": "rare", "description": "可植入聚灵阵，提升挂机收益。" },
+    { "id": "spirit_spring_shard", "name": "灵泉碎片", "category": "vein", "rarity": "rare", "description": "清净灵泉碎片，可强力化解丹毒。" },
+    { "id": "foundation_pill", "name": "筑基丹", "category": "pill", "rarity": "epic", "description": "练气突破筑基的关键丹药。" },
+    { "id": "rejuvenation_pill", "name": "回春丹", "category": "combat_pill", "rarity": "common", "description": "局内携带丹药，持续恢复生命。" },
+    { "id": "burning_blood_pill", "name": "燃血丹", "category": "combat_pill", "rarity": "uncommon", "description": "局内携带丹药，短时间提升火力，结束后虚弱。" },
+    { "id": "clear_mind_pill", "name": "清心丹", "category": "combat_pill", "rarity": "uncommon", "description": "局内携带丹药，解除控制并提高移速。" },
+    { "id": "minor_breakthrough_pill", "name": "小破境丹", "category": "cultivation_pill", "rarity": "uncommon", "description": "推动修为进度，但不提供灵气经验。" }
+  ]
+}

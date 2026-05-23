@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "0.1.0",
+  "rules": {
+    "maxSpellSlots": 4,
+    "emptySlotsAllowed": true,
+    "masteryLevelMaxV01": 3,
+    "runLevelStartsFromMasteryWhenEquipped": true,
+    "runUpgradesDoNotPersist": true
+  },
+  "spells": [
+    {
+      "id": "spell_five_thunder",
+      "name": "五雷正法",
+      "element": "thunder",
+      "unlockCost": { "spirit_stone_low": 150, "spell_page_thunder": 1 },
+      "masteryLevels": [
+        { "level": 1, "effects": { "initialRunLevel": 1 } },
+        { "level": 2, "cost": { "spirit_stone_low": 240, "thunder_marow": 1 }, "effects": { "initialRunLevel": 2, "chainCountBonus": 1 } },
+        { "level": 3, "cost": { "spirit_stone_low": 520, "thunder_marow": 2, "spirit_jade": 1 }, "effects": { "initialRunLevel": 3, "killExplosionRadiusBonus": 12 } }
+      ]
+    },
+    {
+      "id": "spell_bagua_sword_ring",
+      "name": "八卦剑阵",
+      "element": "metal",
+      "unlockCost": { "spirit_stone_low": 120, "jade_slip_fragment": 1 },
+      "masteryLevels": [
+        { "level": 1, "effects": { "initialRunLevel": 1 } },
+        { "level": 2, "cost": { "spirit_stone_low": 220, "black_iron_essence": 8 }, "effects": { "initialRunLevel": 2, "durationBonusFrames": 30 } },
+        { "level": 3, "cost": { "spirit_stone_low": 480, "spirit_jade": 1 }, "effects": { "initialRunLevel": 3, "clearBulletRadiusBonus": 18 } }
+      ]
+    },
+    {
+      "id": "spell_red_lotus_fire",
+      "name": "红莲业火",
+      "element": "fire",
+      "unlockCost": { "spirit_stone_low": 130, "red_sun_ginseng": 1 },
+      "masteryLevels": [
+        { "level": 1, "effects": { "initialRunLevel": 1 } },
+        { "level": 2, "cost": { "spirit_stone_low": 230, "red_sun_ginseng": 2 }, "effects": { "initialRunLevel": 2, "burnDpsMultiplier": 1.08 } },
+        { "level": 3, "cost": { "spirit_stone_low": 500, "thunder_marow": 1, "spirit_jade": 1 }, "effects": { "initialRunLevel": 3, "burnExplosionChanceBonus": 0.08 } }
+      ]
+    },
+    {
+      "id": "spell_sleeve_universe",
+      "name": "袖里乾坤",
+      "element": "void",
+      "unlockCost": { "spirit_stone_low": 180, "jade_slip_fragment": 2 },
+      "masteryLevels": [
+        { "level": 1, "effects": { "initialRunLevel": 1 } },
+        { "level": 2, "cost": { "spirit_stone_low": 300, "spirit_jade": 1 }, "effects": { "initialRunLevel": 2, "maxAbsorbedBulletsBonus": 10 } },
+        { "level": 3, "cost": { "spirit_stone_low": 620, "spirit_jade": 2, "thunder_marow": 1 }, "effects": { "initialRunLevel": 3, "absorbDurationBonusFrames": 20 } }
+      ]
+    }
+  ]
+}

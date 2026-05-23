@@ -1,0 +1,85 @@
+{
+  "saveVersion": "0.1.0",
+  "profileId": "debug_profile_001",
+  "realm": {
+    "realmId": "qi_refining",
+    "layer": 1,
+    "cultivation": 0,
+    "cultivationToNext": 300,
+    "atBottleneck": false
+  },
+  "wallet": {
+    "spirit_stone_low": 120,
+    "qingling_herb": 6,
+    "black_iron_essence": 4,
+    "demon_core_small": 2
+  },
+  "buildings": {
+    "building_dongfu_hall": { "level": 1 },
+    "building_scripture_library": { "level": 1 },
+    "building_spirit_gathering_array": { "level": 1 },
+    "building_alchemy_room": { "level": 1 },
+    "building_artifact_forge": { "level": 1 },
+    "building_tribulation_altar": { "level": 1 }
+  },
+  "methods": {
+    "method_pure_yang": { "unlocked": true, "level": 1, "trainingProgress": 0 },
+    "method_sharp_metal": { "unlocked": true, "level": 1, "trainingProgress": 0 },
+    "method_turtle_breath": { "unlocked": true, "level": 1, "trainingProgress": 0 },
+    "method_clear_sense": { "unlocked": false, "level": 0, "trainingProgress": 0 },
+    "method_innate_root": { "unlocked": false, "level": 0, "trainingProgress": 0 },
+    "method_silent_breath": { "unlocked": false, "level": 0, "trainingProgress": 0 }
+  },
+  "spells": {
+    "spell_five_thunder": { "unlocked": true, "masteryLevel": 1 },
+    "spell_bagua_sword_ring": { "unlocked": true, "masteryLevel": 1 },
+    "spell_red_lotus_fire": { "unlocked": false, "masteryLevel": 0 },
+    "spell_sleeve_universe": { "unlocked": false, "masteryLevel": 0 }
+  },
+  "artifacts": {
+    "artifact_qingshuang_sword": { "unlocked": true, "star": 1 },
+    "artifact_ziyang_gourd": { "unlocked": false, "star": 0 },
+    "artifact_xuanyue_seal": { "unlocked": false, "star": 0 }
+  },
+  "treasures": {
+    "treasure_minor_sword_array": { "unlocked": true, "star": 1 },
+    "treasure_bagua_jade": { "unlocked": true, "star": 1 },
+    "treasure_gold_toad": { "unlocked": false, "star": 0 },
+    "treasure_tongxin_lock": { "unlocked": false, "star": 0 }
+  },
+  "pills": {
+    "rejuvenation_pill": 1,
+    "burning_blood_pill": 0,
+    "clear_mind_pill": 0,
+    "minor_breakthrough_pill": 0,
+    "foundation_pill": 0
+  },
+  "alchemy": {
+    "toxin": { "body": 0, "qi": 0, "shen": 0 },
+    "permanentPillProgress": { "jing": 0, "qiRoot": 0, "shen": 0 }
+  },
+  "idle": {
+    "lastClaimAtMs": 0,
+    "pendingEventIds": []
+  },
+  "activeTraining": [
+    { "methodId": "method_sharp_metal", "allocationWeight": 1 }
+  ],
+  "activeLoadoutId": "preset_safe_push",
+  "loadouts": [
+    {
+      "id": "preset_safe_push",
+      "name": "稳健开荒",
+      "mainMethodId": "method_turtle_breath",
+      "natalArtifactId": "artifact_qingshuang_sword",
+      "spiritTreasureIds": ["treasure_bagua_jade", "treasure_minor_sword_array"],
+      "spellIds": ["spell_five_thunder", "spell_bagua_sword_ring", null, null],
+      "pillIds": ["rejuvenation_pill", null, null]
+    }
+  ],
+  "appliedReceiptIds": [],
+  "flags": {
+    "firstStageCleared": false,
+    "foundationTrialUnlocked": false
+  }
+}

@@ -1,0 +1,14 @@
+flowchart TD
+  A[Browser / App Shell] --> B[Input Sources]
+  A --> R[Canvas Renderer]
+  B --> C[FrameInputBuffer]
+  N[Network Transport] --> C
+  C --> D[FixedTickRunner 60 FPS]
+  D --> E[CombatSimulation]
+  F[ContentRegistry + JSON] --> E
+  G[Seeded RNG Streams] --> E
+  E --> H[ViewStateBuilder]
+  H --> R
+  H --> U[HUD / Overlay Presenters]
+  E --> S[StateHash]
+  S --> N

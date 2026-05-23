@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "v0.1",
+  "stageId": "stage_01_qingyun",
+  "segments": {
+    "stage_01_01": {
+      "noiseLevel": "low",
+      "enabledEffects": [
+        "hit_spark_small",
+        "enemy_death_small",
+        "pickup_magnet_trail",
+        "first_insight_time_ripple"
+      ],
+      "disabled": [
+        "large_flash",
+        "heavy_vignette"
+      ]
+    },
+    "stage_01_02": {
+      "noiseLevel": "medium",
+      "specialCues": [
+        {
+          "enemy": "elite_split_wind_wolf",
+          "cue": "orange_charge_line",
+          "warningFrames": 27
+        }
+      ]
+    },
+    "stage_01_03": {
+      "noiseLevel": "medium",
+      "specialCues": [
+        {
+          "enemy": "enemy_rogue_cultivator_shadow",
+          "cue": "purple_casting_rune",
+          "warningFrames": 24
+        }
+      ],
+      "backgroundFogAlphaMax": 0.16
+    },
+    "stage_01_04": {
+      "noiseLevel": "high",
+      "readabilityOverrides": {
+        "spellAlphaMultiplier": 0.85,
+        "pickupTrailCap": 100,
+        "mergeChainExplosions": true
+      }
+    },
+    "stage_01_05": {
+      "noiseLevel": "boss",
+      "bossIntro": "boss_entry_shadow_nameplate",
+      "phaseWarnings": true,
+      "deathEffect": "boss_death_cascade"
+    }
+  }
+}

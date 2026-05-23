@@ -1,0 +1,242 @@
+{
+  "schema": "ArtifactDefinition[]",
+  "version": "0.1",
+  "items": [
+    {
+      "id": "artifact_qingshuang_sword",
+      "name": "青霜飞剑",
+      "element": "metal",
+      "role": "straight_pierce",
+      "rarity": "common",
+      "attack": {
+        "patternId": "straight_pierce_sword",
+        "fireInterval": 0.18,
+        "projectileSpeed": 850,
+        "damage": 10,
+        "projectileCount": 1,
+        "pierce": 1,
+        "params": {
+          "width": 8,
+          "height": 22,
+          "autoFire": true,
+          "focusTightensSpread": true
+        }
+      },
+      "starUpgrades": [
+        {
+          "star": 2,
+          "name": "双剑并行",
+          "description": "普攻额外发射一柄并行飞剑。",
+          "modifiers": [
+            {
+              "stat": "artifact.projectileCount",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "star": 3,
+          "name": "寒芒透骨",
+          "description": "每第5发飞剑额外穿透2名敌人。",
+          "modifiers": [
+            {
+              "stat": "artifact.everyNthPierce",
+              "op": "set",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "star": 4,
+          "name": "剑光分裂",
+          "description": "击中精英或Boss时低概率分裂出两道侧向剑光。",
+          "modifiers": [
+            {
+              "stat": "artifact.splitChanceVsElite",
+              "op": "add",
+              "value": 0.12
+            }
+          ]
+        },
+        {
+          "star": 5,
+          "name": "太白剑意",
+          "description": "飞剑暴击时释放一枚小型剑气爆点。",
+          "modifiers": [
+            {
+              "stat": "artifact.critAoERadius",
+              "op": "set",
+              "value": 55
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "natal",
+        "outer_or_inner",
+        "sword",
+        "beginner",
+        "boss_dps"
+      ]
+    },
+    {
+      "id": "artifact_ziyang_gourd",
+      "name": "紫阳葫芦",
+      "element": "fire",
+      "role": "fan_aoe",
+      "rarity": "common",
+      "attack": {
+        "patternId": "fan_flame_breath",
+        "fireInterval": 0.36,
+        "projectileSpeed": 420,
+        "damage": 7,
+        "projectileCount": 5,
+        "spreadAngleDeg": 55,
+        "params": {
+          "range": 430,
+          "burnDuration": 2.5,
+          "burnDps": 5,
+          "autoFire": true
+        }
+      },
+      "starUpgrades": [
+        {
+          "star": 2,
+          "name": "火舌外卷",
+          "description": "扇形角度扩大。",
+          "modifiers": [
+            {
+              "stat": "artifact.spreadAngleDeg",
+              "op": "add",
+              "value": 8
+            }
+          ]
+        },
+        {
+          "star": 3,
+          "name": "三昧余烬",
+          "description": "命中后附加灼烧。",
+          "modifiers": [
+            {
+              "stat": "artifact.burnDps",
+              "op": "add",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "star": 4,
+          "name": "爆燃",
+          "description": "灼烧敌人死亡时产生小爆炸。",
+          "modifiers": [
+            {
+              "stat": "artifact.burnDeathExplosionRadius",
+              "op": "set",
+              "value": 70
+            }
+          ]
+        },
+        {
+          "star": 5,
+          "name": "烈焰附剑",
+          "description": "金系飞剑穿过火息时附加火焰伤害。",
+          "modifiers": [
+            {
+              "stat": "synergy.metalProjectileIgnite",
+              "op": "set",
+              "value": 1
+            }
+          ],
+          "unlocks": [
+            "synergy_metal_fire_burning_sword"
+          ]
+        }
+      ],
+      "tags": [
+        "natal",
+        "outer_or_inner",
+        "gourd",
+        "clear_horde",
+        "fire"
+      ]
+    },
+    {
+      "id": "artifact_xuanyue_seal",
+      "name": "玄岳重印",
+      "element": "earth",
+      "role": "delayed_slam",
+      "rarity": "common",
+      "attack": {
+        "patternId": "delayed_area_slam",
+        "fireInterval": 0.85,
+        "damage": 36,
+        "radius": 90,
+        "delay": 0.45,
+        "params": {
+          "targeting": "screen_upper_random_enemy_cluster",
+          "canClearSmallBullets": false,
+          "autoFire": true,
+          "warningCircle": true
+        }
+      },
+      "starUpgrades": [
+        {
+          "star": 2,
+          "name": "山岳加身",
+          "description": "砸落范围扩大。",
+          "modifiers": [
+            {
+              "stat": "artifact.radius",
+              "op": "add",
+              "value": 18
+            }
+          ]
+        },
+        {
+          "star": 3,
+          "name": "震脉",
+          "description": "命中敌人短暂减速。",
+          "modifiers": [
+            {
+              "stat": "artifact.slowDuration",
+              "op": "set",
+              "value": 1.4
+            }
+          ]
+        },
+        {
+          "star": 4,
+          "name": "镇妖",
+          "description": "砸落中心眩晕普通怪。",
+          "modifiers": [
+            {
+              "stat": "artifact.stunNormalDuration",
+              "op": "set",
+              "value": 0.6
+            }
+          ]
+        },
+        {
+          "star": 5,
+          "name": "地脉共鸣",
+          "description": "重印落地时震碎普通小型敌弹。",
+          "modifiers": [
+            {
+              "stat": "artifact.clearNormalBulletsRadius",
+              "op": "set",
+              "value": 110
+            }
+          ]
+        }
+      ],
+      "tags": [
+        "natal",
+        "outer_or_inner",
+        "seal",
+        "elite_control",
+        "earth"
+      ]
+    }
+  ]
+}

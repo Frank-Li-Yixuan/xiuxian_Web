@@ -1,0 +1,44 @@
+{
+  "schema": "InsightExpTable",
+  "version": "0.1",
+  "note": "灵气经验只用于顿悟抓牌，不用于境界突破。",
+  "teamInsightExp": {
+    "levels": [
+      {
+        "level": 1,
+        "expToNext": 60,
+        "expectedTrigger": "stage_01_01_end"
+      },
+      {
+        "level": 2,
+        "expToNext": 130,
+        "expectedTrigger": "stage_01_03_mid_or_end"
+      },
+      {
+        "level": 3,
+        "expToNext": 240,
+        "expectedTrigger": "stage_01_04_end"
+      },
+      {
+        "level": 4,
+        "expToNext": 390,
+        "expectedTrigger": "boss_or_post_boss"
+      },
+      {
+        "level": 5,
+        "expToNext": 580,
+        "expectedTrigger": "reserved"
+      }
+    ],
+    "scalingFormula": "floor(60 * level^1.55)",
+    "teamShared": true,
+    "trigger": "time_stop_insight_choice",
+    "maxInsightPausesPerSegment": 1
+  },
+  "orbValues": {
+    "orb_insight_small": 6,
+    "orb_insight_medium": 18,
+    "orb_insight_large": 46,
+    "orb_insight_huge": 180
+  }
+}

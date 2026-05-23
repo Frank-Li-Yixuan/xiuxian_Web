@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "0.1.0",
+  "protocolName": "xiuxian-stg-lockstep",
+  "transport": {
+    "type": "websocket_relay",
+    "serverAuthority": "room_events_only",
+    "serverSimulatesGameplay": false
+  },
+  "simulation": {
+    "simFps": 60,
+    "logicalResolution": { "width": 1920, "height": 1080 },
+    "combatRect": { "x": 360, "y": 0, "width": 1080, "height": 1080 },
+    "fixedTick": true,
+    "gameplayTimersUseFrames": true,
+    "renderInterpolationAllowed": true
+  },
+  "input": {
+    "defaultInputDelayFrames": 4,
+    "minInputDelayFrames": 3,
+    "maxInputDelayFrames": 9,
+    "sendBatchEveryFrames": 2,
+    "buttons": {
+      "Spell1": 1,
+      "Spell2": 2,
+      "Spell3": 4,
+      "Spell4": 8,
+      "Pill1": 16,
+      "Pill2": 32,
+      "Pill3": 64,
+      "Interact": 128,
+      "Focus": 256,
+      "Confirm": 512,
+      "Cancel": 1024
+    }
+  },
+  "rngStreams": [
+    { "id": "gameplay", "hashIncluded": true },
+    { "id": "stage", "hashIncluded": true },
+    { "id": "drop", "hashIncluded": true },
+    { "id": "reward", "hashIncluded": true },
+    { "id": "boss", "hashIncluded": true },
+    { "id": "tribulation", "hashIncluded": true },
+    { "id": "visual", "hashIncluded": false }
+  ],
+  "hashing": {
+    "hashEveryFrames": 120,
+    "algorithm": "xxhash64_or_crc32c_dev",
+    "includeRngDigest": true,
+    "excludeVisualEffects": true
+  },
+  "snapshots": {
+    "snapshotEveryFrames": 120,
+    "snapshotRingSize": 180,
+    "hostActsAsRepairAuthority": true
+  },
+  "network": {
+    "pingIntervalMs": 1000,
+    "timeoutMs": 5000,
+    "reconnectGraceMs": 60000,
+    "targetMaxRttMs": 150
+  },
+  "pauseModes": [
+    "running",
+    "insight_pause",
+    "network_waiting",
+    "finished",
+    "aborted"
+  ],
+  "roomPhases": [
+    "lobby",
+    "loadout_commit",
+    "loading",
+    "countdown",
+    "in_run",
+    "insight_pause",
+    "network_waiting",
+    "finished",
+    "aborted"
+  ]
+}

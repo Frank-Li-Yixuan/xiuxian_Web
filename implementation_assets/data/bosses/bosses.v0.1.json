@@ -1,0 +1,148 @@
+{
+  "schema": "BossDefinition[]",
+  "version": "0.1",
+  "items": [
+    {
+      "id": "boss_qingyun_tribulation_spirit",
+      "name": "青云劫灵",
+      "element": "thunder",
+      "hp": 5200,
+      "entry": {
+        "fromY": -260,
+        "toY": 70,
+        "duration": 2.2
+      },
+      "phases": [
+        {
+          "id": "phase_1_thunder_orbs",
+          "hpThreshold": 0.66,
+          "timeline": [
+            {
+              "at": 0.5,
+              "patternId": "boss_five_way_slow_orbs",
+              "repeat": {
+                "count": 4,
+                "interval": 3.2
+              },
+              "params": {
+                "speed": 190,
+                "damage": 12
+              }
+            },
+            {
+              "at": 2.0,
+              "patternId": "boss_targeted_triple_thunder",
+              "repeat": {
+                "count": 3,
+                "interval": 4.0
+              },
+              "params": {
+                "warningTime": 0.35
+              }
+            },
+            {
+              "at": 10.0,
+              "patternId": "summon_stage01_imps",
+              "params": {
+                "count": 10
+              }
+            }
+          ]
+        },
+        {
+          "id": "phase_2_cloud_press",
+          "hpThreshold": 0.33,
+          "timeline": [
+            {
+              "at": 0.0,
+              "patternId": "tribulation_warning_columns",
+              "repeat": {
+                "count": 6,
+                "interval": 2.6
+              },
+              "params": {
+                "columns": 3,
+                "warningTime": 0.8,
+                "unbreakable": true
+              }
+            },
+            {
+              "at": 4.0,
+              "patternId": "summon_side_wolves",
+              "repeat": {
+                "count": 4,
+                "interval": 5.0
+              },
+              "params": {
+                "countPerSide": 2
+              }
+            },
+            {
+              "at": 7.0,
+              "patternId": "boss_ring_bullets",
+              "repeat": {
+                "count": 3,
+                "interval": 6.5
+              },
+              "params": {
+                "bulletCount": 28,
+                "speed": 170
+              }
+            }
+          ]
+        },
+        {
+          "id": "phase_3_heavenly_torrent",
+          "hpThreshold": 0.0,
+          "timeline": [
+            {
+              "at": 0.0,
+              "patternId": "boss_fast_tracking_thunder",
+              "repeat": {
+                "count": 8,
+                "interval": 1.8
+              },
+              "params": {
+                "trackingStrength": 0.12
+              }
+            },
+            {
+              "at": 5.0,
+              "patternId": "summon_stone_armor",
+              "repeat": {
+                "count": 2,
+                "interval": 8.0
+              },
+              "params": {
+                "count": 1
+              }
+            },
+            {
+              "at": 12.0,
+              "patternId": "boss_major_thunder_punishment",
+              "repeat": {
+                "count": 2,
+                "interval": 18.0
+              },
+              "params": {
+                "warningTime": 1.0,
+                "columns": 5,
+                "unbreakable": true
+              }
+            }
+          ]
+        }
+      ],
+      "drops": "drop_boss_qingyun_tribulation_spirit",
+      "rewards": [
+        "reward_pool_qingyun_boss"
+      ],
+      "tags": [
+        "boss",
+        "stage01",
+        "tribulation_flavored",
+        "thunder"
+      ]
+    }
+  ]
+}

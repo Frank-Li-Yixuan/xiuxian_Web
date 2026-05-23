@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant P1 as Client P1
+    participant S as Relay Server
+    participant P2 as Client P2
+
+    P1->>S: create_room + version handshake
+    P2->>S: join_room + version handshake
+    S-->>P1: room_joined
+    S-->>P2: room_joined
+
+    P1->>S: loadout_commit
+    P2->>S: loadout_commit
+    S-->>P1: run_start(seed, dataPackHash, inputDelay)
+    S-->>P2: run_start(seed, dataPackHash, inputDelay)
+
+    loop Every 2-3 frames
+        P1->>S: input_batch(baseFrame, inputs)
+        P2->>S: input_batch(baseFrame, inputs)
+        S-->>P1: relay P2 input_batch
+        S-->>P2: relay P1 input_batch
+    end
+
+    loop Every 120 frames
+        P1->>S: hash_report(frame, hash)
+        P2->>S: hash_report(frame, hash)
+    end
+
+    Note over P1,P2: 灵气经验满，进入 insight_pause
+    P1->>S: insight_decision(reroll/choose)
+    P2->>S: insight_decision(reroll/choose)
+    S-->>P1: ordered_room_event(serverDecisionSeq)
+    S-->>P2: ordered_room_event(serverDecisionSeq)
+    Note over P1,P2: 双方选择完成，同一 resumeFrame 继续

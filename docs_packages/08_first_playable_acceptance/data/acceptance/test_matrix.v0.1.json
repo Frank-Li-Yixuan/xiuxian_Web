@@ -1,0 +1,65 @@
+{
+  "version": "v0.1",
+  "tests": [
+    {
+      "id": "T-RNG-001",
+      "type": "unit",
+      "target": "SeededRng",
+      "required": true
+    },
+    {
+      "id": "T-FIXED-001",
+      "type": "unit",
+      "target": "FixedTickRunner",
+      "required": true
+    },
+    {
+      "id": "T-CONTENT-001",
+      "type": "content",
+      "target": "All JSON",
+      "required": true
+    },
+    {
+      "id": "T-HEADLESS-001",
+      "type": "integration",
+      "target": "Stage 01 Clear",
+      "required": true
+    },
+    {
+      "id": "T-HEADLESS-002",
+      "type": "integration",
+      "target": "Stage 01 Death Settlement",
+      "required": true
+    },
+    {
+      "id": "T-DETERMINISM-001",
+      "type": "determinism",
+      "target": "Same Seed Replay",
+      "required": true
+    },
+    {
+      "id": "T-DETERMINISM-002",
+      "type": "determinism",
+      "target": "Two Client Harness",
+      "required": false
+    },
+    {
+      "id": "T-OUTGAME-001",
+      "type": "integration",
+      "target": "Receipt to Second Run",
+      "required": true
+    },
+    {
+      "id": "T-VFX-001",
+      "type": "manual",
+      "target": "Readability Checklist",
+      "required": true
+    },
+    {
+      "id": "T-PLAYTEST-001",
+      "type": "manual",
+      "target": "End-to-end Playtest",
+      "required": true
+    }
+  ]
+}

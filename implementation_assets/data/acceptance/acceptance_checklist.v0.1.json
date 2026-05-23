@@ -1,0 +1,99 @@
+{
+  "version": "v0.1",
+  "categories": [
+    {
+      "id": "combat",
+      "name": "局内战斗",
+      "items": [
+        {
+          "id": "combat_auto_attack",
+          "level": "must",
+          "text": "玩家自动普攻由本命法宝决定。"
+        },
+        {
+          "id": "combat_four_spells",
+          "level": "must",
+          "text": "四个主动法术 J/K/L/I 可用，并消耗真元。"
+        },
+        {
+          "id": "combat_three_pills",
+          "level": "must",
+          "text": "三个丹药槽可吞服并显示炼化进度。"
+        },
+        {
+          "id": "combat_stage01",
+          "level": "must",
+          "text": "第一大阶段 1-1 到 1-5 可完整运行。"
+        },
+        {
+          "id": "combat_boss",
+          "level": "must",
+          "text": "Boss 青云劫灵三阶段可击败并结算。"
+        }
+      ]
+    },
+    {
+      "id": "progression",
+      "name": "双轨成长",
+      "items": [
+        {
+          "id": "prog_insight_exp",
+          "level": "must",
+          "text": "灵气经验只触发顿悟三选一。"
+        },
+        {
+          "id": "prog_cultivation",
+          "level": "must",
+          "text": "修为只触发小层突破、瓶颈或雷劫。"
+        },
+        {
+          "id": "prog_debug_tribulation",
+          "level": "should",
+          "text": "Debug 可触发局内雷劫。"
+        }
+      ]
+    },
+    {
+      "id": "outgame",
+      "name": "局外洞府",
+      "items": [
+        {
+          "id": "out_receipt",
+          "level": "must",
+          "text": "通关/死亡后生成结算 Receipt。"
+        },
+        {
+          "id": "out_modules",
+          "level": "must",
+          "text": "聚灵阵、藏经阁、炼丹房、炼器阁最小功能可用。"
+        },
+        {
+          "id": "out_second_run",
+          "level": "must",
+          "text": "强化后能生成第二局 RunConfig。"
+        }
+      ]
+    },
+    {
+      "id": "engineering",
+      "name": "工程确定性",
+      "items": [
+        {
+          "id": "eng_headless",
+          "level": "must",
+          "text": "Headless 可跑完整第一大阶段。"
+        },
+        {
+          "id": "eng_seeded_rng",
+          "level": "must",
+          "text": "Gameplay 禁止裸 Math.random。"
+        },
+        {
+          "id": "eng_state_hash",
+          "level": "must",
+          "text": "StateHash 可检测不同步。"
+        }
+      ]
+    }
+  ]
+}

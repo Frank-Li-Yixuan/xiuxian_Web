@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "v0.1",
+  "artifacts": {
+    "artifact_qingshuang_sword": {
+      "name": "青霜飞剑",
+      "projectileShape": "sword_diamond",
+      "trailFrames": 12,
+      "hitEffect": "hit_spark_small",
+      "colors": [
+        "#f8fafc",
+        "#22d3ee",
+        "#fbbf24"
+      ],
+      "rules": {
+        "noLargeLaserFill": true
+      }
+    },
+    "artifact_ziyang_gourd": {
+      "name": "紫阳葫芦",
+      "projectileShape": "fan_flame_tongues",
+      "trailFrames": 8,
+      "hitEffect": "ember_pop",
+      "colors": [
+        "#f97316",
+        "#ef4444",
+        "#facc15"
+      ],
+      "rules": {
+        "underEnemyBullets": true,
+        "fieldAlphaMax": 0.38
+      }
+    },
+    "artifact_xuanyue_seal": {
+      "name": "玄岳重印",
+      "projectileShape": "falling_seal",
+      "warningFrames": 18,
+      "impactEffect": "earth_shock_ring",
+      "colors": [
+        "#ca8a04",
+        "#facc15",
+        "#a16207"
+      ],
+      "rules": {
+        "impactShake": "medium",
+        "shockRingHollow": true
+      }
+    }
+  }
+}

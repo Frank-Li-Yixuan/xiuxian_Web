@@ -1,0 +1,116 @@
+{
+  "schema": "PillDefinition[]",
+  "version": "0.1",
+  "items": [
+    {
+      "id": "pill_rejuvenation",
+      "name": "回春丹",
+      "rarity": "common",
+      "digestTime": 12,
+      "maxStack": 3,
+      "effects": [
+        {
+          "effectId": "rejuvenation_hot",
+          "type": "heal_over_time",
+          "params": {
+            "healPerSecond": 8,
+            "canTickWhileMoving": true
+          }
+        }
+      ],
+      "tags": [
+        "pill",
+        "defense",
+        "digest",
+        "hot"
+      ]
+    },
+    {
+      "id": "pill_burning_blood",
+      "name": "燃血丹",
+      "rarity": "uncommon",
+      "digestTime": 8,
+      "maxStack": 2,
+      "effects": [
+        {
+          "effectId": "burning_blood_buff",
+          "type": "buff",
+          "params": {
+            "attackSpeedMultiplier": 1.35,
+            "spellDamageMultiplier": 1.25,
+            "qiCostMultiplier": 0.9
+          }
+        }
+      ],
+      "afterEffects": [
+        {
+          "effectId": "burning_blood_weakness",
+          "type": "buff",
+          "params": {
+            "duration": 3,
+            "moveSpeedMultiplier": 0.82,
+            "tag": "weakness"
+          }
+        }
+      ],
+      "tags": [
+        "pill",
+        "burst",
+        "digest",
+        "after_effect"
+      ]
+    },
+    {
+      "id": "pill_clear_mind",
+      "name": "清心丹",
+      "rarity": "common",
+      "digestTime": 6,
+      "maxStack": 2,
+      "effects": [
+        {
+          "effectId": "clear_mind_cleanse",
+          "type": "cleanse",
+          "params": {
+            "cleanseTags": [
+              "slow",
+              "burn",
+              "confuse",
+              "minor_karma"
+            ],
+            "moveSpeedMultiplier": 1.15,
+            "duration": 6
+          }
+        }
+      ],
+      "tags": [
+        "pill",
+        "cleanse",
+        "digest",
+        "anti_control"
+      ]
+    },
+    {
+      "id": "pill_minor_breakthrough",
+      "name": "小破境丹",
+      "rarity": "rare",
+      "digestTime": 10,
+      "maxStack": 1,
+      "effects": [
+        {
+          "effectId": "minor_cultivation_boost",
+          "type": "cultivation_gain",
+          "params": {
+            "amount": 120,
+            "canTriggerBottleneck": true
+          }
+        }
+      ],
+      "tags": [
+        "pill",
+        "cultivation",
+        "breakthrough",
+        "digest"
+      ]
+    }
+  ]
+}

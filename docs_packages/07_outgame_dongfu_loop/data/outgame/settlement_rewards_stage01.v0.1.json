@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "0.1.0",
+  "stageId": "stage_01_qingyun",
+  "rules": {
+    "baseResourcesKept": "100_percent",
+    "difficultyMultipliers": {
+      "normal": { "base": 1.0, "rare": 1.0 },
+      "hard": { "base": 1.15, "rare": 1.25 },
+      "tribulation": { "base": 1.30, "rare": 1.60 }
+    },
+    "onlineCoopBaseRewardsDuplicatedPerPlayer": true,
+    "rareRewardsRolledPerPlayer": true
+  },
+  "progressRewardBands": [
+    {
+      "id": "died_early",
+      "label": "止步山门",
+      "stageProgressMin": "1-1",
+      "stageProgressMax": "1-2",
+      "rewards": { "spirit_stone_low": [80, 130], "qingling_herb": [4, 8], "demon_core_small": [1, 3] }
+    },
+    {
+      "id": "died_mid",
+      "label": "归府养伤",
+      "stageProgressMin": "1-3",
+      "stageProgressMax": "1-4",
+      "rewards": { "spirit_stone_low": [160, 260], "qingling_herb": [8, 16], "black_iron_essence": [5, 10], "jade_slip_fragment": [1, 2], "demon_core_small": [3, 8] }
+    },
+    {
+      "id": "boss_clear",
+      "label": "青云劫灵已破",
+      "requiresBossKill": "boss_qingyun_tribulation_spirit",
+      "rewards": { "spirit_stone_low": [320, 420], "qingling_herb": [18, 28], "clear_mind_grass": [4, 8], "black_iron_essence": [10, 16], "demon_core_small": [8, 14], "spirit_jade": [1, 3], "thunder_marow": [1, 1], "jade_slip_fragment": [2, 4] },
+      "firstClearBonus": { "spirit_vein_seed": 1, "spell_page_thunder": 1 }
+    }
+  ]
+}
