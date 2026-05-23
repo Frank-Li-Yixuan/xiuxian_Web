@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>双人雷霆战机修仙版 v0.1</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, "Microsoft YaHei", "PingFang SC", sans-serif;
+        background: #11110f;
+        color: #f4f1e8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #11110f;
+      }
+
+      button {
+        border: 1px solid #5a6d60;
+        border-radius: 6px;
+        background: #24352b;
+        color: #f4f1e8;
+        cursor: pointer;
+        font: inherit;
+        min-height: 34px;
+        padding: 6px 10px;
+      }
+
+      button:hover {
+        border-color: #c6a15b;
+        background: #3a3a2e;
+      }
+
+      .xiuxian-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 10px;
+        height: 100vh;
+        padding: 10px;
+      }
+
+      .xiuxian-playfield {
+        min-width: 0;
+        min-height: 0;
+        border: 1px solid #38443f;
+        border-radius: 6px;
+        background: #071018;
+        overflow: hidden;
+      }
+
+      .xiuxian-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .xiuxian-hud,
+      .xiuxian-outgame {
+        border: 1px solid #38443f;
+        border-radius: 6px;
+        background: #161916;
+        overflow: auto;
+        padding: 12px;
+      }
+
+      .xiuxian-debug {
+        display: flex;
+        gap: 8px;
+        grid-column: 1 / 2;
+        min-width: 0;
+      }
+
+      .xiuxian-outgame {
+        grid-column: 2 / 3;
+        max-height: 240px;
+      }
+
+      .xiuxian-outgame[hidden] {
+        display: none;
+      }
+
+      .hud-title {
+        color: #d6b56d;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .hud-section {
+        border-bottom: 1px solid #303c38;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+      }
+
+      .hud-alert {
+        color: #b7f2cf;
+      }
+
+      .hud-row {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        min-height: 24px;
+      }
+
+      .hud-row span {
+        color: #aeb8b0;
+        min-width: 0;
+      }
+
+      .hud-row strong {
+        color: #f4f1e8;
+        font-weight: 650;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        text-align: right;
+      }
+
+      .hud-meter {
+        margin: 6px 0;
+      }
+
+      .hud-meter-track {
+        background: #2a302d;
+        border: 1px solid #3e4d46;
+        border-radius: 4px;
+        height: 9px;
+        overflow: hidden;
+      }
+
+      .hud-meter-track i {
+        display: block;
+        height: 100%;
+      }
+
+      .hud-meter-hp i {
+        background: #d95f5f;
+      }
+
+      .hud-meter-qi i {
+        background: #5aa7d9;
+      }
+
+      .hud-meter-cultivation i {
+        background: #c6a15b;
+      }
+
+      .hud-meter-insight i {
+        background: #5ecb8a;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="xiuxian-game-root"></main>
+    <script type="module" src="/src/app/BrowserGameApp.ts"></script>
+  </body>
+</html>
