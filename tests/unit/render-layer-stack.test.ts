@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import renderLayersData from "../../docs_packages/06_combat_feel_vfx/data/vfx/render_layers.v0.1.json";
 import type { EffectEvent } from "../../src/sim/spells/SpellEffects";
 import { CanvasRenderer, type CanvasRenderFrame } from "../../src/render/CanvasRenderer";
+import type { CanvasPresentationState } from "../../src/render/CanvasPresentationState";
 import {
   createRenderLayerStack,
   createRenderLayerStackFromData,
@@ -182,6 +183,108 @@ describe("CanvasRenderer", () => {
     expect(context.operations).toContain("fillText:归府结算:960:302");
     expect(context.operations).toContain("fillText:灵石 +370:960:358");
     expect(context.operations).toContain("fillText:五雷法页 +1:960:430");
+    expect(context.operations).not.toContain("drawImage");
+    expect(context.operations).not.toContain("externalFont");
+  });
+
+  it("renders neon presentation entities with readable projectile and boss silhouettes", () => {
+    const viewState = createViewState();
+    const presentation: CanvasPresentationState = {
+      frame: 240,
+      screen: { width: 1920, height: 1080 },
+      players: [
+        {
+          playerId: "p1",
+          position: { x: 960, y: 900 },
+          renderColor: "player1",
+          realmLayer: 4,
+          aliveState: "body",
+          focusActive: true,
+          hpRatio: 0.8,
+          qiRatio: 0.6
+        }
+      ],
+      enemies: [
+        {
+          entityId: 1,
+          enemyId: "enemy_wolf_demon",
+          renderKind: "wolf_demon",
+          position: { x: 900, y: 360 },
+          hpRatio: 0.5
+        },
+        {
+          entityId: 2,
+          enemyId: "enemy_stone_armor_demon",
+          renderKind: "stone_armor_demon",
+          position: { x: 1040, y: 340 },
+          hpRatio: 1
+        }
+      ],
+      playerProjectiles: [
+        {
+          entityId: 10,
+          ownerPlayerId: "p1",
+          artifactId: "artifact_qingshuang_sword",
+          renderKind: "flying_sword",
+          position: { x: 960, y: 760 },
+          velocity: { x: 0, y: -720 },
+          radius: 5,
+          pierce: 1
+        }
+      ],
+      enemyProjectiles: [
+        {
+          entityId: 20,
+          ownerKind: "boss",
+          ownerId: "boss_qingyun_tribulation_spirit",
+          renderKind: "boss_big",
+          position: { x: 970, y: 620 },
+          velocity: { x: 0, y: 260 },
+          radius: 16
+        }
+      ],
+      pickups: [
+        {
+          entityId: 30,
+          pickupId: "material_demon_core",
+          label: "妖",
+          renderKind: "material",
+          position: { x: 870, y: 640 }
+        }
+      ],
+      warnings: [],
+      visualEvents: [],
+      boss: {
+        entityId: 90_001,
+        bossId: "boss_qingyun_tribulation_spirit",
+        renderKind: "qingyun_tribulation_spirit",
+        position: { x: 960, y: 210 },
+        hpRatio: 0.66,
+        phaseIndex: 2,
+        phaseCount: 3,
+        status: "active",
+        warningText: "万雷归宗"
+      }
+    };
+    const context = new RecordingCanvasContext();
+
+    new CanvasRenderer().renderFrame(context, {
+      viewState,
+      effectEvents: [],
+      presentation
+    });
+
+    expect(context.operations).toContain("command:players:presentation_player_p1");
+    expect(context.operations).toContain("moveTo:960:868");
+    expect(context.operations).toContain("lineTo:984:928");
+    expect(context.operations).toContain("command:enemies:presentation_enemy_1");
+    expect(context.operations).toContain("command:enemies:presentation_enemy_2");
+    expect(context.operations).toContain("command:player_projectiles_low:presentation_player_projectile_10");
+    expect(context.operations).toContain("command:enemy_bullets:presentation_enemy_projectile_20");
+    expect(context.operations).toContain("fillStyle:#ffffff");
+    expect(context.operations).toContain("strokeStyle:#f97316");
+    expect(context.operations).toContain("command:boss:presentation_boss");
+    expect(context.operations).toContain("fillText:万雷归宗:960:84");
     expect(context.operations).not.toContain("drawImage");
     expect(context.operations).not.toContain("externalFont");
   });

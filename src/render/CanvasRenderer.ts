@@ -1,5 +1,16 @@
 import type { EffectEvent } from "../sim/spells/SpellEffects";
 import type {
+  CanvasPresentationBoss,
+  CanvasPresentationEnemy,
+  CanvasPresentationEnemyProjectile,
+  CanvasPresentationPickup,
+  CanvasPresentationPlayer,
+  CanvasPresentationPlayerProjectile,
+  CanvasPresentationState,
+  CanvasPresentationVisualEvent,
+  CanvasPresentationWarning
+} from "./CanvasPresentationState";
+import type {
   BossHudViewState,
   InRunUiViewState,
   LightningWarningViewState,
@@ -29,6 +40,7 @@ export interface CanvasRendererOptions {
 export interface CanvasRenderFrame {
   readonly viewState: InRunUiViewState;
   readonly effectEvents: readonly EffectEvent[];
+  readonly presentation?: CanvasPresentationState;
   readonly outgameSummary?: CanvasSettlementSummary;
 }
 
@@ -79,9 +91,16 @@ export class CanvasRenderer {
       }
     ];
 
+    if (frame.presentation !== undefined) {
+      commands.push(...createPresentationCommands(frame.presentation));
+    }
+
     for (let index = 0; index < frame.effectEvents.length; index += 1) {
       const event = frame.effectEvents[index];
       if (event === undefined) {
+        continue;
+      }
+      if (frame.presentation !== undefined && isPresentationBackedEffect(event.effectId)) {
         continue;
       }
       commands.push(createEffectCommand(event, index));
@@ -171,6 +190,75 @@ export class CanvasRenderer {
   }
 }
 
+function createPresentationCommands(presentation: CanvasPresentationState): readonly RenderCommand[] {
+  const commands: RenderCommand[] = [];
+  for (const pickup of presentation.pickups) {
+    commands.push({
+      id: `presentation_pickup_${pickup.entityId}`,
+      layerId: "pickup_trails",
+      draw: (context) => drawPresentationPickup(context, pickup)
+    });
+  }
+  for (const projectile of presentation.playerProjectiles) {
+    commands.push({
+      id: `presentation_player_projectile_${projectile.entityId}`,
+      layerId: projectile.renderKind === "seal_impact" ? "player_projectiles_high" : "player_projectiles_low",
+      draw: (context) => drawPresentationPlayerProjectile(context, projectile)
+    });
+  }
+  for (const enemy of presentation.enemies) {
+    commands.push({
+      id: `presentation_enemy_${enemy.entityId}`,
+      layerId: "enemies",
+      draw: (context) => drawPresentationEnemy(context, enemy)
+    });
+  }
+  const boss = presentation.boss;
+  if (boss !== undefined) {
+    commands.push({
+      id: "presentation_boss",
+      layerId: "boss",
+      draw: (context) => drawPresentationBoss(context, boss)
+    });
+  }
+  for (const projectile of presentation.enemyProjectiles) {
+    commands.push({
+      id: `presentation_enemy_projectile_${projectile.entityId}`,
+      layerId: "enemy_bullets",
+      draw: (context) => drawPresentationEnemyProjectile(context, projectile)
+    });
+  }
+  for (const warning of presentation.warnings) {
+    if (warning.kind !== "tribulation") {
+      commands.push({
+        id: `presentation_warning_${warning.id}`,
+        layerId: "tribulation_warnings",
+        draw: (context) => drawPresentationWarning(context, warning)
+      });
+    }
+  }
+  for (const player of presentation.players) {
+    commands.push({
+      id: `presentation_player_${player.playerId}`,
+      layerId: player.aliveState === "soul" ? "rescue_and_soul" : "players",
+      draw: (context) => drawPresentationPlayer(context, player)
+    });
+    commands.push({
+      id: `presentation_player_hitbox_${player.playerId}`,
+      layerId: "player_hitbox",
+      draw: (context) => drawPresentationPlayerHitbox(context, player)
+    });
+  }
+  for (const event of presentation.visualEvents) {
+    commands.push({
+      id: `presentation_visual_${event.id}`,
+      layerId: "foreground_effects",
+      draw: (context) => drawPresentationVisualEvent(context, event)
+    });
+  }
+  return commands;
+}
+
 function createEffectCommand(event: EffectEvent, index: number): RenderCommand {
   const layerId = layerForEffect(event.effectId);
   return {
@@ -180,12 +268,307 @@ function createEffectCommand(event: EffectEvent, index: number): RenderCommand {
   };
 }
 
+function isPresentationBackedEffect(effectId: string): boolean {
+  return [
+    "enemy_body",
+    "boss_body",
+    "player_body",
+    "soul_body",
+    "player_hitbox",
+    "pickup_trail",
+    "player_projectile_low",
+    "enemy_bullet"
+  ].includes(effectId);
+}
+
 function createTribulationWarningCommand(warning: LightningWarningViewState): RenderCommand {
   return {
     id: `tribulation_warning_${warning.id}`,
     layerId: "tribulation_warnings",
     draw: (context) => drawTribulationWarning(context, warning)
   };
+}
+
+function drawPresentationPickup(context: CanvasLikeContext, pickup: CanvasPresentationPickup): void {
+  context.recordCommand?.("pickup_trails", `presentation_pickup_${pickup.entityId}`);
+  const color = pickup.renderKind === "spirit_exp" ? "#34d399" : pickup.renderKind === "qi_orb" ? "#38bdf8" : "#facc15";
+  withGlow(context, color, 18, () => {
+    drawRing(context, pickup.position, 15, color, 2, 0.78);
+    drawFilledCircle(context, pickup.position, 8, color, 0.62);
+    drawText(context, pickup.label, pickup.position, "#ffffff", "bold 12px system-ui, sans-serif", "center", 0.96);
+  });
+}
+
+function drawPresentationPlayerProjectile(context: CanvasLikeContext, projectile: CanvasPresentationPlayerProjectile): void {
+  context.recordCommand?.("player_projectiles_low", `presentation_player_projectile_${projectile.entityId}`);
+  const color = playerColor(projectile.ownerPlayerId);
+  if (projectile.renderKind === "seal_impact") {
+    withGlow(context, "#facc15", 18, () => {
+      drawRing(context, projectile.position, 22, "#facc15", 3, 0.8);
+      drawLine(context, { x: projectile.position.x - 18, y: projectile.position.y }, { x: projectile.position.x + 18, y: projectile.position.y }, "#fef3c7", 2, 0.8);
+    });
+    return;
+  }
+  if (projectile.renderKind === "gourd_flame") {
+    withGlow(context, "#f97316", 16, () => {
+      drawPolygon(
+        context,
+        [
+          { x: projectile.position.x, y: projectile.position.y - 20 },
+          { x: projectile.position.x + 9, y: projectile.position.y + 8 },
+          { x: projectile.position.x, y: projectile.position.y + 18 },
+          { x: projectile.position.x - 9, y: projectile.position.y + 8 }
+        ],
+        "#f97316",
+        "#fed7aa",
+        1.5,
+        0.86
+      );
+    });
+    return;
+  }
+  withGlow(context, color, 16, () => {
+    drawPolygon(
+      context,
+      [
+        { x: projectile.position.x, y: projectile.position.y - 24 },
+        { x: projectile.position.x + 8, y: projectile.position.y + 6 },
+        { x: projectile.position.x, y: projectile.position.y + 24 },
+        { x: projectile.position.x - 8, y: projectile.position.y + 6 }
+      ],
+      color,
+      "#ffffff",
+      1.4,
+      0.88
+    );
+    drawLine(context, { x: projectile.position.x, y: projectile.position.y + 22 }, { x: projectile.position.x, y: projectile.position.y + 42 }, color, 2, 0.28);
+  });
+}
+
+function drawPresentationEnemy(context: CanvasLikeContext, enemy: CanvasPresentationEnemy): void {
+  context.recordCommand?.("enemies", `presentation_enemy_${enemy.entityId}`);
+  const style = enemyStyle(enemy.renderKind);
+  withGlow(context, style.stroke, style.glow, () => {
+    drawPolygon(context, enemyShape(enemy), style.fill, style.stroke, style.lineWidth, 0.92);
+    drawFilledCircle(context, enemy.position, style.coreRadius, style.stroke, 0.84);
+    if (enemy.hpRatio < 0.95) {
+      fillRect(context, { x: enemy.position.x - 24, y: enemy.position.y + 30, width: 48, height: 4 }, "#1f2937", 0.8);
+      fillRect(context, { x: enemy.position.x - 24, y: enemy.position.y + 30, width: 48 * enemy.hpRatio, height: 4 }, style.stroke, 0.88);
+    }
+  });
+}
+
+function drawPresentationBoss(context: CanvasLikeContext, boss: CanvasPresentationBoss): void {
+  context.recordCommand?.("boss", "presentation_boss");
+  const color = boss.phaseIndex >= 3 ? "#f97316" : boss.phaseIndex >= 2 ? "#a855f7" : "#22d3ee";
+  const x = boss.position.x;
+  const y = boss.position.y;
+  withGlow(context, color, 36, () => {
+    drawFilledCircle(context, boss.position, 108, color, 0.08);
+    drawRing(context, boss.position, 94, color, 3, 0.42);
+    drawPolygon(
+      context,
+      [
+        { x, y: y + 78 },
+        { x: x + 82, y: y + 4 },
+        { x: x + 66, y: y - 72 },
+        { x: x + 26, y: y - 34 },
+        { x: x - 26, y: y - 34 },
+        { x: x - 66, y: y - 72 },
+        { x: x - 82, y: y + 4 }
+      ],
+      "#0f172a",
+      color,
+      5,
+      0.96
+    );
+    drawFilledCircle(context, boss.position, 16 + boss.phaseIndex * 2, "#ffffff", 0.94);
+    drawRing(context, boss.position, 34 + boss.phaseIndex * 7, "#fef3c7", 1.5, 0.38);
+  });
+  if (boss.warningText !== undefined) {
+    drawText(context, boss.warningText, { x: 960, y: 84 }, "#fecaca", "14px system-ui, sans-serif", "center", 0.92);
+  }
+}
+
+function drawPresentationEnemyProjectile(context: CanvasLikeContext, projectile: CanvasPresentationEnemyProjectile): void {
+  context.recordCommand?.("enemy_bullets", `presentation_enemy_projectile_${projectile.entityId}`);
+  const color = projectile.renderKind === "boss_big" ? "#f97316" : projectile.ownerKind === "boss" ? "#ff3b7f" : "#ef4444";
+  const radius = Math.max(7, projectile.radius);
+  withGlow(context, color, projectile.renderKind === "boss_big" ? 22 : 13, () => {
+    drawFilledCircle(context, projectile.position, radius + 5, color, 0.2);
+    drawFilledCircle(context, projectile.position, radius, "#ffffff", 0.98);
+    drawRing(context, projectile.position, radius, color, projectile.renderKind === "boss_big" ? 4 : 3, 0.98);
+    if (projectile.renderKind === "boss_big") {
+      drawLine(context, { x: projectile.position.x - radius * 1.5, y: projectile.position.y }, { x: projectile.position.x + radius * 1.5, y: projectile.position.y }, "#ffffff", 1, 0.9);
+      drawLine(context, { x: projectile.position.x, y: projectile.position.y - radius * 1.5 }, { x: projectile.position.x, y: projectile.position.y + radius * 1.5 }, "#ffffff", 1, 0.9);
+    }
+  });
+}
+
+function drawPresentationWarning(context: CanvasLikeContext, warning: CanvasPresentationWarning): void {
+  context.recordCommand?.("tribulation_warnings", `presentation_warning_${warning.id}`);
+  const color = warning.severity === "lethal" ? "#ff1f3d" : "#f97316";
+  drawRing(context, warning.position, warning.radius, color, 3, 0.68);
+  drawLine(context, { x: warning.position.x - warning.radius, y: warning.position.y }, { x: warning.position.x + warning.radius, y: warning.position.y }, color, 2, 0.5);
+}
+
+function drawPresentationPlayer(context: CanvasLikeContext, player: CanvasPresentationPlayer): void {
+  context.recordCommand?.(player.aliveState === "soul" ? "rescue_and_soul" : "players", `presentation_player_${player.playerId}`);
+  const color = player.renderColor === "player2" ? "#d946ef" : "#22d3ee";
+  const x = player.position.x;
+  const y = player.position.y;
+  if (player.aliveState === "soul") {
+    withGlow(context, "#facc15", 22, () => {
+      drawRing(context, player.position, 26, "#facc15", 2.5, 0.7);
+      drawFilledCircle(context, player.position, 10, "#fde68a", 0.46);
+    });
+    return;
+  }
+  withGlow(context, color, 24, () => {
+    drawPolygon(
+      context,
+      [
+        { x, y: y - 32 },
+        { x: x + 24, y: y + 28 },
+        { x, y: y + 12 },
+        { x: x - 24, y: y + 28 }
+      ],
+      "#0f172a",
+      color,
+      3,
+      player.focusActive ? 0.78 : 0.96
+    );
+    drawFilledCircle(context, player.position, 5 + Math.min(6, player.realmLayer), "#fef3c7", 0.95);
+    drawRing(context, player.position, 31, color, 1.8, 0.24 + player.qiRatio * 0.25);
+  });
+}
+
+function drawPresentationPlayerHitbox(context: CanvasLikeContext, player: CanvasPresentationPlayer): void {
+  context.recordCommand?.("player_hitbox", `presentation_player_hitbox_${player.playerId}`);
+  drawRing(context, player.position, 14, "#fef3c7", 1.5, player.focusActive ? 0.88 : 0.34);
+  drawFilledCircle(context, player.position, 7, "#ffffff", player.focusActive ? 0.98 : 0.72);
+}
+
+function drawPresentationVisualEvent(context: CanvasLikeContext, event: CanvasPresentationVisualEvent): void {
+  context.recordCommand?.("foreground_effects", `presentation_visual_${event.id}`);
+  const radius = event.intensity === "ultimate" ? 112 : event.intensity === "large" ? 72 : 28;
+  drawRing(context, event.position, radius, event.color, event.intensity === "ultimate" ? 5 : 2, 0.45);
+  if (event.text !== undefined) {
+    drawText(context, event.text, { x: event.position.x, y: event.position.y - radius }, event.color, "16px system-ui, sans-serif", "center", 0.86);
+  }
+}
+
+function drawPolygon(
+  context: CanvasLikeContext,
+  points: readonly Vec2[],
+  fillStyle: string,
+  strokeStyle: string,
+  lineWidth = 2,
+  alpha = 1
+): void {
+  if (points.length === 0) {
+    return;
+  }
+  context.save();
+  try {
+    context.globalAlpha = alpha;
+    context.fillStyle = fillStyle;
+    context.strokeStyle = strokeStyle;
+    context.lineWidth = lineWidth;
+    context.beginPath();
+    context.moveTo(points[0]?.x ?? 0, points[0]?.y ?? 0);
+    for (let index = 1; index < points.length; index += 1) {
+      const point = points[index];
+      if (point !== undefined) {
+        context.lineTo(point.x, point.y);
+      }
+    }
+    context.closePath();
+    context.fill();
+    context.stroke();
+  } finally {
+    context.restore();
+  }
+}
+
+function withGlow(context: CanvasLikeContext, color: string, blur: number, draw: () => void): void {
+  context.save();
+  try {
+    const glowContext = context as CanvasLikeContext & { shadowBlur?: number; shadowColor?: string };
+    glowContext.shadowBlur = blur;
+    glowContext.shadowColor = color;
+    draw();
+  } finally {
+    context.restore();
+  }
+}
+
+function playerColor(playerId: string): string {
+  return playerId === "p2" ? "#d946ef" : "#22d3ee";
+}
+
+function enemyStyle(kind: CanvasPresentationEnemy["renderKind"]): {
+  readonly fill: string;
+  readonly stroke: string;
+  readonly glow: number;
+  readonly lineWidth: number;
+  readonly coreRadius: number;
+} {
+  switch (kind) {
+    case "wolf_demon":
+      return { fill: "#160b12", stroke: "#f43f5e", glow: 18, lineWidth: 2.6, coreRadius: 4 };
+    case "rogue_cultivator_shadow":
+      return { fill: "#100824", stroke: "#a855f7", glow: 20, lineWidth: 2.4, coreRadius: 5 };
+    case "stone_armor_demon":
+      return { fill: "#18120b", stroke: "#ca8a04", glow: 16, lineWidth: 3.2, coreRadius: 7 };
+    case "elite_split_wind_wolf":
+      return { fill: "#120a14", stroke: "#fb7185", glow: 24, lineWidth: 3.4, coreRadius: 7 };
+    case "mountain_imp":
+      return { fill: "#061711", stroke: "#22c55e", glow: 14, lineWidth: 2.2, coreRadius: 4 };
+    default:
+      return { fill: "#111827", stroke: "#f97316", glow: 14, lineWidth: 2.2, coreRadius: 4 };
+  }
+}
+
+function enemyShape(enemy: CanvasPresentationEnemy): readonly Vec2[] {
+  const x = enemy.position.x;
+  const y = enemy.position.y;
+  switch (enemy.renderKind) {
+    case "wolf_demon":
+    case "elite_split_wind_wolf":
+      return [
+        { x, y: y + 27 },
+        { x: x + 28, y: y - 28 },
+        { x, y: y - 12 },
+        { x: x - 28, y: y - 28 }
+      ];
+    case "stone_armor_demon":
+      return [
+        { x: x + 32, y },
+        { x: x + 16, y: y + 30 },
+        { x: x - 16, y: y + 30 },
+        { x: x - 32, y },
+        { x: x - 16, y: y - 30 },
+        { x: x + 16, y: y - 30 }
+      ];
+    case "rogue_cultivator_shadow":
+      return [
+        { x, y: y - 30 },
+        { x: x + 24, y: y - 4 },
+        { x: x + 14, y: y + 28 },
+        { x, y: y + 12 },
+        { x: x - 14, y: y + 28 },
+        { x: x - 24, y: y - 4 }
+      ];
+    default:
+      return [
+        { x, y: y + 24 },
+        { x: x + 24, y: y - 12 },
+        { x: x + 12, y: y - 26 },
+        { x: x - 12, y: y - 26 },
+        { x: x - 24, y: y - 12 }
+      ];
+  }
 }
 
 function layerForEffect(effectId: string): string {
