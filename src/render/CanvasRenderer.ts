@@ -32,6 +32,7 @@ import {
   type RenderLayerDefinition,
   type RenderLayerStack
 } from "./RenderLayerStack";
+import { createRenderVfxParticles } from "./RenderVfxTimeline";
 
 export interface CanvasRendererOptions {
   readonly layerStack?: RenderLayerStack;
@@ -253,7 +254,7 @@ function createPresentationCommands(presentation: CanvasPresentationState): read
     commands.push({
       id: `presentation_visual_${event.id}`,
       layerId: "foreground_effects",
-      draw: (context) => drawPresentationVisualEvent(context, event)
+      draw: (context) => drawPresentationVisualEvent(context, event, presentation.frame)
     });
   }
   return commands;
@@ -449,10 +450,13 @@ function drawPresentationPlayerHitbox(context: CanvasLikeContext, player: Canvas
   drawFilledCircle(context, player.position, 7, "#ffffff", player.focusActive ? 0.98 : 0.72);
 }
 
-function drawPresentationVisualEvent(context: CanvasLikeContext, event: CanvasPresentationVisualEvent): void {
+function drawPresentationVisualEvent(context: CanvasLikeContext, event: CanvasPresentationVisualEvent, frame: number): void {
   context.recordCommand?.("foreground_effects", `presentation_visual_${event.id}`);
   const radius = event.intensity === "ultimate" ? 112 : event.intensity === "large" ? 72 : 28;
   drawRing(context, event.position, radius, event.color, event.intensity === "ultimate" ? 5 : 2, 0.45);
+  for (const particle of createRenderVfxParticles({ frame, events: [event], budget: 64 })) {
+    drawFilledCircle(context, particle.position, particle.size, particle.color, particle.alpha);
+  }
   if (event.text !== undefined) {
     drawText(context, event.text, { x: event.position.x, y: event.position.y - radius }, event.color, "16px system-ui, sans-serif", "center", 0.86);
   }

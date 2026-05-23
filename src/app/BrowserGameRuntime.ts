@@ -64,7 +64,7 @@ import { indexPillDefinitions, stepPillSystem, type PillDefinitionPack, type Pil
 import { stepDigestionSystem } from "../sim/pills/DigestionSystem";
 import { StageRunner, type StageDefinition, type StageFrameContext } from "../sim/stage/StageRunner";
 import { WaveSpawner } from "../sim/stage/WaveSpawner";
-import type { CanvasPresentationState } from "../render/CanvasPresentationState";
+import type { CanvasPresentationState, CanvasPresentationVisualEvent } from "../render/CanvasPresentationState";
 import type {
   BossState,
   PlayerCultivationState,
@@ -244,6 +244,7 @@ export class BrowserGameRuntime {
   private projectileAllocator = { nextEntityId: 1 };
   private lastEffectEvents: readonly EffectEvent[] = [];
   private lastBossEffectEvents: readonly EffectEvent[] = [];
+  private lastPresentationVisualEvents: readonly CanvasPresentationVisualEvent[] = [];
 
   public constructor(options: BrowserGameRuntimeOptions = {}) {
     this.mode = options.mode ?? "local_coop";
@@ -302,6 +303,7 @@ export class BrowserGameRuntime {
       this.stepInsightSession(inputs);
       return this.getSnapshot();
     }
+    this.lastPresentationVisualEvents = [];
 
     const stageContext = this.stageRunner.getFrameContext(this.frame);
     this.spawnStageEnemies(stageContext);
@@ -556,17 +558,20 @@ export class BrowserGameRuntime {
       if (enemy.position.y < 0 || enemy.position.y > this.screenHeight || this.frame % 90 !== enemy.entityId % 90) {
         continue;
       }
-      spawnedBullets.push({
-        entityId: this.nextEnemyProjectileEntityId,
-        ownerKind: "enemy",
-        ownerId: enemy.enemyId,
-        position: enemy.position,
-        velocity: { x: 0, y: 230 },
-        damage: Math.max(4, enemy.contactDamage * 0.45),
-        radius: 7,
-        spawnFrame: this.frame
-      });
-      this.nextEnemyProjectileEntityId += 1;
+      const velocities = enemy.bulletPatternId === "pattern_triple_down" ? [{ x: -75, y: 190 }, { x: 0, y: 240 }, { x: 75, y: 190 }] : [{ x: 0, y: 230 }];
+      for (const velocity of velocities) {
+        spawnedBullets.push({
+          entityId: this.nextEnemyProjectileEntityId,
+          ownerKind: "enemy",
+          ownerId: enemy.enemyId,
+          position: enemy.position,
+          velocity,
+          damage: Math.max(4, enemy.contactDamage * 0.45),
+          radius: enemy.bulletPatternId === "pattern_triple_down" ? 9 : 7,
+          spawnFrame: this.frame
+        });
+        this.nextEnemyProjectileEntityId += 1;
+      }
     }
     this.enemyProjectiles = [...this.enemyProjectiles.map(moveEnemyProjectile), ...spawnedBullets]
       .filter((projectile) => isInsideLooseBounds(projectile.position))
@@ -593,7 +598,15 @@ export class BrowserGameRuntime {
     this.enemies = damage.enemies;
     this.playerProjectiles = this.playerProjectiles.filter((projectile) => !collisions.consumedPlayerProjectileIds.includes(projectile.entityId));
     this.enemyProjectiles = this.enemyProjectiles.filter((projectile) => !collisions.consumedEnemyProjectileIds.includes(projectile.entityId));
-    this.pickups = [...this.pickups, ...this.createPickupsForKilledEnemies(damage.killedEnemies)].sort((a, b) => a.entityId - b.entityId);
+    const createdPickups = this.createPickupsForKilledEnemies(damage.killedEnemies);
+    this.pickups = [...this.pickups, ...createdPickups].sort((a, b) => a.entityId - b.entityId);
+    if (damage.killedEnemies.length > 0 || createdPickups.length > 0) {
+      this.lastPresentationVisualEvents = [
+        ...this.lastPresentationVisualEvents,
+        ...damage.killedEnemies.slice(0, 12).map((enemy) => enemyKillVisualEvent(this.frame, enemy)),
+        ...createdPickups.slice(0, 16).map((pickup) => pickupSpawnVisualEvent(this.frame, pickup))
+      ];
+    }
     if (this.players.every((player) => player.aliveState === "soul" || player.aliveState === "dead")) {
       this.completeRun("team_wipe");
     }
@@ -1091,6 +1104,7 @@ export class BrowserGameRuntime {
       const speed = numberParam(attack.params, "speed", 210);
       const damage = numberParam(attack.params, "damage", 12);
       const spread = projectileCount === 1 ? 0 : 70;
+      const radius = bossProjectileRadius(attack);
       for (let index = 0; index < projectileCount; index += 1) {
         const t = projectileCount === 1 ? 0.5 : index / (projectileCount - 1);
         const angle = ((90 - spread / 2 + spread * t) * Math.PI) / 180;
@@ -1104,7 +1118,7 @@ export class BrowserGameRuntime {
             y: round3(Math.sin(angle) * speed)
           },
           damage,
-          radius: 8,
+          radius,
           spawnFrame: this.frame
         });
         this.nextEnemyProjectileEntityId += 1;
@@ -1284,16 +1298,29 @@ export class BrowserGameRuntime {
           renderKind: pickupRenderKind(pickup.pickupId)
         }))
       ),
-      warnings: freezePresentationArray(
-        this.latestLightningWarnings.map((warning) => ({
+      warnings: freezePresentationArray([
+        ...this.latestLightningWarnings.map((warning) => ({
           id: warning.tribulationId,
           kind: "tribulation" as const,
           position: { x: warning.x, y: warning.y },
           radius: warning.radius,
           severity: warning.severity
-        }))
-      ),
-      visualEvents: freezePresentationArray(createPresentationVisualEvents(this.frame, this.lastBossEffectEvents)),
+        })),
+        ...this.enemies
+          .filter((enemy) => enemy.tags.includes("charger"))
+          .slice(0, 16)
+          .map((enemy) => ({
+            id: `charge_${enemy.entityId}`,
+            kind: "wolf_charge" as const,
+            position: enemy.position,
+            radius: enemy.enemyId === "elite_split_wind_wolf" ? 92 : 64,
+            severity: enemy.enemyId === "elite_split_wind_wolf" ? ("high" as const) : ("medium" as const)
+          }))
+      ]),
+      visualEvents: freezePresentationArray([
+        ...this.lastPresentationVisualEvents,
+        ...createPresentationBossVisualEvents(this.frame, this.lastBossEffectEvents)
+      ]),
       ...(boss === undefined
         ? {}
         : {
@@ -1567,6 +1594,18 @@ function numberParam(params: Readonly<Record<string, unknown>>, key: string, fal
   return typeof value === "number" && Number.isFinite(value) ? value : fallback;
 }
 
+function bossProjectileRadius(attack: BossAttackEvent): number {
+  switch (attack.patternId) {
+    case "boss_targeted_triple_thunder":
+    case "boss_fast_tracking_thunder":
+      return 16;
+    case "boss_ring_bullets":
+      return 10;
+    default:
+      return 8;
+  }
+}
+
 function getInsightOptionIndex(input: FrameInput): number | undefined {
   if (hasInputButton(input.pressedMask, InputButtonBit.Spell1)) {
     return 0;
@@ -1800,7 +1839,7 @@ function pickupLabel(pickupId: string): string {
   return "材";
 }
 
-function createPresentationVisualEvents(frame: number, events: readonly EffectEvent[]): CanvasPresentationState["visualEvents"] {
+function createPresentationBossVisualEvents(frame: number, events: readonly EffectEvent[]): CanvasPresentationState["visualEvents"] {
   return events.map((event, index) =>
     Object.freeze({
       id: `${event.effectId}_${event.frame}_${index}`,
@@ -1812,6 +1851,31 @@ function createPresentationVisualEvents(frame: number, events: readonly EffectEv
       intensity: event.effectId === "boss_death_cascade" ? ("ultimate" as const) : ("large" as const)
     })
   );
+}
+
+function enemyKillVisualEvent(frame: number, enemy: KilledEnemyState): CanvasPresentationVisualEvent {
+  const elite = enemy.enemyId.startsWith("elite") || enemy.enemyId.includes("stone_armor");
+  return Object.freeze({
+    id: `kill_${enemy.entityId}_${frame}`,
+    kind: "kill_burst",
+    frame,
+    position: enemy.position,
+    color: elite ? "#f97316" : "#f43f5e",
+    text: elite ? "破阵" : "破",
+    intensity: elite ? "medium" : "small"
+  });
+}
+
+function pickupSpawnVisualEvent(frame: number, pickup: PickupState): CanvasPresentationVisualEvent {
+  return Object.freeze({
+    id: `pickup_${pickup.entityId}_${frame}`,
+    kind: "pickup",
+    frame,
+    position: pickup.position,
+    color: pickupRenderKind(pickup.pickupId) === "spirit_exp" ? "#34d399" : "#facc15",
+    text: pickupLabel(pickup.pickupId),
+    intensity: "micro"
+  });
 }
 
 function getCultivationToNext(realmId: string, layer: number): number {

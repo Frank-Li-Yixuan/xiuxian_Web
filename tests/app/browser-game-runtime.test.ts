@@ -139,6 +139,28 @@ describe("browser playable shell", () => {
 
     expect(snapshot.simState.bosses[0]?.hp).toBe(0);
     expect(snapshot.effectEvents.map((event) => event.effectId)).toContain("boss_death_cascade");
+    expect(snapshot.presentation.visualEvents.map((event) => event.kind)).toContain("boss_death");
+  });
+
+  it("surfaces browser combat feedback as presentation warnings and projectile variants", () => {
+    const stageRuntime = createBrowserGameRuntime({ mode: "local_coop", seed: 20260523 });
+    let stageSnapshot = stageRuntime.getSnapshot();
+    let sawChargeWarning = false;
+
+    for (let frame = 0; frame < 2100 && !sawChargeWarning; frame += 1) {
+      stageSnapshot = stageRuntime.step([]);
+      sawChargeWarning = stageSnapshot.presentation.warnings.some((warning) => warning.kind === "wolf_charge");
+    }
+
+    expect(sawChargeWarning).toBe(true);
+
+    const bossRuntime = createBrowserGameRuntime({ mode: "single_player", seed: 20260523, startAtBoss: true });
+    let bossSnapshot = bossRuntime.getSnapshot();
+    for (let frame = 0; frame < 390; frame += 1) {
+      bossSnapshot = bossRuntime.step([]);
+    }
+
+    expect(bossSnapshot.presentation.enemyProjectiles.some((projectile) => projectile.renderKind === "boss_big")).toBe(true);
   });
 
   it("creates a real settlement summary from browser boss victory", () => {
