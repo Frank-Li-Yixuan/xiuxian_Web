@@ -119,18 +119,18 @@ export class CanvasRenderer {
       });
     }
 
-    commands.push(
-      {
+    if (frame.presentation === undefined) {
+      commands.push({
         id: "hud_stage",
         layerId: "hud",
         draw: (context) => drawStageHud(context, frame.viewState)
-      },
-      {
-        id: "hud_team_insight",
-        layerId: "hud",
-        draw: (context) => drawTeamInsightHud(context, frame.viewState)
-      }
-    );
+      });
+    }
+    commands.push({
+      id: "hud_team_insight",
+      layerId: "hud",
+      draw: (context) => drawTeamInsightHud(context, frame.viewState)
+    });
 
     const boss = frame.viewState.boss;
     if (boss?.visible === true) {
@@ -141,12 +141,14 @@ export class CanvasRenderer {
       });
     }
 
-    for (const player of frame.viewState.players) {
-      commands.push({
-        id: `hud_${player.playerId}`,
-        layerId: "hud",
-        draw: (context) => drawPlayerHud(context, player)
-      });
+    if (frame.presentation === undefined) {
+      for (const player of frame.viewState.players) {
+        commands.push({
+          id: `hud_${player.playerId}`,
+          layerId: "hud",
+          draw: (context) => drawPlayerHud(context, player)
+        });
+      }
     }
 
     if (frame.viewState.insight?.visible === true) {

@@ -267,12 +267,15 @@ describe("CanvasRenderer", () => {
       }
     };
     const context = new RecordingCanvasContext();
-
-    new CanvasRenderer().renderFrame(context, {
+    const frame: CanvasRenderFrame = {
       viewState,
       effectEvents: [],
       presentation
-    });
+    };
+    const renderer = new CanvasRenderer();
+    const commandIds = renderer.buildRenderCommands(frame).map((commandEntry) => commandEntry.id);
+
+    renderer.renderFrame(context, frame);
 
     expect(context.operations).toContain("command:players:presentation_player_p1");
     expect(context.operations).toContain("moveTo:960:868");
@@ -284,6 +287,11 @@ describe("CanvasRenderer", () => {
     expect(context.operations).toContain("fillStyle:#ffffff");
     expect(context.operations).toContain("strokeStyle:#f97316");
     expect(context.operations).toContain("command:boss:presentation_boss");
+    expect(commandIds).toContain("hud_team_insight");
+    expect(commandIds).toContain("hud_boss");
+    expect(commandIds).not.toContain("hud_stage");
+    expect(commandIds).not.toContain("hud_p1");
+    expect(commandIds).not.toContain("hud_p2");
     expect(context.operations).toContain("fillText:万雷归宗:960:84");
     expect(context.operations).not.toContain("drawImage");
     expect(context.operations).not.toContain("externalFont");

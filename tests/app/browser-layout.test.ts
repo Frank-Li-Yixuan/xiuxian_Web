@@ -13,6 +13,7 @@ describe("browser full-bleed layout", () => {
     expect(html).toContain("inset: 0");
     expect(html).toContain(".xiuxian-playfield");
     expect(html).toContain("position: absolute");
+    expect(html).toContain("grid-template-columns: minmax(260px, 320px) minmax(0, 1fr) minmax(260px, 320px)");
     expect(html).not.toContain("grid-template-columns: minmax(0, 1fr) 360px");
     expect(html).not.toContain("grid-template-rows: minmax(0, 1fr) auto");
     expect(shellRule).not.toContain("padding");
@@ -23,6 +24,8 @@ describe("browser full-bleed layout", () => {
 
     expect(app).not.toContain('title.textContent = "构筑摘要"');
     expect(app).not.toContain('row("调试证据"');
+    expect(app).not.toContain('titled("战斗进度")');
+    expect(app).not.toContain("target.hidden = false");
     expect(app).toContain('debug.hidden = true');
     expect(app).toContain('hud.className = "xiuxian-hud xiuxian-hud-overlay"');
   });

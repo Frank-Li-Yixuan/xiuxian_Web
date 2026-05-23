@@ -109,16 +109,6 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
 
 function renderHud(target: HTMLElement, snapshot: BrowserGameSnapshot): void {
   target.replaceChildren();
-  const stage = document.createElement("section");
-  stage.className = "hud-panel hud-stage";
-  stage.append(
-    titled("战斗进度"),
-    row("阶段", `${snapshot.viewState.stage.segmentIndex}/${snapshot.viewState.stage.segmentCount} · ${snapshot.viewState.stage.segmentName}`),
-    row("目标", snapshot.viewState.stage.nextEventText ?? "推进妖潮"),
-    meter("灵气", snapshot.viewState.teamInsight.progress01, "insight")
-  );
-  target.append(stage);
-
   for (const player of snapshot.viewState.players) {
     const section = document.createElement("section");
     section.className = `hud-panel hud-section hud-player-${player.playerId}`;
@@ -133,21 +123,6 @@ function renderHud(target: HTMLElement, snapshot: BrowserGameSnapshot): void {
     );
     target.append(section);
   }
-
-  if (snapshot.viewState.insight?.visible === true) {
-    const insight = document.createElement("section");
-    insight.className = "hud-section hud-alert";
-    insight.textContent = snapshot.viewState.insight.players
-      .map((player) => `${player.playerId.toUpperCase()} ${player.options.map((option) => option.name).join(" / ")}`)
-      .join("  ");
-    target.append(insight);
-  }
-  if (snapshot.viewState.rescue?.visible === true) {
-    target.append(row("渡魂", `${Math.round(snapshot.viewState.rescue.progress01 * 100)}%`));
-  }
-  if (snapshot.viewState.tribulation?.active === true) {
-    target.append(row(snapshot.viewState.tribulation.warningText, `${Math.round(snapshot.viewState.tribulation.remainingTime)}s`));
-  }
 }
 
 function titled(text: string): HTMLElement {
@@ -159,13 +134,13 @@ function titled(text: string): HTMLElement {
 
 function renderOutgame(target: HTMLElement, snapshot: BrowserGameSnapshot): void {
   target.replaceChildren();
+  target.hidden = true;
   if (snapshot.outgameSummary === undefined) {
-    target.hidden = true;
     return;
   }
-  target.hidden = false;
   const title = document.createElement("div");
   title.className = "hud-title";
+  target.dataset.receiptId = snapshot.outgameSummary.receiptId;
   title.textContent = "洞府结算";
   target.append(
     title,
