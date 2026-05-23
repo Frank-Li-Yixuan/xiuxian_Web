@@ -64,6 +64,7 @@ import { indexPillDefinitions, stepPillSystem, type PillDefinitionPack, type Pil
 import { stepDigestionSystem } from "../sim/pills/DigestionSystem";
 import { StageRunner, type StageDefinition, type StageFrameContext } from "../sim/stage/StageRunner";
 import { WaveSpawner } from "../sim/stage/WaveSpawner";
+import type { CanvasPresentationState } from "../render/CanvasPresentationState";
 import type {
   BossState,
   PlayerCultivationState,
@@ -118,6 +119,7 @@ export interface BrowserGameSnapshot {
   readonly simState: SimState;
   readonly viewState: InRunUiViewState;
   readonly effectEvents: readonly EffectEvent[];
+  readonly presentation: CanvasPresentationState;
   readonly rcEvidence: BrowserRcEvidence;
   readonly stageOutcome?: "in_run" | "boss_victory" | "team_wipe";
   readonly outgameSummary?: BrowserOutgameSummary;
@@ -377,6 +379,7 @@ export class BrowserGameRuntime {
       simState,
       viewState,
       effectEvents: this.lastEffectEvents,
+      presentation: this.createPresentationState(),
       rcEvidence: Object.freeze({ ...this.rcEvidenceMutable }),
       stageOutcome: this.stageOutcome
     };
@@ -1217,6 +1220,97 @@ export class BrowserGameRuntime {
     return Object.freeze([...entityEffects, ...spellEffects]);
   }
 
+  private createPresentationState(): CanvasPresentationState {
+    const boss = this.boss;
+    return Object.freeze({
+      frame: this.frame,
+      screen: Object.freeze({
+        width: this.screenWidth,
+        height: this.screenHeight
+      }),
+      players: freezePresentationArray(
+        this.players.map((player, index) => {
+          const cultivation = this.playerCultivations.find((candidate) => candidate.playerId === player.playerId);
+          return {
+            playerId: player.playerId,
+            position: player.position,
+            renderColor: index === 0 ? "player1" : "player2",
+            realmLayer: cultivation?.layer ?? 1,
+            aliveState: player.aliveState,
+            focusActive: false,
+            hpRatio: ratio(player.hp, player.maxHp),
+            qiRatio: ratio(player.qi, player.maxQi)
+          } as const;
+        })
+      ),
+      enemies: freezePresentationArray(
+        this.enemies.slice(0, 80).map((enemy) => ({
+          entityId: enemy.entityId,
+          enemyId: enemy.enemyId,
+          renderKind: enemyRenderKind(enemy.enemyId),
+          position: enemy.position,
+          hpRatio: ratio(enemy.hp, enemy.maxHp)
+        }))
+      ),
+      playerProjectiles: freezePresentationArray(
+        this.playerProjectiles.slice(0, 160).map((projectile) => ({
+          entityId: projectile.entityId,
+          ownerPlayerId: projectile.ownerPlayerId,
+          artifactId: projectile.artifactId,
+          renderKind: playerProjectileRenderKind(projectile.artifactId),
+          position: projectile.position,
+          velocity: projectile.velocity,
+          radius: projectile.radius,
+          pierce: projectile.pierce
+        }))
+      ),
+      enemyProjectiles: freezePresentationArray(
+        this.enemyProjectiles.slice(0, 160).map((projectile) => ({
+          entityId: projectile.entityId,
+          ownerKind: projectile.ownerKind,
+          ownerId: projectile.ownerId,
+          renderKind: enemyProjectileRenderKind(projectile),
+          position: projectile.position,
+          velocity: projectile.velocity,
+          radius: projectile.radius
+        }))
+      ),
+      pickups: freezePresentationArray(
+        this.pickups.slice(0, 96).map((pickup) => ({
+          entityId: pickup.entityId,
+          pickupId: pickup.pickupId,
+          position: pickup.position,
+          label: pickupLabel(pickup.pickupId),
+          renderKind: pickupRenderKind(pickup.pickupId)
+        }))
+      ),
+      warnings: freezePresentationArray(
+        this.latestLightningWarnings.map((warning) => ({
+          id: warning.tribulationId,
+          kind: "tribulation" as const,
+          position: { x: warning.x, y: warning.y },
+          radius: warning.radius,
+          severity: warning.severity
+        }))
+      ),
+      visualEvents: freezePresentationArray(createPresentationVisualEvents(this.frame, this.lastBossEffectEvents)),
+      ...(boss === undefined
+        ? {}
+        : {
+            boss: Object.freeze({
+              entityId: boss.entityId,
+              bossId: boss.bossId,
+              renderKind: "qingyun_tribulation_spirit" as const,
+              position: boss.position,
+              hpRatio: ratio(boss.hp, boss.maxHp),
+              phaseIndex: boss.phaseIndex,
+              phaseCount: Math.max(1, QINGYUN_BOSS.phases.length),
+              status: boss.status
+            })
+          })
+    });
+  }
+
   private recordInputEvidence(inputs: readonly FrameInput[]): void {
     this.rcEvidenceMutable.spellInputObserved ||= inputs.some(
       (input) =>
@@ -1623,6 +1717,101 @@ function effect(effectId: string, frame: number, ownerPlayerId: string, position
     effectId,
     position
   };
+}
+
+function freezePresentationArray<T extends object>(items: readonly T[]): readonly Readonly<T>[] {
+  return Object.freeze(items.map((item) => Object.freeze(item)));
+}
+
+function ratio(value: number, max: number): number {
+  if (!Number.isFinite(value) || !Number.isFinite(max) || max <= 0) {
+    return 0;
+  }
+  return Math.max(0, Math.min(1, value / max));
+}
+
+function enemyRenderKind(enemyId: string): CanvasPresentationState["enemies"][number]["renderKind"] {
+  switch (enemyId) {
+    case "enemy_mountain_imp":
+      return "mountain_imp";
+    case "enemy_wolf_demon":
+      return "wolf_demon";
+    case "enemy_rogue_cultivator_shadow":
+      return "rogue_cultivator_shadow";
+    case "enemy_stone_armor_demon":
+      return "stone_armor_demon";
+    case "elite_split_wind_wolf":
+      return "elite_split_wind_wolf";
+    default:
+      return "unknown";
+  }
+}
+
+function playerProjectileRenderKind(artifactId: string): CanvasPresentationState["playerProjectiles"][number]["renderKind"] {
+  switch (artifactId) {
+    case "artifact_ziyang_gourd":
+      return "gourd_flame";
+    case "artifact_xuanyue_seal":
+      return "seal_impact";
+    default:
+      return "flying_sword";
+  }
+}
+
+function enemyProjectileRenderKind(projectile: EnemyProjectileState): CanvasPresentationState["enemyProjectiles"][number]["renderKind"] {
+  if (projectile.ownerKind === "tribulation") {
+    return "tribulation";
+  }
+  if (projectile.ownerKind === "boss") {
+    return projectile.radius >= 14 ? "boss_big" : "boss_orb";
+  }
+  return projectile.radius >= 9 ? "enemy_spread" : "enemy_basic";
+}
+
+function pickupRenderKind(pickupId: string): CanvasPresentationState["pickups"][number]["renderKind"] {
+  if (pickupId.includes("insight") || pickupId.includes("spirit_exp")) {
+    return "spirit_exp";
+  }
+  if (pickupId.includes("qi")) {
+    return "qi_orb";
+  }
+  if (pickupId.includes("pill")) {
+    return "pill";
+  }
+  if (pickupId.includes("material") || pickupId.includes("herb") || pickupId.includes("ore") || pickupId.includes("demon_core")) {
+    return "material";
+  }
+  return "unknown";
+}
+
+function pickupLabel(pickupId: string): string {
+  if (pickupId.includes("spirit") || pickupId.includes("insight")) {
+    return "灵";
+  }
+  if (pickupId.includes("qi")) {
+    return "气";
+  }
+  if (pickupId.includes("pill")) {
+    return "丹";
+  }
+  if (pickupId.includes("demon_core")) {
+    return "妖";
+  }
+  return "材";
+}
+
+function createPresentationVisualEvents(frame: number, events: readonly EffectEvent[]): CanvasPresentationState["visualEvents"] {
+  return events.map((event, index) =>
+    Object.freeze({
+      id: `${event.effectId}_${event.frame}_${index}`,
+      kind: event.effectId === "boss_death_cascade" ? ("boss_death" as const) : ("boss_phase" as const),
+      frame,
+      position: event.position,
+      color: event.effectId === "boss_death_cascade" ? "#facc15" : "#38bdf8",
+      text: event.effectId === "boss_death_cascade" ? "青云劫灵崩解" : "劫灵换相",
+      intensity: event.effectId === "boss_death_cascade" ? ("ultimate" as const) : ("large" as const)
+    })
+  );
 }
 
 function getCultivationToNext(realmId: string, layer: number): number {

@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { CanvasRenderer } from "../../src/render/CanvasRenderer";
+import type { CanvasPresentationState } from "../../src/render/CanvasPresentationState";
 import type { CanvasLikeContext } from "../../src/render/PrimitiveDrawing";
 import { InputButtonBit } from "../../src/sim/input/FrameInput";
 import { createBrowserGameRuntime } from "../../src/app/BrowserGameRuntime";
@@ -162,6 +163,37 @@ describe("browser playable shell", () => {
       })
     );
     expect(snapshot.outgameSummary?.resourcesKept.spirit_stone_low).not.toBe(18);
+  });
+
+  it("exposes a read-only canvas presentation contract without polluting SimState", () => {
+    const runtime = createBrowserGameRuntime({ mode: "local_coop", seed: 20260523, startAtBoss: true });
+    let snapshot = runtime.getSnapshot();
+
+    for (let frame = 0; frame < 16; frame += 1) {
+      snapshot = runtime.step([p1Input({ frame, moveX: 1 })]);
+    }
+
+    const presentation: CanvasPresentationState = snapshot.presentation;
+
+    expect(Object.keys(snapshot.simState)).not.toContain("presentation");
+    expect(presentation.frame).toBe(snapshot.simState.frame);
+    expect(presentation.players.map((player) => player.playerId)).toEqual(["p1", "p2"]);
+    expect(presentation.players.map((player) => player.renderColor)).toEqual(["player1", "player2"]);
+    expect(presentation.playerProjectiles.length).toBeGreaterThan(0);
+    expect(presentation.playerProjectiles[0]).toEqual(
+      expect.objectContaining({
+        ownerPlayerId: "p1",
+        renderKind: "flying_sword"
+      })
+    );
+    expect(presentation.boss).toEqual(
+      expect.objectContaining({
+        bossId: "boss_qingyun_tribulation_spirit",
+        renderKind: "qingyun_tribulation_spirit"
+      })
+    );
+    expect(Object.isFrozen(presentation.players)).toBe(true);
+    expect(Object.isFrozen(presentation.playerProjectiles)).toBe(true);
   });
 
   it("maps debug team-wipe completion through real settlement data", () => {
