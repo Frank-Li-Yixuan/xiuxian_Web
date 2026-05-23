@@ -1,5 +1,6 @@
 import { CanvasRenderer } from "../render/CanvasRenderer";
 import { createBrowserGameRuntime, type BrowserGameRuntime, type BrowserGameSnapshot } from "./BrowserGameRuntime";
+import { advanceFixedStepLoop, createFixedStepLoopState } from "./FixedBrowserLoop";
 import { LocalKeyboardInputSource } from "./LocalKeyboardInput";
 
 export interface BrowserGameAppHandle {
@@ -68,12 +69,17 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
 
   let running = true;
   let latestSnapshot = runtime.getSnapshot();
+  let loopState = createFixedStepLoopState();
 
-  const draw = (): void => {
+  const draw = (timestampMs: number): void => {
     if (!running) {
       return;
     }
-    latestSnapshot = runtime.step(keyboard.createFrameInputs(latestSnapshot.simState.frame));
+    const loopAdvance = advanceFixedStepLoop(loopState, timestampMs);
+    loopState = loopAdvance.state;
+    for (let tick = 0; tick < loopAdvance.ticksToRun; tick += 1) {
+      latestSnapshot = runtime.step(keyboard.createFrameInputs(latestSnapshot.simState.frame));
+    }
     renderer.renderFrame(context, latestSnapshot);
     renderHud(hud, latestSnapshot);
     renderOutgame(outgame, latestSnapshot);
