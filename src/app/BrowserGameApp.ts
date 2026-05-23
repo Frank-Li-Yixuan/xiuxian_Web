@@ -31,7 +31,7 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
   canvas.width = CANVAS_WIDTH;
   canvas.height = CANVAS_HEIGHT;
   canvas.dataset.testid = "xiuxian-canvas";
-  hud.className = "xiuxian-hud";
+  hud.className = "xiuxian-hud xiuxian-hud-overlay";
   hud.dataset.testid = "xiuxian-hud";
   debug.className = "xiuxian-debug";
   outgame.className = "xiuxian-outgame";
@@ -109,26 +109,27 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
 
 function renderHud(target: HTMLElement, snapshot: BrowserGameSnapshot): void {
   target.replaceChildren();
-  const title = document.createElement("div");
-  title.className = "hud-title";
-  title.textContent = "构筑摘要";
-  target.append(
-    title,
-    row("阶段", `${snapshot.viewState.stage.stageName} · ${snapshot.viewState.stage.segmentName}`),
+  const stage = document.createElement("section");
+  stage.className = "hud-panel hud-stage";
+  stage.append(
+    titled("战斗进度"),
+    row("阶段", `${snapshot.viewState.stage.segmentIndex}/${snapshot.viewState.stage.segmentCount} · ${snapshot.viewState.stage.segmentName}`),
     row("目标", snapshot.viewState.stage.nextEventText ?? "推进妖潮"),
-    row("调试证据", evidenceSummary(snapshot))
+    meter("灵气", snapshot.viewState.teamInsight.progress01, "insight")
   );
+  target.append(stage);
 
   for (const player of snapshot.viewState.players) {
     const section = document.createElement("section");
-    section.className = "hud-section";
+    section.className = `hud-panel hud-section hud-player-${player.playerId}`;
     section.dataset.playerId = player.playerId;
     section.append(
-      row(player.core.displayName, `${player.core.realmName}${player.core.realmLayer}`),
-      row("本命", player.artifacts.outer?.name ?? player.artifacts.outer?.itemId ?? "未装配"),
-      row("灵宝", player.treasures.slots.map((slot) => slot.name ?? slot.itemId ?? "空").join(" / ")),
-      row("法术", player.spells.map((slot) => `${slot.keyLabel}:${slot.name ?? "空"}`).join("  ")),
-      row("丹药", player.pills.map((slot) => `${slot.keyLabel}:${slot.name ?? "空"}`).join("  "))
+      titled(`${player.core.displayName} · ${player.core.realmName}${player.core.realmLayer}`),
+      meter("精", player.core.maxHp <= 0 ? 0 : player.core.hp / player.core.maxHp, "hp"),
+      meter("气", player.core.maxQi <= 0 ? 0 : player.core.qi / player.core.maxQi, "qi"),
+      meter("修为", player.cultivation.progress01, "cultivation"),
+      row("法术", compactSlots(player.spells.map((slot) => `${slot.keyLabel}:${slot.name ?? "空"}`))),
+      row("丹药", compactSlots(player.pills.map((slot) => `${slot.keyLabel}:${slot.name ?? "空"}`)))
     );
     target.append(section);
   }
@@ -147,6 +148,13 @@ function renderHud(target: HTMLElement, snapshot: BrowserGameSnapshot): void {
   if (snapshot.viewState.tribulation?.active === true) {
     target.append(row(snapshot.viewState.tribulation.warningText, `${Math.round(snapshot.viewState.tribulation.remainingTime)}s`));
   }
+}
+
+function titled(text: string): HTMLElement {
+  const title = document.createElement("div");
+  title.className = "hud-title";
+  title.textContent = text;
+  return title;
 }
 
 function renderOutgame(target: HTMLElement, snapshot: BrowserGameSnapshot): void {
@@ -192,27 +200,16 @@ function meter(label: string, ratio: number, kind: string): HTMLElement {
   return wrapper;
 }
 
+function compactSlots(slots: readonly string[]): string {
+  return slots.slice(0, 4).join("  ");
+}
+
 function actionButton(label: string, onClick: () => void): HTMLButtonElement {
   const button = document.createElement("button");
   button.type = "button";
   button.textContent = label;
   button.addEventListener("click", onClick);
   return button;
-}
-
-function evidenceSummary(snapshot: BrowserGameSnapshot): string {
-  const evidence = snapshot.rcEvidence;
-  const count = [
-    evidence.browserCanvasPlayable,
-    evidence.localCoopPlayers >= 2,
-    evidence.spellInputObserved,
-    evidence.pillInputObserved,
-    evidence.insightOverlayObserved,
-    evidence.rescueOverlayObserved,
-    evidence.debugTribulationObserved,
-    evidence.outgameSettlementObserved
-  ].filter(Boolean).length;
-  return `${count}/8`;
 }
 
 function compactReceiptId(receiptId: string): string {
