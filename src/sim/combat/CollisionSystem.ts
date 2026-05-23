@@ -19,7 +19,22 @@ export type DamageSourceKind = "player_projectile" | "enemy_projectile" | "conta
 export interface EnemyDamageEvent {
   readonly targetKind: "enemy";
   readonly targetEntityId: EntityId;
-  readonly sourceKind: "player_projectile";
+  readonly sourceKind: "player_projectile" | "spell";
+  readonly sourceEntityId?: EntityId;
+  readonly sourcePlayerId: string;
+  readonly amount: number;
+}
+
+export interface BossCollisionState {
+  readonly entityId: EntityId;
+  readonly position: Vec2;
+  readonly status?: "entering" | "active" | "defeated";
+}
+
+export interface BossDamageEvent {
+  readonly targetKind: "boss";
+  readonly targetEntityId: EntityId;
+  readonly sourceKind: "player_projectile" | "spell";
   readonly sourceEntityId: EntityId;
   readonly sourcePlayerId: string;
   readonly amount: number;
@@ -33,12 +48,13 @@ export interface PlayerDamageEvent {
   readonly amount: number;
 }
 
-export type DamageEvent = EnemyDamageEvent | PlayerDamageEvent;
+export type DamageEvent = EnemyDamageEvent | BossDamageEvent | PlayerDamageEvent;
 
 export interface ResolveCollisionFrameOptions {
   readonly frame: number;
   readonly players: readonly CombatPlayerState[];
   readonly enemies: readonly EnemyState[];
+  readonly bosses?: readonly BossCollisionState[];
   readonly playerProjectiles: readonly ProjectileState[];
   readonly enemyProjectiles: readonly EnemyProjectileState[];
 }
@@ -56,6 +72,7 @@ export function resolveCollisionFrame(options: ResolveCollisionFrameOptions): Co
   const consumedPlayerProjectileIds: EntityId[] = [];
   const consumedEnemyProjectileIds: EntityId[] = [];
   const sortedEnemies = [...options.enemies].sort((a, b) => a.entityId - b.entityId);
+  const sortedBosses = [...(options.bosses ?? [])].filter((boss) => boss.status !== "defeated").sort((a, b) => a.entityId - b.entityId);
   const sortedPlayers = [...options.players].sort((a, b) => a.playerId.localeCompare(b.playerId));
 
   for (const projectile of [...options.playerProjectiles].sort((a, b) => a.entityId - b.entityId)) {
@@ -76,6 +93,26 @@ export function resolveCollisionFrame(options: ResolveCollisionFrameOptions): Co
         });
         hits += 1;
         if (projectile.kind === "linear" && hits > projectile.pierce) {
+          consumedPlayerProjectileIds.push(projectile.entityId);
+          break;
+        }
+      }
+    }
+    for (const boss of sortedBosses) {
+      if (projectile.kind === "linear" && hits > projectile.pierce) {
+        break;
+      }
+      if (collides(projectile.position, getProjectileCollisionRadius(projectile), boss.position, getBossHitRadius())) {
+        damageEvents.push({
+          targetKind: "boss",
+          targetEntityId: boss.entityId,
+          sourceKind: "player_projectile",
+          sourceEntityId: projectile.entityId,
+          sourcePlayerId: projectile.ownerPlayerId,
+          amount: projectile.damage
+        });
+        hits += 1;
+        if (projectile.kind === "linear") {
           consumedPlayerProjectileIds.push(projectile.entityId);
           break;
         }
@@ -136,6 +173,10 @@ function getProjectileCollisionRadius(projectile: ProjectileState): number {
 
 function getEnemyHitRadius(enemy: EnemyState): number {
   return enemy.tags.includes("elite") || enemy.tags.includes("tank") ? 24 : DEFAULT_ENEMY_HIT_RADIUS;
+}
+
+function getBossHitRadius(): number {
+  return 72;
 }
 
 function isDamageablePlayer(player: CombatPlayerState): boolean {

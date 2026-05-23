@@ -12,8 +12,18 @@ import spellsData from "../../data/spells/spells.v0.1.json";
 import stageData from "../../data/stages/stage_01_qingyun.v0.1.json";
 import treasuresData from "../../data/treasures/spirit_treasures.v0.1.json";
 import { stepArtifactSystem, type ArtifactDefinition } from "../sim/artifacts/ArtifactSystem";
+import {
+  createBossState,
+  stepBossFrame,
+  type BossAttackEvent,
+  type BossCombatState,
+  type BossDefinition,
+  type BossEffectEvent,
+  type BossDeathRewards,
+  type BossDropTableDefinition
+} from "../sim/boss/BossSystem";
 import { applyDamageEvents, type KilledEnemyState } from "../sim/combat/DamageSystem";
-import { resolveCollisionFrame, type EnemyProjectileState } from "../sim/combat/CollisionSystem";
+import { resolveCollisionFrame, type BossDamageEvent, type DamageEvent, type EnemyProjectileState } from "../sim/combat/CollisionSystem";
 import { createRunRngStreams, type RngStreamState } from "../sim/core/SeededRng";
 import { materializeDrops, type DropTablePack, type PickupState } from "../sim/drops/DropSystem";
 import { applyPickupFrame, type PickupPlayerState } from "../sim/drops/PickupSystem";
@@ -79,6 +89,8 @@ export interface BrowserGameRuntimeOptions {
   readonly seed?: number;
   readonly screenWidth?: number;
   readonly screenHeight?: number;
+  readonly startAtBoss?: boolean;
+  readonly bossHpScale?: number;
 }
 
 export interface BrowserRcEvidence {
@@ -147,6 +159,8 @@ const CULTIVATION = indexCultivationData(cultivationData as unknown as Cultivati
 const INSIGHT_TABLE = indexInsightExpTable(insightExpData);
 const REWARD_POOLS = indexRewardPools((rewardPoolsData as RewardPoolPack).items);
 const TRIBULATIONS = indexDynamicTribulationEvents(tribulationsData as unknown as DynamicTribulationEventPack);
+const QINGYUN_BOSS = requireBossDefinition();
+const DROP_TABLE_ITEMS = (dropTablesData as { readonly items: readonly BossDropTableDefinition[] }).items;
 const DROP_TABLES = (dropTablesData as DropTablePack).items.reduce<Record<string, DropTablePack["items"][number]>>((indexed, table) => {
   indexed[table.id] = table;
   return indexed;
@@ -171,6 +185,7 @@ export class BrowserGameRuntime {
   private readonly seed: number;
   private readonly screenWidth: number;
   private readonly screenHeight: number;
+  private readonly bossHpScale: number | undefined;
   private readonly stageRunner = new StageRunner(STAGE, { segmentIds: STAGE_COMBAT_SEGMENTS });
   private readonly rng: ReturnType<typeof createRunRngStreams>;
   private readonly waveSpawner: WaveSpawner;
@@ -192,6 +207,8 @@ export class BrowserGameRuntime {
   private playerProjectiles: readonly ProjectileState[] = [];
   private enemyProjectiles: readonly EnemyProjectileState[] = [];
   private pickups: readonly PickupState[] = [];
+  private boss: BossCombatState | undefined;
+  private bossDeathRewards: BossDeathRewards | undefined;
   private rescueStates: readonly RescueState[] = [];
   private activeTribulations: readonly ActiveTribulationState[] = [];
   private latestLightningWarnings: readonly ViewLightningWarningInput[] = [];
@@ -203,12 +220,14 @@ export class BrowserGameRuntime {
   private nextPickupEntityId = 200_000;
   private projectileAllocator = { nextEntityId: 1 };
   private lastEffectEvents: readonly EffectEvent[] = [];
+  private lastBossEffectEvents: readonly EffectEvent[] = [];
 
   public constructor(options: BrowserGameRuntimeOptions = {}) {
     this.mode = options.mode ?? "local_coop";
     this.seed = options.seed ?? RUN_CONFIG.seed;
     this.screenWidth = options.screenWidth ?? SCREEN_WIDTH;
     this.screenHeight = options.screenHeight ?? SCREEN_HEIGHT;
+    this.bossHpScale = options.bossHpScale;
     this.rng = createRunRngStreams(this.seed);
     this.waveSpawner = new WaveSpawner({ stageRng: this.rng.stage });
     const playerIds = this.mode === "single_player" ? ["p1"] : ["p1", "p2"];
@@ -243,6 +262,11 @@ export class BrowserGameRuntime {
       outgameSettlementObserved: false
     };
     this.lastEffectEvents = this.createEffectEvents([]);
+    if (options.startAtBoss === true) {
+      this.frame = this.stageRunner.totalFrames;
+      this.ensureBossStarted();
+      this.lastEffectEvents = this.createEffectEvents([]);
+    }
   }
 
   public step(frameInputs: readonly FrameInput[]): BrowserGameSnapshot {
@@ -292,14 +316,16 @@ export class BrowserGameRuntime {
     this.pillState = digestionResult.pillState;
     this.playerCultivations = digestionResult.playerCultivations;
 
+    this.ensureBossStarted();
     this.stepScriptedEnemyBullets();
-    this.resolveDamageAndDrops([]);
+    const bossDamage = this.resolveDamageAndDrops(spellResult.damageEvents);
+    this.lastBossEffectEvents = this.stepBoss(bossDamage);
     this.applyPickupsAndCultivation();
     this.stepRescue(inputs);
     this.stepTribulations();
     this.maybeCreateInsightFromTeamExp();
 
-    this.lastEffectEvents = this.createEffectEvents(spellResult.effectEvents);
+    this.lastEffectEvents = this.createEffectEvents([...spellResult.effectEvents, ...this.lastBossEffectEvents]);
     this.frame += 1;
     return this.getSnapshot();
   }
@@ -491,18 +517,21 @@ export class BrowserGameRuntime {
       .sort((a, b) => a.entityId - b.entityId);
   }
 
-  private resolveDamageAndDrops(extraDamageEvents: Parameters<typeof applyDamageEvents>[0]["damageEvents"]): void {
+  private resolveDamageAndDrops(extraDamageEvents: readonly DamageEvent[]): number {
     const collisions = resolveCollisionFrame({
       frame: this.frame,
       players: this.players,
       enemies: this.enemies,
+      bosses: this.boss === undefined ? [] : [this.boss],
       playerProjectiles: this.playerProjectiles,
       enemyProjectiles: this.enemyProjectiles
     });
+    const damageEvents = [...collisions.damageEvents, ...extraDamageEvents];
+    const bossDamage = sumBossDamage(damageEvents, this.boss?.entityId);
     const damage = applyDamageEvents({
       players: this.players,
       enemies: this.enemies,
-      damageEvents: [...collisions.damageEvents, ...extraDamageEvents]
+      damageEvents
     });
     this.players = mergeRuntimePlayerExtras(damage.players, this.players);
     this.enemies = damage.enemies;
@@ -512,6 +541,7 @@ export class BrowserGameRuntime {
     if (this.players.every((player) => player.aliveState === "soul" || player.aliveState === "dead")) {
       this.completeRunForReview("team_wipe");
     }
+    return bossDamage;
   }
 
   private createPickupsForKilledEnemies(killedEnemies: readonly KilledEnemyState[]): readonly PickupState[] {
@@ -931,24 +961,133 @@ export class BrowserGameRuntime {
   }
 
   private createBossStates(): readonly BossState[] {
-    if (this.frame < this.stageRunner.totalFrames) {
+    if (this.boss === undefined) {
       return [];
-    }
-    const bossFrame = this.frame - this.stageRunner.totalFrames;
-    const phaseIndex = bossFrame < secondsToFrames(38) ? 0 : bossFrame < secondsToFrames(78) ? 1 : 2;
-    const maxHp = 5200;
-    const hp = Math.max(0, maxHp - bossFrame * 0.72);
-    if (hp <= 0 && this.stageOutcome === "in_run") {
-      this.completeRunForReview("boss_victory");
     }
     return [
       {
-        entityId: 90_001,
-        bossId: QINGYUN_BOSS_ID,
-        hp,
-        phaseIndex
+        entityId: this.boss.entityId,
+        bossId: this.boss.bossId,
+        hp: this.boss.hp,
+        phaseIndex: this.boss.phaseIndex
       }
     ];
+  }
+
+  private ensureBossStarted(): void {
+    if (this.boss !== undefined || this.stageOutcome !== "in_run" || this.frame < this.stageRunner.totalFrames) {
+      return;
+    }
+    this.boss = createBossState({
+      definition: QINGYUN_BOSS,
+      entityId: 90_001,
+      spawnFrame: this.frame,
+      x: this.screenWidth / 2,
+      ...(this.bossHpScale === undefined ? {} : { hpScale: this.bossHpScale })
+    });
+  }
+
+  private stepBoss(incomingDamage: number): readonly EffectEvent[] {
+    if (this.boss === undefined) {
+      return [];
+    }
+    const result = stepBossFrame({
+      definition: QINGYUN_BOSS,
+      boss: this.boss,
+      frame: this.frame,
+      incomingDamage,
+      dropTables: DROP_TABLE_ITEMS,
+      dropRng: this.rng.drop
+    });
+    this.boss = result.boss;
+    if (result.deathRewards !== undefined) {
+      this.bossDeathRewards = result.deathRewards;
+    }
+    this.spawnBossAttackProjectiles(result.attackEvents);
+    return result.effectEvents.map((event) => bossEffectToRuntimeEffect(event));
+  }
+
+  private spawnBossAttackProjectiles(attackEvents: readonly BossAttackEvent[]): void {
+    const spawned: EnemyProjectileState[] = [];
+    for (const attack of attackEvents) {
+      if (attack.projectileOwnerKind === "summon") {
+        this.spawnBossSummons(attack);
+        continue;
+      }
+      if (attack.warningFrames !== undefined && attack.projectileOwnerKind === "tribulation") {
+        this.latestLightningWarnings = [
+          ...this.latestLightningWarnings,
+          ...createBossLightningWarnings(attack, this.players, this.screenWidth)
+        ];
+        continue;
+      }
+      const boss = this.boss;
+      if (boss === undefined || attack.projectileOwnerKind !== "boss") {
+        continue;
+      }
+      const projectileCount = Math.max(1, attack.projectileCount);
+      const speed = numberParam(attack.params, "speed", 210);
+      const damage = numberParam(attack.params, "damage", 12);
+      const spread = projectileCount === 1 ? 0 : 70;
+      for (let index = 0; index < projectileCount; index += 1) {
+        const t = projectileCount === 1 ? 0.5 : index / (projectileCount - 1);
+        const angle = ((90 - spread / 2 + spread * t) * Math.PI) / 180;
+        spawned.push({
+          entityId: this.nextEnemyProjectileEntityId,
+          ownerKind: "boss",
+          ownerId: attack.bossId,
+          position: boss.position,
+          velocity: {
+            x: round3(Math.cos(angle) * speed),
+            y: round3(Math.sin(angle) * speed)
+          },
+          damage,
+          radius: 8,
+          spawnFrame: this.frame
+        });
+        this.nextEnemyProjectileEntityId += 1;
+      }
+    }
+    this.enemyProjectiles = [...this.enemyProjectiles, ...spawned].sort((a, b) => a.entityId - b.entityId);
+  }
+
+  private spawnBossSummons(attack: BossAttackEvent): void {
+    if (attack.summonEnemyId === undefined) {
+      return;
+    }
+    const definition = ENEMIES[attack.summonEnemyId];
+    if (definition === undefined) {
+      return;
+    }
+    const count = Math.max(0, attack.projectileCount);
+    for (let index = 0; index < count; index += 1) {
+      const x = 470 + ((index * 137) % 980);
+      this.enemies = [
+        ...this.enemies,
+        {
+          entityId: this.nextEnemyEntityId,
+          enemyId: definition.id,
+          hp: definition.hp,
+          maxHp: definition.hp,
+          speed: definition.speed,
+          contactDamage: definition.contactDamage,
+          behaviorId: definition.behaviorId,
+          behaviorParams: definition.behaviorParams ?? {},
+          behaviorPhase: "moving",
+          position: { x, y: -40 },
+          velocity: { x: 0, y: definition.speed },
+          spawnFrame: this.frame,
+          sourceSegmentId: "stage_01_05_boss",
+          sourceWaveIndex: 0,
+          sourceGroupIndex: 0,
+          spawnIndex: index,
+          armor: typeof definition.behaviorParams?.armor === "number" ? definition.behaviorParams.armor : 0,
+          tags: definition.tags ?? [],
+          ...(definition.bulletPatternId === undefined ? {} : { bulletPatternId: definition.bulletPatternId })
+        }
+      ];
+      this.nextEnemyEntityId += 1;
+    }
   }
 
   private createStageProgress(): ViewStageProgressInput {
@@ -1004,8 +1143,8 @@ export class BrowserGameRuntime {
     for (const pickup of this.pickups.slice(0, 64)) {
       entityEffects.push(effect("pickup_trail", frame, "pickup", pickup.position));
     }
-    for (const boss of this.createBossStates()) {
-      entityEffects.push(effect("boss_body", frame, boss.bossId, { x: 960, y: 150 }));
+    if (this.boss !== undefined) {
+      entityEffects.push(effect("boss_body", frame, this.boss.bossId, this.boss.position));
     }
     for (const player of this.players) {
       entityEffects.push(effect(player.aliveState === "soul" ? "soul_body" : "player_body", frame, player.playerId, player.position));
@@ -1049,6 +1188,14 @@ interface MutableBrowserRcEvidence {
   rescueOverlayObserved: boolean;
   debugTribulationObserved: boolean;
   outgameSettlementObserved: boolean;
+}
+
+function requireBossDefinition(): BossDefinition {
+  const definition = (bossesData as { readonly items: readonly BossDefinition[] }).items.find((boss) => boss.id === QINGYUN_BOSS_ID);
+  if (definition === undefined) {
+    throw new Error(`Missing boss definition: ${QINGYUN_BOSS_ID}`);
+  }
+  return definition;
 }
 
 function createRuntimePlayer(playerId: PlayerId, index: number): RuntimePlayerState {
@@ -1149,6 +1296,50 @@ function normalizeInputs(inputs: readonly FrameInput[], frame: number, playerIds
       inputSeq: frame * 10 + index
     };
   });
+}
+
+function sumBossDamage(damageEvents: readonly DamageEvent[], bossEntityId: number | undefined): number {
+  if (bossEntityId === undefined) {
+    return 0;
+  }
+  return damageEvents.reduce((sum, event) => {
+    if (event.targetKind !== "boss" || event.targetEntityId !== bossEntityId) {
+      return sum;
+    }
+    return sum + event.amount;
+  }, 0);
+}
+
+function bossEffectToRuntimeEffect(event: BossEffectEvent): EffectEvent {
+  return effect(event.effectId, event.frame, event.bossId, event.position);
+}
+
+function createBossLightningWarnings(
+  attack: BossAttackEvent,
+  players: readonly RuntimePlayerState[],
+  screenWidth: number
+): readonly ViewLightningWarningInput[] {
+  const warningFrames = attack.warningFrames ?? secondsToFrames(0.75);
+  const warnings: ViewLightningWarningInput[] = [];
+  for (let index = 0; index < Math.max(1, attack.projectileCount); index += 1) {
+    const player = players[index % Math.max(1, players.length)];
+    const fallbackX = 440 + ((index + 1) * (screenWidth - 880)) / (Math.max(1, attack.projectileCount) + 1);
+    warnings.push({
+      id: `boss_${attack.patternId}_${attack.frame}_${index}`,
+      tribulationId: attack.patternId,
+      x: player?.position.x ?? fallbackX,
+      y: player?.position.y ?? 540,
+      radius: 76,
+      impactFrame: attack.frame + warningFrames,
+      severity: attack.projectileOwnerKind === "tribulation" ? "lethal" : "high"
+    });
+  }
+  return warnings;
+}
+
+function numberParam(params: Readonly<Record<string, unknown>>, key: string, fallback: number): number {
+  const value = params[key];
+  return typeof value === "number" && Number.isFinite(value) ? value : fallback;
 }
 
 function getInsightOptionIndex(input: FrameInput): number | undefined {

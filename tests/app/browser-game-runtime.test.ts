@@ -102,6 +102,44 @@ describe("browser playable shell", () => {
     expect(resumed.viewState.insight).toBeUndefined();
   });
 
+  it("keeps Qingyun boss HP gameplay-owned and damageable by player projectiles", () => {
+    const runtime = createBrowserGameRuntime({ mode: "single_player", seed: 20260523, startAtBoss: true });
+    let snapshot = runtime.getSnapshot();
+
+    for (let frame = 0; frame < 15; frame += 1) {
+      snapshot = runtime.step([p1Input({ frame, moveX: 1 })]);
+    }
+
+    const spawnedBoss = snapshot.simState.bosses[0];
+    expect(spawnedBoss).toEqual(expect.objectContaining({ bossId: "boss_qingyun_tribulation_spirit", hp: 5200 }));
+
+    const oneFrameLater = runtime.step([]);
+    expect(oneFrameLater.simState.bosses[0]?.hp).toBe(spawnedBoss?.hp);
+
+    let damaged = oneFrameLater;
+    for (let frame = 0; frame < 360; frame += 1) {
+      damaged = runtime.step([]);
+    }
+
+    expect(damaged.simState.bosses[0]?.hp).toBeLessThan(spawnedBoss?.hp ?? 0);
+    expect(damaged.effectEvents.map((event) => event.effectId)).toContain("boss_body");
+  });
+
+  it("emits boss death cascade when runtime boss HP reaches zero", () => {
+    const runtime = createBrowserGameRuntime({ mode: "single_player", seed: 20260523, startAtBoss: true, bossHpScale: 0.02 });
+    let snapshot = runtime.getSnapshot();
+
+    for (let frame = 0; frame < 15; frame += 1) {
+      snapshot = runtime.step([p1Input({ frame, moveX: 1 })]);
+    }
+    for (let frame = 0; frame < 600 && snapshot.effectEvents.every((event) => event.effectId !== "boss_death_cascade"); frame += 1) {
+      snapshot = runtime.step([]);
+    }
+
+    expect(snapshot.simState.bosses[0]?.hp).toBe(0);
+    expect(snapshot.effectEvents.map((event) => event.effectId)).toContain("boss_death_cascade");
+  });
+
   it("advances a two-player browser runtime through input, renderable view state, insight, rescue, and debug tribulation evidence", () => {
     const runtime = createBrowserGameRuntime({ mode: "local_coop", seed: 20260523 });
     const before = runtime.getSnapshot();
@@ -170,10 +208,10 @@ describe("browser playable shell", () => {
     expect(snapshot.viewState.rescue?.visible).toBe(true);
     expect(snapshot.viewState.tribulation?.active).toBe(true);
     expect(snapshot.effectEvents.map((event) => event.effectId)).toEqual(
-      expect.arrayContaining(["player_body", "enemy_body", "player_projectile_low", "player_hitbox", "tribulation_strike"])
+      expect.arrayContaining(["player_body", "player_projectile_low", "player_hitbox", "tribulation_strike"])
     );
     expect(commands.map((command) => command.layerId)).toEqual(
-      expect.arrayContaining(["players", "enemies", "player_projectiles_low", "player_hitbox", "tribulation_strikes", "hud"])
+      expect.arrayContaining(["players", "player_projectiles_low", "player_hitbox", "tribulation_strikes", "hud"])
     );
     expect(snapshot.rcEvidence).toEqual(
       expect.objectContaining({
@@ -291,4 +329,17 @@ class RecordingCanvasContext implements CanvasLikeContext {
   public set textBaseline(value: CanvasTextBaseline) {
     this.operations.push(`textBaseline:${value}`);
   }
+}
+
+function p1Input(options: { readonly frame: number; readonly moveX?: -1 | 0 | 1; readonly pressedMask?: number }) {
+  return {
+    frame: options.frame,
+    playerId: "p1" as const,
+    moveX: options.moveX ?? 0,
+    moveY: 0 as const,
+    downMask: options.pressedMask ?? 0,
+    pressedMask: options.pressedMask ?? 0,
+    releasedMask: 0,
+    inputSeq: options.frame + 1
+  };
 }

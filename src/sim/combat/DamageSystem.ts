@@ -29,7 +29,7 @@ export function applyDamageEvents(options: ApplyDamageEventsOptions): DamageSyst
   for (const event of options.damageEvents) {
     if (event.targetKind === "enemy") {
       damageByEnemy.set(event.targetEntityId, (damageByEnemy.get(event.targetEntityId) ?? 0) + event.amount);
-    } else {
+    } else if (event.targetKind === "player") {
       damageByPlayer.set(event.targetPlayerId, (damageByPlayer.get(event.targetPlayerId) ?? 0) + event.amount);
     }
   }
