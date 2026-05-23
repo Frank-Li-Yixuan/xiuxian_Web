@@ -1,4 +1,5 @@
 import { CanvasRenderer } from "../render/CanvasRenderer";
+import { isBrowserDebugModeEnabled } from "./BrowserDebugMode";
 import { createBrowserGameRuntime, type BrowserGameRuntime, type BrowserGameSnapshot } from "./BrowserGameRuntime";
 import { advanceFixedStepLoop, createFixedStepLoopState } from "./FixedBrowserLoop";
 import { LocalKeyboardInputSource } from "./LocalKeyboardInput";
@@ -60,12 +61,16 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
   window.addEventListener("keydown", keydown);
   window.addEventListener("keyup", keyup);
 
-  debug.append(
-    actionButton("顿悟", () => runtime.forceInsightForReview()),
-    actionButton("救援", () => runtime.forceP2SoulForReview()),
-    actionButton("雷劫", () => runtime.triggerDebugTribulationForReview("p1")),
-    actionButton("结算", () => runtime.completeRunForReview("boss_victory"))
-  );
+  if (isBrowserDebugModeEnabled(window.location.search)) {
+    debug.append(
+      actionButton("顿悟", () => runtime.forceInsightForReview()),
+      actionButton("救援", () => runtime.forceP2SoulForReview()),
+      actionButton("雷劫", () => runtime.triggerDebugTribulationForReview("p1")),
+      actionButton("结算", () => runtime.completeRunForReview("boss_victory"))
+    );
+  } else {
+    debug.hidden = true;
+  }
 
   let running = true;
   let latestSnapshot = runtime.getSnapshot();
@@ -237,7 +242,9 @@ declare global {
   }
 }
 
-const root = document.getElementById("xiuxian-game-root");
-if (root !== null) {
-  window.__XIUXIAN_APP__ = mountBrowserGameApp(root);
+if (typeof document !== "undefined") {
+  const root = document.getElementById("xiuxian-game-root");
+  if (root !== null) {
+    window.__XIUXIAN_APP__ = mountBrowserGameApp(root);
+  }
 }

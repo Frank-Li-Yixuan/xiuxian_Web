@@ -2,6 +2,8 @@ import artifactsData from "../../data/artifacts/artifacts.v0.1.json";
 import bossesData from "../../data/bosses/bosses.v0.1.json";
 import enemiesData from "../../data/enemies/enemies.v0.1.json";
 import tribulationsData from "../../data/events/tribulations.v0.1.json";
+import defaultProfileData from "../../data/outgame/default_profile.v0.1.json";
+import settlementRewardsData from "../../data/outgame/settlement_rewards_stage01.v0.1.json";
 import pillsData from "../../data/pills/pills.v0.1.json";
 import cultivationData from "../../data/progression/cultivation_realms.v0.1.json";
 import insightExpData from "../../data/progression/insight_exp_tables.v0.1.json";
@@ -48,6 +50,14 @@ import {
 import { applyTeamInsightExpGain, indexInsightExpTable } from "../sim/progression/TeamInsightSystem";
 import { indexRewardPools, type RewardChoice, type RewardPlayerContext, type RewardPoolPack } from "../sim/rewards/RewardGenerator";
 import { secondsToFrames } from "../sim/SimConstants";
+import {
+  createRunSettlementReceipt,
+  type ResourceMap,
+  type RunSettlementOutcome,
+  type RunSettlementReceipt,
+  type SettlementMode,
+  type SettlementRewardConfig
+} from "../sim/settlement/RunSettlement";
 import type { EffectEvent } from "../sim/spells/SpellEffects";
 import { indexSpellDefinitions, stepSpellSystem, type SpellDefinitionPack, type SpellRuntimePlayerState } from "../sim/spells/SpellSystem";
 import { indexPillDefinitions, stepPillSystem, type PillDefinitionPack, type PillRuntimePlayerState } from "../sim/pills/PillSystem";
@@ -123,8 +133,16 @@ export interface BrowserOutgameSummary {
 interface DebugRunConfig {
   readonly runId: string;
   readonly seed: number;
+  readonly difficulty: string;
   readonly stageId: string;
   readonly players: Readonly<Record<string, DebugRunPlayerConfig>>;
+}
+
+interface BrowserDefaultProfileData {
+  readonly profileId: string;
+  readonly flags?: {
+    readonly firstStageCleared?: boolean;
+  };
 }
 
 interface DebugRunPlayerConfig {
@@ -151,6 +169,8 @@ const QINGYUN_BOSS_ID = "boss_qingyun_tribulation_spirit";
 const STAGE_COMBAT_SEGMENTS = ["stage_01_01", "stage_01_02", "stage_01_03", "stage_01_04"] as const;
 
 const RUN_CONFIG = debugRunConfigData as unknown as DebugRunConfig;
+const DEFAULT_PROFILE = defaultProfileData as BrowserDefaultProfileData;
+const SETTLEMENT_REWARDS = settlementRewardsData as SettlementRewardConfig;
 const STAGE = stageData as unknown as StageDefinition;
 const ENEMIES = indexEnemyDefinitions((enemiesData as EnemyDefinitionPack).items);
 const SPELLS = indexSpellDefinitions((spellsData as SpellDefinitionPack).items);
@@ -207,6 +227,7 @@ export class BrowserGameRuntime {
   private playerProjectiles: readonly ProjectileState[] = [];
   private enemyProjectiles: readonly EnemyProjectileState[] = [];
   private pickups: readonly PickupState[] = [];
+  private readonly collectedBaseRewards: Record<string, number> = {};
   private boss: BossCombatState | undefined;
   private bossDeathRewards: BossDeathRewards | undefined;
   private rescueStates: readonly RescueState[] = [];
@@ -272,6 +293,9 @@ export class BrowserGameRuntime {
   public step(frameInputs: readonly FrameInput[]): BrowserGameSnapshot {
     const inputs = normalizeInputs(frameInputs, this.frame, this.players.map((player) => player.playerId));
     this.recordInputEvidence(inputs);
+    if (this.stageOutcome !== "in_run") {
+      return this.getSnapshot();
+    }
     if (this.insightSession !== undefined && !this.insightSession.completed) {
       this.stepInsightSession(inputs);
       return this.getSnapshot();
@@ -427,18 +451,47 @@ export class BrowserGameRuntime {
   }
 
   public completeRunForReview(outcome: "boss_victory" | "team_wipe" = "boss_victory"): void {
+    this.completeRun(outcome);
+  }
+
+  private completeRun(outcome: RunSettlementOutcome): void {
+    if (this.outgameSummary !== undefined) {
+      return;
+    }
+    const receipt = createRunSettlementReceipt({
+      runId: RUN_CONFIG.runId,
+      profileId: DEFAULT_PROFILE.profileId,
+      mode: this.createSettlementMode(),
+      stageId: RUN_CONFIG.stageId,
+      difficulty: RUN_CONFIG.difficulty,
+      reachedSegment: this.getReachedSettlementSegment(outcome),
+      outcome,
+      rewardConfig: SETTLEMENT_REWARDS,
+      firstClear: outcome === "boss_victory" && DEFAULT_PROFILE.flags?.firstStageCleared !== true,
+      ...(outcome === "boss_victory" ? { bossKilled: QINGYUN_BOSS_ID } : {}),
+      ...(hasResources(this.collectedBaseRewards) ? { collectedBaseRewards: this.collectedBaseRewards } : {}),
+      ...(outcome === "boss_victory" && this.bossDeathRewards !== undefined
+        ? { bossSettlementMaterials: this.bossDeathRewards.settlementMaterials }
+        : {})
+    });
     this.stageOutcome = outcome;
-    this.outgameSummary = {
-      receiptId: `receipt_browser_${RUN_CONFIG.stageId}_${outcome}`,
-      resourcesKept: {
-        spirit_stone_low: outcome === "boss_victory" ? 18 : 8,
-        qingling_herb: outcome === "boss_victory" ? 4 : 2,
-        black_iron_essence: outcome === "boss_victory" ? 3 : 1
-      },
-      upgrades: ["回春丹 x1", "青霜飞剑 2星", "锐金诀 Lv.2"],
-      secondRunPowerDelta: outcome === "boss_victory" ? 25.7 : 11.4
-    };
+    this.outgameSummary = createBrowserOutgameSummary(receipt);
     this.rcEvidenceMutable.outgameSettlementObserved = true;
+  }
+
+  private createSettlementMode(): SettlementMode {
+    return this.mode === "local_coop" ? "local_coop_shared_profile" : "single_player";
+  }
+
+  private getReachedSettlementSegment(outcome: RunSettlementOutcome): string {
+    if (outcome === "boss_victory") {
+      return "1-5";
+    }
+    const context = this.stageRunner.getFrameContext(this.frame);
+    if (context === undefined) {
+      return "1-5";
+    }
+    return `1-${context.segmentIndex + 1}`;
   }
 
   private spawnStageEnemies(context: StageFrameContext | undefined): void {
@@ -539,7 +592,7 @@ export class BrowserGameRuntime {
     this.enemyProjectiles = this.enemyProjectiles.filter((projectile) => !collisions.consumedEnemyProjectileIds.includes(projectile.entityId));
     this.pickups = [...this.pickups, ...this.createPickupsForKilledEnemies(damage.killedEnemies)].sort((a, b) => a.entityId - b.entityId);
     if (this.players.every((player) => player.aliveState === "soul" || player.aliveState === "dead")) {
-      this.completeRunForReview("team_wipe");
+      this.completeRun("team_wipe");
     }
     return bossDamage;
   }
@@ -570,6 +623,9 @@ export class BrowserGameRuntime {
     this.players = mergeRuntimePlayerExtras(pickupResult.players, this.players);
     this.pickups = pickupResult.remainingPickups;
     this.teamInsightExp = pickupResult.teamInsightExp;
+    for (const pickup of pickupResult.materialPickups) {
+      addResource(this.collectedBaseRewards, pickup.pickupId, pickup.amount);
+    }
     if (pickupResult.playerCultivationGains.length > 0) {
       const cultivation = stepCultivationSystem({
         frame: this.frame,
@@ -1003,6 +1059,9 @@ export class BrowserGameRuntime {
     if (result.deathRewards !== undefined) {
       this.bossDeathRewards = result.deathRewards;
     }
+    if (result.boss.status === "defeated") {
+      this.completeRun("boss_victory");
+    }
     this.spawnBossAttackProjectiles(result.attackEvents);
     return result.effectEvents.map((event) => bossEffectToRuntimeEffect(event));
   }
@@ -1188,6 +1247,78 @@ interface MutableBrowserRcEvidence {
   rescueOverlayObserved: boolean;
   debugTribulationObserved: boolean;
   outgameSettlementObserved: boolean;
+}
+
+function createBrowserOutgameSummary(receipt: RunSettlementReceipt): BrowserOutgameSummary {
+  const resourcesKept = mergeResourceMaps(receipt.baseRewards, receipt.bonusRewards, receipt.firstClearBonus);
+  const cultivationRewards = receipt.cultivationRewards ?? 0;
+  return {
+    receiptId: receipt.receiptId,
+    resourcesKept,
+    upgrades: createSettlementUpgradeNotes(receipt, resourcesKept),
+    secondRunPowerDelta: calculateSecondRunPowerDelta(resourcesKept, cultivationRewards)
+  };
+}
+
+function createSettlementUpgradeNotes(receipt: RunSettlementReceipt, resources: ResourceMap): readonly string[] {
+  const notes: string[] = [];
+  if ((resources.spirit_vein_seed ?? 0) > 0) {
+    notes.push(`聚灵阵材料 +${resources.spirit_vein_seed}`);
+  }
+  if ((resources.spell_page_thunder ?? 0) > 0) {
+    notes.push(`五雷法页 +${resources.spell_page_thunder}`);
+  }
+  if ((resources.thunder_marow ?? 0) > 0) {
+    notes.push(`雷髓 +${resources.thunder_marow}`);
+  }
+  if ((resources.spirit_jade ?? 0) > 0) {
+    notes.push(`灵玉 +${resources.spirit_jade}`);
+  }
+  if ((receipt.cultivationRewards ?? 0) > 0) {
+    notes.push(`修为 +${receipt.cultivationRewards}`);
+  }
+  if (notes.length === 0) {
+    notes.push(`阶段进度 ${receipt.reachedSegment}`);
+  }
+  return Object.freeze(notes);
+}
+
+function calculateSecondRunPowerDelta(resources: ResourceMap, cultivationRewards: number): number {
+  const weighted =
+    (resources.spirit_stone_low ?? 0) / 40 +
+    (resources.qingling_herb ?? 0) * 0.35 +
+    (resources.black_iron_essence ?? 0) * 0.7 +
+    (resources.demon_core_small ?? 0) * 0.6 +
+    (resources.spirit_jade ?? 0) * 3 +
+    (resources.thunder_marow ?? 0) * 5 +
+    (resources.spirit_vein_seed ?? 0) * 8 +
+    (resources.spell_page_thunder ?? 0) * 6 +
+    cultivationRewards / 25;
+  return round3(weighted);
+}
+
+function mergeResourceMaps(...maps: readonly (ResourceMap | undefined)[]): ResourceMap {
+  const merged: Record<string, number> = {};
+  for (const map of maps) {
+    if (map === undefined) {
+      continue;
+    }
+    for (const [resourceId, amount] of Object.entries(map)) {
+      addResource(merged, resourceId, amount);
+    }
+  }
+  return Object.freeze(merged);
+}
+
+function addResource(target: Record<string, number>, resourceId: string, amount: number): void {
+  if (resourceId.length === 0 || !Number.isFinite(amount) || amount <= 0) {
+    return;
+  }
+  target[resourceId] = round3((target[resourceId] ?? 0) + amount);
+}
+
+function hasResources(resources: ResourceMap): boolean {
+  return Object.keys(resources).length > 0;
 }
 
 function requireBossDefinition(): BossDefinition {

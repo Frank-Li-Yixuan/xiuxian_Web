@@ -140,6 +140,50 @@ describe("browser playable shell", () => {
     expect(snapshot.effectEvents.map((event) => event.effectId)).toContain("boss_death_cascade");
   });
 
+  it("creates a real settlement summary from browser boss victory", () => {
+    const runtime = createBrowserGameRuntime({ mode: "single_player", seed: 20260523, startAtBoss: true, bossHpScale: 0.02 });
+    let snapshot = runtime.getSnapshot();
+
+    for (let frame = 0; frame < 15; frame += 1) {
+      snapshot = runtime.step([p1Input({ frame, moveX: 1 })]);
+    }
+    for (let frame = 0; frame < 600 && snapshot.stageOutcome !== "boss_victory"; frame += 1) {
+      snapshot = runtime.step([]);
+    }
+
+    expect(snapshot.stageOutcome).toBe("boss_victory");
+    expect(snapshot.outgameSummary).toEqual(
+      expect.objectContaining({
+        receiptId: "receipt_debug_run_stage01_seed_20260522_stage_01_qingyun_boss_victory",
+        resourcesKept: expect.objectContaining({
+          spirit_stone_low: 370,
+          spirit_vein_seed: 1
+        })
+      })
+    );
+    expect(snapshot.outgameSummary?.resourcesKept.spirit_stone_low).not.toBe(18);
+  });
+
+  it("maps debug team-wipe completion through real settlement data", () => {
+    const runtime = createBrowserGameRuntime({ mode: "single_player", seed: 20260523 });
+
+    runtime.completeRunForReview("team_wipe");
+    const snapshot = runtime.getSnapshot();
+
+    expect(snapshot.stageOutcome).toBe("team_wipe");
+    expect(snapshot.outgameSummary).toEqual(
+      expect.objectContaining({
+        receiptId: "receipt_debug_run_stage01_seed_20260522_stage_01_qingyun_team_wipe",
+        resourcesKept: expect.objectContaining({
+          spirit_stone_low: 105,
+          qingling_herb: 6,
+          demon_core_small: 2
+        })
+      })
+    );
+    expect(snapshot.outgameSummary?.resourcesKept.spirit_stone_low).not.toBe(8);
+  });
+
   it("advances a two-player browser runtime through input, renderable view state, insight, rescue, and debug tribulation evidence", () => {
     const runtime = createBrowserGameRuntime({ mode: "local_coop", seed: 20260523 });
     const before = runtime.getSnapshot();
