@@ -14,7 +14,7 @@ describe("browser playable shell", () => {
   it("ships an HTML entry that mounts the browser game app without external resources", () => {
     const html = readFileSync(join(process.cwd(), "index.html"), "utf8");
 
-    expect(html).toContain("/src/app/BrowserGameApp.ts");
+    expect(html).toContain("/src/app/main.tsx");
     expect(html).toContain("xiuxian-game-root");
     expect(html).not.toMatch(/https?:\/\//);
     expect(html).not.toMatch(/cdn|fonts\.googleapis|@font-face/i);

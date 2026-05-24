@@ -1,0 +1,140 @@
+{
+  "version": "0.3",
+  "namespace": "ui.main_menu",
+  "assets": {
+    "mainMenu.background.qingyun": {
+      "path": "/assets/generated/ui/main_menu/background/main_menu_bg_qingyun.png",
+      "type": "background",
+      "required": true
+    },
+    "mainMenu.raw.uiSheetReference": {
+      "path": "/assets/generated/ui/main_menu/raw/ui_sheet_reference.png",
+      "type": "reference",
+      "required": false
+    },
+    "mainMenu.titlePlaque": {
+      "path": "/assets/generated/ui/main_menu/controls/title_plaque.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 310, "y": 220, "w": 1220, "h": 220 }
+    },
+    "mainMenu.button.normal": {
+      "path": "/assets/generated/ui/main_menu/controls/main_button_normal.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 140, "y": 62, "w": 600, "h": 88 }
+    },
+    "mainMenu.button.hover": {
+      "path": "/assets/generated/ui/main_menu/controls/main_button_hover.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 140, "y": 62, "w": 600, "h": 88 }
+    },
+    "mainMenu.button.pressed": {
+      "path": "/assets/generated/ui/main_menu/controls/main_button_pressed.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 140, "y": 62, "w": 600, "h": 88 }
+    },
+    "mainMenu.button.selected": {
+      "path": "/assets/generated/ui/main_menu/controls/main_button_selected.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 140, "y": 62, "w": 600, "h": 88 }
+    },
+    "mainMenu.button.disabled": {
+      "path": "/assets/generated/ui/main_menu/controls/main_button_disabled.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 140, "y": 62, "w": 600, "h": 88 }
+    },
+    "mainMenu.secondaryButton.normal": {
+      "path": "/assets/generated/ui/main_menu/controls/secondary_button_normal.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 160, "y": 78, "w": 560, "h": 80 }
+    },
+    "mainMenu.secondaryButton.hover": {
+      "path": "/assets/generated/ui/main_menu/controls/secondary_button_hover.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 160, "y": 78, "w": 560, "h": 80 }
+    },
+    "mainMenu.secondaryButton.pressed": {
+      "path": "/assets/generated/ui/main_menu/controls/secondary_button_pressed.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 160, "y": 78, "w": 560, "h": 80 }
+    },
+    "mainMenu.secondaryButton.disabled": {
+      "path": "/assets/generated/ui/main_menu/controls/secondary_button_disabled.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 160, "y": 78, "w": 560, "h": 80 }
+    },
+    "mainMenu.saveSlot.normal": {
+      "path": "/assets/generated/ui/main_menu/controls/save_slot_normal.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 260, "y": 58, "w": 760, "h": 100 }
+    },
+    "mainMenu.saveSlot.hover": {
+      "path": "/assets/generated/ui/main_menu/controls/save_slot_hover.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 260, "y": 58, "w": 760, "h": 100 }
+    },
+    "mainMenu.saveSlot.selected": {
+      "path": "/assets/generated/ui/main_menu/controls/save_slot_selected.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 260, "y": 58, "w": 760, "h": 100 }
+    },
+    "mainMenu.saveSlot.empty": {
+      "path": "/assets/generated/ui/main_menu/controls/save_slot_empty.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 260, "y": 58, "w": 760, "h": 100 }
+    },
+    "mainMenu.saveSlot.disabled": {
+      "path": "/assets/generated/ui/main_menu/controls/save_slot_disabled.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 260, "y": 58, "w": 760, "h": 100 }
+    },
+    "mainMenu.dialog.frame": {
+      "path": "/assets/generated/ui/main_menu/controls/dialog_frame.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 245, "y": 225, "w": 735, "h": 310 }
+    },
+    "mainMenu.settings.panel": {
+      "path": "/assets/generated/ui/main_menu/controls/settings_panel.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 360, "y": 130, "w": 850, "h": 520 }
+    },
+    "mainMenu.closeButton.normal": {
+      "path": "/assets/generated/ui/main_menu/controls/close_button_normal.png",
+      "type": "ui",
+      "required": true
+    },
+    "mainMenu.closeButton.hover": {
+      "path": "/assets/generated/ui/main_menu/controls/close_button_hover.png",
+      "type": "ui",
+      "required": true
+    },
+    "mainMenu.backButton.normal": {
+      "path": "/assets/generated/ui/main_menu/controls/back_button_normal.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 160, "y": 78, "w": 560, "h": 80 }
+    },
+    "mainMenu.backButton.hover": {
+      "path": "/assets/generated/ui/main_menu/controls/back_button_hover.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": { "x": 160, "y": 78, "w": 560, "h": 80 }
+    }
+  }
+}

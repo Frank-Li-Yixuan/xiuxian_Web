@@ -235,16 +235,3 @@ function isGameplayKey(code: string): boolean {
     code === "Backspace"
   );
 }
-
-declare global {
-  interface Window {
-    __XIUXIAN_APP__?: BrowserGameAppHandle;
-  }
-}
-
-if (typeof document !== "undefined") {
-  const root = document.getElementById("xiuxian-game-root");
-  if (root !== null) {
-    window.__XIUXIAN_APP__ = mountBrowserGameApp(root);
-  }
-}
