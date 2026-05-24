@@ -41,14 +41,19 @@ describe("main menu image button css", () => {
   });
 
   it("keeps the generated save slots inside the decorative panel safe area", () => {
+    const panelRule = ruleBody(".save-slot-panel.generated-ui-panel");
+    const innerRule = ruleBody(".save-panel-inner-bg");
     const listRule = ruleBody(".save-slot-panel.generated-ui-panel .save-slot-list");
     const copyRule = ruleBody(".save-slot-panel.generated-ui-panel .save-slot-copy");
     const selectedRule = ruleBody(".save-slot-card.is-selected");
 
+    expect(panelRule).toContain("width: min(1220px, calc(100vw - 8px))");
+    expect(innerRule).toContain("inset: 14.5% 7.2% 5.4%");
     expect(listRule).toContain("left: 50%");
-    expect(listRule).toContain("top: 29.5%");
-    expect(listRule).toContain("width: min(340px, 36%)");
-    expect(copyRule).toContain("left: 40.5%");
+    expect(listRule).toContain("top: 24%");
+    expect(listRule).toContain("width: min(392px, 42.5%)");
+    expect(copyRule).toContain("left: 12%");
+    expect(copyRule).toContain("right: 12%");
     expect(copyRule).toContain("text-align: center");
     expect(selectedRule).toContain("transform: scale(1.006)");
   });

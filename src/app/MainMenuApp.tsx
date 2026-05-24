@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useReducer, useState, type ReactElement } from "react";
+import { useEffect, useMemo, useReducer, useRef, useState, type ReactElement } from "react";
 
 import { loadGeneratedUiAssets, type GeneratedUiAssetRegistry } from "../assets/generatedUiAssets";
+import { MAIN_MENU_AUDIO_ASSETS } from "../assets/mainMenuAudio";
 import { loadMainMenuAssets, type MainMenuAssetRegistry } from "../assets/mainMenuAssets";
 import {
   createInitialMainMenuAppState,
@@ -15,15 +16,21 @@ import { OutgameHomeScreen } from "./screens/OutgameHomeScreen";
 import { SaveSlotScreen } from "./screens/SaveSlotScreen";
 import { SettingsScreen } from "./screens/SettingsScreen";
 
+const BGM_VOLUME_STORAGE_KEY = "xiuxian-stg.settings.bgmVolume.v0.1";
+const DEFAULT_BGM_VOLUME = 0.56;
+
 export function MainMenuApp(): ReactElement {
   const saveService = useMemo(() => createSaveSlotService(), []);
   const [assets, setAssets] = useState<MainMenuAssetRegistry | null>(null);
   const [generatedUiAssets, setGeneratedUiAssets] = useState<GeneratedUiAssetRegistry | null>(null);
   const [assetError, setAssetError] = useState<string | null>(null);
+  const [bgmVolume, setBgmVolume] = useState(() => readInitialBgmVolume());
   const [state, dispatch] = useReducer(
     (current: MainMenuAppState, action: MainMenuAppAction) => mainMenuAppReducer(current, action),
     createInitialMainMenuAppState({ hasAnySave: saveService.hasAnySave() })
   );
+
+  useMainMenuBgm(bgmVolume, state.route.screen !== "combat");
 
   useEffect(() => {
     let cancelled = false;
@@ -75,7 +82,18 @@ export function MainMenuApp(): ReactElement {
         />
       );
     case "settings":
-      return <SettingsScreen assets={assets} onClose={() => dispatch({ type: "return_to_main_menu", hasAnySave: saveService.hasAnySave() })} />;
+      return (
+        <SettingsScreen
+          assets={assets}
+          bgmVolume={bgmVolume}
+          generatedUiAssets={generatedUiAssets}
+          onBgmVolumeChange={(nextVolume) => {
+            setBgmVolume(nextVolume);
+            writeBgmVolume(nextVolume);
+          }}
+          onClose={() => dispatch({ type: "return_to_main_menu", hasAnySave: saveService.hasAnySave() })}
+        />
+      );
     case "outgame_home":
       if (state.activeProfile === null) {
         return <MainMenuScreen assets={assets} canContinue={state.canContinue} onContinue={() => dispatch({ type: "open_save_slots", mode: "continue" })} onExit={() => window.close()} onNewGame={() => dispatch({ type: "open_save_slots", mode: "new" })} onSettings={() => dispatch({ type: "open_settings" })} />;
@@ -91,4 +109,94 @@ export function MainMenuApp(): ReactElement {
     case "combat":
       return <CombatScreen />;
   }
+}
+
+function readInitialBgmVolume(): number {
+  if (typeof window === "undefined") {
+    return DEFAULT_BGM_VOLUME;
+  }
+  const stored = window.localStorage.getItem(BGM_VOLUME_STORAGE_KEY);
+  if (stored === null) {
+    return DEFAULT_BGM_VOLUME;
+  }
+  return clampVolume(Number(stored));
+}
+
+function writeBgmVolume(volume: number): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+  window.localStorage.setItem(BGM_VOLUME_STORAGE_KEY, String(clampVolume(volume)));
+}
+
+function useMainMenuBgm(volume: number, enabled: boolean): void {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const audio = new Audio(MAIN_MENU_AUDIO_ASSETS.bgmStillnessOnTheSummit);
+    audio.setAttribute("data-main-menu-bgm", "true");
+    audio.loop = true;
+    audio.preload = "auto";
+    audio.volume = clampVolume(volume);
+    audio.style.display = "none";
+    document.body.append(audio);
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.remove();
+      audio.src = "";
+      audioRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio === null || typeof window === "undefined") {
+      return;
+    }
+
+    audio.volume = clampVolume(volume);
+
+    const play = (): void => {
+      if (!enabled || audio.volume <= 0) {
+        return;
+      }
+      void audio.play().catch(() => undefined);
+    };
+    const unlockAudio = (): void => {
+      play();
+    };
+
+    if (enabled && volume > 0) {
+      play();
+      window.addEventListener("pointerdown", unlockAudio, { once: true });
+      window.addEventListener("keydown", unlockAudio, { once: true });
+    } else {
+      audio.pause();
+    }
+
+    return () => {
+      window.removeEventListener("pointerdown", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+    };
+  }, [enabled, volume]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio !== null) {
+      audio.volume = clampVolume(volume);
+    }
+  }, [volume]);
+}
+
+function clampVolume(volume: number): number {
+  if (!Number.isFinite(volume)) {
+    return DEFAULT_BGM_VOLUME;
+  }
+  return Math.min(1, Math.max(0, volume));
 }

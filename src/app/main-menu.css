@@ -509,6 +509,21 @@
   width: 100%;
 }
 
+.setting-control-with-value {
+  align-items: center;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) 48px;
+}
+
+.setting-value {
+  color: rgba(255, 247, 214, 0.88);
+  font-family: "KaiTi", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  text-align: right;
+  text-shadow: 0 0 8px rgba(45, 245, 211, 0.18);
+}
+
 .setting-range::-webkit-slider-runnable-track {
   background: linear-gradient(90deg, rgba(58, 220, 175, 0.95), rgba(244, 211, 126, 0.36));
   border: 1px solid rgba(255, 240, 181, 0.38);
@@ -717,7 +732,7 @@
   height: auto;
   overflow: visible;
   padding: 0;
-  width: min(1100px, calc(100vw - 32px));
+  width: min(1220px, calc(100vw - 8px));
 }
 
 .save-panel-inner-bg {
@@ -725,7 +740,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  inset: 17% 11% 10.5%;
+  inset: 14.5% 7.2% 5.4%;
   opacity: 0.82;
   pointer-events: none;
   position: absolute;
@@ -760,9 +775,9 @@
   gap: clamp(4px, 0.7vh, 7px);
   left: 50%;
   position: absolute;
-  top: 29.5%;
+  top: 24%;
   transform: translateX(-50%);
-  width: min(340px, 36%);
+  width: min(392px, 42.5%);
   z-index: 1;
 }
 
@@ -806,8 +821,8 @@
 .save-slot-panel.generated-ui-panel .save-slot-copy {
   align-items: center;
   bottom: 24%;
-  left: 40.5%;
-  right: 9%;
+  left: 12%;
+  right: 12%;
   text-align: center;
   top: 26%;
 }
@@ -819,7 +834,7 @@
 }
 
 .save-slot-panel.generated-ui-panel .save-slot-copy strong {
-  font-size: clamp(14px, 1.65vh, 19px);
+  font-size: clamp(15px, 1.85vh, 21px);
   line-height: 1.1;
   max-width: 100%;
   overflow: hidden;
@@ -828,7 +843,7 @@
 }
 
 .save-slot-panel.generated-ui-panel .save-slot-copy small {
-  font-size: clamp(10px, 1.08vh, 12px);
+  font-size: clamp(10px, 1.2vh, 13px);
   line-height: 1.2;
   max-width: 100%;
   overflow: hidden;

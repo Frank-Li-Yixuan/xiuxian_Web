@@ -1,14 +1,19 @@
 import type { ReactElement } from "react";
 
+import type { GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
 import { MAIN_MENU_ASSET_IDS, type MainMenuAssetRegistry } from "../../assets/mainMenuAssets";
-import { CloseButton, ImageButton } from "./MainMenuUi";
+import { GeneratedCloseButton } from "../components/GeneratedUi";
+import { ImageButton } from "./MainMenuUi";
 
 export interface SettingsScreenProps {
   readonly assets: MainMenuAssetRegistry;
+  readonly bgmVolume: number;
+  readonly generatedUiAssets: GeneratedUiAssetRegistry;
+  readonly onBgmVolumeChange: (volume: number) => void;
   readonly onClose: () => void;
 }
 
-export function SettingsScreen({ assets, onClose }: SettingsScreenProps): ReactElement {
+export function SettingsScreen({ assets, bgmVolume, generatedUiAssets, onBgmVolumeChange, onClose }: SettingsScreenProps): ReactElement {
   return (
     <section
       className="main-menu-screen settings-screen"
@@ -16,7 +21,7 @@ export function SettingsScreen({ assets, onClose }: SettingsScreenProps): ReactE
       style={{ backgroundImage: `url("${assets.path(MAIN_MENU_ASSET_IDS.background)}")` }}
     >
       <div className="settings-panel">
-        <CloseButton assets={assets} onClick={onClose} />
+        <GeneratedCloseButton assets={generatedUiAssets} onClick={onClose} />
         <header className="settings-header">
           <h1>设置</h1>
         </header>
@@ -35,8 +40,19 @@ export function SettingsScreen({ assets, onClose }: SettingsScreenProps): ReactE
 
         <div className="settings-grid">
           <label className="setting-row">
-            <span className="setting-label">音量</span>
-            <input className="setting-range" defaultValue={72} max={100} min={0} type="range" />
+            <span className="setting-label">BGM音量</span>
+            <span className="setting-control-with-value">
+              <input
+                aria-label="BGM音量"
+                className="setting-range"
+                max={100}
+                min={0}
+                type="range"
+                value={Math.round(bgmVolume * 100)}
+                onChange={(event) => onBgmVolumeChange(Number(event.currentTarget.value) / 100)}
+              />
+              <span className="setting-value">{Math.round(bgmVolume * 100)}%</span>
+            </span>
           </label>
           <label className="setting-row">
             <span className="setting-label">特效强度</span>

@@ -10,6 +10,7 @@ import type { MainMenuAssetId, MainMenuAssetRegistry } from "../../src/assets/ma
 import { CharacterCreationScreen } from "../../src/app/screens/CharacterCreationScreen";
 import { LifeSimulationScreen } from "../../src/app/screens/LifeSimulationScreen";
 import { SaveSlotScreen } from "../../src/app/screens/SaveSlotScreen";
+import { SettingsScreen } from "../../src/app/screens/SettingsScreen";
 import { createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
 import { createSaveSlotService } from "../../src/save/SaveSlotService";
 
@@ -59,6 +60,24 @@ describe("generated UI page usage", () => {
     expect(markup).toContain("/assets/generated/ui/life_simulation/life_choice_event_card.png");
     expect(markup).toContain("/assets/generated/ui/life_simulation/life_choice_button_normal.png");
     expect(markup).toContain("/assets/generated/ui/life_simulation/life_choice_button_hover.png");
+  });
+
+  it("renders SettingsScreen with the generated close button and controlled BGM volume", () => {
+    const markup = renderToStaticMarkup(
+      createElement(SettingsScreen, {
+        assets: loadMainMenuRegistry(),
+        bgmVolume: 0.42,
+        generatedUiAssets: loadGeneratedUiRegistry(),
+        onBgmVolumeChange: () => undefined,
+        onClose: () => undefined
+      })
+    );
+
+    expect(markup).toContain("/assets/generated/ui/common/close_button_normal.png");
+    expect(markup).toContain("/assets/generated/ui/common/close_button_hover.png");
+    expect(markup).not.toContain("/assets/generated/ui/main_menu/controls/close_button_normal.png");
+    expect(markup).toContain("BGM音量");
+    expect(markup).toContain("42%");
   });
 });
 
