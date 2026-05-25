@@ -6,6 +6,7 @@ import { DevUiComponentsScreen } from "./screens/DevUiComponentsScreen";
 import { DevUiSystemScreen } from "./screens/DevUiSystemScreen";
 import { DevUiWorkbenchScreen } from "./screens/DevUiWorkbenchScreen";
 import { MainMenuApp } from "./MainMenuApp";
+import { VfxLabScreen } from "./vfx-lab/VfxLabScreen";
 import "./main-menu.css";
 
 const root = document.getElementById("xiuxian-game-root");
@@ -23,6 +24,8 @@ createRoot(root).render(
       <DevUiSystemScreen />
     ) : window.location.pathname === "/dev/ui-workbench" ? (
       <DevUiWorkbenchScreen />
+    ) : window.location.pathname === "/vfx-lab" ? (
+      <VfxLabScreen />
     ) : (
       <MainMenuApp />
     )}

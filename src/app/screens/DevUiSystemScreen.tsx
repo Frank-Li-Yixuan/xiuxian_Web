@@ -1,12 +1,11 @@
 import type { ReactElement } from "react";
 
-import { CloudLayer, MistLayer, XianxiaButton, XianxiaDialog, XianxiaInput, XianxiaPanel, XianxiaSaveCard } from "../ui-system";
+import { MistLayer, XianxiaButton, XianxiaDialog, XianxiaInput, XianxiaPanel, XianxiaSaveCard } from "../ui-system";
 
 export function DevUiSystemScreen(): ReactElement {
   return (
     <main className="xianxia-ui-system-showcase">
       <MistLayer />
-      <CloudLayer />
       <header className="xianxia-ui-system-header">
         <h1>Xianxia UI System</h1>
         <p>DOM controls for ceremonial jade-and-gold outgame screens.</p>

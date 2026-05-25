@@ -2205,8 +2205,7 @@
   --xx-danger-soft: rgba(207, 74, 73, 0.34);
 }
 
-.xianxia-mist-layer,
-.xianxia-cloud-layer {
+.xianxia-mist-layer {
   inset: 0;
   overflow: hidden;
   pointer-events: none;
@@ -2270,82 +2269,6 @@
   animation-delay: -4s;
   left: 76vw;
   top: 64vh;
-}
-
-.xianxia-cloud-layer {
-  z-index: 2;
-}
-
-.xianxia-auspicious-cloud {
-  animation: xianxiaCloudDrift 32s ease-in-out infinite alternate;
-  background:
-    radial-gradient(circle at 18% 56%, rgba(246, 255, 236, 0.62) 0 9%, transparent 10%),
-    radial-gradient(circle at 34% 45%, rgba(220, 255, 244, 0.56) 0 13%, transparent 14%),
-    radial-gradient(circle at 52% 52%, rgba(190, 249, 236, 0.5) 0 11%, transparent 12%),
-    radial-gradient(circle at 70% 47%, rgba(246, 255, 236, 0.52) 0 8%, transparent 9%);
-  filter: drop-shadow(0 0 12px rgba(194, 255, 240, 0.3)) blur(0.6px);
-  height: 92px;
-  opacity: 0.56;
-  position: absolute;
-  width: 210px;
-}
-
-.xianxia-auspicious-cloud::before,
-.xianxia-auspicious-cloud::after {
-  border-color: rgba(243, 215, 127, 0.46);
-  border-radius: 999px;
-  content: "";
-  height: 38px;
-  position: absolute;
-  width: 76px;
-}
-
-.xianxia-auspicious-cloud::before {
-  border-bottom: 2px solid;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  left: 34px;
-  top: 44px;
-}
-
-.xianxia-auspicious-cloud::after {
-  border-top: 2px solid;
-  border-left: 2px solid transparent;
-  border-right: 2px solid transparent;
-  right: 30px;
-  top: 34px;
-}
-
-.xianxia-auspicious-cloud-a {
-  animation-duration: 36s;
-  left: 6vw;
-  top: 24vh;
-  --cloud-scale: 1;
-}
-
-.xianxia-auspicious-cloud-b {
-  animation-delay: -9s;
-  animation-duration: 44s;
-  right: 7vw;
-  top: 15vh;
-  --cloud-scale: 0.78;
-}
-
-.xianxia-auspicious-cloud-c {
-  animation-delay: -16s;
-  animation-duration: 50s;
-  left: 68vw;
-  top: 55vh;
-  --cloud-scale: 0.64;
-}
-
-.xianxia-auspicious-cloud-d {
-  animation-delay: -23s;
-  animation-duration: 58s;
-  left: 18vw;
-  top: 69vh;
-  opacity: 0.3;
-  --cloud-scale: 0.52;
 }
 
 .main-menu-title-wrap {
@@ -2974,15 +2897,6 @@
   }
 }
 
-@keyframes xianxiaCloudDrift {
-  from {
-    transform: translate3d(-2vw, 0, 0) scale(var(--cloud-scale, 1));
-  }
-  to {
-    transform: translate3d(10vw, -2.4vh, 0) scale(var(--cloud-scale, 1));
-  }
-}
-
 @media (max-width: 900px), (max-height: 760px) {
   .xianxia-save-panel {
     padding-inline: 22px;
@@ -3006,10 +2920,118 @@
 @media (prefers-reduced-motion: reduce) {
   .xianxia-mist,
   .xianxia-spirit-light,
-  .xianxia-auspicious-cloud,
   .xianxia-button-shine,
   .xianxia-save-card-glow {
     animation: none !important;
     transition: none !important;
   }
+}
+
+.vfx-lab-shell {
+  --vfx-panel: rgba(5, 12, 23, 0.86);
+  --vfx-line: rgba(125, 211, 252, 0.38);
+  background: #050712;
+  color: #f8fafc;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  width: 100vw;
+}
+
+.vfx-lab-canvas {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.vfx-lab-toolbar,
+.vfx-lab-metrics {
+  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, var(--vfx-panel), rgba(15, 23, 42, 0.62));
+  border: 1px solid var(--vfx-line);
+  border-radius: 8px;
+  box-shadow: 0 0 26px rgba(34, 211, 238, 0.12);
+  position: absolute;
+  z-index: 20;
+}
+
+.vfx-lab-toolbar {
+  align-items: end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  left: 16px;
+  max-width: calc(100vw - 32px);
+  padding: 12px;
+  top: 16px;
+}
+
+.vfx-lab-title {
+  display: grid;
+  gap: 3px;
+  min-width: 210px;
+}
+
+.vfx-lab-title strong {
+  color: #fde68a;
+  font-size: 17px;
+}
+
+.vfx-lab-title span,
+.vfx-lab-toolbar label,
+.vfx-lab-metrics span {
+  color: #bae6fd;
+  font-size: 12px;
+}
+
+.vfx-lab-toolbar label {
+  display: grid;
+  gap: 5px;
+}
+
+.vfx-lab-toolbar select {
+  background: rgba(15, 23, 42, 0.94);
+  border: 1px solid rgba(148, 163, 184, 0.36);
+  border-radius: 6px;
+  color: #f8fafc;
+  font: inherit;
+  min-height: 34px;
+  min-width: 150px;
+  padding: 6px 8px;
+}
+
+.vfx-lab-metrics {
+  display: grid;
+  gap: 8px;
+  min-width: 220px;
+  padding: 12px;
+  right: 16px;
+  top: 16px;
+}
+
+.vfx-lab-metrics div {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.vfx-lab-metrics strong {
+  color: #f8fafc;
+  font-size: 13px;
+  text-align: right;
+}
+
+.vfx-lab-flags {
+  align-items: start;
+  display: grid !important;
+  gap: 4px !important;
+  justify-content: stretch !important;
+}
+
+.vfx-lab-flags strong {
+  color: #bbf7d0;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-align: left;
 }

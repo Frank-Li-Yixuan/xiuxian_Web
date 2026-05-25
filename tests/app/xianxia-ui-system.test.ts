@@ -9,7 +9,7 @@ import { AssetRegistry } from "../../src/assets/AssetRegistry";
 import type { MainMenuAssetId, MainMenuAssetRegistry } from "../../src/assets/mainMenuAssets";
 
 describe("xianxia UI system", () => {
-  it("renders the main menu with atmospheric cloud and mist layers", () => {
+  it("renders the main menu with mist and spirit-light layers", () => {
     const markup = renderToStaticMarkup(
       createElement(MainMenuScreen, {
         assets: loadMainMenuRegistry(),
@@ -22,8 +22,9 @@ describe("xianxia UI system", () => {
     );
 
     expect(markup).toContain("xianxia-mist-layer");
-    expect(markup).toContain("xianxia-cloud-layer");
-    expect(markup).toContain("data-cloud-layer=\"auspicious\"");
+    expect(markup).toContain("xianxia-spirit-light");
+    expect(markup).not.toContain("xianxia-cloud-layer");
+    expect(markup).not.toContain("xianxia-auspicious-cloud");
     expect(markup).not.toContain("xianxia-crane");
     expect(markup).toContain("新的游戏");
     expect(markup).toContain("继续游戏");
@@ -38,7 +39,8 @@ describe("xianxia UI system", () => {
     expect(markup).toContain("xianxia-button");
     expect(markup).toContain("xianxia-save-card");
     expect(markup).toContain("xianxia-dialog");
-    expect(markup).toContain("xianxia-cloud-layer");
+    expect(markup).toContain("xianxia-mist-layer");
+    expect(markup).not.toContain("xianxia-cloud-layer");
   });
 });
 

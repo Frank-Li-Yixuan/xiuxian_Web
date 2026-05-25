@@ -1,4 +1,3 @@
-export { CloudLayer } from "./CloudLayer";
 export { MistLayer } from "./MistLayer";
 export { XianxiaButton, type XianxiaButtonVariant } from "./XianxiaButton";
 export { XianxiaDialog } from "./XianxiaDialog";

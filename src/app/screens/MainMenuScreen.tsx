@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 
 import { MAIN_MENU_ASSET_IDS, type MainMenuAssetRegistry } from "../../assets/mainMenuAssets";
-import { CloudLayer, MistLayer, XianxiaButton } from "../ui-system";
+import { MistLayer, XianxiaButton } from "../ui-system";
 
 export interface MainMenuScreenProps {
   readonly assets: MainMenuAssetRegistry;
@@ -27,7 +27,6 @@ export function MainMenuScreen({
       style={{ backgroundImage: `url("${assets.path(MAIN_MENU_ASSET_IDS.background)}")` }}
     >
       <MistLayer />
-      <CloudLayer />
       <div className="main-menu-title-wrap">
         <img alt="" className="main-menu-title-plaque" src={assets.path(MAIN_MENU_ASSET_IDS.titlePlaque)} />
         <h1>双人雷霆战机修仙版</h1>

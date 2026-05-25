@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>修仙 STG Pixi VFX Lab</title>
+  </head>
+  <body>
+    <main id="app">
+      <section class="lab-stage" aria-label="Pixi VFX review stage">
+        <div id="pixi-root" class="pixi-root"></div>
+      </section>
+      <aside class="lab-panel" aria-label="VFX controls">
+        <header>
+          <strong>Pixi VFX Lab</strong>
+          <span>单特效审查 / WebGL Filters</span>
+        </header>
+        <label>
+          特效场景
+          <select id="scenario-select"></select>
+        </label>
+        <label>
+          强度
+          <select id="preset-select"></select>
+        </label>
+        <label id="feedback-control" class="feedback-control is-hidden">
+          反馈类型
+          <select id="feedback-select"></select>
+        </label>
+        <div class="button-row">
+          <button id="pause-button" type="button">暂停</button>
+          <button id="step-button" type="button">逐帧</button>
+        </div>
+        <dl class="metrics">
+          <div><dt>FPS</dt><dd id="metric-fps">0</dd></div>
+          <div><dt>Frame</dt><dd id="metric-frame">0</dd></div>
+          <div><dt>Sprites</dt><dd id="metric-sprites">0</dd></div>
+          <div><dt>Filters</dt><dd id="metric-filters">0</dd></div>
+        </dl>
+        <p id="scene-note" class="scene-note"></p>
+      </aside>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
