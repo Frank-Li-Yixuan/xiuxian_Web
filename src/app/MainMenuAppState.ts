@@ -1,9 +1,10 @@
 import type { OutgameProfileState } from "../outgame/ProfileState";
-import type { SaveSlotMode } from "../save/SaveSlotService";
+import type { SaveSlotId, SaveSlotMode } from "../save/SaveSlotService";
 
 export type MainMenuRoute =
   | { readonly screen: "main_menu" }
   | { readonly screen: "save_slots"; readonly mode: SaveSlotMode }
+  | { readonly screen: "character_creation" }
   | { readonly screen: "settings" }
   | { readonly screen: "outgame_home" }
   | { readonly screen: "combat" };
@@ -12,12 +13,14 @@ export interface MainMenuAppState {
   readonly route: MainMenuRoute;
   readonly canContinue: boolean;
   readonly activeProfile: OutgameProfileState | null;
+  readonly activeSaveSlotId: SaveSlotId | null;
 }
 
 export type MainMenuAppAction =
   | { readonly type: "open_save_slots"; readonly mode: SaveSlotMode }
   | { readonly type: "open_settings" }
   | { readonly type: "return_to_main_menu"; readonly hasAnySave: boolean }
+  | { readonly type: "profile_created"; readonly profile: OutgameProfileState; readonly slotId: SaveSlotId }
   | { readonly type: "profile_ready"; readonly profile: OutgameProfileState }
   | { readonly type: "enter_combat" };
 
@@ -29,7 +32,8 @@ export function createInitialMainMenuAppState(options: CreateInitialMainMenuAppS
   return {
     route: { screen: "main_menu" },
     canContinue: options.hasAnySave,
-    activeProfile: null
+    activeProfile: null,
+    activeSaveSlotId: null
   };
 }
 
@@ -50,6 +54,14 @@ export function mainMenuAppReducer(state: MainMenuAppState, action: MainMenuAppA
         ...state,
         route: { screen: "main_menu" },
         canContinue: action.hasAnySave
+      };
+    case "profile_created":
+      return {
+        ...state,
+        route: { screen: "character_creation" },
+        canContinue: true,
+        activeProfile: action.profile,
+        activeSaveSlotId: action.slotId
       };
     case "profile_ready":
       return {

@@ -1,12 +1,13 @@
-import type { CSSProperties, ReactElement, ReactNode } from "react";
+import type { CSSProperties, HTMLAttributes, ReactElement, ReactNode } from "react";
 
 import { GENERATED_UI_ASSET_IDS, type GeneratedUiAssetId, type GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
 
-interface GeneratedAssetProps {
+interface GeneratedAssetProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
   readonly assets: GeneratedUiAssetRegistry;
   readonly assetId: GeneratedUiAssetId;
   readonly className?: string;
   readonly children?: ReactNode;
+  readonly style?: CSSProperties;
 }
 
 interface GeneratedImageButtonProps {
@@ -24,17 +25,17 @@ interface GeneratedImageButtonProps {
   readonly onClick?: () => void;
 }
 
-export function GeneratedPanel({ assets, assetId, className = "", children }: GeneratedAssetProps): ReactElement {
+export function GeneratedPanel({ assets, assetId, className = "", children, style, ...rest }: GeneratedAssetProps): ReactElement {
   return (
-    <div className={`generated-ui-panel ${className}`.trim()} style={singleAssetStyle(assets, assetId)}>
+    <div {...rest} className={`generated-ui-panel ${className}`.trim()} style={{ ...singleAssetStyle(assets, assetId), ...style }}>
       {children}
     </div>
   );
 }
 
-export function GeneratedFrame({ assets, assetId, className = "", children }: GeneratedAssetProps): ReactElement {
+export function GeneratedFrame({ assets, assetId, className = "", children, style, ...rest }: GeneratedAssetProps): ReactElement {
   return (
-    <div className={`generated-ui-frame ${className}`.trim()} style={singleAssetStyle(assets, assetId)}>
+    <div {...rest} className={`generated-ui-frame ${className}`.trim()} style={{ ...singleAssetStyle(assets, assetId), ...style }}>
       {children}
     </div>
   );

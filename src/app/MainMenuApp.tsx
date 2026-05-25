@@ -3,6 +3,7 @@ import { useEffect, useMemo, useReducer, useRef, useState, type ReactElement } f
 import { loadGeneratedUiAssets, type GeneratedUiAssetRegistry } from "../assets/generatedUiAssets";
 import { MAIN_MENU_AUDIO_ASSETS } from "../assets/mainMenuAudio";
 import { loadMainMenuAssets, type MainMenuAssetRegistry } from "../assets/mainMenuAssets";
+import { applyCharacterDraftToProfile } from "../character/CharacterProfileMapper";
 import {
   createInitialMainMenuAppState,
   mainMenuAppReducer,
@@ -10,6 +11,7 @@ import {
   type MainMenuAppState
 } from "./MainMenuAppState";
 import { createSaveSlotService } from "../save/SaveSlotService";
+import { CharacterCreationScreen } from "./screens/CharacterCreationScreen";
 import { CombatScreen } from "./screens/CombatScreen";
 import { MainMenuScreen } from "./screens/MainMenuScreen";
 import { OutgameHomeScreen } from "./screens/OutgameHomeScreen";
@@ -78,7 +80,32 @@ export function MainMenuApp(): ReactElement {
           mode={state.route.mode}
           service={saveService}
           onBack={() => dispatch({ type: "return_to_main_menu", hasAnySave: saveService.hasAnySave() })}
+          onProfileCreated={(slotId, profile) => dispatch({ type: "profile_created", slotId, profile })}
           onProfileReady={(profile) => dispatch({ type: "profile_ready", profile })}
+        />
+      );
+    case "character_creation":
+      if (state.activeProfile === null || state.activeSaveSlotId === null) {
+        return <MainMenuScreen assets={assets} canContinue={state.canContinue} onContinue={() => dispatch({ type: "open_save_slots", mode: "continue" })} onExit={() => window.close()} onNewGame={() => dispatch({ type: "open_save_slots", mode: "new" })} onSettings={() => dispatch({ type: "open_settings" })} />;
+      }
+      return (
+        <CharacterCreationScreen
+          assets={generatedUiAssets}
+          slotId={state.activeSaveSlotId}
+          onBack={() => dispatch({ type: "return_to_main_menu", hasAnySave: saveService.hasAnySave() })}
+          onConfirmLife={(draft) => {
+            if (state.activeProfile === null || state.activeSaveSlotId === null) {
+              return;
+            }
+            const completedProfile = applyCharacterDraftToProfile({
+              profile: state.activeProfile,
+              draft,
+              nowMs: saveService.nowMs(),
+              ageYears: 18
+            });
+            saveService.writeProfile(state.activeSaveSlotId, completedProfile);
+            dispatch({ type: "profile_ready", profile: completedProfile });
+          }}
         />
       );
     case "settings":

@@ -36,6 +36,20 @@ interface PngInfo {
 
 const MANIFEST_PATH = join(process.cwd(), "public/assets/generated/ui/manifest.v0.4.json");
 const REQUIRED_ASSET_IDS = Object.values(GENERATED_UI_ASSET_IDS);
+const FATE_ALTAR_REQUIRED_ASSET_IDS = [
+  "ui.characterCreation.blackMeditationSilhouette",
+  "ui.characterCreation.fateAltarDisc",
+  "ui.characterCreation.fateAltarDiscActive",
+  "ui.characterCreation.rootAura.metal",
+  "ui.characterCreation.rootAura.wood",
+  "ui.characterCreation.rootAura.water",
+  "ui.characterCreation.rootAura.fire",
+  "ui.characterCreation.rootAura.earth",
+  "ui.characterCreation.rootAura.thunder",
+  "ui.characterCreation.rootAura.yin",
+  "ui.characterCreation.rootAura.mixed"
+] as const;
+const ALL_REQUIRED_ASSET_IDS = [...new Set([...REQUIRED_ASSET_IDS, ...FATE_ALTAR_REQUIRED_ASSET_IDS])];
 
 describe("generated UI asset manifest", () => {
   it("ships a v0.4 generated UI manifest with all required local asset ids", () => {
@@ -43,9 +57,9 @@ describe("generated UI asset manifest", () => {
 
     expect(manifest.version).toBe("0.4");
     expect(manifest.namespace).toBe("ui.generated");
-    expect(REQUIRED_ASSET_IDS).toHaveLength(42);
+    expect(REQUIRED_ASSET_IDS).toEqual(expect.arrayContaining([...FATE_ALTAR_REQUIRED_ASSET_IDS]));
 
-    for (const assetId of REQUIRED_ASSET_IDS) {
+    for (const assetId of ALL_REQUIRED_ASSET_IDS) {
       const entry = manifest.assets[assetId];
       expect(entry, assetId).toBeDefined();
       expect(entry?.required, assetId).toBe(true);
@@ -57,7 +71,7 @@ describe("generated UI asset manifest", () => {
   it("points every required entry at a non-empty transparent PNG with transparent corners", () => {
     const manifest = readManifest();
 
-    for (const assetId of REQUIRED_ASSET_IDS) {
+    for (const assetId of ALL_REQUIRED_ASSET_IDS) {
       const entry = manifest.assets[assetId];
       if (entry === undefined) {
         throw new Error(`Missing ${assetId}`);
@@ -77,7 +91,7 @@ describe("generated UI asset manifest", () => {
   it("keeps content rectangles and regions inside image bounds", () => {
     const manifest = readManifest();
 
-    for (const assetId of REQUIRED_ASSET_IDS) {
+    for (const assetId of ALL_REQUIRED_ASSET_IDS) {
       const entry = manifest.assets[assetId];
       if (entry === undefined) {
         throw new Error(`Missing ${assetId}`);

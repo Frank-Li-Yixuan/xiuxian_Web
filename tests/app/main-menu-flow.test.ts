@@ -16,13 +16,17 @@ describe("main menu app flow", () => {
     const initial = createInitialMainMenuAppState({ hasAnySave: true });
     const newGame = mainMenuAppReducer(initial, { type: "open_save_slots", mode: "new" });
     const settings = mainMenuAppReducer(initial, { type: "open_settings" });
-    const profile = createDefaultProfileForSlot({ slotId: "slot_2", nowMs: 2_000 });
-    const outgame = mainMenuAppReducer(newGame, { type: "profile_ready", profile });
+    const profile = createDefaultProfileForSlot({ slotId: "slot_2", nowMs: 2_000, saveName: "青云初试" });
+    const characterCreation = mainMenuAppReducer(newGame, { type: "profile_created", profile, slotId: "slot_2" });
+    const outgame = mainMenuAppReducer(characterCreation, { type: "profile_ready", profile });
     const combat = mainMenuAppReducer(outgame, { type: "enter_combat" });
 
     expect(newGame.route).toEqual({ screen: "save_slots", mode: "new" });
     expect(settings.route).toEqual({ screen: "settings" });
     expect(mainMenuAppReducer(settings, { type: "return_to_main_menu", hasAnySave: true }).route).toEqual({ screen: "main_menu" });
+    expect(characterCreation.route).toEqual({ screen: "character_creation" });
+    expect(characterCreation.activeSaveSlotId).toBe("slot_2");
+    expect(characterCreation.activeProfile?.saveName).toBe("青云初试");
     expect(outgame.route).toEqual({ screen: "outgame_home" });
     expect(outgame.activeProfile?.profileId).toBe("local_slot_2");
     expect(combat.route).toEqual({ screen: "combat" });

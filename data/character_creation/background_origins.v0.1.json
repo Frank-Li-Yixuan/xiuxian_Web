@@ -1,0 +1,85 @@
+{
+  "version": "0.1",
+  "backgrounds": [
+    {
+      "id": "bg_village_orphan",
+      "name": "山村孤儿",
+      "rarity": "common",
+      "description": "你生于山野，无父无母，靠村人接济长大。",
+      "visibleEffects": ["初始资源较少", "隐藏血脉权重略高", "气运波动较大"],
+      "statModifiers": { "fortune": 6, "inspiration": 4 },
+      "hiddenFateWeights": { "ancient_reincarnation": 1.2, "thunder_blood": 1.1 },
+      "carriedItemPool": ["item_old_copper_coin", "item_mothers_charm", "item_broken_wooden_sword"]
+    },
+    {
+      "id": "bg_apothecary_apprentice",
+      "name": "药铺学徒",
+      "rarity": "common",
+      "description": "你自幼在药铺帮工，熟悉草木气味与药性火候。",
+      "visibleEffects": ["药理事件权重提高", "初始丹药线索提高", "炼丹路线更稳"],
+      "statModifiers": { "woodAffinity": 5, "fireAffinity": 3, "comprehension": 4 },
+      "hiddenFateWeights": { "alchemy_saint_bone": 1.4 },
+      "carriedItemPool": ["item_apothecary_copper_furnace", "item_herb_pouch", "item_bitter_pill"]
+    },
+    {
+      "id": "bg_taoist_temple_servant",
+      "name": "道观杂役",
+      "rarity": "common",
+      "description": "你在破旧道观中扫地添香，常听老道诵经。",
+      "visibleEffects": ["心性与符箓事件提高", "隐藏经文线索提高"],
+      "statModifiers": { "heart": 8, "shen": 3, "comprehension": 3 },
+      "hiddenFateWeights": { "sealed_scripture": 1.3, "past_life_taoist": 1.2 },
+      "carriedItemPool": ["item_old_talisman", "item_incense_ash", "item_broken_bell"]
+    },
+    {
+      "id": "bg_hunter_child",
+      "name": "猎户之子",
+      "rarity": "common",
+      "description": "你随长辈出入山林，识兽迹，知险地。",
+      "visibleEffects": ["精与根骨较好", "战斗前置事件更多", "药理略低"],
+      "statModifiers": { "jing": 8, "rootBone": 8, "inspiration": 2 },
+      "hiddenFateWeights": { "dragon_bone_unawakened": 1.25, "beast_blood": 1.2 },
+      "carriedItemPool": ["item_hunting_bow", "item_bone_whistle", "item_wolf_tooth"]
+    },
+    {
+      "id": "bg_fallen_cultivator_descendant",
+      "name": "破落修士之后",
+      "rarity": "uncommon",
+      "description": "家中曾出过修士，如今只剩残器旧书与无人敢提的往事。",
+      "visibleEffects": ["初始随身物质量提高", "身世因果更重", "法宝线索提高"],
+      "statModifiers": { "fortune": 4, "inspiration": 6, "karma": 8 },
+      "hiddenFateWeights": { "sword_soul_fragment": 1.45, "clan_enemy": 1.3 },
+      "carriedItemPool": ["item_ancestral_jade", "item_broken_flying_sword", "item_wordless_page"]
+    },
+    {
+      "id": "bg_displaced_refugee",
+      "name": "流民遗孤",
+      "rarity": "common",
+      "description": "灾荒与战乱夺走了你的家，你比同龄人更早理解生死。",
+      "visibleEffects": ["初始资源少", "心性成长高", "灾祸与奇遇并存"],
+      "statModifiers": { "heart": 10, "jing": -3, "fortune": 2 },
+      "hiddenFateWeights": { "heavy_karma_origin": 1.3, "merit_seed": 1.1 },
+      "carriedItemPool": ["item_family_letter", "item_cracked_copper_coin", "item_threadbare_charm"]
+    },
+    {
+      "id": "bg_private_school_child",
+      "name": "私塾童生",
+      "rarity": "common",
+      "description": "你常年读书识字，比同龄人更容易理解符文与古卷。",
+      "visibleEffects": ["悟性与学识较高", "体魄略弱"],
+      "statModifiers": { "comprehension": 10, "shen": 4, "jing": -3 },
+      "hiddenFateWeights": { "sealed_scripture": 1.2, "scholar_sage_memory": 1.15 },
+      "carriedItemPool": ["item_old_book", "item_bamboo_slip", "item_inkstone"]
+    },
+    {
+      "id": "bg_merchant_side_child",
+      "name": "富户庶子",
+      "rarity": "uncommon",
+      "description": "你衣食无忧，却在家族冷眼与算计中长大。",
+      "visibleEffects": ["初始资源较好", "亲缘事件复杂", "心性分化明显"],
+      "statModifiers": { "fortune": 8, "heart": -2, "comprehension": 4 },
+      "hiddenFateWeights": { "business_luck": 1.2, "family_karma": 1.25 },
+      "carriedItemPool": ["item_jade_pendant", "item_silver_token", "item_account_book"]
+    }
+  ]
+}

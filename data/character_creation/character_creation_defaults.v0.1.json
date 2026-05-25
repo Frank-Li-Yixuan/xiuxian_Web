@@ -1,0 +1,29 @@
+{
+  "version": "0.1",
+  "defaults": {
+    "draftName": "无名散修",
+    "baseStats": {
+      "core": { "jing": [18, 34], "qi": [18, 34], "shen": [18, 34] },
+      "aptitude": {
+        "rootBone": [20, 80],
+        "comprehension": [20, 80],
+        "inspiration": [20, 80],
+        "fortune": [20, 80],
+        "heart": [20, 80],
+        "lifespan": [20, 80]
+      }
+    },
+    "reroll": {
+      "initialFreeLocks": 1,
+      "initialDivinationTokens": 1,
+      "maxNormalLocks": 1,
+      "maxLocksWithDivination": 2
+    },
+    "traitSlots": {
+      "main": 1,
+      "secondary": 2,
+      "flaw": 1
+    },
+    "profileStageAfterConfirm": "life_simulation"
+  }
+}

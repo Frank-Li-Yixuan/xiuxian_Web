@@ -1,0 +1,257 @@
+{
+  "version": "0.1",
+  "namespace": "ui.character_creation",
+  "assets": {
+    "cc.mainPanel": {
+      "path": "/assets/generated/ui/character_creation/character_creation_main_panel.png",
+      "category": "panel",
+      "required": true,
+      "recommendedWidth": 1500,
+      "recommendedHeight": 880,
+      "contentRect": { "x": 131, "y": 146, "w": 1216, "h": 825 },
+      "regions": {
+        "portrait": { "x": 131, "y": 211, "w": 405, "h": 630 },
+        "attributes": { "x": 594, "y": 211, "w": 348, "h": 500 },
+        "traits": { "x": 971, "y": 211, "w": 376, "h": 500 },
+        "actions": { "x": 536, "y": 830, "w": 521, "h": 130 }
+      }
+    },
+    "cc.portraitFrame": {
+      "path": "/assets/generated/ui/character_creation/character_portrait_frame.png",
+      "category": "frame",
+      "required": true,
+      "recommendedWidth": 420,
+      "recommendedHeight": 680
+    },
+    "cc.blackMeditationSilhouette": {
+      "path": "/assets/generated/ui/character_creation/black_meditation_silhouette.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 64, "y": 64, "w": 384, "h": 384 }
+    },
+    "cc.fateAltarDisc": {
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.fateAltarDiscActive": {
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc_active.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.metal": {
+      "path": "/assets/generated/ui/character_creation/root_aura_metal.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.wood": {
+      "path": "/assets/generated/ui/character_creation/root_aura_wood.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.water": {
+      "path": "/assets/generated/ui/character_creation/root_aura_water.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.fire": {
+      "path": "/assets/generated/ui/character_creation/root_aura_fire.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.earth": {
+      "path": "/assets/generated/ui/character_creation/root_aura_earth.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.thunder": {
+      "path": "/assets/generated/ui/character_creation/root_aura_thunder.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.yin": {
+      "path": "/assets/generated/ui/character_creation/root_aura_yin.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.rootAura.mixed": {
+      "path": "/assets/generated/ui/character_creation/root_aura_mixed.png",
+      "category": "fate_altar",
+      "required": true,
+      "contentRect": { "x": 96, "y": 96, "w": 576, "h": 576 }
+    },
+    "cc.nameInput": {
+      "path": "/assets/generated/ui/character_creation/name_input_field.png",
+      "category": "input",
+      "required": true,
+      "contentRect": { "x": 454, "y": 0, "w": 1082, "h": 406 }
+    },
+    "cc.attributePanel": {
+      "path": "/assets/generated/ui/character_creation/character_attribute_panel.png",
+      "category": "panel",
+      "required": true,
+      "contentRect": { "x": 136, "y": 247, "w": 716, "h": 1076 },
+      "regions": {
+        "rows": { "x": 136, "y": 247, "w": 716, "h": 1076 }
+      }
+    },
+    "cc.attributeRow": {
+      "path": "/assets/generated/ui/character_creation/attribute_row.png",
+      "category": "row",
+      "required": true,
+      "contentRect": { "x": 442, "y": 0, "w": 1113, "h": 270 }
+    },
+    "cc.spiritualRootDisc": {
+      "path": "/assets/generated/ui/character_creation/spiritual_root_disc.png",
+      "category": "disc",
+      "required": true
+    },
+    "cc.elementBadgeFrame": {
+      "path": "/assets/generated/ui/character_creation/element_badge_frame.png",
+      "category": "badge",
+      "required": true
+    },
+    "cc.destiny.common": {
+      "path": "/assets/generated/ui/character_creation/destiny_card_common.png",
+      "category": "card",
+      "required": true,
+      "contentRect": { "x": 87, "y": 265, "w": 738, "h": 1015 },
+      "regions": {
+        "icon": { "x": 298, "y": 175, "w": 316, "h": 239 },
+        "title": { "x": 119, "y": 444, "w": 675, "h": 149 },
+        "description": { "x": 98, "y": 638, "w": 717, "h": 477 },
+        "drawback": { "x": 119, "y": 1145, "w": 675, "h": 164 }
+      }
+    },
+    "cc.destiny.rare": {
+      "path": "/assets/generated/ui/character_creation/destiny_card_rare.png",
+      "category": "card",
+      "required": true,
+      "contentRect": { "x": 140, "y": 274, "w": 738, "h": 1015 },
+      "regions": {
+        "icon": { "x": 351, "y": 184, "w": 316, "h": 239 },
+        "title": { "x": 172, "y": 453, "w": 675, "h": 149 },
+        "description": { "x": 151, "y": 647, "w": 717, "h": 477 },
+        "drawback": { "x": 172, "y": 1154, "w": 675, "h": 164 }
+      }
+    },
+    "cc.destiny.epic": {
+      "path": "/assets/generated/ui/character_creation/destiny_card_epic.png",
+      "category": "card",
+      "required": true,
+      "contentRect": { "x": 141, "y": 277, "w": 738, "h": 1015 },
+      "regions": {
+        "icon": { "x": 352, "y": 187, "w": 316, "h": 239 },
+        "title": { "x": 173, "y": 456, "w": 675, "h": 149 },
+        "description": { "x": 152, "y": 650, "w": 717, "h": 477 },
+        "drawback": { "x": 173, "y": 1157, "w": 675, "h": 164 }
+      }
+    },
+    "cc.destiny.legendary": {
+      "path": "/assets/generated/ui/character_creation/destiny_card_legendary.png",
+      "category": "card",
+      "required": true,
+      "contentRect": { "x": 144, "y": 290, "w": 738, "h": 1014 },
+      "regions": {
+        "icon": { "x": 355, "y": 201, "w": 316, "h": 239 },
+        "title": { "x": 176, "y": 469, "w": 675, "h": 149 },
+        "description": { "x": 155, "y": 663, "w": 717, "h": 477 },
+        "drawback": { "x": 176, "y": 1170, "w": 675, "h": 164 }
+      }
+    },
+    "cc.destiny.flaw": {
+      "path": "/assets/generated/ui/character_creation/destiny_card_flaw.png",
+      "category": "card",
+      "required": true,
+      "contentRect": { "x": 134, "y": 267, "w": 738, "h": 1015 },
+      "regions": {
+        "icon": { "x": 345, "y": 177, "w": 316, "h": 239 },
+        "title": { "x": 166, "y": 446, "w": 675, "h": 149 },
+        "description": { "x": 145, "y": 640, "w": 717, "h": 477 },
+        "drawback": { "x": 166, "y": 1147, "w": 675, "h": 164 }
+      }
+    },
+    "cc.traitLock.locked": {
+      "path": "/assets/generated/ui/character_creation/trait_lock_button_locked.png",
+      "category": "button",
+      "required": true
+    },
+    "cc.traitLock.unlocked": {
+      "path": "/assets/generated/ui/character_creation/trait_lock_button_unlocked.png",
+      "category": "button",
+      "required": true
+    },
+    "cc.reroll.normal": {
+      "path": "/assets/generated/ui/character_creation/reroll_fate_button_normal.png",
+      "category": "button",
+      "required": true,
+      "contentRect": { "x": 414, "y": 166, "w": 995, "h": 444 }
+    },
+    "cc.reroll.hover": {
+      "path": "/assets/generated/ui/character_creation/reroll_fate_button_hover.png",
+      "category": "button",
+      "required": true,
+      "contentRect": { "x": 439, "y": 171, "w": 1030, "h": 428 }
+    },
+    "cc.confirmLife.normal": {
+      "path": "/assets/generated/ui/character_creation/confirm_life_button_normal.png",
+      "category": "button",
+      "required": true,
+      "contentRect": { "x": 433, "y": 154, "w": 993, "h": 445 }
+    },
+    "cc.backgroundOriginPanel": {
+      "path": "/assets/generated/ui/character_creation/background_origin_panel.png",
+      "category": "panel",
+      "required": true,
+      "contentRect": { "x": 219, "y": 274, "w": 1019, "h": 483 },
+      "regions": {
+        "emblem": { "x": 578, "y": 106, "w": 300, "h": 189 },
+        "body": { "x": 219, "y": 274, "w": 1019, "h": 483 }
+      }
+    },
+    "cc.hiddenBloodlinePanel": {
+      "path": "/assets/generated/ui/character_creation/hidden_bloodline_panel.png",
+      "category": "panel",
+      "required": true,
+      "contentRect": { "x": 260, "y": 254, "w": 1044, "h": 471 },
+      "regions": {
+        "emblem": { "x": 628, "y": 90, "w": 307, "h": 184 },
+        "body": { "x": 260, "y": 254, "w": 1044, "h": 471 }
+      }
+    },
+    "cc.divinationTokenBadge": {
+      "path": "/assets/generated/ui/character_creation/divination_token_badge.png",
+      "category": "badge",
+      "required": true
+    },
+    "common.close.normal": {
+      "path": "/assets/generated/ui/common/close_button_normal.png",
+      "category": "button",
+      "required": true
+    },
+    "common.close.hover": {
+      "path": "/assets/generated/ui/common/close_button_hover.png",
+      "category": "button",
+      "required": true
+    },
+    "common.close.pressed": {
+      "path": "/assets/generated/ui/common/close_button_pressed.png",
+      "category": "button",
+      "required": true
+    },
+    "common.close.disabled": {
+      "path": "/assets/generated/ui/common/close_button_disabled.png",
+      "category": "button",
+      "required": true
+    }
+  }
+}

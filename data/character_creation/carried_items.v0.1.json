@@ -1,0 +1,13 @@
+{
+  "version": "0.1",
+  "items": [
+    { "id": "item_broken_wooden_sword", "name": "残破木剑", "rarity": "common", "tags": ["剑修", "随身物"], "description": "一柄裂开的木剑，握久了会微微发热。", "outerBattlefieldConversion": "青霜飞剑线索" },
+    { "id": "item_ancestral_jade", "name": "祖传玉佩", "rarity": "uncommon", "tags": ["护身", "法宝"], "description": "旧玉佩上有难以辨认的八卦纹。", "outerBattlefieldConversion": "八卦玉佩·残" },
+    { "id": "item_apothecary_copper_furnace", "name": "药铺铜炉", "rarity": "uncommon", "tags": ["丹道", "火候"], "description": "小铜炉虽旧，炉壁却有淡淡药香。", "outerBattlefieldConversion": "初始回春丹 + 炼丹房线索" },
+    { "id": "item_wordless_page", "name": "无字残页", "rarity": "rare", "tags": ["功法", "隐藏"], "description": "空白纸页，月光下似有字迹浮现。", "outerBattlefieldConversion": "随机功法线索" },
+    { "id": "item_old_talisman", "name": "破旧符纸", "rarity": "common", "tags": ["符箓", "护命"], "description": "纸角焦黑，却仍有一丝灵光。", "outerBattlefieldConversion": "护命符·残" },
+    { "id": "item_bone_whistle", "name": "黑骨短笛", "rarity": "rare", "tags": ["魂修", "异物"], "description": "夜里靠近耳边，似能听见远处哭声。", "outerBattlefieldConversion": "魂修线索" },
+    { "id": "item_family_letter", "name": "残旧家书", "rarity": "common", "tags": ["因果", "亲缘"], "description": "字迹模糊，却写着不要回头。", "outerBattlefieldConversion": "功德/业力事件线索" },
+    { "id": "item_old_copper_coin", "name": "裂纹铜钱", "rarity": "common", "tags": ["气运", "占卜"], "description": "抛起时偶尔会立在地上。", "outerBattlefieldConversion": "一次低级重 Roll" }
+  ]
+}

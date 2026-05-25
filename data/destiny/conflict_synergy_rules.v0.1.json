@@ -1,0 +1,156 @@
+{
+  "version": "0.1",
+  "exclusiveRules": [
+    {
+      "id": "ex_heaven_late",
+      "traits": [
+        "destiny_heaven_jealous_talent",
+        "destiny_late_bloomer"
+      ],
+      "reason": "一个是早慧速成，一个是晚成迟发，核心曲线互斥。"
+    },
+    {
+      "id": "ex_turtle_battle",
+      "traits": [
+        "destiny_turtle_supreme",
+        "destiny_battle_nourished"
+      ],
+      "reason": "苟道潜修与以战养战玩法相反。"
+    },
+    {
+      "id": "ex_glass_demon",
+      "traits": [
+        "destiny_glass_heart",
+        "destiny_demon_seed"
+      ],
+      "reason": "清净琉璃心默认不与魔心暗种共存。后续可由隐藏事件破例。"
+    },
+    {
+      "id": "ex_lone_merit_bond",
+      "traits": [
+        "destiny_lone_star",
+        "destiny_small_merit"
+      ],
+      "reason": "天煞孤星削弱关系与护生线。"
+    },
+    {
+      "id": "ex_alchemy_artifact_core",
+      "traits": [
+        "destiny_alchemy_prodigy",
+        "destiny_artifact_blessed"
+      ],
+      "soft": true,
+      "reason": "丹道与器道可共存，但 v0.1 默认避免双生产核心同时出现。"
+    }
+  ],
+  "synergyRules": [
+    {
+      "id": "syn_heaven_thunder",
+      "traits": [
+        "destiny_heaven_jealous_talent",
+        "destiny_thunder_affinity"
+      ],
+      "name": "天雷夺命",
+      "description": "雷劫更强，但雷劫成功后的造化奖励提高。",
+      "effects": [
+        "tribulationPower +1",
+        "tribulationRewardMultiplier +50%"
+      ]
+    },
+    {
+      "id": "syn_turtle_stillness",
+      "traits": [
+        "destiny_turtle_supreme",
+        "destiny_stillness_meditation"
+      ],
+      "name": "万年老龟",
+      "description": "潜修层数上限提高，但战斗收益进一步下降。",
+      "effects": [
+        "maxHiddenCultivationStacks +5",
+        "combatKillReward -10%"
+      ]
+    },
+    {
+      "id": "syn_defiant_tenacious",
+      "traits": [
+        "destiny_waste_root_defiant",
+        "destiny_tenacious"
+      ],
+      "name": "败而不折",
+      "description": "失败时额外获得逆命点。",
+      "effects": [
+        "failureTokenGain +1"
+      ]
+    },
+    {
+      "id": "syn_demon_lifespan",
+      "traits": [
+        "destiny_demon_seed",
+        "destiny_borrow_lifespan"
+      ],
+      "name": "燃命入魔",
+      "description": "禁术收益提高，但心魔和寿元消耗同步提高。",
+      "effects": [
+        "forbiddenGain +50%",
+        "lifespanCost +25%",
+        "heartDemonGain +25%"
+      ]
+    },
+    {
+      "id": "syn_alchemy_poison",
+      "traits": [
+        "destiny_alchemy_prodigy",
+        "destiny_poisoned_benefit"
+      ],
+      "name": "药火双刃",
+      "description": "丹药爆发极强，但丹毒将成为核心风险。",
+      "effects": [
+        "pillEffect +50%",
+        "toxicityGain +50%"
+      ]
+    },
+    {
+      "id": "syn_artifact_sword",
+      "traits": [
+        "destiny_artifact_blessed",
+        "destiny_sword_bone"
+      ],
+      "name": "剑器有灵",
+      "description": "剑类本命法宝更容易觉醒器灵。",
+      "effects": [
+        "swordArtifactSpiritWeight +100%"
+      ]
+    },
+    {
+      "id": "syn_moon_soul_unstable",
+      "traits": [
+        "destiny_moon_dream",
+        "flaw_unstable_soul"
+      ],
+      "name": "魂月相牵",
+      "description": "魂修事件大幅提高，但神魂受创风险增加。",
+      "effects": [
+        "soulEventWeight +100%",
+        "soulInjuryRisk +20%"
+      ]
+    }
+  ],
+  "conflictRules": [
+    {
+      "id": "con_fire_cold",
+      "tags": [
+        "fire",
+        "yin"
+      ],
+      "description": "火性与阴寒并存时，人生模拟可能出现火候失衡事件。"
+    },
+    {
+      "id": "con_demon_purity",
+      "tags": [
+        "demon",
+        "purity"
+      ],
+      "description": "魔念与清净倾向并存时，心魔与净化事件都会提高。"
+    }
+  ]
+}

@@ -291,6 +291,127 @@
       "type": "ui",
       "required": true
     },
+    "ui.characterCreation.blackMeditationSilhouette": {
+      "path": "/assets/generated/ui/character_creation/black_meditation_silhouette.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 64,
+        "y": 64,
+        "w": 384,
+        "h": 384
+      }
+    },
+    "ui.characterCreation.fateAltarDisc": {
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.fateAltarDiscActive": {
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc_active.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.metal": {
+      "path": "/assets/generated/ui/character_creation/root_aura_metal.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.wood": {
+      "path": "/assets/generated/ui/character_creation/root_aura_wood.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.water": {
+      "path": "/assets/generated/ui/character_creation/root_aura_water.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.fire": {
+      "path": "/assets/generated/ui/character_creation/root_aura_fire.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.earth": {
+      "path": "/assets/generated/ui/character_creation/root_aura_earth.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.thunder": {
+      "path": "/assets/generated/ui/character_creation/root_aura_thunder.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.yin": {
+      "path": "/assets/generated/ui/character_creation/root_aura_yin.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
+    "ui.characterCreation.rootAura.mixed": {
+      "path": "/assets/generated/ui/character_creation/root_aura_mixed.png",
+      "type": "ui",
+      "required": true,
+      "contentRect": {
+        "x": 96,
+        "y": 96,
+        "w": 576,
+        "h": 576
+      }
+    },
     "ui.characterCreation.nameInput": {
       "path": "/assets/generated/ui/character_creation/name_input_field.png",
       "type": "ui",

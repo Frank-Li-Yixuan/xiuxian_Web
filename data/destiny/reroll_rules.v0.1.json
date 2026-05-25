@@ -1,0 +1,37 @@
+{
+  "version": "0.1",
+  "freeReroll": true,
+  "initialLocks": 2,
+  "initialDivinationTokens": 1,
+  "maxLockedFields": 2,
+  "lockableFields": [
+    "spiritualRoot",
+    "mainDestiny",
+    "secondaryDestiny0",
+    "secondaryDestiny1",
+    "flawDestiny",
+    "backgroundOrigin",
+    "carriedItem"
+  ],
+  "advancedLockableFields": [
+    "hiddenFateHint"
+  ],
+  "fateMeter": {
+    "initial": 0,
+    "noRareOrAboveDelta": 1,
+    "rareDelta": -2,
+    "mysticOrAboveReset": true,
+    "thresholdBoost": 6,
+    "thresholdGuaranteeRare": 12,
+    "boostRule": "当天机值达到 6，主天命奇命及以上权重提高；达到 12 时下一次主天命至少奇命。"
+  },
+  "highQualityLimits": {
+    "maxEarthlyOrAbovePerDraft": 1,
+    "allowSecondEarthlyOrAboveWithDivination": true,
+    "maxForbiddenPerDraft": 1
+  },
+  "rerollHistory": {
+    "recordLast": 20,
+    "repetitionPenalty": 0.5
+  }
+}

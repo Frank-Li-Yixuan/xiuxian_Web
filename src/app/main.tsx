@@ -1,6 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
+import { DevUiAtlasScreen } from "./screens/DevUiAtlasScreen";
+import { DevUiComponentsScreen } from "./screens/DevUiComponentsScreen";
+import { DevUiSystemScreen } from "./screens/DevUiSystemScreen";
+import { DevUiWorkbenchScreen } from "./screens/DevUiWorkbenchScreen";
 import { MainMenuApp } from "./MainMenuApp";
 import "./main-menu.css";
 
@@ -11,6 +15,16 @@ if (root === null) {
 
 createRoot(root).render(
   <StrictMode>
-    <MainMenuApp />
+    {window.location.pathname === "/dev/ui-atlas" ? (
+      <DevUiAtlasScreen />
+    ) : window.location.pathname === "/dev/ui-components" ? (
+      <DevUiComponentsScreen />
+    ) : window.location.pathname === "/dev/ui-system" ? (
+      <DevUiSystemScreen />
+    ) : window.location.pathname === "/dev/ui-workbench" ? (
+      <DevUiWorkbenchScreen />
+    ) : (
+      <MainMenuApp />
+    )}
   </StrictMode>
 );

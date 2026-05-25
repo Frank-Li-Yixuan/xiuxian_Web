@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 
 import { MAIN_MENU_ASSET_IDS, type MainMenuAssetRegistry } from "../../assets/mainMenuAssets";
-import { ImageButton } from "./MainMenuUi";
+import { CloudLayer, MistLayer, XianxiaButton } from "../ui-system";
 
 export interface MainMenuScreenProps {
   readonly assets: MainMenuAssetRegistry;
@@ -26,24 +26,26 @@ export function MainMenuScreen({
       data-testid="main-menu-screen"
       style={{ backgroundImage: `url("${assets.path(MAIN_MENU_ASSET_IDS.background)}")` }}
     >
+      <MistLayer />
+      <CloudLayer />
       <div className="main-menu-title-wrap">
         <img alt="" className="main-menu-title-plaque" src={assets.path(MAIN_MENU_ASSET_IDS.titlePlaque)} />
         <h1>双人雷霆战机修仙版</h1>
       </div>
 
       <nav aria-label="主菜单" className="main-menu-actions">
-        <ImageButton assets={assets} onClick={onNewGame}>
+        <XianxiaButton className="main-menu-dom-button" onClick={onNewGame}>
           新的游戏
-        </ImageButton>
-        <ImageButton assets={assets} disabled={!canContinue} onClick={onContinue}>
+        </XianxiaButton>
+        <XianxiaButton className="main-menu-dom-button" disabled={!canContinue} onClick={onContinue}>
           继续游戏
-        </ImageButton>
-        <ImageButton assets={assets} onClick={onSettings}>
+        </XianxiaButton>
+        <XianxiaButton className="main-menu-dom-button" onClick={onSettings}>
           设置
-        </ImageButton>
-        <ImageButton assets={assets} onClick={onExit}>
+        </XianxiaButton>
+        <XianxiaButton className="main-menu-dom-button" variant="secondary" onClick={onExit}>
           退出
-        </ImageButton>
+        </XianxiaButton>
       </nav>
     </section>
   );

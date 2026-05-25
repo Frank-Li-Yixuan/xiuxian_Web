@@ -11,14 +11,14 @@ import { CharacterCreationScreen } from "../../src/app/screens/CharacterCreation
 import { LifeSimulationScreen } from "../../src/app/screens/LifeSimulationScreen";
 import { SaveSlotScreen } from "../../src/app/screens/SaveSlotScreen";
 import { SettingsScreen } from "../../src/app/screens/SettingsScreen";
-import { createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
+import { completeLifeSimulationForProfile, createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
 import { createSaveSlotService } from "../../src/save/SaveSlotService";
 
 describe("generated UI page usage", () => {
-  it("renders SaveSlotScreen with save/common generated assets while preserving slot behavior", () => {
+  it("renders SaveSlotScreen with DOM save cards instead of generated save-slot controls", () => {
     const storage = new MemoryStorage();
     const service = createSaveSlotService({ storage, nowMs: () => 2_000 });
-    service.writeProfile("slot_1", createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000 }));
+    service.writeProfile("slot_1", createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "青云初试" }));
 
     const markup = renderToStaticMarkup(
       createElement(SaveSlotScreen, {
@@ -27,29 +27,79 @@ describe("generated UI page usage", () => {
         mode: "continue",
         service,
         onBack: () => undefined,
+        onProfileCreated: () => undefined,
         onProfileReady: () => undefined
       })
     );
 
-    expect(markup).toContain("/assets/generated/ui/save/save_panel_frame.png");
-    expect(markup).toContain("/assets/generated/ui/save/save_panel_inner_bg.png");
-    expect(markup).toContain("/assets/generated/ui/save/save_slot_empty.png");
-    expect(markup).toContain("/assets/generated/ui/common/close_button_normal.png");
+    expect(markup).toContain("xianxia-save-card");
+    expect(markup).toContain("xianxia-panel");
+    expect(markup).not.toContain("/assets/generated/ui/save/save_panel_frame.png");
+    expect(markup).not.toContain("/assets/generated/ui/save/save_panel_inner_bg.png");
+    expect(markup).not.toContain("/assets/generated/ui/save/save_slot_empty.png");
+    expect(markup).not.toContain("/assets/generated/ui/common/close_button_normal.png");
+    expect(markup).not.toContain("/assets/generated/ui/save/create_save_button_");
+    expect(markup).not.toContain("/assets/generated/ui/save/load_save_button_normal.png");
+    expect(markup).not.toContain("/assets/generated/ui/save/danger_button_normal.png");
     expect(markup).not.toContain("/assets/generated/ui/save/save_slot_existing_normal.png");
     expect(markup).not.toContain("/assets/generated/ui/save/save_slot_disabled.png");
     expect(markup).not.toContain("/assets/generated/ui/save/save_avatar_frame.png");
     expect(markup).not.toContain("/assets/generated/ui/main_menu/controls/save_slot_");
     expect(markup).not.toContain("创建新存档");
+    expect(markup).toContain("青云初试");
+    expect(markup).toContain("未定道友");
+    expect(markup).toContain("当前进度：模拟中");
+    expect(markup).toContain("0岁 · 练气 1层 · 修为 0/300");
+    expect(markup).not.toContain("存档 1");
+  });
+
+  it("renders completed save slots without the life-simulation progress line", () => {
+    const storage = new MemoryStorage();
+    const service = createSaveSlotService({ storage, nowMs: () => 3_000 });
+    const completedProfile = completeLifeSimulationForProfile({
+      profile: createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "出山档" }),
+      nowMs: 2_000,
+      ageYears: 18,
+      characterName: "李青云"
+    });
+    service.writeProfile("slot_1", completedProfile);
+
+    const markup = renderToStaticMarkup(
+      createElement(SaveSlotScreen, {
+        assets: loadMainMenuRegistry(),
+        generatedUiAssets: loadGeneratedUiRegistry(),
+        mode: "continue",
+        service,
+        onBack: () => undefined,
+        onProfileCreated: () => undefined,
+        onProfileReady: () => undefined
+      })
+    );
+
+    expect(markup).toContain("出山档");
+    expect(markup).toContain("李青云");
+    expect(markup).toContain("18岁 · 练气 1层 · 修为 0/300");
+    expect(markup).not.toContain("当前进度：模拟中");
   });
 
   it("renders CharacterCreationScreen with its generated UI controls", () => {
     const markup = renderToStaticMarkup(createElement(CharacterCreationScreen, { assets: loadGeneratedUiRegistry() }));
 
     expect(markup).toContain("/assets/generated/ui/character_creation/character_creation_main_panel.png");
-    expect(markup).toContain("/assets/generated/ui/character_creation/character_portrait_frame.png");
-    expect(markup).toContain("/assets/generated/ui/character_creation/spiritual_root_disc.png");
-    expect(markup).toContain("/assets/generated/ui/character_creation/destiny_card_legendary.png");
+    expect(markup).toContain("/assets/generated/ui/character_creation/black_meditation_silhouette.png");
+    expect(markup).toContain("/assets/generated/ui/character_creation/fate_altar_disc.png");
+    expect(markup).toContain("/assets/generated/ui/character_creation/fate_altar_disc_active.png");
+    expect(markup).toContain("/assets/generated/ui/character_creation/root_aura_");
+    expect(markup).toMatch(/\/assets\/generated\/ui\/character_creation\/destiny_card_(common|rare|epic|legendary|flaw)\.png/);
     expect(markup).toContain("/assets/generated/ui/character_creation/confirm_life_button_normal.png");
+    expect(markup).toContain("创建角色 / 推演天命");
+    expect(markup).toContain("character-fate-altar");
+    expect(markup).toContain('data-scrollable="true"');
+    expect(markup.match(/data-destiny-card-slot=/g) ?? []).toHaveLength(4);
+    expect(markup.indexOf("character-destiny-row")).toBeLessThan(markup.indexOf("character-detail-panel"));
+    expect(markup).not.toContain("/assets/generated/ui/character_creation/character_portrait_frame.png");
+    expect(markup).not.toContain("character-seated-silhouette");
+    expect(markup).not.toContain("立绘");
   });
 
   it("renders LifeSimulationScreen with timeline, log, event card, and choice buttons", () => {

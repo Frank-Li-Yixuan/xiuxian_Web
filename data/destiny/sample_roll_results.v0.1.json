@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "samples": [
+    {
+      "name": "天妒雷修",
+      "spiritualRoot": "雷火双灵根",
+      "main": "天妒英才",
+      "secondary": [
+        "劫雷亲和",
+        "雷鸣识海"
+      ],
+      "flaw": "命火早衰",
+      "hiddenHint": "你偶尔能听见雷云深处的战鼓。",
+      "playstyle": "高速成长、雷劫高压、域外战场雷法强势。"
+    },
+    {
+      "name": "苟道丹修",
+      "spiritualRoot": "木土水三灵根",
+      "main": "苟道至尊",
+      "secondary": [
+        "丹道奇才",
+        "坐忘常定"
+      ],
+      "flaw": "怯战心结",
+      "hiddenHint": "你常在梦里见到一尊残破丹炉。",
+      "playstyle": "人生模拟闭关和炼丹强，第一战攻击弱但保命强。"
+    },
+    {
+      "name": "废灵逆命剑修",
+      "spiritualRoot": "杂灵根",
+      "main": "废灵逆命",
+      "secondary": [
+        "百折不摧",
+        "器灵之眷"
+      ],
+      "flaw": "法宝排斥",
+      "hiddenHint": "你手中的木剑偶尔会响起细微剑鸣。",
+      "playstyle": "前期弱，失败反而积累逆命点，适合逆袭。"
+    }
+  ]
+}

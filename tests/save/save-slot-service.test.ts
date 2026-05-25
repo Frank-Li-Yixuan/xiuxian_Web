@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
+import { completeLifeSimulationForProfile, createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
 import { SAVE_SLOT_IDS, createSaveSlotService } from "../../src/save/SaveSlotService";
 
 describe("SaveSlotService", () => {
@@ -16,10 +16,13 @@ describe("SaveSlotService", () => {
     ]);
   });
 
-  it("creates a slot-specific default profile without merging cultivation and insight exp", () => {
-    const profile = createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_234 });
+  it("creates a slot-specific default profile with save metadata without merging cultivation and insight exp", () => {
+    const profile = createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_234, saveName: "青云初试" });
 
     expect(profile.profileId).toBe("local_slot_1");
+    expect(profile.saveName).toBe("青云初试");
+    expect(profile.characterName).toBe("未定道友");
+    expect(profile.lifeSimulation).toEqual({ status: "simulating", ageYears: 0 });
     expect(profile.createdAtMs).toBe(1_234);
     expect(profile.updatedAtMs).toBe(1_234);
     expect(profile.realm).toEqual(
@@ -32,6 +35,23 @@ describe("SaveSlotService", () => {
     );
     expect(profile.wallet).not.toHaveProperty("insight_exp");
     expect(profile.flags.firstStageCleared).toBe(false);
+  });
+
+  it("marks a created profile as out of life simulation while preserving cultivation", () => {
+    const profile = createDefaultProfileForSlot({ slotId: "slot_2", nowMs: 1_000, saveName: "渡劫前夜" });
+
+    const completed = completeLifeSimulationForProfile({
+      profile,
+      nowMs: 2_000,
+      ageYears: 18,
+      characterName: "李青云"
+    });
+
+    expect(completed.saveName).toBe("渡劫前夜");
+    expect(completed.characterName).toBe("李青云");
+    expect(completed.lifeSimulation).toEqual({ status: "completed", ageYears: 18 });
+    expect(completed.realm).toEqual(profile.realm);
+    expect(completed.updatedAtMs).toBe(2_000);
   });
 
   it("writes, reads, overwrites, and deletes a profile by save slot", () => {

@@ -1,0 +1,192 @@
+{
+  "version": "0.1",
+  "traits": [
+    {
+      "id": "destiny_heaven_envies_genius",
+      "name": "天妒英才",
+      "slotTypes": ["main"],
+      "rarity": "legendary",
+      "tags": ["极速成长", "短寿", "雷劫"],
+      "description": "慧极近妖，修行如饮水，却命火不稳，天道注视沉重。",
+      "positiveEffects": ["修炼速度 +300%", "悟性大幅提高", "前期事件领悟收益提高"],
+      "negativeEffects": ["寿元上限仅为常规 30%", "大境界突破更易引来强化雷劫"],
+      "statModifiers": { "comprehension": 35, "lifespanPercent": -70, "tribulationWeight": 2 },
+      "exclusiveWith": ["destiny_long_lived_seed"],
+      "synergyWith": ["destiny_thunder_affinity"],
+      "conflictWith": ["destiny_cowardly_long_life"]
+    },
+    {
+      "id": "destiny_supreme_coward_path",
+      "name": "苟道至尊",
+      "slotTypes": ["main"],
+      "rarity": "epic",
+      "tags": ["闭关", "保命", "低战斗"],
+      "description": "你天生懂得避祸，只要远离争斗，底蕴便会悄然积累。",
+      "positiveEffects": ["不战斗期间修为与经验型成长大幅提升", "保命事件权重提高"],
+      "negativeEffects": ["主动攻击法术初始等级降低", "频繁战斗会削弱该命格"],
+      "statModifiers": { "heart": 20, "combatSpellStartLevel": -1, "idleGrowthPercent": 300 },
+      "exclusiveWith": ["destiny_battle_nourishes_battle"],
+      "synergyWith": ["destiny_sitting_forgetting"],
+      "conflictWith": ["destiny_killing_nature"]
+    },
+    {
+      "id": "destiny_waste_root_defies_fate",
+      "name": "废灵逆命",
+      "slotTypes": ["main"],
+      "rarity": "epic",
+      "tags": ["逆袭", "失败收益", "慢热"],
+      "description": "灵根驳杂，仙路艰难，但每一次失败都会在你体内留下逆命之痕。",
+      "positiveEffects": ["突破失败后获得逆命点", "逆命点可转化为根骨、心性或隐藏觉醒"],
+      "negativeEffects": ["前期修炼速度大幅降低", "初始灵根质量下限降低"],
+      "statModifiers": { "trainingSpeedPercent": -60, "heart": 15 },
+      "synergyWith": ["destiny_unbreakable_will", "destiny_artifact_spirit_favored"]
+    },
+    {
+      "id": "destiny_battle_nourishes_battle",
+      "name": "以战养战",
+      "slotTypes": ["main", "secondary"],
+      "rarity": "rare",
+      "tags": ["战斗", "成长", "风险"],
+      "description": "你在生死压力中成长更快，安稳闭关反而难有进境。",
+      "positiveEffects": ["战斗中修为与灵气收益提高", "域外战场击杀收益提高"],
+      "negativeEffects": ["局外闭关收益降低"],
+      "statModifiers": { "combatGrowthPercent": 80, "idleGrowthPercent": -40 },
+      "exclusiveWith": ["destiny_supreme_coward_path"]
+    },
+    {
+      "id": "destiny_thunder_affinity",
+      "name": "劫雷亲和",
+      "slotTypes": ["secondary"],
+      "rarity": "rare",
+      "tags": ["雷法", "天劫", "高压"],
+      "description": "雷霆伤你，也塑你。你对雷法与雷劫都有异常亲和。",
+      "positiveEffects": ["雷法奖励权重提高", "雷系伤害与雷劫造化收益提高"],
+      "negativeEffects": ["雷劫事件更频繁"],
+      "statModifiers": { "thunderWeight": 45, "tribulationWeight": 1 }
+    },
+    {
+      "id": "destiny_alchemy_genius",
+      "name": "丹道奇才",
+      "slotTypes": ["main", "secondary"],
+      "rarity": "rare",
+      "tags": ["炼丹", "火候", "丹毒"],
+      "description": "你对药性与火候有惊人直觉。",
+      "positiveEffects": ["炼丹成功率提高", "药性事件识别率提高"],
+      "negativeEffects": ["法宝升星成本提高"],
+      "statModifiers": { "alchemySuccess": 25, "artifactCostPercent": 20 }
+    },
+    {
+      "id": "destiny_artifact_spirit_favored",
+      "name": "器灵之眷",
+      "slotTypes": ["secondary"],
+      "rarity": "rare",
+      "tags": ["法宝", "器灵", "温养"],
+      "description": "沉睡器灵更容易回应你的神念。",
+      "positiveEffects": ["本命法宝温养效率提高", "随身物转化为法宝概率提高"],
+      "negativeEffects": ["心法修炼速度略降"],
+      "statModifiers": { "artifactWarmingPercent": 60, "methodTrainingPercent": -10 }
+    },
+    {
+      "id": "destiny_sitting_forgetting",
+      "name": "坐忘常定",
+      "slotTypes": ["secondary"],
+      "rarity": "uncommon",
+      "tags": ["闭关", "心性", "清净"],
+      "description": "你很容易进入忘我定境。",
+      "positiveEffects": ["闭关收益提高", "心魔抗性提高"],
+      "negativeEffects": ["社交与弟子相关事件收益降低"],
+      "statModifiers": { "heart": 12, "idleGrowthPercent": 45, "socialEventWeight": -20 }
+    },
+    {
+      "id": "destiny_demon_heart_seed",
+      "name": "魔心暗种",
+      "slotTypes": ["main", "secondary"],
+      "rarity": "epic",
+      "tags": ["魔念", "暴击", "心魔"],
+      "description": "识海深处有一枚暗种，危险，也强大。",
+      "positiveEffects": ["暴击与魔念奖励权重提高", "极端事件收益提高"],
+      "negativeEffects": ["心魔事件频发", "功德事件收益降低"],
+      "statModifiers": { "critBias": 15, "heartDemonWeight": 2, "meritGainPercent": -30 },
+      "conflictWith": ["destiny_clear_glass_heart"]
+    },
+    {
+      "id": "destiny_clear_glass_heart",
+      "name": "清净琉璃心",
+      "slotTypes": ["secondary"],
+      "rarity": "epic",
+      "tags": ["清心", "心魔抗性", "悟性"],
+      "description": "你心如琉璃，不易为外魔所动。",
+      "positiveEffects": ["心魔抗性大幅提高", "顿悟质量提高"],
+      "negativeEffects": ["魔道收益降低"],
+      "statModifiers": { "heart": 28, "comprehension": 12, "demonRewardWeight": -35 },
+      "conflictWith": ["destiny_demon_heart_seed"]
+    },
+    {
+      "id": "destiny_borrow_life_to_cultivate",
+      "name": "借寿修行",
+      "slotTypes": ["main", "secondary"],
+      "rarity": "epic",
+      "tags": ["寿元", "爆发成长", "代价"],
+      "description": "你可燃烧寿元换取短期进境。",
+      "positiveEffects": ["可用寿元换修为或领悟", "瓶颈前冲刺能力极强"],
+      "negativeEffects": ["寿元消耗更难恢复"],
+      "statModifiers": { "lifespan": -10, "lifeToCultivationEnabled": 1 }
+    },
+    {
+      "id": "destiny_unbreakable_will",
+      "name": "百折不摧",
+      "slotTypes": ["secondary"],
+      "rarity": "uncommon",
+      "tags": ["失败收益", "心性", "逆命"],
+      "description": "失败不会击垮你，只会让你更沉稳。",
+      "positiveEffects": ["失败事件的负面降低", "失败后心性成长提高"],
+      "negativeEffects": ["初始气运略低"],
+      "statModifiers": { "heart": 16, "fortune": -5 },
+      "synergyWith": ["destiny_waste_root_defies_fate"]
+    },
+    {
+      "id": "flaw_short_life",
+      "name": "命火早衰",
+      "slotTypes": ["flaw"],
+      "rarity": "flaw",
+      "tags": ["短寿", "病弱", "高压"],
+      "description": "你的命火先天不稳，修行路上时间更紧。",
+      "positiveEffects": ["早期隐藏事件权重略高"],
+      "negativeEffects": ["寿元显著降低", "伤病事件提高"],
+      "statModifiers": { "lifespan": -35, "inspiration": 8 }
+    },
+    {
+      "id": "flaw_heavy_karma",
+      "name": "宿业缠身",
+      "slotTypes": ["flaw"],
+      "rarity": "flaw",
+      "tags": ["业力", "仇敌", "高收益"],
+      "description": "你出生便背负未明因果。",
+      "positiveEffects": ["稀有因果事件权重提高"],
+      "negativeEffects": ["业力初始较高", "天道反噬事件提高"],
+      "statModifiers": { "karma": 25, "rareEventWeight": 10 }
+    },
+    {
+      "id": "flaw_frail_body",
+      "name": "先天体弱",
+      "slotTypes": ["flaw"],
+      "rarity": "flaw",
+      "tags": ["病弱", "肉身", "心性"],
+      "description": "肉身孱弱，但也让你更早学会忍耐。",
+      "positiveEffects": ["心性略增"],
+      "negativeEffects": ["精与根骨降低", "伤病事件提高"],
+      "statModifiers": { "jing": -15, "rootBone": -10, "heart": 8 }
+    },
+    {
+      "id": "flaw_disaster_star",
+      "name": "灾星入命",
+      "slotTypes": ["flaw"],
+      "rarity": "flaw",
+      "tags": ["灾祸", "高随机", "气运"],
+      "description": "大灾小劫总绕着你，却也常在灾中藏机。",
+      "positiveEffects": ["灾祸后的机缘权重提高"],
+      "negativeEffects": ["负面月度事件提高"],
+      "statModifiers": { "fortune": -10, "disasterEventWeight": 2, "postDisasterBoonWeight": 1 }
+    }
+  ]
+}

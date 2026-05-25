@@ -1,0 +1,1084 @@
+{
+  "version": "0.1",
+  "traits": [
+    {
+      "id": "destiny_heaven_jealous_talent",
+      "name": "天妒英才",
+      "quality": "heavenly",
+      "slotTypes": [
+        "main"
+      ],
+      "tags": [
+        "growth",
+        "genius",
+        "tribulation",
+        "short_life"
+      ],
+      "description": "你生而早慧，修行如饮水，却似被天道盯上。",
+      "positiveEffects": [
+        "修炼、读书、悟道类收益 +300%",
+        "悟性 +50",
+        "人生模拟中学习类选择结果提高一级"
+      ],
+      "negativeEffects": [
+        "寿元上限 -70%",
+        "大境界突破雷劫强度 +2",
+        "病弱、咳血、天道注视事件权重提高"
+      ],
+      "modifiers": {
+        "comprehension": 50,
+        "lifespanMultiplier": 0.3,
+        "lifeStudyGainMultiplier": 4.0,
+        "tribulationPowerDelta": 2
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_turtle_supreme",
+      "name": "苟道至尊",
+      "quality": "earthly",
+      "slotTypes": [
+        "main"
+      ],
+      "tags": [
+        "avoidance",
+        "idle",
+        "survival",
+        "coward_path"
+      ],
+      "description": "你天生不喜争斗，越远离凶险，底蕴越深。",
+      "positiveEffects": [
+        "连续 6 个月不选择战斗/冒险时获得潜修层数",
+        "每层潜修使闭关收益 +30%，最多 10 层",
+        "域外战场存活奖励 +50%"
+      ],
+      "negativeEffects": [
+        "主动战斗选择会清空部分潜修层数",
+        "初始攻击法术等级 -1",
+        "战斗击杀收益 -20%"
+      ],
+      "modifiers": {
+        "idleGainPerStack": 0.3,
+        "maxStacks": 10,
+        "combatKillRewardMultiplier": 0.8
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_waste_root_defiant",
+      "name": "废灵逆命",
+      "quality": "defiant",
+      "slotTypes": [
+        "main"
+      ],
+      "tags": [
+        "defiant",
+        "failure",
+        "comeback",
+        "poor_root"
+      ],
+      "description": "灵根驳杂，前路艰难，但每一次失败都会化作逆命之痕。",
+      "positiveEffects": [
+        "失败、受伤、突破失败获得逆命点",
+        "逆命点可转化为根骨、心性或隐藏觉醒进度",
+        "首次域外战场濒死时触发逆命回响"
+      ],
+      "negativeEffects": [
+        "初始灵根品质降低",
+        "12 岁前修炼收益 -50%",
+        "前期事件更容易被评价为失败"
+      ],
+      "modifiers": {
+        "earlyCultivationMultiplier": 0.5,
+        "failureTokenGain": 1
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_late_bloomer",
+      "name": "大器晚成",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "growth",
+        "late_game"
+      ],
+      "description": "少年迟钝，青年以后方显峥嵘。",
+      "positiveEffects": [
+        "16 岁后所有成长收益 +100%",
+        "筑基后修炼收益 +60%"
+      ],
+      "negativeEffects": [
+        "16 岁前学习、修炼、练武收益 -35%"
+      ],
+      "modifiers": {
+        "before16GainMultiplier": 0.65,
+        "after16GainMultiplier": 2.0
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_battle_nourished",
+      "name": "以战养战",
+      "quality": "rare",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "combat",
+        "kill",
+        "risk"
+      ],
+      "description": "你越战越强，闭关反而不如浴血。",
+      "positiveEffects": [
+        "战斗模式修为获取 +60%",
+        "击杀精英后短时回复精气"
+      ],
+      "negativeEffects": [
+        "闭关、挂机修为收益 -35%",
+        "人生模拟中冲突事件权重提高"
+      ],
+      "modifiers": {
+        "combatCultivationMultiplier": 1.6,
+        "idleCultivationMultiplier": 0.65
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_thunder_affinity",
+      "name": "劫雷亲和",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "thunder",
+        "tribulation",
+        "spell"
+      ],
+      "description": "雷霆既是劫，也是你的机缘。",
+      "positiveEffects": [
+        "雷法效果 +50%",
+        "雷系事件更易转化为机缘",
+        "雷系隐藏血脉进度 +30%"
+      ],
+      "negativeEffects": [
+        "雷劫触发权重 +80%",
+        "雷劫伤害 +15%"
+      ],
+      "modifiers": {
+        "thunderPowerMultiplier": 1.5,
+        "tribulationWeightMultiplier": 1.8
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_alchemy_prodigy",
+      "name": "丹道奇才",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "alchemy",
+        "wood",
+        "fire",
+        "outgame"
+      ],
+      "description": "你对药性与火候有近乎本能的理解。",
+      "positiveEffects": [
+        "药理成长 +80%",
+        "炼丹成功率 +20%",
+        "丹毒增长 -25%"
+      ],
+      "negativeEffects": [
+        "炼器效率 -25%",
+        "金石类事件收益降低"
+      ],
+      "modifiers": {
+        "alchemyGainMultiplier": 1.8,
+        "alchemySuccessBonus": 0.2,
+        "artifactCraftMultiplier": 0.75
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_artifact_blessed",
+      "name": "器灵之眷",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "artifact",
+        "spirit",
+        "outgame"
+      ],
+      "description": "未醒之器灵似乎天生愿意亲近你。",
+      "positiveEffects": [
+        "本命法宝温养效率 +80%",
+        "器灵觉醒权重 +100%",
+        "随身物更容易转化为法宝线索"
+      ],
+      "negativeEffects": [
+        "功法修炼速度 -20%"
+      ],
+      "modifiers": {
+        "artifactWarmingMultiplier": 1.8,
+        "methodTrainingMultiplier": 0.8
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_stillness_meditation",
+      "name": "坐忘常定",
+      "quality": "rare",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "idle",
+        "heart",
+        "meditation"
+      ],
+      "description": "你天生能入静，尘事不易扰心。",
+      "positiveEffects": [
+        "闭关、静修、读书事件收益 +50%",
+        "心性 +20"
+      ],
+      "negativeEffects": [
+        "社交、游历、战斗选择收益 -20%"
+      ],
+      "modifiers": {
+        "heart": 20,
+        "meditationGainMultiplier": 1.5
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_demon_seed",
+      "name": "魔心暗种",
+      "quality": "earthly",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "demon",
+        "heart_demon",
+        "forbidden",
+        "crit"
+      ],
+      "description": "你心底深处有一枚暗种，危险，也强大。",
+      "positiveEffects": [
+        "暴击和禁术事件权重提高",
+        "心魔类选项收益翻倍",
+        "禁命候选权重提高"
+      ],
+      "negativeEffects": [
+        "心魔增长 +100%",
+        "业力事件权重 +60%",
+        "清修事件收益降低"
+      ],
+      "modifiers": {
+        "heartDemonGainMultiplier": 2.0,
+        "karmaEventWeightMultiplier": 1.6
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_glass_heart",
+      "name": "清净琉璃心",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "heart",
+        "purity",
+        "anti_demon"
+      ],
+      "description": "心若琉璃，魔念难侵。",
+      "positiveEffects": [
+        "心魔伤害 -60%",
+        "清修、净化、功德事件收益 +50%",
+        "心性 +25"
+      ],
+      "negativeEffects": [
+        "禁术、魔道、业力类收益 -30%"
+      ],
+      "modifiers": {
+        "heart": 25,
+        "heartDemonDamageMultiplier": 0.4
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_borrow_lifespan",
+      "name": "借寿修行",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "lifespan",
+        "forbidden",
+        "growth"
+      ],
+      "description": "你能燃烧命火换取修行速度。",
+      "positiveEffects": [
+        "可将寿元转化为修为、悟性或真元",
+        "高危事件中可燃寿保命"
+      ],
+      "negativeEffects": [
+        "寿元消耗真实保留",
+        "寿元低于阈值后病弱事件提高"
+      ],
+      "modifiers": {
+        "canSpendLifespan": true
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_poisoned_benefit",
+      "name": "饮鸩止渴",
+      "quality": "rare",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "alchemy",
+        "pill",
+        "poison"
+      ],
+      "description": "丹药对你格外猛烈，毒性亦然。",
+      "positiveEffects": [
+        "丹药收益 +100%"
+      ],
+      "negativeEffects": [
+        "丹毒增长 +100%",
+        "伤病事件权重提高"
+      ],
+      "modifiers": {
+        "pillEffectMultiplier": 2.0,
+        "toxicityGainMultiplier": 2.0
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_last_breath",
+      "name": "命悬一线",
+      "quality": "rare",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "combat",
+        "low_hp",
+        "risk"
+      ],
+      "description": "越接近死亡，你越能爆发潜力。",
+      "positiveEffects": [
+        "生命低于 25% 时伤害 +80%",
+        "低血时拾取范围 +40%"
+      ],
+      "negativeEffects": [
+        "常规回血效果 -30%"
+      ],
+      "modifiers": {
+        "lowHpDamageMultiplier": 1.8,
+        "healingMultiplier": 0.7
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_tenacious",
+      "name": "百折不摧",
+      "quality": "rare",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "failure",
+        "heart",
+        "survival"
+      ],
+      "description": "你不怕摔倒，只怕没有下一次。",
+      "positiveEffects": [
+        "失败后的负面减少",
+        "受伤后心性成长提高",
+        "与废灵逆命共鸣"
+      ],
+      "negativeEffects": [
+        "初始气运 -8"
+      ],
+      "modifiers": {
+        "fortune": -8,
+        "failurePenaltyMultiplier": 0.65
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_sword_bone",
+      "name": "天生剑骨",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "sword",
+        "metal",
+        "combat"
+      ],
+      "description": "骨中藏锋，万兵难掩剑意。",
+      "positiveEffects": [
+        "剑类法宝与剑诀收益 +60%",
+        "金灵根权重提高",
+        "初始武艺 +15"
+      ],
+      "negativeEffects": [
+        "丹道、木系恢复收益 -15%"
+      ],
+      "modifiers": {
+        "swordPowerMultiplier": 1.6,
+        "martial": 15
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_five_mixed",
+      "name": "五行杂糅",
+      "quality": "rare",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "mixed_root",
+        "wuxing",
+        "versatile"
+      ],
+      "description": "五行皆有，皆不纯粹，却处处留有余地。",
+      "positiveEffects": [
+        "杂灵根惩罚降低",
+        "多模式适配奖励 +20%",
+        "相生组合更容易出现"
+      ],
+      "negativeEffects": [
+        "单一法脉修炼速度 -20%"
+      ],
+      "modifiers": {
+        "mixedRootPenaltyMultiplier": 0.5,
+        "singleLineageTrainingMultiplier": 0.8
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_moon_dream",
+      "name": "太阴入梦",
+      "quality": "mystic",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "yin",
+        "soul",
+        "dream"
+      ],
+      "description": "你常在梦里见到另一轮月。",
+      "positiveEffects": [
+        "阴灵根、魂修、梦境事件权重提高",
+        "神 +20",
+        "隐藏太阴残脉进度 +30%"
+      ],
+      "negativeEffects": [
+        "白日练武、火系事件收益 -15%"
+      ],
+      "modifiers": {
+        "shen": 20,
+        "yinEventWeightMultiplier": 1.6
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_fortune_star",
+      "name": "福星高照",
+      "quality": "rare",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "fortune",
+        "luck",
+        "merit"
+      ],
+      "description": "灾厄临头时，总有一线转机。",
+      "positiveEffects": [
+        "气运 +25",
+        "小机缘事件权重 +80%",
+        "低概率大难不死"
+      ],
+      "negativeEffects": [
+        "稳定修炼收益无加成"
+      ],
+      "modifiers": {
+        "fortune": 25,
+        "minorChanceEventMultiplier": 1.8
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_lone_star",
+      "name": "天煞孤星",
+      "quality": "earthly",
+      "slotTypes": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "solo",
+        "combat",
+        "karma"
+      ],
+      "description": "孤星入命，亲缘淡薄，杀伐极盛。",
+      "positiveEffects": [
+        "单人战斗伤害 +50%",
+        "杀伐类收益 +60%"
+      ],
+      "negativeEffects": [
+        "亲缘、道友、弟子互动收益 -50%",
+        "业力增长 +50%"
+      ],
+      "modifiers": {
+        "soloDamageMultiplier": 1.5,
+        "relationshipGainMultiplier": 0.5,
+        "karmaGainMultiplier": 1.5
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_herb_affinity",
+      "name": "药性亲和",
+      "quality": "good",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "alchemy",
+        "wood"
+      ],
+      "description": "你能分辨草木药性。",
+      "positiveEffects": [
+        "药理事件收益 +30%",
+        "木系事件权重 +30%"
+      ],
+      "negativeEffects": [],
+      "modifiers": {
+        "herbEventWeightMultiplier": 1.3
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_gold_stone_bone",
+      "name": "金石骨",
+      "quality": "good",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "metal",
+        "body"
+      ],
+      "description": "筋骨坚韧如金石。",
+      "positiveEffects": [
+        "精 +8",
+        "根骨 +8",
+        "金系练体事件收益 +25%"
+      ],
+      "negativeEffects": [
+        "灵活类选择收益 -10%"
+      ],
+      "modifiers": {
+        "jing": 8,
+        "rootBone": 8
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_thunder_mind",
+      "name": "雷鸣识海",
+      "quality": "rare",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "thunder",
+        "shen"
+      ],
+      "description": "雷声入梦，识海常鸣。",
+      "positiveEffects": [
+        "神 +15",
+        "雷雨事件收益 +50%"
+      ],
+      "negativeEffects": [
+        "心神不宁事件权重 +20%"
+      ],
+      "modifiers": {
+        "shen": 15
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_early_wisdom",
+      "name": "隐世早慧",
+      "quality": "good",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "comprehension",
+        "study"
+      ],
+      "description": "你很早就能理解成人不懂的问题。",
+      "positiveEffects": [
+        "悟性 +12",
+        "读书事件收益 +25%"
+      ],
+      "negativeEffects": [
+        "童年孤僻事件权重 +20%"
+      ],
+      "modifiers": {
+        "comprehension": 12
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_small_merit",
+      "name": "护生有德",
+      "quality": "good",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "merit",
+        "support"
+      ],
+      "description": "你不忍见弱者受苦。",
+      "positiveEffects": [
+        "功德事件收益 +40%",
+        "救援类选择收益 +25%"
+      ],
+      "negativeEffects": [
+        "杀伐类收益 -10%"
+      ],
+      "modifiers": {
+        "meritEventWeightMultiplier": 1.4
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_spirit_sense",
+      "name": "灵觉微明",
+      "quality": "mortal",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "inspiration",
+        "sense"
+      ],
+      "description": "你偶尔能感到常人感不到的东西。",
+      "positiveEffects": [
+        "灵感 +6"
+      ],
+      "negativeEffects": [],
+      "modifiers": {
+        "inspiration": 6
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_good_memory",
+      "name": "过目不忘",
+      "quality": "good",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "study",
+        "comprehension"
+      ],
+      "description": "经书读一遍便能记住大半。",
+      "positiveEffects": [
+        "学识事件收益 +35%",
+        "悟性 +8"
+      ],
+      "negativeEffects": [],
+      "modifiers": {
+        "comprehension": 8
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "destiny_fast_hands",
+      "name": "手疾眼快",
+      "quality": "mortal",
+      "slotTypes": [
+        "secondary"
+      ],
+      "tags": [
+        "combat",
+        "dexterity"
+      ],
+      "description": "你反应比常人快一些。",
+      "positiveEffects": [
+        "域外战场初始移速 +3%",
+        "武艺事件收益 +10%"
+      ],
+      "negativeEffects": [],
+      "modifiers": {
+        "outerMoveSpeedMultiplier": 1.03
+      },
+      "baseWeight": 100
+    },
+    {
+      "id": "flaw_short_life",
+      "name": "命火早衰",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "short_life",
+        "illness"
+      ],
+      "description": "命火天生细弱。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "寿元上限 -35%",
+        "病弱事件权重 +60%"
+      ],
+      "modifiers": {
+        "lifespanMultiplier": 0.65,
+        "illnessEventWeightMultiplier": 1.6
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "medium"
+    },
+    {
+      "id": "flaw_old_karma",
+      "name": "宿业缠身",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "karma",
+        "tribulation"
+      ],
+      "description": "似有旧债未偿。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "业力初始 +20",
+        "灾厄、仇敌、因果事件权重 +50%"
+      ],
+      "modifiers": {
+        "karma": 20,
+        "karmaEventWeightMultiplier": 1.5
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "medium"
+    },
+    {
+      "id": "flaw_weak_body",
+      "name": "先天体弱",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "body",
+        "illness"
+      ],
+      "description": "幼年体弱多病。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "精 -12",
+        "练武和冒险失败风险提高"
+      ],
+      "modifiers": {
+        "jing": -12
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "minor"
+    },
+    {
+      "id": "flaw_disaster_star",
+      "name": "灾星入命",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "disaster",
+        "luck"
+      ],
+      "description": "灾祸常与你擦肩。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "灾厄事件权重 +70%",
+        "但灾后机缘权重 +30%"
+      ],
+      "modifiers": {
+        "disasterWeightMultiplier": 1.7
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "major"
+    },
+    {
+      "id": "flaw_toxic_body",
+      "name": "丹毒易积",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "alchemy",
+        "poison"
+      ],
+      "description": "药力难化，毒性易留。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "丹毒增长 +60%",
+        "丹药炼化时间 +15%"
+      ],
+      "modifiers": {
+        "toxicityGainMultiplier": 1.6,
+        "pillDigestTimeMultiplier": 1.15
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "minor"
+    },
+    {
+      "id": "flaw_demon_sensitive",
+      "name": "心魔易感",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "heart_demon"
+      ],
+      "description": "杂念易生，梦魇常来。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "心魔增长 +60%",
+        "梦魇事件权重 +50%"
+      ],
+      "modifiers": {
+        "heartDemonGainMultiplier": 1.6
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "medium"
+    },
+    {
+      "id": "flaw_blocked_meridian",
+      "name": "灵脉闭塞",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "cultivation",
+        "qi"
+      ],
+      "description": "经脉不畅，吐纳艰难。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "气 -10",
+        "12 岁前修炼收益 -25%"
+      ],
+      "modifiers": {
+        "qi": -10,
+        "earlyCultivationMultiplier": 0.75
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "minor"
+    },
+    {
+      "id": "flaw_soldier_calamity",
+      "name": "兵劫缠身",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "combat",
+        "conflict"
+      ],
+      "description": "争斗总会找上门。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "冲突、妖兽、战斗事件权重 +60%"
+      ],
+      "modifiers": {
+        "conflictEventWeightMultiplier": 1.6
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "medium"
+    },
+    {
+      "id": "flaw_thunder_drawn",
+      "name": "雷劫易至",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "thunder",
+        "tribulation"
+      ],
+      "description": "天雷似乎更容易注意到你。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "雷劫触发权重 +60%",
+        "雷雨灾厄事件权重 +40%"
+      ],
+      "modifiers": {
+        "tribulationWeightMultiplier": 1.6
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "major"
+    },
+    {
+      "id": "flaw_thin_family",
+      "name": "亲缘薄",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "family",
+        "lonely"
+      ],
+      "description": "亲缘淡薄，少有庇护。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "亲缘事件收益 -50%",
+        "孤独、离散事件权重提高"
+      ],
+      "modifiers": {
+        "familyGainMultiplier": 0.5
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "minor"
+    },
+    {
+      "id": "flaw_sickly",
+      "name": "百病缠身",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "illness",
+        "body"
+      ],
+      "description": "小病不断，大病偶至。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "每年有概率获得伤病",
+        "精成长 -20%"
+      ],
+      "modifiers": {
+        "jingGrowthMultiplier": 0.8
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "major"
+    },
+    {
+      "id": "flaw_unstable_soul",
+      "name": "神魂不稳",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "soul",
+        "shen"
+      ],
+      "description": "魂魄与肉身似乎不甚贴合。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "神 -8",
+        "心魔和魂修事件同时提高"
+      ],
+      "modifiers": {
+        "shen": -8
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "medium"
+    },
+    {
+      "id": "flaw_artifact_rejection",
+      "name": "法宝排斥",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "artifact"
+      ],
+      "description": "寻常法器难与你相合。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "法宝温养效率 -40%",
+        "但器灵之眷出现时转为特殊共鸣"
+      ],
+      "modifiers": {
+        "artifactWarmingMultiplier": 0.6
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "major"
+    },
+    {
+      "id": "flaw_coward_heart",
+      "name": "怯战心结",
+      "quality": "flaw",
+      "slotTypes": [
+        "flaw"
+      ],
+      "tags": [
+        "fear",
+        "combat"
+      ],
+      "description": "遇到血光时会本能退缩。",
+      "positiveEffects": [],
+      "negativeEffects": [
+        "战斗/冒险选择成功率 -15%",
+        "苟道类收益 +15%"
+      ],
+      "modifiers": {
+        "combatChoiceSuccessDelta": -15
+      },
+      "baseWeight": 100,
+      "calamitySeverity": "minor"
+    }
+  ]
+}

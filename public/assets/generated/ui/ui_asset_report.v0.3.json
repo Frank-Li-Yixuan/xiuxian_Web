@@ -1,0 +1,2410 @@
+{
+  "version": "0.3",
+  "namespace": "ui.normalized",
+  "generatedAtMs": 1779677708910,
+  "rootDirs": [
+    "/assets/generated/ui/common/",
+    "/assets/generated/ui/save/",
+    "/assets/generated/ui/character_creation/",
+    "/assets/generated/ui/life_simulation/"
+  ],
+  "assetCount": 53,
+  "assets": [
+    {
+      "id": "ui.characterCreation.attributeRow",
+      "path": "/assets/generated/ui/character_creation/attribute_row.png",
+      "category": "ornament",
+      "required": true,
+      "imageSize": {
+        "w": 1998,
+        "h": 270
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1950,
+        "h": 222
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.1975
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 422,
+        "h": 48
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 1950,
+        "h": 222
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.characterCreation.backgroundOriginPanel",
+      "path": "/assets/generated/ui/character_creation/background_origin_panel.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 1456,
+        "h": 1014
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1408,
+        "h": 966
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0787
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 1180,
+        "h": 810
+      },
+      "contentRect": {
+        "x": 192,
+        "y": 159,
+        "w": 1072,
+        "h": 696
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 169,
+        "right": 169,
+        "top": 116,
+        "bottom": 116
+      }
+    },
+    {
+      "id": "ui.characterCreation.blackMeditationSilhouette",
+      "path": "/assets/generated/ui/character_creation/black_meditation_silhouette.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 512,
+        "h": 512
+      },
+      "visualBounds": {
+        "x": 84,
+        "y": 71,
+        "w": 345,
+        "h": 360
+      },
+      "transparentPadding": {
+        "left": 84,
+        "right": 83,
+        "top": 71,
+        "bottom": 81,
+        "paddingRatio": 0.5262
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 345,
+        "h": 360
+      },
+      "contentRect": {
+        "x": 84,
+        "y": 71,
+        "w": 345,
+        "h": 360
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.characterAttributePanel",
+      "path": "/assets/generated/ui/character_creation/character_attribute_panel.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 985,
+        "h": 1549
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 937,
+        "h": 1501
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0782
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 937,
+        "h": 1501
+      },
+      "contentRect": {
+        "x": 136,
+        "y": 234,
+        "w": 713,
+        "h": 1081
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 112,
+        "right": 112,
+        "top": 180,
+        "bottom": 180
+      }
+    },
+    {
+      "id": "ui.characterCreation.characterCreationMainPanel",
+      "path": "/assets/generated/ui/character_creation/character_creation_main_panel.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 1478,
+        "h": 1115
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1430,
+        "h": 1067
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0741
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 1180,
+        "h": 880
+      },
+      "contentRect": {
+        "x": 195,
+        "y": 173,
+        "w": 1088,
+        "h": 769
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 172,
+        "right": 172,
+        "top": 128,
+        "bottom": 128
+      }
+    },
+    {
+      "id": "ui.characterCreation.characterPortraitFrame",
+      "path": "/assets/generated/ui/character_creation/character_portrait_frame.png",
+      "category": "iconFrame",
+      "required": true,
+      "imageSize": {
+        "w": 1011,
+        "h": 1505
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 963,
+        "h": 1457
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0779
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 48,
+        "h": 73
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 963,
+        "h": 1457
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.characterCreation.confirmLifeButton.normal",
+      "path": "/assets/generated/ui/character_creation/confirm_life_button_normal.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1861,
+        "h": 730
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1813,
+        "h": 682
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0899
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 255,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 422,
+        "y": 214,
+        "w": 1017,
+        "h": 302
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.characterCreation.confirmLifeButton"
+    },
+    {
+      "id": "ui.characterCreation.destinyCard.common",
+      "path": "/assets/generated/ui/character_creation/destiny_card_common.png",
+      "category": "card",
+      "required": true,
+      "imageSize": {
+        "w": 910,
+        "h": 1470
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 862,
+        "h": 1422
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0837
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 132,
+        "h": 218
+      },
+      "contentRect": {
+        "x": 127,
+        "y": 279,
+        "w": 656,
+        "h": 912
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 121,
+        "right": 121,
+        "top": 228,
+        "bottom": 228
+      }
+    },
+    {
+      "id": "ui.characterCreation.destinyCard.epic",
+      "path": "/assets/generated/ui/character_creation/destiny_card_epic.png",
+      "category": "card",
+      "required": true,
+      "imageSize": {
+        "w": 1014,
+        "h": 1513
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 966,
+        "h": 1465
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0776
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 132,
+        "h": 200
+      },
+      "contentRect": {
+        "x": 139,
+        "y": 287,
+        "w": 736,
+        "h": 939
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 135,
+        "right": 135,
+        "top": 234,
+        "bottom": 234
+      }
+    },
+    {
+      "id": "ui.characterCreation.destinyCard.flaw",
+      "path": "/assets/generated/ui/character_creation/destiny_card_flaw.png",
+      "category": "card",
+      "required": true,
+      "imageSize": {
+        "w": 1001,
+        "h": 1508
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 953,
+        "h": 1460
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0783
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 132,
+        "h": 202
+      },
+      "contentRect": {
+        "x": 138,
+        "y": 286,
+        "w": 725,
+        "h": 936
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 133,
+        "right": 133,
+        "top": 234,
+        "bottom": 234
+      }
+    },
+    {
+      "id": "ui.characterCreation.destinyCard.legendary",
+      "path": "/assets/generated/ui/character_creation/destiny_card_legendary.png",
+      "category": "card",
+      "required": true,
+      "imageSize": {
+        "w": 1027,
+        "h": 1537
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 979,
+        "h": 1489
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0765
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 132,
+        "h": 201
+      },
+      "contentRect": {
+        "x": 141,
+        "y": 292,
+        "w": 745,
+        "h": 953
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 137,
+        "right": 137,
+        "top": 238,
+        "bottom": 238
+      }
+    },
+    {
+      "id": "ui.characterCreation.destinyCard.rare",
+      "path": "/assets/generated/ui/character_creation/destiny_card_rare.png",
+      "category": "card",
+      "required": true,
+      "imageSize": {
+        "w": 1014,
+        "h": 1508
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 966,
+        "h": 1460
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0777
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 132,
+        "h": 200
+      },
+      "contentRect": {
+        "x": 139,
+        "y": 286,
+        "w": 736,
+        "h": 936
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 135,
+        "right": 135,
+        "top": 234,
+        "bottom": 234
+      }
+    },
+    {
+      "id": "ui.characterCreation.divinationTokenBadge",
+      "path": "/assets/generated/ui/character_creation/divination_token_badge.png",
+      "category": "iconFrame",
+      "required": true,
+      "imageSize": {
+        "w": 1026,
+        "h": 1089
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 978,
+        "h": 1041
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0888
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 68,
+        "h": 72
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 978,
+        "h": 1041
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.characterCreation.elementBadgeFrame",
+      "path": "/assets/generated/ui/character_creation/element_badge_frame.png",
+      "category": "iconFrame",
+      "required": true,
+      "imageSize": {
+        "w": 1109,
+        "h": 1163
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1061,
+        "h": 1115
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0828
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 69,
+        "h": 72
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 1061,
+        "h": 1115
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.characterCreation.fateAltarDiscActive",
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc_active.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 63,
+        "y": 63,
+        "w": 643,
+        "h": 643
+      },
+      "transparentPadding": {
+        "left": 63,
+        "right": 62,
+        "top": 63,
+        "bottom": 62,
+        "paddingRatio": 0.299
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 512
+      },
+      "contentRect": {
+        "x": 63,
+        "y": 63,
+        "w": 643,
+        "h": 643
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.fateAltarDisc",
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc.png",
+      "category": "iconFrame",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 63,
+        "y": 63,
+        "w": 643,
+        "h": 643
+      },
+      "transparentPadding": {
+        "left": 63,
+        "right": 62,
+        "top": 63,
+        "bottom": 62,
+        "paddingRatio": 0.299
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 72,
+        "h": 72
+      },
+      "contentRect": {
+        "x": 63,
+        "y": 63,
+        "w": 643,
+        "h": 643
+      },
+      "scalingMode": "fixed",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.hiddenBloodlinePanel",
+      "path": "/assets/generated/ui/character_creation/hidden_bloodline_panel.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 1563,
+        "h": 947
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1515,
+        "h": 899
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0798
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 1180,
+        "h": 700
+      },
+      "contentRect": {
+        "x": 205,
+        "y": 149,
+        "w": 1153,
+        "h": 649
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 182,
+        "right": 182,
+        "top": 108,
+        "bottom": 108
+      }
+    },
+    {
+      "id": "ui.characterCreation.nameInputField",
+      "path": "/assets/generated/ui/character_creation/name_input_field.png",
+      "category": "ornament",
+      "required": true,
+      "imageSize": {
+        "w": 1990,
+        "h": 415
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1942,
+        "h": 367
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.137
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 254,
+        "h": 48
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 1942,
+        "h": 367
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.characterCreation.rerollFateButton.hover",
+      "path": "/assets/generated/ui/character_creation/reroll_fate_button_hover.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1900,
+        "h": 782
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1852,
+        "h": 734
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0851
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 242,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 431,
+        "y": 229,
+        "w": 1038,
+        "h": 324
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.characterCreation.rerollFateButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rerollFateButton.normal",
+      "path": "/assets/generated/ui/character_creation/reroll_fate_button_normal.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1818,
+        "h": 753
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1770,
+        "h": 705
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0885
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 241,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 413,
+        "y": 221,
+        "w": 992,
+        "h": 311
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.characterCreation.rerollFateButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.earth",
+      "path": "/assets/generated/ui/character_creation/root_aura_earth.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 85,
+        "right": 84,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3917
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 512
+      },
+      "contentRect": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.fire",
+      "path": "/assets/generated/ui/character_creation/root_aura_fire.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 85,
+        "right": 84,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3917
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 512
+      },
+      "contentRect": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.metal",
+      "path": "/assets/generated/ui/character_creation/root_aura_metal.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 85,
+        "right": 84,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3917
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 512
+      },
+      "contentRect": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.mixed",
+      "path": "/assets/generated/ui/character_creation/root_aura_mixed.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 77,
+        "y": 85,
+        "w": 615,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 77,
+        "right": 76,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3754
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 499
+      },
+      "contentRect": {
+        "x": 77,
+        "y": 85,
+        "w": 615,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.thunder",
+      "path": "/assets/generated/ui/character_creation/root_aura_thunder.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 77,
+        "y": 85,
+        "w": 615,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 77,
+        "right": 76,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3754
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 499
+      },
+      "contentRect": {
+        "x": 77,
+        "y": 85,
+        "w": 615,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.water",
+      "path": "/assets/generated/ui/character_creation/root_aura_water.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 85,
+        "right": 84,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3917
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 512
+      },
+      "contentRect": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.wood",
+      "path": "/assets/generated/ui/character_creation/root_aura_wood.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 85,
+        "right": 84,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3917
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 512
+      },
+      "contentRect": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.rootAura.yin",
+      "path": "/assets/generated/ui/character_creation/root_aura_yin.png",
+      "category": "overlay",
+      "required": true,
+      "imageSize": {
+        "w": 768,
+        "h": 768
+      },
+      "visualBounds": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "transparentPadding": {
+        "left": 85,
+        "right": 84,
+        "top": 85,
+        "bottom": 84,
+        "paddingRatio": 0.3917
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 512,
+        "h": 512
+      },
+      "contentRect": {
+        "x": 85,
+        "y": 85,
+        "w": 599,
+        "h": 599
+      },
+      "scalingMode": "contain",
+      "warnings": [
+        "hugeTransparentPadding"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.spiritualRootDisc",
+      "path": "/assets/generated/ui/character_creation/spiritual_root_disc.png",
+      "category": "iconFrame",
+      "required": true,
+      "imageSize": {
+        "w": 1226,
+        "h": 1227
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1178,
+        "h": 1179
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0767
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 72,
+        "h": 72
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 1178,
+        "h": 1179
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.characterCreation.traitLockButton.locked",
+      "path": "/assets/generated/ui/character_creation/trait_lock_button_locked.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1140,
+        "h": 1162
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1092,
+        "h": 1114
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0817
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 94,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 264,
+        "y": 335,
+        "w": 612,
+        "h": 492
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.characterCreation.traitLockButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.characterCreation.traitLockButton.unlocked",
+      "path": "/assets/generated/ui/character_creation/trait_lock_button_unlocked.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1134,
+        "h": 1161
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1086,
+        "h": 1113
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0819
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 94,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 262,
+        "y": 335,
+        "w": 610,
+        "h": 491
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.characterCreation.traitLockButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.common.closeButton.disabled",
+      "path": "/assets/generated/ui/common/close_button_disabled.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1106,
+        "h": 1132
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1058,
+        "h": 1084
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.084
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 94,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 256,
+        "y": 327,
+        "w": 594,
+        "h": 478
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.common.closeButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.common.closeButton.hover",
+      "path": "/assets/generated/ui/common/close_button_hover.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1157,
+        "h": 1136
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1109,
+        "h": 1088
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.082
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 98,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 267,
+        "y": 328,
+        "w": 623,
+        "h": 480
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.common.closeButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.common.closeButton.normal",
+      "path": "/assets/generated/ui/common/close_button_normal.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1095,
+        "h": 1096
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1047,
+        "h": 1048
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0857
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 96,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 254,
+        "y": 317,
+        "w": 587,
+        "h": 462
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.common.closeButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.common.closeButton.pressed",
+      "path": "/assets/generated/ui/common/close_button_pressed.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1124,
+        "h": 1111
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1076,
+        "h": 1063
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0841
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 97,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 260,
+        "y": 321,
+        "w": 604,
+        "h": 469
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.common.closeButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.hover",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_hover.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 2029,
+        "h": 504
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1981,
+        "h": 456
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.1166
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 320,
+        "h": 74
+      },
+      "contentRect": {
+        "x": 459,
+        "y": 151,
+        "w": 1111,
+        "h": 202
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.lifeSimulation.lifeChoiceButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.normal",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_normal.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1860,
+        "h": 437
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1812,
+        "h": 389
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.1328
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 320,
+        "h": 69
+      },
+      "contentRect": {
+        "x": 422,
+        "y": 132,
+        "w": 1016,
+        "h": 173
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.lifeSimulation.lifeChoiceButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceEventCard",
+      "path": "/assets/generated/ui/life_simulation/life_choice_event_card.png",
+      "category": "card",
+      "required": true,
+      "imageSize": {
+        "w": 1346,
+        "h": 1110
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1298,
+        "h": 1062
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0774
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 232,
+        "h": 190
+      },
+      "contentRect": {
+        "x": 179,
+        "y": 215,
+        "w": 988,
+        "h": 680
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 182,
+        "right": 182,
+        "top": 170,
+        "bottom": 170
+      }
+    },
+    {
+      "id": "ui.lifeSimulation.lifeEventLogPanel",
+      "path": "/assets/generated/ui/life_simulation/life_event_log_panel.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 1015,
+        "h": 1599
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 967,
+        "h": 1551
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0759
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 967,
+        "h": 1551
+      },
+      "contentRect": {
+        "x": 140,
+        "y": 241,
+        "w": 735,
+        "h": 1117
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 116,
+        "right": 116,
+        "top": 186,
+        "bottom": 186
+      }
+    },
+    {
+      "id": "ui.lifeSimulation.lifeTimelineVertical",
+      "path": "/assets/generated/ui/life_simulation/life_timeline_vertical.png",
+      "category": "ornament",
+      "required": true,
+      "imageSize": {
+        "w": 443,
+        "h": 1810
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 395,
+        "h": 1762
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.132
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 54,
+        "h": 240
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 395,
+        "h": 1762
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.save.createSaveButton.hover",
+      "path": "/assets/generated/ui/save/create_save_button_hover.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1942,
+        "h": 721
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1894,
+        "h": 673
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0896
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 270,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 440,
+        "y": 212,
+        "w": 1062,
+        "h": 297
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.save.createSaveButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.save.createSaveButton.normal",
+      "path": "/assets/generated/ui/save/create_save_button_normal.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1995,
+        "h": 700
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1947,
+        "h": 652
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.091
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 287,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 452,
+        "y": 206,
+        "w": 1091,
+        "h": 288
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.save.createSaveButton",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.save.dangerButton.normal",
+      "path": "/assets/generated/ui/save/danger_button_normal.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1960,
+        "h": 706
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1912,
+        "h": 658
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0908
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 279,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 444,
+        "y": 208,
+        "w": 1072,
+        "h": 290
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.save.dangerButton"
+    },
+    {
+      "id": "ui.save.loadSaveButton.normal",
+      "path": "/assets/generated/ui/save/load_save_button_normal.png",
+      "category": "button",
+      "required": true,
+      "imageSize": {
+        "w": 1961,
+        "h": 650
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1913,
+        "h": 602
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0965
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 305,
+        "h": 96
+      },
+      "contentRect": {
+        "x": 444,
+        "y": 192,
+        "w": 1073,
+        "h": 266
+      },
+      "scalingMode": "fixed",
+      "stateGroup": "ui.save.loadSaveButton"
+    },
+    {
+      "id": "ui.save.overwriteConfirmDialog",
+      "path": "/assets/generated/ui/save/overwrite_confirm_dialog.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 1489,
+        "h": 1030
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1441,
+        "h": 982
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0773
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 1180,
+        "h": 804
+      },
+      "contentRect": {
+        "x": 196,
+        "y": 161,
+        "w": 1097,
+        "h": 708
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 173,
+        "right": 173,
+        "top": 118,
+        "bottom": 118
+      }
+    },
+    {
+      "id": "ui.save.saveAvatarFrame",
+      "path": "/assets/generated/ui/save/save_avatar_frame.png",
+      "category": "iconFrame",
+      "required": true,
+      "imageSize": {
+        "w": 1214,
+        "h": 1212
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1166,
+        "h": 1164
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0776
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 72,
+        "h": 72
+      },
+      "contentRect": {
+        "x": 24,
+        "y": 24,
+        "w": 1166,
+        "h": 1164
+      },
+      "scalingMode": "fixed"
+    },
+    {
+      "id": "ui.save.savePanelFrame",
+      "path": "/assets/generated/ui/save/save_panel_frame.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 1451,
+        "h": 982
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1403,
+        "h": 934
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0803
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 1180,
+        "h": 786
+      },
+      "contentRect": {
+        "x": 192,
+        "y": 154,
+        "w": 1067,
+        "h": 674
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 168,
+        "right": 168,
+        "top": 112,
+        "bottom": 112
+      }
+    },
+    {
+      "id": "ui.save.savePanelInnerBg",
+      "path": "/assets/generated/ui/save/save_panel_inner_bg.png",
+      "category": "panel",
+      "required": true,
+      "imageSize": {
+        "w": 1200,
+        "h": 720
+      },
+      "visualBounds": {
+        "x": 17,
+        "y": 15,
+        "w": 1167,
+        "h": 689
+      },
+      "transparentPadding": {
+        "left": 17,
+        "right": 16,
+        "top": 15,
+        "bottom": 16,
+        "paddingRatio": 0.0694
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 1167,
+        "h": 689
+      },
+      "contentRect": {
+        "x": 157,
+        "y": 111,
+        "w": 887,
+        "h": 497
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 140,
+        "right": 140,
+        "top": 83,
+        "bottom": 83
+      }
+    },
+    {
+      "id": "ui.save.saveSlot.disabled",
+      "path": "/assets/generated/ui/save/save_slot_disabled.png",
+      "category": "slot",
+      "required": true,
+      "imageSize": {
+        "w": 1746,
+        "h": 679
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1698,
+        "h": 631
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0962
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 506,
+        "h": 188
+      },
+      "contentRect": {
+        "x": 227,
+        "y": 137,
+        "w": 1292,
+        "h": 405
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 238,
+        "right": 238,
+        "top": 101,
+        "bottom": 101
+      },
+      "stateGroup": "ui.save.saveSlot"
+    },
+    {
+      "id": "ui.save.saveSlotEmpty",
+      "path": "/assets/generated/ui/save/save_slot_empty.png",
+      "category": "slot",
+      "required": true,
+      "imageSize": {
+        "w": 1754,
+        "h": 787
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1706,
+        "h": 739
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0867
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 434,
+        "h": 188
+      },
+      "contentRect": {
+        "x": 228,
+        "y": 157,
+        "w": 1298,
+        "h": 473
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 239,
+        "right": 239,
+        "top": 118,
+        "bottom": 118
+      }
+    },
+    {
+      "id": "ui.save.saveSlotExisting.hover",
+      "path": "/assets/generated/ui/save/save_slot_existing_hover.png",
+      "category": "slot",
+      "required": true,
+      "imageSize": {
+        "w": 1825,
+        "h": 682
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1777,
+        "h": 634
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0948
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 527,
+        "h": 188
+      },
+      "contentRect": {
+        "x": 237,
+        "y": 138,
+        "w": 1351,
+        "h": 406
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 249,
+        "right": 249,
+        "top": 101,
+        "bottom": 101
+      },
+      "stateGroup": "ui.save.saveSlotExisting",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.save.saveSlotExisting.normal",
+      "path": "/assets/generated/ui/save/save_slot_existing_normal.png",
+      "category": "slot",
+      "required": true,
+      "imageSize": {
+        "w": 1766,
+        "h": 624
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1718,
+        "h": 576
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.102
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 560,
+        "h": 188
+      },
+      "contentRect": {
+        "x": 230,
+        "y": 127,
+        "w": 1306,
+        "h": 370
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 241,
+        "right": 241,
+        "top": 92,
+        "bottom": 92
+      },
+      "stateGroup": "ui.save.saveSlotExisting",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    {
+      "id": "ui.save.saveSlotExisting.selected",
+      "path": "/assets/generated/ui/save/save_slot_existing_selected.png",
+      "category": "slot",
+      "required": true,
+      "imageSize": {
+        "w": 1722,
+        "h": 735
+      },
+      "visualBounds": {
+        "x": 24,
+        "y": 24,
+        "w": 1674,
+        "h": 687
+      },
+      "transparentPadding": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24,
+        "paddingRatio": 0.0914
+      },
+      "mostlyEmpty": false,
+      "recommendedDisplaySize": {
+        "w": 458,
+        "h": 188
+      },
+      "contentRect": {
+        "x": 224,
+        "y": 147,
+        "w": 1274,
+        "h": 441
+      },
+      "scalingMode": "nineSlice",
+      "nineSlice": {
+        "left": 234,
+        "right": 234,
+        "top": 110,
+        "bottom": 110
+      },
+      "stateGroup": "ui.save.saveSlotExisting",
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    }
+  ],
+  "warnings": [
+    {
+      "id": "ui.characterCreation.blackMeditationSilhouette",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/black_meditation_silhouette.png"
+    },
+    {
+      "id": "ui.characterCreation.fateAltarDiscActive",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc_active.png"
+    },
+    {
+      "id": "ui.characterCreation.fateAltarDisc",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/fate_altar_disc.png"
+    },
+    {
+      "id": "ui.characterCreation.rerollFateButton.hover",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/character_creation/reroll_fate_button_hover.png"
+    },
+    {
+      "id": "ui.characterCreation.rerollFateButton.normal",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/character_creation/reroll_fate_button_normal.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.earth",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_earth.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.fire",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_fire.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.metal",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_metal.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.mixed",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_mixed.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.thunder",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_thunder.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.water",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_water.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.wood",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_wood.png"
+    },
+    {
+      "id": "ui.characterCreation.rootAura.yin",
+      "code": "hugeTransparentPadding",
+      "path": "/assets/generated/ui/character_creation/root_aura_yin.png"
+    },
+    {
+      "id": "ui.characterCreation.traitLockButton.locked",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/character_creation/trait_lock_button_locked.png"
+    },
+    {
+      "id": "ui.characterCreation.traitLockButton.unlocked",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/character_creation/trait_lock_button_unlocked.png"
+    },
+    {
+      "id": "ui.common.closeButton.disabled",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_disabled.png"
+    },
+    {
+      "id": "ui.common.closeButton.disabled",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_disabled.png"
+    },
+    {
+      "id": "ui.common.closeButton.hover",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_hover.png"
+    },
+    {
+      "id": "ui.common.closeButton.hover",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_hover.png"
+    },
+    {
+      "id": "ui.common.closeButton.normal",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_normal.png"
+    },
+    {
+      "id": "ui.common.closeButton.normal",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_normal.png"
+    },
+    {
+      "id": "ui.common.closeButton.pressed",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_pressed.png"
+    },
+    {
+      "id": "ui.common.closeButton.pressed",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/common/close_button_pressed.png"
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.hover",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_hover.png"
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.hover",
+      "code": "stateGroupVisualAspectMismatch",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_hover.png"
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.hover",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_hover.png"
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.normal",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_normal.png"
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.normal",
+      "code": "stateGroupVisualAspectMismatch",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_normal.png"
+    },
+    {
+      "id": "ui.lifeSimulation.lifeChoiceButton.normal",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/life_simulation/life_choice_button_normal.png"
+    },
+    {
+      "id": "ui.save.createSaveButton.hover",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/save/create_save_button_hover.png"
+    },
+    {
+      "id": "ui.save.createSaveButton.hover",
+      "code": "stateGroupVisualAspectMismatch",
+      "path": "/assets/generated/ui/save/create_save_button_hover.png"
+    },
+    {
+      "id": "ui.save.createSaveButton.hover",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/save/create_save_button_hover.png"
+    },
+    {
+      "id": "ui.save.createSaveButton.normal",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/save/create_save_button_normal.png"
+    },
+    {
+      "id": "ui.save.createSaveButton.normal",
+      "code": "stateGroupVisualAspectMismatch",
+      "path": "/assets/generated/ui/save/create_save_button_normal.png"
+    },
+    {
+      "id": "ui.save.createSaveButton.normal",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/save/create_save_button_normal.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.hover",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_hover.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.hover",
+      "code": "stateGroupVisualAspectMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_hover.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.hover",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_hover.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.normal",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_normal.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.normal",
+      "code": "stateGroupVisualAspectMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_normal.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.normal",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_normal.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.selected",
+      "code": "stateGroupImageSizeMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_selected.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.selected",
+      "code": "stateGroupVisualAspectMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_selected.png"
+    },
+    {
+      "id": "ui.save.saveSlotExisting.selected",
+      "code": "stateGroupDisplaySizeMismatch",
+      "path": "/assets/generated/ui/save/save_slot_existing_selected.png"
+    }
+  ],
+  "stateGroups": {
+    "ui.characterCreation.confirmLifeButton": {
+      "ids": [
+        "ui.characterCreation.confirmLifeButton.normal"
+      ],
+      "warnings": []
+    },
+    "ui.characterCreation.rerollFateButton": {
+      "ids": [
+        "ui.characterCreation.rerollFateButton.hover",
+        "ui.characterCreation.rerollFateButton.normal"
+      ],
+      "warnings": [
+        "stateGroupImageSizeMismatch"
+      ]
+    },
+    "ui.characterCreation.traitLockButton": {
+      "ids": [
+        "ui.characterCreation.traitLockButton.locked",
+        "ui.characterCreation.traitLockButton.unlocked"
+      ],
+      "warnings": [
+        "stateGroupImageSizeMismatch"
+      ]
+    },
+    "ui.common.closeButton": {
+      "ids": [
+        "ui.common.closeButton.disabled",
+        "ui.common.closeButton.hover",
+        "ui.common.closeButton.normal",
+        "ui.common.closeButton.pressed"
+      ],
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    "ui.lifeSimulation.lifeChoiceButton": {
+      "ids": [
+        "ui.lifeSimulation.lifeChoiceButton.hover",
+        "ui.lifeSimulation.lifeChoiceButton.normal"
+      ],
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    "ui.save.createSaveButton": {
+      "ids": [
+        "ui.save.createSaveButton.hover",
+        "ui.save.createSaveButton.normal"
+      ],
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    },
+    "ui.save.dangerButton": {
+      "ids": [
+        "ui.save.dangerButton.normal"
+      ],
+      "warnings": []
+    },
+    "ui.save.loadSaveButton": {
+      "ids": [
+        "ui.save.loadSaveButton.normal"
+      ],
+      "warnings": []
+    },
+    "ui.save.saveSlot": {
+      "ids": [
+        "ui.save.saveSlot.disabled"
+      ],
+      "warnings": []
+    },
+    "ui.save.saveSlotExisting": {
+      "ids": [
+        "ui.save.saveSlotExisting.hover",
+        "ui.save.saveSlotExisting.normal",
+        "ui.save.saveSlotExisting.selected"
+      ],
+      "warnings": [
+        "stateGroupImageSizeMismatch",
+        "stateGroupVisualAspectMismatch",
+        "stateGroupDisplaySizeMismatch"
+      ]
+    }
+  }
+}

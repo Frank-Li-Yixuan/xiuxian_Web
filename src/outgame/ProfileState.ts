@@ -1,11 +1,22 @@
 import type { RunSettlementReceipt } from "../sim/settlement/RunSettlement";
+import type { CharacterOriginState } from "../types/character-creation-types.v0.1";
 import { addResources, copyResourceMap, type ResourceMap } from "./ResourceWallet";
 
 export type ResourceWallet = ResourceMap;
+export type LifeSimulationStatus = "simulating" | "completed";
+
+export interface LifeSimulationProgressState {
+  readonly status: LifeSimulationStatus;
+  readonly ageYears: number;
+}
 
 export interface OutgameProfileState {
   readonly saveVersion: string;
   readonly profileId: string;
+  readonly saveName?: string;
+  readonly characterName?: string;
+  readonly characterOrigin?: CharacterOriginState;
+  readonly lifeSimulation?: LifeSimulationProgressState;
   readonly createdAtMs?: number;
   readonly updatedAtMs?: number;
   readonly realm: RealmProgressState;
@@ -173,6 +184,27 @@ function validateProfile(profile: OutgameProfileState): void {
   }
   if (profile.profileId.length === 0) {
     throw new Error("profileId must not be empty");
+  }
+  if (profile.saveName !== undefined && profile.saveName.trim().length === 0) {
+    throw new Error("profile saveName must not be empty when provided");
+  }
+  if (profile.characterName !== undefined && profile.characterName.trim().length === 0) {
+    throw new Error("profile characterName must not be empty when provided");
+  }
+  if (profile.characterOrigin !== undefined) {
+    if (profile.characterOrigin.characterId.trim().length === 0) {
+      throw new Error("profile characterOrigin characterId must not be empty");
+    }
+    if (profile.characterOrigin.name.trim().length === 0) {
+      throw new Error("profile characterOrigin name must not be empty");
+    }
+    assertNonNegativeInteger(profile.characterOrigin.confirmedAtMs, "characterOrigin.confirmedAtMs");
+  }
+  if (profile.lifeSimulation !== undefined) {
+    if (profile.lifeSimulation.status !== "simulating" && profile.lifeSimulation.status !== "completed") {
+      throw new Error("profile lifeSimulation status is invalid");
+    }
+    assertNonNegativeInteger(profile.lifeSimulation.ageYears, "lifeSimulation.ageYears");
   }
   assertNonNegativeFinite(profile.realm.cultivation, "realm.cultivation");
   assertNonNegativeFinite(profile.realm.cultivationToNext, "realm.cultivationToNext");

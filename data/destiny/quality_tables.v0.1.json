@@ -1,0 +1,179 @@
+{
+  "version": "0.1",
+  "qualities": [
+    {
+      "id": "mortal",
+      "name": "凡命",
+      "rank": 1,
+      "positiveBudget": [
+        1,
+        2
+      ],
+      "negativeBudget": [
+        0,
+        0
+      ],
+      "frameAsset": "destiny_card_common",
+      "color": "#8fa6a0"
+    },
+    {
+      "id": "good",
+      "name": "良命",
+      "rank": 2,
+      "positiveBudget": [
+        2,
+        4
+      ],
+      "negativeBudget": [
+        0,
+        1
+      ],
+      "frameAsset": "destiny_card_good",
+      "color": "#7fd7bf"
+    },
+    {
+      "id": "rare",
+      "name": "奇命",
+      "rank": 3,
+      "positiveBudget": [
+        4,
+        7
+      ],
+      "negativeBudget": [
+        1,
+        2
+      ],
+      "frameAsset": "destiny_card_rare",
+      "color": "#5fd7ff"
+    },
+    {
+      "id": "mystic",
+      "name": "玄命",
+      "rank": 4,
+      "positiveBudget": [
+        7,
+        11
+      ],
+      "negativeBudget": [
+        2,
+        5
+      ],
+      "frameAsset": "destiny_card_epic",
+      "color": "#a27cff"
+    },
+    {
+      "id": "earthly",
+      "name": "地命",
+      "rank": 5,
+      "positiveBudget": [
+        11,
+        16
+      ],
+      "negativeBudget": [
+        5,
+        8
+      ],
+      "frameAsset": "destiny_card_legendary",
+      "color": "#f0c66a"
+    },
+    {
+      "id": "heavenly",
+      "name": "天命",
+      "rank": 6,
+      "positiveBudget": [
+        16,
+        24
+      ],
+      "negativeBudget": [
+        8,
+        14
+      ],
+      "frameAsset": "destiny_card_heavenly",
+      "color": "#fff4aa"
+    },
+    {
+      "id": "defiant",
+      "name": "逆命",
+      "rank": 7,
+      "positiveBudget": [
+        18,
+        28
+      ],
+      "negativeBudget": [
+        10,
+        18
+      ],
+      "frameAsset": "destiny_card_defiant",
+      "color": "#f2b65c"
+    },
+    {
+      "id": "forbidden",
+      "name": "禁命",
+      "rank": 8,
+      "positiveBudget": [
+        24,
+        40
+      ],
+      "negativeBudget": [
+        15,
+        30
+      ],
+      "frameAsset": "destiny_card_forbidden",
+      "color": "#b13cff"
+    }
+  ],
+  "qualityWeights": {
+    "main": {
+      "good": 38,
+      "rare": 30,
+      "mystic": 20,
+      "earthly": 8,
+      "heavenly": 3,
+      "defiant": 0.8,
+      "forbidden": 0.2
+    },
+    "secondary": {
+      "mortal": 25,
+      "good": 38,
+      "rare": 25,
+      "mystic": 10,
+      "earthly": 2
+    },
+    "flawSeverity": {
+      "minor": 45,
+      "medium": 35,
+      "major": 17,
+      "death": 3
+    }
+  },
+  "budgetCostReference": [
+    {
+      "effect": "单项资质 +5",
+      "cost": 1
+    },
+    {
+      "effect": "修炼收益 +10%",
+      "cost": 1
+    },
+    {
+      "effect": "事件权重 +50%",
+      "cost": 2
+    },
+    {
+      "effect": "自动保命一次",
+      "cost": 6
+    },
+    {
+      "effect": "核心循环改写",
+      "cost": "12+"
+    },
+    {
+      "effect": "寿元 -70%",
+      "cost": -10
+    },
+    {
+      "effect": "雷劫强度 +1",
+      "cost": -3
+    }
+  ]
+}

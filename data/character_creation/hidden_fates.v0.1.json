@@ -1,0 +1,77 @@
+{
+  "version": "0.1",
+  "hiddenFates": [
+    {
+      "id": "hidden_thunder_blood",
+      "secretName": "古雷真血",
+      "hint": "你偶尔能听见雷云深处的战鼓。",
+      "rarity": "legendary",
+      "tags": ["雷法", "雷劫", "血脉"],
+      "revealConditions": ["雷雨事件累计 3 次", "域外战场遭遇雷击未死"],
+      "latentEffects": { "thunderEventWeight": 1.5, "tribulationBoonWeight": 1.2 }
+    },
+    {
+      "id": "hidden_taiyin_vein",
+      "secretName": "太阴残脉",
+      "hint": "月夜时，你总觉得额心有一缕凉意。",
+      "rarity": "epic",
+      "tags": ["魂修", "月华", "神识"],
+      "revealConditions": ["玄月事件", "神魂出窍"],
+      "latentEffects": { "soulEventWeight": 1.45, "shen": 5 }
+    },
+    {
+      "id": "hidden_dragon_bone",
+      "secretName": "龙骨未醒",
+      "hint": "你幼时跌落高崖，却只擦破了皮。",
+      "rarity": "epic",
+      "tags": ["炼体", "根骨", "护体"],
+      "revealConditions": ["重伤事件后存活", "炼体功法入门"],
+      "latentEffects": { "rootBone": 8, "injuryResistance": 1.2 }
+    },
+    {
+      "id": "hidden_alchemy_saint_bone",
+      "secretName": "丹圣遗骨",
+      "hint": "你闻到草药时，脑中偶尔浮现陌生火候。",
+      "rarity": "legendary",
+      "tags": ["炼丹", "火候", "药性"],
+      "revealConditions": ["炼丹事件成功 3 次", "火候事件完美处理"],
+      "latentEffects": { "alchemySuccess": 1.35, "toxinControl": 1.2 }
+    },
+    {
+      "id": "hidden_sword_soul_fragment",
+      "secretName": "前世剑魄",
+      "hint": "你握住木枝时，仿佛听见一声极远的剑鸣。",
+      "rarity": "legendary",
+      "tags": ["剑修", "前世", "器灵"],
+      "revealConditions": ["获得飞剑", "无伤击杀精英"],
+      "latentEffects": { "swordRewardWeight": 1.45, "artifactSpiritWeight": 1.25 }
+    },
+    {
+      "id": "hidden_merit_seed",
+      "secretName": "功德种子",
+      "hint": "你救助弱小时，胸口会浮起一丝暖意。",
+      "rarity": "rare",
+      "tags": ["功德", "护生", "气运"],
+      "revealConditions": ["救援事件", "功德达到阈值"],
+      "latentEffects": { "meritGain": 1.25, "fatalSaveWeight": 1.1 }
+    },
+    {
+      "id": "hidden_demon_mark",
+      "secretName": "魔印微痕",
+      "hint": "镜中倒影有时会比你慢半拍。",
+      "rarity": "epic",
+      "tags": ["魔念", "心魔", "高风险"],
+      "revealConditions": ["心魔事件", "魔念选择"],
+      "latentEffects": { "heartDemonWeight": 1.5, "demonRewardWeight": 1.3 }
+    },
+    {
+      "id": "hidden_system_resonance",
+      "secretName": "系统共鸣体",
+      "hint": "你总觉得世间万物背后有一层看不见的界面。",
+      "rarity": "legendary",
+      "tags": ["系统", "域外", "命运"],
+      "revealConditions": ["十八岁系统觉醒"],
+      "latentEffects": { "outerBattlefieldBoon": 1.25, "rerollQuality": 1.15 }
+    }
+  ]
+}

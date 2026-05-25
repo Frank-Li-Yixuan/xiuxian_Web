@@ -1,0 +1,105 @@
+{
+  "version": "0.1",
+  "roots": [
+    {
+      "id": "root_metal",
+      "name": "金灵根",
+      "rarity": "common",
+      "elements": ["metal"],
+      "tags": ["飞剑", "破甲", "暴击"],
+      "description": "金性锐利，适合剑修、穿透与杀伐。",
+      "statBias": { "shen": 6, "rootBone": 4, "comprehension": 2 },
+      "rewardWeights": { "sword": 1.25, "metal_spell": 1.2 }
+    },
+    {
+      "id": "root_wood",
+      "name": "木灵根",
+      "rarity": "common",
+      "elements": ["wood"],
+      "tags": ["生发", "药理", "恢复"],
+      "description": "木性生发，适合药道、回复、藤木控制。",
+      "statBias": { "jing": 4, "qi": 3, "rootBone": 4, "inspiration": 2 },
+      "rewardWeights": { "alchemy": 1.2, "recovery": 1.25 }
+    },
+    {
+      "id": "root_water",
+      "name": "水灵根",
+      "rarity": "common",
+      "elements": ["water"],
+      "tags": ["清心", "真元", "护盾"],
+      "description": "水性潜藏，适合真元回复、清心、护盾与保命。",
+      "statBias": { "qi": 6, "shen": 2, "heart": 5 },
+      "rewardWeights": { "qi_regen": 1.25, "defense": 1.15 }
+    },
+    {
+      "id": "root_fire",
+      "name": "火灵根",
+      "rarity": "common",
+      "elements": ["fire"],
+      "tags": ["爆发", "炼丹", "灼烧"],
+      "description": "火性炽烈，适合炼丹、爆发、灼烧与雷火连携。",
+      "statBias": { "qi": 4, "comprehension": 4, "inspiration": 3 },
+      "rewardWeights": { "fire_spell": 1.25, "burst": 1.2 }
+    },
+    {
+      "id": "root_earth",
+      "name": "土灵根",
+      "rarity": "common",
+      "elements": ["earth"],
+      "tags": ["承载", "阵法", "防御"],
+      "description": "土性厚重，适合阵法、重印、防御与聚灵。",
+      "statBias": { "jing": 6, "rootBone": 5, "heart": 2 },
+      "rewardWeights": { "formation": 1.25, "defense": 1.2 }
+    },
+    {
+      "id": "root_thunder",
+      "name": "雷灵根",
+      "rarity": "rare",
+      "elements": ["thunder"],
+      "tags": ["雷法", "天劫", "清场"],
+      "description": "雷性刚猛，适合雷法与清场，但更容易引来劫数。",
+      "statBias": { "qi": 6, "shen": 4, "inspiration": 5, "heart": -2 },
+      "rewardWeights": { "thunder_spell": 1.45, "tribulation": 1.15 }
+    },
+    {
+      "id": "root_yin",
+      "name": "阴灵根",
+      "rarity": "rare",
+      "elements": ["yin"],
+      "tags": ["魂修", "梦境", "神魂"],
+      "description": "阴性幽微，适合神魂、梦境、心魔与月华路线。",
+      "statBias": { "shen": 8, "inspiration": 6, "jing": -2 },
+      "rewardWeights": { "soul": 1.4, "hidden_event": 1.2 }
+    },
+    {
+      "id": "root_mixed",
+      "name": "杂灵根",
+      "rarity": "uncommon",
+      "elements": ["metal", "wood", "water", "fire", "earth"],
+      "tags": ["驳杂", "适应", "逆命"],
+      "description": "五行驳杂，修炼较慢，但适配路线极广。",
+      "statBias": { "rootBone": -4, "heart": 5, "fortune": 4 },
+      "rewardWeights": { "general": 1.15, "rare_combo": 1.1 }
+    },
+    {
+      "id": "root_heavenly_metal",
+      "name": "天金灵根",
+      "rarity": "legendary",
+      "elements": ["metal"],
+      "tags": ["天灵根", "剑修", "极端"],
+      "description": "金性近道，剑修天资惊人，但路线偏窄。",
+      "statBias": { "shen": 14, "comprehension": 8, "fortune": -3 },
+      "rewardWeights": { "sword": 1.7, "other_element": 0.7 }
+    },
+    {
+      "id": "root_heavenly_thunder",
+      "name": "天雷灵根",
+      "rarity": "legendary",
+      "elements": ["thunder"],
+      "tags": ["天灵根", "雷法", "劫数"],
+      "description": "天雷入命，雷法近乎本能，但天道注视更重。",
+      "statBias": { "qi": 12, "shen": 10, "heart": -4 },
+      "rewardWeights": { "thunder_spell": 1.9, "tribulation": 1.35 }
+    }
+  ]
+}
