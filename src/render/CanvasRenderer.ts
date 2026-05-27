@@ -7,7 +7,6 @@ import type {
   CanvasPresentationPlayer,
   CanvasPresentationPlayerProjectile,
   CanvasPresentationState,
-  CanvasPresentationVisualEvent,
   CanvasPresentationWarning
 } from "./CanvasPresentationState";
 import type {
@@ -32,10 +31,21 @@ import {
   type RenderLayerDefinition,
   type RenderLayerStack
 } from "./RenderLayerStack";
-import { createRenderVfxParticles } from "./RenderVfxTimeline";
+import type { AbilityVfxRenderer } from "./AbilityVfxRenderer";
+import type { CombatVfxRenderer } from "./CombatVfxRenderer";
+import { computeImpactScreenShake, ImpactVfxRenderer } from "./ImpactVfxRenderer";
+import type { PickupPresentationSystem } from "./PickupPresentationSystem";
+import type { ProjectileSkinRenderer } from "./ProjectileSkinRenderer";
+import type { SpriteEntityRenderer } from "./SpriteEntityRenderer";
 
 export interface CanvasRendererOptions {
   readonly layerStack?: RenderLayerStack;
+  readonly abilityVfxRenderer?: AbilityVfxRenderer;
+  readonly combatVfxRenderer?: CombatVfxRenderer;
+  readonly impactVfxRenderer?: ImpactVfxRenderer;
+  readonly projectileSkinRenderer?: ProjectileSkinRenderer;
+  readonly pickupPresentationSystem?: PickupPresentationSystem;
+  readonly spriteEntityRenderer?: SpriteEntityRenderer;
 }
 
 export interface CanvasRenderFrame {
@@ -73,9 +83,21 @@ const DEFAULT_RENDER_LAYERS: readonly RenderLayerDefinition[] = [
 
 export class CanvasRenderer {
   private readonly layerStack: RenderLayerStack;
+  private readonly abilityVfxRenderer: AbilityVfxRenderer | undefined;
+  private readonly combatVfxRenderer: CombatVfxRenderer | undefined;
+  private readonly impactVfxRenderer: ImpactVfxRenderer;
+  private readonly projectileSkinRenderer: ProjectileSkinRenderer | undefined;
+  private readonly pickupPresentationSystem: PickupPresentationSystem | undefined;
+  private readonly spriteEntityRenderer: SpriteEntityRenderer | undefined;
 
   public constructor(options: CanvasRendererOptions = {}) {
     this.layerStack = options.layerStack ?? createRenderLayerStack(DEFAULT_RENDER_LAYERS);
+    this.abilityVfxRenderer = options.abilityVfxRenderer;
+    this.combatVfxRenderer = options.combatVfxRenderer;
+    this.impactVfxRenderer = options.impactVfxRenderer ?? new ImpactVfxRenderer();
+    this.projectileSkinRenderer = options.projectileSkinRenderer;
+    this.pickupPresentationSystem = options.pickupPresentationSystem;
+    this.spriteEntityRenderer = options.spriteEntityRenderer;
   }
 
   public buildRenderCommands(frame: CanvasRenderFrame): readonly RenderCommand[] {
@@ -93,7 +115,29 @@ export class CanvasRenderer {
     ];
 
     if (frame.presentation !== undefined) {
-      commands.push(...createPresentationCommands(frame.presentation));
+      const presentationOptions: {
+        abilityVfxRenderer?: AbilityVfxRenderer;
+        impactVfxRenderer: ImpactVfxRenderer;
+        projectileSkinRenderer?: ProjectileSkinRenderer;
+        pickupPresentationSystem?: PickupPresentationSystem;
+        spriteEntityRenderer?: SpriteEntityRenderer;
+      } = { impactVfxRenderer: this.impactVfxRenderer };
+      if (this.abilityVfxRenderer !== undefined) {
+        presentationOptions.abilityVfxRenderer = this.abilityVfxRenderer;
+      }
+      if (this.projectileSkinRenderer !== undefined) {
+        presentationOptions.projectileSkinRenderer = this.projectileSkinRenderer;
+      }
+      if (this.pickupPresentationSystem !== undefined) {
+        presentationOptions.pickupPresentationSystem = this.pickupPresentationSystem;
+      }
+      if (this.spriteEntityRenderer !== undefined) {
+        presentationOptions.spriteEntityRenderer = this.spriteEntityRenderer;
+      }
+      commands.push(...createPresentationCommands(frame.presentation, presentationOptions));
+      if (this.combatVfxRenderer !== undefined) {
+        commands.push(...this.combatVfxRenderer.createCommands(frame.presentation));
+      }
     }
 
     for (let index = 0; index < frame.effectEvents.length; index += 1) {
@@ -102,6 +146,9 @@ export class CanvasRenderer {
         continue;
       }
       if (frame.presentation !== undefined && isPresentationBackedEffect(event.effectId)) {
+        continue;
+      }
+      if (frame.presentation !== undefined && this.abilityVfxRenderer !== undefined && isAbilityBackedEffect(event.effectId)) {
         continue;
       }
       commands.push(createEffectCommand(event, index));
@@ -178,7 +225,7 @@ export class CanvasRenderer {
 
   public renderFrame(context: CanvasLikeContext, frame: CanvasRenderFrame): void {
     clearCanvas(context, frame.viewState.screen.width, frame.viewState.screen.height);
-    const shake = computeScreenShake(frame.effectEvents);
+    const shake = computeScreenShake(frame.effectEvents, frame.presentation);
     context.save();
     try {
       context.translate?.(shake.x, shake.y);
@@ -193,28 +240,51 @@ export class CanvasRenderer {
   }
 }
 
-function createPresentationCommands(presentation: CanvasPresentationState): readonly RenderCommand[] {
+function createPresentationCommands(
+  presentation: CanvasPresentationState,
+  options: {
+    readonly abilityVfxRenderer?: AbilityVfxRenderer;
+    readonly impactVfxRenderer: ImpactVfxRenderer;
+    readonly projectileSkinRenderer?: ProjectileSkinRenderer;
+    readonly pickupPresentationSystem?: PickupPresentationSystem;
+    readonly spriteEntityRenderer?: SpriteEntityRenderer;
+  }
+): readonly RenderCommand[] {
   const commands: RenderCommand[] = [];
-  for (const pickup of presentation.pickups) {
-    commands.push({
-      id: `presentation_pickup_${pickup.entityId}`,
-      layerId: "pickup_trails",
-      draw: (context) => drawPresentationPickup(context, pickup)
-    });
+
+  if (options.pickupPresentationSystem !== undefined) {
+    commands.push(...options.pickupPresentationSystem.createCommands({ frame: presentation.frame, pickups: presentation.pickups }));
+  } else {
+    for (const pickup of presentation.pickups) {
+      commands.push({
+        id: `presentation_pickup_${pickup.entityId}`,
+        layerId: "pickup_trails",
+        draw: (context) => drawPresentationPickup(context, pickup)
+      });
+    }
   }
-  for (const projectile of presentation.playerProjectiles) {
-    commands.push({
-      id: `presentation_player_projectile_${projectile.entityId}`,
-      layerId: projectile.renderKind === "seal_impact" ? "player_projectiles_high" : "player_projectiles_low",
-      draw: (context) => drawPresentationPlayerProjectile(context, projectile)
-    });
+
+  if (options.projectileSkinRenderer !== undefined) {
+    commands.push(...options.projectileSkinRenderer.createCommands(presentation));
+  } else {
+    for (const projectile of presentation.playerProjectiles) {
+      commands.push({
+        id: `presentation_player_projectile_${projectile.entityId}`,
+        layerId: projectile.renderKind === "seal_impact" ? "player_projectiles_high" : "player_projectiles_low",
+        draw: (context) => drawPresentationPlayerProjectile(context, projectile)
+      });
+    }
   }
-  for (const enemy of presentation.enemies) {
-    commands.push({
-      id: `presentation_enemy_${enemy.entityId}`,
-      layerId: "enemies",
-      draw: (context) => drawPresentationEnemy(context, enemy)
-    });
+  if (options.spriteEntityRenderer !== undefined) {
+    commands.push(...options.spriteEntityRenderer.createCommands(presentation));
+  } else {
+    for (const enemy of presentation.enemies) {
+      commands.push({
+        id: `presentation_enemy_${enemy.entityId}`,
+        layerId: "enemies",
+        draw: (context) => drawPresentationEnemy(context, enemy)
+      });
+    }
   }
   const boss = presentation.boss;
   if (boss !== undefined) {
@@ -224,15 +294,20 @@ function createPresentationCommands(presentation: CanvasPresentationState): read
       draw: (context) => drawPresentationBoss(context, boss)
     });
   }
-  for (const projectile of presentation.enemyProjectiles) {
-    commands.push({
-      id: `presentation_enemy_projectile_${projectile.entityId}`,
-      layerId: "enemy_bullets",
-      draw: (context) => drawPresentationEnemyProjectile(context, projectile)
-    });
+  if (options.projectileSkinRenderer === undefined) {
+    for (const projectile of presentation.enemyProjectiles) {
+      commands.push({
+        id: `presentation_enemy_projectile_${projectile.entityId}`,
+        layerId: "enemy_bullets",
+        draw: (context) => drawPresentationEnemyProjectile(context, projectile)
+      });
+    }
   }
   for (const warning of presentation.warnings) {
     if (warning.kind !== "tribulation") {
+      if (options.spriteEntityRenderer !== undefined && warning.kind === "wolf_charge") {
+        continue;
+      }
       commands.push({
         id: `presentation_warning_${warning.id}`,
         layerId: "tribulation_warnings",
@@ -241,23 +316,22 @@ function createPresentationCommands(presentation: CanvasPresentationState): read
     }
   }
   for (const player of presentation.players) {
-    commands.push({
-      id: `presentation_player_${player.playerId}`,
-      layerId: player.aliveState === "soul" ? "rescue_and_soul" : "players",
-      draw: (context) => drawPresentationPlayer(context, player)
-    });
+    if (options.spriteEntityRenderer === undefined) {
+      commands.push({
+        id: `presentation_player_${player.playerId}`,
+        layerId: player.aliveState === "soul" ? "rescue_and_soul" : "players",
+        draw: (context) => drawPresentationPlayer(context, player)
+      });
+    }
     commands.push({
       id: `presentation_player_hitbox_${player.playerId}`,
       layerId: "player_hitbox",
       draw: (context) => drawPresentationPlayerHitbox(context, player)
     });
   }
-  for (const event of presentation.visualEvents) {
-    commands.push({
-      id: `presentation_visual_${event.id}`,
-      layerId: "foreground_effects",
-      draw: (context) => drawPresentationVisualEvent(context, event, presentation.frame)
-    });
+  commands.push(...options.impactVfxRenderer.createCommands(presentation));
+  if (options.abilityVfxRenderer !== undefined) {
+    commands.push(...options.abilityVfxRenderer.createCommands(presentation));
   }
   return commands;
 }
@@ -281,6 +355,22 @@ function isPresentationBackedEffect(effectId: string): boolean {
     "pickup_trail",
     "player_projectile_low",
     "enemy_bullet"
+  ].includes(effectId);
+}
+
+function isAbilityBackedEffect(effectId: string): boolean {
+  return [
+    "thunder_gather",
+    "thunder_chain_hit",
+    "lotus_area_warning",
+    "low_flame_field",
+    "bagua_ring_open",
+    "void_fan_open",
+    "bullet_absorb_lines",
+    "void_core_compress",
+    "sword_qi_reflect",
+    "spell_damage_field",
+    "spell_cast_failed"
   ].includes(effectId);
 }
 
@@ -450,18 +540,6 @@ function drawPresentationPlayerHitbox(context: CanvasLikeContext, player: Canvas
   context.recordCommand?.("player_hitbox", `presentation_player_hitbox_${player.playerId}`);
   drawRing(context, player.position, 14, "#fef3c7", 1.5, player.focusActive ? 0.88 : 0.34);
   drawFilledCircle(context, player.position, 7, "#ffffff", player.focusActive ? 0.98 : 0.72);
-}
-
-function drawPresentationVisualEvent(context: CanvasLikeContext, event: CanvasPresentationVisualEvent, frame: number): void {
-  context.recordCommand?.("foreground_effects", `presentation_visual_${event.id}`);
-  const radius = event.intensity === "ultimate" ? 112 : event.intensity === "large" ? 72 : 28;
-  drawRing(context, event.position, radius, event.color, event.intensity === "ultimate" ? 5 : 2, 0.45);
-  for (const particle of createRenderVfxParticles({ frame, events: [event], budget: 64 })) {
-    drawFilledCircle(context, particle.position, particle.size, particle.color, particle.alpha);
-  }
-  if (event.text !== undefined) {
-    drawText(context, event.text, { x: event.position.x, y: event.position.y - radius }, event.color, "16px system-ui, sans-serif", "center", 0.86);
-  }
 }
 
 function drawPolygon(
@@ -848,7 +926,13 @@ function drawStartOverlay(context: CanvasLikeContext, viewState: InRunUiViewStat
   drawText(context, viewState.stage.segmentName, { x: viewState.screen.width / 2, y: 282 }, "#bfdbfe", "16px system-ui, sans-serif", "center", 0.86);
 }
 
-function computeScreenShake(events: readonly EffectEvent[]): Vec2 {
+function computeScreenShake(events: readonly EffectEvent[], presentation: CanvasPresentationState | undefined): Vec2 {
+  const legacyShake = legacyEffectShake(events);
+  const impactShake = presentation === undefined ? { x: 0, y: 0 } : computeImpactScreenShake(presentation);
+  return Math.hypot(impactShake.x, impactShake.y) >= Math.hypot(legacyShake.x, legacyShake.y) ? impactShake : legacyShake;
+}
+
+function legacyEffectShake(events: readonly EffectEvent[]): Vec2 {
   if (events.some((event) => event.effectId === "boss_death_cascade")) {
     return { x: 6, y: -4 };
   }

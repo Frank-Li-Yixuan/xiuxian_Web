@@ -2,6 +2,8 @@ node_modules/
 dist/
 coverage/
 artifacts/
+!public/assets/3d/combat/artifacts/
+!public/assets/3d/combat/artifacts/**
 .env
 .env.*
 .codex-*.log

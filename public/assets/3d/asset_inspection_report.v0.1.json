@@ -1,0 +1,658 @@
+{
+  "version": "0.1",
+  "namespace": "assets.3d.combat.inspection",
+  "generatedAt": "2026-05-27T09:38:09.699Z",
+  "manifestPath": "public/assets/3d/manifest.v0.1.json",
+  "summary": {
+    "total": 8,
+    "inspected": 8,
+    "planned": 0,
+    "runtimeReady": 6,
+    "needsCleanup": 2,
+    "warnings": 2,
+    "errors": 0,
+    "byCategory": {
+      "player": 1,
+      "artifact": 1,
+      "pickup": 1,
+      "enemy": 4,
+      "boss": 1
+    }
+  },
+  "assets": [
+    {
+      "id": "player.baseHumanoid",
+      "displayName": "Base Humanoid Placeholder",
+      "category": "player",
+      "path": "/assets/3d/combat/player/player.baseHumanoid/Superhero_Male_FullBody.gltf",
+      "format": "gltf",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 30989,
+      "nodeCount": 69,
+      "meshCount": 3,
+      "visibleMeshNodeCount": 3,
+      "textureCount": 7,
+      "externalTextures": [
+        "T_Hair_1_Normal_png.png",
+        "T_Hair_1_BaseColor.png",
+        "T_Eye_Normal_png.png",
+        "T_Eye_Brown.png",
+        "T_Superhero_Male_Normal.png",
+        "T_Superhero_Male_Dark.png",
+        "T_Superhero_Male_Roughness.png"
+      ],
+      "missingExternalTextures": [],
+      "externalBuffers": [
+        "Superhero_Male_FullBody.bin"
+      ],
+      "missingExternalBuffers": [],
+      "animations": [],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -0.929433,
+          "y": -0.00951,
+          "z": -0.163451
+        },
+        "max": {
+          "x": 0.929433,
+          "y": 1.810077,
+          "z": 0.128038
+        },
+        "size": {
+          "x": 1.858865,
+          "y": 1.819586,
+          "z": 0.291488
+        },
+        "maxDimension": 1.858865
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "base",
+        "runtimeReady": true,
+        "reason": ""
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "id": "artifact.sword",
+      "displayName": "Qingshuang Sword Placeholder",
+      "category": "artifact",
+      "path": "/assets/3d/combat/artifacts/artifact.sword/weapon-sword.glb",
+      "format": "glb",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 9284,
+      "nodeCount": 1,
+      "meshCount": 1,
+      "visibleMeshNodeCount": 1,
+      "textureCount": 1,
+      "externalTextures": [
+        "Textures/colormap.png"
+      ],
+      "missingExternalTextures": [
+        "Textures/colormap.png"
+      ],
+      "externalBuffers": [],
+      "missingExternalBuffers": [],
+      "animations": [],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -0.11648,
+          "y": -0.1,
+          "z": -0.054096
+        },
+        "max": {
+          "x": 0.11648,
+          "y": 0.348046,
+          "z": 0.054096
+        },
+        "size": {
+          "x": 0.23296,
+          "y": 0.448046,
+          "z": 0.108192
+        },
+        "maxDimension": 0.448046
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 2.2319,
+          "y": 2.2319,
+          "z": 2.2319
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "center",
+        "runtimeReady": false,
+        "reason": "missing external references"
+      },
+      "warnings": [
+        "missing external texture references: Textures/colormap.png"
+      ],
+      "errors": []
+    },
+    {
+      "id": "pickup.qiOrb",
+      "displayName": "Qi Orb Placeholder",
+      "category": "pickup",
+      "path": "/assets/3d/combat/pickups/pickup.qiOrb/bullet-foam.glb",
+      "format": "glb",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 4112,
+      "nodeCount": 1,
+      "meshCount": 1,
+      "visibleMeshNodeCount": 1,
+      "textureCount": 1,
+      "externalTextures": [
+        "Textures/colormap.png"
+      ],
+      "missingExternalTextures": [
+        "Textures/colormap.png"
+      ],
+      "externalBuffers": [],
+      "missingExternalBuffers": [],
+      "animations": [],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -0.01,
+          "y": 0,
+          "z": -0.01
+        },
+        "max": {
+          "x": 0.01,
+          "y": 0.05,
+          "z": 0.01
+        },
+        "size": {
+          "x": 0.02,
+          "y": 0.05,
+          "z": 0.02
+        },
+        "maxDimension": 0.05
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 20,
+          "y": 20,
+          "z": 20
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "center",
+        "runtimeReady": false,
+        "reason": "missing external references"
+      },
+      "warnings": [
+        "missing external texture references: Textures/colormap.png"
+      ],
+      "errors": []
+    },
+    {
+      "id": "enemy.smallImp",
+      "displayName": "Small Imp Placeholder",
+      "category": "enemy",
+      "path": "/assets/3d/combat/enemies/enemy.smallImp/Orc.gltf",
+      "format": "gltf",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 213802,
+      "nodeCount": 6,
+      "meshCount": 1,
+      "visibleMeshNodeCount": 1,
+      "textureCount": 1,
+      "externalTextures": [],
+      "missingExternalTextures": [],
+      "externalBuffers": [],
+      "missingExternalBuffers": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Bite_Front"
+        },
+        {
+          "index": 1,
+          "name": "Dance"
+        },
+        {
+          "index": 2,
+          "name": "Death"
+        },
+        {
+          "index": 3,
+          "name": "HitRecieve"
+        },
+        {
+          "index": 4,
+          "name": "Idle"
+        },
+        {
+          "index": 5,
+          "name": "Jump"
+        },
+        {
+          "index": 6,
+          "name": "No"
+        },
+        {
+          "index": 7,
+          "name": "Walk"
+        },
+        {
+          "index": 8,
+          "name": "Yes"
+        }
+      ],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -1.25857,
+          "y": -0.00594,
+          "z": -0.801766
+        },
+        "max": {
+          "x": 1.37913,
+          "y": 2.34139,
+          "z": 0.851573
+        },
+        "size": {
+          "x": 2.637699,
+          "y": 2.347329,
+          "z": 1.653339
+        },
+        "maxDimension": 2.637699
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 0.6824,
+          "y": 0.6824,
+          "z": 0.6824
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "base",
+        "runtimeReady": true,
+        "reason": ""
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "id": "enemy.wolfBeast",
+      "displayName": "Wolf Beast Placeholder",
+      "category": "enemy",
+      "path": "/assets/3d/combat/enemies/enemy.wolfBeast/Wolf.gltf",
+      "format": "gltf",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 3175890,
+      "nodeCount": 53,
+      "meshCount": 1,
+      "visibleMeshNodeCount": 1,
+      "textureCount": 0,
+      "externalTextures": [],
+      "missingExternalTextures": [],
+      "externalBuffers": [],
+      "missingExternalBuffers": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Attack"
+        },
+        {
+          "index": 1,
+          "name": "Death"
+        },
+        {
+          "index": 2,
+          "name": "Eating"
+        },
+        {
+          "index": 3,
+          "name": "Gallop"
+        },
+        {
+          "index": 4,
+          "name": "Gallop_Jump"
+        },
+        {
+          "index": 5,
+          "name": "Idle"
+        },
+        {
+          "index": 6,
+          "name": "Idle_2"
+        },
+        {
+          "index": 7,
+          "name": "Idle_2_HeadLow"
+        },
+        {
+          "index": 8,
+          "name": "Idle_HitReact1"
+        },
+        {
+          "index": 9,
+          "name": "Idle_HitReact2"
+        },
+        {
+          "index": 10,
+          "name": "Jump_ToIdle"
+        },
+        {
+          "index": 11,
+          "name": "Walk"
+        }
+      ],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -0.5326,
+          "y": -0.010203,
+          "z": -2.991897
+        },
+        "max": {
+          "x": 0.5326,
+          "y": 2.67081,
+          "z": 2.561191
+        },
+        "size": {
+          "x": 1.0652,
+          "y": 2.681012,
+          "z": 5.553088
+        },
+        "maxDimension": 5.553088
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 0.3241,
+          "y": 0.3241,
+          "z": 0.3241
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "base",
+        "runtimeReady": true,
+        "reason": ""
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "id": "enemy.insect",
+      "displayName": "Insect Placeholder",
+      "category": "enemy",
+      "path": "/assets/3d/combat/enemies/enemy.insect/Armabee.gltf",
+      "format": "gltf",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 297261,
+      "nodeCount": 15,
+      "meshCount": 1,
+      "visibleMeshNodeCount": 1,
+      "textureCount": 1,
+      "externalTextures": [],
+      "missingExternalTextures": [],
+      "externalBuffers": [],
+      "missingExternalBuffers": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Death"
+        },
+        {
+          "index": 1,
+          "name": "Fast_Flying"
+        },
+        {
+          "index": 2,
+          "name": "Flying_Idle"
+        },
+        {
+          "index": 3,
+          "name": "Headbutt"
+        },
+        {
+          "index": 4,
+          "name": "HitReact"
+        },
+        {
+          "index": 5,
+          "name": "No"
+        },
+        {
+          "index": 6,
+          "name": "Punch"
+        },
+        {
+          "index": 7,
+          "name": "Yes"
+        }
+      ],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -2.151953,
+          "y": 1.189746,
+          "z": -1.378245
+        },
+        "max": {
+          "x": 2.151953,
+          "y": 3.075908,
+          "z": 0.680933
+        },
+        "size": {
+          "x": 4.303907,
+          "y": 1.886162,
+          "z": 2.059179
+        },
+        "maxDimension": 4.303907
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 0.4182,
+          "y": 0.4182,
+          "z": 0.4182
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "base",
+        "runtimeReady": true,
+        "reason": ""
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "id": "enemy.stoneGolem",
+      "displayName": "Stone Golem Placeholder",
+      "category": "enemy",
+      "path": "/assets/3d/combat/enemies/enemy.stoneGolem/Goleling.gltf",
+      "format": "gltf",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 384972,
+      "nodeCount": 15,
+      "meshCount": 1,
+      "visibleMeshNodeCount": 1,
+      "textureCount": 1,
+      "externalTextures": [],
+      "missingExternalTextures": [],
+      "externalBuffers": [],
+      "missingExternalBuffers": [],
+      "animations": [
+        {
+          "index": 0,
+          "name": "Death"
+        },
+        {
+          "index": 1,
+          "name": "Fast_Flying"
+        },
+        {
+          "index": 2,
+          "name": "Flying_Idle"
+        },
+        {
+          "index": 3,
+          "name": "Headbutt"
+        },
+        {
+          "index": 4,
+          "name": "HitReact"
+        },
+        {
+          "index": 5,
+          "name": "No"
+        },
+        {
+          "index": 6,
+          "name": "Punch"
+        },
+        {
+          "index": 7,
+          "name": "Yes"
+        }
+      ],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -2.191019,
+          "y": 1.488874,
+          "z": -1.430203
+        },
+        "max": {
+          "x": 2.191019,
+          "y": 3.04106,
+          "z": 0.511919
+        },
+        "size": {
+          "x": 4.382037,
+          "y": 1.552187,
+          "z": 1.942122
+        },
+        "maxDimension": 4.382037
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 0.4108,
+          "y": 0.4108,
+          "z": 0.4108
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "base",
+        "runtimeReady": true,
+        "reason": ""
+      },
+      "warnings": [],
+      "errors": []
+    },
+    {
+      "id": "boss.floatingCrystal",
+      "displayName": "Floating Crystal Boss Placeholder",
+      "category": "boss",
+      "path": "/assets/3d/combat/bosses/boss.floatingCrystal/21_Element_Lightning.gltf",
+      "format": "gltf",
+      "pipelineStatus": "runtime_ready",
+      "planned": false,
+      "skipped": false,
+      "fileExists": true,
+      "fileSizeBytes": 5473,
+      "nodeCount": 2,
+      "meshCount": 2,
+      "visibleMeshNodeCount": 2,
+      "textureCount": 2,
+      "externalTextures": [
+        "Cards_Atlas.png"
+      ],
+      "missingExternalTextures": [],
+      "externalBuffers": [
+        "21_Element_Lightning.bin"
+      ],
+      "missingExternalBuffers": [],
+      "animations": [],
+      "boundingBox": {
+        "available": true,
+        "min": {
+          "x": -1.378705,
+          "y": -1.75587,
+          "z": -1.558011
+        },
+        "max": {
+          "x": 1.378705,
+          "y": 1.753912,
+          "z": -0.012499
+        },
+        "size": {
+          "x": 2.75741,
+          "y": 3.509782,
+          "z": 1.545512
+        },
+        "maxDimension": 3.509782
+      },
+      "normalization": {
+        "recommendedScale": {
+          "x": 0.8548,
+          "y": 0.8548,
+          "z": 0.8548
+        },
+        "recommendedRotation": {
+          "xDeg": 0,
+          "yDeg": 0,
+          "zDeg": 0
+        },
+        "anchor": "center",
+        "runtimeReady": true,
+        "reason": ""
+      },
+      "warnings": [],
+      "errors": []
+    }
+  ]
+}

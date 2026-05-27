@@ -1,0 +1,209 @@
+{
+  "version": "0.1",
+  "visualAssets": [
+    {
+      "id": "projectile.player_sword",
+      "category": "projectile",
+      "priority": "P0",
+      "keywords": [
+        "sword projectile sprite",
+        "slash projectile",
+        "magic sword shot"
+      ],
+      "notes": "青霜飞剑/玩家普攻"
+    },
+    {
+      "id": "projectile.enemy_basic",
+      "category": "projectile",
+      "priority": "P0",
+      "keywords": [
+        "bullet hell bullet sprite",
+        "red orb projectile"
+      ],
+      "notes": "普通敌弹，要求白芯危险边"
+    },
+    {
+      "id": "pickup.qi_orb",
+      "category": "pickup",
+      "priority": "P0",
+      "keywords": [
+        "magic orb sprite",
+        "energy orb pickup"
+      ],
+      "notes": "灵气球"
+    },
+    {
+      "id": "pickup.mana_orb",
+      "category": "pickup",
+      "priority": "P0",
+      "keywords": [
+        "blue mana orb sprite"
+      ],
+      "notes": "真元球"
+    },
+    {
+      "id": "vfx.explosion_small",
+      "category": "vfx",
+      "priority": "P0",
+      "keywords": [
+        "2D explosion sprite sheet",
+        "magic burst sprite sheet"
+      ],
+      "notes": "小怪死亡"
+    },
+    {
+      "id": "vfx.explosion_elite",
+      "category": "vfx",
+      "priority": "P0",
+      "keywords": [
+        "large explosion sprite sheet",
+        "shockwave sprite sheet"
+      ],
+      "notes": "精英死亡"
+    },
+    {
+      "id": "vfx.lightning_chain",
+      "category": "vfx",
+      "priority": "P0",
+      "keywords": [
+        "lightning sprite sheet",
+        "electric arc vfx"
+      ],
+      "notes": "五雷正法"
+    },
+    {
+      "id": "vfx.sword_slash",
+      "category": "vfx",
+      "priority": "P0",
+      "keywords": [
+        "slash effect sprite sheet",
+        "sword qi vfx"
+      ],
+      "notes": "飞剑命中/剑气"
+    },
+    {
+      "id": "vfx.heal_aura",
+      "category": "vfx",
+      "priority": "P0",
+      "keywords": [
+        "healing aura sprite sheet",
+        "green magic aura"
+      ],
+      "notes": "回春丹"
+    },
+    {
+      "id": "vfx.shield_break",
+      "category": "vfx",
+      "priority": "P0",
+      "keywords": [
+        "shield sprite sheet",
+        "barrier break vfx"
+      ],
+      "notes": "八卦玉佩/护盾碎裂"
+    },
+    {
+      "id": "bg.outer_battlefield",
+      "category": "background",
+      "priority": "P1",
+      "keywords": [
+        "dark fantasy parallax background",
+        "outer space battlefield 2D"
+      ],
+      "notes": "域外战场背景"
+    },
+    {
+      "id": "enemy.imp",
+      "category": "enemy",
+      "priority": "P1",
+      "keywords": [
+        "2D demon sprite sheet",
+        "imp enemy sprite"
+      ],
+      "notes": "山魈/小妖"
+    },
+    {
+      "id": "enemy.wolf",
+      "category": "enemy",
+      "priority": "P1",
+      "keywords": [
+        "wolf monster sprite sheet"
+      ],
+      "notes": "狼妖"
+    },
+    {
+      "id": "enemy.insect",
+      "category": "enemy",
+      "priority": "P1",
+      "keywords": [
+        "insect monster sprite sheet",
+        "bug enemy sprite"
+      ],
+      "notes": "虫族入侵预留"
+    }
+  ],
+  "audioAssets": [
+    {
+      "id": "sfx.sword_fire",
+      "category": "player_fire",
+      "priority": "P0",
+      "keywords": [
+        "sword whoosh short sound",
+        "magic projectile launch"
+      ]
+    },
+    {
+      "id": "sfx.enemy_hit_light",
+      "category": "hit",
+      "priority": "P0",
+      "keywords": [
+        "small hit impact sound",
+        "magic hit"
+      ]
+    },
+    {
+      "id": "sfx.enemy_death_small",
+      "category": "explosion",
+      "priority": "P0",
+      "keywords": [
+        "small explosion pop sound",
+        "monster death burst"
+      ]
+    },
+    {
+      "id": "sfx.lightning_cast",
+      "category": "spell",
+      "priority": "P0",
+      "keywords": [
+        "lightning spell sound",
+        "electric zap"
+      ]
+    },
+    {
+      "id": "sfx.pickup_qi",
+      "category": "pickup",
+      "priority": "P0",
+      "keywords": [
+        "magic pickup sound",
+        "soft chime"
+      ]
+    },
+    {
+      "id": "sfx.boss_warning",
+      "category": "warning",
+      "priority": "P0",
+      "keywords": [
+        "warning gong sound",
+        "danger alert fantasy"
+      ]
+    },
+    {
+      "id": "amb.outer_battlefield",
+      "category": "ambience",
+      "priority": "P1",
+      "keywords": [
+        "dark fantasy ambience loop",
+        "void ambience loop"
+      ]
+    }
+  ]
+}

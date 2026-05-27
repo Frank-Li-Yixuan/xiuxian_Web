@@ -14,11 +14,25 @@ export interface CanvasLikeContext {
   clearRect(x: number, y: number, width: number, height: number): void;
   fillRect(x: number, y: number, width: number, height: number): void;
   fillText(text: string, x: number, y: number): void;
+  drawImage?(
+    image: CanvasImageSource,
+    sx: number,
+    sy: number,
+    sw: number,
+    sh: number,
+    dx: number,
+    dy: number,
+    dw: number,
+    dh: number
+  ): void;
   translate?(x: number, y: number): void;
+  rotate?(angle: number): void;
+  scale?(x: number, y: number): void;
 
   fillStyle: string | CanvasGradient | CanvasPattern;
   strokeStyle: string | CanvasGradient | CanvasPattern;
   globalAlpha: number;
+  globalCompositeOperation?: GlobalCompositeOperation;
   lineWidth: number;
   font: string;
   textAlign: CanvasTextAlign;

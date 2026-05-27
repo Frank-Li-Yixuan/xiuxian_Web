@@ -60,11 +60,24 @@ import {
 } from "../sim/settlement/RunSettlement";
 import type { EffectEvent } from "../sim/spells/SpellEffects";
 import { indexSpellDefinitions, stepSpellSystem, type SpellDefinitionPack, type SpellRuntimePlayerState } from "../sim/spells/SpellSystem";
-import { indexPillDefinitions, stepPillSystem, type PillDefinitionPack, type PillRuntimePlayerState } from "../sim/pills/PillSystem";
+import {
+  indexPillDefinitions,
+  stepPillSystem,
+  type PillDefinitionPack,
+  type PillEffectEvent,
+  type PillRuntimePlayerState
+} from "../sim/pills/PillSystem";
 import { stepDigestionSystem } from "../sim/pills/DigestionSystem";
 import { StageRunner, type StageDefinition, type StageFrameContext } from "../sim/stage/StageRunner";
 import { WaveSpawner } from "../sim/stage/WaveSpawner";
-import type { CanvasPresentationState, CanvasPresentationVisualEvent } from "../render/CanvasPresentationState";
+import type {
+  CanvasPresentationAbilityVfxEvent,
+  CanvasPresentationEntityAnimationEvent,
+  CanvasPresentationState,
+  CanvasPresentationVisualEvent
+} from "../render/CanvasPresentationState";
+import { getAbilityVfxProfile } from "../render/AbilityVfxRenderer";
+import { createImpactSpriteVfxRequests, getImpactVfxProfile } from "../render/ImpactVfxRenderer";
 import type {
   BossState,
   PlayerCultivationState,
@@ -245,6 +258,9 @@ export class BrowserGameRuntime {
   private lastEffectEvents: readonly EffectEvent[] = [];
   private lastBossEffectEvents: readonly EffectEvent[] = [];
   private lastPresentationVisualEvents: readonly CanvasPresentationVisualEvent[] = [];
+  private lastPresentationAbilityVfxEvents: readonly CanvasPresentationAbilityVfxEvent[] = [];
+  private lastPresentationEntityAnimationEvents: readonly CanvasPresentationEntityAnimationEvent[] = [];
+  private lastPresentationPlayerVelocities: Readonly<Record<string, Vec2>> = {};
 
   public constructor(options: BrowserGameRuntimeOptions = {}) {
     this.mode = options.mode ?? "local_coop";
@@ -304,10 +320,14 @@ export class BrowserGameRuntime {
       return this.getSnapshot();
     }
     this.lastPresentationVisualEvents = [];
+    this.lastPresentationAbilityVfxEvents = [];
+    this.lastPresentationEntityAnimationEvents = [];
+    const playersBeforeMovement = this.players;
 
     const stageContext = this.stageRunner.getFrameContext(this.frame);
     this.spawnStageEnemies(stageContext);
     this.players = stepPlayers({ players: this.players, frameInputs: inputs }) as readonly RuntimePlayerState[];
+    this.lastPresentationPlayerVelocities = createPlayerVelocityMap(playersBeforeMovement, this.players);
     this.enemies = stepEnemies({ frame: this.frame, enemies: this.enemies, players: this.players });
     this.stepArtifactProjectiles();
     const spellResult = stepSpellSystem({
@@ -343,6 +363,15 @@ export class BrowserGameRuntime {
     this.players = mergeRuntimePlayerExtras(digestionResult.players, this.players);
     this.pillState = digestionResult.pillState;
     this.playerCultivations = digestionResult.playerCultivations;
+    this.lastPresentationAbilityVfxEvents = [
+      ...this.lastPresentationAbilityVfxEvents,
+      ...createSpellAbilityVfxEvents(this.frame, spellResult.effectEvents, spellResult.activeEffects),
+      ...createPillAbilityVfxEvents(this.frame, [...pillResult.effectEvents, ...digestionResult.effectEvents], this.players, this.pillState)
+    ];
+    this.lastPresentationEntityAnimationEvents = [
+      ...this.lastPresentationEntityAnimationEvents,
+      ...createSpellCastEntityAnimationEvents(this.frame, spellResult.effectEvents)
+    ];
 
     this.ensureBossStarted();
     this.stepScriptedEnemyBullets();
@@ -579,6 +608,13 @@ export class BrowserGameRuntime {
   }
 
   private resolveDamageAndDrops(extraDamageEvents: readonly DamageEvent[]): number {
+    const impactSources = createImpactSourceSnapshot({
+      playerProjectiles: this.playerProjectiles,
+      enemyProjectiles: this.enemyProjectiles,
+      enemies: this.enemies,
+      players: this.players,
+      boss: this.boss
+    });
     const collisions = resolveCollisionFrame({
       frame: this.frame,
       players: this.players,
@@ -600,12 +636,21 @@ export class BrowserGameRuntime {
     this.enemyProjectiles = this.enemyProjectiles.filter((projectile) => !collisions.consumedEnemyProjectileIds.includes(projectile.entityId));
     const createdPickups = this.createPickupsForKilledEnemies(damage.killedEnemies);
     this.pickups = [...this.pickups, ...createdPickups].sort((a, b) => a.entityId - b.entityId);
-    if (damage.killedEnemies.length > 0 || createdPickups.length > 0) {
+    const impactVisualEvents = createDamageImpactVisualEvents(this.frame, damageEvents, damage.killedEnemies, impactSources);
+    const artifactAbilityEvents = createArtifactHitAbilityVfxEvents(this.frame, damageEvents, impactSources);
+    const entityAnimationEvents = createDamageEntityAnimationEvents(this.frame, damageEvents, damage.killedEnemies, impactSources);
+    if (impactVisualEvents.length > 0 || createdPickups.length > 0) {
       this.lastPresentationVisualEvents = [
         ...this.lastPresentationVisualEvents,
-        ...damage.killedEnemies.slice(0, 12).map((enemy) => enemyKillVisualEvent(this.frame, enemy)),
+        ...impactVisualEvents,
         ...createdPickups.slice(0, 16).map((pickup) => pickupSpawnVisualEvent(this.frame, pickup))
       ];
+    }
+    if (artifactAbilityEvents.length > 0) {
+      this.lastPresentationAbilityVfxEvents = [...this.lastPresentationAbilityVfxEvents, ...artifactAbilityEvents];
+    }
+    if (entityAnimationEvents.length > 0) {
+      this.lastPresentationEntityAnimationEvents = [...this.lastPresentationEntityAnimationEvents, ...entityAnimationEvents];
     }
     if (this.players.every((player) => player.aliveState === "soul" || player.aliveState === "dead")) {
       this.completeRun("team_wipe");
@@ -1236,91 +1281,120 @@ export class BrowserGameRuntime {
 
   private createPresentationState(): CanvasPresentationState {
     const boss = this.boss;
+    const players = freezePresentationArray(
+      this.players.map((player, index) => {
+        const cultivation = this.playerCultivations.find((candidate) => candidate.playerId === player.playerId);
+        return {
+          playerId: player.playerId,
+          position: player.position,
+          velocity: this.lastPresentationPlayerVelocities[player.playerId] ?? { x: 0, y: 0 },
+          spawnFrame: 0,
+          renderColor: index === 0 ? "player1" : "player2",
+          realmLayer: cultivation?.layer ?? 1,
+          aliveState: player.aliveState,
+          focusActive: false,
+          hpRatio: ratio(player.hp, player.maxHp),
+          qiRatio: ratio(player.qi, player.maxQi)
+        } as const;
+      })
+    );
+    const enemies = freezePresentationArray(
+      this.enemies.slice(0, 80).map((enemy) => ({
+        entityId: enemy.entityId,
+        enemyId: enemy.enemyId,
+        renderKind: enemyRenderKind(enemy.enemyId),
+        position: enemy.position,
+        velocity: enemy.velocity,
+        spawnFrame: enemy.spawnFrame,
+        ...entityAnimationHintForEnemy(enemy),
+        hpRatio: ratio(enemy.hp, enemy.maxHp)
+      }))
+    );
+    const playerProjectiles = freezePresentationArray(
+      this.playerProjectiles.slice(0, 160).map((projectile) => ({
+        entityId: projectile.entityId,
+        ownerPlayerId: projectile.ownerPlayerId,
+        artifactId: projectile.artifactId,
+        renderKind: playerProjectileRenderKind(projectile.artifactId),
+        position: projectile.position,
+        velocity: projectile.velocity,
+        radius: projectile.radius,
+        pierce: projectile.pierce
+      }))
+    );
+    const enemyProjectiles = freezePresentationArray(
+      this.enemyProjectiles.slice(0, 160).map((projectile) => ({
+        entityId: projectile.entityId,
+        ownerKind: projectile.ownerKind,
+        ownerId: projectile.ownerId,
+        renderKind: enemyProjectileRenderKind(projectile),
+        position: projectile.position,
+        velocity: projectile.velocity,
+        radius: projectile.radius
+      }))
+    );
+    const pickups = freezePresentationArray(
+      this.pickups.slice(0, 96).map((pickup) => ({
+        entityId: pickup.entityId,
+        pickupId: pickup.pickupId,
+        position: pickup.position,
+        label: pickupLabel(pickup.pickupId),
+        renderKind: pickupRenderKind(pickup.pickupId),
+        sfxCueId: pickupSfxCueId(pickup.pickupId)
+      }))
+    );
+    const warnings = freezePresentationArray([
+      ...this.latestLightningWarnings.map((warning) => ({
+        id: warning.tribulationId,
+        kind: "tribulation" as const,
+        position: { x: warning.x, y: warning.y },
+        radius: warning.radius,
+        severity: warning.severity
+      })),
+      ...this.enemies
+        .filter((enemy) => enemy.tags.includes("charger"))
+        .slice(0, 16)
+        .map((enemy) => ({
+          id: `charge_${enemy.entityId}`,
+          kind: "wolf_charge" as const,
+          position: enemy.position,
+          radius: enemy.enemyId === "elite_split_wind_wolf" ? 92 : 64,
+          severity: enemy.enemyId === "elite_split_wind_wolf" ? ("high" as const) : ("medium" as const)
+        }))
+    ]);
+    const visualEvents = freezePresentationArray([
+      ...this.lastPresentationVisualEvents,
+      ...createPresentationBossVisualEvents(this.frame, this.lastBossEffectEvents)
+    ]);
+    const spriteVfx = freezePresentationArray(
+      createImpactSpriteVfxRequests({
+        frame: this.frame,
+        visualEvents,
+        enemyProjectiles,
+        warnings
+      })
+    );
+    const abilityVfx = freezePresentationArray([
+      ...this.lastPresentationAbilityVfxEvents,
+      ...createTreasureAbilityVfxEvents(this.frame, players, this.playerLoadouts, pickups)
+    ]);
+    const entityAnimationEvents = freezePresentationArray(this.lastPresentationEntityAnimationEvents);
     return Object.freeze({
       frame: this.frame,
       screen: Object.freeze({
         width: this.screenWidth,
         height: this.screenHeight
       }),
-      players: freezePresentationArray(
-        this.players.map((player, index) => {
-          const cultivation = this.playerCultivations.find((candidate) => candidate.playerId === player.playerId);
-          return {
-            playerId: player.playerId,
-            position: player.position,
-            renderColor: index === 0 ? "player1" : "player2",
-            realmLayer: cultivation?.layer ?? 1,
-            aliveState: player.aliveState,
-            focusActive: false,
-            hpRatio: ratio(player.hp, player.maxHp),
-            qiRatio: ratio(player.qi, player.maxQi)
-          } as const;
-        })
-      ),
-      enemies: freezePresentationArray(
-        this.enemies.slice(0, 80).map((enemy) => ({
-          entityId: enemy.entityId,
-          enemyId: enemy.enemyId,
-          renderKind: enemyRenderKind(enemy.enemyId),
-          position: enemy.position,
-          hpRatio: ratio(enemy.hp, enemy.maxHp)
-        }))
-      ),
-      playerProjectiles: freezePresentationArray(
-        this.playerProjectiles.slice(0, 160).map((projectile) => ({
-          entityId: projectile.entityId,
-          ownerPlayerId: projectile.ownerPlayerId,
-          artifactId: projectile.artifactId,
-          renderKind: playerProjectileRenderKind(projectile.artifactId),
-          position: projectile.position,
-          velocity: projectile.velocity,
-          radius: projectile.radius,
-          pierce: projectile.pierce
-        }))
-      ),
-      enemyProjectiles: freezePresentationArray(
-        this.enemyProjectiles.slice(0, 160).map((projectile) => ({
-          entityId: projectile.entityId,
-          ownerKind: projectile.ownerKind,
-          ownerId: projectile.ownerId,
-          renderKind: enemyProjectileRenderKind(projectile),
-          position: projectile.position,
-          velocity: projectile.velocity,
-          radius: projectile.radius
-        }))
-      ),
-      pickups: freezePresentationArray(
-        this.pickups.slice(0, 96).map((pickup) => ({
-          entityId: pickup.entityId,
-          pickupId: pickup.pickupId,
-          position: pickup.position,
-          label: pickupLabel(pickup.pickupId),
-          renderKind: pickupRenderKind(pickup.pickupId)
-        }))
-      ),
-      warnings: freezePresentationArray([
-        ...this.latestLightningWarnings.map((warning) => ({
-          id: warning.tribulationId,
-          kind: "tribulation" as const,
-          position: { x: warning.x, y: warning.y },
-          radius: warning.radius,
-          severity: warning.severity
-        })),
-        ...this.enemies
-          .filter((enemy) => enemy.tags.includes("charger"))
-          .slice(0, 16)
-          .map((enemy) => ({
-            id: `charge_${enemy.entityId}`,
-            kind: "wolf_charge" as const,
-            position: enemy.position,
-            radius: enemy.enemyId === "elite_split_wind_wolf" ? 92 : 64,
-            severity: enemy.enemyId === "elite_split_wind_wolf" ? ("high" as const) : ("medium" as const)
-          }))
-      ]),
-      visualEvents: freezePresentationArray([
-        ...this.lastPresentationVisualEvents,
-        ...createPresentationBossVisualEvents(this.frame, this.lastBossEffectEvents)
-      ]),
+      players,
+      enemies,
+      playerProjectiles,
+      enemyProjectiles,
+      pickups,
+      warnings,
+      visualEvents,
+      spriteVfx,
+      abilityVfx,
+      entityAnimationEvents,
       ...(boss === undefined
         ? {}
         : {
@@ -1839,31 +1913,233 @@ function pickupLabel(pickupId: string): string {
   return "材";
 }
 
+function pickupSfxCueId(pickupId: string): string {
+  if (pickupId.includes("pill")) {
+    return "sfx.pill.rejuvenation_heal_01";
+  }
+  if (pickupId.includes("material") || pickupId.includes("herb") || pickupId.includes("ore") || pickupId.includes("demon_core")) {
+    return "sfx.pickup.rare_drop_01";
+  }
+  return "sfx.pickup.qi_orb_01";
+}
+
+interface ImpactSourceSnapshot {
+  readonly playerProjectilesById: ReadonlyMap<number, ProjectileState>;
+  readonly enemyProjectilesById: ReadonlyMap<number, EnemyProjectileState>;
+  readonly enemiesById: ReadonlyMap<number, EnemyState>;
+  readonly playersById: ReadonlyMap<string, RuntimePlayerState>;
+  readonly boss?: BossCombatState;
+}
+
+function createImpactSourceSnapshot(options: {
+  readonly playerProjectiles: readonly ProjectileState[];
+  readonly enemyProjectiles: readonly EnemyProjectileState[];
+  readonly enemies: readonly EnemyState[];
+  readonly players: readonly RuntimePlayerState[];
+  readonly boss: BossCombatState | undefined;
+}): ImpactSourceSnapshot {
+  return {
+    playerProjectilesById: new Map(options.playerProjectiles.map((projectile) => [projectile.entityId, projectile])),
+    enemyProjectilesById: new Map(options.enemyProjectiles.map((projectile) => [projectile.entityId, projectile])),
+    enemiesById: new Map(options.enemies.map((enemy) => [enemy.entityId, enemy])),
+    playersById: new Map(options.players.map((player) => [player.playerId, player])),
+    ...(options.boss === undefined ? {} : { boss: options.boss })
+  };
+}
+
+function createPlayerVelocityMap(
+  previousPlayers: readonly RuntimePlayerState[],
+  currentPlayers: readonly RuntimePlayerState[]
+): Readonly<Record<string, Vec2>> {
+  const previousById = new Map(previousPlayers.map((player) => [player.playerId, player]));
+  const velocities: Record<string, Vec2> = {};
+  for (const player of currentPlayers) {
+    const previous = previousById.get(player.playerId);
+    velocities[player.playerId] =
+      previous === undefined
+        ? { x: 0, y: 0 }
+        : {
+            x: (player.position.x - previous.position.x) * 60,
+            y: (player.position.y - previous.position.y) * 60
+          };
+  }
+  return Object.freeze(velocities);
+}
+
+function entityAnimationHintForEnemy(enemy: EnemyState): { readonly animationHint?: "attack" } {
+  if (enemy.behaviorPhase === "charging" || enemy.behaviorPhase === "stationary" || enemy.tags.includes("charger")) {
+    return { animationHint: "attack" };
+  }
+  return {};
+}
+
+function createSpellCastEntityAnimationEvents(
+  frame: number,
+  effectEvents: readonly EffectEvent[]
+): readonly CanvasPresentationEntityAnimationEvent[] {
+  const events: CanvasPresentationEntityAnimationEvent[] = [];
+  const seenPlayers = new Set<string>();
+  for (let index = 0; index < effectEvents.length; index += 1) {
+    const event = effectEvents[index];
+    if (event === undefined || event.effectId === "spell_cast_failed" || seenPlayers.has(event.ownerPlayerId)) {
+      continue;
+    }
+    seenPlayers.add(event.ownerPlayerId);
+    events.push(
+      entityAnimationEvent({
+        id: `entity_cast_${event.ownerPlayerId}_${event.spellId}_${frame}_${index}`,
+        entityKind: "player",
+        entityId: event.ownerPlayerId,
+        animation: "cast",
+        frame,
+        startFrame: frame,
+        endFrame: frame + 20,
+        position: event.position,
+        sourceId: event.spellId
+      })
+    );
+  }
+  return Object.freeze(events);
+}
+
+function createDamageEntityAnimationEvents(
+  frame: number,
+  damageEvents: readonly DamageEvent[],
+  killedEnemies: readonly KilledEnemyState[],
+  sources: ImpactSourceSnapshot
+): readonly CanvasPresentationEntityAnimationEvent[] {
+  const events: CanvasPresentationEntityAnimationEvent[] = [];
+  const killedById = new Map(killedEnemies.map((enemy) => [enemy.entityId, enemy]));
+
+  for (let index = 0; index < Math.min(64, damageEvents.length); index += 1) {
+    const event = damageEvents[index];
+    if (event === undefined) {
+      continue;
+    }
+    if (event.targetKind === "enemy") {
+      const enemy = sources.enemiesById.get(event.targetEntityId) ?? killedById.get(event.targetEntityId);
+      if (enemy === undefined) {
+        continue;
+      }
+      events.push(
+        entityAnimationEvent({
+          id: `entity_enemy_hit_${event.targetEntityId}_${frame}_${index}`,
+          entityKind: "enemy",
+          entityId: String(event.targetEntityId),
+          animation: "hit",
+          frame,
+          startFrame: frame,
+          endFrame: frame + 12,
+          position: enemy.position,
+          sourceId: enemy.enemyId
+        })
+      );
+    } else if (event.targetKind === "player") {
+      const player = sources.playersById.get(event.targetPlayerId);
+      if (player === undefined) {
+        continue;
+      }
+      events.push(
+        entityAnimationEvent({
+          id: `entity_player_hit_${event.targetPlayerId}_${frame}_${index}`,
+          entityKind: "player",
+          entityId: event.targetPlayerId,
+          animation: "hit",
+          frame,
+          startFrame: frame,
+          endFrame: frame + 16,
+          position: player.position,
+          sourceId: event.sourceKind
+        })
+      );
+    }
+  }
+
+  for (const enemy of killedEnemies.slice(0, 16)) {
+    events.push(
+      entityAnimationEvent({
+        id: `entity_enemy_death_${enemy.entityId}_${frame}`,
+        entityKind: "enemy",
+        entityId: String(enemy.entityId),
+        animation: "death",
+        frame,
+        startFrame: frame,
+        endFrame: frame + 42,
+        position: enemy.position,
+        sourceId: enemy.enemyId
+      })
+    );
+  }
+
+  return Object.freeze(events);
+}
+
+function entityAnimationEvent(input: CanvasPresentationEntityAnimationEvent): CanvasPresentationEntityAnimationEvent {
+  return Object.freeze(input);
+}
+
+function createDamageImpactVisualEvents(
+  frame: number,
+  damageEvents: readonly DamageEvent[],
+  killedEnemies: readonly KilledEnemyState[],
+  sources: ImpactSourceSnapshot
+): readonly CanvasPresentationVisualEvent[] {
+  const killedEnemyIds = new Set(killedEnemies.map((enemy) => enemy.entityId));
+  const visualEvents: CanvasPresentationVisualEvent[] = [];
+
+  for (let index = 0; index < Math.min(48, damageEvents.length); index += 1) {
+    const event = damageEvents[index];
+    if (event === undefined) {
+      continue;
+    }
+    if (event.targetKind === "enemy") {
+      const enemy = sources.enemiesById.get(event.targetEntityId);
+      const projectile = event.sourceEntityId === undefined ? undefined : sources.playerProjectilesById.get(event.sourceEntityId);
+      const hitPosition = projectile?.position ?? enemy?.position;
+      if (hitPosition !== undefined && event.sourceKind === "player_projectile") {
+        visualEvents.push(withImpactDefaults("projectile_hit", `projectile_hit_${event.sourceEntityId ?? "spell"}_${event.targetEntityId}_${frame}_${index}`, frame, hitPosition));
+      }
+      if (enemy !== undefined && !killedEnemyIds.has(event.targetEntityId)) {
+        visualEvents.push(withImpactDefaults("enemy_damaged", `enemy_damaged_${event.targetEntityId}_${frame}_${index}`, frame, enemy.position));
+      }
+      continue;
+    }
+    if (event.targetKind === "boss") {
+      const projectile = sources.playerProjectilesById.get(event.sourceEntityId);
+      if (projectile !== undefined) {
+        visualEvents.push(withImpactDefaults("projectile_hit", `projectile_hit_${event.sourceEntityId}_${event.targetEntityId}_${frame}_${index}`, frame, projectile.position));
+      }
+      const bossPosition = sources.boss?.position;
+      if (bossPosition !== undefined) {
+        visualEvents.push(withImpactDefaults("enemy_damaged", `enemy_damaged_boss_${event.targetEntityId}_${frame}_${index}`, frame, bossPosition));
+      }
+      continue;
+    }
+    const player = sources.playersById.get(event.targetPlayerId);
+    const projectile = sources.enemyProjectilesById.get(event.sourceEntityId);
+    const position = player?.position ?? projectile?.position;
+    if (position !== undefined) {
+      visualEvents.push(withImpactDefaults("player_hit", `player_hit_${event.targetPlayerId}_${event.sourceEntityId}_${frame}_${index}`, frame, position));
+    }
+  }
+
+  for (const enemy of killedEnemies.slice(0, 12)) {
+    visualEvents.push(enemyKillVisualEvent(frame, enemy));
+  }
+
+  return Object.freeze(visualEvents);
+}
+
 function createPresentationBossVisualEvents(frame: number, events: readonly EffectEvent[]): CanvasPresentationState["visualEvents"] {
-  return events.map((event, index) =>
-    Object.freeze({
-      id: `${event.effectId}_${event.frame}_${index}`,
-      kind: event.effectId === "boss_death_cascade" ? ("boss_death" as const) : ("boss_phase" as const),
-      frame,
-      position: event.position,
-      color: event.effectId === "boss_death_cascade" ? "#facc15" : "#38bdf8",
-      text: event.effectId === "boss_death_cascade" ? "青云劫灵崩解" : "劫灵换相",
-      intensity: event.effectId === "boss_death_cascade" ? ("ultimate" as const) : ("large" as const)
-    })
-  );
+  return events.map((event, index) => {
+    const kind = event.effectId === "boss_death_cascade" ? "boss_killed" : "boss_phase_changed";
+    return withImpactDefaults(kind, `${kind}_${event.frame}_${index}`, frame, event.position);
+  });
 }
 
 function enemyKillVisualEvent(frame: number, enemy: KilledEnemyState): CanvasPresentationVisualEvent {
-  const elite = enemy.enemyId.startsWith("elite") || enemy.enemyId.includes("stone_armor");
-  return Object.freeze({
-    id: `kill_${enemy.entityId}_${frame}`,
-    kind: "kill_burst",
-    frame,
-    position: enemy.position,
-    color: elite ? "#f97316" : "#f43f5e",
-    text: elite ? "破阵" : "破",
-    intensity: elite ? "medium" : "small"
-  });
+  const kind = enemy.enemyId.startsWith("elite") || enemy.enemyId.includes("stone_armor") ? "elite_killed" : "enemy_killed";
+  return withImpactDefaults(kind, `${kind}_${enemy.entityId}_${frame}`, frame, enemy.position);
 }
 
 function pickupSpawnVisualEvent(frame: number, pickup: PickupState): CanvasPresentationVisualEvent {
@@ -1876,6 +2152,306 @@ function pickupSpawnVisualEvent(frame: number, pickup: PickupState): CanvasPrese
     text: pickupLabel(pickup.pickupId),
     intensity: "micro"
   });
+}
+
+function withImpactDefaults(
+  kind: CanvasPresentationVisualEvent["kind"],
+  id: string,
+  frame: number,
+  position: Vec2
+): CanvasPresentationVisualEvent {
+  const profile = getImpactVfxProfile(kind);
+  return Object.freeze({
+    id,
+    kind,
+    frame,
+    position,
+    color: profile.color,
+    intensity: profile.defaultIntensity,
+    priority: profile.priority,
+    ...(profile.defaultText === undefined ? {} : { text: profile.defaultText }),
+    ...(profile.sfxCueId === undefined ? {} : { sfxCueId: profile.sfxCueId }),
+    ...(profile.shakeIntensity === undefined ? {} : { shakeIntensity: profile.shakeIntensity })
+  });
+}
+
+function createSpellAbilityVfxEvents(
+  frame: number,
+  effectEvents: readonly EffectEvent[],
+  activeEffects: readonly {
+    readonly spellId: string;
+    readonly ownerPlayerId: string;
+    readonly kind: string;
+    readonly position: Vec2;
+    readonly radius: number;
+    readonly startFrame: number;
+    readonly endFrame: number;
+  }[]
+): readonly CanvasPresentationAbilityVfxEvent[] {
+  const events: CanvasPresentationAbilityVfxEvent[] = [];
+
+  for (let index = 0; index < effectEvents.length; index += 1) {
+    const event = effectEvents[index];
+    if (event === undefined || !isKnownAbilitySource(event.spellId)) {
+      continue;
+    }
+    const phase = spellEffectPhase(event.effectId);
+    if (phase === undefined) {
+      continue;
+    }
+    events.push(abilityEvent({
+      id: `spell_${event.spellId}_${event.effectId}_${event.frame}_${index}`,
+      sourceId: event.spellId,
+      ownerPlayerId: event.ownerPlayerId,
+      frame,
+      startFrame: Math.min(frame, event.frame),
+      endFrame: Math.max(frame + abilityDurationForPhase(phase), event.frame + abilityDurationForPhase(phase)),
+      position: event.position,
+      phase,
+      radius: spellRadius(event.spellId),
+      ...(event.targetEntityId === undefined ? {} : { targetPosition: event.position })
+    }));
+  }
+
+  for (const active of activeEffects) {
+    if (!isKnownAbilitySource(active.spellId)) {
+      continue;
+    }
+    events.push(abilityEvent({
+      id: `spell_active_${active.spellId}_${active.ownerPlayerId}_${active.startFrame}`,
+      sourceId: active.spellId,
+      ownerPlayerId: active.ownerPlayerId,
+      frame,
+      startFrame: active.startFrame,
+      endFrame: active.endFrame,
+      position: active.position,
+      radius: active.radius,
+      phase: "active"
+    }));
+  }
+
+  return Object.freeze(events);
+}
+
+function createPillAbilityVfxEvents(
+  frame: number,
+  pillEvents: readonly PillEffectEvent[],
+  players: readonly RuntimePlayerState[],
+  pillState: readonly PillRuntimePlayerState[]
+): readonly CanvasPresentationAbilityVfxEvent[] {
+  const events: CanvasPresentationAbilityVfxEvent[] = [];
+  const playerPositions = new Map(players.map((player) => [player.playerId, player.position]));
+
+  for (let index = 0; index < pillEvents.length; index += 1) {
+    const event = pillEvents[index];
+    if (event === undefined || event.pillId === undefined || !isKnownAbilitySource(event.pillId)) {
+      continue;
+    }
+    const phase = pillEventPhase(event.event);
+    const position = playerPositions.get(event.playerId);
+    if (phase === undefined || position === undefined) {
+      continue;
+    }
+    events.push(abilityEvent({
+      id: `pill_${event.pillId}_${event.event}_${event.frame}_${index}`,
+      sourceId: event.pillId,
+      ownerPlayerId: event.playerId,
+      frame,
+      startFrame: event.frame,
+      endFrame: event.frame + abilityDurationForPhase(phase),
+      position,
+      phase
+    }));
+  }
+
+  for (const runtime of pillState) {
+    const position = playerPositions.get(runtime.playerId);
+    if (position === undefined) {
+      continue;
+    }
+    for (const digestion of runtime.activeDigestions) {
+      if (!isKnownAbilitySource(digestion.pillId)) {
+        continue;
+      }
+      events.push(abilityEvent({
+        id: `pill_digest_${runtime.playerId}_${digestion.pillId}_${digestion.startFrame}`,
+        sourceId: digestion.pillId,
+        ownerPlayerId: runtime.playerId,
+        frame,
+        startFrame: digestion.startFrame,
+        endFrame: digestion.startFrame + digestion.totalFrames,
+        position,
+        phase: "digest"
+      }));
+    }
+  }
+
+  return Object.freeze(events);
+}
+
+function createArtifactHitAbilityVfxEvents(
+  frame: number,
+  damageEvents: readonly DamageEvent[],
+  sources: ImpactSourceSnapshot
+): readonly CanvasPresentationAbilityVfxEvent[] {
+  const events: CanvasPresentationAbilityVfxEvent[] = [];
+  for (let index = 0; index < Math.min(48, damageEvents.length); index += 1) {
+    const event = damageEvents[index];
+    if (event === undefined || event.sourceKind !== "player_projectile" || event.sourceEntityId === undefined) {
+      continue;
+    }
+    const projectile = sources.playerProjectilesById.get(event.sourceEntityId);
+    if (projectile === undefined || !isKnownAbilitySource(projectile.artifactId)) {
+      continue;
+    }
+    events.push(abilityEvent({
+      id: `artifact_${projectile.artifactId}_${projectile.entityId}_${frame}_${index}`,
+      sourceId: projectile.artifactId,
+      ownerPlayerId: projectile.ownerPlayerId,
+      frame,
+      startFrame: frame,
+      endFrame: frame + 18,
+      position: projectile.position,
+      phase: "hit",
+      radius: projectile.artifactId === "artifact_xuanyue_seal" ? 92 : 34
+    }));
+  }
+  return Object.freeze(events);
+}
+
+function createTreasureAbilityVfxEvents(
+  frame: number,
+  players: CanvasPresentationState["players"],
+  loadouts: readonly ViewPlayerLoadout[],
+  pickups: CanvasPresentationState["pickups"]
+): readonly CanvasPresentationAbilityVfxEvent[] {
+  const events: CanvasPresentationAbilityVfxEvent[] = [];
+  for (const player of players) {
+    const loadout = loadouts.find((candidate) => candidate.playerId === player.playerId);
+    for (const slot of loadout?.treasureSlots ?? []) {
+      const sourceId = slot.itemId;
+      if (sourceId === null || !isKnownAbilitySource(sourceId)) {
+        continue;
+      }
+      const targetPosition =
+        sourceId === "treasure_tongxin_lock"
+          ? players.find((candidate) => candidate.playerId !== player.playerId)?.position
+          : sourceId === "treasure_gold_toad"
+            ? pickups[0]?.position ?? { x: player.position.x - 120, y: player.position.y - 96 }
+            : undefined;
+      events.push(abilityEvent({
+        id: `treasure_${player.playerId}_${sourceId}`,
+        sourceId,
+        ownerPlayerId: player.playerId,
+        frame,
+        startFrame: frame,
+        endFrame: frame,
+        position: player.position,
+        ...(targetPosition === undefined ? {} : { targetPosition }),
+        phase: sourceId === "treasure_gold_toad" ? "trigger" : "active",
+        ...(sourceId === "treasure_tongxin_lock" ? { radius: 260 } : {})
+      }));
+    }
+  }
+  return Object.freeze(events);
+}
+
+function abilityEvent(options: {
+  readonly id: string;
+  readonly sourceId: string;
+  readonly ownerPlayerId: string;
+  readonly frame: number;
+  readonly startFrame: number;
+  readonly endFrame: number;
+  readonly position: Vec2;
+  readonly targetPosition?: Vec2;
+  readonly radius?: number;
+  readonly phase: CanvasPresentationAbilityVfxEvent["phase"];
+}): CanvasPresentationAbilityVfxEvent {
+  const profile = getAbilityVfxProfile(options.sourceId);
+  return Object.freeze({
+    id: options.id,
+    kind: profile.kind,
+    sourceId: options.sourceId,
+    ownerPlayerId: options.ownerPlayerId,
+    frame: options.frame,
+    startFrame: options.startFrame,
+    endFrame: options.endFrame,
+    position: options.position,
+    ...(options.targetPosition === undefined ? {} : { targetPosition: options.targetPosition }),
+    ...(options.radius === undefined ? {} : { radius: options.radius }),
+    phase: options.phase,
+    ...(profile.sfxCueId === undefined ? {} : { sfxCueId: profile.sfxCueId })
+  });
+}
+
+function isKnownAbilitySource(sourceId: string): boolean {
+  try {
+    getAbilityVfxProfile(sourceId);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function spellEffectPhase(effectId: string): CanvasPresentationAbilityVfxEvent["phase"] | undefined {
+  switch (effectId) {
+    case "thunder_gather":
+    case "bagua_ring_open":
+    case "lotus_area_warning":
+    case "void_fan_open":
+      return "cast";
+    case "low_flame_field":
+    case "bullet_absorb_lines":
+      return "active";
+    case "thunder_chain_hit":
+    case "sword_qi_reflect":
+      return "hit";
+    case "void_core_compress":
+      return "end";
+    default:
+      return undefined;
+  }
+}
+
+function pillEventPhase(event: PillEffectEvent["event"]): CanvasPresentationAbilityVfxEvent["phase"] | undefined {
+  switch (event) {
+    case "pill_swallowed":
+      return "swallow";
+    case "pill_digest_completed":
+      return "complete";
+    case "pill_after_effect_started":
+      return "after_effect";
+    default:
+      return undefined;
+  }
+}
+
+function abilityDurationForPhase(phase: CanvasPresentationAbilityVfxEvent["phase"]): number {
+  switch (phase) {
+    case "active":
+    case "digest":
+      return secondsToFrames(1);
+    case "hit":
+    case "complete":
+    case "after_effect":
+      return 28;
+    default:
+      return 18;
+  }
+}
+
+function spellRadius(spellId: string): number {
+  switch (spellId) {
+    case "spell_bagua_sword_ring":
+      return 150;
+    case "spell_red_lotus_fire":
+      return 180;
+    case "spell_sleeve_universe":
+      return 220;
+    default:
+      return 86;
+  }
 }
 
 function getCultivationToNext(realmId: string, layer: number): number {

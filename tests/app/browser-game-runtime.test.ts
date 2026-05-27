@@ -139,7 +139,7 @@ describe("browser playable shell", () => {
 
     expect(snapshot.simState.bosses[0]?.hp).toBe(0);
     expect(snapshot.effectEvents.map((event) => event.effectId)).toContain("boss_death_cascade");
-    expect(snapshot.presentation.visualEvents.map((event) => event.kind)).toContain("boss_death");
+    expect(snapshot.presentation.visualEvents.map((event) => event.kind)).toContain("boss_killed");
   });
 
   it("surfaces browser combat feedback as presentation warnings and projectile variants", () => {
@@ -335,6 +335,18 @@ describe("browser playable shell", () => {
     expect(context.operations).not.toContain("drawImage");
     expect(context.operations).not.toContain("externalFont");
     expect(context.operations.some((operation) => operation.startsWith("fillText:"))).toBe(true);
+  });
+
+  it("keeps BrowserGameApp sprite asset loading as an async render-only upgrade with fallback", () => {
+    const appSource = readFileSync(join(process.cwd(), "src/app/BrowserGameApp.ts"), "utf8");
+
+    expect(appSource).toContain("loadSpriteAssetRegistry");
+    expect(appSource).toContain("AbilityVfxRenderer");
+    expect(appSource).toContain("ProjectileSkinRenderer");
+    expect(appSource).toContain("PickupPresentationSystem");
+    expect(appSource).toContain("new CanvasRenderer({ abilityVfxRenderer: new AbilityVfxRenderer() })");
+    expect(appSource).toContain("abilityVfxRenderer: new AbilityVfxRenderer()");
+    expect(appSource).toContain(".catch");
   });
 });
 

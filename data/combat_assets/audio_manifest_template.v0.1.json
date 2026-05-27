@@ -1,0 +1,22 @@
+{
+  "version": "0.1",
+  "assets": {
+    "sfx.example": {
+      "path": "/assets/audio/combat/example.ogg",
+      "category": "hit",
+      "mixGroup": "combat",
+      "sourceName": "Example",
+      "sourceUrl": "https://example.com",
+      "author": "unknown",
+      "license": "CC0",
+      "attributionRequired": false,
+      "downloadDate": "2026-05-26",
+      "durationMs": 250,
+      "volume": 0.5,
+      "cooldownMs": 40,
+      "maxInstances": 4,
+      "required": false,
+      "notes": "Template"
+    }
+  }
+}

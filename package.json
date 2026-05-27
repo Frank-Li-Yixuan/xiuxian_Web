@@ -10,24 +10,30 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "validate:data": "tsx tools/validate-data.ts",
+    "validate:combat-assets": "node scripts/validate-combat-assets.mjs",
+    "validate:3d-assets": "node scripts/validate-3d-assets.mjs",
+    "inspect:3d-assets": "node scripts/inspect-3d-assets.mjs",
     "check:forbidden": "node -e \"const fs=require('node:fs');const path=require('node:path');const root='src/sim';const forbidden=['Math.random','Date.now','performance.now','document.','window.','requestAnimationFrame','setTimeout','setInterval','localStorage','new Audio','CanvasRenderingContext2D'];const failures=[];function walk(dir){if(!fs.existsSync(dir))return;for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())walk(file);else if(/\\.(ts|tsx|js|jsx)$/.test(entry.name)){const text=fs.readFileSync(file,'utf8');for(const token of forbidden){const idx=text.indexOf(token);if(idx!==-1){const line=text.slice(0,idx).split('\\n').length;failures.push(file+':'+line+' contains forbidden token: '+token);}}}}}walk(root);if(failures.length){console.error(failures.join('\\n'));process.exit(1);}console.log('No forbidden gameplay patterns found.');\"",
     "test:determinism": "vitest run tests/determinism --passWithNoTests",
     "test:headless:stage01": "vitest run tests/integration/stage01 --passWithNoTests"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
+    "@react-three/fiber": "^9.6.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "motion": "^12.40.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.184.1",
     "@vitejs/plugin-react": "^5.2.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",

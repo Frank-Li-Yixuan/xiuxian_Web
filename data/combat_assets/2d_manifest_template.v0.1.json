@@ -1,0 +1,29 @@
+{
+  "version": "0.1",
+  "assets": {
+    "vfx.example": {
+      "path": "/assets/2d/combat/vfx/example.png",
+      "type": "spriteSheet",
+      "category": "vfx",
+      "sourceName": "Example",
+      "sourceUrl": "https://example.com",
+      "author": "unknown",
+      "license": "CC0",
+      "attributionRequired": false,
+      "downloadDate": "2026-05-26",
+      "frameWidth": 128,
+      "frameHeight": 128,
+      "frameCount": 16,
+      "fps": 24,
+      "loop": false,
+      "blendMode": "screen",
+      "anchor": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "recommendedScale": 1,
+      "required": false,
+      "notes": "Template"
+    }
+  }
+}

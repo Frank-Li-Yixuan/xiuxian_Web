@@ -1,4 +1,13 @@
+import { AudioBus, type AudioBusStatus } from "../audio/AudioBus";
+import { CombatSfxMapper } from "../audio/CombatSfxMapper";
+import { loadCombatAudioAssetRegistry } from "../assets/CombatAssetRegistry";
 import { CanvasRenderer } from "../render/CanvasRenderer";
+import { AbilityVfxRenderer } from "../render/AbilityVfxRenderer";
+import { CombatVfxRenderer } from "../render/CombatVfxRenderer";
+import { PickupPresentationSystem } from "../render/PickupPresentationSystem";
+import { ProjectileSkinRenderer } from "../render/ProjectileSkinRenderer";
+import { loadSpriteAssetRegistry } from "../render/SpriteAssetRegistry";
+import { SpriteEntityRenderer } from "../render/SpriteEntityRenderer";
 import { isBrowserDebugModeEnabled } from "./BrowserDebugMode";
 import { createBrowserGameRuntime, type BrowserGameRuntime, type BrowserGameSnapshot } from "./BrowserGameRuntime";
 import { advanceFixedStepLoop, createFixedStepLoopState } from "./FixedBrowserLoop";
@@ -8,7 +17,18 @@ export interface BrowserGameAppHandle {
   readonly runtime: BrowserGameRuntime;
   readonly canvas: HTMLCanvasElement;
   getSnapshot: () => BrowserGameSnapshot;
+  getCombatAudioStatus: () => BrowserCombatAudioStatus;
+  setCombatAudioEnabled: (enabled: boolean) => void;
+  setCombatAudioGroupMuted: (mixGroup: string, muted: boolean) => void;
+  setCombatAudioGroupVolume: (mixGroup: string, volume: number) => void;
   stop: () => void;
+}
+
+export type BrowserCombatAudioMode = "loading" | "locked" | "ready" | "silent-fallback";
+
+export interface BrowserCombatAudioStatus extends AudioBusStatus {
+  readonly mode: BrowserCombatAudioMode;
+  readonly error?: string;
 }
 
 const CANVAS_WIDTH = 1920;
@@ -16,8 +36,9 @@ const CANVAS_HEIGHT = 1080;
 
 export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
   const runtime = createBrowserGameRuntime({ mode: "local_coop", screenWidth: CANVAS_WIDTH, screenHeight: CANVAS_HEIGHT });
-  const renderer = new CanvasRenderer();
+  let renderer = new CanvasRenderer({ abilityVfxRenderer: new AbilityVfxRenderer() });
   const keyboard = new LocalKeyboardInputSource(["p1", "p2"]);
+  const sfxMapper = new CombatSfxMapper();
   const shell = document.createElement("div");
   const playfield = document.createElement("div");
   const canvas = document.createElement("canvas");
@@ -46,7 +67,82 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
     throw new Error("Canvas 2D context is unavailable");
   }
 
+  let audioBus: AudioBus | undefined;
+  let combatAudioLoadCancelled = false;
+  let combatAudioUnlockRequested = false;
+  let combatAudioError: string | undefined;
+  canvas.dataset.combatAudio = "combat-audio-loading";
+
+  const updateCombatAudioDataset = (): void => {
+    if (combatAudioError !== undefined) {
+      canvas.dataset.combatAudio = "combat-audio-silent-fallback";
+      return;
+    }
+    if (audioBus === undefined) {
+      canvas.dataset.combatAudio = "combat-audio-loading";
+      return;
+    }
+    canvas.dataset.combatAudio = audioBus.getStatus().unlocked ? "combat-audio-ready" : "combat-audio-locked";
+  };
+
+  const unlockCombatAudio = (): void => {
+    combatAudioUnlockRequested = true;
+    audioBus?.unlock();
+    updateCombatAudioDataset();
+  };
+
+  const playCombatSfx = (snapshot: BrowserGameSnapshot): void => {
+    const requests = sfxMapper.createRequests(snapshot.presentation);
+    if (audioBus === undefined) {
+      return;
+    }
+    for (const request of requests) {
+      audioBus.play(request);
+    }
+  };
+
+  void loadCombatAudioAssetRegistry()
+    .then((registry) => {
+      if (combatAudioLoadCancelled) {
+        return;
+      }
+      audioBus = new AudioBus({ registry, unlocked: combatAudioUnlockRequested });
+      updateCombatAudioDataset();
+    })
+    .catch((reason: unknown) => {
+      if (combatAudioLoadCancelled) {
+        return;
+      }
+      combatAudioError = reason instanceof Error ? reason.message : String(reason);
+      updateCombatAudioDataset();
+      console.warn("Falling back to combat-audio-silent-fallback after audio asset load failure.", reason);
+    });
+
+  let spriteRendererLoadCancelled = false;
+  void loadSpriteAssetRegistry()
+    .then((spriteRegistry) => {
+      if (spriteRendererLoadCancelled) {
+        return;
+      }
+      renderer = new CanvasRenderer({
+        abilityVfxRenderer: new AbilityVfxRenderer(),
+        combatVfxRenderer: new CombatVfxRenderer({ spriteRegistry }),
+        projectileSkinRenderer: new ProjectileSkinRenderer({ spriteRegistry }),
+        pickupPresentationSystem: new PickupPresentationSystem({ spriteRegistry }),
+        spriteEntityRenderer: new SpriteEntityRenderer({ spriteRegistry })
+      });
+      canvas.dataset.combatAssetRenderer = "sprite";
+    })
+    .catch((reason: unknown) => {
+      if (spriteRendererLoadCancelled) {
+        return;
+      }
+      canvas.dataset.combatAssetRenderer = "procedural-fallback";
+      console.warn("Falling back to procedural combat renderer after sprite asset load failure.", reason);
+    });
+
   const keydown = (event: KeyboardEvent): void => {
+    unlockCombatAudio();
     keyboard.setKeyDown(event.code, true);
     if (isGameplayKey(event.code)) {
       event.preventDefault();
@@ -60,6 +156,7 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
   };
   window.addEventListener("keydown", keydown);
   window.addEventListener("keyup", keyup);
+  window.addEventListener("pointerdown", unlockCombatAudio);
 
   if (isBrowserDebugModeEnabled(window.location.search)) {
     debug.append(
@@ -84,6 +181,7 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
     loopState = loopAdvance.state;
     for (let tick = 0; tick < loopAdvance.ticksToRun; tick += 1) {
       latestSnapshot = runtime.step(keyboard.createFrameInputs(latestSnapshot.simState.frame));
+      playCombatSfx(latestSnapshot);
     }
     renderer.renderFrame(context, latestSnapshot);
     renderHud(hud, latestSnapshot);
@@ -99,11 +197,44 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
     runtime,
     canvas,
     getSnapshot: () => latestSnapshot,
+    getCombatAudioStatus: () => createCombatAudioStatus(audioBus, combatAudioError),
+    setCombatAudioEnabled: (enabled: boolean) => {
+      audioBus?.setEnabled(enabled);
+      updateCombatAudioDataset();
+    },
+    setCombatAudioGroupMuted: (mixGroup: string, muted: boolean) => {
+      audioBus?.setGroupMuted(mixGroup, muted);
+    },
+    setCombatAudioGroupVolume: (mixGroup: string, volume: number) => {
+      audioBus?.setGroupVolume(mixGroup, volume);
+    },
     stop: () => {
       running = false;
+      spriteRendererLoadCancelled = true;
+      combatAudioLoadCancelled = true;
+      audioBus?.stopAll();
       window.removeEventListener("keydown", keydown);
       window.removeEventListener("keyup", keyup);
+      window.removeEventListener("pointerdown", unlockCombatAudio);
     }
+  };
+}
+
+function createCombatAudioStatus(audioBus: AudioBus | undefined, error: string | undefined): BrowserCombatAudioStatus {
+  if (audioBus === undefined) {
+    return {
+      mode: error === undefined ? "loading" : "silent-fallback",
+      enabled: false,
+      unlocked: false,
+      activeInstances: 0,
+      groups: {},
+      ...(error === undefined ? {} : { error })
+    };
+  }
+  const status = audioBus.getStatus();
+  return {
+    ...status,
+    mode: status.unlocked ? "ready" : "locked"
   };
 }
 
