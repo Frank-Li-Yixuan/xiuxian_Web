@@ -4020,6 +4020,7 @@
 .dev-combat-asset-playground-toolbar {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   left: 24px;
   padding: 14px;

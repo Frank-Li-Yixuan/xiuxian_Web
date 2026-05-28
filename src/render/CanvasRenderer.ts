@@ -25,6 +25,7 @@ import {
   type CanvasLikeContext,
   type Vec2
 } from "./PrimitiveDrawing";
+import type { BackgroundParallaxRenderer } from "./BackgroundParallaxRenderer";
 import {
   createRenderLayerStack,
   type RenderCommand,
@@ -40,6 +41,7 @@ import type { SpriteEntityRenderer } from "./SpriteEntityRenderer";
 
 export interface CanvasRendererOptions {
   readonly layerStack?: RenderLayerStack;
+  readonly backgroundParallaxRenderer?: BackgroundParallaxRenderer;
   readonly abilityVfxRenderer?: AbilityVfxRenderer;
   readonly combatVfxRenderer?: CombatVfxRenderer;
   readonly impactVfxRenderer?: ImpactVfxRenderer;
@@ -83,6 +85,7 @@ const DEFAULT_RENDER_LAYERS: readonly RenderLayerDefinition[] = [
 
 export class CanvasRenderer {
   private readonly layerStack: RenderLayerStack;
+  private readonly backgroundParallaxRenderer: BackgroundParallaxRenderer | undefined;
   private readonly abilityVfxRenderer: AbilityVfxRenderer | undefined;
   private readonly combatVfxRenderer: CombatVfxRenderer | undefined;
   private readonly impactVfxRenderer: ImpactVfxRenderer;
@@ -92,6 +95,7 @@ export class CanvasRenderer {
 
   public constructor(options: CanvasRendererOptions = {}) {
     this.layerStack = options.layerStack ?? createRenderLayerStack(DEFAULT_RENDER_LAYERS);
+    this.backgroundParallaxRenderer = options.backgroundParallaxRenderer;
     this.abilityVfxRenderer = options.abilityVfxRenderer;
     this.combatVfxRenderer = options.combatVfxRenderer;
     this.impactVfxRenderer = options.impactVfxRenderer ?? new ImpactVfxRenderer();
@@ -101,18 +105,23 @@ export class CanvasRenderer {
   }
 
   public buildRenderCommands(frame: CanvasRenderFrame): readonly RenderCommand[] {
-    const commands: RenderCommand[] = [
-      {
-        id: "background_far",
-        layerId: "background_far",
-        draw: (context) => drawBackgroundFar(context, frame.viewState)
-      },
-      {
-        id: "background_near",
-        layerId: "background_near",
-        draw: (context) => drawBackgroundNear(context, frame.viewState)
-      }
-    ];
+    const backgroundCommands =
+      this.backgroundParallaxRenderer?.createCommands({
+        viewState: frame.viewState,
+        ...(frame.presentation === undefined ? {} : { presentation: frame.presentation })
+      }) ?? [
+        {
+          id: "background_far",
+          layerId: "background_far",
+          draw: (context) => drawBackgroundFar(context, frame.viewState)
+        },
+        {
+          id: "background_near",
+          layerId: "background_near",
+          draw: (context) => drawBackgroundNear(context, frame.viewState)
+        }
+      ];
+    const commands: RenderCommand[] = [...backgroundCommands];
 
     if (frame.presentation !== undefined) {
       const presentationOptions: {

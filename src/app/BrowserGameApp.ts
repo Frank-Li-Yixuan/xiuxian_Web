@@ -3,6 +3,7 @@ import { CombatSfxMapper } from "../audio/CombatSfxMapper";
 import { loadCombatAudioAssetRegistry } from "../assets/CombatAssetRegistry";
 import { CanvasRenderer } from "../render/CanvasRenderer";
 import { AbilityVfxRenderer } from "../render/AbilityVfxRenderer";
+import { BackgroundParallaxRenderer } from "../render/BackgroundParallaxRenderer";
 import { CombatVfxRenderer } from "../render/CombatVfxRenderer";
 import { PickupPresentationSystem } from "../render/PickupPresentationSystem";
 import { ProjectileSkinRenderer } from "../render/ProjectileSkinRenderer";
@@ -36,7 +37,10 @@ const CANVAS_HEIGHT = 1080;
 
 export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
   const runtime = createBrowserGameRuntime({ mode: "local_coop", screenWidth: CANVAS_WIDTH, screenHeight: CANVAS_HEIGHT });
-  let renderer = new CanvasRenderer({ abilityVfxRenderer: new AbilityVfxRenderer() });
+  let renderer = new CanvasRenderer({
+    backgroundParallaxRenderer: new BackgroundParallaxRenderer(),
+    abilityVfxRenderer: new AbilityVfxRenderer()
+  });
   const keyboard = new LocalKeyboardInputSource(["p1", "p2"]);
   const sfxMapper = new CombatSfxMapper();
   const shell = document.createElement("div");
@@ -125,6 +129,7 @@ export function mountBrowserGameApp(root: HTMLElement): BrowserGameAppHandle {
         return;
       }
       renderer = new CanvasRenderer({
+        backgroundParallaxRenderer: new BackgroundParallaxRenderer({ spriteRegistry }),
         abilityVfxRenderer: new AbilityVfxRenderer(),
         combatVfxRenderer: new CombatVfxRenderer({ spriteRegistry }),
         projectileSkinRenderer: new ProjectileSkinRenderer({ spriteRegistry }),

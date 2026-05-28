@@ -6,6 +6,7 @@ import type {
   CanvasPresentationState
 } from "../../render/CanvasPresentationState";
 import { AbilityVfxRenderer, getAbilityVfxProfile } from "../../render/AbilityVfxRenderer";
+import { BackgroundParallaxRenderer } from "../../render/BackgroundParallaxRenderer";
 import { CanvasRenderer, type CanvasRenderFrame } from "../../render/CanvasRenderer";
 import { CombatVfxRenderer } from "../../render/CombatVfxRenderer";
 import { getImpactVfxProfile } from "../../render/ImpactVfxRenderer";
@@ -20,6 +21,7 @@ const CANVAS_HEIGHT = 1080;
 const ENEMY_BULLET_COUNT = 100;
 type AbilitySceneMode = "all" | "spells" | "artifacts" | "pills" | "treasures";
 type EntitySceneMode = "entities" | "idle" | "move" | "attack" | "hit" | "death";
+type BackgroundSceneMode = "background" | "outer_battlefield" | "qingyun_reserve" | "tribulation_sky";
 
 export function DevCombatAssetPlaygroundScreen(): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -38,6 +40,8 @@ export function DevCombatAssetPlaygroundScreen(): ReactElement {
   const [abilityToken, setAbilityToken] = useState(0);
   const [entityMode, setEntityMode] = useState<EntitySceneMode>("entities");
   const [entityToken, setEntityToken] = useState(0);
+  const [backgroundMode, setBackgroundMode] = useState<BackgroundSceneMode>("background");
+  const [backgroundToken, setBackgroundToken] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,9 +71,13 @@ export function DevCombatAssetPlaygroundScreen(): ReactElement {
 
   const renderer = useMemo(() => {
     if (spriteRegistry === undefined) {
-      return new CanvasRenderer({ abilityVfxRenderer: new AbilityVfxRenderer() });
+      return new CanvasRenderer({
+        backgroundParallaxRenderer: new BackgroundParallaxRenderer(),
+        abilityVfxRenderer: new AbilityVfxRenderer()
+      });
     }
     return new CanvasRenderer({
+      backgroundParallaxRenderer: new BackgroundParallaxRenderer({ spriteRegistry }),
       abilityVfxRenderer: new AbilityVfxRenderer(),
       combatVfxRenderer: new CombatVfxRenderer({ spriteRegistry }),
       projectileSkinRenderer: new ProjectileSkinRenderer({
@@ -110,7 +118,8 @@ export function DevCombatAssetPlaygroundScreen(): ReactElement {
           frame: frameRef.current,
           magnetStartFrame: magnetStartFrameRef.current,
           abilityMode,
-          entityMode
+          entityMode,
+          backgroundMode
         })
       );
 
@@ -128,7 +137,7 @@ export function DevCombatAssetPlaygroundScreen(): ReactElement {
       running = false;
       window.cancelAnimationFrame(animationFrameId);
     };
-  }, [abilityMode, abilityToken, entityMode, entityToken, renderer, magnetToken]);
+  }, [abilityMode, abilityToken, backgroundMode, backgroundToken, entityMode, entityToken, renderer, magnetToken]);
 
   const playMagnet = (): void => {
     magnetStartFrameRef.current = frameRef.current;
@@ -141,6 +150,10 @@ export function DevCombatAssetPlaygroundScreen(): ReactElement {
   const playEntityMode = (mode: EntitySceneMode): void => {
     setEntityMode(mode);
     setEntityToken((value) => value + 1);
+  };
+  const playBackgroundMode = (mode: BackgroundSceneMode): void => {
+    setBackgroundMode(mode);
+    setBackgroundToken((value) => value + 1);
   };
 
   return (
@@ -198,6 +211,18 @@ export function DevCombatAssetPlaygroundScreen(): ReactElement {
         <button type="button" onClick={() => playEntityMode("death")}>
           Death
         </button>
+        <button type="button" onClick={() => playBackgroundMode("background")}>
+          Background
+        </button>
+        <button type="button" onClick={() => playBackgroundMode("outer_battlefield")}>
+          Outer Battlefield
+        </button>
+        <button type="button" onClick={() => playBackgroundMode("qingyun_reserve")}>
+          Qingyun Reserve
+        </button>
+        <button type="button" onClick={() => playBackgroundMode("tribulation_sky")}>
+          Tribulation Sky
+        </button>
         <button type="button" onClick={() => setPaused((value) => !value)}>
           {paused ? "Resume" : "Pause"}
         </button>
@@ -233,6 +258,10 @@ export function DevCombatAssetPlaygroundScreen(): ReactElement {
             entity.enemy.elite_split_wind_wolf_01 · entity.enemy.rogue_cultivator_shadow_01 · entity.enemy.stone_armor_demon_01
           </p>
         </section>
+        <section>
+          <h2>Background Parallax</h2>
+          <p>background.space_dark_01 路 Outer Battlefield 路 Qingyun Reserve 路 Tribulation Sky</p>
+        </section>
       </aside>
     </main>
   );
@@ -243,9 +272,10 @@ function createPlaygroundFrame(options: {
   readonly magnetStartFrame: number;
   readonly abilityMode: AbilitySceneMode;
   readonly entityMode: EntitySceneMode;
+  readonly backgroundMode: BackgroundSceneMode;
 }): CanvasRenderFrame {
   return {
-    viewState: createPlaygroundViewState(options.frame),
+    viewState: createPlaygroundViewState(options.frame, options.backgroundMode),
     effectEvents: [],
     presentation: createPlaygroundPresentation(options)
   };
@@ -256,6 +286,7 @@ function createPlaygroundPresentation(options: {
   readonly magnetStartFrame: number;
   readonly abilityMode: AbilitySceneMode;
   readonly entityMode: EntitySceneMode;
+  readonly backgroundMode: BackgroundSceneMode;
 }): CanvasPresentationState {
   return {
     frame: options.frame,
@@ -291,15 +322,7 @@ function createPlaygroundPresentation(options: {
     playerProjectiles: createPlayerProjectiles(options.frame),
     enemyProjectiles: createEnemyBulletGrid(options.frame),
     pickups: createPickupShowcase(options.frame, options.magnetStartFrame),
-    warnings: [
-      {
-        id: "playground_wolf_charge",
-        kind: "wolf_charge",
-        position: { x: 1080, y: 310 },
-        radius: 72,
-        severity: "medium"
-      }
-    ],
+    warnings: createPlaygroundWarnings(options.backgroundMode),
     visualEvents: createImpactShowcase(options.frame),
     abilityVfx: createAbilityShowcase(options.frame, options.abilityMode),
     entityAnimationEvents: createEntityAnimationShowcase(options.frame, options.entityMode)
@@ -597,9 +620,36 @@ function createPickupShowcase(frame: number, magnetStartFrame: number): CanvasPr
   }));
 }
 
-function createPlaygroundViewState(frame: number): InRunUiViewState {
+function createPlaygroundWarnings(backgroundMode: BackgroundSceneMode): CanvasPresentationState["warnings"] {
+  const warnings: CanvasPresentationState["warnings"] = [
+    {
+      id: "playground_wolf_charge",
+      kind: "wolf_charge",
+      position: { x: 1080, y: 310 },
+      radius: 72,
+      severity: "medium"
+    }
+  ];
+  if (backgroundMode !== "tribulation_sky") {
+    return warnings;
+  }
+  return [
+    ...warnings,
+    {
+      id: "playground_tribulation_sky",
+      kind: "tribulation",
+      position: { x: 960, y: 500 },
+      radius: 100,
+      severity: "lethal"
+    }
+  ];
+}
+
+function createPlaygroundViewState(frame: number, backgroundMode: BackgroundSceneMode): InRunUiViewState {
+  const qingyun = backgroundMode === "qingyun_reserve";
+  const tribulationSky = backgroundMode === "tribulation_sky";
   return {
-    mode: "combat",
+    mode: tribulationSky ? "combat_tribulation" : "combat",
     screen: {
       width: CANVAS_WIDTH,
       height: CANVAS_HEIGHT,
@@ -613,18 +663,41 @@ function createPlaygroundViewState(frame: number): InRunUiViewState {
       exp: frame % 120,
       expToNext: 120,
       progress01: (frame % 120) / 120,
-      nextTriggerText: "BAS-C006 projectile / pickup VFX pass",
+      nextTriggerText: "BAS-C011 background parallax pass",
       sharedFortuneReroll: 2,
       isReadyToInsight: false
     },
     stage: {
-      stageName: "BAS-C006",
-      segmentName: "Combat asset playground",
+      stageName: qingyun ? "青云山·背景预留" : "BAS-C011 Outer Battlefield",
+      segmentName: tribulationSky ? "雷劫天象层" : qingyun ? "山门 / 云海 / 妖雾预留" : "Combat asset playground",
       segmentIndex: 1,
       segmentCount: 1,
       timeRemaining: 0,
-      intensity: "high"
+      intensity: tribulationSky ? "boss" : backgroundMode === "background" ? "medium" : "high"
     },
+    ...(tribulationSky
+      ? {
+          tribulation: {
+            active: true,
+            playerId: "p1",
+            tribulationName: "练气破筑基·局内三九雷劫",
+            phase: "active" as const,
+            remainingTime: 12,
+            warningText: "雷劫天象层",
+            canClearThunder: false as const,
+            lightningWarnings: [
+              {
+                id: "playground_tribulation_sky",
+                x: 960,
+                y: 500,
+                radius: 100,
+                timeToImpact: 0.8,
+                severity: "lethal" as const
+              }
+            ]
+          }
+        }
+      : {}),
     prompts: []
   };
 }

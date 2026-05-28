@@ -341,10 +341,11 @@ describe("browser playable shell", () => {
     const appSource = readFileSync(join(process.cwd(), "src/app/BrowserGameApp.ts"), "utf8");
 
     expect(appSource).toContain("loadSpriteAssetRegistry");
+    expect(appSource).toContain("BackgroundParallaxRenderer");
     expect(appSource).toContain("AbilityVfxRenderer");
     expect(appSource).toContain("ProjectileSkinRenderer");
     expect(appSource).toContain("PickupPresentationSystem");
-    expect(appSource).toContain("new CanvasRenderer({ abilityVfxRenderer: new AbilityVfxRenderer() })");
+    expect(appSource).toContain("backgroundParallaxRenderer: new BackgroundParallaxRenderer()");
     expect(appSource).toContain("abilityVfxRenderer: new AbilityVfxRenderer()");
     expect(appSource).toContain(".catch");
   });

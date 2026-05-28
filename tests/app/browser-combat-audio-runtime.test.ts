@@ -23,7 +23,9 @@ describe("browser combat audio runtime wiring", () => {
     const snapshot = runtime.step([]);
 
     expect(Object.keys(snapshot)).not.toEqual(expect.arrayContaining(["audioBus", "sfxMapper", "cueQueue"]));
-    expect(Object.keys(snapshot.simState)).not.toEqual(expect.arrayContaining(["audioBus", "sfxMapper", "cueQueue", "combatAudio"]));
+    expect(Object.keys(snapshot.simState)).not.toEqual(
+      expect.arrayContaining(["audioBus", "sfxMapper", "cueQueue", "combatAudio", "backgroundParallaxRenderer"])
+    );
     expect(snapshot.presentation.visualEvents).toBeDefined();
   });
 });

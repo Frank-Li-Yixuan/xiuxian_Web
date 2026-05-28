@@ -13,7 +13,7 @@ describe("dev combat asset playground", () => {
     expect(mainSource).toContain("DevCombatAssetPlaygroundScreen");
   });
 
-  it("SSR-renders projectile, pickup, impact, ability, entity sprite, and 100 enemy bullet playground controls", () => {
+  it("SSR-renders projectile, pickup, impact, ability, entity sprite, background, and 100 enemy bullet playground controls", () => {
     const markup = renderToStaticMarkup(createElement(DevCombatAssetPlaygroundScreen));
 
     expect(markup).toContain("dev-combat-asset-playground-screen");
@@ -24,6 +24,11 @@ describe("dev combat asset playground", () => {
     expect(markup).toContain("Impact / death VFX");
     expect(markup).toContain("Spell / Artifact / Pill / Treasure VFX");
     expect(markup).toContain("Entity Sprite Animation");
+    expect(markup).toContain("Background Parallax");
+    expect(markup).toContain("background.space_dark_01");
+    expect(markup).toContain("Outer Battlefield");
+    expect(markup).toContain("Qingyun Reserve");
+    expect(markup).toContain("Tribulation Sky");
     expect(markup).toContain("projectile_hit");
     expect(markup).toContain("enemy_damaged");
     expect(markup).toContain("enemy_killed");
@@ -61,6 +66,7 @@ describe("dev combat asset playground", () => {
     expect(markup).toContain("Attack");
     expect(markup).toContain("Hit");
     expect(markup).toContain("Death");
+    expect(markup).toContain("Background");
     expect(markup).toContain("Spells");
     expect(markup).toContain("Pills");
     expect(markup).toContain("Treasures");
