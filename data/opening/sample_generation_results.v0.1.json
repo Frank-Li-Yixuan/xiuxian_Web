@@ -1,0 +1,119 @@
+{
+  "version": "0.1",
+  "samples": [
+    {
+      "seed": "demo-thunder-genius-001",
+      "archetype": "命薄天才",
+      "aptitude": {
+        "rootBone": 34,
+        "comprehension": 96,
+        "inspiration": 88,
+        "fortune": 41,
+        "heart": 52,
+        "lifespan": 18
+      },
+      "coreSeed": {
+        "jing": 11,
+        "qi": 17,
+        "shen": 22
+      },
+      "spiritualRoot": {
+        "displayName": "雷火双灵根",
+        "category": "dual",
+        "elements": {
+          "thunder": 78,
+          "fire": 58
+        },
+        "purity": 84,
+        "stability": 42,
+        "conflict": 72,
+        "breadth": 48
+      },
+      "tags": [
+        "aptitude:comprehension_high",
+        "aptitude:lifespan_low",
+        "root:thunder",
+        "root:fire",
+        "lifeEvent:thunderstorm_omen",
+        "destinyBias:heaven_jealous_talent",
+        "destinyBias:tribulation_affinity"
+      ]
+    },
+    {
+      "seed": "demo-wastebone-002",
+      "archetype": "废柴逆骨",
+      "aptitude": {
+        "rootBone": 19,
+        "comprehension": 38,
+        "inspiration": 71,
+        "fortune": 55,
+        "heart": 86,
+        "lifespan": 78
+      },
+      "coreSeed": {
+        "jing": 9,
+        "qi": 8,
+        "shen": 15
+      },
+      "spiritualRoot": {
+        "displayName": "闭塞灵根",
+        "category": "closed",
+        "latentRoot": "阴",
+        "elements": {
+          "yin": 12
+        },
+        "purity": 12,
+        "stability": 44,
+        "conflict": 38,
+        "breadth": 20
+      },
+      "tags": [
+        "archetype:wastebone",
+        "aptitude:heart_high",
+        "root:closed",
+        "latentRoot:yin",
+        "destinyBias:waste_root_reversal",
+        "lifeEvent:repeated_failure",
+        "hiddenFateBias:soul_path"
+      ]
+    },
+    {
+      "seed": "demo-stable-alchemy-003",
+      "archetype": "平凡中正",
+      "aptitude": {
+        "rootBone": 61,
+        "comprehension": 58,
+        "inspiration": 63,
+        "fortune": 66,
+        "heart": 70,
+        "lifespan": 73
+      },
+      "coreSeed": {
+        "jing": 17,
+        "qi": 14,
+        "shen": 15
+      },
+      "spiritualRoot": {
+        "displayName": "木土双灵根",
+        "category": "dual",
+        "elements": {
+          "wood": 62,
+          "earth": 52
+        },
+        "purity": 67,
+        "stability": 82,
+        "conflict": 18,
+        "breadth": 54
+      },
+      "tags": [
+        "root:wood",
+        "root:earth",
+        "rootRelation:generating",
+        "lifeEvent:herb_gathering",
+        "lifeEvent:family_home",
+        "mode:horde_growth_bias",
+        "destinyBias:alchemy_affinity"
+      ]
+    }
+  ]
+}

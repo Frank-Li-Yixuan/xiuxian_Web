@@ -1,0 +1,512 @@
+{
+  "version": "0.1",
+  "notes": "命盘类型用于先随机人物先天底子，再由灵根和天命继续塑形。",
+  "archetypes": [
+    {
+      "id": "balanced_ordinary",
+      "name": "平凡中正",
+      "weight": 32,
+      "description": "各项中等，没有明显短板，适合作为常规开局。",
+      "aptitudeRanges": {
+        "rootBone": [
+          40,
+          65
+        ],
+        "comprehension": [
+          40,
+          65
+        ],
+        "inspiration": [
+          35,
+          60
+        ],
+        "fortune": [
+          35,
+          60
+        ],
+        "heart": [
+          40,
+          65
+        ],
+        "lifespan": [
+          45,
+          70
+        ]
+      },
+      "skew": {},
+      "coreSeedBase": {
+        "jing": 12,
+        "qi": 11,
+        "shen": 11
+      },
+      "rootCategoryWeightModifiers": {
+        "single": 1.15,
+        "dual": 1.15,
+        "triple": 1.05
+      },
+      "biasTags": [
+        "archetype:balanced",
+        "lifeEvent:ordinary_family"
+      ]
+    },
+    {
+      "id": "early_sage",
+      "name": "偏科早慧",
+      "weight": 14,
+      "description": "悟性和灵感突出，但肉身承载较弱。",
+      "aptitudeRanges": {
+        "rootBone": [
+          20,
+          50
+        ],
+        "comprehension": [
+          70,
+          95
+        ],
+        "inspiration": [
+          55,
+          85
+        ],
+        "fortune": [
+          25,
+          60
+        ],
+        "heart": [
+          35,
+          70
+        ],
+        "lifespan": [
+          30,
+          60
+        ]
+      },
+      "skew": {
+        "comprehension": 0.05,
+        "inspiration": 0.03,
+        "rootBone": -0.03
+      },
+      "coreSeedBase": {
+        "jing": 9,
+        "qi": 13,
+        "shen": 16
+      },
+      "rootCategoryWeightModifiers": {
+        "single": 1.05,
+        "variant": 1.15,
+        "hidden": 1.1
+      },
+      "biasTags": [
+        "archetype:early_sage",
+        "destinyBias:heaven_jealous_talent",
+        "lifeEvent:early_learning"
+      ]
+    },
+    {
+      "id": "iron_body",
+      "name": "肉身强横",
+      "weight": 13,
+      "description": "根骨与精气旺盛，适合炼体和前期战斗。",
+      "aptitudeRanges": {
+        "rootBone": [
+          70,
+          95
+        ],
+        "comprehension": [
+          20,
+          58
+        ],
+        "inspiration": [
+          25,
+          60
+        ],
+        "fortune": [
+          30,
+          65
+        ],
+        "heart": [
+          45,
+          75
+        ],
+        "lifespan": [
+          55,
+          85
+        ]
+      },
+      "skew": {
+        "rootBone": 0.06,
+        "comprehension": -0.04
+      },
+      "coreSeedBase": {
+        "jing": 18,
+        "qi": 11,
+        "shen": 9
+      },
+      "rootCategoryWeightModifiers": {
+        "earthly": 1.15,
+        "single": 1.05,
+        "heavenly": 0.8
+      },
+      "biasTags": [
+        "archetype:iron_body",
+        "lifeEvent:martial_training",
+        "mode:horde_tank_bias"
+      ]
+    },
+    {
+      "id": "blessed_fortune",
+      "name": "福缘深厚",
+      "weight": 10,
+      "description": "气运与灵感较高，更容易遇到机缘。",
+      "aptitudeRanges": {
+        "rootBone": [
+          35,
+          65
+        ],
+        "comprehension": [
+          35,
+          68
+        ],
+        "inspiration": [
+          65,
+          92
+        ],
+        "fortune": [
+          70,
+          98
+        ],
+        "heart": [
+          38,
+          72
+        ],
+        "lifespan": [
+          45,
+          80
+        ]
+      },
+      "skew": {
+        "fortune": 0.07,
+        "inspiration": 0.04
+      },
+      "coreSeedBase": {
+        "jing": 11,
+        "qi": 12,
+        "shen": 15
+      },
+      "rootCategoryWeightModifiers": {
+        "hidden": 1.25,
+        "variant": 1.1
+      },
+      "biasTags": [
+        "archetype:blessed",
+        "destinyBias:fortunate_star",
+        "lifeEvent:chance_encounter"
+      ]
+    },
+    {
+      "id": "thin_lived_genius",
+      "name": "命薄天才",
+      "weight": 7,
+      "description": "悟性极高，但寿元薄弱，容易引来高压命运。",
+      "aptitudeRanges": {
+        "rootBone": [
+          20,
+          55
+        ],
+        "comprehension": [
+          85,
+          105
+        ],
+        "inspiration": [
+          70,
+          100
+        ],
+        "fortune": [
+          20,
+          55
+        ],
+        "heart": [
+          30,
+          65
+        ],
+        "lifespan": [
+          10,
+          35
+        ]
+      },
+      "skew": {
+        "comprehension": 0.08,
+        "inspiration": 0.04,
+        "lifespan": -0.08
+      },
+      "coreSeedBase": {
+        "jing": 8,
+        "qi": 15,
+        "shen": 20
+      },
+      "rootCategoryWeightModifiers": {
+        "heavenly": 1.3,
+        "variant": 1.25,
+        "hidden": 1.15
+      },
+      "biasTags": [
+        "archetype:thin_lived_genius",
+        "aptitude:lifespan_low",
+        "destinyBias:heaven_jealous_talent"
+      ]
+    },
+    {
+      "id": "wastebone_reversal",
+      "name": "废柴逆骨",
+      "weight": 8,
+      "description": "开局底子很差，但心性与隐藏潜力较好，适合逆袭。",
+      "aptitudeRanges": {
+        "rootBone": [
+          5,
+          35
+        ],
+        "comprehension": [
+          15,
+          55
+        ],
+        "inspiration": [
+          30,
+          80
+        ],
+        "fortune": [
+          20,
+          70
+        ],
+        "heart": [
+          50,
+          90
+        ],
+        "lifespan": [
+          45,
+          85
+        ]
+      },
+      "skew": {
+        "rootBone": -0.08,
+        "heart": 0.06
+      },
+      "coreSeedBase": {
+        "jing": 7,
+        "qi": 7,
+        "shen": 11
+      },
+      "rootCategoryWeightModifiers": {
+        "closed": 1.8,
+        "hidden": 1.5,
+        "mixed": 1.2
+      },
+      "biasTags": [
+        "archetype:wastebone",
+        "destinyBias:waste_root_reversal",
+        "lifeEvent:repeated_failure"
+      ]
+    },
+    {
+      "id": "steady_dao_heart",
+      "name": "道心坚固",
+      "weight": 6,
+      "description": "心性极稳，突破和心魔事件更安全。",
+      "aptitudeRanges": {
+        "rootBone": [
+          35,
+          70
+        ],
+        "comprehension": [
+          35,
+          70
+        ],
+        "inspiration": [
+          35,
+          65
+        ],
+        "fortune": [
+          30,
+          65
+        ],
+        "heart": [
+          78,
+          105
+        ],
+        "lifespan": [
+          55,
+          90
+        ]
+      },
+      "skew": {
+        "heart": 0.08
+      },
+      "coreSeedBase": {
+        "jing": 13,
+        "qi": 13,
+        "shen": 15
+      },
+      "rootCategoryWeightModifiers": {
+        "dual": 1.1,
+        "triple": 1.1,
+        "chaos": 0.65
+      },
+      "biasTags": [
+        "archetype:steady_heart",
+        "destinyBias:clear_glass_heart",
+        "lifeEvent:meditation"
+      ]
+    },
+    {
+      "id": "root_omen",
+      "name": "灵根异象",
+      "weight": 4,
+      "description": "出生伴随灵根异象，高概率出现特殊灵根。",
+      "aptitudeRanges": {
+        "rootBone": [
+          30,
+          75
+        ],
+        "comprehension": [
+          45,
+          85
+        ],
+        "inspiration": [
+          65,
+          105
+        ],
+        "fortune": [
+          35,
+          80
+        ],
+        "heart": [
+          35,
+          75
+        ],
+        "lifespan": [
+          35,
+          80
+        ]
+      },
+      "skew": {
+        "inspiration": 0.08
+      },
+      "coreSeedBase": {
+        "jing": 11,
+        "qi": 16,
+        "shen": 18
+      },
+      "rootCategoryWeightModifiers": {
+        "heavenly": 1.8,
+        "variant": 1.8,
+        "hidden": 1.7,
+        "chaos": 1.2
+      },
+      "biasTags": [
+        "archetype:root_omen",
+        "lifeEvent:spiritual_root_omen",
+        "hiddenFateBias:root_awakening"
+      ]
+    },
+    {
+      "id": "hidden_immortal_bone",
+      "name": "仙骨暗藏",
+      "weight": 3,
+      "description": "表面平稳，体内藏有较高潜力和隐秘因果。",
+      "aptitudeRanges": {
+        "rootBone": [
+          55,
+          90
+        ],
+        "comprehension": [
+          55,
+          90
+        ],
+        "inspiration": [
+          60,
+          95
+        ],
+        "fortune": [
+          45,
+          85
+        ],
+        "heart": [
+          50,
+          85
+        ],
+        "lifespan": [
+          50,
+          90
+        ]
+      },
+      "skew": {
+        "rootBone": 0.03,
+        "comprehension": 0.03,
+        "inspiration": 0.03
+      },
+      "coreSeedBase": {
+        "jing": 15,
+        "qi": 15,
+        "shen": 16
+      },
+      "rootCategoryWeightModifiers": {
+        "hidden": 1.9,
+        "heavenly": 1.2,
+        "variant": 1.2
+      },
+      "biasTags": [
+        "archetype:hidden_bone",
+        "hiddenFateBias:past_life",
+        "hiddenFateBias:ancient_bloodline"
+      ]
+    },
+    {
+      "id": "tribulation_bound",
+      "name": "劫运缠身",
+      "weight": 3,
+      "description": "命运高压，容易遇到灾厄，但也更容易触发大机缘。",
+      "aptitudeRanges": {
+        "rootBone": [
+          25,
+          80
+        ],
+        "comprehension": [
+          35,
+          85
+        ],
+        "inspiration": [
+          55,
+          105
+        ],
+        "fortune": [
+          5,
+          95
+        ],
+        "heart": [
+          25,
+          80
+        ],
+        "lifespan": [
+          20,
+          75
+        ]
+      },
+      "skew": {
+        "inspiration": 0.04
+      },
+      "coreSeedBase": {
+        "jing": 11,
+        "qi": 14,
+        "shen": 17
+      },
+      "rootCategoryWeightModifiers": {
+        "variant": 1.4,
+        "chaos": 1.5,
+        "hidden": 1.2
+      },
+      "biasTags": [
+        "archetype:tribulation_bound",
+        "destinyBias:tribulation_affinity",
+        "lifeEvent:calamity"
+      ]
+    }
+  ]
+}

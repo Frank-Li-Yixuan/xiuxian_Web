@@ -1,0 +1,199 @@
+{
+  "version": "0.1",
+  "namespace": "origin_fate.carried_items",
+  "description": "随身物池：人生模拟中保留的凡物/遗物。18 岁系统觉醒时会被扫描并转化为域外战场开局物品、洞府线索或长期因果标签。",
+  "items": [
+    {
+      "id": "origin_item_broken_wooden_sword",
+      "name": "残破木剑",
+      "rarity": "common",
+      "baseWeight": 90,
+      "visibleDescription": "一柄早已开裂的木剑，剑柄被你握得发亮。",
+      "biasTags": ["hunter", "fallen_lineage", "sword", "metal", "childhood_training"],
+      "hiddenFateSynergyTags": ["past_life_sword_soul", "dragon_bone"],
+      "lifeEventTags": ["practice_sword", "wooden_sword_warm", "child_duel"],
+      "eighteenConversion": {
+        "type": "artifact_clue",
+        "label": "青霜飞剑·残缘",
+        "outerBattlefieldEffect": "第一场域外战场中飞剑类本命法宝候选权重提高；若持有剑类隐藏命，开局获得剑意残响。",
+        "dongfuHook": "artifact_warming_sword_clue"
+      }
+    },
+    {
+      "id": "origin_item_ancestral_jade",
+      "name": "祖传玉佩",
+      "rarity": "uncommon",
+      "baseWeight": 70,
+      "visibleDescription": "一枚纹路模糊的旧玉佩，贴身佩戴时偶有温意。",
+      "biasTags": ["relic", "fallen_lineage", "merchant", "family", "protection"],
+      "hiddenFateSynergyTags": ["merit_seed", "system_resonance_body", "lunar_remnant_vein"],
+      "lifeEventTags": ["jade_warm", "family_memory", "protective_omen"],
+      "eighteenConversion": {
+        "type": "treasure_fragment",
+        "label": "八卦玉佩·残",
+        "outerBattlefieldEffect": "开局获得一次护盾或护命触发；功德类隐藏命进度提高。",
+        "dongfuHook": "unlock_jade_treasure_repair"
+      }
+    },
+    {
+      "id": "item_apothecary_bronze_furnace",
+      "name": "药铺铜炉",
+      "rarity": "uncommon",
+      "baseWeight": 62,
+      "visibleDescription": "药铺淘汰的小铜炉，炉壁内侧残留着多年药香。",
+      "biasTags": ["apothecary", "alchemy", "fire", "wood", "medicine"],
+      "hiddenFateSynergyTags": ["pill_saint_remains"],
+      "lifeEventTags": ["furnace_dream", "alchemy_practice", "pill_smell"],
+      "eighteenConversion": {
+        "type": "dongfu_building_bonus",
+        "label": "残炉火候",
+        "outerBattlefieldEffect": "开局携带回春丹或提高丹药掉落权重。",
+        "dongfuHook": "alchemy_room_initial_fire_control_bonus"
+      }
+    },
+    {
+      "id": "origin_item_wordless_page",
+      "name": "无字残页",
+      "rarity": "rare",
+      "baseWeight": 36,
+      "visibleDescription": "一页没有字的旧纸，只有在烛火将尽时才隐约浮现纹路。",
+      "biasTags": ["scholar", "scripture", "fallen_lineage", "temple", "comprehension"],
+      "hiddenFateSynergyTags": ["heaven_book_fragment", "system_resonance_body"],
+      "lifeEventTags": ["scripture_rearrange", "midnight_reading", "hidden_text"],
+      "eighteenConversion": {
+        "type": "spell_clue",
+        "label": "无名法诀线索",
+        "outerBattlefieldEffect": "第一次顿悟奖励质量提高；万族试炼塔后续解锁天书相关牌池。",
+        "dongfuHook": "method_research_mystery_page"
+      }
+    },
+    {
+      "id": "origin_item_old_talisman",
+      "name": "破旧符纸",
+      "rarity": "common",
+      "baseWeight": 80,
+      "visibleDescription": "符纸边角已经发黄，但朱砂笔画仍有一丝灵光。",
+      "biasTags": ["temple", "talisman", "protection", "daoist_ritual"],
+      "hiddenFateSynergyTags": ["merit_seed", "dao_heart", "system_resonance_body"],
+      "lifeEventTags": ["talisman_glow", "ritual", "protection"],
+      "eighteenConversion": {
+        "type": "talisman",
+        "label": "护命符·旧",
+        "outerBattlefieldEffect": "第一场域外战场获得一次低阶护命符。",
+        "dongfuHook": "unlock_talisman_crafting_hint"
+      }
+    },
+    {
+      "id": "item_black_bone_flute",
+      "name": "黑骨短笛",
+      "rarity": "rare",
+      "baseWeight": 24,
+      "visibleDescription": "一支不知何骨制成的短笛，你从未吹响过它。",
+      "biasTags": ["graveyard", "yin", "soul", "demon", "night"],
+      "hiddenFateSynergyTags": ["lunar_remnant_vein", "demon_mark", "void_battlefield_echo"],
+      "lifeEventTags": ["bone_flute_dream", "night_whisper", "soul_call"],
+      "eighteenConversion": {
+        "type": "forbidden_clue",
+        "label": "魂音残器",
+        "outerBattlefieldEffect": "神魂/心魔事件权重提高；若心性不足，第一战可能出现扰动。",
+        "dongfuHook": "unlock_soul_or_purification_choice"
+      }
+    },
+    {
+      "id": "origin_item_family_letter",
+      "name": "残旧家书",
+      "rarity": "common",
+      "baseWeight": 78,
+      "visibleDescription": "一封残旧家书，字迹被水渍晕开，只剩几句嘱托。",
+      "biasTags": ["family", "refugee", "orphan", "heart", "merit"],
+      "hiddenFateSynergyTags": ["merit_seed", "past_life", "curse_seal"],
+      "lifeEventTags": ["family_memory", "heart_choice", "ancestor_dream"],
+      "eighteenConversion": {
+        "type": "karmic_memory",
+        "label": "未尽亲缘",
+        "outerBattlefieldEffect": "心性相关判定小幅提高；救援/护生选项权重提高。",
+        "dongfuHook": "enable_family_memory_events"
+      }
+    },
+    {
+      "id": "item_cracked_coin",
+      "name": "裂纹铜钱",
+      "rarity": "common",
+      "baseWeight": 74,
+      "visibleDescription": "一枚裂纹铜钱，正反两面花纹都看不清，却总是丢不掉。",
+      "biasTags": ["merchant", "fortune", "refugee", "trade", "system_resonance"],
+      "hiddenFateSynergyTags": ["system_resonance_body", "merit_seed", "curse_seal"],
+      "lifeEventTags": ["coin_flip", "strange_trade", "luck_event"],
+      "eighteenConversion": {
+        "type": "fortune_token",
+        "label": "裂命铜钱",
+        "outerBattlefieldEffect": "第一场域外战场获得一次低阶重 Roll 或掉落修正。",
+        "dongfuHook": "unlock_luck_merchant_hint"
+      }
+    },
+    {
+      "id": "item_rusty_hunting_bow",
+      "name": "锈弓残弦",
+      "rarity": "common",
+      "baseWeight": 48,
+      "visibleDescription": "一张旧猎弓，弦已残，弓身却仍有韧性。",
+      "biasTags": ["hunter", "forest", "martial", "beast"],
+      "hiddenFateSynergyTags": ["dragon_bone_unawakened", "spirit_beast_bond"],
+      "lifeEventTags": ["hunting_training", "beast_track", "forest_event"],
+      "eighteenConversion": {
+        "type": "combat_training",
+        "label": "山林猎术",
+        "outerBattlefieldEffect": "第一场战斗初始闪避/移动类教学收益提高。",
+        "dongfuHook": "hunter_training_memory"
+      }
+    },
+    {
+      "id": "item_daoist_incense_burner",
+      "name": "旧香炉",
+      "rarity": "uncommon",
+      "baseWeight": 42,
+      "visibleDescription": "道观中替下的旧香炉，炉底积着一层难以清去的香灰。",
+      "biasTags": ["temple", "incense", "ritual", "heart", "daoist"],
+      "hiddenFateSynergyTags": ["dao_heart", "merit_seed", "heaven_book_fragment"],
+      "lifeEventTags": ["incense_smoke", "ritual_dream", "quiet_meditation"],
+      "eighteenConversion": {
+        "type": "ritual_clue",
+        "label": "香火余烬",
+        "outerBattlefieldEffect": "清心/护法类效果小幅提高。",
+        "dongfuHook": "unlock_incense_altar_hint"
+      }
+    },
+    {
+      "id": "item_rain_stained_scripture",
+      "name": "雨渍旧经",
+      "rarity": "uncommon",
+      "baseWeight": 44,
+      "visibleDescription": "被雨浸过的旧经书，许多字已模糊，偏偏某些句子异常清晰。",
+      "biasTags": ["scholar", "temple", "scripture", "comprehension"],
+      "hiddenFateSynergyTags": ["heaven_book_fragment", "dao_heart"],
+      "lifeEventTags": ["scripture_reading", "rain_night", "hidden_sentence"],
+      "eighteenConversion": {
+        "type": "method_clue",
+        "label": "残经悟痕",
+        "outerBattlefieldEffect": "第一次顿悟更容易出现功法/法术类奖励。",
+        "dongfuHook": "library_initial_clue"
+      }
+    },
+    {
+      "id": "item_childhood_stone_charm",
+      "name": "童年石符",
+      "rarity": "common",
+      "baseWeight": 64,
+      "visibleDescription": "你小时候在溪边捡到的石片，纹路像一枚简陋符印。",
+      "biasTags": ["river", "childhood", "water", "earth", "protection"],
+      "hiddenFateSynergyTags": ["lunar_remnant_vein", "merit_seed", "dragon_bone_unawakened"],
+      "lifeEventTags": ["stone_charm_warm", "river_event", "childhood_memory"],
+      "eighteenConversion": {
+        "type": "minor_treasure_clue",
+        "label": "石符护念",
+        "outerBattlefieldEffect": "开局获得小幅护盾或水土类奖励权重。",
+        "dongfuHook": "minor_formation_seed"
+      }
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "version": "0.1",
+  "timeline": {
+    "startAgeMonths": 0,
+    "endAgeMonthsExclusive": 216,
+    "monthsPerYear": 12,
+    "majorChoiceIntervalMonths": 6,
+    "monthlyEventsPerMonth": 1,
+    "allowBonusEvents": true,
+    "maxBonusEventsPerMonth": 1
+  },
+  "rng": {
+    "mustUseSeededRng": true,
+    "streamNames": [
+      "lifeMonthly",
+      "lifeBonus",
+      "lifeOutcome"
+    ],
+    "forbidden": [
+      "Math.random"
+    ]
+  },
+  "weightFormula": {
+    "base": "event.baseWeight",
+    "phaseMultiplier": "1.0 if age in range else 0",
+    "tagBonus": "sum(matching tag modifiers from opening/origin/destiny)",
+    "stateBonus": "from current wounds, heart knots, hiddenFateProgress, resources",
+    "repeatPenalty": "category.repeatPenalty ** triggerCount",
+    "cooldownMultiplier": "0 if within cooldown else 1",
+    "final": "(base + tagBonus + stateBonus) * phaseMultiplier * repeatPenalty * cooldownMultiplier"
+  },
+  "monthlyBaselineGrowth": {
+    "enabled": true,
+    "description": "每月先应用阶段基础成长，再抽事件。基础成长很小，事件与半年选择才是主要差异来源。",
+    "aptitudeScaling": {
+      "jing": "phase.baseGrowth.jing * (0.65 + rootBone / 180)",
+      "qi": "phase.baseGrowth.qi * (0.65 + rootBone / 260 + spiritualRootQiAffinity / 120)",
+      "shen": "phase.baseGrowth.shen * (0.65 + comprehension / 260 + inspiration / 220)"
+    }
+  },
+  "eventOutcomeBands": [
+    {
+      "id": "bad",
+      "rollMaxExclusive": 15,
+      "effectMultiplier": 0.6,
+      "description": "不顺或小灾"
+    },
+    {
+      "id": "normal",
+      "rollMaxExclusive": 70,
+      "effectMultiplier": 1.0,
+      "description": "普通结果"
+    },
+    {
+      "id": "good",
+      "rollMaxExclusive": 92,
+      "effectMultiplier": 1.35,
+      "description": "良好结果"
+    },
+    {
+      "id": "great",
+      "rollMaxExclusive": 100,
+      "effectMultiplier": 1.8,
+      "description": "大机缘或大成功"
+    }
+  ],
+  "outcomeRollFormula": "1d100 + fortune*0.08 + inspiration*0.08 + heart*0.05 + matchingDestinyBonus - event.difficulty",
+  "hiddenFateProgress": {
+    "bands": [
+      {
+        "id": "faint_omen",
+        "range": [
+          0,
+          29
+        ],
+        "label": "隐约预兆"
+      },
+      {
+        "id": "stirring",
+        "range": [
+          30,
+          69
+        ],
+        "label": "命中异动"
+      },
+      {
+        "id": "near_awake",
+        "range": [
+          70,
+          99
+        ],
+        "label": "封印将醒"
+      },
+      {
+        "id": "awakened",
+        "range": [
+          100,
+          100
+        ],
+        "label": "已觉醒"
+      }
+    ],
+    "monthlyProgressCap": 12,
+    "age18RevealHandoff": true
+  },
+  "stateCaps": {
+    "coreStatsSoftCapBefore18": 150,
+    "aptitudeSoftCapBefore18": 120,
+    "meritCapBefore18": 120,
+    "karmaCapBefore18": 120,
+    "heartDemonCapBefore18": 100
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "version": "0.1",
+  "monthlyLogFormat": {
+    "title": "{ageYear}岁{ageMonthInYear}月 · {eventTitle}",
+    "body": "{eventDescription}",
+    "effectSummary": "{visibleEffectsSummary}",
+    "hiddenSummaryPolicy": "隐藏效果不显示真名，只显示模糊提示，例如：你感到某种旧日因果被轻轻拨动。"
+  },
+  "effectTextTemplates": [
+    {
+      "kind": "core",
+      "template": "{target} {signedValue}"
+    },
+    {
+      "kind": "aptitudeSoft",
+      "template": "{target} 资质微调 {signedValue}"
+    },
+    {
+      "kind": "lifeSkill",
+      "template": "{target}经验 {signedValue}"
+    },
+    {
+      "kind": "merit",
+      "template": "功德 {signedValue}"
+    },
+    {
+      "kind": "karma",
+      "template": "业力 {signedValue}"
+    },
+    {
+      "kind": "state",
+      "template": "获得状态：{target}"
+    },
+    {
+      "kind": "hiddenFateProgress",
+      "template": "隐藏预兆略有变化"
+    },
+    {
+      "kind": "itemAffinity",
+      "template": "某件随身物似乎与你更近了"
+    }
+  ],
+  "publicTone": {
+    "normal": "平实、像人生流水账，但带一点修真味。",
+    "omen": "含蓄，不直接剧透隐藏血脉真名。",
+    "disaster": "克制，不恐怖，不血腥，强调命数变化。",
+    "system": "18 岁前只出现异常感，不直接把系统说穿。"
+  }
+}

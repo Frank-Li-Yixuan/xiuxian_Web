@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "0.1",
+  "id": "stat_conversion_tables_v0_1",
+  "softCap": {
+    "cap": 120,
+    "softness": 0.45
+  },
+  "outerBattlefieldIntroStats": {
+    "maxHp": {
+      "base": 80,
+      "jingMultiplier": 2.6,
+      "rootBoneMultiplier": 0.7
+    },
+    "maxQi": {
+      "base": 60,
+      "qiMultiplier": 3.0,
+      "comprehensionMultiplier": 0.45
+    },
+    "pickupRadius": {
+      "base": 85,
+      "shenMultiplier": 1.25,
+      "inspirationMultiplier": 0.35
+    },
+    "critChance": {
+      "base": 0.03,
+      "shenMultiplier": 0.00045,
+      "comprehensionMultiplier": 0.00025,
+      "max": 0.25
+    },
+    "passiveQiRegen": {
+      "base": 0.8,
+      "qiMultiplier": 0.018,
+      "heartMultiplier": 0.006
+    },
+    "spellInsightBonus": {
+      "comprehensionMultiplier": 0.25,
+      "inspirationMultiplier": 0.2
+    },
+    "dropLuckBonus": {
+      "fortuneMultiplier": 0.18
+    },
+    "heartDemonResist": {
+      "heartMultiplier": 0.35,
+      "meritMultiplier": 0.08
+    }
+  },
+  "negativeStateModifiers": {
+    "wound_minor": { "maxHpMultiplier": -0.03 },
+    "wound_heavy": { "maxHpMultiplier": -0.1, "moveSpeedMultiplier": -0.03 },
+    "wound_old_illness": { "maxHpMultiplier": -0.08 },
+    "heart_knot_minor": { "spellCooldownMultiplier": 0.03 },
+    "heart_knot_heavy": { "spellCooldownMultiplier": 0.08 },
+    "heart_demon_seed": { "heartDemonEventWeight": 0.25 },
+    "karma_high": { "enemyDangerMultiplier": 0.1, "rewardMultiplier": 0.05 },
+    "merit_high": { "firstNearDeathProtectionChance": 0.15 }
+  },
+  "safetyFloors": {
+    "minMaxHp": 140,
+    "minMaxQi": 120,
+    "minPickupRadius": 110
+  }
+}

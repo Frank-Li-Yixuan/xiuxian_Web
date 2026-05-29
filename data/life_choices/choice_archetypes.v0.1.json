@@ -1,0 +1,148 @@
+{
+  "version": "0.1",
+  "riskTiers": [
+    {
+      "id": "safe",
+      "label": "稳",
+      "difficulty": 30,
+      "riskPenalty": 0,
+      "uiTone": "jade",
+      "description": "低风险，小收益。"
+    },
+    {
+      "id": "steady",
+      "label": "正",
+      "difficulty": 45,
+      "riskPenalty": 0,
+      "uiTone": "cyan",
+      "description": "中低风险，稳步成长。"
+    },
+    {
+      "id": "risky",
+      "label": "险",
+      "difficulty": 60,
+      "riskPenalty": 5,
+      "uiTone": "gold",
+      "description": "中高风险，收益明显。"
+    },
+    {
+      "id": "dangerous",
+      "label": "凶",
+      "difficulty": 75,
+      "riskPenalty": 10,
+      "uiTone": "crimson",
+      "description": "高风险，可能受伤或积业。"
+    },
+    {
+      "id": "forbidden",
+      "label": "禁",
+      "difficulty": 90,
+      "riskPenalty": 20,
+      "uiTone": "purple_crimson",
+      "description": "禁忌选择，强收益强代价。"
+    },
+    {
+      "id": "destiny",
+      "label": "命",
+      "difficulty": 60,
+      "riskPenalty": 0,
+      "uiTone": "white_gold",
+      "description": "命格、隐藏血脉或随身物触发。"
+    }
+  ],
+  "outcomeThresholds": {
+    "failure": {
+      "maxExclusive": 40
+    },
+    "mixed": {
+      "min": 40,
+      "maxExclusive": 65
+    },
+    "success": {
+      "min": 65,
+      "maxExclusive": 85
+    },
+    "great": {
+      "min": 85,
+      "maxExclusive": 100
+    },
+    "great_plus": {
+      "min": 100
+    },
+    "hidden": {
+      "min": 100,
+      "requiresHiddenConditions": true
+    }
+  },
+  "successChanceLabels": [
+    {
+      "min": 85,
+      "label": "十拿九稳"
+    },
+    {
+      "min": 70,
+      "label": "胜算颇高"
+    },
+    {
+      "min": 55,
+      "label": "可堪一试"
+    },
+    {
+      "min": 40,
+      "label": "吉凶参半"
+    },
+    {
+      "min": 25,
+      "label": "凶险"
+    },
+    {
+      "min": 0,
+      "label": "九死一生"
+    }
+  ],
+  "categories": [
+    "study_path",
+    "martial_path",
+    "alchemy_path",
+    "temple_path",
+    "family_path",
+    "wilderness_path",
+    "crisis_path",
+    "dream_path",
+    "origin_path",
+    "hidden_fate_path",
+    "destiny_path",
+    "system_path"
+  ],
+  "phaseWeights": {
+    "infancy": {
+      "family_path": 18,
+      "dream_path": 12,
+      "hidden_fate_path": 8
+    },
+    "childhood": {
+      "study_path": 16,
+      "martial_path": 12,
+      "alchemy_path": 10,
+      "temple_path": 10,
+      "wilderness_path": 10
+    },
+    "juvenile": {
+      "study_path": 12,
+      "martial_path": 14,
+      "origin_path": 10,
+      "hidden_fate_path": 12,
+      "crisis_path": 10
+    },
+    "youth": {
+      "destiny_path": 14,
+      "system_path": 12,
+      "origin_path": 12,
+      "martial_path": 12,
+      "alchemy_path": 10
+    },
+    "awakening": {
+      "system_path": 100
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.1",
+  "id": "age18_awakening_rules_v0_1",
+  "trigger": {
+    "requiredAgeMonths": 216,
+    "requiredSaveStage": "life_simulation_completed",
+    "nextSaveStage": "age18_awakening"
+  },
+  "awakeningScoreWeights": {
+    "coreScore": 0.28,
+    "aptitudeScore": 0.25,
+    "destinyScore": 0.16,
+    "hiddenFateScore": 0.12,
+    "carriedItemScore": 0.08,
+    "lifeChoiceScore": 0.07,
+    "karmaMeritScore": 0.04
+  },
+  "scoreBands": [
+    { "min": 0, "max": 39, "label": "命途艰难" },
+    { "min": 40, "max": 59, "label": "凡命入道" },
+    { "min": 60, "max": 74, "label": "小有仙缘" },
+    { "min": 75, "max": 89, "label": "资质不凡" },
+    { "min": 90, "max": 109, "label": "天命初显" },
+    { "min": 110, "max": 999, "label": "逆天之姿" }
+  ],
+  "systemMessages": [
+    { "id": "age_check", "text": "检测到宿主年龄已满十八岁。" },
+    { "id": "life_sim_end", "text": "人生模拟阶段结束。" },
+    { "id": "parse_destiny", "text": "正在解析天命、灵根、随身因果。" },
+    { "id": "outer_battlefield_call", "text": "域外战场征召开始。" },
+    { "id": "survive_to_unlock_home", "text": "存活并完成初次征召，即可获得系统家园权限。" }
+  ],
+  "saveStages": {
+    "afterResolution": "outer_battlefield_pending",
+    "onBattleStart": "outer_battlefield_in_progress",
+    "onBattleFailed": "outer_battlefield_pending",
+    "onBattleCleared": "system_home_unlocked",
+    "afterHomeIntro": "dongfu"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "version": "0.1",
+  "namespace": "origin_fate.reveal_rules",
+  "description": "隐藏命显示和揭示规则。创建角色阶段不得直接暴露真名，只显示预兆、风险提示和模糊等级。",
+  "progressBands": [
+    {
+      "id": "hintOnly",
+      "range": [0, 29],
+      "uiLabel": "隐约预兆",
+      "canRevealTrueName": false,
+      "description": "只显示一条模糊预兆，不显示系统判定。"
+    },
+    {
+      "id": "suspicious",
+      "range": [30, 69],
+      "uiLabel": "命中异动",
+      "canRevealTrueName": false,
+      "description": "显示预兆和风险提示，可展示相关标签，但仍不显示真名。"
+    },
+    {
+      "id": "halfAwakened",
+      "range": [70, 99],
+      "uiLabel": "封印将醒",
+      "canRevealTrueName": "after_life_event_or_age18",
+      "description": "人生模拟中可触发半觉醒事件，18 岁结算有概率揭示。"
+    },
+    {
+      "id": "awakened",
+      "range": [100, 100],
+      "uiLabel": "已觉醒",
+      "canRevealTrueName": "age18_or_special_event",
+      "description": "创建页仍不直接显示真名，但人生模拟或 18 岁觉醒时可揭示。"
+    }
+  ],
+  "uiTextRules": {
+    "forbiddenAtCreation": ["trueName", "exactProgressNumber", "fullEffectList"],
+    "allowedAtCreation": ["omenHints", "visibleRiskHint", "vagueProgressLevel", "relatedTagsIfUnlockedByDivination"],
+    "allowedAfterAge18": ["trueNameIfRevealed", "thresholdEffects", "dongfuHooks", "outerBattlefieldEffects"]
+  },
+  "divinationRules": {
+    "basicDivination": {
+      "cost": "divinationToken:1",
+      "effect": "show one extra omen hint and related tag group",
+      "doesNotRevealTrueName": true
+    },
+    "deepDivination": {
+      "cost": "future_unlock",
+      "effect": "may reveal category and partial threshold effect",
+      "doesNotRevealTrueNameAtCreation": true
+    }
+  },
+  "age18RevealFormula": {
+    "baseRevealChanceByBand": {
+      "hintOnly": 0.05,
+      "suspicious": 0.25,
+      "halfAwakened": 0.70,
+      "awakened": 1.0
+    },
+    "modifiers": [
+      { "condition": "inspiration >= 90", "delta": 0.08 },
+      { "condition": "fortune >= 90", "delta": 0.06 },
+      { "condition": "matchingDestinyTag", "delta": 0.12 },
+      { "condition": "matchingCarriedItem", "delta": 0.10 },
+      { "condition": "heart < 25 and hidden category is curseSeal", "delta": 0.10 }
+    ]
+  }
+}

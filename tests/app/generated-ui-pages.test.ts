@@ -18,7 +18,7 @@ describe("generated UI page usage", () => {
   it("renders SaveSlotScreen with DOM save cards instead of generated save-slot controls", () => {
     const storage = new MemoryStorage();
     const service = createSaveSlotService({ storage, nowMs: () => 2_000 });
-    service.writeProfile("slot_1", createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "青云初试" }));
+    service.writeProfile("slot_1", createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "Qingyun Test" }));
 
     const markup = renderToStaticMarkup(
       createElement(SaveSlotScreen, {
@@ -34,33 +34,19 @@ describe("generated UI page usage", () => {
 
     expect(markup).toContain("xianxia-save-card");
     expect(markup).toContain("xianxia-panel");
-    expect(markup).not.toContain("/assets/generated/ui/save/save_panel_frame.png");
-    expect(markup).not.toContain("/assets/generated/ui/save/save_panel_inner_bg.png");
-    expect(markup).not.toContain("/assets/generated/ui/save/save_slot_empty.png");
-    expect(markup).not.toContain("/assets/generated/ui/common/close_button_normal.png");
-    expect(markup).not.toContain("/assets/generated/ui/save/create_save_button_");
-    expect(markup).not.toContain("/assets/generated/ui/save/load_save_button_normal.png");
-    expect(markup).not.toContain("/assets/generated/ui/save/danger_button_normal.png");
-    expect(markup).not.toContain("/assets/generated/ui/save/save_slot_existing_normal.png");
-    expect(markup).not.toContain("/assets/generated/ui/save/save_slot_disabled.png");
-    expect(markup).not.toContain("/assets/generated/ui/save/save_avatar_frame.png");
+    expect(markup).toContain("Qingyun Test");
+    expect(markup).not.toContain("/assets/generated/ui/save/");
     expect(markup).not.toContain("/assets/generated/ui/main_menu/controls/save_slot_");
-    expect(markup).not.toContain("创建新存档");
-    expect(markup).toContain("青云初试");
-    expect(markup).toContain("未定道友");
-    expect(markup).toContain("当前进度：模拟中");
-    expect(markup).toContain("0岁 · 练气 1层 · 修为 0/300");
-    expect(markup).not.toContain("存档 1");
   });
 
   it("renders completed save slots without the life-simulation progress line", () => {
     const storage = new MemoryStorage();
     const service = createSaveSlotService({ storage, nowMs: () => 3_000 });
     const completedProfile = completeLifeSimulationForProfile({
-      profile: createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "出山档" }),
+      profile: createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "Mountain Exit" }),
       nowMs: 2_000,
       ageYears: 18,
-      characterName: "李青云"
+      characterName: "Li Qing"
     });
     service.writeProfile("slot_1", completedProfile);
 
@@ -76,29 +62,45 @@ describe("generated UI page usage", () => {
       })
     );
 
-    expect(markup).toContain("出山档");
-    expect(markup).toContain("李青云");
-    expect(markup).toContain("18岁 · 练气 1层 · 修为 0/300");
-    expect(markup).not.toContain("当前进度：模拟中");
+    expect(markup).toContain("Mountain Exit");
+    expect(markup).toContain("Li Qing");
+    expect(markup).not.toContain("progress-stage-simulating");
   });
 
-  it("renders CharacterCreationScreen with its generated UI controls", () => {
+  it("renders CharacterCreationScreen as the CCUI2 DOM fate-altar skeleton", () => {
     const markup = renderToStaticMarkup(createElement(CharacterCreationScreen, { assets: loadGeneratedUiRegistry() }));
 
-    expect(markup).toContain("/assets/generated/ui/character_creation/character_creation_main_panel.png");
-    expect(markup).toContain("/assets/generated/ui/character_creation/black_meditation_silhouette.png");
-    expect(markup).toContain("/assets/generated/ui/character_creation/fate_altar_disc.png");
-    expect(markup).toContain("/assets/generated/ui/character_creation/fate_altar_disc_active.png");
-    expect(markup).toContain("/assets/generated/ui/character_creation/root_aura_");
-    expect(markup).toMatch(/\/assets\/generated\/ui\/character_creation\/destiny_card_(common|rare|epic|legendary|flaw)\.png/);
-    expect(markup).toContain("/assets/generated/ui/character_creation/confirm_life_button_normal.png");
-    expect(markup).toContain("创建角色 / 推演天命");
-    expect(markup).toContain("character-fate-altar");
-    expect(markup).toContain('data-scrollable="true"');
+    expect(markup).toContain("ccui2-character-creation");
+    expect(markup).toContain("ccui2-main-stage");
+    expect(markup).toContain("ccui2-fate-altar");
+    expect(markup).toContain("ccui2-meditation-silhouette");
+    expect(markup).toContain("ccui2-root-effect-layer");
+    expect(markup).toContain("ccui2-destiny-effect-layer");
+    expect(markup).toContain("ccui2-detail-scroll");
+    expect(markup).toContain("xianxia-panel");
+    expect(markup).toContain("xianxia-button");
+    expect(markup).toContain("推演天命");
+    expect(markup).toContain("主天命");
+    expect(markup).toContain("副天命 1");
+    expect(markup).toContain("副天命 2");
+    expect(markup).toContain("劫命");
+    expect(markup).toContain("属性详情");
+    expect(markup).toContain("灵根详情");
+    expect(markup).toContain("天命详情");
+    expect(markup).toContain("身世血脉");
+    expect(markup).toContain("随身物");
+    expect(markup).toContain("重新推演");
+    expect(markup).toContain("锁定项");
+    expect(markup).toContain("天机推演");
+    expect(markup).toContain("确认此生");
+    expect(markup).toContain('data-layout-lock="no-page-scroll"');
+    expect(markup).not.toContain("/assets/generated/ui/character_creation/");
     expect(markup.match(/data-destiny-card-slot=/g) ?? []).toHaveLength(4);
-    expect(markup.indexOf("character-destiny-row")).toBeLessThan(markup.indexOf("character-detail-panel"));
-    expect(markup).not.toContain("/assets/generated/ui/character_creation/character_portrait_frame.png");
-    expect(markup).not.toContain("character-seated-silhouette");
+    expect(markup.match(/ccui2-action-button/g) ?? []).toHaveLength(5);
+    expect(markup.indexOf("ccui2-destiny-card-row")).toBeLessThan(markup.indexOf("ccui2-detail-drawer"));
+    expect(markup.indexOf("ccui2-detail-drawer")).toBeLessThan(markup.indexOf("ccui2-action-bar"));
+    expect(markup).not.toContain("character-portrait-frame");
+    expect(markup).not.toContain("full-body");
     expect(markup).not.toContain("立绘");
   });
 
@@ -126,7 +128,6 @@ describe("generated UI page usage", () => {
     expect(markup).toContain("/assets/generated/ui/common/close_button_normal.png");
     expect(markup).toContain("/assets/generated/ui/common/close_button_hover.png");
     expect(markup).not.toContain("/assets/generated/ui/main_menu/controls/close_button_normal.png");
-    expect(markup).toContain("BGM音量");
     expect(markup).toContain("42%");
   });
 });

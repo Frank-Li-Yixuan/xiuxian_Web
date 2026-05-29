@@ -1,0 +1,113 @@
+{
+  "version": "0.1",
+  "phases": [
+    {
+      "id": "infancy",
+      "name": "婴幼年",
+      "ageRangeMonths": [
+        0,
+        47
+      ],
+      "theme": "先天异象、家庭、体质、早期命火",
+      "monthlyEventSlots": [
+        "birth_omen",
+        "family",
+        "health",
+        "dream",
+        "minor_growth"
+      ],
+      "baseGrowth": {
+        "jing": 0.18,
+        "qi": 0.12,
+        "shen": 0.14
+      },
+      "choicePolicy": {
+        "majorChoiceEveryMonths": 6,
+        "choiceTone": "多由家庭环境与先天反应决定"
+      }
+    },
+    {
+      "id": "childhood",
+      "name": "童年",
+      "ageRangeMonths": [
+        48,
+        107
+      ],
+      "theme": "性格、读书、玩耍、采药、早期机缘",
+      "monthlyEventSlots": [
+        "study",
+        "play",
+        "family",
+        "minor_omen",
+        "social",
+        "health"
+      ],
+      "baseGrowth": {
+        "jing": 0.22,
+        "qi": 0.16,
+        "shen": 0.18
+      },
+      "choicePolicy": {
+        "majorChoiceEveryMonths": 6,
+        "choiceTone": "开始选择读书、练武、采药、藏拙、探索"
+      }
+    },
+    {
+      "id": "youth",
+      "name": "少年",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "theme": "灵根显现、身世线索、第一次冲突、道途倾向",
+      "monthlyEventSlots": [
+        "spiritual_root",
+        "conflict",
+        "study",
+        "martial",
+        "origin_clue",
+        "omen"
+      ],
+      "baseGrowth": {
+        "jing": 0.25,
+        "qi": 0.22,
+        "shen": 0.22
+      },
+      "choicePolicy": {
+        "majorChoiceEveryMonths": 6,
+        "choiceTone": "决定是否冒险、拜师、追查异象、压制或利用心魔"
+      }
+    },
+    {
+      "id": "adolescence",
+      "name": "青春",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "theme": "流派成形、随身物异动、命格显化、系统前兆",
+      "monthlyEventSlots": [
+        "lineage_bias",
+        "carried_item",
+        "destiny_trigger",
+        "danger",
+        "hidden_fate",
+        "system_omen"
+      ],
+      "baseGrowth": {
+        "jing": 0.28,
+        "qi": 0.28,
+        "shen": 0.28
+      },
+      "choicePolicy": {
+        "majorChoiceEveryMonths": 6,
+        "choiceTone": "进入高收益高风险阶段，明显塑造域外战场开局"
+      }
+    }
+  ],
+  "age18": {
+    "month": 216,
+    "name": "系统觉醒",
+    "handoff": "Age18AwakeningResolver"
+  }
+}

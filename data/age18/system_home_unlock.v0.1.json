@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "0.1",
+  "id": "system_home_unlock_v0_1",
+  "trigger": "after_outer_battlefield_intro_clear",
+  "displayName": "系统家园开辟",
+  "baseModules": [
+    {
+      "id": "home_grass_hut",
+      "name": "草庐",
+      "status": "unlocked",
+      "description": "系统临时凝成的容身之所。"
+    },
+    {
+      "id": "home_spirit_array_foundation",
+      "name": "聚灵阵基",
+      "status": "unlocked",
+      "description": "残缺阵基，可缓慢聚拢灵气。"
+    },
+    {
+      "id": "home_scripture_wall",
+      "name": "藏经残壁",
+      "status": "unlocked",
+      "description": "刻有残缺纹路的石壁，可记录功法与法术线索。"
+    },
+    {
+      "id": "home_system_core",
+      "name": "系统核心",
+      "status": "unlocked",
+      "description": "域外战场结算后凝成的系统界面核心。"
+    },
+    {
+      "id": "home_trial_gate",
+      "name": "试炼玄坛",
+      "status": "partial",
+      "description": "暂时仅可重新进入域外战场。"
+    }
+  ],
+  "conditionalModules": [
+    {
+      "id": "home_broken_alchemy_furnace",
+      "name": "残破丹炉",
+      "requiresAnyHook": ["home_hook_alchemy_basic", "home_bonus_alchemy_fire_control", "home_hook_alchemy_saint_line"],
+      "description": "因药火因果而显现的残炉，可作为炼丹房雏形。"
+    },
+    {
+      "id": "home_artifact_stone_table",
+      "name": "炼器石台",
+      "requiresAnyHook": ["home_hook_sword_repair", "home_hook_treasure_repair", "home_hook_artifact_warming"],
+      "description": "可承载法宝残片的石台，是炼器阁雏形。"
+    },
+    {
+      "id": "home_clear_mind_pool_seed",
+      "name": "清心泉眼",
+      "requiresAnyHook": ["home_bonus_clear_mind_minor", "home_hook_soul_cultivation_hint", "home_hook_heart_demon"],
+      "description": "一口极浅的清泉，可用于压制心魔或洗涤神魂。"
+    },
+    {
+      "id": "home_talisman_desk",
+      "name": "符案",
+      "requiresAnyHook": ["home_hook_talisman_basic"],
+      "description": "残符化成的小案，可记录符箓线索。"
+    }
+  ],
+  "initialResources": [
+    { "id": "resource_low_spirit_stone", "amount": 120 },
+    { "id": "resource_outerfield_crystal", "amount": 5 },
+    { "id": "resource_basic_herb", "amount": 3 },
+    { "id": "resource_basic_ore", "amount": 3 }
+  ],
+  "originBasedBonuses": {
+    "origin_apothecary_apprentice": ["home_hook_alchemy_basic"],
+    "origin_ruined_cultivator_descendant": ["home_hook_scripture_wall", "home_hook_basic_weapon_memory"],
+    "origin_dao_temple_servant": ["home_hook_talisman_basic"],
+    "origin_grave_keeper_child": ["home_hook_soul_cultivation_hint"],
+    "origin_village_orphan": ["home_bonus_stability_minor"]
+  },
+  "nextObjectives": [
+    {
+      "id": "objective_inspect_home_core",
+      "title": "检查系统核心",
+      "description": "查看系统为你开辟的家园权限。"
+    },
+    {
+      "id": "objective_collect_spirit_array",
+      "title": "启动聚灵阵基",
+      "description": "让聚灵阵基开始缓慢产出修为与灵石。"
+    },
+    {
+      "id": "objective_prepare_next_trial",
+      "title": "准备下一次历练",
+      "description": "整理随身物转化后的线索，准备重新进入域外战场。"
+    }
+  ]
+}

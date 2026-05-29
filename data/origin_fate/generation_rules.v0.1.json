@@ -1,0 +1,83 @@
+{
+  "version": "0.1",
+  "namespace": "origin_fate.generation_rules",
+  "description": "身世、隐藏命、随身物生成规则。所有随机必须使用 Seeded RNG。",
+  "pipeline": [
+    "generateBackgroundOrigin",
+    "generateHiddenFateCandidate",
+    "generateCarriedItems",
+    "composeVisibleOmen",
+    "composeLifeEventBiasTags",
+    "composeModeProjectionTags"
+  ],
+  "backgroundOrigin": {
+    "count": 1,
+    "weightFormula": "baseWeight + openingTags + destinyTags + spiritualRootTags + rerollPity + lockBonus",
+    "lockable": true,
+    "rerollKeepsIfLocked": true,
+    "minimumVisibleVariety": true
+  },
+  "hiddenFate": {
+    "count": 1,
+    "alwaysGenerateInternally": true,
+    "displayPolicy": "show_omen_only",
+    "defaultRevealName": false,
+    "baseChanceToHaveStrongHiddenFate": 0.45,
+    "chanceModifiers": [
+      { "conditionTag": "aptitude:inspiration_high", "delta": 0.12 },
+      { "conditionTag": "aptitude:fortune_high", "delta": 0.08 },
+      { "conditionTag": "archetype:spiritual_omen", "delta": 0.18 },
+      { "conditionTag": "destiny:forbidden_or_mythic", "delta": 0.12 },
+      { "conditionTag": "origin:fallen_lineage", "delta": 0.10 },
+      { "conditionTag": "flaw:closed_spiritual_root", "delta": 0.08 }
+    ],
+    "progressRoll": {
+      "defaultRange": [5, 25],
+      "minimum": 0,
+      "maximum": 100,
+      "rareHighProgressChance": 0.04,
+      "rareHighProgressRange": [45, 70]
+    },
+    "lockable": "requires_divination_unlock",
+    "rerollKeepsIfLocked": false
+  },
+  "carriedItems": {
+    "minCount": 1,
+    "maxCount": 2,
+    "secondItemBaseChance": 0.25,
+    "secondItemChanceModifiers": [
+      { "conditionTag": "origin:merchant", "delta": 0.15 },
+      { "conditionTag": "origin:fallen_lineage", "delta": 0.12 },
+      { "conditionTag": "aptitude:fortune_high", "delta": 0.10 },
+      { "conditionTag": "flaw:poverty", "delta": -0.12 }
+    ],
+    "weightFormula": "baseWeight + originBias + hiddenFateSynergy + destinyTags + spiritualRootTags",
+    "lockable": true,
+    "allowDuplicates": false
+  },
+  "visibleOmen": {
+    "maxHintsShown": 2,
+    "showRiskHint": true,
+    "neverShowTrueHiddenFateName": true,
+    "hintSelection": "weighted_by_progress_and_tags"
+  },
+  "determinism": {
+    "randomSource": "SeededRng",
+    "forbidMathRandom": true,
+    "sameSeedSameLocksSameRerollIndexMustMatch": true
+  },
+  "uiSummary": {
+    "showBackgroundOriginName": true,
+    "showBackgroundOriginDescription": true,
+    "showHiddenOmen": true,
+    "showHiddenProgress": "as_vague_level_only",
+    "hiddenProgressLevels": [
+      { "id": "faint", "range": [0, 29], "label": "隐约" },
+      { "id": "stirring", "range": [30, 69], "label": "异动" },
+      { "id": "nearAwakened", "range": [70, 99], "label": "将醒" },
+      { "id": "awakened", "range": [100, 100], "label": "觉醒" }
+    ],
+    "showCarriedItems": true,
+    "showConversionPreview": "vague"
+  }
+}

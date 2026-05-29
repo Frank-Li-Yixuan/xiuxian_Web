@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "0.1",
+  "id": "carried_item_conversion_v0_1",
+  "affinityBands": [
+    { "id": "low", "min": 0, "max": 29, "label": "因果浅薄" },
+    { "id": "medium", "min": 30, "max": 69, "label": "因果牵连" },
+    { "id": "high", "min": 70, "max": 99, "label": "因果深重" },
+    { "id": "perfect", "min": 100, "max": 999, "label": "因果圆满" }
+  ],
+  "items": {
+    "carried_broken_wooden_sword": {
+      "name": "残破木剑",
+      "conversions": [
+        {
+          "id": "wooden_sword_basic",
+          "minAffinityBand": "low",
+          "baseWeight": 60,
+          "visibleName": "残剑余意",
+          "outerBattlefieldModifiers": ["modifier_flying_sword_damage_minor"],
+          "homeHooks": ["home_hook_basic_weapon_memory"]
+        },
+        {
+          "id": "wooden_sword_qingshuang_seed",
+          "minAffinityBand": "medium",
+          "baseWeight": 35,
+          "visibleName": "青霜飞剑·残",
+          "outerBattlefieldLoadout": ["artifact_qingshuang_sword_damaged"],
+          "homeHooks": ["home_hook_sword_repair"]
+        },
+        {
+          "id": "wooden_sword_past_sword_soul",
+          "minAffinityBand": "high",
+          "baseWeight": 10,
+          "requiresAnyHiddenFate": ["hidden_fate_past_sword_soul"],
+          "visibleName": "剑魄回声",
+          "outerBattlefieldModifiers": ["modifier_sword_soul_echo"],
+          "homeHooks": ["home_hook_past_sword_soul"]
+        }
+      ]
+    },
+    "carried_ancestral_jade": {
+      "name": "祖传玉佩",
+      "conversions": [
+        {
+          "id": "jade_basic_shield",
+          "minAffinityBand": "low",
+          "baseWeight": 60,
+          "visibleName": "玉佩护身",
+          "outerBattlefieldModifiers": ["modifier_first_hit_shield"],
+          "homeHooks": ["home_hook_jade_memory"]
+        },
+        {
+          "id": "jade_bagua_fragment",
+          "minAffinityBand": "medium",
+          "baseWeight": 30,
+          "visibleName": "八卦玉佩·残",
+          "outerBattlefieldLoadout": ["treasure_bagua_jade_damaged"],
+          "homeHooks": ["home_hook_treasure_repair"]
+        },
+        {
+          "id": "jade_merit_protection",
+          "minAffinityBand": "high",
+          "baseWeight": 15,
+          "requiresTags": ["merit_high"],
+          "visibleName": "善缘玉光",
+          "outerBattlefieldModifiers": ["modifier_near_death_merit_shield"],
+          "homeHooks": ["home_bonus_stability_minor"]
+        }
+      ]
+    },
+    "carried_apothecary_bronze_furnace": {
+      "name": "药铺铜炉",
+      "conversions": [
+        {
+          "id": "bronze_furnace_pill",
+          "minAffinityBand": "low",
+          "baseWeight": 55,
+          "visibleName": "炉中余药",
+          "outerBattlefieldLoadout": ["pill_rejuvenation"],
+          "homeHooks": ["home_hook_alchemy_basic"]
+        },
+        {
+          "id": "bronze_furnace_fire_control",
+          "minAffinityBand": "medium",
+          "baseWeight": 35,
+          "visibleName": "残炉火候",
+          "outerBattlefieldModifiers": ["modifier_pill_digest_speed_minor"],
+          "homeHooks": ["home_bonus_alchemy_fire_control"]
+        },
+        {
+          "id": "bronze_furnace_saint_bone",
+          "minAffinityBand": "high",
+          "baseWeight": 12,
+          "requiresAnyHiddenFate": ["hidden_fate_alchemy_saint_bone"],
+          "visibleName": "丹火旧忆",
+          "outerBattlefieldLoadout": ["pill_rejuvenation", "pill_clear_mind"],
+          "homeHooks": ["home_hook_alchemy_saint_line"]
+        }
+      ]
+    },
+    "carried_blank_page": {
+      "name": "无字残页",
+      "conversions": [
+        {
+          "id": "blank_page_spell_hint",
+          "minAffinityBand": "low",
+          "baseWeight": 50,
+          "visibleName": "无字法痕",
+          "outerBattlefieldModifiers": ["modifier_first_insight_spell_weight"],
+          "homeHooks": ["home_hook_scripture_wall"]
+        },
+        {
+          "id": "blank_page_tianshu",
+          "minAffinityBand": "high",
+          "baseWeight": 10,
+          "requiresAnyHiddenFate": ["hidden_fate_heavenly_book_fragment"],
+          "visibleName": "天书残痕",
+          "outerBattlefieldModifiers": ["modifier_first_insight_extra_choice"],
+          "homeHooks": ["home_hook_heavenly_book"]
+        }
+      ]
+    },
+    "carried_old_talisman": {
+      "name": "破旧符纸",
+      "conversions": [
+        {
+          "id": "old_talisman_life_charm",
+          "minAffinityBand": "low",
+          "baseWeight": 70,
+          "visibleName": "护命残符",
+          "outerBattlefieldLoadout": ["talisman_life_guard"],
+          "homeHooks": ["home_hook_talisman_basic"]
+        }
+      ]
+    },
+    "carried_black_bone_flute": {
+      "name": "黑骨短笛",
+      "conversions": [
+        {
+          "id": "bone_flute_soul_hint",
+          "minAffinityBand": "low",
+          "baseWeight": 50,
+          "visibleName": "幽魂短笛",
+          "outerBattlefieldModifiers": ["modifier_soul_state_minor"],
+          "homeHooks": ["home_hook_soul_cultivation_hint"]
+        },
+        {
+          "id": "bone_flute_demon_seed",
+          "minAffinityBand": "medium",
+          "baseWeight": 20,
+          "requiresAnyHiddenFate": ["hidden_fate_demon_mark"],
+          "visibleName": "魔音微醒",
+          "outerBattlefieldModifiers": ["modifier_heart_demon_projection"],
+          "homeHooks": ["home_hook_heart_demon"]
+        }
+      ]
+    }
+  }
+}

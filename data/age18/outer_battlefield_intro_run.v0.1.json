@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "0.1",
+  "id": "outer_battlefield_intro_run_v0_1",
+  "modeId": "outer_battlefield_intro",
+  "displayName": "域外战场·初次征召",
+  "durationTargetSeconds": [180, 300],
+  "failurePolicy": {
+    "retryable": true,
+    "preserveLifeSimulation": true,
+    "onFailureStage": "outer_battlefield_pending",
+    "failureHooks": ["hook_first_battle_fright"],
+    "lowFailAssistAfterAttempts": 2
+  },
+  "phases": [
+    {
+      "id": "system_calibration",
+      "startSec": 0,
+      "endSec": 30,
+      "title": "系统校准",
+      "enemyGroups": ["enemy_outerfield_remnant_basic"],
+      "tutorialPrompts": ["move", "auto_attack"]
+    },
+    {
+      "id": "first_kill_and_orbs",
+      "startSec": 30,
+      "endSec": 80,
+      "title": "初次杀敌",
+      "enemyGroups": ["enemy_outerfield_remnant_basic", "enemy_rift_insect"],
+      "tutorialPrompts": ["pickup_qi", "qi_orbs"]
+    },
+    {
+      "id": "first_insight",
+      "startSec": 80,
+      "endSec": 100,
+      "title": "第一次顿悟",
+      "forceInsight": true,
+      "rewardPoolId": "reward_pool_intro_first_insight"
+    },
+    {
+      "id": "destiny_manifestation",
+      "startSec": 100,
+      "endSec": 160,
+      "title": "命格显化",
+      "enemyGroups": ["enemy_void_archer", "enemy_outerfield_remnant_basic"],
+      "triggerDestinyEvent": true
+    },
+    {
+      "id": "battlefield_patroller",
+      "startSec": 160,
+      "endSec": 240,
+      "title": "战场巡游者",
+      "bossId": "boss_battlefield_patroller_intro"
+    },
+    {
+      "id": "system_settlement",
+      "startSec": 240,
+      "endSec": 260,
+      "title": "系统结算",
+      "clearEnemies": true,
+      "grantHomePermission": true
+    }
+  ],
+  "enemyPool": [
+    "enemy_outerfield_remnant_basic",
+    "enemy_rift_insect",
+    "enemy_void_archer",
+    "enemy_karma_wisp",
+    "enemy_heart_demon_shadow"
+  ],
+  "boss": {
+    "id": "boss_battlefield_patroller_intro",
+    "name": "战场巡游者",
+    "hpBudgetSeconds": [45, 75],
+    "phases": ["slow_fan", "rift_line", "summon_remnants"]
+  },
+  "rewardPools": [
+    "reward_pool_intro_first_insight",
+    "reward_pool_intro_patroller_clear"
+  ],
+  "completionRewards": {
+    "resources": [
+      { "id": "resource_low_spirit_stone", "amountMin": 80, "amountMax": 160 },
+      { "id": "resource_outerfield_crystal", "amountMin": 3, "amountMax": 8 }
+    ],
+    "hooks": ["unlock_system_home"]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "version": "0.1",
+  "namespace": "origin_fate.sample_generation_results",
+  "samples": [
+    {
+      "sampleId": "sample_thunder_orphan",
+      "inputTags": ["archetype:thin_lived_genius", "root:thunder", "destiny:heaven_jealous_talent"],
+      "backgroundOrigin": "origin_mountain_orphan",
+      "visibleOriginName": "山村孤儿",
+      "hiddenFateInternalId": "hidden_ancient_thunder_blood",
+      "hiddenFateShownToPlayer": {
+        "vagueLevel": "异动",
+        "hints": ["你偶尔能听见雷云深处的战鼓。", "暴雨夜，你的骨节会隐隐发热。"],
+        "riskHint": "雷雨、天劫、域外裂隙相关事件更容易靠近你。"
+      },
+      "carriedItems": ["origin_item_broken_wooden_sword", "item_cracked_coin"],
+      "notes": "典型短命雷修开局，人生模拟应多刷雷雨、早慧、病弱事件。"
+    },
+    {
+      "sampleId": "sample_alchemy_apprentice",
+      "inputTags": ["originBias:alchemy", "root:wood", "root:fire", "destiny:alchemy_genius"],
+      "backgroundOrigin": "origin_apothecary_apprentice",
+      "visibleOriginName": "药铺学徒",
+      "hiddenFateInternalId": "hidden_pill_saint_remains",
+      "hiddenFateShownToPlayer": {
+        "vagueLevel": "异动",
+        "hints": ["你闻到药香时，脑中会浮现陌生火候。"],
+        "riskHint": "炼丹、药性、火候与丹毒事件更容易出现。"
+      },
+      "carriedItems": ["item_apothecary_bronze_furnace"],
+      "notes": "丹修开局，18 岁后应给回春丹/炼丹房线索。"
+    },
+    {
+      "sampleId": "sample_failed_lineage_sword",
+      "inputTags": ["archetype:waste_reversal", "root:mixed", "destiny:defying_failure", "origin:fallen_lineage"],
+      "backgroundOrigin": "origin_fallen_cultivator_descendant",
+      "visibleOriginName": "破落修士之后",
+      "hiddenFateInternalId": "hidden_past_life_sword_soul",
+      "hiddenFateShownToPlayer": {
+        "vagueLevel": "隐约",
+        "hints": ["你握住木剑时，耳边会有剑鸣。"],
+        "riskHint": "剑器、杀伐、前世残忆与宿敌事件更容易触发。"
+      },
+      "carriedItems": ["origin_item_broken_wooden_sword", "origin_item_wordless_page"],
+      "notes": "废柴逆命 + 剑魄盲盒，适合玩家期待反转。"
+    },
+    {
+      "sampleId": "sample_refugee_demon_mark",
+      "inputTags": ["origin:refugee", "destiny:demon_seed", "karma_heavy", "heart_low"],
+      "backgroundOrigin": "origin_refugee_orphan",
+      "visibleOriginName": "流民遗孤",
+      "hiddenFateInternalId": "hidden_demon_mark",
+      "hiddenFateShownToPlayer": {
+        "vagueLevel": "异动",
+        "hints": ["你梦中常见一枚黑色印记。", "你偶尔会听见不属于自己的低语。"],
+        "riskHint": "心魔、禁术、业力与高风险收益事件更容易出现。"
+      },
+      "carriedItems": ["origin_item_family_letter", "origin_item_old_talisman"],
+      "notes": "高风险魔心开局，人生模拟要提供净化/借魔两种路线。"
+    }
+  ]
+}

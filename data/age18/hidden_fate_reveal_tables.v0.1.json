@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.1",
+  "id": "hidden_fate_reveal_tables_v0_1",
+  "progressBands": [
+    { "id": "faint", "min": 0, "max": 29, "label": "隐约预兆", "baseRevealChance": 0.05 },
+    { "id": "stirring", "min": 30, "max": 69, "label": "命中异动", "baseRevealChance": 0.25 },
+    { "id": "near_awakened", "min": 70, "max": 99, "label": "封印将醒", "baseRevealChance": 0.7 },
+    { "id": "awakened", "min": 100, "max": 999, "label": "已觉醒", "baseRevealChance": 1.0 }
+  ],
+  "chanceModifiers": {
+    "inspiration75": 0.04,
+    "inspiration90": 0.08,
+    "fortune75": 0.03,
+    "fortune90": 0.06,
+    "matchingDestiny": 0.12,
+    "matchingCarriedItem": 0.10,
+    "matchingAge18Hook": 0.04,
+    "matchingAge18HookMax": 0.16,
+    "sealedPenalty": -0.08,
+    "systemResonanceHook": 0.15
+  },
+  "revealStates": [
+    "sealed",
+    "halfAwakened",
+    "revealed",
+    "unstable"
+  ],
+  "hiddenFateEffects": {
+    "hidden_fate_ancient_thunder_blood": {
+      "sealed": ["modifier_thunder_event_weight_minor"],
+      "halfAwakened": ["modifier_chain_lightning_first_battle"],
+      "revealed": ["tag_hidden_ancient_thunder_blood", "unlock_lineage_thunder_hint"],
+      "unstable": ["modifier_chain_lightning_first_battle", "modifier_extra_thunder_warning"]
+    },
+    "hidden_fate_alchemy_saint_bone": {
+      "sealed": ["modifier_alchemy_hint"],
+      "halfAwakened": ["grant_pill_rejuvenation", "modifier_pill_digest_speed_minor"],
+      "revealed": ["tag_hidden_alchemy_saint_bone", "home_bonus_alchemy_fire_control"],
+      "unstable": ["modifier_pill_effect_bonus", "modifier_dan_toxin_sensitivity"]
+    },
+    "hidden_fate_past_sword_soul": {
+      "sealed": ["modifier_sword_hint"],
+      "halfAwakened": ["modifier_flying_sword_damage_minor"],
+      "revealed": ["tag_hidden_past_sword_soul", "home_hook_sword_repair"],
+      "unstable": ["modifier_flying_sword_damage_minor", "modifier_sword_killing_intent"]
+    },
+    "hidden_fate_system_resonance": {
+      "sealed": ["modifier_system_noise"],
+      "halfAwakened": ["modifier_tutorial_reward_choice_plus"],
+      "revealed": ["tag_hidden_system_resonance", "home_hook_system_core"],
+      "unstable": ["modifier_tutorial_reward_choice_plus", "modifier_system_static_event"]
+    }
+  }
+}

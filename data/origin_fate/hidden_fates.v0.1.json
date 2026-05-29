@@ -1,0 +1,317 @@
+{
+  "version": "0.1",
+  "namespace": "origin_fate.hidden_fates",
+  "description": "隐藏血脉/前世/系统共鸣池。创建页只显示 omenHint，不直接显示 trueName。18 岁觉醒或后续事件根据 progress 揭示。",
+  "hiddenFates": [
+    {
+      "id": "hidden_ancient_thunder_blood",
+      "trueName": "古雷真血",
+      "category": "bloodline",
+      "rarity": "legendary",
+      "baseWeight": 28,
+      "biasTags": ["thunder", "root:thunder", "destiny:tribulation", "thunderstorm_omen", "outer_battlefield"],
+      "antiBiasTags": ["root:water_calm", "heart:very_stable"],
+      "initialProgressRange": [8, 28],
+      "omenHints": [
+        "你偶尔能听见雷云深处的战鼓。",
+        "暴雨夜，你的骨节会隐隐发热。",
+        "你从小不怕雷声，反而觉得亲近。"
+      ],
+      "visibleRiskHint": "雷雨、天劫、域外裂隙相关事件更容易靠近你。",
+      "progressSources": [
+        { "sourceTag": "event:thunderstorm_investigate", "delta": 18 },
+        { "sourceTag": "choice:embrace_thunder", "delta": 15 },
+        { "sourceTag": "root:thunder", "delta": 10 },
+        { "sourceTag": "destiny:tribulation_affinity", "delta": 12 },
+        { "sourceTag": "choice:avoid_thunder", "delta": -6 }
+      ],
+      "revealThresholds": {
+        "hintOnly": 0,
+        "suspicious": 30,
+        "halfAwakened": 70,
+        "awakened": 100
+      },
+      "lifeEventBiasTags": ["thunderstorm", "heaven_gaze", "outer_battlefield_omen"],
+      "outerBattlefieldEffects": [
+        { "threshold": 30, "effect": "雷系奖励池权重 +15%，雷击事件权重 +10%。" },
+        { "threshold": 70, "effect": "第一次濒死时有概率触发雷血护体，清除附近弹幕。" },
+        { "threshold": 100, "effect": "域外战场开局获得【雷血初醒】：五雷正法候选权重提高，雷劫成功奖励提高。" }
+      ],
+      "dongfuHooks": ["unlock_thunder_pool_clue", "increase_tribulation_reward", "enable_thunder_bloodline_events"]
+    },
+    {
+      "id": "hidden_lunar_remnant_vein",
+      "trueName": "太阴残脉",
+      "category": "bloodline",
+      "rarity": "epic",
+      "baseWeight": 36,
+      "biasTags": ["yin", "root:yin", "graveyard", "night", "soul", "water"],
+      "antiBiasTags": ["root:fire_pure", "destiny:burning_blood"],
+      "initialProgressRange": [6, 24],
+      "omenHints": [
+        "月色越冷，你越觉得清醒。",
+        "你常梦见一轮残月照在黑水之上。",
+        "你的体温偏低，却不畏寒夜。"
+      ],
+      "visibleRiskHint": "夜梦、神魂、心魔与太阴事件更容易触发。",
+      "progressSources": [
+        { "sourceTag": "event:full_moon_meditation", "delta": 16 },
+        { "sourceTag": "choice:study_dream", "delta": 10 },
+        { "sourceTag": "root:yin", "delta": 12 },
+        { "sourceTag": "event:soul_vision", "delta": 12 },
+        { "sourceTag": "choice:avoid_night", "delta": -5 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 30, "halfAwakened": 70, "awakened": 100 },
+      "lifeEventBiasTags": ["moonlight", "dream", "soul", "heart_demon"],
+      "outerBattlefieldEffects": [
+        { "threshold": 30, "effect": "神魂相关事件权重 +15%，拾取半径小幅提高。" },
+        { "threshold": 70, "effect": "神魂出窍后移动速度提高，第一次救援所需时间降低。" },
+        { "threshold": 100, "effect": "开局获得【太阴照神】：神识提高，魂修线索解锁。" }
+      ],
+      "dongfuHooks": ["unlock_moon_well_clue", "enable_soul_cultivation_events"]
+    },
+    {
+      "id": "hidden_dragon_bone_unawakened",
+      "trueName": "龙骨未醒",
+      "category": "bloodline",
+      "rarity": "legendary",
+      "baseWeight": 22,
+      "biasTags": ["rootBone_high", "jing_high", "hunter", "beast", "earth", "wood"],
+      "antiBiasTags": ["rootBone_low", "lifespan_low"],
+      "initialProgressRange": [4, 18],
+      "omenHints": [
+        "你摔伤后总比别人好得更快。",
+        "山中野兽偶尔会避开你的目光。",
+        "你梦见骨骼深处有金色纹路。"
+      ],
+      "visibleRiskHint": "肉身成长、兽类、炼体与重器事件更容易出现。",
+      "progressSources": [
+        { "sourceTag": "event:beast_encounter", "delta": 10 },
+        { "sourceTag": "choice:train_body", "delta": 12 },
+        { "sourceTag": "aptitude:rootBone_high", "delta": 10 },
+        { "sourceTag": "event:bone_pain", "delta": 8 },
+        { "sourceTag": "choice:avoid_martial", "delta": -4 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 35, "halfAwakened": 75, "awakened": 100 },
+      "lifeEventBiasTags": ["body_training", "beast", "bone_omen", "martial"],
+      "outerBattlefieldEffects": [
+        { "threshold": 35, "effect": "最大生命小幅提高，受击硬直降低。" },
+        { "threshold": 75, "effect": "第一次受到重击时获得护体龙纹，短时减伤。" },
+        { "threshold": 100, "effect": "开局获得【龙骨初醒】：精大幅提高，重印/护体类奖励权重提高。" }
+      ],
+      "dongfuHooks": ["unlock_body_tempering_pool", "increase_body_cultivation_events"]
+    },
+    {
+      "id": "hidden_pill_saint_remains",
+      "trueName": "丹圣遗骨",
+      "category": "pastLife",
+      "rarity": "legendary",
+      "baseWeight": 24,
+      "biasTags": ["alchemy", "apothecary", "wood", "fire", "medicine_pouch", "comprehension_high"],
+      "antiBiasTags": ["artifact_bias_high"],
+      "initialProgressRange": [6, 24],
+      "omenHints": [
+        "你闻到药香时，脑中会浮现陌生火候。",
+        "你见过的药材，总能记住细微差异。",
+        "你偶尔梦见一尊残破丹炉。"
+      ],
+      "visibleRiskHint": "炼丹、药性、火候与丹毒事件更容易出现。",
+      "progressSources": [
+        { "sourceTag": "event:herb_sorting", "delta": 10 },
+        { "sourceTag": "choice:study_medicine", "delta": 14 },
+        { "sourceTag": "origin:apothecary", "delta": 12 },
+        { "sourceTag": "destiny:alchemy_genius", "delta": 18 },
+        { "sourceTag": "choice:ignore_medicine", "delta": -4 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 30, "halfAwakened": 70, "awakened": 100 },
+      "lifeEventBiasTags": ["alchemy", "herb", "furnace_dream", "pill_toxicity"],
+      "outerBattlefieldEffects": [
+        { "threshold": 30, "effect": "初始丹药候选权重 +15%。" },
+        { "threshold": 70, "effect": "第一枚丹药炼化效果提高，丹毒降低。" },
+        { "threshold": 100, "effect": "开局获得【丹火残悟】：回春丹 +1，炼丹房开启时初始火候经验提高。" }
+      ],
+      "dongfuHooks": ["unlock_alchemy_memory_events", "alchemy_room_initial_bonus"]
+    },
+    {
+      "id": "hidden_past_life_sword_soul",
+      "trueName": "前世剑魄",
+      "category": "pastLife",
+      "rarity": "legendary",
+      "baseWeight": 20,
+      "biasTags": ["metal", "sword", "fallen_lineage", "wooden_sword", "comprehension_high"],
+      "antiBiasTags": ["root:wood_healer"],
+      "initialProgressRange": [4, 22],
+      "omenHints": [
+        "你握住木剑时，耳边会有剑鸣。",
+        "你从未学剑，却能看出别人招式破绽。",
+        "你常梦见漫天剑雨落在荒原。"
+      ],
+      "visibleRiskHint": "剑器、杀伐、前世残忆与宿敌事件更容易触发。",
+      "progressSources": [
+        { "sourceTag": "choice:practice_sword", "delta": 16 },
+        { "sourceTag": "event:sword_dream", "delta": 12 },
+        { "sourceTag": "carried:wooden_sword", "delta": 14 },
+        { "sourceTag": "destiny:sword_bone", "delta": 18 },
+        { "sourceTag": "choice:discard_sword", "delta": -10 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 35, "halfAwakened": 70, "awakened": 100 },
+      "lifeEventBiasTags": ["sword", "past_life", "duel", "old_enemy"],
+      "outerBattlefieldEffects": [
+        { "threshold": 35, "effect": "飞剑类本命法宝候选权重提高。" },
+        { "threshold": 70, "effect": "青霜飞剑开局等级 +1 或获得剑意残响。" },
+        { "threshold": 100, "effect": "开局获得【剑魄微醒】：飞剑穿透与暴击提高。" }
+      ],
+      "dongfuHooks": ["unlock_sword_soul_events", "artifact_warming_sword_bonus"]
+    },
+    {
+      "id": "hidden_merit_seed",
+      "trueName": "功德种子",
+      "category": "karmicSeed",
+      "rarity": "epic",
+      "baseWeight": 34,
+      "biasTags": ["merit", "healing", "rescue", "heart_high", "fortune_high"],
+      "antiBiasTags": ["karma_heavy", "demon_mark"],
+      "initialProgressRange": [8, 30],
+      "omenHints": [
+        "你见他人受苦时，总会莫名心痛。",
+        "你帮人之后，常有微弱暖意入心。",
+        "有人说你眉心有一线善光。"
+      ],
+      "visibleRiskHint": "救助、护生、功德与因果选择更容易出现。",
+      "progressSources": [
+        { "sourceTag": "choice:save_other", "delta": 16 },
+        { "sourceTag": "event:help_villager", "delta": 8 },
+        { "sourceTag": "destiny:compassion", "delta": 12 },
+        { "sourceTag": "choice:betray_or_harm", "delta": -18 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 30, "halfAwakened": 70, "awakened": 100 },
+      "lifeEventBiasTags": ["merit", "rescue", "choice_morality", "protection"],
+      "outerBattlefieldEffects": [
+        { "threshold": 30, "effect": "救援、护盾、保命类奖励权重提高。" },
+        { "threshold": 70, "effect": "第一次濒死可消耗功德保留 1 精。" },
+        { "threshold": 100, "effect": "开局获得【功德护心】：心魔抗性提高，救援效果增强。" }
+      ],
+      "dongfuHooks": ["enable_merit_hall_events", "reduce_tribulation_volatility"]
+    },
+    {
+      "id": "hidden_demon_mark",
+      "trueName": "魔印微痕",
+      "category": "curseSeal",
+      "rarity": "epic",
+      "baseWeight": 30,
+      "biasTags": ["karma", "war", "graveyard", "demon", "heart_demon", "forbidden"],
+      "antiBiasTags": ["merit_seed", "heart:very_stable"],
+      "initialProgressRange": [6, 26],
+      "omenHints": [
+        "你梦中常见一枚黑色印记。",
+        "你愤怒时，影子似乎比身体慢半拍。",
+        "你偶尔会听见不属于自己的低语。"
+      ],
+      "visibleRiskHint": "心魔、禁术、业力与高风险收益事件更容易出现。",
+      "progressSources": [
+        { "sourceTag": "choice:use_forbidden_power", "delta": 18 },
+        { "sourceTag": "event:nightmare", "delta": 10 },
+        { "sourceTag": "destiny:demon_seed", "delta": 20 },
+        { "sourceTag": "choice:purify_self", "delta": -12 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 30, "halfAwakened": 65, "awakened": 100 },
+      "lifeEventBiasTags": ["heart_demon", "forbidden", "nightmare", "karma"],
+      "outerBattlefieldEffects": [
+        { "threshold": 30, "effect": "高风险奖励权重提高，心魔扰动概率提高。" },
+        { "threshold": 65, "effect": "低血时伤害提高，但弹幕压力略升。" },
+        { "threshold": 100, "effect": "开局获得【魔印初动】：禁术收益提高，心魔事件进入战斗池。" }
+      ],
+      "dongfuHooks": ["enable_heart_demon_events", "unlock_purification_need"]
+    },
+    {
+      "id": "hidden_system_resonance_body",
+      "trueName": "系统共鸣体",
+      "category": "systemResonance",
+      "rarity": "mythic",
+      "baseWeight": 8,
+      "biasTags": ["system_resonance", "outer_battlefield_omen", "hidden_trigger_high", "inspiration_high", "fortune_high"],
+      "antiBiasTags": [],
+      "initialProgressRange": [2, 16],
+      "omenHints": [
+        "你偶尔觉得，有什么东西在注视你的人生。",
+        "你曾在梦中听见冷漠的计数声。",
+        "你总觉得十八岁之后会发生无法逃避的事。"
+      ],
+      "visibleRiskHint": "系统觉醒、域外战场、异常选择与命运偏移事件更容易出现。",
+      "progressSources": [
+        { "sourceTag": "event:outer_battlefield_dream", "delta": 20 },
+        { "sourceTag": "choice:follow_unknown_voice", "delta": 14 },
+        { "sourceTag": "aptitude:inspiration_high", "delta": 10 },
+        { "sourceTag": "destiny:heaven_jealous", "delta": 8 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 25, "halfAwakened": 60, "awakened": 100 },
+      "lifeEventBiasTags": ["system_omen", "outer_battlefield", "strange_voice", "fate_deviation"],
+      "outerBattlefieldEffects": [
+        { "threshold": 25, "effect": "域外战场教程事件更清晰，系统提示更频繁。" },
+        { "threshold": 60, "effect": "第一次顿悟选项质量提高。" },
+        { "threshold": 100, "effect": "开局获得【系统共鸣】：初次域外战场结算奖励提高，洞府开启资源 +1 档。" }
+      ],
+      "dongfuHooks": ["system_home_bonus", "unlock_system_trial_hint"]
+    },
+    {
+      "id": "hidden_heaven_book_fragment",
+      "trueName": "天书残页",
+      "category": "karmicObject",
+      "rarity": "legendary",
+      "baseWeight": 18,
+      "biasTags": ["old_book", "scripture", "scholar", "temple", "comprehension_high"],
+      "antiBiasTags": [],
+      "initialProgressRange": [4, 20],
+      "omenHints": [
+        "你看残破经文时，常觉得字迹在自行重排。",
+        "你梦见一页白纸悬在无边黑暗中。",
+        "你似乎能记住从未读过的句子。"
+      ],
+      "visibleRiskHint": "经文、悟道、法术、卡牌试炼相关事件权重提高。",
+      "progressSources": [
+        { "sourceTag": "choice:study_scripture", "delta": 14 },
+        { "sourceTag": "carried:wordless_page", "delta": 18 },
+        { "sourceTag": "event:scripture_rearrange", "delta": 12 },
+        { "sourceTag": "aptitude:comprehension_high", "delta": 8 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 30, "halfAwakened": 70, "awakened": 100 },
+      "lifeEventBiasTags": ["scripture", "insight", "deckbuilder", "method_clue"],
+      "outerBattlefieldEffects": [
+        { "threshold": 30, "effect": "法术顿悟、玉简掉落权重提高。" },
+        { "threshold": 70, "effect": "第一次顿悟多 1 个候选，或提高重 Roll 资源。" },
+        { "threshold": 100, "effect": "解锁天书残页线索，万族试炼塔初始牌池品质提高。" }
+      ],
+      "dongfuHooks": ["unlock_heaven_book_clue", "method_research_discount"]
+    },
+    {
+      "id": "hidden_void_battlefield_echo",
+      "trueName": "域外战场回响",
+      "category": "pastLife",
+      "rarity": "epic",
+      "baseWeight": 26,
+      "biasTags": ["outer_battlefield", "war", "dream", "system_resonance", "killing_intent"],
+      "antiBiasTags": ["seclusion_only"],
+      "initialProgressRange": [5, 22],
+      "omenHints": [
+        "你梦见铁与星火坠落的荒原。",
+        "你听见过不属于此界的厮杀声。",
+        "你偶尔觉得自己曾在天外死过一次。"
+      ],
+      "visibleRiskHint": "战斗、杀伐、域外残响与实战类事件更容易出现。",
+      "progressSources": [
+        { "sourceTag": "event:outer_battlefield_dream", "delta": 16 },
+        { "sourceTag": "choice:train_martial", "delta": 8 },
+        { "sourceTag": "destiny:battle_growth", "delta": 12 },
+        { "sourceTag": "choice:avoid_all_conflict", "delta": -6 }
+      ],
+      "revealThresholds": { "hintOnly": 0, "suspicious": 30, "halfAwakened": 70, "awakened": 100 },
+      "lifeEventBiasTags": ["battle_dream", "martial", "killing", "outer_battlefield"],
+      "outerBattlefieldEffects": [
+        { "threshold": 30, "effect": "域外战场初始适应速度提高。" },
+        { "threshold": 70, "effect": "击杀精英后短暂提升精气神恢复。" },
+        { "threshold": 100, "effect": "开局获得【战场旧识】：第一场域外战场奖励提高，但敌潮压力 +1。" }
+      ],
+      "dongfuHooks": ["unlock_outer_battlefield_memory", "increase_combat_trial_rewards"]
+    }
+  ]
+}

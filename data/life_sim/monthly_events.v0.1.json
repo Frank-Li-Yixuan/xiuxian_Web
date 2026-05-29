@@ -1,0 +1,3470 @@
+{
+  "version": "0.1",
+  "designNote": "本表是 MVP 月度事件池。后续可扩到 200+。每个事件均为自动月度事件，不需要玩家主动选择；玩家重大选择另由半年选择系统负责。",
+  "events": [
+    {
+      "id": "m001_thunder_birth_cry",
+      "title": "雷雨夜啼",
+      "description": "暴雨夜，你啼哭不止，窗外雷光照亮屋梁。长辈说这是不祥，也有人说是天生异象。",
+      "ageRangeMonths": [
+        0,
+        18
+      ],
+      "category": "birth_omen",
+      "baseWeight": 6,
+      "tags": [
+        "thunder",
+        "birth",
+        "omen",
+        "hidden_fate"
+      ],
+      "conditions": [],
+      "difficulty": 5,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "ancient_thunder_blood",
+          "value": 4
+        },
+        {
+          "kind": "tag",
+          "target": "lifeEvent:thunderstorm_omen",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m002_silent_infant",
+      "title": "静默婴孩",
+      "description": "你少有哭闹，常常望着虚空出神，像是在听什么旁人听不见的声音。",
+      "ageRangeMonths": [
+        0,
+        36
+      ],
+      "category": "dream",
+      "baseWeight": 8,
+      "tags": [
+        "shen",
+        "inspiration",
+        "yin",
+        "system"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "system_resonance_body",
+          "value": 2
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "taiyin_remnant_vein",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m003_weak_pulse",
+      "title": "脉象微弱",
+      "description": "村中老医替你把脉，摇头说命火偏弱，需好生将养。",
+      "ageRangeMonths": [
+        0,
+        47
+      ],
+      "category": "health",
+      "baseWeight": 10,
+      "tags": [
+        "lifespan",
+        "illness",
+        "weak_body"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "state",
+          "target": "wound:frail_pulse",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "lifespan",
+          "value": -1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m004_strong_grip",
+      "title": "抓握有力",
+      "description": "你尚在襁褓，却能死死攥住大人的手指，骨节有力。",
+      "ageRangeMonths": [
+        0,
+        36
+      ],
+      "category": "health",
+      "baseWeight": 9,
+      "tags": [
+        "jing",
+        "rootBone",
+        "body"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "rootBone",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m005_lantern_shadow_smile",
+      "title": "灯影微笑",
+      "description": "夜里油灯忽明忽暗，你望着墙上影子笑了起来。",
+      "ageRangeMonths": [
+        0,
+        36
+      ],
+      "category": "birth_omen",
+      "baseWeight": 5,
+      "tags": [
+        "yin",
+        "dream",
+        "hidden_fate"
+      ],
+      "conditions": [],
+      "difficulty": 8,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "demon_mark_trace",
+          "value": 3
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "taiyin_remnant_vein",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m006_family_lullaby",
+      "title": "母亲哼唱",
+      "description": "母亲常抱着你轻声哼唱，你在歌声里睡得很沉。",
+      "ageRangeMonths": [
+        0,
+        47
+      ],
+      "category": "family",
+      "baseWeight": 12,
+      "tags": [
+        "family",
+        "heart",
+        "merit"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        },
+        {
+          "kind": "state",
+          "target": "kinship",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m007_old_jade_warm",
+      "title": "旧玉微温",
+      "description": "家中旧玉佩在你靠近时微微发热，长辈只当是错觉。",
+      "ageRangeMonths": [
+        6,
+        47
+      ],
+      "category": "origin_clue",
+      "baseWeight": 6,
+      "tags": [
+        "jade",
+        "carried_item",
+        "artifact",
+        "origin"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "ancestral_jade",
+          "value": 5
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "system_resonance_body",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m008_cradle_fever",
+      "title": "襁褓低烧",
+      "description": "你发了一场低烧，退烧后眼神却比从前清亮。",
+      "ageRangeMonths": [
+        0,
+        47
+      ],
+      "category": "health",
+      "baseWeight": 7,
+      "tags": [
+        "illness",
+        "shen",
+        "risk"
+      ],
+      "conditions": [],
+      "difficulty": 12,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": -1
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        },
+        {
+          "kind": "state",
+          "target": "wound:childhood_fever",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "sealed_wisdom",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m009_dream_of_cauldron",
+      "title": "梦中丹炉",
+      "description": "你梦见一尊残破丹炉，炉火不旺，却久燃不灭。",
+      "ageRangeMonths": [
+        12,
+        47
+      ],
+      "category": "dream",
+      "baseWeight": 5,
+      "tags": [
+        "alchemy",
+        "fire",
+        "past_life"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 1
+        },
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "alchemy_saint_bone",
+          "value": 5
+        },
+        {
+          "kind": "itemAffinity",
+          "target": "herb_shop_copper_furnace",
+          "value": 4
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m010_stone_under_pillow",
+      "title": "枕下小石",
+      "description": "你总把一枚不起眼的小石攥在手心，丢了也会哭闹不止。",
+      "ageRangeMonths": [
+        18,
+        47
+      ],
+      "category": "family",
+      "baseWeight": 6,
+      "tags": [
+        "earth",
+        "carried_item",
+        "root"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "childhood_stone_talisman",
+          "value": 6
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m011_private_school_first_words",
+      "title": "私塾启蒙",
+      "description": "你开始跟着先生识字，虽然年幼，却能很快记住笔画。",
+      "ageRangeMonths": [
+        48,
+        107
+      ],
+      "category": "study",
+      "baseWeight": 13,
+      "tags": [
+        "study",
+        "comprehension"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 8,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "comprehension",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m012_chasing_cranes",
+      "title": "追逐白鹤",
+      "description": "你追着山边白鹤跑了一下午，摔了一身泥，却笑得很开心。",
+      "ageRangeMonths": [
+        48,
+        107
+      ],
+      "category": "social",
+      "baseWeight": 8,
+      "tags": [
+        "fortune",
+        "body",
+        "crane"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m013_herb_sorting",
+      "title": "分拣草药",
+      "description": "药铺伙计让你帮忙分拣草药，你竟能分辨几种药性的寒热。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "alchemy",
+      "baseWeight": 9,
+      "tags": [
+        "alchemy",
+        "wood",
+        "herb"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "alchemy_saint_bone",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m014_chopping_firewood",
+      "title": "上山砍柴",
+      "description": "你跟着大人上山砍柴，肩背酸痛，却感觉气血更足。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "martial",
+      "baseWeight": 10,
+      "tags": [
+        "body",
+        "rootBone",
+        "wood"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 8,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m015_river_meditation",
+      "title": "溪边发呆",
+      "description": "你坐在溪边看水流，看着看着，呼吸竟变得悠长。",
+      "ageRangeMonths": [
+        48,
+        107
+      ],
+      "category": "spiritual_root",
+      "baseWeight": 8,
+      "tags": [
+        "water",
+        "qi",
+        "seclusion"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "taiyin_remnant_vein",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m016_watch_taoist_ritual",
+      "title": "偷看法事",
+      "description": "你躲在道观墙外，看道士燃符踏罡，心中隐隐生出熟悉感。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "study",
+      "baseWeight": 7,
+      "tags": [
+        "ritual",
+        "talisman",
+        "shen",
+        "daoist_temple"
+      ],
+      "conditions": [],
+      "difficulty": 6,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "old_talisman_paper",
+          "value": 4
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m017_childhood_brawl",
+      "title": "童年争斗",
+      "description": "你与村中孩子起了争执，最后鼻青脸肿地回家。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "social",
+      "baseWeight": 8,
+      "tags": [
+        "conflict",
+        "martial",
+        "karma"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 1
+        },
+        {
+          "kind": "state",
+          "target": "heartKnot:childhood_resentment",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "karma",
+          "target": "minor",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m018_help_lost_goat",
+      "title": "寻回走失羊羔",
+      "description": "你帮邻居找回走失的羊羔，村里人夸你心善。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "merit_karma",
+      "baseWeight": 9,
+      "tags": [
+        "merit",
+        "social",
+        "fortune"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "merit",
+          "target": "minor",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m019_reading_beyond_age",
+      "title": "早慧惊人",
+      "description": "先生问了一个难题，你不知为何便答了出来。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "study",
+      "baseWeight": 6,
+      "tags": [
+        "comprehension",
+        "early_wisdom",
+        "heaven_jealous"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "aptitude:comprehension_high",
+            "destiny:heaven_jealous_talent"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 3
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "comprehension",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "tag",
+          "target": "omen:early_wisdom",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m020_hide_in_cellar",
+      "title": "地窖避祸",
+      "description": "外面传来混乱声，你躲进地窖，屏住呼吸直到天亮。",
+      "ageRangeMonths": [
+        72,
+        107
+      ],
+      "category": "danger",
+      "baseWeight": 6,
+      "tags": [
+        "stealth",
+        "goudao",
+        "survival"
+      ],
+      "conditions": [],
+      "difficulty": 8,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "stealth",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "destinyProgress",
+          "target": "goudao_layers",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m021_small_fire_accident",
+      "title": "炉火惊险",
+      "description": "灶房火星溅起，你被烫了一下，却看清了火势流向。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "danger",
+      "baseWeight": 7,
+      "tags": [
+        "fire",
+        "alchemy",
+        "injury"
+      ],
+      "conditions": [],
+      "difficulty": 10,
+      "cooldownMonths": 16,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": -1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 2
+        },
+        {
+          "kind": "state",
+          "target": "scar:small_burn",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m022_wooden_sword_game",
+      "title": "木剑游戏",
+      "description": "你折了树枝作剑，一招一式并不成章，却莫名顺手。",
+      "ageRangeMonths": [
+        60,
+        107
+      ],
+      "category": "martial",
+      "baseWeight": 8,
+      "tags": [
+        "sword",
+        "metal",
+        "martial"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "broken_wooden_sword",
+          "value": 4
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "past_life_sword_soul",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m023_nightmare_shadow",
+      "title": "黑影梦魇",
+      "description": "你梦见身后有一道黑影，它没有追你，只是静静看着。",
+      "ageRangeMonths": [
+        72,
+        107
+      ],
+      "category": "dream",
+      "baseWeight": 5,
+      "tags": [
+        "heart_demon",
+        "yin",
+        "curse"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "destiny:demon_seed",
+            "root:yin",
+            "origin:gravekeeper"
+          ]
+        }
+      ],
+      "difficulty": 15,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "state",
+          "target": "heartDemon",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "demon_mark_trace",
+          "value": 4
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m024_family_talisman",
+      "title": "旧符压箱",
+      "description": "你在箱底翻出一张破旧符纸，纸上朱砂早已发暗。",
+      "ageRangeMonths": [
+        72,
+        107
+      ],
+      "category": "origin_clue",
+      "baseWeight": 6,
+      "tags": [
+        "talisman",
+        "carried_item",
+        "origin"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "old_talisman_paper",
+          "value": 6
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "heavenly_book_fragment",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m025_root_pulse",
+      "title": "灵根脉动",
+      "description": "某日静坐时，你感觉体内某处轻轻一跳，像有细流掠过经脉。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "spiritual_root",
+      "baseWeight": 11,
+      "tags": [
+        "spiritual_root",
+        "qi",
+        "awakening"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "root_related",
+          "value": 4
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m026_wandering_taoist",
+      "title": "游方道士",
+      "description": "一位游方道士经过村口，随口说你“命里有一道裂隙”。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "origin_clue",
+      "baseWeight": 7,
+      "tags": [
+        "daoist",
+        "fate",
+        "hidden_fate"
+      ],
+      "conditions": [],
+      "difficulty": 8,
+      "cooldownMonths": 30,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "highestWeighted",
+          "value": 6
+        },
+        {
+          "kind": "tag",
+          "target": "clue:wandering_taoist",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m027_bandit_smoke",
+      "title": "山贼烟尘",
+      "description": "远处山道扬起烟尘，村人匆匆闭门，你第一次认真想过力量的意义。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "danger",
+      "baseWeight": 8,
+      "tags": [
+        "danger",
+        "martial",
+        "heart"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "majorChoiceHook",
+          "target": "bandit_threat",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m028_rescue_child",
+      "title": "救下幼童",
+      "description": "溪水暴涨，一名幼童跌入水中，你冒险将他拉回岸边。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "merit_karma",
+      "baseWeight": 7,
+      "tags": [
+        "merit",
+        "water",
+        "risk",
+        "social"
+      ],
+      "conditions": [],
+      "difficulty": 12,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "merit",
+          "target": "minor",
+          "value": 4
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m029_kill_wild_beast",
+      "title": "击杀野兽",
+      "description": "野兽闯入田间，你和猎户合力将其杀死，手心第一次沾满血腥。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "martial",
+      "baseWeight": 7,
+      "tags": [
+        "martial",
+        "karma",
+        "beast"
+      ],
+      "conditions": [],
+      "difficulty": 12,
+      "cooldownMonths": 16,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 3
+        },
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "karma",
+          "target": "minor",
+          "value": 2
+        },
+        {
+          "kind": "majorChoiceHook",
+          "target": "first_kill",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m030_study_broken_classic",
+      "title": "残经难解",
+      "description": "你得到一页残破经文，字句残缺，却让你整夜难眠。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "study",
+      "baseWeight": 8,
+      "tags": [
+        "study",
+        "scripture",
+        "comprehension"
+      ],
+      "conditions": [],
+      "difficulty": 10,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 3
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "wordless_fragment",
+          "value": 4
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "heavenly_book_fragment",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m031_lunar_dream",
+      "title": "月下旧梦",
+      "description": "月色极亮，你梦见自己站在一片冰冷湖面上，湖底有人轻声呼唤。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "dream",
+      "baseWeight": 6,
+      "tags": [
+        "yin",
+        "water",
+        "dream",
+        "soul"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "root:yin",
+            "root:water",
+            "hiddenBias:taiyin"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "taiyin_remnant_vein",
+          "value": 6
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m032_thunder_bone_ache",
+      "title": "雷雨骨痛",
+      "description": "雷雨夜，你的骨节隐隐发热，像有什么东西要从血里醒来。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "hidden_fate",
+      "baseWeight": 5,
+      "tags": [
+        "thunder",
+        "bloodline",
+        "pain"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "root:thunder",
+            "destiny:tribulation_affinity",
+            "hiddenBias:thunder"
+          ]
+        }
+      ],
+      "difficulty": 14,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": -1
+        },
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "ancient_thunder_blood",
+          "value": 8
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m033_failed_breathing",
+      "title": "吐纳失败",
+      "description": "你按书上方法吐纳半日，只觉胸闷气短，什么也没练成。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "spiritual_root",
+      "baseWeight": 9,
+      "tags": [
+        "failure",
+        "reverse_fate",
+        "qi"
+      ],
+      "conditions": [],
+      "difficulty": 10,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": -1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "destinyProgress",
+          "target": "reverse_fate_points",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m034_sudden_breakthrough_breath",
+      "title": "一息通达",
+      "description": "你本已放弃，却在睡前忽然感到一缕气机穿过小腹。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "spiritual_root",
+      "baseWeight": 6,
+      "tags": [
+        "qi",
+        "breakthrough",
+        "fortune"
+      ],
+      "conditions": [
+        {
+          "kind": "statAnyAbove",
+          "stats": [
+            "fortune",
+            "inspiration"
+          ],
+          "value": 75
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 4
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "system_resonance_body",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m035_temple_sweeping",
+      "title": "道观扫尘",
+      "description": "你帮道观扫了一月庭院，道人没有传你法，只教你如何静心。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "study",
+      "baseWeight": 7,
+      "tags": [
+        "daoist_temple",
+        "heart",
+        "ritual",
+        "seclusion"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 14,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m036_secret_copper_coin",
+      "title": "裂纹铜钱",
+      "description": "你捡到一枚裂纹铜钱，抛起时总落在同一面。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "origin_clue",
+      "baseWeight": 5,
+      "tags": [
+        "fortune",
+        "carried_item",
+        "omen"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 30,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "cracked_copper_coin",
+          "value": 8
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "system_resonance_body",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m037_bone_flute_sound",
+      "title": "夜半骨笛",
+      "description": "夜半风过，你听见细细的笛声，醒来时手边多了一截黑色骨片。",
+      "ageRangeMonths": [
+        120,
+        167
+      ],
+      "category": "hidden_fate",
+      "baseWeight": 4,
+      "tags": [
+        "yin",
+        "soul",
+        "carried_item",
+        "ominous"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "root:yin",
+            "origin:gravekeeper",
+            "destiny:demon_seed"
+          ]
+        }
+      ],
+      "difficulty": 18,
+      "cooldownMonths": 36,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        },
+        {
+          "kind": "state",
+          "target": "heartDemon",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "black_bone_flute",
+          "value": 10
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "taiyin_remnant_vein",
+          "value": 5
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "demon_mark_trace",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m038_teacher_praise",
+      "title": "先生称奇",
+      "description": "先生说你文章虽稚嫩，却有一股不属于少年人的沉静。",
+      "ageRangeMonths": [
+        120,
+        167
+      ],
+      "category": "study",
+      "baseWeight": 8,
+      "tags": [
+        "comprehension",
+        "heart",
+        "study"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 3
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "comprehension",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m039_sword_hum_in_dream",
+      "title": "梦中剑鸣",
+      "description": "你梦见一柄断剑在黑暗里震颤，醒来时手腕酸痛。",
+      "ageRangeMonths": [
+        120,
+        167
+      ],
+      "category": "dream",
+      "baseWeight": 5,
+      "tags": [
+        "sword",
+        "metal",
+        "past_life"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "root:metal",
+            "destiny:sword_bone",
+            "hiddenBias:sword"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "past_life_sword_soul",
+          "value": 7
+        },
+        {
+          "kind": "itemAffinity",
+          "target": "broken_wooden_sword",
+          "value": 4
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m040_illness_three_days",
+      "title": "病卧三日",
+      "description": "你病倒三日，醒来时对许多事看得更淡。",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "category": "health",
+      "baseWeight": 8,
+      "tags": [
+        "illness",
+        "heart",
+        "lifespan"
+      ],
+      "conditions": [],
+      "difficulty": 14,
+      "cooldownMonths": 20,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": -2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 2
+        },
+        {
+          "kind": "state",
+          "target": "wound:youth_illness",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "heaven_jealous_like",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m041_choose_sword_practice",
+      "title": "晨起练剑",
+      "description": "你开始每日清晨练剑，木剑磨得光滑，手上也生了茧。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "martial",
+      "baseWeight": 9,
+      "tags": [
+        "sword",
+        "metal",
+        "martial",
+        "lineage_bias"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 8,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 3
+        },
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "past_life_sword_soul",
+          "value": 3
+        },
+        {
+          "kind": "modeBias",
+          "target": "stg:sword",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m042_pill_fire_practice",
+      "title": "试看火候",
+      "description": "你在药炉旁守了一夜，学会了分辨文火与武火。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "alchemy",
+      "baseWeight": 9,
+      "tags": [
+        "alchemy",
+        "fire",
+        "dan_dao"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 4
+        },
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "alchemy_saint_bone",
+          "value": 4
+        },
+        {
+          "kind": "dongfuHook",
+          "target": "alchemy_fire_control",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m043_long_seclusion",
+      "title": "闭门潜修",
+      "description": "你减少外出，把大半时间用来静坐和读书。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "destiny_trigger",
+      "baseWeight": 8,
+      "tags": [
+        "seclusion",
+        "goudao",
+        "heart"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 8,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "destinyProgress",
+          "target": "goudao_layers",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m044_illicit_scripture",
+      "title": "禁书一页",
+      "description": "你在旧书堆里发现一页禁术残文，明知不该看，却移不开眼。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "danger",
+      "baseWeight": 5,
+      "tags": [
+        "forbidden",
+        "heart_demon",
+        "knowledge",
+        "karma"
+      ],
+      "conditions": [],
+      "difficulty": 22,
+      "cooldownMonths": 30,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 3
+        },
+        {
+          "kind": "state",
+          "target": "heartDemon",
+          "value": 4
+        },
+        {
+          "kind": "karma",
+          "target": "minor",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "demon_mark_trace",
+          "value": 5
+        },
+        {
+          "kind": "majorChoiceHook",
+          "target": "forbidden_page",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m045_help_heal_villager",
+      "title": "救治病人",
+      "description": "你尝试用草药帮病人退热，药效虽弱，却救了急。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "merit_karma",
+      "baseWeight": 8,
+      "tags": [
+        "merit",
+        "alchemy",
+        "wood",
+        "social"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "merit",
+          "target": "minor",
+          "value": 4
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "merit_seed",
+          "value": 4
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m046_accidental_injury",
+      "title": "经脉岔气",
+      "description": "一次吐纳中你急于求成，气机岔入旁脉，痛得冷汗直流。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "health",
+      "baseWeight": 7,
+      "tags": [
+        "qi",
+        "injury",
+        "conflict"
+      ],
+      "conditions": [],
+      "difficulty": 18,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": -2
+        },
+        {
+          "kind": "state",
+          "target": "wound:meridian_strain",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "majorChoiceHook",
+          "target": "meridian_recovery",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m047_omen_of_outer_battlefield",
+      "title": "天外战鼓",
+      "description": "你连续数夜梦见黑色战场，天上有流星般的残兵坠落。",
+      "ageRangeMonths": [
+        180,
+        215
+      ],
+      "category": "system_omen",
+      "baseWeight": 6,
+      "tags": [
+        "system",
+        "outer_battlefield",
+        "dream",
+        "omen"
+      ],
+      "conditions": [],
+      "difficulty": 12,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "outer_battlefield_echo",
+          "value": 8
+        },
+        {
+          "kind": "age18Hook",
+          "target": "outer_battlefield_omen",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m048_ancestral_letter",
+      "title": "残旧家书",
+      "description": "你在箱底翻出一封残旧家书，字迹模糊，只剩一句“莫入天门”。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "origin_clue",
+      "baseWeight": 5,
+      "tags": [
+        "family",
+        "origin",
+        "carried_item",
+        "warning"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 30,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "old_family_letter",
+          "value": 8
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "heavenly_book_fragment",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m049_poverty_work",
+      "title": "为生计奔走",
+      "description": "家中拮据，你不得不四处帮工，少了读书，却更懂世道艰难。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "family",
+      "baseWeight": 9,
+      "tags": [
+        "poverty",
+        "survival",
+        "social"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 3
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": -1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m050_wealthy_lessons",
+      "title": "请师授课",
+      "description": "家中请来先生授课，你得以接触更多书卷与见闻。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "study",
+      "baseWeight": 7,
+      "tags": [
+        "wealth",
+        "study",
+        "social"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "origin:wealthy_branch",
+            "state:family_wealthy"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 4
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m051_graveyard_vigil",
+      "title": "守墓夜值",
+      "description": "你在墓地守夜，阴风穿过松林，却没有感到害怕。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "dream",
+      "baseWeight": 6,
+      "tags": [
+        "yin",
+        "soul",
+        "heart",
+        "grave"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "origin:gravekeeper",
+            "root:yin",
+            "hiddenBias:taiyin"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 3
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "taiyin_remnant_vein",
+          "value": 6
+        },
+        {
+          "kind": "itemAffinity",
+          "target": "black_bone_flute",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m052_copper_furnace_crack",
+      "title": "铜炉裂响",
+      "description": "药铺旧铜炉忽然裂开一道细纹，你却从裂纹中看见炉火走势。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "alchemy",
+      "baseWeight": 5,
+      "tags": [
+        "alchemy",
+        "carried_item",
+        "past_life"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "origin:herb_shop_apprentice",
+            "destiny:alchemy_genius",
+            "hiddenBias:alchemy"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 30,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 4
+        },
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "herb_shop_copper_furnace",
+          "value": 10
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "alchemy_saint_bone",
+          "value": 8
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m053_talisman_sparks",
+      "title": "符纸生光",
+      "description": "破旧符纸无风自燃，火焰却不烫手，只在掌心留下一点朱痕。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "hidden_fate",
+      "baseWeight": 5,
+      "tags": [
+        "talisman",
+        "fire",
+        "system",
+        "carried_item"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 3
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "old_talisman_paper",
+          "value": 8
+        },
+        {
+          "kind": "hiddenFateProgress",
+          "target": "system_resonance_body",
+          "value": 5
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m054_first_love_parting",
+      "title": "少年离别",
+      "description": "一个与你亲近的人远行，你第一次明白有些缘分留不住。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "social",
+      "baseWeight": 6,
+      "tags": [
+        "heart",
+        "kinship",
+        "parting"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 30,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 2
+        },
+        {
+          "kind": "state",
+          "target": "heartKnot:parting",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m055_heavenly_gaze",
+      "title": "天道注视",
+      "description": "某日午后，你忽然心悸，像有一只无形的眼在天上看你。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "destiny_trigger",
+      "baseWeight": 4,
+      "tags": [
+        "heaven_jealous",
+        "tribulation",
+        "danger"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "destiny:heaven_jealous_talent",
+            "destiny:tribulation_affinity",
+            "root:thunder"
+          ]
+        }
+      ],
+      "difficulty": 22,
+      "cooldownMonths": 36,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        },
+        {
+          "kind": "state",
+          "target": "heavenlyAttention",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "age18Hook",
+          "target": "tribulation_attention",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m056_fortunate_market",
+      "title": "市集捡漏",
+      "description": "你在市集角落买下一件不起眼的旧物，回家后发现其中另有玄机。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "social",
+      "baseWeight": 5,
+      "tags": [
+        "fortune",
+        "carried_item",
+        "market"
+      ],
+      "conditions": [
+        {
+          "kind": "statAbove",
+          "stat": "fortune",
+          "value": 75
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "random_lucky_item",
+          "value": 8
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m057_body_training_misery",
+      "title": "苦练伤身",
+      "description": "你连续数月练武，体魄确有增长，旧伤却也隐隐作痛。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "martial",
+      "baseWeight": 8,
+      "tags": [
+        "body",
+        "injury",
+        "martial"
+      ],
+      "conditions": [],
+      "difficulty": 12,
+      "cooldownMonths": 14,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 4
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 3
+        },
+        {
+          "kind": "state",
+          "target": "wound:training_strain",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m058_hidden_kindness",
+      "title": "暗中行善",
+      "description": "你悄悄把米粮送给更穷的人，没有留下姓名。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "merit_karma",
+      "baseWeight": 7,
+      "tags": [
+        "merit",
+        "goudao",
+        "hidden_kindness"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 14,
+      "visibleEffects": [
+        {
+          "kind": "merit",
+          "target": "minor",
+          "value": 5
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "merit_seed",
+          "value": 5
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m059_rage_revenge",
+      "title": "怒而报复",
+      "description": "有人欺辱你至亲，你忍无可忍，狠狠报复了回去。",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "category": "danger",
+      "baseWeight": 5,
+      "tags": [
+        "karma",
+        "revenge",
+        "martial",
+        "heart_demon"
+      ],
+      "conditions": [],
+      "difficulty": 20,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 3
+        },
+        {
+          "kind": "karma",
+          "target": "minor",
+          "value": 4
+        },
+        {
+          "kind": "state",
+          "target": "heartDemon",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "majorChoiceHook",
+          "target": "revenge_aftermath",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m060_system_static",
+      "title": "耳畔杂音",
+      "description": "你偶尔听见耳边有细碎杂音，像有人在远处调试一件看不见的法器。",
+      "ageRangeMonths": [
+        192,
+        215
+      ],
+      "category": "system_omen",
+      "baseWeight": 4,
+      "tags": [
+        "system",
+        "glitch",
+        "outer_battlefield"
+      ],
+      "conditions": [],
+      "difficulty": 14,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "system_resonance_body",
+          "value": 8
+        },
+        {
+          "kind": "age18Hook",
+          "target": "system_static",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m061_gold_ore_glimpse",
+      "title": "金石异光",
+      "description": "山石裂隙中有金光一闪，你伸手摸去，掌心有些发麻。",
+      "ageRangeMonths": [
+        72,
+        215
+      ],
+      "category": "spiritual_root",
+      "baseWeight": 6,
+      "tags": [
+        "metal",
+        "artifact",
+        "root"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "root:metal",
+            "destiny:artifact_blessed"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "craft",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "past_life_sword_soul",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m062_green_sprout_after_rain",
+      "title": "雨后青芽",
+      "description": "暴雨过后，你发现脚边一株青芽长得极快，似乎因你而生。",
+      "ageRangeMonths": [
+        48,
+        167
+      ],
+      "category": "spiritual_root",
+      "baseWeight": 6,
+      "tags": [
+        "wood",
+        "growth",
+        "herb"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "root:wood",
+            "origin:herb_shop_apprentice"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 16,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "lifeEventBias",
+          "target": "wood_sprout_omen",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m063_earth_pulse_under_feet",
+      "title": "地脉微震",
+      "description": "你赤脚踏过田埂，忽然感觉大地像在缓慢呼吸。",
+      "ageRangeMonths": [
+        72,
+        167
+      ],
+      "category": "spiritual_root",
+      "baseWeight": 6,
+      "tags": [
+        "earth",
+        "formation",
+        "root"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "root:earth",
+            "destiny:formation_bias"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "ritual",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "modeBias",
+          "target": "autochess:earth_formation",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m064_fireflies_script",
+      "title": "萤火成字",
+      "description": "夏夜萤火聚散，竟在空中排成几个你不认识的字。",
+      "ageRangeMonths": [
+        72,
+        167
+      ],
+      "category": "dream",
+      "baseWeight": 5,
+      "tags": [
+        "inspiration",
+        "scripture",
+        "hidden_fate"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "study",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "heavenly_book_fragment",
+          "value": 4
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m065_hunters_trap",
+      "title": "猎户陷阱",
+      "description": "你跟随猎户学设陷阱，明白了耐心比蛮力更有用。",
+      "ageRangeMonths": [
+        84,
+        167
+      ],
+      "category": "martial",
+      "baseWeight": 7,
+      "tags": [
+        "hunter",
+        "stealth",
+        "survival"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "origin:hunter_child",
+            "destiny:goudao_supreme"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 12,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "stealth",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m066_cold_stream_training",
+      "title": "寒溪淬体",
+      "description": "你咬牙站在寒溪中，双腿发抖，却熬到了日出。",
+      "ageRangeMonths": [
+        108,
+        215
+      ],
+      "category": "martial",
+      "baseWeight": 6,
+      "tags": [
+        "water",
+        "body",
+        "heart"
+      ],
+      "conditions": [],
+      "difficulty": 16,
+      "cooldownMonths": 16,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 3
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "state",
+          "target": "cold_resistance",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m067_secret_charity",
+      "title": "救济流民",
+      "description": "路边流民病倒，你把仅有的干粮分出一半。",
+      "ageRangeMonths": [
+        108,
+        215
+      ],
+      "category": "merit_karma",
+      "baseWeight": 7,
+      "tags": [
+        "merit",
+        "poverty",
+        "social"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 16,
+      "visibleEffects": [
+        {
+          "kind": "merit",
+          "target": "minor",
+          "value": 4
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 1
+        },
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": -1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "merit_seed",
+          "value": 3
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m068_star_counting",
+      "title": "数星入神",
+      "description": "你仰头数星，竟忘了时间，回过神时天已将明。",
+      "ageRangeMonths": [
+        72,
+        215
+      ],
+      "category": "dream",
+      "baseWeight": 8,
+      "tags": [
+        "shen",
+        "inspiration",
+        "seclusion"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m069_bad_omen_crow",
+      "title": "乌鸦报凶",
+      "description": "乌鸦停在屋檐上叫了一整日，夜里家中果然出了变故。",
+      "ageRangeMonths": [
+        48,
+        167
+      ],
+      "category": "danger",
+      "baseWeight": 5,
+      "tags": [
+        "bad_luck",
+        "family",
+        "fortune"
+      ],
+      "conditions": [],
+      "difficulty": 16,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": -1
+        },
+        {
+          "kind": "state",
+          "target": "heartKnot:family_worry",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "majorChoiceHook",
+          "target": "family_misfortune",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m070_lucky_rainbow",
+      "title": "雨后虹光",
+      "description": "暴雨初歇，山间虹光落在你身上，温暖得像一场梦。",
+      "ageRangeMonths": [
+        48,
+        167
+      ],
+      "category": "birth_omen",
+      "baseWeight": 4,
+      "tags": [
+        "fortune",
+        "omen",
+        "merit"
+      ],
+      "conditions": [
+        {
+          "kind": "statAbove",
+          "stat": "fortune",
+          "value": 70
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "merit_seed",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m071_quiet_sitting_month",
+      "title": "整月静坐",
+      "description": "这一月你很少出门，反复琢磨呼吸与心念的关系。",
+      "ageRangeMonths": [
+        108,
+        215
+      ],
+      "category": "study",
+      "baseWeight": 8,
+      "tags": [
+        "seclusion",
+        "heart",
+        "qi"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 10,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 2
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "destinyProgress",
+          "target": "goudao_layers",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m072_failed_social_shame",
+      "title": "众前出丑",
+      "description": "你在众人面前出了丑，脸上火辣，心中却暗暗发誓。",
+      "ageRangeMonths": [
+        72,
+        167
+      ],
+      "category": "social",
+      "baseWeight": 7,
+      "tags": [
+        "heart",
+        "failure",
+        "reverse_fate"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 16,
+      "visibleEffects": [
+        {
+          "kind": "state",
+          "target": "heartKnot:shame",
+          "value": 1
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "destinyProgress",
+          "target": "reverse_fate_points",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m073_small_windfall",
+      "title": "小小横财",
+      "description": "你在路边捡到一小袋铜钱，失主已不可寻。",
+      "ageRangeMonths": [
+        60,
+        167
+      ],
+      "category": "social",
+      "baseWeight": 6,
+      "tags": [
+        "fortune",
+        "karma",
+        "wealth"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "karma",
+          "target": "minor",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m074_return_lost_money",
+      "title": "归还失物",
+      "description": "你把捡到的钱袋还给失主，对方千恩万谢。",
+      "ageRangeMonths": [
+        60,
+        167
+      ],
+      "category": "merit_karma",
+      "baseWeight": 6,
+      "tags": [
+        "merit",
+        "social",
+        "fortune"
+      ],
+      "conditions": [
+        {
+          "kind": "stateFlag",
+          "flag": "found_money_recently"
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "merit",
+          "target": "minor",
+          "value": 3
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "social",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m075_heavy_snow",
+      "title": "大雪封门",
+      "description": "大雪封山，村中断粮，你学会了怎样在匮乏中保存体力。",
+      "ageRangeMonths": [
+        60,
+        167
+      ],
+      "category": "danger",
+      "baseWeight": 5,
+      "tags": [
+        "survival",
+        "water",
+        "family"
+      ],
+      "conditions": [],
+      "difficulty": 12,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 3
+        },
+        {
+          "kind": "core",
+          "target": "jing",
+          "value": 1
+        },
+        {
+          "kind": "state",
+          "target": "familyStrain",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m076_wild_ginseng",
+      "title": "山参一线",
+      "description": "你在石缝中发现一株小山参，却没有立刻采下。",
+      "ageRangeMonths": [
+        84,
+        215
+      ],
+      "category": "alchemy",
+      "baseWeight": 6,
+      "tags": [
+        "herb",
+        "wood",
+        "fortune"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "alchemy",
+          "value": 3
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "fortune",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "majorChoiceHook",
+          "target": "wild_ginseng_choice",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m077_shadow_in_mirror",
+      "title": "镜中异影",
+      "description": "铜镜里，你身后的影子慢了一瞬。",
+      "ageRangeMonths": [
+        132,
+        215
+      ],
+      "category": "hidden_fate",
+      "baseWeight": 4,
+      "tags": [
+        "demon",
+        "yin",
+        "heart_demon"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "destiny:demon_seed",
+            "hiddenBias:demon",
+            "root:yin"
+          ]
+        }
+      ],
+      "difficulty": 20,
+      "cooldownMonths": 30,
+      "visibleEffects": [
+        {
+          "kind": "state",
+          "target": "heartDemon",
+          "value": 3
+        },
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "demon_mark_trace",
+          "value": 6
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m078_vow_under_tree",
+      "title": "树下立誓",
+      "description": "你在老树下立誓，总有一日要走出这片山。",
+      "ageRangeMonths": [
+        132,
+        215
+      ],
+      "category": "destiny_trigger",
+      "baseWeight": 7,
+      "tags": [
+        "heart",
+        "ambition",
+        "adventure"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "aptitudeSoft",
+          "target": "heart",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "tag",
+          "target": "vow:leave_mountain",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m079_broken_bowstring",
+      "title": "残弓断弦",
+      "description": "旧弓弦忽然断裂，弦声入耳，像一道锐利的警告。",
+      "ageRangeMonths": [
+        108,
+        215
+      ],
+      "category": "origin_clue",
+      "baseWeight": 5,
+      "tags": [
+        "hunter",
+        "carried_item",
+        "martial"
+      ],
+      "conditions": [
+        {
+          "kind": "tagAny",
+          "tags": [
+            "origin:hunter_child",
+            "martial_high"
+          ]
+        }
+      ],
+      "difficulty": 0,
+      "cooldownMonths": 24,
+      "visibleEffects": [
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 2
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "itemAffinity",
+          "target": "rusted_bowstring",
+          "value": 8
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m080_last_month_before_eighteen",
+      "title": "生辰将近",
+      "description": "十八岁生辰将近，你近来总觉得天边有什么东西正在靠近。",
+      "ageRangeMonths": [
+        210,
+        215
+      ],
+      "category": "system_omen",
+      "baseWeight": 10,
+      "tags": [
+        "system",
+        "age18",
+        "outer_battlefield"
+      ],
+      "conditions": [],
+      "difficulty": 0,
+      "cooldownMonths": 999,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 2
+        },
+        {
+          "kind": "aptitudeSoft",
+          "target": "inspiration",
+          "value": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "age18Hook",
+          "target": "system_countdown",
+          "value": 1
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m081_breath_like_mist",
+      "title": "鼻息如雾",
+      "description": "寒晨里，你呼出的白雾久久不散，像一缕细小灵气绕着鼻尖打转。",
+      "ageRangeMonths": [
+        6,
+        47
+      ],
+      "category": "birth_omen",
+      "baseWeight": 6,
+      "tags": [
+        "qi",
+        "mist",
+        "water",
+        "birth"
+      ],
+      "conditions": [],
+      "difficulty": 4,
+      "cooldownMonths": 18,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "qi",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "survival",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "taiyin_remnant_vein",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    },
+    {
+      "id": "m082_first_laugh_at_sword",
+      "title": "见剑而笑",
+      "description": "有人带着旧剑路过门前，你忽然伸手去抓，笑声清亮。",
+      "ageRangeMonths": [
+        12,
+        47
+      ],
+      "category": "birth_omen",
+      "baseWeight": 5,
+      "tags": [
+        "sword",
+        "metal",
+        "birth",
+        "omen"
+      ],
+      "conditions": [],
+      "difficulty": 4,
+      "cooldownMonths": 20,
+      "visibleEffects": [
+        {
+          "kind": "core",
+          "target": "shen",
+          "value": 1
+        },
+        {
+          "kind": "lifeSkill",
+          "target": "martial",
+          "value": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "kind": "hiddenFateProgress",
+          "target": "past_life_sword_soul",
+          "value": 3
+        },
+        {
+          "kind": "itemAffinity",
+          "target": "broken_wooden_sword",
+          "value": 2
+        }
+      ],
+      "majorChoiceHooks": []
+    }
+  ]
+}

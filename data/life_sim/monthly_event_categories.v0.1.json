@@ -1,0 +1,128 @@
+{
+  "version": "0.1",
+  "categories": [
+    {
+      "id": "birth_omen",
+      "name": "出生异象",
+      "defaultWeight": 8,
+      "repeatPolicy": "rare",
+      "description": "先天灵根、隐藏血脉、命格的早期表现"
+    },
+    {
+      "id": "family",
+      "name": "家庭亲缘",
+      "defaultWeight": 12,
+      "repeatPolicy": "normal",
+      "description": "父母、亲族、家境、亲缘、随身物来源"
+    },
+    {
+      "id": "health",
+      "name": "体质伤病",
+      "defaultWeight": 10,
+      "repeatPolicy": "normal",
+      "description": "病弱、受伤、早熟、命火、寿元"
+    },
+    {
+      "id": "study",
+      "name": "读书学识",
+      "defaultWeight": 10,
+      "repeatPolicy": "normal",
+      "description": "学识、悟性、见识、符箓和功法理解"
+    },
+    {
+      "id": "martial",
+      "name": "练武劳作",
+      "defaultWeight": 9,
+      "repeatPolicy": "normal",
+      "description": "精、根骨、武艺、体魄、战斗前置"
+    },
+    {
+      "id": "alchemy",
+      "name": "药理炼丹",
+      "defaultWeight": 7,
+      "repeatPolicy": "normal",
+      "description": "药理、丹毒、炼丹线索、随身物药炉"
+    },
+    {
+      "id": "spiritual_root",
+      "name": "灵根异动",
+      "defaultWeight": 7,
+      "repeatPolicy": "normal",
+      "description": "五行灵根、异灵根、隐灵根进度"
+    },
+    {
+      "id": "dream",
+      "name": "梦境神识",
+      "defaultWeight": 8,
+      "repeatPolicy": "normal",
+      "description": "神、灵感、太阴、魂修、前世线索"
+    },
+    {
+      "id": "social",
+      "name": "人际名声",
+      "defaultWeight": 7,
+      "repeatPolicy": "normal",
+      "description": "村缘、师缘、善缘、冲突、名声"
+    },
+    {
+      "id": "origin_clue",
+      "name": "身世线索",
+      "defaultWeight": 5,
+      "repeatPolicy": "limited",
+      "description": "破落修士、祖传物、前世、家族遗留"
+    },
+    {
+      "id": "hidden_fate",
+      "name": "隐藏命异动",
+      "defaultWeight": 5,
+      "repeatPolicy": "limited",
+      "description": "隐藏血脉、前世残魂、系统共鸣进度"
+    },
+    {
+      "id": "destiny_trigger",
+      "name": "天命触发",
+      "defaultWeight": 6,
+      "repeatPolicy": "contextual",
+      "description": "天命/劫命让事件变形"
+    },
+    {
+      "id": "danger",
+      "name": "灾祸劫数",
+      "defaultWeight": 7,
+      "repeatPolicy": "normal",
+      "description": "伤病、心结、业力、灾星、兵劫"
+    },
+    {
+      "id": "merit_karma",
+      "name": "功德业力",
+      "defaultWeight": 6,
+      "repeatPolicy": "normal",
+      "description": "救人、杀伐、因果、天道响应"
+    },
+    {
+      "id": "system_omen",
+      "name": "系统前兆",
+      "defaultWeight": 3,
+      "repeatPolicy": "rare",
+      "description": "18 岁系统觉醒和域外战场征召前兆"
+    }
+  ],
+  "repeatPolicies": {
+    "rare": {
+      "maxPerLife": 2,
+      "repeatPenalty": 0.2
+    },
+    "limited": {
+      "maxPerLife": 5,
+      "repeatPenalty": 0.45
+    },
+    "normal": {
+      "maxPerLife": 999,
+      "repeatPenalty": 0.75
+    },
+    "contextual": {
+      "maxPerLife": 999,
+      "repeatPenalty": 0.65
+    }
+  }
+}

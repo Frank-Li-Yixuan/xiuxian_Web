@@ -1,0 +1,80 @@
+{
+  "version": "0.1",
+  "seed": "sample-life-thunder-001",
+  "characterSummary": {
+    "archetype": "命薄天才",
+    "root": "雷火双灵根",
+    "mainDestiny": "天妒英才",
+    "background": "山村孤儿",
+    "visibleHiddenOmen": "你偶尔能听见雷云深处的战鼓。"
+  },
+  "sampleMonths": [
+    {
+      "ageMonth": 0,
+      "eventId": "m001_thunder_birth_cry",
+      "visible": [
+        "神 +1",
+        "生存 +1"
+      ],
+      "hidden": [
+        "古雷真血进度 +4"
+      ]
+    },
+    {
+      "ageMonth": 16,
+      "eventId": "m008_cradle_fever",
+      "visible": [
+        "精 -1",
+        "神 +2",
+        "获得幼年低烧"
+      ],
+      "hidden": [
+        "早慧类隐藏进度 +2"
+      ]
+    },
+    {
+      "ageMonth": 72,
+      "eventId": "m019_reading_beyond_age",
+      "visible": [
+        "学识 +3",
+        "悟性 +2"
+      ],
+      "hidden": [
+        "早慧预兆"
+      ]
+    },
+    {
+      "ageMonth": 132,
+      "eventId": "m032_thunder_bone_ache",
+      "visible": [
+        "精 -1",
+        "气 +2"
+      ],
+      "hidden": [
+        "古雷真血进度 +8"
+      ]
+    },
+    {
+      "ageMonth": 188,
+      "eventId": "m055_heavenly_gaze",
+      "visible": [
+        "神 +2",
+        "天道注视 +1"
+      ],
+      "hidden": [
+        "18岁雷劫关注钩子"
+      ]
+    },
+    {
+      "ageMonth": 214,
+      "eventId": "m080_last_month_before_eighteen",
+      "visible": [
+        "神 +2",
+        "灵感 +2"
+      ],
+      "hidden": [
+        "系统倒计时钩子"
+      ]
+    }
+  ]
+}

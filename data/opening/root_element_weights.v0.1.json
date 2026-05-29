@@ -1,0 +1,145 @@
+{
+  "version": "0.1",
+  "baseElementWeights": {
+    "metal": 18,
+    "wood": 18,
+    "water": 18,
+    "fire": 18,
+    "earth": 18,
+    "thunder": 5,
+    "yin": 5
+  },
+  "archetypeElementModifiers": {
+    "iron_body": {
+      "earth": 1.25,
+      "metal": 1.2
+    },
+    "early_sage": {
+      "water": 1.15,
+      "yin": 1.2
+    },
+    "blessed_fortune": {
+      "wood": 1.15,
+      "water": 1.1
+    },
+    "thin_lived_genius": {
+      "thunder": 1.4,
+      "fire": 1.15,
+      "yin": 1.1
+    },
+    "wastebone_reversal": {
+      "yin": 1.25,
+      "earth": 1.1
+    },
+    "steady_dao_heart": {
+      "water": 1.25,
+      "earth": 1.2
+    },
+    "root_omen": {
+      "thunder": 1.5,
+      "yin": 1.4
+    },
+    "hidden_immortal_bone": {
+      "metal": 1.1,
+      "thunder": 1.2,
+      "yin": 1.2
+    },
+    "tribulation_bound": {
+      "thunder": 1.6,
+      "fire": 1.2,
+      "yin": 1.2
+    }
+  },
+  "relationships": {
+    "generating": [
+      [
+        "wood",
+        "fire"
+      ],
+      [
+        "fire",
+        "earth"
+      ],
+      [
+        "earth",
+        "metal"
+      ],
+      [
+        "metal",
+        "water"
+      ],
+      [
+        "water",
+        "wood"
+      ]
+    ],
+    "controlling": [
+      [
+        "wood",
+        "earth"
+      ],
+      [
+        "earth",
+        "water"
+      ],
+      [
+        "water",
+        "fire"
+      ],
+      [
+        "fire",
+        "metal"
+      ],
+      [
+        "metal",
+        "wood"
+      ]
+    ],
+    "special": [
+      {
+        "pair": [
+          "thunder",
+          "fire"
+        ],
+        "relation": "explosive",
+        "conflictBonus": 18,
+        "tags": [
+          "rootRelation:thunder_fire"
+        ]
+      },
+      {
+        "pair": [
+          "thunder",
+          "water"
+        ],
+        "relation": "storm",
+        "conflictBonus": 8,
+        "tags": [
+          "rootRelation:storm"
+        ]
+      },
+      {
+        "pair": [
+          "yin",
+          "water"
+        ],
+        "relation": "deep_yin",
+        "conflictBonus": 4,
+        "tags": [
+          "rootRelation:deep_yin"
+        ]
+      },
+      {
+        "pair": [
+          "yin",
+          "fire"
+        ],
+        "relation": "yin_fire_conflict",
+        "conflictBonus": 22,
+        "tags": [
+          "rootRelation:yin_fire_conflict"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "version": "0.1",
+  "eventWeightFormula": {
+    "baseWeight": "event.baseWeight",
+    "phaseBonus": 15,
+    "recentHookBonusPerMatch": 20,
+    "destinyTagBonusPerMatch": 10,
+    "rootTagBonusPerMatch": 8,
+    "originTagBonusPerMatch": 8,
+    "hiddenFateHintBonusPerMatch": 12,
+    "carriedItemBonusPerMatch": 8,
+    "woundRelevantBonus": 6,
+    "repeatPenaltyRecentSameCategory": -10,
+    "repeatPenaltySameEvent": -30
+  },
+  "choiceCheckFormula": {
+    "primaryAptitudeMultiplier": 0.35,
+    "primaryCoreMultiplier": 0.35,
+    "supportAptitudeMultiplier": 0.2,
+    "lifeSkillMultiplier": 0.5,
+    "fortuneMultiplier": 0.1,
+    "heartMultiplier": 0.08,
+    "heartDemonPenaltyMultiplier": 0.15
+  },
+  "optionComposition": {
+    "minOptions": 3,
+    "maxOptions": 4,
+    "mustIncludeAtLeastOneSafeOrSteady": true,
+    "mustIncludeAtLeastOneRiskyOrDangerousAfterAgeMonths": 48,
+    "specialOptionLimit": 2
+  },
+  "pendingChoice": {
+    "triggerEveryMonths": 6,
+    "doNotGenerateAtAgeMonths": [
+      216
+    ],
+    "mustPersistBeforePlayerChoice": true,
+    "mustNotRerollOnReload": true
+  }
+}

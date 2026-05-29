@@ -1,0 +1,141 @@
+{
+  "version": "0.1",
+  "effectScale": {
+    "minor": {
+      "stat": 1,
+      "lifeSkill": 1,
+      "hiddenProgress": 2,
+      "meritKarma": 1
+    },
+    "normal": {
+      "stat": 2,
+      "lifeSkill": 2,
+      "hiddenProgress": 4,
+      "meritKarma": 2
+    },
+    "good": {
+      "stat": 3,
+      "lifeSkill": 3,
+      "hiddenProgress": 7,
+      "meritKarma": 3
+    },
+    "rare": {
+      "stat": 5,
+      "lifeSkill": 5,
+      "hiddenProgress": 12,
+      "meritKarma": 5
+    },
+    "disaster": {
+      "stat": -2,
+      "lifeSkill": 0,
+      "hiddenProgress": 3,
+      "meritKarma": 4
+    }
+  },
+  "recommendedAge18Targets": {
+    "ordinary": {
+      "jing": [
+        45,
+        70
+      ],
+      "qi": [
+        40,
+        70
+      ],
+      "shen": [
+        40,
+        70
+      ]
+    },
+    "strong": {
+      "jing": [
+        70,
+        95
+      ],
+      "qi": [
+        70,
+        95
+      ],
+      "shen": [
+        70,
+        95
+      ]
+    },
+    "extreme": {
+      "jing": [
+        100,
+        130
+      ],
+      "qi": [
+        100,
+        130
+      ],
+      "shen": [
+        100,
+        130
+      ]
+    }
+  },
+  "lifeSkillTargets": {
+    "study": [
+      0,
+      80
+    ],
+    "martial": [
+      0,
+      80
+    ],
+    "alchemy": [
+      0,
+      80
+    ],
+    "craft": [
+      0,
+      80
+    ],
+    "social": [
+      0,
+      80
+    ],
+    "stealth": [
+      0,
+      80
+    ],
+    "ritual": [
+      0,
+      80
+    ],
+    "survival": [
+      0,
+      80
+    ]
+  },
+  "conversionPreview": {
+    "study": [
+      "万族试炼塔初始牌池质量",
+      "功法研读效率"
+    ],
+    "martial": [
+      "域外战场初始生命与闪避容错",
+      "虫族入侵近身抗压"
+    ],
+    "alchemy": [
+      "初始丹药、洞府炼丹房火候经验"
+    ],
+    "craft": [
+      "法宝修复、炼器阁初始效率"
+    ],
+    "social": [
+      "弟子/道友/人际事件权重"
+    ],
+    "stealth": [
+      "苟道事件、域外战场保命符权重"
+    ],
+    "ritual": [
+      "符箓、阵法、劫雷台准备"
+    ],
+    "survival": [
+      "伤病恢复、第一战续航"
+    ]
+  }
+}

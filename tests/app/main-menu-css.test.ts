@@ -57,4 +57,13 @@ describe("main menu image button css", () => {
     expect(copyRule).toContain("text-align: center");
     expect(selectedRule).toContain("transform: scale(1.006)");
   });
+
+  it("keeps the CCUI2 fate altar stage contained above destiny cards", () => {
+    const sidePanelRule = ruleBody(".ccui2-side-panel");
+    const fateAltarRule = ruleBody(".ccui2-fate-altar");
+
+    expect(sidePanelRule).toContain("height: 100%");
+    expect(sidePanelRule).toContain("overflow: hidden");
+    expect(fateAltarRule).toContain("width: min(40vh, 34vw, 480px)");
+  });
 });

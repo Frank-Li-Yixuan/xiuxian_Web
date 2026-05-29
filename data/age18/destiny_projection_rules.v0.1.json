@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "0.1",
+  "id": "destiny_projection_rules_v0_1",
+  "projections": {
+    "destiny_heaven_jealous_talent": {
+      "name": "天妒英才",
+      "outerBattlefieldModifiers": [
+        "modifier_first_insight_quality_plus",
+        "modifier_heavenly_attention_warning"
+      ],
+      "systemMessages": ["天资过盛，天道已垂目。"],
+      "riskTags": ["tribulation_attention"]
+    },
+    "destiny_supreme_goudao": {
+      "name": "苟道至尊",
+      "outerBattlefieldModifiers": [
+        "modifier_goudao_survival_shield",
+        "modifier_active_spell_damage_minor_down"
+      ],
+      "systemMessages": ["检测到避世命格，存活奖励已提高。"],
+      "homeHooks": ["home_hook_seclusion_training"]
+    },
+    "destiny_waste_root_reversal": {
+      "name": "废灵逆命",
+      "outerBattlefieldModifiers": [
+        "modifier_starting_stat_minor_down",
+        "modifier_first_near_death_reversal"
+      ],
+      "onFirstBattleFailureHooks": ["grant_reversal_point"],
+      "systemMessages": ["检测到逆命因子，失败将被记录为逆命痕迹。"]
+    },
+    "destiny_battle_nourished": {
+      "name": "以战养战",
+      "outerBattlefieldModifiers": ["modifier_elite_kill_restore"],
+      "systemMessages": ["实战命格已接入，击破强敌可回补精气。"]
+    },
+    "destiny_thunder_affinity": {
+      "name": "劫雷亲和",
+      "outerBattlefieldModifiers": ["modifier_thunder_spell_bonus", "modifier_thunder_event_weight"],
+      "systemMessages": ["雷霆亲和已记录，域外雷痕将回应你。"]
+    },
+    "destiny_alchemy_genius": {
+      "name": "丹道奇才",
+      "outerBattlefieldLoadout": ["pill_rejuvenation"],
+      "outerBattlefieldModifiers": ["modifier_pill_digest_speed_minor"],
+      "homeHooks": ["home_bonus_alchemy_fire_control"]
+    },
+    "destiny_artifact_blessed": {
+      "name": "器灵之眷",
+      "outerBattlefieldModifiers": ["modifier_artifact_spirit_echo"],
+      "homeHooks": ["home_hook_artifact_warming"]
+    },
+    "destiny_demon_seed": {
+      "name": "魔心暗种",
+      "outerBattlefieldModifiers": ["modifier_crit_minor_up", "modifier_heart_demon_projection"],
+      "riskTags": ["heart_demon_seed", "karma_pressure"]
+    },
+    "destiny_clear_glass_heart": {
+      "name": "清净琉璃心",
+      "outerBattlefieldModifiers": ["modifier_heart_demon_resist_up", "modifier_clear_mind_aura"],
+      "homeHooks": ["home_bonus_clear_mind_minor"]
+    },
+    "destiny_lifespan_borrowing": {
+      "name": "借寿修行",
+      "outerBattlefieldModifiers": ["modifier_lifespan_burn_emergency"],
+      "riskTags": ["lifespan_risk"]
+    }
+  },
+  "synergyProjections": {
+    "synergy_heaven_jealous_thunder_affinity": {
+      "requires": ["destiny_heaven_jealous_talent", "destiny_thunder_affinity"],
+      "outerBattlefieldModifiers": ["modifier_thunder_reward_plus", "modifier_extra_thunder_warning"],
+      "message": "天资与雷劫互相牵引，危险与造化并至。"
+    },
+    "synergy_goudao_seated_forgetfulness": {
+      "requires": ["destiny_supreme_goudao", "destiny_zuowang_stability"],
+      "outerBattlefieldModifiers": ["modifier_goudao_shield_cap_plus", "modifier_combat_reward_minor_down"],
+      "message": "藏拙之道更深，战意也更淡。"
+    },
+    "synergy_waste_root_unbreakable": {
+      "requires": ["destiny_waste_root_reversal", "destiny_unbreakable"],
+      "outerBattlefieldModifiers": ["modifier_reversal_point_bonus"],
+      "message": "败而不折，逆命之痕更深。"
+    }
+  }
+}

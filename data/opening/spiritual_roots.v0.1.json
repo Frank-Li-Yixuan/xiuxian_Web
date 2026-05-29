@@ -1,0 +1,372 @@
+{
+  "version": "0.1",
+  "rootCategories": [
+    {
+      "id": "single",
+      "name": "单灵根",
+      "weight": 28,
+      "description": "单一五行较纯，修炼稳定，路线明确。",
+      "elementCount": [
+        1,
+        1
+      ],
+      "metricRanges": {
+        "purity": [
+          65,
+          90
+        ],
+        "stability": [
+          55,
+          85
+        ],
+        "conflict": [
+          5,
+          25
+        ],
+        "breadth": [
+          20,
+          45
+        ]
+      },
+      "cultivationRateModifier": 1.1,
+      "tags": [
+        "rootCategory:single"
+      ]
+    },
+    {
+      "id": "dual",
+      "name": "双灵根",
+      "weight": 27,
+      "description": "两行并存，可相生相克，构筑空间更大。",
+      "elementCount": [
+        2,
+        2
+      ],
+      "metricRanges": {
+        "purity": [
+          50,
+          80
+        ],
+        "stability": [
+          35,
+          90
+        ],
+        "conflict": [
+          10,
+          75
+        ],
+        "breadth": [
+          45,
+          70
+        ]
+      },
+      "cultivationRateModifier": 1.0,
+      "tags": [
+        "rootCategory:dual"
+      ]
+    },
+    {
+      "id": "triple",
+      "name": "三灵根",
+      "weight": 15,
+      "description": "多行并修，适配广但精进略慢。",
+      "elementCount": [
+        3,
+        3
+      ],
+      "metricRanges": {
+        "purity": [
+          35,
+          65
+        ],
+        "stability": [
+          40,
+          70
+        ],
+        "conflict": [
+          25,
+          55
+        ],
+        "breadth": [
+          60,
+          85
+        ]
+      },
+      "cultivationRateModifier": 0.92,
+      "tags": [
+        "rootCategory:triple"
+      ]
+    },
+    {
+      "id": "mixed",
+      "name": "杂灵根",
+      "weight": 13,
+      "description": "五行驳杂，前期修炼慢，但多模式适应能力强。",
+      "elementCount": [
+        4,
+        5
+      ],
+      "metricRanges": {
+        "purity": [
+          20,
+          50
+        ],
+        "stability": [
+          25,
+          65
+        ],
+        "conflict": [
+          35,
+          80
+        ],
+        "breadth": [
+          75,
+          105
+        ]
+      },
+      "cultivationRateModifier": 0.8,
+      "tags": [
+        "rootCategory:mixed",
+        "mode:multi_adapt"
+      ]
+    },
+    {
+      "id": "heavenly",
+      "name": "天灵根",
+      "weight": 3,
+      "description": "单属性极纯，修炼极快，但路线极窄。",
+      "elementCount": [
+        1,
+        1
+      ],
+      "metricRanges": {
+        "purity": [
+          95,
+          120
+        ],
+        "stability": [
+          60,
+          90
+        ],
+        "conflict": [
+          10,
+          35
+        ],
+        "breadth": [
+          5,
+          25
+        ]
+      },
+      "cultivationRateModifier": 1.35,
+      "tags": [
+        "rootCategory:heavenly",
+        "rarity:high"
+      ]
+    },
+    {
+      "id": "variant",
+      "name": "异灵根",
+      "weight": 5,
+      "description": "雷、阴等特殊灵根，强力但更危险。",
+      "elementCount": [
+        1,
+        2
+      ],
+      "allowedElements": [
+        "thunder",
+        "yin"
+      ],
+      "metricRanges": {
+        "purity": [
+          70,
+          105
+        ],
+        "stability": [
+          35,
+          75
+        ],
+        "conflict": [
+          30,
+          80
+        ],
+        "breadth": [
+          35,
+          65
+        ]
+      },
+      "cultivationRateModifier": 1.05,
+      "tags": [
+        "rootCategory:variant",
+        "rarity:special"
+      ]
+    },
+    {
+      "id": "hidden",
+      "name": "隐灵根",
+      "weight": 5,
+      "description": "表面普通，实际藏有潜在灵根，需事件觉醒。",
+      "elementCount": [
+        1,
+        2
+      ],
+      "metricRanges": {
+        "purity": [
+          10,
+          40
+        ],
+        "stability": [
+          40,
+          80
+        ],
+        "conflict": [
+          20,
+          60
+        ],
+        "breadth": [
+          40,
+          80
+        ]
+      },
+      "cultivationRateModifier": 0.9,
+      "hasLatentRoot": true,
+      "tags": [
+        "rootCategory:hidden",
+        "hiddenFateBias:root_awakening"
+      ]
+    },
+    {
+      "id": "closed",
+      "name": "闭塞灵根",
+      "weight": 2,
+      "description": "灵脉闭塞，前期艰难，适合逆命路线。",
+      "elementCount": [
+        1,
+        1
+      ],
+      "metricRanges": {
+        "purity": [
+          1,
+          25
+        ],
+        "stability": [
+          20,
+          55
+        ],
+        "conflict": [
+          20,
+          70
+        ],
+        "breadth": [
+          10,
+          45
+        ]
+      },
+      "cultivationRateModifier": 0.55,
+      "tags": [
+        "rootCategory:closed",
+        "destinyBias:waste_root_reversal"
+      ]
+    },
+    {
+      "id": "chaos",
+      "name": "混沌灵根",
+      "weight": 2,
+      "description": "多种气机冲撞，极不稳定，高风险高上限。",
+      "elementCount": [
+        4,
+        7
+      ],
+      "metricRanges": {
+        "purity": [
+          20,
+          85
+        ],
+        "stability": [
+          5,
+          40
+        ],
+        "conflict": [
+          75,
+          120
+        ],
+        "breadth": [
+          80,
+          120
+        ]
+      },
+      "cultivationRateModifier": 0.75,
+      "tags": [
+        "rootCategory:chaos",
+        "rarity:danger",
+        "destinyBias:forbidden"
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "metal",
+      "name": "金",
+      "tags": [
+        "root:metal",
+        "mode:blade",
+        "lifeEvent:sword_training"
+      ]
+    },
+    {
+      "id": "wood",
+      "name": "木",
+      "tags": [
+        "root:wood",
+        "mode:growth",
+        "lifeEvent:herb_gathering"
+      ]
+    },
+    {
+      "id": "water",
+      "name": "水",
+      "tags": [
+        "root:water",
+        "mode:shield",
+        "lifeEvent:meditation_water"
+      ]
+    },
+    {
+      "id": "fire",
+      "name": "火",
+      "tags": [
+        "root:fire",
+        "mode:burn",
+        "lifeEvent:alchemy_fire"
+      ]
+    },
+    {
+      "id": "earth",
+      "name": "土",
+      "tags": [
+        "root:earth",
+        "mode:formation",
+        "lifeEvent:home_and_land"
+      ]
+    },
+    {
+      "id": "thunder",
+      "name": "雷",
+      "tags": [
+        "root:thunder",
+        "mode:thunder",
+        "lifeEvent:thunderstorm_omen",
+        "destinyBias:tribulation_affinity"
+      ]
+    },
+    {
+      "id": "yin",
+      "name": "阴",
+      "tags": [
+        "root:yin",
+        "mode:soul",
+        "lifeEvent:moon_dream",
+        "hiddenFateBias:soul_path"
+      ]
+    }
+  ]
+}

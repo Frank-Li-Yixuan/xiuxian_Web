@@ -1456,6 +1456,545 @@
   }
 }
 
+.ccui2-character-creation {
+  background:
+    radial-gradient(circle at 50% 14%, rgba(92, 245, 219, 0.2), transparent 31%),
+    radial-gradient(circle at 12% 86%, rgba(199, 168, 91, 0.16), transparent 28%),
+    linear-gradient(135deg, #061018 0%, #0b2729 48%, #090d16 100%);
+  color: var(--xx-paper);
+  height: 100vh;
+  overflow: hidden;
+  padding: clamp(12px, 1.8vh, 24px) clamp(14px, 2vw, 32px);
+}
+
+.ccui2-character-shell {
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1920px;
+  padding: clamp(14px, 1.8vh, 24px) clamp(18px, 2.2vw, 40px);
+}
+
+.ccui2-character-shell > .xianxia-panel-content {
+  display: grid;
+  gap: clamp(8px, 1.1vh, 14px);
+  grid-template-rows:
+    clamp(58px, 8vh, 86px)
+    minmax(270px, 1fr)
+    clamp(98px, 13vh, 146px)
+    clamp(132px, 19vh, 210px)
+    clamp(56px, 7.2vh, 78px);
+  height: 100%;
+  min-height: 0;
+}
+
+.ccui2-header {
+  align-items: center;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(190px, 0.75fr) minmax(320px, 1.4fr) minmax(220px, 0.8fr);
+  min-height: 0;
+}
+
+.ccui2-header-copy,
+.ccui2-title-block,
+.ccui2-header-actions {
+  min-width: 0;
+}
+
+.ccui2-header-copy p,
+.ccui2-title-block span,
+.ccui2-panel-kicker {
+  color: rgba(209, 250, 242, 0.7);
+  font-size: clamp(11px, 0.78vw, 14px);
+  letter-spacing: 0;
+  margin: 0 0 4px;
+}
+
+.ccui2-header-copy strong {
+  color: #fff2b9;
+  display: block;
+  font-size: clamp(16px, 1.24vw, 22px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ccui2-title-block {
+  text-align: center;
+}
+
+.ccui2-title-block h1 {
+  color: #fff6c9;
+  font-family: "KaiTi", "Microsoft YaHei", serif;
+  font-size: clamp(30px, 3vw, 56px);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(67, 239, 207, 0.36), 0 4px 16px rgba(0, 0, 0, 0.68);
+}
+
+.ccui2-header-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.ccui2-header-button.xianxia-button {
+  min-height: 40px;
+  padding-inline: 18px;
+}
+
+.ccui2-main-stage {
+  display: grid;
+  gap: clamp(12px, 1.4vw, 22px);
+  grid-template-columns: minmax(220px, 0.74fr) minmax(360px, 1.34fr) minmax(220px, 0.74fr);
+  min-height: 0;
+}
+
+.ccui2-side-panel {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ccui2-side-panel > .xianxia-panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1vh, 14px);
+  min-height: 0;
+  padding: clamp(14px, 1.6vh, 22px);
+}
+
+.ccui2-side-panel h2 {
+  color: #fff4be;
+  font-size: clamp(18px, 1.35vw, 27px);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.ccui2-side-panel p,
+.ccui2-side-panel dd,
+.ccui2-side-panel dt {
+  font-size: clamp(12px, 0.9vw, 15px);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.ccui2-side-panel p,
+.ccui2-side-panel dd {
+  color: rgba(230, 253, 247, 0.84);
+}
+
+.ccui2-side-panel dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  min-height: 0;
+}
+
+.ccui2-side-panel dt {
+  color: rgba(255, 233, 166, 0.88);
+  font-weight: 700;
+}
+
+.ccui2-stat-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-height: 0;
+}
+
+.ccui2-stat-grid span {
+  background: rgba(6, 28, 34, 0.64);
+  border: 1px solid rgba(232, 203, 122, 0.25);
+  border-radius: 8px;
+  color: rgba(232, 253, 247, 0.86);
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: clamp(7px, 0.95vh, 11px) 8px;
+  text-align: center;
+}
+
+.ccui2-stat-grid strong {
+  color: #fff0af;
+  font-size: clamp(16px, 1.2vw, 22px);
+}
+
+.ccui2-fate-altar {
+  align-self: center;
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+  max-height: 100%;
+  position: relative;
+  width: min(40vh, 34vw, 480px);
+}
+
+.ccui2-orbit,
+.ccui2-root-effect-layer,
+.ccui2-destiny-effect-layer,
+.ccui2-meditation-silhouette,
+.ccui2-altar-caption {
+  position: absolute;
+}
+
+.ccui2-orbit {
+  border-radius: 50%;
+  inset: 0;
+}
+
+.ccui2-orbit-outer {
+  animation: ccui2Orbit 44s linear infinite;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(239, 213, 137, 0.34) 0deg 3deg, transparent 3deg 12deg),
+    radial-gradient(circle, transparent 61%, rgba(236, 213, 139, 0.36) 62%, transparent 64%);
+  opacity: 0.72;
+}
+
+.ccui2-orbit-middle {
+  animation: ccui2OrbitReverse 32s linear infinite;
+  border: 1px solid rgba(85, 238, 212, 0.38);
+  inset: 11%;
+}
+
+.ccui2-orbit-inner {
+  background:
+    conic-gradient(from 45deg, transparent, rgba(96, 246, 222, 0.22), transparent 24%, rgba(255, 228, 150, 0.18), transparent 52%),
+    radial-gradient(circle, rgba(26, 84, 78, 0.28), transparent 68%);
+  border: 1px dashed rgba(255, 234, 168, 0.32);
+  inset: 22%;
+}
+
+.ccui2-root-effect-layer {
+  background:
+    radial-gradient(circle, rgba(88, 255, 196, calc(var(--jing-aura) * 0.14)), transparent 58%),
+    conic-gradient(from 90deg, rgba(117, 245, 222, 0.14), transparent 20%, rgba(173, 132, 255, 0.12), transparent 46%);
+  border-radius: 50%;
+  filter: blur(8px);
+  inset: 8%;
+  mix-blend-mode: screen;
+}
+
+.ccui2-destiny-effect-layer {
+  border-radius: 50%;
+  inset: 17%;
+  opacity: 0.82;
+}
+
+.has-thunder-destiny .ccui2-destiny-effect-layer {
+  background: conic-gradient(from 0deg, transparent, rgba(181, 236, 255, 0.24), transparent 15%, rgba(111, 72, 255, 0.16), transparent 31%);
+}
+
+.has-sword-destiny .ccui2-destiny-effect-layer::before,
+.has-tribulation-destiny .ccui2-destiny-effect-layer::after {
+  content: "";
+  position: absolute;
+}
+
+.has-sword-destiny .ccui2-destiny-effect-layer::before {
+  border-left: 2px solid rgba(248, 252, 220, 0.28);
+  border-right: 2px solid rgba(248, 252, 220, 0.18);
+  inset: 14% 47%;
+  transform: rotate(34deg);
+}
+
+.has-tribulation-destiny .ccui2-destiny-effect-layer::after {
+  border: 2px dashed rgba(255, 110, 137, 0.28);
+  border-radius: 50%;
+  inset: 6%;
+}
+
+.ccui2-meditation-silhouette {
+  bottom: 26%;
+  height: 33%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 33%;
+}
+
+.ccui2-silhouette-head,
+.ccui2-silhouette-body,
+.ccui2-silhouette-legs {
+  background: #020506;
+  box-shadow:
+    0 14px 22px rgba(0, 0, 0, 0.5),
+    0 0 28px rgba(0, 0, 0, 0.9);
+  display: block;
+  position: absolute;
+}
+
+.ccui2-silhouette-head {
+  border-radius: 50%;
+  height: 26%;
+  left: 37%;
+  top: 0;
+  width: 26%;
+}
+
+.ccui2-silhouette-body {
+  border-radius: 48% 48% 26% 26%;
+  height: 42%;
+  left: 30%;
+  top: 23%;
+  width: 40%;
+}
+
+.ccui2-silhouette-legs {
+  border-radius: 999px 999px 48% 48%;
+  bottom: 5%;
+  height: 28%;
+  left: 7%;
+  width: 86%;
+}
+
+.ccui2-altar-caption {
+  align-items: center;
+  bottom: 3%;
+  color: rgba(238, 253, 248, 0.86);
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(11px, 0.8vw, 14px);
+  gap: 3px;
+  left: 16%;
+  right: 16%;
+  text-align: center;
+}
+
+.ccui2-altar-caption strong {
+  color: #fff0ae;
+  font-size: clamp(15px, 1.15vw, 20px);
+}
+
+.ccui2-destiny-card-row {
+  display: grid;
+  gap: clamp(9px, 1vw, 16px);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 0;
+}
+
+.ccui2-destiny-card {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(93, 239, 216, 0.19), transparent 52%),
+    linear-gradient(180deg, rgba(16, 53, 58, 0.9), rgba(7, 20, 30, 0.96));
+  border: 1px solid rgba(229, 202, 122, 0.48);
+  border-radius: 8px;
+  box-shadow: inset 0 0 24px rgba(72, 224, 199, 0.08), 0 12px 22px rgba(0, 0, 0, 0.22);
+  color: var(--xx-paper);
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 0;
+  min-width: 0;
+  padding: clamp(10px, 1.3vh, 14px);
+  text-align: center;
+}
+
+.ccui2-destiny-card.is-selected {
+  border-color: rgba(255, 236, 160, 0.9);
+  box-shadow:
+    inset 0 0 24px rgba(255, 235, 157, 0.12),
+    0 0 22px rgba(84, 242, 217, 0.22);
+}
+
+.ccui2-destiny-card.rarity-epic,
+.ccui2-destiny-card.rarity-legendary {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(201, 143, 255, 0.24), transparent 54%),
+    linear-gradient(180deg, rgba(42, 40, 72, 0.92), rgba(9, 20, 31, 0.97));
+}
+
+.ccui2-destiny-card.rarity-flaw {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 111, 118, 0.2), transparent 54%),
+    linear-gradient(180deg, rgba(58, 33, 42, 0.94), rgba(10, 18, 28, 0.98));
+}
+
+.ccui2-card-slot {
+  color: #ffe8a7;
+  font-size: clamp(11px, 0.78vw, 14px);
+}
+
+.ccui2-destiny-card strong {
+  align-self: center;
+  color: #fff7d8;
+  font-size: clamp(15px, 1.15vw, 22px);
+  line-height: 1.16;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ccui2-destiny-card small {
+  color: rgba(217, 250, 241, 0.74);
+  font-size: clamp(10px, 0.72vw, 13px);
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ccui2-detail-drawer {
+  min-height: 0;
+}
+
+.ccui2-detail-drawer > .xianxia-panel-content {
+  display: grid;
+  gap: 10px;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+  padding: clamp(12px, 1.5vh, 18px) clamp(16px, 1.8vw, 28px);
+}
+
+.ccui2-detail-tabs {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.ccui2-detail-tabs button {
+  background: rgba(6, 29, 36, 0.72);
+  border: 1px solid rgba(226, 202, 121, 0.36);
+  border-radius: 7px;
+  color: rgba(235, 253, 246, 0.84);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: clamp(12px, 0.82vw, 15px);
+  padding: 7px 12px;
+}
+
+.ccui2-detail-tabs button.is-active {
+  background: rgba(62, 203, 180, 0.18);
+  border-color: rgba(255, 233, 158, 0.76);
+  color: #fff4bf;
+}
+
+.ccui2-detail-scroll {
+  color: rgba(233, 253, 247, 0.86);
+  font-size: clamp(12px, 0.86vw, 16px);
+  line-height: 1.55;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.ccui2-detail-scroll h2 {
+  color: #fff2b9;
+  font-size: clamp(16px, 1.12vw, 21px);
+  margin: 0 0 8px;
+}
+
+.ccui2-detail-scroll p,
+.ccui2-detail-scroll ul {
+  margin: 0 0 8px;
+}
+
+.ccui2-detail-warning {
+  color: #ffc8c8;
+}
+
+.ccui2-action-bar {
+  align-items: center;
+  display: grid;
+  gap: clamp(8px, 0.9vw, 14px);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  min-height: 0;
+}
+
+.ccui2-action-button.xianxia-button {
+  min-height: clamp(46px, 6vh, 62px);
+  padding-inline: clamp(8px, 1.2vw, 20px);
+  width: 100%;
+}
+
+@keyframes ccui2Orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ccui2OrbitReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@media (max-height: 820px) {
+  .ccui2-character-creation {
+    padding-block: 10px;
+  }
+
+  .ccui2-character-shell {
+    padding-block: 12px;
+  }
+
+  .ccui2-character-shell > .xianxia-panel-content {
+    gap: 8px;
+    grid-template-rows: 56px minmax(254px, 1fr) 92px 126px 54px;
+  }
+
+  .ccui2-side-panel > .xianxia-panel-content {
+    gap: 6px;
+    padding: 12px;
+  }
+
+  .ccui2-stat-grid {
+    gap: 5px;
+  }
+
+  .ccui2-stat-grid span {
+    padding-block: 5px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .ccui2-character-creation {
+    padding-inline: 12px;
+  }
+
+  .ccui2-character-shell {
+    padding-inline: 18px;
+  }
+
+  .ccui2-header {
+    grid-template-columns: minmax(150px, 0.65fr) minmax(260px, 1.35fr) minmax(190px, 0.75fr);
+  }
+
+  .ccui2-main-stage {
+    grid-template-columns: minmax(196px, 0.68fr) minmax(320px, 1.36fr) minmax(196px, 0.68fr);
+  }
+
+  .ccui2-header-button.xianxia-button,
+  .ccui2-action-button.xianxia-button {
+    padding-inline: 12px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .ccui2-header {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .ccui2-title-block {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .ccui2-header-copy {
+    display: none;
+  }
+
+  .ccui2-header-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ccui2-orbit-outer,
+  .ccui2-orbit-middle {
+    animation: none;
+  }
+}
+
 .life-simulation-layout {
   display: grid;
   gap: 22px;

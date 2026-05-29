@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "seed": "demo-life-choice-001",
+  "examples": [
+    {
+      "ageMonths": 6,
+      "eventId": "choice_family_cradle_omen",
+      "selectedOptionId": "strange_silence",
+      "outcome": "success",
+      "visibleLog": "你凝望虚空，像是看见别人看不见的光。神识微涨。"
+    },
+    {
+      "ageMonths": 84,
+      "eventId": "choice_rainy_hill_thunder",
+      "selectedOptionId": "go_to_hill",
+      "outcome": "great",
+      "visibleLog": "你在雷雨中听见骨血深处的回响。此事被记入隐秘因果。"
+    },
+    {
+      "ageMonths": 120,
+      "eventId": "choice_bandit_smoke",
+      "selectedOptionId": "risky_probe",
+      "outcome": "mixed",
+      "visibleLog": "你查到一些山贼行踪，却也在夜路中扭伤了脚。"
+    },
+    {
+      "ageMonths": 180,
+      "eventId": "choice_night_sky_war_drums",
+      "selectedOptionId": "steady_action",
+      "outcome": "great",
+      "visibleLog": "你默记天外战鼓的节奏，心中隐约浮现黑色战场。"
+    }
+  ]
+}

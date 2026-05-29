@@ -1,0 +1,152 @@
+{
+  "version": "0.1",
+  "rng": {
+    "requiresSeededRng": true,
+    "forbidden": [
+      "Math.random",
+      "Date.now for gameplay random"
+    ],
+    "streams": [
+      "archetype",
+      "aptitude",
+      "coreSeed",
+      "spiritualRoot",
+      "elementVector",
+      "drama"
+    ]
+  },
+  "statDomains": {
+    "aptitudeMin": 1,
+    "aptitudeSoftMax": 100,
+    "aptitudeHardMax": 120,
+    "coreSeedMin": 5,
+    "coreSeedMax": 28,
+    "rootMetricMin": 0,
+    "rootMetricMax": 120
+  },
+  "distinctiveness": {
+    "minimumScoreAfterCompensation": 2,
+    "scoring": [
+      {
+        "condition": "anyAptitudeGte90",
+        "score": 2
+      },
+      {
+        "condition": "anyAptitudeLte20",
+        "score": 1
+      },
+      {
+        "condition": "rareRootCategory",
+        "score": 2
+      },
+      {
+        "condition": "generatingDualRoot",
+        "score": 1
+      },
+      {
+        "condition": "controllingDualRoot",
+        "score": 1
+      },
+      {
+        "condition": "lifespanLte25",
+        "score": 1
+      },
+      {
+        "condition": "inspirationGte85",
+        "score": 1
+      },
+      {
+        "condition": "fortuneGte85",
+        "score": 1
+      }
+    ],
+    "compensationHooks": [
+      {
+        "id": "minor_inspiration_omen",
+        "effect": {
+          "inspiration": 8
+        },
+        "tags": [
+          "drama:omen"
+        ]
+      },
+      {
+        "id": "minor_fortune_spark",
+        "effect": {
+          "fortune": 8
+        },
+        "tags": [
+          "drama:fortunate_spark"
+        ]
+      },
+      {
+        "id": "minor_heart_steady",
+        "effect": {
+          "heart": 8
+        },
+        "tags": [
+          "drama:steady_heart"
+        ]
+      },
+      {
+        "id": "root_light_omen",
+        "effect": {},
+        "tags": [
+          "drama:root_light_omen",
+          "hiddenFateBias:root_awakening"
+        ]
+      }
+    ]
+  },
+  "locks": {
+    "supported": [
+      "attributeArchetype",
+      "aptitudeStats",
+      "coreSeedStats",
+      "spiritualRootCategory",
+      "spiritualRootElements",
+      "spiritualRootFull"
+    ],
+    "recommendedUiLocks": [
+      "attributeInnate",
+      "spiritualRootFull"
+    ]
+  },
+  "displayTiers": [
+    {
+      "min": 1,
+      "max": 19,
+      "label": "破败"
+    },
+    {
+      "min": 20,
+      "max": 39,
+      "label": "下等"
+    },
+    {
+      "min": 40,
+      "max": 59,
+      "label": "平庸"
+    },
+    {
+      "min": 60,
+      "max": 74,
+      "label": "尚佳"
+    },
+    {
+      "min": 75,
+      "max": 89,
+      "label": "上乘"
+    },
+    {
+      "min": 90,
+      "max": 100,
+      "label": "天资"
+    },
+    {
+      "min": 101,
+      "max": 120,
+      "label": "非凡"
+    }
+  ]
+}

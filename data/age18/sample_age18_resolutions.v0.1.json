@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "0.1",
+  "samples": [
+    {
+      "id": "sample_heaven_jealous_thunder",
+      "name": "天妒雷修",
+      "summary": "悟性极高、寿元薄、雷系预兆浓重。",
+      "expected": {
+        "revealedOrHalfHiddenFate": ["hidden_fate_ancient_thunder_blood"],
+        "outerBattlefieldModifiers": ["modifier_first_insight_quality_plus", "modifier_heavenly_attention_warning"],
+        "risk": ["tribulation_attention"]
+      }
+    },
+    {
+      "id": "sample_goudao_alchemist",
+      "name": "苟道丹修",
+      "summary": "药铺学徒、苟道至尊、丹道奇才、药铺铜炉。",
+      "expected": {
+        "convertedItems": ["bronze_furnace_pill", "bronze_furnace_fire_control"],
+        "outerBattlefieldLoadout": ["pill_rejuvenation"],
+        "homeHooks": ["home_hook_alchemy_basic", "home_bonus_alchemy_fire_control"]
+      }
+    },
+    {
+      "id": "sample_waste_root_sword",
+      "name": "废灵剑修",
+      "summary": "废灵逆命、残破木剑、前世剑魄线索。",
+      "expected": {
+        "outerBattlefieldModifiers": ["modifier_starting_stat_minor_down", "modifier_first_near_death_reversal"],
+        "homeHooks": ["home_hook_sword_repair"]
+      }
+    },
+    {
+      "id": "sample_demon_flute",
+      "name": "魔心禁修",
+      "summary": "魔心暗种、黑骨短笛、业力偏高。",
+      "expected": {
+        "outerBattlefieldModifiers": ["modifier_heart_demon_projection"],
+        "homeHooks": ["home_hook_heart_demon"]
+      }
+    }
+  ]
+}
