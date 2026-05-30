@@ -121,3 +121,90 @@ export interface DestinyRollDebugInfo {
   readonly fateMeterBefore: FateMeterState;
   readonly fateMeterAfter: FateMeterState;
 }
+
+export type DestinyQualityTableId = Exclude<DestinyQuality, "flaw">;
+
+export interface DestinyQualityDefinition {
+  readonly id: DestinyQualityTableId;
+  readonly name: string;
+  readonly rank: number;
+  readonly positiveBudget: readonly [number, number];
+  readonly negativeBudget: readonly [number, number];
+  readonly frameAsset: string;
+  readonly color: string;
+}
+
+export interface DestinyQualityTablesDataFile {
+  readonly version: string;
+  readonly qualities: readonly DestinyQualityDefinition[];
+  readonly qualityWeights: {
+    readonly main: Readonly<Partial<Record<DestinyQualityTableId, number>>>;
+    readonly secondary: Readonly<Partial<Record<DestinyQualityTableId, number>>>;
+    readonly flawSeverity: Readonly<Partial<Record<CalamitySeverity, number>>>;
+  };
+  readonly budgetCostReference: readonly {
+    readonly effect: string;
+    readonly cost: number | string;
+  }[];
+}
+
+export type DestinyExclusiveRule = DestinyConflictRule;
+
+export interface DestinyTagConflictRule {
+  readonly id: string;
+  readonly tags: readonly string[];
+  readonly description: string;
+}
+
+export interface DestinyConflictSynergyRulesDataFile {
+  readonly version: string;
+  readonly exclusiveRules: readonly DestinyExclusiveRule[];
+  readonly synergyRules: readonly DestinySynergyRule[];
+  readonly conflictRules: readonly DestinyTagConflictRule[];
+}
+
+export interface DestinyFateMeterRules {
+  readonly initial: number;
+  readonly noRareOrAboveDelta: number;
+  readonly rareDelta: number;
+  readonly mysticOrAboveReset: boolean;
+  readonly thresholdBoost: number;
+  readonly thresholdGuaranteeRare: number;
+  readonly boostRule: string;
+}
+
+export interface DestinyHighQualityLimits {
+  readonly maxEarthlyOrAbovePerDraft: number;
+  readonly allowSecondEarthlyOrAboveWithDivination: boolean;
+  readonly maxForbiddenPerDraft: number;
+}
+
+export interface DestinyRerollHistoryRules {
+  readonly recordLast: number;
+  readonly repetitionPenalty: number;
+}
+
+export interface DestinyRerollRulesDataFile {
+  readonly version: string;
+  readonly freeReroll: boolean;
+  readonly initialLocks: number;
+  readonly initialDivinationTokens: number;
+  readonly maxLockedFields: number;
+  readonly lockableFields: readonly string[];
+  readonly advancedLockableFields: readonly string[];
+  readonly fateMeter: DestinyFateMeterRules;
+  readonly highQualityLimits: DestinyHighQualityLimits;
+  readonly rerollHistory: DestinyRerollHistoryRules;
+}
+
+export interface DestinyTraitDataFile {
+  readonly version: string;
+  readonly traits: readonly DestinyTraitDefinition[];
+}
+
+export interface DestinyDataBundle {
+  readonly qualityTables?: DestinyQualityTablesDataFile;
+  readonly destinyTraits?: DestinyTraitDataFile;
+  readonly conflictSynergyRules?: DestinyConflictSynergyRulesDataFile;
+  readonly rerollRules?: DestinyRerollRulesDataFile;
+}
