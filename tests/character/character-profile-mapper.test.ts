@@ -33,10 +33,13 @@ describe("CharacterProfileMapper", () => {
       coreStats: draft.coreStats,
       aptitude: draft.aptitude,
       spiritualRoot: draft.spiritualRoot,
+      openingInnateDraft: draft.openingInnateDraft,
       destinies: draft.destinies,
       background: draft.background,
       hiddenFate: draft.hiddenFate,
       carriedItems: draft.carriedItems,
+      attributeLock: draft.attributeLock,
+      spiritualRootLock: draft.spiritualRootLock,
       confirmedAtMs: 2_000
     });
     expect(loaded?.lifeSimulation).toEqual({ status: "completed", ageYears: 18 });

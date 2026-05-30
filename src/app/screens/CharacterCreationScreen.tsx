@@ -334,6 +334,7 @@ function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreatio
       rarity: "rare",
       tags: ["雷法", "生机", "试炼占位"]
     },
+    openingInnateDraft: createPlaceholderOpeningInnateDraft(slotId),
     destinies: {
       main: destiny("placeholder_main_fate", "雷心照命", "epic", ["雷法", "命盘"], ["开局法术反馈更清晰"], ["高压试炼更容易显形"]),
       secondary: [
@@ -381,10 +382,66 @@ function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreatio
       background: false,
       hiddenFate: false
     },
+    attributeLock: false,
+    spiritualRootLock: false,
     rerollCount: 0,
     divinationTokens: 1,
     createdAtMs: nowMs,
     updatedAtMs: nowMs
+  };
+}
+
+function createPlaceholderOpeningInnateDraft(slotId: string): CharacterCreationDraft["openingInnateDraft"] {
+  return {
+    draftId: `${slotId}_ccui2_placeholder`,
+    seed: `${slotId}:ccui2_placeholder`,
+    rerollIndex: 0,
+    archetype: {
+      id: "ccui2_placeholder",
+      name: "CCUI2 placeholder",
+      description: "Layout placeholder only.",
+      tags: ["archetype:placeholder"]
+    },
+    aptitude: {
+      rootBone: 64,
+      comprehension: 72,
+      inspiration: 66,
+      fortune: 58,
+      heart: 76,
+      lifespan: 61
+    },
+    coreSeed: { jing: 62, qi: 71, shen: 68 },
+    spiritualRoot: {
+      categoryId: "dual",
+      displayName: "闆锋湪鐏垫牴",
+      elements: { thunder: 52, wood: 48 },
+      primaryElement: "thunder",
+      secondaryElements: ["wood"],
+      purity: 72,
+      stability: 58,
+      conflict: 34,
+      breadth: 55,
+      relationTags: [],
+      tags: ["rootCategory:dual", "root:thunder", "root:wood", "mode:thunder", "mode:growth"]
+    },
+    growthBias: {
+      jingGrowth: 1,
+      qiGrowth: 1,
+      shenGrowth: 1,
+      studyBias: 1,
+      martialBias: 1,
+      alchemyBias: 1,
+      artifactBias: 1,
+      seclusionBias: 1,
+      adventureBias: 1
+    },
+    tags: {
+      destinyBiasTags: [],
+      lifeEventBiasTags: ["archetype:placeholder"],
+      modeBiasTags: ["mode:thunder", "mode:growth"],
+      hiddenFateBiasTags: []
+    },
+    distinctivenessScore: 0
   };
 }
 

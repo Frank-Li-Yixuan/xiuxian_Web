@@ -1,3 +1,5 @@
+import type { OpeningInnateDraft } from "./opening-generator-types.v0.1";
+
 export type CharacterCreationRarity = "common" | "uncommon" | "rare" | "epic" | "legendary" | "flaw";
 export type DestinySlotType = "main" | "secondary" | "flaw";
 export type ProfileStage = "empty" | "character_creation" | "life_simulation" | "outer_battlefield" | "dongfu_unlocked";
@@ -139,11 +141,14 @@ export interface CharacterCreationDraft {
   readonly coreStats: CoreThreeTreasures;
   readonly aptitude: AptitudeStats;
   readonly spiritualRoot: SpiritualRootState;
+  readonly openingInnateDraft: OpeningInnateDraft;
   readonly destinies: DestinySelectionState;
   readonly background: BackgroundOriginState;
   readonly hiddenFate: HiddenFateState;
   readonly carriedItems: readonly CarriedItemDraft[];
   readonly locks: CharacterCreationLocks;
+  readonly attributeLock: boolean;
+  readonly spiritualRootLock: boolean;
   readonly rerollCount: number;
   readonly divinationTokens: number;
   readonly createdAtMs: number;
@@ -157,10 +162,13 @@ export interface CharacterOriginState {
   readonly coreStats: CoreThreeTreasures;
   readonly aptitude: AptitudeStats;
   readonly spiritualRoot: SpiritualRootState;
+  readonly openingInnateDraft: OpeningInnateDraft;
   readonly destinies: DestinySelectionState;
   readonly background: BackgroundOriginState;
   readonly hiddenFate: HiddenFateState;
   readonly carriedItems: readonly CarriedItemDraft[];
+  readonly attributeLock: boolean;
+  readonly spiritualRootLock: boolean;
   readonly confirmedAtMs: number;
 }
 

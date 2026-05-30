@@ -34,10 +34,13 @@ export function mapCharacterDraftToOrigin(draft: CharacterCreationDraft, confirm
     coreStats: draft.coreStats,
     aptitude: draft.aptitude,
     spiritualRoot: draft.spiritualRoot,
+    openingInnateDraft: draft.openingInnateDraft,
     destinies: draft.destinies,
     background: draft.background,
     hiddenFate: draft.hiddenFate,
     carriedItems: draft.carriedItems,
+    attributeLock: draft.attributeLock,
+    spiritualRootLock: draft.spiritualRootLock,
     confirmedAtMs
   };
 }

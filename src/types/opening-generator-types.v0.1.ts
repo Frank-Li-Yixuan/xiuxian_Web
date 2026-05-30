@@ -215,6 +215,19 @@ export interface OpeningInnateDraft {
   readonly debug?: OpeningGenerationDebugInfo;
 }
 
+export type OpeningAttributeDraft = Omit<OpeningInnateDraft, "spiritualRoot">;
+
+export interface OpeningSpiritualRootDraft {
+  readonly draftId: string;
+  readonly seed: string;
+  readonly rerollIndex: number;
+  readonly spiritualRoot: SpiritualRootState;
+  readonly tags: OpeningDraftTags;
+  readonly distinctivenessScore: number;
+  readonly locks?: OpeningGenerationLocks;
+  readonly debug?: OpeningGenerationDebugInfo;
+}
+
 export interface OpeningGenerationDebugInfo {
   readonly selectedArchetypeWeightRoll: number;
   readonly selectedRootCategoryWeightRoll: number;
@@ -230,6 +243,31 @@ export interface GenerateOpeningInnateInput {
   readonly previousDraft?: OpeningInnateDraft;
 }
 
+export interface GenerateOpeningAttributeInput {
+  readonly seed: string;
+  readonly draftId: string;
+  readonly rerollIndex: number;
+  readonly locks?: OpeningGenerationLocks;
+  readonly previousDraft?: OpeningAttributeDraft;
+}
+
+export interface GenerateOpeningSpiritualRootInput {
+  readonly seed: string;
+  readonly draftId: string;
+  readonly rerollIndex: number;
+  readonly archetype: AttributeArchetypeResult;
+  readonly locks?: OpeningGenerationLocks;
+  readonly previousDraft?: OpeningSpiritualRootDraft;
+}
+
 export interface OpeningGenerator {
   generate(input: GenerateOpeningInnateInput): OpeningInnateDraft;
+}
+
+export interface OpeningAttributeGenerator {
+  generate(input: GenerateOpeningAttributeInput): OpeningAttributeDraft;
+}
+
+export interface OpeningSpiritualRootGenerator {
+  generate(input: GenerateOpeningSpiritualRootInput): OpeningSpiritualRootDraft;
 }

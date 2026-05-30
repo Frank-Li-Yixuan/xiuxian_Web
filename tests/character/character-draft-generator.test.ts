@@ -26,7 +26,12 @@ describe("CharacterDraftGenerator", () => {
       heart: expect.any(Number),
       lifespan: expect.any(Number)
     });
-    expect(draft.spiritualRoot.rootId).toMatch(/^root_/);
+    expect(draft.openingInnateDraft.draftId).toBe(draft.draftId);
+    expect(draft.coreStats).toEqual(draft.openingInnateDraft.coreSeed);
+    expect(draft.aptitude).toEqual(draft.openingInnateDraft.aptitude);
+    expect(draft.spiritualRoot.rootId).toMatch(/^opening_/);
+    expect(draft.attributeLock).toBe(false);
+    expect(draft.spiritualRootLock).toBe(false);
     expect(draft.destinies.main.traitId).toMatch(/^destiny_/);
     expect(draft.destinies.secondary).toHaveLength(2);
     expect(draft.destinies.flaw.traitId).toMatch(/^flaw_/);

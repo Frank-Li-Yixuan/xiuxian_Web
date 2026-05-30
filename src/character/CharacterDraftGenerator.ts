@@ -1,4 +1,11 @@
 import { SeededRng, type RngSeed } from "../sim/core/SeededRng";
+import { DefaultOpeningGenerator } from "../opening/OpeningGenerator";
+import type {
+  OpeningGenerationLocks,
+  OpeningGenerator,
+  OpeningInnateDraft,
+  SpiritualRootState as OpeningSpiritualRootState
+} from "../types/opening-generator-types.v0.1";
 import { loadCharacterCreationData } from "./CharacterCreationData";
 import type {
   AptitudeStats,
@@ -8,6 +15,7 @@ import type {
   CharacterAppearanceState,
   CharacterCreationDraft,
   CharacterCreationLocks,
+  CharacterCreationRarity,
   CoreThreeTreasures,
   DestinySelectionState,
   DestinySlotType,
@@ -25,6 +33,7 @@ import type {
 export interface CharacterDraftGeneratorOptions {
   readonly seed: RngSeed;
   readonly data?: LoadedCharacterCreationData;
+  readonly openingGenerator?: OpeningGenerator;
 }
 
 export interface GenerateCharacterDraftOptions {
@@ -36,6 +45,8 @@ export interface GenerateCharacterDraftOptions {
 export interface RerollCharacterDraftOptions {
   readonly nowMs: number;
   readonly locks?: Partial<CharacterCreationLocks>;
+  readonly attributeLock?: boolean;
+  readonly spiritualRootLock?: boolean;
   readonly name?: string;
 }
 
@@ -65,11 +76,15 @@ const ROBE_COLORS = ["jade", "ink", "white", "teal", "gold"] as const;
 export class CharacterDraftGenerator {
   private readonly data: LoadedCharacterCreationData;
   private readonly rng: SeededRng;
+  private readonly openingGenerator: OpeningGenerator;
+  private readonly openingSeed: string;
   private nextDraftSerial = 0;
 
   public constructor(options: CharacterDraftGeneratorOptions) {
     this.data = options.data ?? loadCharacterCreationData();
     this.rng = new SeededRng(options.seed, "character_creation");
+    this.openingGenerator = options.openingGenerator ?? new DefaultOpeningGenerator();
+    this.openingSeed = String(options.seed);
   }
 
   public generate(options: GenerateCharacterDraftOptions): CharacterCreationDraft {
@@ -77,26 +92,35 @@ export class CharacterDraftGenerator {
       throw new Error("slotId must not be empty");
     }
 
-    const spiritualRoot = toSpiritualRootState(pickWeightedByRarity(this.rng, this.data.spiritualRoots));
+    const draftSerial = this.nextDraftSerial;
+    const draftId = `draft_${options.slotId}_${draftSerial}`;
+    this.nextDraftSerial += 1;
+    const openingInnateDraft = this.openingGenerator.generate({
+      seed: createOpeningSeed(this.openingSeed, options.slotId, draftSerial),
+      draftId,
+      rerollIndex: 0
+    });
+    const spiritualRoot = projectOpeningSpiritualRoot(openingInnateDraft.spiritualRoot);
     const destinies = this.rollDestinies([]);
     const background = toBackgroundOriginState(pickWeightedByRarity(this.rng, this.data.backgrounds));
     const hiddenFate = toHiddenFateState(this.pickHiddenFate(background.backgroundId));
-    const draftId = `draft_${options.slotId}_${this.nextDraftSerial}`;
-    this.nextDraftSerial += 1;
 
     return deepFreeze({
       draftId,
       slotId: options.slotId,
       name: normalizeName(options.name, this.data.defaults.draftName),
       appearance: this.rollAppearance(),
-      coreStats: this.rollCoreStats(),
-      aptitude: this.rollAptitudeStats(),
+      coreStats: openingInnateDraft.coreSeed,
+      aptitude: openingInnateDraft.aptitude,
       spiritualRoot,
+      openingInnateDraft,
       destinies,
       background,
       hiddenFate,
       carriedItems: this.rollCarriedItems(background.backgroundId),
       locks: DEFAULT_LOCKS,
+      attributeLock: false,
+      spiritualRootLock: false,
       rerollCount: 0,
       divinationTokens: this.data.defaults.reroll.initialDivinationTokens,
       createdAtMs: options.nowMs,
@@ -106,7 +130,17 @@ export class CharacterDraftGenerator {
 
   public reroll(draft: CharacterCreationDraft, options: RerollCharacterDraftOptions): CharacterCreationDraft {
     const locks = mergeLocks(draft.locks, options.locks);
-    const spiritualRoot = locks.spiritualRoot ? draft.spiritualRoot : toSpiritualRootState(pickWeightedByRarity(this.rng, this.data.spiritualRoots));
+    const attributeLock = options.attributeLock ?? draft.attributeLock;
+    const spiritualRootLock = options.spiritualRootLock ?? options.locks?.spiritualRoot ?? draft.spiritualRootLock;
+    const openingLocks = buildOpeningLocks(attributeLock, spiritualRootLock);
+    const openingInnateDraft = this.openingGenerator.generate({
+      seed: draft.openingInnateDraft.seed,
+      draftId: draft.draftId,
+      rerollIndex: draft.rerollCount + 1,
+      ...(openingLocks === undefined ? {} : { locks: openingLocks }),
+      previousDraft: draft.openingInnateDraft
+    });
+    const spiritualRoot = projectOpeningSpiritualRoot(openingInnateDraft.spiritualRoot);
     const preservedDestinies = this.getPreservedDestinyTraits(draft.destinies, locks);
     const destinies = this.rollDestinies(preservedDestinies, draft.destinies, locks);
     const background = locks.background
@@ -118,14 +152,20 @@ export class CharacterDraftGenerator {
       ...draft,
       name: normalizeName(options.name, draft.name),
       appearance: this.rollAppearance(),
-      coreStats: this.rollCoreStats(),
-      aptitude: this.rollAptitudeStats(),
+      coreStats: openingInnateDraft.coreSeed,
+      aptitude: openingInnateDraft.aptitude,
       spiritualRoot,
+      openingInnateDraft,
       destinies,
       background,
       hiddenFate,
       carriedItems: this.rollCarriedItems(background.backgroundId),
-      locks,
+      locks: {
+        ...locks,
+        spiritualRoot: spiritualRootLock
+      },
+      attributeLock,
+      spiritualRootLock,
       rerollCount: draft.rerollCount + 1,
       updatedAtMs: options.nowMs
     });
@@ -270,6 +310,39 @@ function toSpiritualRootState(root: SpiritualRootDefinition): SpiritualRootState
   };
 }
 
+export function projectOpeningSpiritualRoot(root: OpeningSpiritualRootState): SpiritualRootState {
+  return {
+    rootId: `opening_${root.categoryId}_${root.primaryElement ?? "none"}`,
+    displayName: root.displayName,
+    elements: Object.entries(root.elements)
+      .filter((entry): entry is [string, number] => entry[1] !== undefined && entry[1] > 0)
+      .sort(([firstElement, firstValue], [secondElement, secondValue]) => secondValue - firstValue || firstElement.localeCompare(secondElement))
+      .map(([element]) => element),
+    rarity: mapOpeningRootRarity(root.categoryId),
+    tags: root.tags
+  };
+}
+
+function mapOpeningRootRarity(categoryId: OpeningSpiritualRootState["categoryId"]): CharacterCreationRarity {
+  switch (categoryId) {
+    case "closed":
+      return "flaw";
+    case "single":
+    case "dual":
+      return "common";
+    case "triple":
+    case "mixed":
+      return "uncommon";
+    case "hidden":
+    case "variant":
+      return "rare";
+    case "chaos":
+      return "epic";
+    case "heavenly":
+      return "legendary";
+  }
+}
+
 function toDestinyTraitState(trait: DestinyTraitDefinition): DestinyTraitState {
   return {
     traitId: trait.id,
@@ -322,6 +395,26 @@ function mergeLocks(current: CharacterCreationLocks, next: Partial<CharacterCrea
     background: next?.background ?? current.background,
     hiddenFate: next?.hiddenFate ?? current.hiddenFate
   };
+}
+
+function buildOpeningLocks(attributeLock: boolean, spiritualRootLock: boolean): OpeningGenerationLocks | undefined {
+  if (!attributeLock && !spiritualRootLock) {
+    return undefined;
+  }
+  return {
+    ...(attributeLock
+      ? {
+          attributeArchetype: true,
+          aptitudeStats: true,
+          coreSeedStats: true
+        }
+      : {}),
+    ...(spiritualRootLock ? { spiritualRootFull: true } : {})
+  };
+}
+
+function createOpeningSeed(seed: string, slotId: string, draftSerial: number): string {
+  return `${seed}:character_creation:${slotId}:${draftSerial}`;
 }
 
 function normalizeName(value: string | undefined, fallback: string): string {
