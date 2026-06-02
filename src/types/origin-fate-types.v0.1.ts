@@ -104,6 +104,147 @@ export interface CarriedItemDefinition {
   readonly eighteenConversion: CarriedItemConversion;
 }
 
+export interface OriginFateDataFileHeader {
+  readonly version: string;
+  readonly namespace: string;
+  readonly description: string;
+}
+
+export interface BackgroundOriginDataFile extends OriginFateDataFileHeader {
+  readonly origins: readonly BackgroundOriginDefinition[];
+}
+
+export interface HiddenFateDataFile extends OriginFateDataFileHeader {
+  readonly hiddenFates: readonly HiddenFateDefinition[];
+}
+
+export interface CarriedItemDataFile extends OriginFateDataFileHeader {
+  readonly items: readonly CarriedItemDefinition[];
+}
+
+export interface OriginFateProgressRollRules {
+  readonly defaultRange: readonly [number, number];
+  readonly minimum: number;
+  readonly maximum: number;
+  readonly rareHighProgressChance: number;
+  readonly rareHighProgressRange: readonly [number, number];
+}
+
+export interface OriginFateBackgroundOriginGenerationRules {
+  readonly count: number;
+  readonly weightFormula: string;
+  readonly lockable: boolean;
+  readonly rerollKeepsIfLocked: boolean;
+  readonly minimumVisibleVariety: boolean;
+}
+
+export interface OriginFateHiddenFateGenerationRules {
+  readonly count: number;
+  readonly alwaysGenerateInternally: boolean;
+  readonly displayPolicy: string;
+  readonly defaultRevealName: boolean;
+  readonly baseChanceToHaveStrongHiddenFate: number;
+  readonly chanceModifiers: readonly WeightedModifier[];
+  readonly progressRoll: OriginFateProgressRollRules;
+  readonly lockable: boolean | string;
+  readonly rerollKeepsIfLocked: boolean;
+}
+
+export interface OriginFateCarriedItemsGenerationRules {
+  readonly minCount: number;
+  readonly maxCount: number;
+  readonly secondItemBaseChance: number;
+  readonly secondItemChanceModifiers: readonly WeightedModifier[];
+  readonly weightFormula: string;
+  readonly lockable: boolean;
+  readonly allowDuplicates: boolean;
+}
+
+export interface OriginFateVisibleOmenRules {
+  readonly maxHintsShown: number;
+  readonly showRiskHint: boolean;
+  readonly neverShowTrueHiddenFateName: boolean;
+  readonly hintSelection: string;
+}
+
+export interface OriginFateDeterminismRules {
+  readonly randomSource: string;
+  readonly forbidMathRandom: boolean;
+  readonly sameSeedSameLocksSameRerollIndexMustMatch: boolean;
+}
+
+export interface OriginFateUiSummaryProgressLevel {
+  readonly id: HiddenFateVagueLevel;
+  readonly range: readonly [number, number];
+  readonly label: string;
+}
+
+export interface OriginFateUiSummaryRules {
+  readonly showBackgroundOriginName: boolean;
+  readonly showBackgroundOriginDescription: boolean;
+  readonly showHiddenOmen: boolean;
+  readonly showHiddenProgress: string;
+  readonly hiddenProgressLevels: readonly OriginFateUiSummaryProgressLevel[];
+  readonly showCarriedItems: boolean;
+  readonly showConversionPreview: string;
+}
+
+export interface OriginFateGenerationRulesDataFile extends OriginFateDataFileHeader {
+  readonly pipeline: readonly string[];
+  readonly backgroundOrigin: OriginFateBackgroundOriginGenerationRules;
+  readonly hiddenFate: OriginFateHiddenFateGenerationRules;
+  readonly carriedItems: OriginFateCarriedItemsGenerationRules;
+  readonly visibleOmen: OriginFateVisibleOmenRules;
+  readonly determinism: OriginFateDeterminismRules;
+  readonly uiSummary: OriginFateUiSummaryRules;
+}
+
+export type OriginFateRevealBandId = "hintOnly" | "suspicious" | "halfAwakened" | "awakened";
+
+export interface OriginFateRevealProgressBand {
+  readonly id: OriginFateRevealBandId;
+  readonly range: readonly [number, number];
+  readonly uiLabel: string;
+  readonly canRevealTrueName: boolean | string;
+  readonly description: string;
+}
+
+export interface OriginFateRevealUiTextRules {
+  readonly forbiddenAtCreation: readonly string[];
+  readonly allowedAtCreation: readonly string[];
+  readonly allowedAfterAge18: readonly string[];
+}
+
+export interface OriginFateDivinationRule {
+  readonly cost: string;
+  readonly effect: string;
+  readonly doesNotRevealTrueName?: boolean;
+  readonly doesNotRevealTrueNameAtCreation?: boolean;
+}
+
+export interface OriginFateAge18RevealFormula {
+  readonly baseRevealChanceByBand: Readonly<Record<OriginFateRevealBandId, number>>;
+  readonly modifiers: readonly {
+    readonly condition: string;
+    readonly delta: number;
+  }[];
+}
+
+export interface OriginFateRevealRulesDataFile extends OriginFateDataFileHeader {
+  readonly progressBands: readonly OriginFateRevealProgressBand[];
+  readonly uiTextRules: OriginFateRevealUiTextRules;
+  readonly divinationRules: Readonly<Record<string, OriginFateDivinationRule>>;
+  readonly age18RevealFormula: OriginFateAge18RevealFormula;
+}
+
+export interface OriginFateDataBundle {
+  readonly backgroundOrigins?: BackgroundOriginDataFile;
+  readonly hiddenFates?: HiddenFateDataFile;
+  readonly carriedItems?: CarriedItemDataFile;
+  readonly generationRules?: OriginFateGenerationRulesDataFile;
+  readonly revealRules?: OriginFateRevealRulesDataFile;
+}
+
 export type HiddenFateVagueLevel = "faint" | "stirring" | "nearAwakened" | "awakened";
 
 export interface VisibleHiddenOmen {
@@ -141,6 +282,13 @@ export interface BackgroundOriginResult {
   readonly matchedTags: readonly string[];
 }
 
+export interface BackgroundOriginGenerationResult {
+  readonly result: BackgroundOriginResult;
+  readonly debug: {
+    readonly candidateWeights: readonly WeightedCandidateDebug[];
+  };
+}
+
 export interface HiddenFateResultInternal {
   readonly hiddenFateId: Id;
   readonly trueName: string;
@@ -151,6 +299,14 @@ export interface HiddenFateResultInternal {
   readonly appliedWeight: number;
 }
 
+export interface HiddenFateGenerationResult {
+  readonly internal: HiddenFateResultInternal;
+  readonly visibleOmen: VisibleHiddenOmen;
+  readonly debug: {
+    readonly candidateWeights: readonly WeightedCandidateDebug[];
+  };
+}
+
 export interface CarriedItemResult {
   readonly itemId: Id;
   readonly name: string;
@@ -158,6 +314,14 @@ export interface CarriedItemResult {
   readonly conversion: CarriedItemConversion;
   readonly matchedTags: readonly string[];
   readonly appliedWeight: number;
+}
+
+export interface CarriedItemsGenerationResult {
+  readonly items: readonly CarriedItemResult[];
+  readonly debug: {
+    readonly candidateWeights: readonly WeightedCandidateDebug[];
+    readonly secondItemChance: number;
+  };
 }
 
 export interface OriginFateDraft {
