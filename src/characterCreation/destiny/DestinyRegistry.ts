@@ -52,6 +52,7 @@ const SUPPORTED_LOCKABLE_FIELDS = new Set([
 export class DestinyRegistry {
   readonly traits: readonly DestinyTraitDefinition[];
   readonly qualities: readonly DestinyQualityDefinition[];
+  readonly qualityWeights: DestinyQualityTablesDataFile["qualityWeights"];
   readonly exclusiveRules: readonly DestinyExclusiveRule[];
   readonly synergyRules: readonly DestinySynergyRule[];
   readonly conflictRules: readonly DestinyTagConflictRule[];
@@ -64,6 +65,7 @@ export class DestinyRegistry {
   constructor(data: Required<DestinyDataBundle>) {
     this.traits = freezeArray(data.destinyTraits.traits);
     this.qualities = freezeArray(data.qualityTables.qualities);
+    this.qualityWeights = deepFreeze(cloneJson(data.qualityTables.qualityWeights));
     this.exclusiveRules = freezeArray(data.conflictSynergyRules.exclusiveRules);
     this.synergyRules = freezeArray(data.conflictSynergyRules.synergyRules);
     this.conflictRules = freezeArray(data.conflictSynergyRules.conflictRules);

@@ -1,3 +1,5 @@
+import type { OpeningInnateDraft } from "./opening-generator-types.v0.1";
+
 export type DestinyQuality =
   | "mortal"
   | "good"
@@ -75,6 +77,8 @@ export interface DestinySelectionState {
   readonly flaw: DestinyTraitDefinition;
   readonly synergies: readonly DestinySynergyRule[];
   readonly softConflicts: readonly string[];
+  readonly synergyWarnings: readonly string[];
+  readonly conflictWarnings: readonly string[];
   readonly warnings: readonly string[];
 }
 
@@ -99,6 +103,7 @@ export interface DestinyRerollSession {
 export interface GenerateDestinyDraftInput {
   readonly session: DestinyRerollSession;
   readonly previousDraft?: CharacterCreationDraftLike;
+  readonly openingInnateDraft?: Pick<OpeningInnateDraft, "tags">;
   readonly accountMeta?: Record<string, unknown>;
 }
 
@@ -120,6 +125,31 @@ export interface DestinyRollDebugInfo {
   readonly selectedWeights: Record<string, number>;
   readonly fateMeterBefore: FateMeterState;
   readonly fateMeterAfter: FateMeterState;
+}
+
+export interface GenerateDestinyRollInput {
+  readonly seed: string;
+  readonly draftId: string;
+  readonly rerollIndex: number;
+  readonly openingInnateDraft?: Pick<OpeningInnateDraft, "tags">;
+  readonly locks?: CharacterCreationLocks;
+  readonly previousDraft?: DestinyRollDraft;
+  readonly fateMeter?: FateMeterState;
+  readonly previousTraitIds?: readonly string[];
+}
+
+export interface DestinyRollDraft {
+  readonly draftId: string;
+  readonly seed: string;
+  readonly rerollIndex: number;
+  readonly destinies: DestinySelectionState;
+  readonly fateMeter: FateMeterState;
+  readonly locks?: CharacterCreationLocks;
+  readonly debug: DestinyRollDebugInfo;
+}
+
+export interface DestinyRoller {
+  generate(input: GenerateDestinyRollInput): DestinyRollDraft;
 }
 
 export type DestinyQualityTableId = Exclude<DestinyQuality, "flaw">;
