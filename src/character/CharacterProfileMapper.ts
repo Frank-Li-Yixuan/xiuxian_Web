@@ -36,6 +36,7 @@ export function mapCharacterDraftToOrigin(draft: CharacterCreationDraft, confirm
     spiritualRoot: draft.spiritualRoot,
     openingInnateDraft: draft.openingInnateDraft,
     destinies: draft.destinies,
+    originFate: draft.originFate,
     background: draft.background,
     hiddenFate: draft.hiddenFate,
     carriedItems: draft.carriedItems,

@@ -1,6 +1,7 @@
 import { useMemo, useState, type CSSProperties, type ReactElement } from "react";
 
 import type { GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
+import { CharacterCreationController } from "../../character/CharacterCreationController";
 import type {
   CharacterCreationDraft,
   CharacterCreationRarity,
@@ -11,6 +12,7 @@ import { XianxiaButton, XianxiaPanel } from "../ui-system";
 
 export interface CharacterCreationScreenProps {
   readonly assets: GeneratedUiAssetRegistry;
+  readonly initialDraft?: CharacterCreationDraft;
   readonly slotId?: string;
   readonly nowMs?: () => number;
   readonly onBack?: () => void;
@@ -46,12 +48,15 @@ const ELEMENT_LABELS: Readonly<Record<string, string>> = {
 };
 
 export function CharacterCreationScreen({
+  initialDraft,
   slotId = "slot_preview",
   nowMs = () => Date.now(),
   onBack,
   onConfirmLife
 }: CharacterCreationScreenProps): ReactElement {
-  const [draft] = useState<CharacterCreationDraft>(() => createPlaceholderDraft(slotId, nowMs()));
+  const [draft] = useState<CharacterCreationDraft>(
+    () => initialDraft ?? new CharacterCreationController({ seed: `ccui2:${slotId}` }).generate({ slotId, nowMs: nowMs() })
+  );
   const [activeTab, setActiveTab] = useState<DetailTab>("stats");
   const [selectedSlot, setSelectedSlot] = useState<DestinyCardSlot>("main");
 
@@ -203,19 +208,20 @@ function FateAltar({ draft }: { readonly draft: CharacterCreationDraft }): React
 }
 
 function OriginFateSummary({ draft }: { readonly draft: CharacterCreationDraft }): ReactElement {
+  const omen = draft.originFate.visibleHiddenOmen;
   return (
     <XianxiaPanel className="ccui2-side-panel ccui2-origin-panel" tone="calm">
       <p className="ccui2-panel-kicker">右命简</p>
-      <h2>{draft.background.name}</h2>
-      <p>{draft.background.description}</p>
+      <h2>{draft.originFate.backgroundOrigin.name}</h2>
+      <p>{draft.originFate.backgroundOrigin.visibleDescription}</p>
       <dl>
         <div>
           <dt>血脉征兆</dt>
-          <dd>{draft.hiddenFate.hint}</dd>
+          <dd>{[omen.levelLabel, ...omen.hints, omen.riskHint].join(" / ")}</dd>
         </div>
         <div>
           <dt>随身物</dt>
-          <dd>{draft.carriedItems.map((item) => item.name).join(" / ")}</dd>
+          <dd>{draft.originFate.carriedItems.map((item) => `${item.name} / ${item.conversion.label}`).join(" / ")}</dd>
         </div>
       </dl>
     </XianxiaPanel>
@@ -273,21 +279,26 @@ function renderDetailBody(tab: DetailTab, draft: CharacterCreationDraft, selecte
         </section>
       );
     case "origin":
+      const omen = draft.originFate.visibleHiddenOmen;
       return (
         <section>
-          <h2>{draft.background.name}</h2>
-          <p>{draft.background.description}</p>
+          <h2>{draft.originFate.backgroundOrigin.name}</h2>
+          <p>{draft.originFate.backgroundOrigin.visibleDescription}</p>
           <p>可见效果：{draft.background.visibleEffects.join(" / ")}</p>
-          <p>隐藏征兆：{draft.hiddenFate.hint}</p>
+          <p>{omen.levelLabel}</p>
+          {omen.hints.map((hint) => (
+            <p key={hint}>隐藏征兆：{hint}</p>
+          ))}
+          <p className="ccui2-detail-warning">{omen.riskHint}</p>
         </section>
       );
     case "items":
       return (
         <section>
           <h2>随身物</h2>
-          {draft.carriedItems.map((item) => (
+          {draft.originFate.carriedItems.map((item) => (
             <p key={item.itemId}>
-              <strong>{item.name}</strong>：{item.description}
+              <strong>{item.name}</strong>：{item.visibleDescription} / {item.conversion.label}
             </p>
           ))}
           <p>
@@ -343,6 +354,7 @@ function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreatio
       ],
       flaw: destiny("placeholder_flaw", "劫云压顶", "flaw", ["劫命", "天象"], ["雷劫语义明确"], ["危险预兆更频繁"])
     },
+    originFate: createPlaceholderOriginFateDraft(slotId),
     background: {
       backgroundId: "placeholder_mountain_orphan",
       name: "青云山脚孤童",
@@ -380,7 +392,8 @@ function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreatio
       secondaryDestiny1: false,
       flawDestiny: false,
       background: false,
-      hiddenFate: false
+      hiddenFate: false,
+      carriedItems: false
     },
     attributeLock: false,
     spiritualRootLock: false,
@@ -388,6 +401,54 @@ function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreatio
     divinationTokens: 1,
     createdAtMs: nowMs,
     updatedAtMs: nowMs
+  };
+}
+
+function createPlaceholderOriginFateDraft(slotId: string): CharacterCreationDraft["originFate"] {
+  return {
+    draftId: `${slotId}_ccui2_placeholder`,
+    seed: `${slotId}:ccui2_origin_placeholder`,
+    rerollIndex: 0,
+    backgroundOrigin: {
+      originId: "placeholder_mountain_orphan",
+      name: "Origin placeholder",
+      visibleDescription: "Visible origin placeholder for the CCUI2 shell.",
+      appliedWeight: 1,
+      matchedTags: ["origin:placeholder"]
+    },
+    hiddenFateInternal: {
+      hiddenFateId: "placeholder_hidden_fate",
+      trueName: "Internal placeholder fate",
+      category: "karmicSeed",
+      progress: 12,
+      progressBand: "faint",
+      matchedTags: ["hidden:placeholder"],
+      appliedWeight: 1
+    },
+    visibleHiddenOmen: {
+      vagueLevel: "faint",
+      levelLabel: "Faint omen",
+      hints: ["A faint sign moves at the edge of the chart."],
+      riskHint: "Risk remains unclear."
+    },
+    carriedItems: [
+      {
+        itemId: "placeholder_jade_half",
+        name: "Placeholder jade",
+        visibleDescription: "Visible carried item placeholder.",
+        conversion: {
+          type: "treasure_fragment",
+          label: "vague treasure clue",
+          outerBattlefieldEffect: "minor battlefield clue",
+          dongfuHook: "placeholder_dongfu_hook"
+        },
+        matchedTags: ["item:placeholder"],
+        appliedWeight: 1
+      }
+    ],
+    lifeEventBiasTags: ["origin:placeholder"],
+    modeProjectionTags: ["mode:placeholder"],
+    age18ConversionHooks: ["placeholder_dongfu_hook"]
   };
 }
 

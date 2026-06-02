@@ -43,7 +43,8 @@ describe("character creation fate altar state", () => {
       secondaryDestiny1: false,
       flawDestiny: false,
       background: false,
-      hiddenFate: false
+      hiddenFate: false,
+      carriedItems: false
     };
 
     const next = toggleCharacterCreationLock(locks, "mainDestiny");

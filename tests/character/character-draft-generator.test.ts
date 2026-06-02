@@ -35,7 +35,9 @@ describe("CharacterDraftGenerator", () => {
     expect(draft.destinies.main.traitId).toMatch(/^destiny_/);
     expect(draft.destinies.secondary).toHaveLength(2);
     expect(draft.destinies.flaw.traitId).toMatch(/^flaw_/);
-    expect(draft.background.backgroundId).toMatch(/^bg_/);
+    expect(draft.originFate.draftId).toBe(draft.draftId);
+    expect(draft.background.backgroundId).toMatch(/^origin_/);
+    expect(draft.background.backgroundId).toBe(draft.originFate.backgroundOrigin.originId);
     expect(draft.hiddenFate.hiddenFateId).toMatch(/^hidden_/);
     expect(draft.carriedItems.length).toBeGreaterThan(0);
     expect(draft.divinationTokens).toBe(1);
