@@ -1,5 +1,6 @@
 import type { RunSettlementReceipt } from "../sim/settlement/RunSettlement";
 import type { CharacterOriginState } from "../types/character-creation-types.v0.1";
+import type { Age18OriginFateResolution } from "../types/origin-fate-types.v0.1";
 import { addResources, copyResourceMap, type ResourceMap } from "./ResourceWallet";
 
 export type ResourceWallet = ResourceMap;
@@ -17,6 +18,7 @@ export interface OutgameProfileState {
   readonly characterName?: string;
   readonly characterOrigin?: CharacterOriginState;
   readonly lifeSimulation?: LifeSimulationProgressState;
+  readonly age18OriginFate?: Age18OriginFateResolution;
   readonly createdAtMs?: number;
   readonly updatedAtMs?: number;
   readonly realm: RealmProgressState;
@@ -111,6 +113,7 @@ export interface LoadoutPresetState {
 export interface OutgameFlags {
   readonly firstStageCleared?: boolean;
   readonly foundationTrialUnlocked?: boolean;
+  readonly originFateAge18Resolved?: boolean;
   readonly [flag: string]: boolean | undefined;
 }
 
