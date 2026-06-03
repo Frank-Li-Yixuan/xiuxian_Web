@@ -1,6 +1,5 @@
-import { useMemo, useState, type CSSProperties, type ReactElement } from "react";
+import { useMemo, useState, type CSSProperties, type Dispatch, type ReactElement, type SetStateAction } from "react";
 
-import type { GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
 import { CharacterCreationController } from "../../character/CharacterCreationController";
 import type {
   CharacterCreationDraft,
@@ -8,24 +7,21 @@ import type {
   DestinyTraitState
 } from "../../character/CharacterCreationTypes";
 import { getDestinyOverlayClasses, getStatAuraCssVars } from "./CharacterCreationFateAltarState";
+import {
+  createCharacterCreationViewModel,
+  type CharacterCreationDestinyCardSlot as DestinyCardSlot,
+  type CharacterCreationDetailTab as DetailTab,
+  type CharacterCreationViewModel
+} from "./CharacterCreationViewModel";
 import { XianxiaButton, XianxiaPanel } from "../ui-system";
 
 export interface CharacterCreationScreenProps {
-  readonly assets: GeneratedUiAssetRegistry;
+  readonly assets: unknown;
   readonly initialDraft?: CharacterCreationDraft;
   readonly slotId?: string;
   readonly nowMs?: () => number;
   readonly onBack?: () => void;
   readonly onConfirmLife?: (draft: CharacterCreationDraft) => void;
-}
-
-type DetailTab = "stats" | "root" | "destiny" | "origin" | "items";
-type DestinyCardSlot = "main" | "secondary0" | "secondary1" | "flaw";
-
-interface DestinyCardModel {
-  readonly slot: DestinyCardSlot;
-  readonly slotLabel: string;
-  readonly trait: DestinyTraitState;
 }
 
 const DETAIL_TABS: readonly { readonly id: DetailTab; readonly label: string }[] = [
@@ -54,16 +50,19 @@ export function CharacterCreationScreen({
   onBack,
   onConfirmLife
 }: CharacterCreationScreenProps): ReactElement {
-  const [draft] = useState<CharacterCreationDraft>(
-    () => initialDraft ?? new CharacterCreationController({ seed: `ccui2:${slotId}` }).generate({ slotId, nowMs: nowMs() })
+  const controller = useMemo(() => new CharacterCreationController({ seed: `ccui2:${slotId}` }), [slotId]);
+  const [draft, setDraft] = useState<CharacterCreationDraft>(
+    () => initialDraft ?? controller.generate({ slotId, nowMs: nowMs() })
   );
   const [activeTab, setActiveTab] = useState<DetailTab>("stats");
   const [selectedSlot, setSelectedSlot] = useState<DestinyCardSlot>("main");
+  const [actionError, setActionError] = useState<string | undefined>(undefined);
 
-  const destinyCards = useMemo(() => getDestinyCards(draft), [draft]);
-  const selectedTrait = destinyCards.find((card) => card.slot === selectedSlot)?.trait ?? draft.destinies.main;
+  const viewModel = useMemo(() => createCharacterCreationViewModel(draft, { selectedSlot, activeTab }), [activeTab, draft, selectedSlot]);
+  const selectedTrait = getDestinyTraitForSlot(draft, selectedSlot);
   const destinyClasses = getDestinyOverlayClasses([draft.destinies.main, ...draft.destinies.secondary, draft.destinies.flaw]);
   const screenStyle = getStatAuraCssVars(draft.coreStats) as CSSProperties;
+  const selectedLockKey = viewModel.selectedLockKey;
 
   return (
     <main
@@ -75,14 +74,18 @@ export function CharacterCreationScreen({
       <XianxiaPanel className="ccui2-character-shell" tone="ceremonial">
         <header className="ccui2-header">
           <div className="ccui2-header-copy">
-            <p>存档名</p>
+            <p>存档名 / 推演</p>
             <strong>{slotId}</strong>
+            <span>第 {viewModel.rerollCount} 次</span>
           </div>
           <div className="ccui2-title-block">
-            <span>命盘推演台</span>
+            <span>命盘推演台 · 天机值 {viewModel.fateMeter.value}/{viewModel.fateMeter.guaranteeThreshold}</span>
             <h1>推演天命</h1>
           </div>
           <div className="ccui2-header-actions">
+            <XianxiaButton className="ccui2-header-button" disabled variant="ghost">
+              剩余锁 {viewModel.lockBudget.locksRemaining}/{viewModel.lockBudget.maxLocks}
+            </XianxiaButton>
             <XianxiaButton className="ccui2-header-button" variant="ghost" onClick={onBack ?? noop}>
               返回
             </XianxiaButton>
@@ -99,10 +102,10 @@ export function CharacterCreationScreen({
         </section>
 
         <section className="ccui2-destiny-card-row" aria-label="天命卡槽">
-          {destinyCards.map((card) => (
+          {viewModel.destinyCards.map((card) => (
             <button
               key={card.slot}
-              className={`ccui2-destiny-card rarity-${card.trait.rarity} ${selectedSlot === card.slot ? "is-selected" : ""}`}
+              className={`ccui2-destiny-card rarity-${card.rarity} ${selectedSlot === card.slot ? "is-selected" : ""} ${card.locked ? "is-locked" : ""}`}
               data-destiny-card-slot={card.slot}
               type="button"
               onClick={() => {
@@ -110,9 +113,9 @@ export function CharacterCreationScreen({
                 setActiveTab("destiny");
               }}
             >
-              <span className="ccui2-card-slot">{card.slotLabel}</span>
-              <strong>{card.trait.name}</strong>
-              <small>{card.trait.tags.join(" / ")}</small>
+              <span className="ccui2-card-slot">{card.slotLabel} · {card.locked ? "已锁" : "未锁"}</span>
+              <strong>{card.name}</strong>
+              <small>{card.qualityLabel} · {card.tags.join(" / ")}</small>
             </button>
           ))}
         </section>
@@ -131,19 +134,38 @@ export function CharacterCreationScreen({
             ))}
           </nav>
           <div className="ccui2-detail-scroll" data-scrollable="true">
-            {renderDetailBody(activeTab, draft, selectedTrait)}
+            {renderDetailBody(activeTab, draft, selectedTrait, viewModel)}
           </div>
         </XianxiaPanel>
 
         <footer className="ccui2-action-bar" aria-label="角色创建操作">
-          <XianxiaButton className="ccui2-action-button" disabled variant="secondary">
+          {actionError === undefined ? null : <span className="ccui2-detail-warning">{actionError}</span>}
+          <XianxiaButton
+            className="ccui2-action-button"
+            variant="secondary"
+            onClick={() => updateDraft(setDraft, () => controller.reroll(draft, { nowMs: nowMs() }), setActionError)}
+          >
             重新推演
           </XianxiaButton>
-          <XianxiaButton className="ccui2-action-button" disabled variant="secondary">
-            锁定项
+          <XianxiaButton
+            className="ccui2-action-button"
+            disabled={selectedLockKey === undefined}
+            variant="secondary"
+            onClick={() => {
+              if (selectedLockKey !== undefined) {
+                updateDraft(setDraft, () => controller.toggleLock(draft, { lockKey: selectedLockKey, nowMs: nowMs() }), setActionError);
+              }
+            }}
+          >
+            锁定项 {selectedLockKey === undefined ? "" : draft.locks[selectedLockKey] ? "解除" : "锁定"}
           </XianxiaButton>
-          <XianxiaButton className="ccui2-action-button" disabled variant="secondary">
-            天机推演
+          <XianxiaButton
+            className="ccui2-action-button"
+            disabled={!viewModel.canUseDivination}
+            variant="secondary"
+            onClick={() => updateDraft(setDraft, () => controller.reroll(draft, { nowMs: nowMs(), useDivination: true }), setActionError)}
+          >
+            天机推演 {viewModel.divinationTokens}
           </XianxiaButton>
           <XianxiaButton className="ccui2-action-button confirm-life-button" onClick={() => onConfirmLife?.(draft)}>
             确认此生
@@ -228,14 +250,19 @@ function OriginFateSummary({ draft }: { readonly draft: CharacterCreationDraft }
   );
 }
 
-function renderDetailBody(tab: DetailTab, draft: CharacterCreationDraft, selectedTrait: DestinyTraitState): ReactElement {
+function renderDetailBody(
+  tab: DetailTab,
+  draft: CharacterCreationDraft,
+  selectedTrait: DestinyTraitState,
+  viewModel: CharacterCreationViewModel
+): ReactElement {
   switch (tab) {
     case "stats":
       return (
         <section>
           <h2>属性详情</h2>
           <p>
-            这里暂放角色创建骨架数据。精、气、神只用于当前命盘视觉强弱展示，尚未接入真实 OAG/DT/HFO 生成器。
+            精、气、神与六维资质来自当前开局生成器。命盘重 Roll 只更新未锁定的数据，不写入正式存档。
           </p>
           <ul>
             <li>精 {draft.coreStats.jing} / 气 {draft.coreStats.qi} / 神 {draft.coreStats.shen}</li>
@@ -263,7 +290,7 @@ function renderDetailBody(tab: DetailTab, draft: CharacterCreationDraft, selecte
           <p>灵根元素：{draft.spiritualRoot.elements.map((element) => ELEMENT_LABELS[element] ?? element).join(" / ")}</p>
           <p>占位倾向：{draft.spiritualRoot.tags.join(" / ")}</p>
           <p>
-            灵根特效层当前只影响中央命盘的 DOM/CSS 光环，不读取外部图片，也不写入模拟层。后续数据接入时只需要替换这里的占位 draft。
+            灵根特效层只影响中央命盘的 DOM/CSS 光环，不读取外部图片，也不写入模拟层。
           </p>
         </section>
       );
@@ -271,11 +298,17 @@ function renderDetailBody(tab: DetailTab, draft: CharacterCreationDraft, selecte
       return (
         <section>
           <h2>{selectedTrait.name}</h2>
+          <p>品质：{selectedTrait.qualityLabel ?? selectedTrait.rarity}</p>
+          {selectedTrait.description === undefined ? null : <p>{selectedTrait.description}</p>}
           <p>正向语义：{selectedTrait.positiveEffects.join(" / ")}</p>
           <p className="ccui2-detail-warning">代价语义：{selectedTrait.negativeEffects.join(" / ")}</p>
-          <p>
-            当前命格卡只提供骨架、选中态与详情展示。重新推演、锁定项和天机推演按钮均为占位，不执行真实抽取逻辑。
-          </p>
+          <p>天机值：{viewModel.fateMeter.value}，剩余锁：{viewModel.lockBudget.locksRemaining}/{viewModel.lockBudget.maxLocks}</p>
+          {viewModel.synergyWarnings.map((warning) => (
+            <p key={warning}>共鸣：{warning}</p>
+          ))}
+          {viewModel.conflictWarnings.map((warning) => (
+            <p key={warning} className="ccui2-detail-warning">警告：{warning}</p>
+          ))}
         </section>
       );
     case "origin":
@@ -309,13 +342,31 @@ function renderDetailBody(tab: DetailTab, draft: CharacterCreationDraft, selecte
   }
 }
 
-function getDestinyCards(draft: CharacterCreationDraft): readonly DestinyCardModel[] {
-  return [
-    { slot: "main", slotLabel: "主天命", trait: draft.destinies.main },
-    { slot: "secondary0", slotLabel: "副天命 1", trait: draft.destinies.secondary[0] },
-    { slot: "secondary1", slotLabel: "副天命 2", trait: draft.destinies.secondary[1] },
-    { slot: "flaw", slotLabel: "劫命", trait: draft.destinies.flaw }
-  ];
+function getDestinyTraitForSlot(draft: CharacterCreationDraft, slot: DestinyCardSlot): DestinyTraitState {
+  switch (slot) {
+    case "main":
+      return draft.destinies.main;
+    case "secondary0":
+      return draft.destinies.secondary[0];
+    case "secondary1":
+      return draft.destinies.secondary[1];
+    case "flaw":
+      return draft.destinies.flaw;
+  }
+}
+
+function updateDraft(
+  setDraft: Dispatch<SetStateAction<CharacterCreationDraft>>,
+  update: () => CharacterCreationDraft,
+  setActionError: Dispatch<SetStateAction<string | undefined>>
+): void {
+  try {
+    const next = update();
+    setDraft(next);
+    setActionError(undefined);
+  } catch (error) {
+    setActionError(error instanceof Error ? error.message : String(error));
+  }
 }
 
 function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreationDraft {
@@ -352,7 +403,12 @@ function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreatio
         destiny("placeholder_secondary_sword", "剑骨微鸣", "rare", ["剑修", "法宝"], ["飞剑语义增强"], ["尚未接入真实加成"]),
         destiny("placeholder_secondary_alchemy", "丹火留香", "rare", ["丹药", "火候"], ["丹药提示更醒目"], ["尚未接入真实消化"])
       ],
-      flaw: destiny("placeholder_flaw", "劫云压顶", "flaw", ["劫命", "天象"], ["雷劫语义明确"], ["危险预兆更频繁"])
+      flaw: destiny("placeholder_flaw", "劫云压顶", "flaw", ["劫命", "天象"], ["雷劫语义明确"], ["危险预兆更频繁"]),
+      synergies: [],
+      softConflicts: [],
+      synergyWarnings: [],
+      conflictWarnings: [],
+      warnings: []
     },
     originFate: createPlaceholderOriginFateDraft(slotId),
     background: {

@@ -1,5 +1,11 @@
 import type { OpeningInnateDraft } from "./opening-generator-types.v0.1";
 import type { OriginFateDraft } from "./origin-fate-types.v0.1";
+import type {
+  DestinyQuality,
+  DestinyRollDraft,
+  DestinyRerollSession,
+  DestinySynergyRule
+} from "./destiny-types.v0.1";
 
 export type CharacterCreationRarity = "common" | "uncommon" | "rare" | "epic" | "legendary" | "flaw";
 export type DestinySlotType = "main" | "secondary" | "flaw";
@@ -66,12 +72,20 @@ export interface DestinySelectionState {
   readonly main: DestinyTraitState;
   readonly secondary: readonly [DestinyTraitState, DestinyTraitState];
   readonly flaw: DestinyTraitState;
+  readonly synergies: readonly DestinySynergyRule[];
+  readonly softConflicts: readonly string[];
+  readonly synergyWarnings: readonly string[];
+  readonly conflictWarnings: readonly string[];
+  readonly warnings: readonly string[];
 }
 
 export interface DestinyTraitState {
   readonly traitId: string;
   readonly name: string;
   readonly rarity: CharacterCreationRarity;
+  readonly quality?: DestinyQuality;
+  readonly qualityLabel?: string;
+  readonly description?: string;
   readonly tags: readonly string[];
   readonly positiveEffects: readonly string[];
   readonly negativeEffects: readonly string[];
@@ -145,6 +159,8 @@ export interface CharacterCreationDraft {
   readonly spiritualRoot: SpiritualRootState;
   readonly openingInnateDraft: OpeningInnateDraft;
   readonly destinies: DestinySelectionState;
+  readonly destinyRollDraft?: DestinyRollDraft;
+  readonly destinyRerollSession?: DestinyRerollSession;
   readonly originFate: OriginFateDraft;
   readonly background: BackgroundOriginState;
   readonly hiddenFate: HiddenFateState;

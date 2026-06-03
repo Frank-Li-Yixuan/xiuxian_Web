@@ -1,4 +1,11 @@
 import { SeededRng, type RngSeed } from "../sim/core/SeededRng";
+import {
+  DefaultDestinyRoller
+} from "../characterCreation/destiny/DestinyRoller";
+import {
+  loadDestinyRegistry,
+  type DestinyRegistry
+} from "../characterCreation/destiny/DestinyRegistry";
 import { DefaultOpeningGenerator } from "../opening/OpeningGenerator";
 import {
   DefaultOriginFateGenerator,
@@ -21,27 +28,29 @@ import type {
   OriginFateLocks,
   OriginRarity
 } from "../types/origin-fate-types.v0.1";
+import type {
+  CharacterCreationLocks as DestinyGenerationLocks,
+  DestinyQuality,
+  DestinyRollDraft,
+  DestinyRoller,
+  DestinyTraitDefinition as GeneratedDestinyTraitDefinition,
+  FateMeterState
+} from "../types/destiny-types.v0.1";
 import { loadCharacterCreationData } from "./CharacterCreationData";
 import type {
   AptitudeStats,
-  BackgroundOriginDefinition,
   BackgroundOriginState,
   CarriedItemDraft,
   CharacterAppearanceState,
   CharacterCreationDraft,
   CharacterCreationLocks,
+  CharacterCreationLockKey,
   CharacterCreationRarity,
-  CoreThreeTreasures,
   DestinySelectionState,
-  DestinySlotType,
-  DestinyTraitDefinition,
   DestinyTraitState,
-  HiddenFateDefinition,
   HiddenFateState,
   LoadedCharacterCreationData,
-  SpiritualRootDefinition,
   SpiritualRootState,
-  StatRange,
   WeightedRarity
 } from "./CharacterCreationTypes";
 
@@ -51,6 +60,8 @@ export interface CharacterDraftGeneratorOptions {
   readonly openingGenerator?: OpeningGenerator;
   readonly originFateGenerator?: OriginFateGenerator;
   readonly originFateRegistry?: OriginFateRegistry;
+  readonly destinyRegistry?: DestinyRegistry;
+  readonly destinyRoller?: DestinyRoller;
 }
 
 export interface GenerateCharacterDraftOptions {
@@ -64,7 +75,13 @@ export interface RerollCharacterDraftOptions {
   readonly locks?: Partial<CharacterCreationLocks>;
   readonly attributeLock?: boolean;
   readonly spiritualRootLock?: boolean;
+  readonly useDivination?: boolean;
   readonly name?: string;
+}
+
+export interface ToggleCharacterCreationLockOptions {
+  readonly lockKey: CharacterCreationLockKey;
+  readonly nowMs: number;
 }
 
 const DEFAULT_LOCKS: CharacterCreationLocks = {
@@ -97,6 +114,8 @@ export class CharacterDraftGenerator {
   private readonly openingGenerator: OpeningGenerator;
   private readonly originFateGenerator: OriginFateGenerator;
   private readonly originFateRegistry: OriginFateRegistry;
+  private readonly destinyRegistry: DestinyRegistry;
+  private readonly destinyRoller: DestinyRoller;
   private readonly openingSeed: string;
   private nextDraftSerial = 0;
 
@@ -106,6 +125,8 @@ export class CharacterDraftGenerator {
     this.openingGenerator = options.openingGenerator ?? new DefaultOpeningGenerator();
     this.originFateRegistry = options.originFateRegistry ?? loadOriginFateRegistry();
     this.originFateGenerator = options.originFateGenerator ?? new DefaultOriginFateGenerator(this.originFateRegistry);
+    this.destinyRegistry = options.destinyRegistry ?? loadDestinyRegistry();
+    this.destinyRoller = options.destinyRoller ?? new DefaultDestinyRoller(this.destinyRegistry);
     this.openingSeed = String(options.seed);
   }
 
@@ -123,13 +144,32 @@ export class CharacterDraftGenerator {
       rerollIndex: 0
     });
     const spiritualRoot = projectOpeningSpiritualRoot(openingInnateDraft.spiritualRoot);
-    const destinies = this.rollDestinies([]);
+    const destinySeed = createDestinySeed(this.openingSeed, options.slotId, draftSerial);
+    const destinyRollDraft = this.destinyRoller.generate({
+      seed: destinySeed,
+      draftId,
+      rerollIndex: 0,
+      openingInnateDraft
+    });
+    const destinies = projectDestinyRollSelection(destinyRollDraft);
+    const divinationTokens = this.destinyRegistry.rerollRules.initialDivinationTokens;
+    const destinyRerollSession = buildDestinyRerollSession({
+      draftId,
+      slotId: options.slotId,
+      seed: destinySeed,
+      rerollCount: 0,
+      locks: DEFAULT_LOCKS,
+      fateMeter: destinyRollDraft.fateMeter,
+      previousTraitIds: getDestinyTraitIds(destinyRollDraft),
+      divinationTokens,
+      maxLocks: this.destinyRegistry.rerollRules.maxLockedFields
+    });
     const originFate = this.originFateGenerator.generate({
       seed: createOriginFateSeed(this.openingSeed, options.slotId, draftSerial),
       draftId,
       rerollIndex: 0,
       ...buildOriginFateContextTags(openingInnateDraft, destinies),
-      divinationTokens: this.data.defaults.reroll.initialDivinationTokens
+      divinationTokens
     });
 
     return deepFreeze({
@@ -142,6 +182,8 @@ export class CharacterDraftGenerator {
       spiritualRoot,
       openingInnateDraft,
       destinies,
+      destinyRollDraft,
+      destinyRerollSession,
       originFate,
       background: this.projectOriginBackground(originFate),
       hiddenFate: this.projectOriginHiddenFate(originFate),
@@ -150,7 +192,7 @@ export class CharacterDraftGenerator {
       attributeLock: false,
       spiritualRootLock: false,
       rerollCount: 0,
-      divinationTokens: this.data.defaults.reroll.initialDivinationTokens,
+      divinationTokens,
       createdAtMs: options.nowMs,
       updatedAtMs: options.nowMs
     });
@@ -160,6 +202,11 @@ export class CharacterDraftGenerator {
     const locks = mergeLocks(draft.locks, options.locks);
     const attributeLock = options.attributeLock ?? draft.attributeLock;
     const spiritualRootLock = options.spiritualRootLock ?? options.locks?.spiritualRoot ?? draft.spiritualRootLock;
+    const effectiveLocks = {
+      ...locks,
+      spiritualRoot: spiritualRootLock
+    };
+    validateLockBudget(effectiveLocks, this.destinyRegistry.rerollRules.maxLockedFields);
     const openingLocks = buildOpeningLocks(attributeLock, spiritualRootLock);
     const openingInnateDraft = this.openingGenerator.generate({
       seed: draft.openingInnateDraft.seed,
@@ -169,8 +216,35 @@ export class CharacterDraftGenerator {
       previousDraft: draft.openingInnateDraft
     });
     const spiritualRoot = projectOpeningSpiritualRoot(openingInnateDraft.spiritualRoot);
-    const preservedDestinies = this.getPreservedDestinyTraits(draft.destinies, locks);
-    const destinies = this.rollDestinies(preservedDestinies, draft.destinies, locks);
+    const divination = resolveDivinationState(draft, options.useDivination === true, this.destinyRegistry);
+    const previousDestinyRollDraft = resolvePreviousDestinyRollDraft(draft, this.destinyRegistry);
+    const destinySeed = previousDestinyRollDraft?.seed ?? `${draft.openingInnateDraft.seed}:destiny_roll`;
+    const destinyRollDraft = this.destinyRoller.generate({
+      seed: destinySeed,
+      draftId: draft.draftId,
+      rerollIndex: draft.rerollCount + 1,
+      openingInnateDraft,
+      locks: toDestinyGenerationLocks(effectiveLocks),
+      ...(previousDestinyRollDraft === undefined ? {} : { previousDraft: previousDestinyRollDraft }),
+      fateMeter: divination.fateMeter,
+      previousTraitIds: draft.destinyRerollSession?.previousTraitIds ?? getLegacyDestinyTraitIds(draft.destinies)
+    });
+    const destinies = projectDestinyRollSelection(destinyRollDraft);
+    const destinyRerollSession = buildDestinyRerollSession({
+      draftId: draft.draftId,
+      slotId: draft.slotId,
+      seed: destinySeed,
+      rerollCount: draft.rerollCount + 1,
+      locks: effectiveLocks,
+      fateMeter: destinyRollDraft.fateMeter,
+      previousTraitIds: appendTraitHistory(
+        draft.destinyRerollSession?.previousTraitIds ?? getLegacyDestinyTraitIds(draft.destinies),
+        getDestinyTraitIds(destinyRollDraft),
+        this.destinyRegistry.rerollRules.rerollHistory.recordLast
+      ),
+      divinationTokens: divination.nextDivinationTokens,
+      maxLocks: this.destinyRegistry.rerollRules.maxLockedFields
+    });
     const originFateLocks = buildOriginFateLocks(draft.originFate, locks);
     const originFate = this.originFateGenerator.generate({
       seed: draft.originFate.seed,
@@ -179,7 +253,7 @@ export class CharacterDraftGenerator {
       ...buildOriginFateContextTags(openingInnateDraft, destinies),
       ...(originFateLocks === undefined ? {} : { locks: originFateLocks }),
       previousDraft: draft.originFate,
-      divinationTokens: draft.divinationTokens
+      divinationTokens: divination.nextDivinationTokens
     });
 
     return deepFreeze({
@@ -191,17 +265,46 @@ export class CharacterDraftGenerator {
       spiritualRoot,
       openingInnateDraft,
       destinies,
+      destinyRollDraft,
+      destinyRerollSession,
       originFate,
       background: this.projectOriginBackground(originFate),
       hiddenFate: this.projectOriginHiddenFate(originFate),
       carriedItems: this.projectOriginCarriedItems(originFate),
       locks: {
-        ...locks,
+        ...effectiveLocks,
         spiritualRoot: spiritualRootLock
       },
       attributeLock,
       spiritualRootLock,
       rerollCount: draft.rerollCount + 1,
+      divinationTokens: divination.nextDivinationTokens,
+      updatedAtMs: options.nowMs
+    });
+  }
+
+  public toggleLock(draft: CharacterCreationDraft, options: ToggleCharacterCreationLockOptions): CharacterCreationDraft {
+    const nextLocks = {
+      ...draft.locks,
+      [options.lockKey]: !draft.locks[options.lockKey]
+    };
+    validateLockBudget(nextLocks, this.destinyRegistry.rerollRules.maxLockedFields);
+
+    return deepFreeze({
+      ...draft,
+      locks: nextLocks,
+      spiritualRootLock: nextLocks.spiritualRoot,
+      destinyRerollSession: buildDestinyRerollSession({
+        draftId: draft.draftId,
+        slotId: draft.slotId,
+        seed: draft.destinyRerollSession?.seed ?? draft.destinyRollDraft?.seed ?? `${draft.openingInnateDraft.seed}:destiny_roll`,
+        rerollCount: draft.rerollCount,
+        locks: nextLocks,
+        fateMeter: draft.destinyRerollSession?.fateMeter ?? draft.destinyRollDraft?.fateMeter ?? getInitialFateMeter(this.destinyRegistry),
+        previousTraitIds: draft.destinyRerollSession?.previousTraitIds ?? getLegacyDestinyTraitIds(draft.destinies),
+        divinationTokens: draft.divinationTokens,
+        maxLocks: this.destinyRegistry.rerollRules.maxLockedFields
+      }),
       updatedAtMs: options.nowMs
     });
   }
@@ -240,31 +343,6 @@ export class CharacterDraftGenerator {
     return originFate.carriedItems.map((item) => toCarriedItemDraft(item, this.originFateRegistry.getCarriedItem(item.itemId).rarity));
   }
 
-  private rollCoreStats(): CoreThreeTreasures {
-    const ranges = this.data.defaults.baseStats.core;
-    return {
-      jing: this.rollStat(ranges.jing),
-      qi: this.rollStat(ranges.qi),
-      shen: this.rollStat(ranges.shen)
-    };
-  }
-
-  private rollAptitudeStats(): AptitudeStats {
-    const ranges = this.data.defaults.baseStats.aptitude;
-    return {
-      rootBone: this.rollStat(ranges.rootBone),
-      comprehension: this.rollStat(ranges.comprehension),
-      inspiration: this.rollStat(ranges.inspiration),
-      fortune: this.rollStat(ranges.fortune),
-      heart: this.rollStat(ranges.heart),
-      lifespan: this.rollStat(ranges.lifespan)
-    };
-  }
-
-  private rollStat(range: StatRange): number {
-    return this.rng.rangeInt(range[0], range[1]);
-  }
-
   private rollAppearance(): CharacterAppearanceState {
     return {
       templateId: this.rng.pickWeighted(APPEARANCE_TEMPLATES.map((item) => ({ item, weight: 1 }))),
@@ -273,110 +351,6 @@ export class CharacterDraftGenerator {
       robeColor: this.rng.pickWeighted(ROBE_COLORS.map((item) => ({ item, weight: 1 })))
     };
   }
-
-  private rollDestinies(
-    preserved: readonly DestinyTraitDefinition[],
-    previous?: DestinySelectionState,
-    locks: CharacterCreationLocks = DEFAULT_LOCKS
-  ): DestinySelectionState {
-    const selected: DestinyTraitDefinition[] = [...preserved];
-    const main = locks.mainDestiny && previous !== undefined ? previous.main : toDestinyTraitState(this.pickDestiny("main", selected));
-    addSelectedDefinition(selected, this.requireDestinyDefinition(main.traitId));
-
-    const secondary0 =
-      locks.secondaryDestiny0 && previous !== undefined
-        ? previous.secondary[0]
-        : toDestinyTraitState(this.pickDestiny("secondary", selected));
-    addSelectedDefinition(selected, this.requireDestinyDefinition(secondary0.traitId));
-
-    const secondary1 =
-      locks.secondaryDestiny1 && previous !== undefined
-        ? previous.secondary[1]
-        : toDestinyTraitState(this.pickDestiny("secondary", selected));
-    addSelectedDefinition(selected, this.requireDestinyDefinition(secondary1.traitId));
-
-    const flaw = locks.flawDestiny && previous !== undefined ? previous.flaw : toDestinyTraitState(this.pickDestiny("flaw", selected));
-
-    return {
-      main,
-      secondary: [secondary0, secondary1],
-      flaw
-    };
-  }
-
-  private pickDestiny(slotType: DestinySlotType, selected: readonly DestinyTraitDefinition[]): DestinyTraitDefinition {
-    const candidates = this.data.destinyTraits.filter(
-      (trait) => trait.slotTypes.includes(slotType) && !selected.some((existing) => existing.id === trait.id) && isTraitCompatible(trait, selected)
-    );
-    if (candidates.length === 0) {
-      throw new Error(`No compatible destiny traits available for ${slotType} slot`);
-    }
-    return pickWeightedByRarity(this.rng, candidates);
-  }
-
-  private pickHiddenFate(backgroundId: string): HiddenFateDefinition {
-    const background = this.data.backgrounds.find((candidate) => candidate.id === backgroundId);
-    const weights = background?.hiddenFateWeights ?? {};
-    return this.rng.pickWeighted(
-      this.data.hiddenFates.map((hiddenFate) => ({
-        item: hiddenFate,
-        weight: getRarityWeight(hiddenFate.rarity) * (weights[hiddenFate.id] ?? weights[hiddenFate.id.replace(/^hidden_/, "")] ?? 1)
-      }))
-    );
-  }
-
-  private rollCarriedItems(backgroundId: string): readonly CarriedItemDraft[] {
-    const background = this.data.backgrounds.find((candidate) => candidate.id === backgroundId);
-    const carriedItemsById = new Map(this.data.carriedItems.map((item) => [item.itemId, item]));
-    const backgroundItems = (background?.carriedItemPool ?? []).flatMap((itemId) => {
-      const item = carriedItemsById.get(itemId);
-      return item === undefined ? [] : [item];
-    });
-    const pool = backgroundItems.length > 0 ? backgroundItems : this.data.carriedItems;
-    return [this.rng.pickWeighted(pool.map((item) => ({ item, weight: getRarityWeight(item.rarity) })))];
-  }
-
-  private requireDestinyDefinition(traitId: string): DestinyTraitDefinition {
-    const definition = this.data.destinyTraits.find((trait) => trait.id === traitId);
-    if (definition === undefined) {
-      throw new Error(`Unknown destiny trait id: ${traitId}`);
-    }
-    return definition;
-  }
-
-  private getPreservedDestinyTraits(destinies: DestinySelectionState, locks: CharacterCreationLocks): readonly DestinyTraitDefinition[] {
-    const traitIds = [
-      ...(locks.mainDestiny ? [destinies.main.traitId] : []),
-      ...(locks.secondaryDestiny0 ? [destinies.secondary[0].traitId] : []),
-      ...(locks.secondaryDestiny1 ? [destinies.secondary[1].traitId] : []),
-      ...(locks.flawDestiny ? [destinies.flaw.traitId] : [])
-    ];
-    return traitIds.flatMap((traitId) => {
-      const definition = this.data.destinyTraits.find((trait) => trait.id === traitId);
-      return definition === undefined ? [] : [definition];
-    });
-  }
-}
-
-function pickWeightedByRarity<T extends { readonly rarity: string }>(rng: SeededRng, values: readonly T[]): T {
-  return rng.pickWeighted(values.map((item) => ({ item, weight: getRarityWeight(item.rarity) })));
-}
-
-function getRarityWeight(rarity: string): number {
-  if (rarity === "flaw") {
-    return 100;
-  }
-  return RARITY_WEIGHTS[rarity as WeightedRarity] ?? 1;
-}
-
-function toSpiritualRootState(root: SpiritualRootDefinition): SpiritualRootState {
-  return {
-    rootId: root.id,
-    displayName: root.name,
-    elements: root.elements,
-    rarity: root.rarity,
-    tags: root.tags
-  };
 }
 
 export function projectOpeningSpiritualRoot(root: OpeningSpiritualRootState): SpiritualRootState {
@@ -412,46 +386,222 @@ function mapOpeningRootRarity(categoryId: OpeningSpiritualRootState["categoryId"
   }
 }
 
-function toDestinyTraitState(trait: DestinyTraitDefinition): DestinyTraitState {
+function projectDestinyRollSelection(draft: DestinyRollDraft): DestinySelectionState {
+  return {
+    main: toDestinyTraitState(draft.destinies.main),
+    secondary: [toDestinyTraitState(draft.destinies.secondary[0]), toDestinyTraitState(draft.destinies.secondary[1])],
+    flaw: toDestinyTraitState(draft.destinies.flaw),
+    synergies: draft.destinies.synergies,
+    softConflicts: draft.destinies.softConflicts,
+    synergyWarnings: draft.destinies.synergyWarnings,
+    conflictWarnings: draft.destinies.conflictWarnings,
+    warnings: draft.destinies.warnings
+  };
+}
+
+function toDestinyTraitState(trait: GeneratedDestinyTraitDefinition): DestinyTraitState {
   return {
     traitId: trait.id,
     name: trait.name,
-    rarity: trait.rarity,
+    rarity: mapDestinyQualityToRarity(trait.quality),
+    quality: trait.quality,
+    qualityLabel: getDestinyQualityLabel(trait.quality),
+    description: trait.description,
     tags: trait.tags,
     positiveEffects: trait.positiveEffects,
     negativeEffects: trait.negativeEffects
   };
 }
 
-function toBackgroundOriginState(background: BackgroundOriginDefinition): BackgroundOriginState {
-  return {
-    backgroundId: background.id,
-    name: background.name,
-    rarity: background.rarity,
-    description: background.description,
-    visibleEffects: background.visibleEffects
-  };
-}
-
-function toHiddenFateState(hiddenFate: HiddenFateDefinition): HiddenFateState {
-  return {
-    hiddenFateId: hiddenFate.id,
-    hint: hiddenFate.hint,
-    rarity: hiddenFate.rarity,
-    tags: hiddenFate.tags,
-    revealed: false
-  };
-}
-
-function isTraitCompatible(candidate: DestinyTraitDefinition, selected: readonly DestinyTraitDefinition[]): boolean {
-  const candidateExclusive = new Set(candidate.exclusiveWith ?? []);
-  return selected.every((existing) => !candidateExclusive.has(existing.id) && existing.exclusiveWith?.includes(candidate.id) !== true);
-}
-
-function addSelectedDefinition(selected: DestinyTraitDefinition[], definition: DestinyTraitDefinition): void {
-  if (!selected.some((trait) => trait.id === definition.id)) {
-    selected.push(definition);
+function mapDestinyQualityToRarity(quality: DestinyQuality): CharacterCreationRarity {
+  switch (quality) {
+    case "flaw":
+      return "flaw";
+    case "mortal":
+    case "good":
+      return "common";
+    case "rare":
+      return "rare";
+    case "mystic":
+    case "defiant":
+      return "epic";
+    case "earthly":
+    case "heavenly":
+    case "forbidden":
+      return "legendary";
   }
+}
+
+function getDestinyQualityLabel(quality: DestinyQuality): string {
+  switch (quality) {
+    case "mortal":
+      return "凡命";
+    case "good":
+      return "良命";
+    case "rare":
+      return "奇命";
+    case "mystic":
+      return "玄命";
+    case "earthly":
+      return "地命";
+    case "heavenly":
+      return "天命";
+    case "defiant":
+      return "逆命";
+    case "forbidden":
+      return "禁命";
+    case "flaw":
+      return "劫命";
+  }
+}
+
+interface BuildDestinyRerollSessionOptions {
+  readonly draftId: string;
+  readonly slotId: string;
+  readonly seed: string;
+  readonly rerollCount: number;
+  readonly locks: CharacterCreationLocks;
+  readonly fateMeter: FateMeterState;
+  readonly previousTraitIds: readonly string[];
+  readonly divinationTokens: number;
+  readonly maxLocks: number;
+}
+
+function buildDestinyRerollSession(options: BuildDestinyRerollSessionOptions) {
+  const activeLockCount = countBudgetedLocks(options.locks);
+  return {
+    sessionId: `${options.draftId}:destiny_reroll`,
+    slotId: options.slotId,
+    seed: options.seed,
+    rerollCount: options.rerollCount,
+    locksRemaining: Math.max(0, options.maxLocks - activeLockCount),
+    divinationTokens: options.divinationTokens,
+    lockedFields: toDestinyGenerationLocks(options.locks),
+    fateMeter: options.fateMeter,
+    previousTraitIds: options.previousTraitIds
+  };
+}
+
+function validateLockBudget(locks: CharacterCreationLocks, maxLocks: number): void {
+  const activeLockCount = countBudgetedLocks(locks);
+  if (activeLockCount > maxLocks) {
+    throw new Error(`Character creation lock budget exceeded: ${activeLockCount}/${maxLocks}`);
+  }
+}
+
+function countBudgetedLocks(locks: CharacterCreationLocks): number {
+  return [
+    locks.spiritualRoot,
+    locks.mainDestiny,
+    locks.secondaryDestiny0,
+    locks.secondaryDestiny1,
+    locks.flawDestiny,
+    locks.background,
+    locks.carriedItems
+  ].filter(Boolean).length;
+}
+
+function toDestinyGenerationLocks(locks: CharacterCreationLocks): DestinyGenerationLocks {
+  return {
+    ...(locks.spiritualRoot ? { spiritualRoot: true } : {}),
+    ...(locks.mainDestiny ? { mainDestiny: true } : {}),
+    ...(locks.secondaryDestiny0 ? { secondaryDestiny0: true } : {}),
+    ...(locks.secondaryDestiny1 ? { secondaryDestiny1: true } : {}),
+    ...(locks.flawDestiny ? { flawDestiny: true } : {}),
+    ...(locks.background ? { backgroundOrigin: true } : {}),
+    ...(locks.hiddenFate ? { hiddenFateHint: true } : {}),
+    ...(locks.carriedItems ? { carriedItem: true } : {})
+  };
+}
+
+function resolvePreviousDestinyRollDraft(
+  draft: CharacterCreationDraft,
+  registry: DestinyRegistry
+): DestinyRollDraft | undefined {
+  if (draft.destinyRollDraft !== undefined) {
+    return draft.destinyRollDraft;
+  }
+
+  try {
+    const main = registry.getTrait(draft.destinies.main.traitId);
+    const secondary0 = registry.getTrait(draft.destinies.secondary[0].traitId);
+    const secondary1 = registry.getTrait(draft.destinies.secondary[1].traitId);
+    const flaw = registry.getTrait(draft.destinies.flaw.traitId);
+    return {
+      draftId: draft.draftId,
+      seed: `${draft.openingInnateDraft.seed}:destiny_roll`,
+      rerollIndex: draft.rerollCount,
+      destinies: {
+        main,
+        secondary: [secondary0, secondary1],
+        flaw,
+        synergies: [],
+        softConflicts: [],
+        synergyWarnings: [],
+        conflictWarnings: [],
+        warnings: []
+      },
+      fateMeter: draft.destinyRerollSession?.fateMeter ?? getInitialFateMeter(registry),
+      debug: {
+        attempts: 0,
+        rejectedByExclusive: [],
+        selectedWeights: {},
+        fateMeterBefore: draft.destinyRerollSession?.fateMeter ?? getInitialFateMeter(registry),
+        fateMeterAfter: draft.destinyRerollSession?.fateMeter ?? getInitialFateMeter(registry)
+      }
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+function getInitialFateMeter(registry: DestinyRegistry): FateMeterState {
+  return {
+    value: registry.rerollRules.fateMeter.initial,
+    guaranteeRareNext: registry.rerollRules.fateMeter.initial >= registry.rerollRules.fateMeter.thresholdGuaranteeRare
+  };
+}
+
+function resolveDivinationState(
+  draft: CharacterCreationDraft,
+  useDivination: boolean,
+  registry: DestinyRegistry
+): { readonly fateMeter: FateMeterState; readonly nextDivinationTokens: number } {
+  const currentFateMeter = draft.destinyRerollSession?.fateMeter ?? draft.destinyRollDraft?.fateMeter ?? getInitialFateMeter(registry);
+  if (!useDivination) {
+    return {
+      fateMeter: currentFateMeter,
+      nextDivinationTokens: draft.divinationTokens
+    };
+  }
+  if (draft.divinationTokens <= 0) {
+    throw new Error("No divination tokens remaining");
+  }
+  return {
+    fateMeter: {
+      ...currentFateMeter,
+      value: Math.max(currentFateMeter.value, registry.rerollRules.fateMeter.thresholdGuaranteeRare),
+      guaranteeRareNext: true
+    },
+    nextDivinationTokens: draft.divinationTokens - 1
+  };
+}
+
+function getDestinyTraitIds(draft: DestinyRollDraft): readonly string[] {
+  return [draft.destinies.main.id, ...draft.destinies.secondary.map((trait) => trait.id), draft.destinies.flaw.id];
+}
+
+function getLegacyDestinyTraitIds(destinies: DestinySelectionState): readonly string[] {
+  return [destinies.main.traitId, ...destinies.secondary.map((trait) => trait.traitId), destinies.flaw.traitId];
+}
+
+function appendTraitHistory(
+  previousTraitIds: readonly string[],
+  nextTraitIds: readonly string[],
+  limit: number
+): readonly string[] {
+  const combined = [...previousTraitIds, ...nextTraitIds];
+  return limit <= 0 ? combined : combined.slice(-limit);
 }
 
 function mergeLocks(current: CharacterCreationLocks, next: Partial<CharacterCreationLocks> | undefined): CharacterCreationLocks {
@@ -554,6 +704,10 @@ function mapOriginRarity(rarity: OriginRarity): CharacterCreationRarity {
 
 function createOriginFateSeed(seed: string, slotId: string, draftSerial: number): string {
   return `${seed}:character_creation_origin_fate:${slotId}:${draftSerial}`;
+}
+
+function createDestinySeed(seed: string, slotId: string, draftSerial: number): string {
+  return `${seed}:character_creation_destiny:${slotId}:${draftSerial}`;
 }
 
 function createOpeningSeed(seed: string, slotId: string, draftSerial: number): string {

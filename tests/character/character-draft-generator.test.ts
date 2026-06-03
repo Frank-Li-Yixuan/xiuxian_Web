@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { loadCharacterCreationData } from "../../src/character/CharacterCreationData";
+import { DestinyCombinationEngine } from "../../src/characterCreation/destiny/DestinyCombinationEngine";
+import { createDestinyRegistry, loadDestinyRegistry } from "../../src/characterCreation/destiny/DestinyRegistry";
 import { CharacterDraftGenerator } from "../../src/character/CharacterDraftGenerator";
-import type { DestinyTraitState, LoadedCharacterCreationData } from "../../src/character/CharacterCreationTypes";
+import type { DestinyTraitState } from "../../src/character/CharacterCreationTypes";
+import type { DestinyDataBundle, DestinyQuality, DestinyQualityDefinition } from "../../src/types/destiny-types.v0.1";
 
 describe("CharacterDraftGenerator", () => {
   it("generates a complete character creation draft", () => {
@@ -45,18 +47,19 @@ describe("CharacterDraftGenerator", () => {
   });
 
   it("does not select destiny traits that are exclusive with each other", () => {
-    const data = loadCharacterCreationData();
-    const generator = new CharacterDraftGenerator({ seed: "cc-c001-exclusive", data });
+    const registry = loadDestinyRegistry();
+    const engine = new DestinyCombinationEngine(registry);
+    const generator = new CharacterDraftGenerator({ seed: "cc-c001-exclusive" });
 
     for (let index = 0; index < 80; index += 1) {
       const draft = generator.generate({ slotId: "slot_1", nowMs: 1_000 + index });
-      expect(hasExclusiveCollision(allDestinyTraits(draft.destinies), data.destinyTraits)).toBe(false);
+      expect(engine.hasHardExclusive(allDestinyTraits(draft.destinies).map((trait) => trait.traitId))).toBe(false);
     }
   });
 
-  it("fails closed when data would force an exclusive destiny collision", () => {
-    const data = makeCollisionOnlyData();
-    const generator = new CharacterDraftGenerator({ seed: "cc-c001-no-compatible", data });
+  it("fails closed when destiny registry data would force an exclusive destiny collision", () => {
+    const destinyRegistry = createDestinyRegistry(makeCollisionOnlyDestinyData());
+    const generator = new CharacterDraftGenerator({ seed: "cc-c001-no-compatible", destinyRegistry });
 
     expect(() => generator.generate({ slotId: "slot_1", nowMs: 1_000 })).toThrow(/No compatible destiny traits/);
   });
@@ -86,13 +89,14 @@ describe("CharacterDraftGenerator", () => {
   });
 
   it("always draws the flaw destiny from the flaw slot", () => {
-    const data = loadCharacterCreationData();
-    const generator = new CharacterDraftGenerator({ seed: "cc-c001-flaw", data });
+    const registry = loadDestinyRegistry();
+    const generator = new CharacterDraftGenerator({ seed: "cc-c001-flaw", destinyRegistry: registry });
 
     const draft = generator.generate({ slotId: "slot_1", nowMs: 6_000 });
-    const flawDefinition = data.destinyTraits.find((trait) => trait.id === draft.destinies.flaw.traitId);
+    const flawDefinition = registry.getTrait(draft.destinies.flaw.traitId);
 
-    expect(flawDefinition?.slotTypes).toContain("flaw");
+    expect(flawDefinition.slotTypes).toContain("flaw");
+    expect(draft.destinies.flaw.quality).toBe("flaw");
     expect(draft.destinies.flaw.rarity).toBe("flaw");
   });
 });
@@ -103,20 +107,6 @@ function allDestinyTraits(destinies: {
   readonly flaw: DestinyTraitState;
 }): readonly DestinyTraitState[] {
   return [destinies.main, ...destinies.secondary, destinies.flaw];
-}
-
-function hasExclusiveCollision(
-  traits: readonly DestinyTraitState[],
-  definitions: ReturnType<typeof loadCharacterCreationData>["destinyTraits"]
-): boolean {
-  const selectedIds = new Set(traits.map((trait) => trait.traitId));
-  for (const trait of traits) {
-    const definition = definitions.find((candidate) => candidate.id === trait.traitId);
-    if (definition?.exclusiveWith?.some((exclusiveId) => selectedIds.has(exclusiveId)) === true) {
-      return true;
-    }
-  }
-  return false;
 }
 
 function getUnlockedSignature(draft: {
@@ -141,52 +131,103 @@ function getUnlockedSignature(draft: {
   });
 }
 
-function makeCollisionOnlyData(): LoadedCharacterCreationData {
-  const data = loadCharacterCreationData();
+function makeCollisionOnlyDestinyData(): DestinyDataBundle {
   return {
-    ...data,
-    destinyTraits: [
-      {
-        id: "destiny_test_main",
-        name: "测试主命格",
-        slotTypes: ["main"],
-        rarity: "common",
-        tags: [],
-        description: "测试",
-        positiveEffects: [],
-        negativeEffects: [],
-        exclusiveWith: ["destiny_test_secondary_a", "destiny_test_secondary_b"]
+    qualityTables: {
+      version: "test",
+      qualities: [makeQuality("good", 2)],
+      qualityWeights: {
+        main: { good: 1 },
+        secondary: { good: 1 },
+        flawSeverity: { minor: 1 }
       },
-      {
-        id: "destiny_test_secondary_a",
-        name: "测试副命格一",
-        slotTypes: ["secondary"],
-        rarity: "common",
-        tags: [],
-        description: "测试",
-        positiveEffects: [],
-        negativeEffects: []
+      budgetCostReference: []
+    },
+    destinyTraits: {
+      version: "test",
+      traits: [
+        makeTrait("destiny_test_main", "good", ["main"]),
+        makeTrait("destiny_test_secondary_a", "good", ["secondary"]),
+        makeTrait("destiny_test_secondary_b", "good", ["secondary"]),
+        makeTrait("flaw_test", "flaw", ["flaw"], "minor")
+      ]
+    },
+    conflictSynergyRules: {
+      version: "test",
+      exclusiveRules: [
+        {
+          id: "ex_main_secondary_a",
+          traits: ["destiny_test_main", "destiny_test_secondary_a"],
+          reason: "test main excludes secondary a"
+        },
+        {
+          id: "ex_main_secondary_b",
+          traits: ["destiny_test_main", "destiny_test_secondary_b"],
+          reason: "test main excludes secondary b"
+        }
+      ],
+      synergyRules: [],
+      conflictRules: []
+    },
+    rerollRules: {
+      version: "test",
+      freeReroll: true,
+      initialLocks: 2,
+      initialDivinationTokens: 1,
+      maxLockedFields: 2,
+      lockableFields: ["spiritualRoot", "mainDestiny", "secondaryDestiny0", "secondaryDestiny1", "flawDestiny"],
+      advancedLockableFields: [],
+      fateMeter: {
+        initial: 0,
+        noRareOrAboveDelta: 1,
+        rareDelta: -2,
+        mysticOrAboveReset: true,
+        thresholdBoost: 2,
+        thresholdGuaranteeRare: 4,
+        boostRule: "test"
       },
-      {
-        id: "destiny_test_secondary_b",
-        name: "测试副命格二",
-        slotTypes: ["secondary"],
-        rarity: "common",
-        tags: [],
-        description: "测试",
-        positiveEffects: [],
-        negativeEffects: []
+      highQualityLimits: {
+        maxEarthlyOrAbovePerDraft: 1,
+        allowSecondEarthlyOrAboveWithDivination: false,
+        maxForbiddenPerDraft: 1
       },
-      {
-        id: "flaw_test",
-        name: "测试缺陷",
-        slotTypes: ["flaw"],
-        rarity: "flaw",
-        tags: [],
-        description: "测试",
-        positiveEffects: [],
-        negativeEffects: []
+      rerollHistory: {
+        recordLast: 20,
+        repetitionPenalty: 0.5
       }
-    ]
+    }
+  };
+}
+
+function makeQuality(id: Exclude<DestinyQuality, "flaw">, rank: number): DestinyQualityDefinition {
+  return {
+    id,
+    name: id,
+    rank,
+    positiveBudget: [1, 2],
+    negativeBudget: [0, 1],
+    frameAsset: `destiny_card_${id}`,
+    color: "#ffffff"
+  };
+}
+
+function makeTrait(
+  id: string,
+  quality: DestinyQuality,
+  slotTypes: readonly ("main" | "secondary" | "flaw")[],
+  calamitySeverity?: "minor"
+) {
+  return {
+    id,
+    name: id,
+    quality,
+    slotTypes,
+    ...(calamitySeverity === undefined ? {} : { calamitySeverity }),
+    tags: [],
+    description: id,
+    positiveEffects: [],
+    negativeEffects: [],
+    modifiers: {},
+    baseWeight: 100
   };
 }

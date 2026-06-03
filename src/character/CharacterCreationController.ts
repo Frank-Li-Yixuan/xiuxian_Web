@@ -2,7 +2,8 @@ import {
   CharacterDraftGenerator,
   type CharacterDraftGeneratorOptions,
   type GenerateCharacterDraftOptions,
-  type RerollCharacterDraftOptions
+  type RerollCharacterDraftOptions,
+  type ToggleCharacterCreationLockOptions
 } from "./CharacterDraftGenerator";
 import type {
   CharacterCreationDraft
@@ -23,5 +24,9 @@ export class CharacterCreationController {
 
   reroll(draft: CharacterCreationDraft, options: RerollCharacterDraftOptions): CharacterCreationDraft {
     return this.draftGenerator.reroll(draft, options);
+  }
+
+  toggleLock(draft: CharacterCreationDraft, options: ToggleCharacterCreationLockOptions): CharacterCreationDraft {
+    return this.draftGenerator.toggleLock(draft, options);
   }
 }
