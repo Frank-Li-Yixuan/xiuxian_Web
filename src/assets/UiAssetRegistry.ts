@@ -39,6 +39,17 @@ export const CHARACTER_CREATION_UI_REQUIRED_IDS = [
 ] as const;
 
 export type UiAssetId = (typeof CHARACTER_CREATION_UI_REQUIRED_IDS)[number];
+const ALLOWED_UI_ASSET_CATEGORIES = new Set([
+  "badge",
+  "button",
+  "card",
+  "disc",
+  "fate_altar",
+  "frame",
+  "input",
+  "panel",
+  "row"
+]);
 
 export interface UiAssetRect {
   readonly x: number;
@@ -121,6 +132,7 @@ export function validateRequiredUiAssets(
     if (entry.required !== true) {
       throw new Error(`Required UI asset must be marked required: ${id}`);
     }
+    validateAssetCategory(id, entry.category);
     validateAssetPath(id, entry.path);
     validateRect(id, entry.contentRect);
     for (const [regionName, region] of Object.entries(entry.regions ?? {})) {
@@ -154,6 +166,15 @@ export async function preloadUiAssets<TLoaded = HTMLImageElement>(
   );
 
   return loadedAssets;
+}
+
+function validateAssetCategory(id: UiAssetId, category: string): void {
+  if (category.trim().length === 0) {
+    throw new Error(`UI asset ${id} category must not be empty`);
+  }
+  if (!ALLOWED_UI_ASSET_CATEGORIES.has(category)) {
+    throw new Error(`UI asset ${id} category is not supported: ${category}`);
+  }
 }
 
 function validateAssetPath(id: UiAssetId, path: string): void {

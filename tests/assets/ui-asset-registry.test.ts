@@ -60,6 +60,30 @@ describe("character creation UI asset registry", () => {
     expect(() => validateRequiredUiAssets(brokenManifest)).toThrow(/cc\.mainPanel/);
   });
 
+  it("fails validation for wrong version, namespace, path, category, and rect metadata", () => {
+    const manifest = readManifest();
+
+    expect(() => validateRequiredUiAssets({ ...manifest, version: "0.2" })).toThrow(/version/);
+    expect(() => validateRequiredUiAssets({ ...manifest, namespace: "ui.generated" })).toThrow(/namespace/);
+    expect(() => validateRequiredUiAssets(withEntry(manifest, "cc.mainPanel", { path: "https://cdn.example/panel.png" }))).toThrow(
+      /external URL|under/
+    );
+    expect(() => validateRequiredUiAssets(withEntry(manifest, "cc.mainPanel", { path: "/assets/generated/ui/save/panel.png" }))).toThrow(
+      /common|character_creation/
+    );
+    expect(() => validateRequiredUiAssets(withEntry(manifest, "cc.mainPanel", { path: "/assets/generated/ui/character_creation/panel.webp" }))).toThrow(
+      /PNG/
+    );
+    expect(() => validateRequiredUiAssets(withEntry(manifest, "cc.mainPanel", { category: "" }))).toThrow(/category/);
+    expect(() => validateRequiredUiAssets(withEntry(manifest, "cc.mainPanel", { category: "image_button" }))).toThrow(/category/);
+    expect(() =>
+      validateRequiredUiAssets(withEntry(manifest, "cc.mainPanel", { contentRect: { x: -1, y: 0, w: 10, h: 10 } }))
+    ).toThrow(/rect/);
+    expect(() =>
+      validateRequiredUiAssets(withEntry(manifest, "cc.mainPanel", { regions: { bad: { x: 0, y: 0, w: 0, h: 10 } } }))
+    ).toThrow(/rect/);
+  });
+
   it("returns assets from the configured registry by id", () => {
     const manifest = readManifest();
     configureUiAssetManifest(manifest);
@@ -79,8 +103,33 @@ describe("character creation UI asset registry", () => {
       path: "/assets/generated/ui/character_creation/reroll_fate_button_normal.png"
     });
   });
+
+  it("keeps the character creation screen off the PNG asset-control registry path", () => {
+    const source = readFileSync(join(process.cwd(), "src/app/screens/CharacterCreationScreen.tsx"), "utf8");
+
+    expect(source).not.toContain("UiAssetRegistry");
+    expect(source).not.toContain("AssetButton");
+    expect(source).not.toContain("AssetPanel");
+  });
 });
 
 function readManifest(): UiAssetManifest {
   return JSON.parse(readFileSync(MANIFEST_PATH, "utf8")) as UiAssetManifest;
+}
+
+function withEntry(
+  manifest: UiAssetManifest,
+  id: (typeof CHARACTER_CREATION_UI_REQUIRED_IDS)[number],
+  patch: Partial<UiAssetManifest["assets"][string]>
+): UiAssetManifest {
+  return {
+    ...manifest,
+    assets: {
+      ...manifest.assets,
+      [id]: {
+        ...manifest.assets[id]!,
+        ...patch
+      }
+    }
+  };
 }
