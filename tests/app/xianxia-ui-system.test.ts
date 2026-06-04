@@ -42,6 +42,16 @@ describe("xianxia UI system", () => {
     expect(markup).toContain("xianxia-mist-layer");
     expect(markup).not.toContain("xianxia-cloud-layer");
   });
+
+  it("disables button hover and tap transforms when reduced motion is requested", () => {
+    const source = readFileSync("src/app/ui-system/XianxiaButton.tsx", "utf8");
+
+    expect(source).toContain("useReducedMotion");
+    expect(source).toContain("shouldReduceMotion");
+    expect(source).toContain("disabled || shouldReduceMotion");
+    expect(source).toContain("whileHover");
+    expect(source).toContain("whileTap");
+  });
 });
 
 function loadMainMenuRegistry(): MainMenuAssetRegistry {

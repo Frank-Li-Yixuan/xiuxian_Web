@@ -1604,12 +1604,16 @@
   min-height: 0;
 }
 
-.ccui2-stat-grid span {
+.ccui2-stat-grid span,
+.ccui2-stat-grid button {
+  appearance: none;
   background: rgba(6, 28, 34, 0.64);
   border: 1px solid rgba(232, 203, 122, 0.25);
   border-radius: 8px;
   color: rgba(232, 253, 247, 0.86);
+  cursor: pointer;
   display: grid;
+  font: inherit;
   gap: 2px;
   min-width: 0;
   padding: clamp(7px, 0.95vh, 11px) 8px;
@@ -1622,6 +1626,7 @@
 }
 
 .ccui2-fate-altar {
+  animation: ccui2AltarIdle 7.5s ease-in-out infinite;
   align-self: center;
   aspect-ratio: 1 / 1;
   justify-self: center;
@@ -1658,6 +1663,7 @@
 }
 
 .ccui2-orbit-inner {
+  animation: ccui2Orbit 58s linear infinite;
   background:
     conic-gradient(from 45deg, transparent, rgba(96, 246, 222, 0.22), transparent 24%, rgba(255, 228, 150, 0.18), transparent 52%),
     radial-gradient(circle, rgba(26, 84, 78, 0.28), transparent 68%);
@@ -1666,6 +1672,7 @@
 }
 
 .ccui2-root-effect-layer {
+  animation: ccui2RootBreath 4.8s ease-in-out infinite;
   background:
     radial-gradient(circle, rgba(88, 255, 196, calc(var(--jing-aura) * 0.14)), transparent 58%),
     conic-gradient(from 90deg, rgba(117, 245, 222, 0.14), transparent 20%, rgba(173, 132, 255, 0.12), transparent 46%);
@@ -1673,6 +1680,49 @@
   filter: blur(8px);
   inset: 8%;
   mix-blend-mode: screen;
+}
+
+.ccui2-root-effect-layer[data-root~="metal"] {
+  background:
+    radial-gradient(circle, rgba(255, 244, 190, 0.2), transparent 58%),
+    conic-gradient(from 90deg, rgba(255, 235, 168, 0.18), transparent 22%, rgba(156, 223, 255, 0.12), transparent 48%);
+}
+
+.ccui2-root-effect-layer[data-root~="wood"] {
+  background:
+    radial-gradient(circle, rgba(107, 255, 164, 0.2), transparent 58%),
+    conic-gradient(from 90deg, rgba(117, 255, 181, 0.18), transparent 22%, rgba(91, 232, 205, 0.13), transparent 48%);
+}
+
+.ccui2-root-effect-layer[data-root~="water"] {
+  background:
+    radial-gradient(circle, rgba(105, 224, 255, 0.22), transparent 58%),
+    conic-gradient(from 90deg, rgba(102, 218, 255, 0.18), transparent 22%, rgba(89, 122, 255, 0.13), transparent 48%);
+}
+
+.ccui2-root-effect-layer[data-root~="fire"] {
+  background:
+    radial-gradient(circle, rgba(255, 130, 86, 0.2), transparent 58%),
+    conic-gradient(from 90deg, rgba(255, 153, 92, 0.18), transparent 22%, rgba(255, 222, 123, 0.13), transparent 48%);
+}
+
+.ccui2-root-effect-layer[data-root~="earth"] {
+  background:
+    radial-gradient(circle, rgba(255, 211, 130, 0.2), transparent 58%),
+    conic-gradient(from 90deg, rgba(255, 211, 122, 0.18), transparent 22%, rgba(116, 221, 174, 0.12), transparent 48%);
+}
+
+.ccui2-root-effect-layer[data-root~="thunder"] {
+  background:
+    radial-gradient(circle, rgba(185, 240, 255, 0.24), transparent 58%),
+    conic-gradient(from 90deg, rgba(202, 240, 255, 0.2), transparent 18%, rgba(132, 99, 255, 0.18), transparent 42%);
+}
+
+.ccui2-root-effect-layer[data-root~="yin"],
+.ccui2-root-effect-layer[data-root~="yang"] {
+  background:
+    radial-gradient(circle, rgba(236, 225, 255, 0.18), transparent 58%),
+    conic-gradient(from 90deg, rgba(237, 227, 255, 0.17), transparent 18%, rgba(38, 44, 78, 0.26), transparent 42%);
 }
 
 .ccui2-destiny-effect-layer {
@@ -1705,51 +1755,63 @@
 }
 
 .ccui2-meditation-silhouette {
-  bottom: 26%;
-  height: 33%;
+  animation: ccui2SilhouetteBreath 5.8s ease-in-out infinite;
+  bottom: 21%;
+  filter:
+    drop-shadow(0 16px 22px rgba(0, 0, 0, 0.58))
+    drop-shadow(0 0 28px rgba(0, 0, 0, 0.82));
+  height: 47%;
   left: 50%;
+  object-fit: contain;
+  pointer-events: none;
   transform: translateX(-50%);
-  width: 33%;
+  user-select: none;
+  width: 47%;
+  z-index: 2;
 }
 
-.ccui2-silhouette-head,
-.ccui2-silhouette-body,
-.ccui2-silhouette-legs {
-  background: #020506;
-  box-shadow:
-    0 14px 22px rgba(0, 0, 0, 0.5),
-    0 0 28px rgba(0, 0, 0, 0.9);
-  display: block;
+.ccui2-root-metric-strip {
+  appearance: none;
+  background: rgba(5, 24, 30, 0.72);
+  border: 1px solid rgba(232, 203, 122, 0.38);
+  border-radius: 8px;
+  bottom: -1%;
+  color: rgba(232, 253, 247, 0.88);
+  cursor: pointer;
+  display: grid;
+  font: inherit;
+  gap: 4px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  left: 4%;
+  min-width: 0;
+  padding: 7px;
   position: absolute;
+  right: 4%;
+  text-align: center;
+  z-index: 3;
 }
 
-.ccui2-silhouette-head {
-  border-radius: 50%;
-  height: 26%;
-  left: 37%;
-  top: 0;
-  width: 26%;
+.ccui2-root-metric-strip.is-locked {
+  border-color: rgba(255, 236, 160, 0.92);
+  box-shadow:
+    inset 0 0 18px rgba(255, 229, 145, 0.14),
+    0 0 22px rgba(255, 225, 134, 0.2);
 }
 
-.ccui2-silhouette-body {
-  border-radius: 48% 48% 26% 26%;
-  height: 42%;
-  left: 30%;
-  top: 23%;
-  width: 40%;
+.ccui2-root-metric-strip span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
 }
 
-.ccui2-silhouette-legs {
-  border-radius: 999px 999px 48% 48%;
-  bottom: 5%;
-  height: 28%;
-  left: 7%;
-  width: 86%;
+.ccui2-root-metric-strip strong {
+  color: #fff0ae;
+  font-size: clamp(14px, 1vw, 18px);
 }
 
 .ccui2-altar-caption {
   align-items: center;
-  bottom: 3%;
+  bottom: -14%;
   color: rgba(238, 253, 248, 0.86);
   display: flex;
   flex-direction: column;
@@ -1787,6 +1849,7 @@
   min-width: 0;
   padding: clamp(10px, 1.3vh, 14px);
   text-align: center;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 
 .ccui2-destiny-card.is-selected {
@@ -1807,6 +1870,31 @@
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 111, 118, 0.2), transparent 54%),
     linear-gradient(180deg, rgba(58, 33, 42, 0.94), rgba(10, 18, 28, 0.98));
+}
+
+.ccui2-destiny-card.is-locked {
+  border-color: rgba(255, 236, 160, 0.92);
+  box-shadow:
+    inset 0 0 22px rgba(255, 229, 145, 0.16),
+    0 0 20px rgba(255, 225, 134, 0.2);
+}
+
+.ccui2-character-creation[data-ccui2-fx="reroll"] .ccui2-orbit-outer {
+  animation: ccui2Orbit 44s linear infinite, ccui2RerollSweep 820ms ease-out 1;
+}
+
+.ccui2-character-creation[data-ccui2-fx="reroll"] .ccui2-destiny-card {
+  animation: ccui2CardFlash 720ms ease-out 1;
+}
+
+.ccui2-character-creation[data-ccui2-fx="lock"] .ccui2-destiny-card.is-selected,
+.ccui2-character-creation[data-ccui2-fx="lock"] .ccui2-root-metric-strip {
+  animation: ccui2LockSeal 780ms ease-out 1;
+}
+
+.ccui2-character-creation[data-ccui2-fx="confirm"] .ccui2-fate-altar,
+.ccui2-character-creation[data-ccui2-fx="confirm"] .confirm-life-button {
+  animation: ccui2ConfirmGlow 900ms ease-out 1;
 }
 
 .ccui2-card-slot {
@@ -1830,6 +1918,18 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.ccui2-origin-panel [data-detail-target] {
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+}
+
+.ccui2-origin-panel [data-detail-target]:focus-visible,
+.ccui2-origin-panel [data-detail-target]:hover {
+  background: rgba(77, 219, 198, 0.08);
+  box-shadow: 0 0 0 1px rgba(232, 203, 122, 0.26);
 }
 
 .ccui2-detail-drawer {
@@ -1917,6 +2017,61 @@
   to { transform: rotate(0deg); }
 }
 
+@keyframes ccui2AltarIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes ccui2RootBreath {
+  0%, 100% { opacity: 0.78; transform: scale(0.985); }
+  50% { opacity: 1; transform: scale(1.025); }
+}
+
+@keyframes ccui2SilhouetteBreath {
+  0%, 100% { transform: translateX(-50%) scaleY(1); }
+  50% { transform: translateX(-50%) scaleY(1.035); }
+}
+
+@keyframes ccui2RerollSweep {
+  0% { filter: brightness(1); opacity: 0.72; }
+  38% { filter: brightness(1.95); opacity: 1; }
+  100% { filter: brightness(1); opacity: 0.72; }
+}
+
+@keyframes ccui2CardFlash {
+  0% { transform: translateY(0); }
+  36% {
+    box-shadow:
+      inset 0 0 26px rgba(255, 244, 183, 0.22),
+      0 0 28px rgba(89, 248, 219, 0.3);
+    transform: translateY(-2px);
+  }
+  100% { transform: translateY(0); }
+}
+
+@keyframes ccui2LockSeal {
+  0% { filter: brightness(1); }
+  42% {
+    border-color: rgba(255, 242, 178, 1);
+    filter: brightness(1.36);
+    box-shadow:
+      inset 0 0 26px rgba(255, 229, 145, 0.2),
+      0 0 34px rgba(255, 225, 134, 0.34);
+  }
+  100% { filter: brightness(1); }
+}
+
+@keyframes ccui2ConfirmGlow {
+  0% { filter: brightness(1); }
+  40% {
+    filter: brightness(1.42);
+    box-shadow:
+      0 0 34px rgba(255, 239, 171, 0.3),
+      0 0 52px rgba(82, 242, 214, 0.22);
+  }
+  100% { filter: brightness(1); }
+}
+
 @media (max-height: 820px) {
   .ccui2-character-creation {
     padding-block: 10px;
@@ -1940,7 +2095,8 @@
     gap: 5px;
   }
 
-  .ccui2-stat-grid span {
+  .ccui2-stat-grid span,
+  .ccui2-stat-grid button {
     padding-block: 5px;
   }
 }
@@ -1968,6 +2124,113 @@
   }
 }
 
+@media (max-width: 1366px), (max-height: 768px) {
+  .ccui2-character-creation {
+    padding: 8px 10px;
+  }
+
+  .ccui2-character-shell {
+    padding: 10px 14px;
+  }
+
+  .ccui2-character-shell > .xianxia-panel-content {
+    gap: 7px;
+    grid-template-rows: 52px minmax(232px, 1fr) 82px 112px 50px;
+  }
+
+  .ccui2-header {
+    gap: 8px;
+    grid-template-columns: minmax(132px, 0.58fr) minmax(150px, 0.72fr) minmax(240px, 1.12fr) minmax(178px, 0.82fr);
+  }
+
+  .ccui2-name-input {
+    min-width: 0;
+  }
+
+  .ccui2-title-block h1 {
+    font-size: 28px;
+  }
+
+  .ccui2-header-actions {
+    gap: 6px;
+  }
+
+  .ccui2-header-button.xianxia-button,
+  .ccui2-action-button.xianxia-button {
+    min-height: 38px;
+    padding-inline: 8px;
+  }
+
+  .ccui2-main-stage {
+    gap: 9px;
+    grid-template-columns: minmax(180px, 0.66fr) minmax(270px, 1.24fr) minmax(180px, 0.66fr);
+  }
+
+  .ccui2-side-panel > .xianxia-panel-content {
+    gap: 5px;
+    padding: 10px;
+  }
+
+  .ccui2-side-panel h2 {
+    font-size: 17px;
+  }
+
+  .ccui2-side-panel p,
+  .ccui2-side-panel dd,
+  .ccui2-side-panel dt {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .ccui2-stat-grid {
+    gap: 4px;
+  }
+
+  .ccui2-stat-grid span,
+  .ccui2-stat-grid button {
+    padding: 4px 5px;
+  }
+
+  .ccui2-fate-altar {
+    width: min(34vh, 29vw, 330px);
+  }
+
+  .ccui2-root-metric-strip {
+    bottom: -1%;
+    padding: 5px;
+  }
+
+  .ccui2-altar-caption {
+    bottom: -15%;
+  }
+
+  .ccui2-destiny-card {
+    padding: 8px;
+  }
+
+  .ccui2-destiny-card strong {
+    font-size: 14px;
+  }
+
+  .ccui2-detail-drawer > .xianxia-panel-content {
+    gap: 6px;
+    padding: 9px 12px;
+  }
+
+  .ccui2-detail-tabs button {
+    padding: 5px 9px;
+  }
+
+  .ccui2-detail-scroll {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .ccui2-action-bar {
+    gap: 7px;
+  }
+}
+
 @media (max-width: 1000px) {
   .ccui2-header {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -1990,8 +2253,30 @@
 
 @media (prefers-reduced-motion: reduce) {
   .ccui2-orbit-outer,
-  .ccui2-orbit-middle {
+  .ccui2-orbit-middle,
+  .ccui2-orbit-inner,
+  .ccui2-fate-altar,
+  .ccui2-root-effect-layer,
+  .ccui2-destiny-effect-layer,
+  .ccui2-destiny-effect-layer::before,
+  .ccui2-destiny-effect-layer::after,
+  .ccui2-meditation-silhouette,
+  .ccui2-destiny-card,
+  .ccui2-root-metric-strip,
+  .ccui2-character-creation[data-ccui2-fx="reroll"] .ccui2-orbit-outer,
+  .ccui2-character-creation[data-ccui2-fx="reroll"] .ccui2-destiny-card,
+  .ccui2-character-creation[data-ccui2-fx="lock"] .ccui2-destiny-card.is-selected,
+  .ccui2-character-creation[data-ccui2-fx="lock"] .ccui2-root-metric-strip,
+  .ccui2-character-creation[data-ccui2-fx="confirm"] .ccui2-fate-altar,
+  .ccui2-character-creation[data-ccui2-fx="confirm"] .confirm-life-button {
     animation: none;
+  }
+
+  .ccui2-destiny-card,
+  .ccui2-detail-tabs button,
+  .ccui2-header-button.xianxia-button,
+  .ccui2-action-button.xianxia-button {
+    transition: none;
   }
 }
 
@@ -3226,7 +3511,8 @@
 
 .xianxia-dialog-overlay.is-hidden,
 .xianxia-dialog-positioner.is-hidden {
-  pointer-events: none;
+  pointer-events: none !important;
+  visibility: hidden;
 }
 
 .xianxia-dialog-positioner {

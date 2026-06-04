@@ -24,6 +24,7 @@ export function createDefaultProfileForSlot(options: CreateDefaultProfileForSlot
     profileId: `local_${options.slotId}`,
     saveName: normalizeName(options.saveName, getDefaultSaveName(options.slotId)),
     characterName: DEFAULT_CHARACTER_NAME,
+    stage: "character_creation",
     lifeSimulation: {
       status: "simulating",
       ageYears: 0
@@ -42,6 +43,7 @@ export function completeLifeSimulationForProfile(options: CompleteLifeSimulation
   return cloneOutgameProfile({
     ...cloneOutgameProfile(options.profile),
     characterName: normalizeName(options.characterName, options.profile.characterName ?? DEFAULT_CHARACTER_NAME),
+    stage: "dongfu_unlocked",
     lifeSimulation: {
       status: "completed",
       ageYears: options.ageYears

@@ -38,7 +38,7 @@ export function SaveSlotScreen({ assets, generatedUiAssets: _generatedUiAssets, 
     }
     if (mode === "continue") {
       if (selectedSlot.profile !== null) {
-        if (selectedSlot.profile.lifeSimulation?.status === "simulating") {
+        if (getSaveSlotContinuationTarget(selectedSlot.profile) === "character_creation") {
           onProfileCreated(selectedSlot.slotId, selectedSlot.profile);
         } else {
           onProfileReady(selectedSlot.profile);
@@ -243,7 +243,7 @@ function getDialogMessage(mode: SaveSlotMode, slot: SaveSlotSummary): string {
     if (profile === null || realm === undefined) {
       return "这个存档位还没有洞府记录，无法读取。";
     }
-    if (profile.lifeSimulation?.status === "simulating") {
+    if (getSaveSlotContinuationTarget(profile) === "character_creation") {
       return "此存档仍在模拟中，载入后回到创建角色流程。";
     }
     return `此存档当前 ${getCultivationLine(profile, false)}。`;
@@ -271,6 +271,18 @@ export function getSaveSlotDisplay(slot: SaveSlotSummary): {
     progress: status === "simulating" ? "当前进度：模拟中" : null,
     cultivation: getCultivationLine(profile, true)
   };
+}
+
+export type SaveSlotContinuationTarget = "character_creation" | "profile_ready";
+
+export function getSaveSlotContinuationTarget(profile: OutgameProfileState): SaveSlotContinuationTarget {
+  if (profile.stage === "character_creation") {
+    return "character_creation";
+  }
+  if (profile.stage === "life_simulation") {
+    return "profile_ready";
+  }
+  return profile.lifeSimulation?.status === "simulating" ? "character_creation" : "profile_ready";
 }
 
 function getCultivationLine(profile: OutgameProfileState, includeAge: boolean): string {

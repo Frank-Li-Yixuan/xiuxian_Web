@@ -84,6 +84,30 @@ describe("CharacterCreationController destiny reroll integration", () => {
     );
   });
 
+  it("preserves every CCUI2 lockable creation slot through reroll", () => {
+    const lockCases = [
+      ["spiritualRoot", (draft: Draft) => JSON.stringify(draft.openingInnateDraft.spiritualRoot)],
+      ["mainDestiny", (draft: Draft) => draft.destinies.main.traitId],
+      ["secondaryDestiny0", (draft: Draft) => draft.destinies.secondary[0].traitId],
+      ["secondaryDestiny1", (draft: Draft) => draft.destinies.secondary[1].traitId],
+      ["flawDestiny", (draft: Draft) => draft.destinies.flaw.traitId],
+      ["background", (draft: Draft) => draft.originFate.backgroundOrigin.originId],
+      ["carriedItems", (draft: Draft) => draft.originFate.carriedItems.map((item) => item.itemId).join("|")]
+    ] as const;
+
+    for (const [lockKey, signature] of lockCases) {
+      const controller = new CharacterCreationController({ seed: `ccui2-c003-preserve-${lockKey}` });
+      const first = controller.generate({ slotId: `slot_${lockKey}`, nowMs: 1_000 });
+      const rerolled = controller.reroll(first, {
+        nowMs: 2_000,
+        locks: { [lockKey]: true }
+      });
+
+      expect(signature(rerolled)).toBe(signature(first));
+      expect(rerolled.locks[lockKey]).toBe(true);
+    }
+  });
+
   it("persists selected destiny data but not draft-only reroll session state into confirmed profiles", () => {
     const controller = new CharacterCreationController({ seed: "dt-c004-profile" });
     const profile = createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000 });
@@ -100,6 +124,8 @@ describe("CharacterCreationController destiny reroll integration", () => {
     });
     const originRecord = confirmed.characterOrigin as unknown as Record<string, unknown>;
 
+    expect(confirmed.stage).toBe("life_simulation");
+    expect(confirmed.lifeSimulation).toEqual({ status: "simulating", ageYears: 0 });
     expect(confirmed.characterOrigin?.destinies).toEqual(draft.destinies);
     expect(originRecord.destinyRollDraft).toBeUndefined();
     expect(originRecord.destinyRerollSession).toBeUndefined();

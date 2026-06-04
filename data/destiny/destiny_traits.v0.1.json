@@ -204,6 +204,7 @@
       "modifiers": {
         "alchemyGainMultiplier": 1.8,
         "alchemySuccessBonus": 0.2,
+        "toxicityGainMultiplier": 0.75,
         "artifactCraftMultiplier": 0.75
       },
       "baseWeight": 100

@@ -5,6 +5,7 @@ export type MainMenuRoute =
   | { readonly screen: "main_menu" }
   | { readonly screen: "save_slots"; readonly mode: SaveSlotMode }
   | { readonly screen: "character_creation" }
+  | { readonly screen: "life_simulation" }
   | { readonly screen: "settings" }
   | { readonly screen: "outgame_home" }
   | { readonly screen: "combat" };
@@ -66,7 +67,7 @@ export function mainMenuAppReducer(state: MainMenuAppState, action: MainMenuAppA
     case "profile_ready":
       return {
         ...state,
-        route: { screen: "outgame_home" },
+        route: { screen: action.profile.stage === "life_simulation" ? "life_simulation" : "outgame_home" },
         canContinue: true,
         activeProfile: action.profile
       };

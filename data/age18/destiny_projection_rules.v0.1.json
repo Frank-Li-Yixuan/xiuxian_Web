@@ -11,7 +11,7 @@
       "systemMessages": ["天资过盛，天道已垂目。"],
       "riskTags": ["tribulation_attention"]
     },
-    "destiny_supreme_goudao": {
+    "destiny_turtle_supreme": {
       "name": "苟道至尊",
       "outerBattlefieldModifiers": [
         "modifier_goudao_survival_shield",
@@ -20,7 +20,7 @@
       "systemMessages": ["检测到避世命格，存活奖励已提高。"],
       "homeHooks": ["home_hook_seclusion_training"]
     },
-    "destiny_waste_root_reversal": {
+    "destiny_waste_root_defiant": {
       "name": "废灵逆命",
       "outerBattlefieldModifiers": [
         "modifier_starting_stat_minor_down",
@@ -39,7 +39,7 @@
       "outerBattlefieldModifiers": ["modifier_thunder_spell_bonus", "modifier_thunder_event_weight"],
       "systemMessages": ["雷霆亲和已记录，域外雷痕将回应你。"]
     },
-    "destiny_alchemy_genius": {
+    "destiny_alchemy_prodigy": {
       "name": "丹道奇才",
       "outerBattlefieldLoadout": ["pill_rejuvenation"],
       "outerBattlefieldModifiers": ["modifier_pill_digest_speed_minor"],
@@ -55,30 +55,30 @@
       "outerBattlefieldModifiers": ["modifier_crit_minor_up", "modifier_heart_demon_projection"],
       "riskTags": ["heart_demon_seed", "karma_pressure"]
     },
-    "destiny_clear_glass_heart": {
+    "destiny_glass_heart": {
       "name": "清净琉璃心",
       "outerBattlefieldModifiers": ["modifier_heart_demon_resist_up", "modifier_clear_mind_aura"],
       "homeHooks": ["home_bonus_clear_mind_minor"]
     },
-    "destiny_lifespan_borrowing": {
+    "destiny_borrow_lifespan": {
       "name": "借寿修行",
       "outerBattlefieldModifiers": ["modifier_lifespan_burn_emergency"],
       "riskTags": ["lifespan_risk"]
     }
   },
   "synergyProjections": {
-    "synergy_heaven_jealous_thunder_affinity": {
+    "syn_heaven_thunder": {
       "requires": ["destiny_heaven_jealous_talent", "destiny_thunder_affinity"],
       "outerBattlefieldModifiers": ["modifier_thunder_reward_plus", "modifier_extra_thunder_warning"],
       "message": "天资与雷劫互相牵引，危险与造化并至。"
     },
-    "synergy_goudao_seated_forgetfulness": {
-      "requires": ["destiny_supreme_goudao", "destiny_zuowang_stability"],
+    "syn_turtle_stillness": {
+      "requires": ["destiny_turtle_supreme", "destiny_stillness_meditation"],
       "outerBattlefieldModifiers": ["modifier_goudao_shield_cap_plus", "modifier_combat_reward_minor_down"],
       "message": "藏拙之道更深，战意也更淡。"
     },
-    "synergy_waste_root_unbreakable": {
-      "requires": ["destiny_waste_root_reversal", "destiny_unbreakable"],
+    "syn_defiant_tenacious": {
+      "requires": ["destiny_waste_root_defiant", "destiny_tenacious"],
       "outerBattlefieldModifiers": ["modifier_reversal_point_bonus"],
       "message": "败而不折，逆命之痕更深。"
     }

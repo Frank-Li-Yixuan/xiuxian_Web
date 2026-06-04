@@ -1,6 +1,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion } from "motion/react";
-import type { ReactElement, ReactNode } from "react";
+import { useEffect, type ReactElement, type ReactNode } from "react";
 
 import { cn } from "./cn";
 
@@ -25,6 +25,19 @@ export function XianxiaDialog({
   title,
   tone = "calm"
 }: XianxiaDialogProps): ReactElement {
+  useEffect(() => {
+    if (open || typeof document === "undefined") {
+      return undefined;
+    }
+    const timeoutId = window.setTimeout(() => {
+      const hasOpenDialog = document.querySelector(".xianxia-dialog-overlay:not(.is-hidden), .xianxia-dialog-positioner:not(.is-hidden)") !== null;
+      if (!hasOpenDialog && document.body.style.pointerEvents === "none") {
+        document.body.style.pointerEvents = "";
+      }
+    }, 0);
+    return () => window.clearTimeout(timeoutId);
+  }, [open]);
+
   return (
     <Dialog.Root open={open} {...(onOpenChange === undefined ? {} : { onOpenChange })}>
       <Dialog.Portal forceMount>

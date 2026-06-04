@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { createInitialMainMenuAppState, mainMenuAppReducer } from "../../src/app/MainMenuAppState";
-import { createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
+import { completeLifeSimulationForProfile, createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
 
 describe("main menu app flow", () => {
   it("starts on the main menu and disables continue when no save exists", () => {
@@ -31,5 +31,26 @@ describe("main menu app flow", () => {
     expect(outgame.activeProfile?.profileId).toBe("local_slot_2");
     expect(combat.route).toEqual({ screen: "combat" });
     expect(combat.activeProfile?.profileId).toBe("local_slot_2");
+  });
+
+  it("routes confirmed life-simulation profiles to life simulation and legacy completed profiles to outgame", () => {
+    const initial = createInitialMainMenuAppState({ hasAnySave: true });
+    const createdProfile = createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "Qingyun" });
+    const characterCreation = mainMenuAppReducer(initial, { type: "profile_created", profile: createdProfile, slotId: "slot_1" });
+    const lifeProfile = {
+      ...createdProfile,
+      stage: "life_simulation" as const,
+      lifeSimulation: { status: "simulating" as const, ageYears: 0 }
+    };
+    const completedProfile = completeLifeSimulationForProfile({
+      profile: createdProfile,
+      nowMs: 2_000,
+      ageYears: 18,
+      characterName: "Lin Wen"
+    });
+
+    expect(characterCreation.route).toEqual({ screen: "character_creation" });
+    expect(mainMenuAppReducer(characterCreation, { type: "profile_ready", profile: lifeProfile }).route).toEqual({ screen: "life_simulation" });
+    expect(mainMenuAppReducer(characterCreation, { type: "profile_ready", profile: completedProfile }).route).toEqual({ screen: "outgame_home" });
   });
 });

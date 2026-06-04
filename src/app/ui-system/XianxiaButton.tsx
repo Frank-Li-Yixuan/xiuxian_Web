@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion, type HTMLMotionProps } from "motion/react";
+import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
 import type { ReactElement, ReactNode } from "react";
 
 import { cn } from "./cn";
@@ -26,12 +26,17 @@ export interface XianxiaButtonProps extends Omit<HTMLMotionProps<"button">, "chi
 }
 
 export function XianxiaButton({ children, className, disabled, type = "button", variant = "primary", ...rest }: XianxiaButtonProps): ReactElement {
+  const shouldReduceMotion = useReducedMotion();
+  const interactionMotion = disabled || shouldReduceMotion
+    ? {}
+    : { whileHover: { y: -2, scale: 1.018 }, whileTap: { y: 0, scale: 0.992 } };
+
   return (
     <motion.button
       className={cn(xianxiaButtonClass({ variant }), className)}
       disabled={disabled}
       type={type}
-      {...(disabled ? {} : { whileHover: { y: -2, scale: 1.018 }, whileTap: { y: 0, scale: 0.992 } })}
+      {...interactionMotion}
       {...rest}
     >
       <span className="xianxia-button-shine" aria-hidden="true" />

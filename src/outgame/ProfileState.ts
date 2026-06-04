@@ -1,5 +1,6 @@
 import type { RunSettlementReceipt } from "../sim/settlement/RunSettlement";
-import type { CharacterOriginState } from "../types/character-creation-types.v0.1";
+import type { CharacterOriginState, ProfileStage } from "../types/character-creation-types.v0.1";
+import type { LifeSimulationState } from "../types/life-monthly-events-types.v0.1";
 import type { Age18OriginFateResolution } from "../types/origin-fate-types.v0.1";
 import { addResources, copyResourceMap, type ResourceMap } from "./ResourceWallet";
 
@@ -16,8 +17,10 @@ export interface OutgameProfileState {
   readonly profileId: string;
   readonly saveName?: string;
   readonly characterName?: string;
+  readonly stage?: ProfileStage;
   readonly characterOrigin?: CharacterOriginState;
   readonly lifeSimulation?: LifeSimulationProgressState;
+  readonly lifeSimulationState?: LifeSimulationState;
   readonly age18OriginFate?: Age18OriginFateResolution;
   readonly createdAtMs?: number;
   readonly updatedAtMs?: number;
@@ -117,6 +120,14 @@ export interface OutgameFlags {
   readonly [flag: string]: boolean | undefined;
 }
 
+const PROFILE_STAGES: readonly ProfileStage[] = [
+  "empty",
+  "character_creation",
+  "life_simulation",
+  "outer_battlefield",
+  "dongfu_unlocked"
+];
+
 export interface ApplyRunSettlementReceiptOptions {
   readonly profile: OutgameProfileState;
   readonly receipt: RunSettlementReceipt;
@@ -194,6 +205,9 @@ function validateProfile(profile: OutgameProfileState): void {
   if (profile.characterName !== undefined && profile.characterName.trim().length === 0) {
     throw new Error("profile characterName must not be empty when provided");
   }
+  if (profile.stage !== undefined && !PROFILE_STAGES.includes(profile.stage)) {
+    throw new Error("profile stage is invalid");
+  }
   if (profile.characterOrigin !== undefined) {
     if (profile.characterOrigin.characterId.trim().length === 0) {
       throw new Error("profile characterOrigin characterId must not be empty");
@@ -208,6 +222,15 @@ function validateProfile(profile: OutgameProfileState): void {
       throw new Error("profile lifeSimulation status is invalid");
     }
     assertNonNegativeInteger(profile.lifeSimulation.ageYears, "lifeSimulation.ageYears");
+  }
+  if (profile.lifeSimulationState !== undefined) {
+    if (profile.lifeSimulationState.profileId !== profile.profileId) {
+      throw new Error("lifeSimulationState profileId must match profile");
+    }
+    if (profile.characterOrigin !== undefined && profile.lifeSimulationState.characterId !== profile.characterOrigin.characterId) {
+      throw new Error("lifeSimulationState characterId must match characterOrigin");
+    }
+    assertNonNegativeInteger(profile.lifeSimulationState.ageMonths, "lifeSimulationState.ageMonths");
   }
   assertNonNegativeFinite(profile.realm.cultivation, "realm.cultivation");
   assertNonNegativeFinite(profile.realm.cultivationToNext, "realm.cultivationToNext");

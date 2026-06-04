@@ -1,13 +1,70 @@
 import type {
+  AptitudeStats,
   CharacterCreationDraft,
   CharacterCreationLockKey,
   CharacterCreationLocks,
+  CoreThreeTreasures,
   DestinyTraitState
 } from "../../character/CharacterCreationTypes";
 import { loadDestinyRegistry } from "../../characterCreation/destiny/DestinyRegistry";
+import type { ElementId, SpiritualRootCategoryId } from "../../types/opening-generator-types.v0.1";
 
 export type CharacterCreationDetailTab = "stats" | "root" | "destiny" | "origin" | "items";
 export type CharacterCreationDestinyCardSlot = "main" | "secondary0" | "secondary1" | "flaw";
+export type CharacterCreationCoreTreasureId = keyof CoreThreeTreasures;
+export type CharacterCreationAptitudeId = keyof AptitudeStats;
+export type CharacterCreationRootMetricId = "purity" | "stability" | "conflict" | "breadth";
+
+export interface CharacterCreationNumericRow<TId extends string = string> {
+  readonly id: TId;
+  readonly label: string;
+  readonly value: number;
+  readonly description: string;
+}
+
+export interface CharacterCreationRootElementViewModel {
+  readonly id: string;
+  readonly label: string;
+  readonly percentage: number;
+  readonly primary: boolean;
+  readonly secondary: boolean;
+  readonly latent: boolean;
+}
+
+export interface CharacterCreationSpiritualRootViewModel {
+  readonly categoryId: SpiritualRootCategoryId;
+  readonly categoryLabel: string;
+  readonly displayName: string;
+  readonly elements: readonly CharacterCreationRootElementViewModel[];
+  readonly primaryElement?: string;
+  readonly secondaryElements: readonly string[];
+  readonly latentRoot?: string;
+  readonly metrics: Readonly<Record<CharacterCreationRootMetricId, number>>;
+  readonly metricRows: readonly CharacterCreationNumericRow<CharacterCreationRootMetricId>[];
+  readonly relationTags: readonly string[];
+  readonly tags: readonly string[];
+}
+
+export interface CharacterCreationOriginFateViewModel {
+  readonly backgroundName: string;
+  readonly backgroundDescription: string;
+  readonly backgroundTags: readonly string[];
+  readonly omen: {
+    readonly levelLabel: string;
+    readonly hints: readonly string[];
+    readonly riskHint: string;
+    readonly relatedTags: readonly string[];
+  };
+  readonly carriedItems: readonly {
+    readonly itemId: string;
+    readonly name: string;
+    readonly visibleDescription: string;
+    readonly conversionLabel: string;
+    readonly outerBattlefieldEffect: string;
+    readonly dongfuHook: string;
+    readonly tags: readonly string[];
+  }[];
+}
 
 export interface CharacterCreationSelectionState {
   readonly selectedSlot: CharacterCreationDestinyCardSlot;
@@ -22,6 +79,7 @@ export interface CharacterCreationDestinyCardViewModel {
   readonly name: string;
   readonly rarity: string;
   readonly qualityLabel: string;
+  readonly description: string;
   readonly tags: readonly string[];
   readonly positiveEffects: readonly string[];
   readonly negativeEffects: readonly string[];
@@ -30,9 +88,38 @@ export interface CharacterCreationDestinyCardViewModel {
   readonly conflictWarnings: readonly string[];
 }
 
+export interface CharacterCreationLockTargetViewModel {
+  readonly key: CharacterCreationLockKey;
+  readonly label: string;
+  readonly locked: boolean;
+  readonly canToggle: boolean;
+  readonly canAdd: boolean;
+  readonly buttonLabel: string;
+  readonly state: "locked" | "unlocked";
+  readonly disabledReason?: string;
+}
+
+export interface CharacterCreationActionViewModel {
+  readonly label: string;
+  readonly disabled: boolean;
+  readonly warning?: string;
+}
+
 export interface CharacterCreationViewModel {
+  readonly coreTreasureRows: readonly CharacterCreationNumericRow<CharacterCreationCoreTreasureId>[];
+  readonly aptitudeRows: readonly CharacterCreationNumericRow<CharacterCreationAptitudeId>[];
+  readonly spiritualRoot: CharacterCreationSpiritualRootViewModel;
+  readonly originFate: CharacterCreationOriginFateViewModel;
   readonly destinyCards: readonly CharacterCreationDestinyCardViewModel[];
   readonly selectedLockKey?: CharacterCreationLockKey;
+  readonly selectedLock?: CharacterCreationLockTargetViewModel;
+  readonly lockTargets: readonly CharacterCreationLockTargetViewModel[];
+  readonly actions: {
+    readonly reroll: CharacterCreationActionViewModel;
+    readonly lock: CharacterCreationActionViewModel;
+    readonly divination: CharacterCreationActionViewModel;
+    readonly confirm: CharacterCreationActionViewModel;
+  };
   readonly lockBudget: {
     readonly activeLocks: readonly CharacterCreationLockKey[];
     readonly locksRemaining: number;
@@ -60,6 +147,82 @@ const DESTINY_CARD_CONFIG = [
 ] as const;
 const DESTINY_REROLL_RULES = loadDestinyRegistry().rerollRules;
 
+const LOCK_TARGET_CONFIG: readonly { readonly key: CharacterCreationLockKey; readonly label: string }[] = [
+  { key: "spiritualRoot", label: "灵根" },
+  { key: "mainDestiny", label: "主天命" },
+  { key: "secondaryDestiny0", label: "副天命 1" },
+  { key: "secondaryDestiny1", label: "副天命 2" },
+  { key: "flawDestiny", label: "劫命" },
+  { key: "background", label: "身世" },
+  { key: "carriedItems", label: "随身物" }
+];
+
+const CORE_TREASURE_LABELS: Readonly<Record<CharacterCreationCoreTreasureId, string>> = {
+  jing: "精",
+  qi: "气",
+  shen: "神"
+};
+
+const APTITUDE_LABELS: Readonly<Record<CharacterCreationAptitudeId, string>> = {
+  rootBone: "根骨",
+  comprehension: "悟性",
+  inspiration: "灵感",
+  fortune: "气运",
+  heart: "心性",
+  lifespan: "寿元"
+};
+
+const ROOT_METRIC_LABELS: Readonly<Record<CharacterCreationRootMetricId, string>> = {
+  purity: "纯度",
+  stability: "稳定",
+  conflict: "冲突",
+  breadth: "广度"
+};
+
+const CORE_TREASURE_DESCRIPTIONS: Readonly<Record<CharacterCreationCoreTreasureId, string>> = {
+  jing: "精代表体魄血气、筋骨耐受和开局生命底子；当前值越高，越适合承受高压开局。",
+  qi: "气代表先天真元种子、呼吸吐纳和施法续航；当前值越高，法术循环越顺。",
+  shen: "神代表神魂清明、感知抗扰和悟道稳定性；当前值越高，越不容易被异兆扰乱。"
+};
+
+const APTITUDE_DESCRIPTIONS: Readonly<Record<CharacterCreationAptitudeId, string>> = {
+  rootBone: "根骨影响体魄成长、修炼承载和近身抗压，是肉身根基的核心资质。",
+  comprehension: "悟性影响理解功法、读懂天命代价和后续研法效率。",
+  inspiration: "灵感影响异象感知、奇遇触发和对隐藏预兆的捕捉能力。",
+  fortune: "气运影响开局随机资源、事件偏向和重 Roll 后的稀有机会。",
+  heart: "心性影响定力、风险承受和面对劫命代价时的稳定程度。",
+  lifespan: "寿元影响先天寿命余量、禁术代价空间和长线修行容错。"
+};
+
+const ROOT_METRIC_DESCRIPTIONS: Readonly<Record<CharacterCreationRootMetricId, string>> = {
+  purity: "纯度代表灵气集中程度；高纯度通常让主元素路线更明确。",
+  stability: "稳定影响开局灵根风险；稳定越低，后续异动和反噬风险越需要关注。",
+  conflict: "冲突代表元素相克、杂质碰撞和修行噪声；冲突越高，路线代价越明显。",
+  breadth: "广度代表元素覆盖和转修余地；广度越高，可兼容的玩法标签越多。"
+};
+
+const ROOT_CATEGORY_LABELS: Readonly<Record<SpiritualRootCategoryId, string>> = {
+  single: "单灵根",
+  dual: "双灵根",
+  triple: "三灵根",
+  mixed: "杂灵根",
+  heavenly: "天灵根",
+  variant: "异灵根",
+  hidden: "隐灵根",
+  closed: "闭灵根",
+  chaos: "混沌灵根"
+};
+
+const ELEMENT_LABELS: Readonly<Record<ElementId, string>> = {
+  metal: "金",
+  wood: "木",
+  water: "水",
+  fire: "火",
+  earth: "土",
+  thunder: "雷",
+  yin: "阴"
+};
+
 export function createCharacterCreationViewModel(
   draft: CharacterCreationDraft,
   selection: CharacterCreationSelectionState
@@ -75,8 +238,23 @@ export function createCharacterCreationViewModel(
   };
 
   const selectedLockKey = getCharacterCreationLockKeyForSelection(selection);
+  const lockTargets = toLockTargets(draft.locks, locksRemaining, maxLocks);
+  const selectedLock = selectedLockKey === undefined
+    ? undefined
+    : lockTargets.find((target) => target.key === selectedLockKey);
+  const lockAction = selectedLock === undefined
+    ? { label: "选择可锁定项", disabled: true }
+    : {
+        label: selectedLock.buttonLabel,
+        disabled: false,
+        ...(selectedLock.canAdd ? {} : { warning: selectedLock.disabledReason })
+      };
 
   return {
+    coreTreasureRows: toCoreTreasureRows(draft.openingInnateDraft.coreSeed),
+    aptitudeRows: toAptitudeRows(draft.openingInnateDraft.aptitude),
+    spiritualRoot: toSpiritualRootViewModel(draft),
+    originFate: toOriginFateViewModel(draft),
     destinyCards: DESTINY_CARD_CONFIG.map((config) => {
       const trait = getTraitForCard(draft, config.slot);
       return {
@@ -87,6 +265,7 @@ export function createCharacterCreationViewModel(
         name: trait.name,
         rarity: trait.rarity,
         qualityLabel: trait.qualityLabel ?? trait.rarity,
+        description: trait.description ?? "此天命暂无详细描述。",
         tags: trait.tags,
         positiveEffects: trait.positiveEffects,
         negativeEffects: trait.negativeEffects,
@@ -96,6 +275,14 @@ export function createCharacterCreationViewModel(
       };
     }),
     ...(selectedLockKey === undefined ? {} : { selectedLockKey }),
+    ...(selectedLock === undefined ? {} : { selectedLock }),
+    lockTargets,
+    actions: {
+      reroll: { label: "重新推演", disabled: false },
+      lock: lockAction,
+      divination: { label: `天机推演 ${draft.divinationTokens}`, disabled: draft.divinationTokens <= 0 },
+      confirm: { label: "确认此生", disabled: false }
+    },
     lockBudget: {
       activeLocks,
       locksRemaining,
@@ -113,6 +300,109 @@ export function createCharacterCreationViewModel(
     synergyWarnings: draft.destinies.synergyWarnings,
     conflictWarnings: draft.destinies.conflictWarnings,
     warnings: draft.destinies.warnings
+  };
+}
+
+function toLockTargets(
+  locks: CharacterCreationLocks,
+  locksRemaining: number,
+  maxLocks: number
+): readonly CharacterCreationLockTargetViewModel[] {
+  return LOCK_TARGET_CONFIG.map((target) => {
+    const locked = locks[target.key];
+    const canAdd = locked || locksRemaining > 0;
+    const buttonLabel = `${locked ? "解除" : "锁定"}${target.label}`;
+    return {
+      key: target.key,
+      label: target.label,
+      locked,
+      canToggle: true,
+      canAdd,
+      buttonLabel,
+      state: locked ? "locked" : "unlocked",
+      ...(canAdd ? {} : { disabledReason: `锁定数量已达上限 ${maxLocks}/${maxLocks}` })
+    };
+  });
+}
+
+function toCoreTreasureRows(coreSeed: CoreThreeTreasures): readonly CharacterCreationNumericRow<CharacterCreationCoreTreasureId>[] {
+  return (Object.keys(CORE_TREASURE_LABELS) as CharacterCreationCoreTreasureId[]).map((id) => ({
+    id,
+    label: CORE_TREASURE_LABELS[id],
+    value: coreSeed[id],
+    description: CORE_TREASURE_DESCRIPTIONS[id]
+  }));
+}
+
+function toAptitudeRows(aptitude: AptitudeStats): readonly CharacterCreationNumericRow<CharacterCreationAptitudeId>[] {
+  return (Object.keys(APTITUDE_LABELS) as CharacterCreationAptitudeId[]).map((id) => ({
+    id,
+    label: APTITUDE_LABELS[id],
+    value: aptitude[id],
+    description: APTITUDE_DESCRIPTIONS[id]
+  }));
+}
+
+function toSpiritualRootViewModel(draft: CharacterCreationDraft): CharacterCreationSpiritualRootViewModel {
+  const root = draft.openingInnateDraft.spiritualRoot;
+  const metrics = {
+    purity: root.purity,
+    stability: root.stability,
+    conflict: root.conflict,
+    breadth: root.breadth
+  };
+
+  return {
+    categoryId: root.categoryId,
+    categoryLabel: ROOT_CATEGORY_LABELS[root.categoryId],
+    displayName: root.displayName,
+    elements: Object.entries(root.elements)
+      .filter((entry): entry is [ElementId, number] => entry[1] !== undefined && entry[1] > 0)
+      .sort(([firstElement, firstValue], [secondElement, secondValue]) => secondValue - firstValue || firstElement.localeCompare(secondElement))
+      .map(([id, percentage]) => ({
+        id,
+        label: ELEMENT_LABELS[id],
+        percentage,
+        primary: root.primaryElement === id,
+        secondary: root.secondaryElements.includes(id),
+        latent: root.latentRoot === id
+      })),
+    ...(root.primaryElement === undefined ? {} : { primaryElement: root.primaryElement }),
+    secondaryElements: root.secondaryElements,
+    ...(root.latentRoot === undefined ? {} : { latentRoot: root.latentRoot }),
+    metrics,
+    metricRows: (Object.keys(ROOT_METRIC_LABELS) as CharacterCreationRootMetricId[]).map((id) => ({
+      id,
+      label: ROOT_METRIC_LABELS[id],
+      value: metrics[id],
+      description: ROOT_METRIC_DESCRIPTIONS[id]
+    })),
+    relationTags: root.relationTags,
+    tags: root.tags
+  };
+}
+
+function toOriginFateViewModel(draft: CharacterCreationDraft): CharacterCreationOriginFateViewModel {
+  const originFate = draft.originFate;
+  return {
+    backgroundName: originFate.backgroundOrigin.name,
+    backgroundDescription: originFate.backgroundOrigin.visibleDescription,
+    backgroundTags: originFate.backgroundOrigin.matchedTags,
+    omen: {
+      levelLabel: originFate.visibleHiddenOmen.levelLabel,
+      hints: originFate.visibleHiddenOmen.hints,
+      riskHint: originFate.visibleHiddenOmen.riskHint,
+      relatedTags: originFate.visibleHiddenOmen.relatedTags ?? []
+    },
+    carriedItems: originFate.carriedItems.map((item) => ({
+      itemId: item.itemId,
+      name: item.name,
+      visibleDescription: item.visibleDescription,
+      conversionLabel: item.conversion.label,
+      outerBattlefieldEffect: item.conversion.outerBattlefieldEffect,
+      dongfuHook: item.conversion.dongfuHook,
+      tags: item.matchedTags
+    }))
   };
 }
 

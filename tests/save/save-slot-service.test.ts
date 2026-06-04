@@ -22,6 +22,7 @@ describe("SaveSlotService", () => {
     expect(profile.profileId).toBe("local_slot_1");
     expect(profile.saveName).toBe("青云初试");
     expect(profile.characterName).toBe("未定道友");
+    expect(profile.stage).toBe("character_creation");
     expect(profile.lifeSimulation).toEqual({ status: "simulating", ageYears: 0 });
     expect(profile.createdAtMs).toBe(1_234);
     expect(profile.updatedAtMs).toBe(1_234);
@@ -49,6 +50,7 @@ describe("SaveSlotService", () => {
 
     expect(completed.saveName).toBe("渡劫前夜");
     expect(completed.characterName).toBe("李青云");
+    expect(completed.stage).toBe("dongfu_unlocked");
     expect(completed.lifeSimulation).toEqual({ status: "completed", ageYears: 18 });
     expect(completed.realm).toEqual(profile.realm);
     expect(completed.updatedAtMs).toBe(2_000);

@@ -13,6 +13,7 @@ import {
 import { createSaveSlotService } from "../save/SaveSlotService";
 import { CharacterCreationScreen } from "./screens/CharacterCreationScreen";
 import { CombatScreen } from "./screens/CombatScreen";
+import { LifeSimulationScreen } from "./screens/LifeSimulationScreen";
 import { MainMenuScreen } from "./screens/MainMenuScreen";
 import { OutgameHomeScreen } from "./screens/OutgameHomeScreen";
 import { SaveSlotScreen } from "./screens/SaveSlotScreen";
@@ -100,8 +101,7 @@ export function MainMenuApp(): ReactElement {
             const completedProfile = applyCharacterDraftToProfile({
               profile: state.activeProfile,
               draft,
-              nowMs: saveService.nowMs(),
-              ageYears: 18
+              nowMs: saveService.nowMs()
             });
             saveService.writeProfile(state.activeSaveSlotId, completedProfile);
             dispatch({ type: "profile_ready", profile: completedProfile });
@@ -131,6 +131,17 @@ export function MainMenuApp(): ReactElement {
           profile={state.activeProfile}
           onBackToMainMenu={() => dispatch({ type: "return_to_main_menu", hasAnySave: saveService.hasAnySave() })}
           onEnterCombat={() => dispatch({ type: "enter_combat" })}
+        />
+      );
+    case "life_simulation":
+      if (state.activeProfile === null) {
+        return <MainMenuScreen assets={assets} canContinue={state.canContinue} onContinue={() => dispatch({ type: "open_save_slots", mode: "continue" })} onExit={() => window.close()} onNewGame={() => dispatch({ type: "open_save_slots", mode: "new" })} onSettings={() => dispatch({ type: "open_settings" })} />;
+      }
+      return (
+        <LifeSimulationScreen
+          assets={generatedUiAssets}
+          profile={state.activeProfile}
+          {...(state.activeProfile.lifeSimulationState === undefined ? {} : { lifeSimulationState: state.activeProfile.lifeSimulationState })}
         />
       );
     case "combat":

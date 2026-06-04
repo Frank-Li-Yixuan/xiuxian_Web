@@ -61,9 +61,68 @@ describe("main menu image button css", () => {
   it("keeps the CCUI2 fate altar stage contained above destiny cards", () => {
     const sidePanelRule = ruleBody(".ccui2-side-panel");
     const fateAltarRule = ruleBody(".ccui2-fate-altar");
+    const silhouetteRule = ruleBody(".ccui2-meditation-silhouette");
 
     expect(sidePanelRule).toContain("height: 100%");
     expect(sidePanelRule).toContain("overflow: hidden");
     expect(fateAltarRule).toContain("width: min(40vh, 34vw, 480px)");
+    expect(silhouetteRule).toContain("object-fit: contain");
+    expect(silhouetteRule).toContain("pointer-events: none");
+  });
+
+  it("disables nonessential CCUI2 animation and transitions for reduced motion", () => {
+    const reducedMotionSection = /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.life-simulation-layout/.exec(css)?.[0] ?? "";
+
+    expect(reducedMotionSection).toContain(".ccui2-orbit-outer");
+    expect(reducedMotionSection).toContain(".ccui2-orbit-inner");
+    expect(reducedMotionSection).toContain(".ccui2-fate-altar");
+    expect(reducedMotionSection).toContain(".ccui2-root-effect-layer");
+    expect(reducedMotionSection).toContain(".ccui2-destiny-effect-layer");
+    expect(reducedMotionSection).toContain(".ccui2-meditation-silhouette");
+    expect(reducedMotionSection).toContain('[data-ccui2-fx="reroll"]');
+    expect(reducedMotionSection).toContain('[data-ccui2-fx="lock"]');
+    expect(reducedMotionSection).toContain('[data-ccui2-fx="confirm"]');
+    expect(reducedMotionSection).toContain(".ccui2-destiny-card");
+    expect(reducedMotionSection).toContain(".ccui2-action-button.xianxia-button");
+    expect(reducedMotionSection).toContain("animation: none");
+    expect(reducedMotionSection).toContain("transition: none");
+  });
+
+  it("defines CCUI2-C006 motion, feedback, root aura, and compact viewport rules", () => {
+    expect(css).toContain("@keyframes ccui2AltarIdle");
+    expect(css).toContain("@keyframes ccui2RootBreath");
+    expect(css).toContain("@keyframes ccui2SilhouetteBreath");
+    expect(css).toContain("@keyframes ccui2RerollSweep");
+    expect(css).toContain("@keyframes ccui2CardFlash");
+    expect(css).toContain("@keyframes ccui2LockSeal");
+    expect(css).toContain("@keyframes ccui2ConfirmGlow");
+    expect(css).toContain('.ccui2-character-creation[data-ccui2-fx="reroll"]');
+    expect(css).toContain('.ccui2-character-creation[data-ccui2-fx="lock"]');
+    expect(css).toContain('.ccui2-character-creation[data-ccui2-fx="confirm"]');
+    expect(css).toContain('.ccui2-root-effect-layer[data-root~="fire"]');
+    expect(css).toContain('.ccui2-root-effect-layer[data-root~="thunder"]');
+    expect(css).toContain(".ccui2-root-metric-strip.is-locked");
+    expect(css).toContain(".ccui2-destiny-card.is-locked");
+    expect(css).toContain("@media (max-width: 1366px), (max-height: 768px)");
+  });
+
+  it("keeps long CCUI2 drawer text scrolling only inside the detail body", () => {
+    const detailScrollRule = ruleBody(".ccui2-detail-scroll");
+    const destinyCardRowRule = ruleBody(".ccui2-destiny-card-row");
+    const actionBarRule = ruleBody(".ccui2-action-bar");
+    const drawerContentRule = ruleBody(".ccui2-detail-drawer > .xianxia-panel-content");
+
+    expect(drawerContentRule).toContain("grid-template-rows: auto minmax(0, 1fr)");
+    expect(detailScrollRule).toContain("overflow-y: auto");
+    expect(detailScrollRule).toContain("min-height: 0");
+    expect(destinyCardRowRule).not.toContain("overflow");
+    expect(actionBarRule).not.toContain("overflow");
+  });
+
+  it("prevents closed dialogs from intercepting CCUI2 interaction clicks", () => {
+    const hiddenDialogRule = /\.xianxia-dialog-overlay\.is-hidden,\s*\.xianxia-dialog-positioner\.is-hidden\s*\{(?<body>[^}]*)\}/.exec(css)?.groups?.body ?? "";
+
+    expect(hiddenDialogRule).toContain("pointer-events: none !important");
+    expect(hiddenDialogRule).toContain("visibility: hidden");
   });
 });

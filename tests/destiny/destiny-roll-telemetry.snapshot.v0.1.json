@@ -1,0 +1,109 @@
+{
+  "sampleCount": 512,
+  "slotQualityCounts": {
+    "main": {
+      "defiant": 3,
+      "earthly": 56,
+      "heavenly": 34,
+      "mystic": 165,
+      "rare": 254
+    },
+    "secondary0": {
+      "earthly": 5,
+      "good": 206,
+      "mortal": 119,
+      "mystic": 50,
+      "rare": 132
+    },
+    "secondary1": {
+      "earthly": 4,
+      "good": 193,
+      "mortal": 120,
+      "mystic": 62,
+      "rare": 133
+    },
+    "flaw": {
+      "flaw": 512
+    }
+  },
+  "topTraits": [
+    {
+      "id": "destiny_spirit_sense",
+      "count": 130,
+      "rate": 0.0635
+    },
+    {
+      "id": "destiny_fast_hands",
+      "count": 109,
+      "rate": 0.0532
+    },
+    {
+      "id": "destiny_gold_stone_bone",
+      "count": 86,
+      "rate": 0.042
+    },
+    {
+      "id": "destiny_good_memory",
+      "count": 86,
+      "rate": 0.042
+    },
+    {
+      "id": "destiny_small_merit",
+      "count": 85,
+      "rate": 0.0415
+    },
+    {
+      "id": "destiny_fortune_star",
+      "count": 83,
+      "rate": 0.0405
+    },
+    {
+      "id": "destiny_poisoned_benefit",
+      "count": 80,
+      "rate": 0.0391
+    },
+    {
+      "id": "destiny_five_mixed",
+      "count": 79,
+      "rate": 0.0386
+    },
+    {
+      "id": "destiny_herb_affinity",
+      "count": 74,
+      "rate": 0.0361
+    },
+    {
+      "id": "destiny_tenacious",
+      "count": 70,
+      "rate": 0.0342
+    },
+    {
+      "id": "destiny_early_wisdom",
+      "count": 68,
+      "rate": 0.0332
+    },
+    {
+      "id": "destiny_last_breath",
+      "count": 62,
+      "rate": 0.0303
+    }
+  ],
+  "synergyIds": [
+    "syn_alchemy_poison",
+    "syn_heaven_thunder",
+    "syn_moon_soul_unstable",
+    "syn_turtle_stillness"
+  ],
+  "warningCounts": {
+    "synergyWarnings": 10,
+    "conflictWarnings": 3,
+    "warnings": 13
+  },
+  "hardExclusiveCount": 0,
+  "debugSampleSignatures": [
+    "destiny_battle_nourished|destiny_gold_stone_bone|destiny_small_merit|flaw_soldier_calamity|syn:none|warn:0",
+    "destiny_stillness_meditation|destiny_gold_stone_bone|destiny_thunder_mind|flaw_disaster_star|syn:none|warn:0",
+    "destiny_artifact_blessed|destiny_fast_hands|destiny_poisoned_benefit|flaw_blocked_meridian|syn:none|warn:0",
+    "destiny_demon_seed|destiny_artifact_blessed|destiny_small_merit|flaw_demon_sensitive|syn:none|warn:0"
+  ]
+}

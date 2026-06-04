@@ -1,23 +1,32 @@
 import { cloneOutgameProfile, type OutgameProfileState } from "../outgame/ProfileState";
+import { createInitialLifeSimulationState } from "../lifeSimulation/LifeSimulationInitializer";
 import type { CharacterCreationDraft, CharacterOriginState } from "./CharacterCreationTypes";
 
 export interface ApplyCharacterDraftToProfileOptions {
   readonly profile: OutgameProfileState;
   readonly draft: CharacterCreationDraft;
   readonly nowMs: number;
-  readonly ageYears: number;
+  readonly ageYears?: number;
 }
 
 export function applyCharacterDraftToProfile(options: ApplyCharacterDraftToProfileOptions): OutgameProfileState {
   const characterOrigin = mapCharacterDraftToOrigin(options.draft, options.nowMs);
+  const profile = cloneOutgameProfile(options.profile);
+  const lifeSimulationState = createInitialLifeSimulationState(
+    profile,
+    characterOrigin,
+    `${profile.profileId}:${characterOrigin.characterId}:life_simulation`
+  );
   return cloneOutgameProfile({
-    ...cloneOutgameProfile(options.profile),
+    ...profile,
     characterName: characterOrigin.name,
     characterOrigin,
+    stage: "life_simulation",
     lifeSimulation: {
-      status: "completed",
-      ageYears: options.ageYears
+      status: "simulating",
+      ageYears: 0
     },
+    lifeSimulationState,
     updatedAtMs: options.nowMs
   });
 }

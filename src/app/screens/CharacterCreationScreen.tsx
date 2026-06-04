@@ -1,28 +1,39 @@
-import { useMemo, useState, type CSSProperties, type Dispatch, type ReactElement, type SetStateAction } from "react";
+import { useMemo, useState, type CSSProperties, type Dispatch, type KeyboardEvent, type ReactElement, type SetStateAction } from "react";
 
 import { CharacterCreationController } from "../../character/CharacterCreationController";
 import type {
-  CharacterCreationDraft,
-  CharacterCreationRarity,
-  DestinyTraitState
+  CharacterCreationDraft
 } from "../../character/CharacterCreationTypes";
 import { getDestinyOverlayClasses, getStatAuraCssVars } from "./CharacterCreationFateAltarState";
 import {
+  getCharacterCreationSelectionForDetailTarget,
+  type CharacterCreationDetailTarget
+} from "./CharacterCreationDetailInteractions";
+import {
   createCharacterCreationViewModel,
+  type CharacterCreationDestinyCardViewModel,
   type CharacterCreationDestinyCardSlot as DestinyCardSlot,
   type CharacterCreationDetailTab as DetailTab,
   type CharacterCreationViewModel
 } from "./CharacterCreationViewModel";
-import { XianxiaButton, XianxiaPanel } from "../ui-system";
+import { XianxiaButton, XianxiaDialog, XianxiaInput, XianxiaPanel } from "../ui-system";
 
 export interface CharacterCreationScreenProps {
   readonly assets: unknown;
   readonly initialDraft?: CharacterCreationDraft;
+  readonly initialActiveTab?: DetailTab;
+  readonly initialSelectedSlot?: DestinyCardSlot;
   readonly slotId?: string;
   readonly nowMs?: () => number;
   readonly onBack?: () => void;
   readonly onConfirmLife?: (draft: CharacterCreationDraft) => void;
+  readonly initialActionError?: string;
+  readonly initialConfirmDialog?: "none" | "confirm-life" | "leave";
+  readonly initialFxKind?: CharacterCreationFxKind;
+  readonly initialNameInput?: string;
 }
+
+type CharacterCreationFxKind = "idle" | "reroll" | "lock" | "confirm";
 
 const DETAIL_TABS: readonly { readonly id: DetailTab; readonly label: string }[] = [
   { id: "stats", label: "属性详情" },
@@ -32,42 +43,108 @@ const DETAIL_TABS: readonly { readonly id: DetailTab; readonly label: string }[]
   { id: "items", label: "随身物" }
 ];
 
-const ELEMENT_LABELS: Readonly<Record<string, string>> = {
-  metal: "金",
-  wood: "木",
-  water: "水",
-  fire: "火",
-  earth: "土",
-  thunder: "雷",
-  yin: "阴",
-  yang: "阳"
-};
+const MEDITATION_SILHOUETTE_SRC = "/assets/generated/ui/character_creation/black_meditation_silhouette.png";
 
 export function CharacterCreationScreen({
   initialDraft,
+  initialActiveTab = "stats",
+  initialSelectedSlot = "main",
   slotId = "slot_preview",
   nowMs = () => Date.now(),
   onBack,
-  onConfirmLife
+  onConfirmLife,
+  initialActionError,
+  initialConfirmDialog = "none",
+  initialFxKind = "idle",
+  initialNameInput
 }: CharacterCreationScreenProps): ReactElement {
   const controller = useMemo(() => new CharacterCreationController({ seed: `ccui2:${slotId}` }), [slotId]);
   const [draft, setDraft] = useState<CharacterCreationDraft>(
     () => initialDraft ?? controller.generate({ slotId, nowMs: nowMs() })
   );
-  const [activeTab, setActiveTab] = useState<DetailTab>("stats");
-  const [selectedSlot, setSelectedSlot] = useState<DestinyCardSlot>("main");
-  const [actionError, setActionError] = useState<string | undefined>(undefined);
+  const [nameInput, setNameInput] = useState(() => initialNameInput ?? draft.name);
+  const [activeTab, setActiveTab] = useState<DetailTab>(initialActiveTab);
+  const [selectedSlot, setSelectedSlot] = useState<DestinyCardSlot>(initialSelectedSlot);
+  const [actionError, setActionError] = useState<string | undefined>(initialActionError);
+  const [confirmDialog, setConfirmDialog] = useState<"none" | "confirm-life" | "leave">(initialConfirmDialog);
+  const [fxState, setFxState] = useState<{ readonly kind: CharacterCreationFxKind; readonly seq: number }>({
+    kind: initialFxKind,
+    seq: 0
+  });
 
   const viewModel = useMemo(() => createCharacterCreationViewModel(draft, { selectedSlot, activeTab }), [activeTab, draft, selectedSlot]);
-  const selectedTrait = getDestinyTraitForSlot(draft, selectedSlot);
+  const selectedCard = getDestinyCardForSlot(viewModel, selectedSlot);
+  const mainDestinyCard = getDestinyCardForSlot(viewModel, "main");
   const destinyClasses = getDestinyOverlayClasses([draft.destinies.main, ...draft.destinies.secondary, draft.destinies.flaw]);
   const screenStyle = getStatAuraCssVars(draft.coreStats) as CSSProperties;
   const selectedLockKey = viewModel.selectedLockKey;
+  const selectedLock = viewModel.selectedLock;
+  const lockKeyAttr = selectedLock?.key ?? "none";
+  const lockStateAttr = selectedLock?.state ?? "unavailable";
+  const lockTargetLabels = viewModel.lockTargets.map((target) => target.label).join("|");
+  const actionMessage = actionError ?? viewModel.actions.lock.warning;
+  const trimmedName = nameInput.trim();
+  const openDetailTarget = (target: CharacterCreationDetailTarget): void => {
+    const next = getCharacterCreationSelectionForDetailTarget({ activeTab, selectedSlot }, target);
+    setActiveTab(next.activeTab);
+    setSelectedSlot(next.selectedSlot);
+  };
+  const requestLeave = (): void => {
+    setActionError(undefined);
+    setConfirmDialog("leave");
+  };
+  const triggerFx = (kind: CharacterCreationFxKind): void => {
+    setFxState((current) => ({ kind, seq: current.seq + 1 }));
+  };
+  const requestConfirmLife = (): void => {
+    if (trimmedName.length === 0) {
+      setActionError("角色名不能为空");
+      setConfirmDialog("none");
+      return;
+    }
+    setActionError(undefined);
+    setConfirmDialog("confirm-life");
+    triggerFx("confirm");
+  };
+  const confirmLife = (): void => {
+    if (trimmedName.length === 0) {
+      setActionError("角色名不能为空");
+      setConfirmDialog("none");
+      return;
+    }
+    triggerFx("confirm");
+    onConfirmLife?.({ ...draft, name: trimmedName });
+  };
+  const rerollDraft = (): void => {
+    if (updateDraft(setDraft, () => controller.reroll(draft, buildRerollOptions(nowMs(), nameInput)), setActionError)) {
+      triggerFx("reroll");
+    }
+  };
+  const divinationRerollDraft = (): void => {
+    if (updateDraft(setDraft, () => controller.reroll(draft, buildRerollOptions(nowMs(), nameInput, true)), setActionError)) {
+      triggerFx("reroll");
+    }
+  };
+  const toggleSelectedLock = (): void => {
+    if (selectedLockKey !== undefined) {
+      if (updateDraft(setDraft, () => controller.toggleLock(draft, { lockKey: selectedLockKey, nowMs: nowMs() }), setActionError)) {
+        triggerFx("lock");
+      }
+    }
+  };
 
   return (
     <main
       className={["character-creation-screen ccui2-character-creation", ...destinyClasses].join(" ")}
       data-layout-lock="no-page-scroll"
+      data-ccui2-fx={fxState.kind}
+      data-ccui2-fx-seq={fxState.seq}
+      data-confirm-dialog={confirmDialog}
+      data-confirm-life-name={confirmDialog === "confirm-life" ? trimmedName : undefined}
+      data-confirm-life-root={confirmDialog === "confirm-life" ? viewModel.spiritualRoot.displayName : undefined}
+      data-confirm-life-main-destiny={confirmDialog === "confirm-life" ? mainDestinyCard.name : undefined}
+      data-confirm-life-origin={confirmDialog === "confirm-life" ? viewModel.originFate.backgroundName : undefined}
+      data-leave-character-creation-warning={confirmDialog === "leave" ? "true" : undefined}
       data-testid="character-creation-screen"
       style={screenStyle}
     >
@@ -78,6 +155,17 @@ export function CharacterCreationScreen({
             <strong>{slotId}</strong>
             <span>第 {viewModel.rerollCount} 次</span>
           </div>
+          <XianxiaInput
+            className="ccui2-name-input"
+            data-character-name-input="true"
+            label="角色名"
+            maxLength={16}
+            name="characterName"
+            placeholder="请输入此生姓名"
+            type="text"
+            value={nameInput}
+            onValueChange={setNameInput}
+          />
           <div className="ccui2-title-block">
             <span>命盘推演台 · 天机值 {viewModel.fateMeter.value}/{viewModel.fateMeter.guaranteeThreshold}</span>
             <h1>推演天命</h1>
@@ -86,19 +174,23 @@ export function CharacterCreationScreen({
             <XianxiaButton className="ccui2-header-button" disabled variant="ghost">
               剩余锁 {viewModel.lockBudget.locksRemaining}/{viewModel.lockBudget.maxLocks}
             </XianxiaButton>
-            <XianxiaButton className="ccui2-header-button" variant="ghost" onClick={onBack ?? noop}>
+            <XianxiaButton className="ccui2-header-button" variant="ghost" onClick={requestLeave}>
               返回
             </XianxiaButton>
-            <XianxiaButton aria-label="关闭" className="ccui2-header-button" variant="ghost" onClick={onBack ?? noop}>
+            <XianxiaButton aria-label="关闭" className="ccui2-header-button" variant="ghost" onClick={requestLeave}>
               关闭
             </XianxiaButton>
           </div>
         </header>
 
         <section className="ccui2-main-stage" aria-label="命盘推演主体">
-          <StatQuickPanel draft={draft} />
-          <FateAltar draft={draft} />
-          <OriginFateSummary draft={draft} />
+          <StatQuickPanel viewModel={viewModel} onOpen={() => openDetailTarget({ type: "stats" })} />
+          <FateAltar viewModel={viewModel} onOpen={() => openDetailTarget({ type: "root" })} />
+          <OriginFateSummary
+            viewModel={viewModel}
+            onOpenOrigin={() => openDetailTarget({ type: "origin" })}
+            onOpenItems={() => openDetailTarget({ type: "items" })}
+          />
         </section>
 
         <section className="ccui2-destiny-card-row" aria-label="天命卡槽">
@@ -108,10 +200,7 @@ export function CharacterCreationScreen({
               className={`ccui2-destiny-card rarity-${card.rarity} ${selectedSlot === card.slot ? "is-selected" : ""} ${card.locked ? "is-locked" : ""}`}
               data-destiny-card-slot={card.slot}
               type="button"
-              onClick={() => {
-                setSelectedSlot(card.slot);
-                setActiveTab("destiny");
-              }}
+              onClick={() => openDetailTarget({ type: "destiny", slot: card.slot })}
             >
               <span className="ccui2-card-slot">{card.slotLabel} · {card.locked ? "已锁" : "未锁"}</span>
               <strong>{card.name}</strong>
@@ -127,123 +216,286 @@ export function CharacterCreationScreen({
                 key={tab.id}
                 className={activeTab === tab.id ? "is-active" : ""}
                 type="button"
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => openDetailTarget(tab.id === "destiny" ? { type: "destiny", slot: selectedSlot } : { type: tab.id })}
               >
                 {tab.label}
               </button>
             ))}
           </nav>
           <div className="ccui2-detail-scroll" data-scrollable="true">
-            {renderDetailBody(activeTab, draft, selectedTrait, viewModel)}
+            {renderDetailBody(activeTab, selectedCard, viewModel)}
           </div>
         </XianxiaPanel>
 
-        <footer className="ccui2-action-bar" aria-label="角色创建操作">
-          {actionError === undefined ? null : <span className="ccui2-detail-warning">{actionError}</span>}
+        <footer
+          className="ccui2-action-bar"
+          aria-label="角色创建操作"
+          data-lock-targets={lockTargetLabels}
+          data-reroll-enabled={String(!viewModel.actions.reroll.disabled)}
+          data-divination-enabled={String(!viewModel.actions.divination.disabled)}
+        >
+          {actionMessage === undefined ? null : <span className="ccui2-detail-warning">{actionMessage}</span>}
           <XianxiaButton
             className="ccui2-action-button"
+            disabled={viewModel.actions.reroll.disabled}
             variant="secondary"
-            onClick={() => updateDraft(setDraft, () => controller.reroll(draft, { nowMs: nowMs() }), setActionError)}
+            onClick={rerollDraft}
           >
-            重新推演
+            {viewModel.actions.reroll.label}
+          </XianxiaButton>
+          <XianxiaButton
+            aria-pressed={selectedLock?.locked ?? undefined}
+            className="ccui2-action-button"
+            data-lock-key={lockKeyAttr}
+            data-lock-state={lockStateAttr}
+            disabled={viewModel.actions.lock.disabled}
+            variant="secondary"
+            onClick={toggleSelectedLock}
+          >
+            {viewModel.actions.lock.label}
           </XianxiaButton>
           <XianxiaButton
             className="ccui2-action-button"
-            disabled={selectedLockKey === undefined}
+            disabled={viewModel.actions.divination.disabled}
             variant="secondary"
-            onClick={() => {
-              if (selectedLockKey !== undefined) {
-                updateDraft(setDraft, () => controller.toggleLock(draft, { lockKey: selectedLockKey, nowMs: nowMs() }), setActionError);
-              }
-            }}
+            onClick={divinationRerollDraft}
           >
-            锁定项 {selectedLockKey === undefined ? "" : draft.locks[selectedLockKey] ? "解除" : "锁定"}
+            {viewModel.actions.divination.label}
           </XianxiaButton>
           <XianxiaButton
-            className="ccui2-action-button"
-            disabled={!viewModel.canUseDivination}
-            variant="secondary"
-            onClick={() => updateDraft(setDraft, () => controller.reroll(draft, { nowMs: nowMs(), useDivination: true }), setActionError)}
+            className="ccui2-action-button confirm-life-button"
+            disabled={viewModel.actions.confirm.disabled}
+            onClick={requestConfirmLife}
           >
-            天机推演 {viewModel.divinationTokens}
+            {viewModel.actions.confirm.label}
           </XianxiaButton>
-          <XianxiaButton className="ccui2-action-button confirm-life-button" onClick={() => onConfirmLife?.(draft)}>
-            确认此生
-          </XianxiaButton>
-          <XianxiaButton className="ccui2-action-button" variant="ghost" onClick={onBack ?? noop}>
+          <XianxiaButton className="ccui2-action-button" variant="ghost" onClick={requestLeave}>
             返回
           </XianxiaButton>
         </footer>
+        <ConfirmLifeDialog
+          name={trimmedName}
+          open={confirmDialog === "confirm-life"}
+          viewModel={viewModel}
+          onCancel={() => setConfirmDialog("none")}
+          onConfirm={confirmLife}
+        />
+        <LeaveCharacterCreationDialog
+          open={confirmDialog === "leave"}
+          onCancel={() => setConfirmDialog("none")}
+          onConfirm={() => onBack?.()}
+        />
       </XianxiaPanel>
     </main>
   );
 }
 
-function StatQuickPanel({ draft }: { readonly draft: CharacterCreationDraft }): ReactElement {
-  const rows = [
-    ["精", draft.coreStats.jing],
-    ["气", draft.coreStats.qi],
-    ["神", draft.coreStats.shen],
-    ["根骨", draft.aptitude.rootBone],
-    ["悟性", draft.aptitude.comprehension],
-    ["灵感", draft.aptitude.inspiration],
-    ["气运", draft.aptitude.fortune],
-    ["心性", draft.aptitude.heart],
-    ["寿元", draft.aptitude.lifespan]
-  ] as const;
+function ConfirmLifeDialog({
+  name,
+  open,
+  viewModel,
+  onCancel,
+  onConfirm
+}: {
+  readonly name: string;
+  readonly open: boolean;
+  readonly viewModel: CharacterCreationViewModel;
+  readonly onCancel: () => void;
+  readonly onConfirm: () => void;
+}): ReactElement {
+  const mainDestiny = viewModel.destinyCards.find((card) => card.slot === "main") ?? viewModel.destinyCards[0]!;
 
+  return (
+    <XianxiaDialog
+      actions={
+        <>
+          <XianxiaButton variant="secondary" onClick={onCancel}>
+            返回修改
+          </XianxiaButton>
+          <XianxiaButton onClick={onConfirm}>
+            确认此生
+          </XianxiaButton>
+        </>
+      }
+      className="ccui2-confirm-life-dialog"
+      description="确认后会写入角色档案，并进入人生模拟。"
+      open={open}
+      title="确认此生"
+      tone="calm"
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) {
+          onCancel();
+        }
+      }}
+    >
+      <dl data-confirm-life-summary="true">
+        <dt>姓名</dt>
+        <dd>{name}</dd>
+        <dt>灵根</dt>
+        <dd>{viewModel.spiritualRoot.displayName}</dd>
+        <dt>主天命</dt>
+        <dd>{mainDestiny.name}</dd>
+        <dt>身世</dt>
+        <dd>{viewModel.originFate.backgroundName}</dd>
+      </dl>
+    </XianxiaDialog>
+  );
+}
+
+function LeaveCharacterCreationDialog({
+  open,
+  onCancel,
+  onConfirm
+}: {
+  readonly open: boolean;
+  readonly onCancel: () => void;
+  readonly onConfirm: () => void;
+}): ReactElement {
+  return (
+    <XianxiaDialog
+      actions={
+        <>
+          <XianxiaButton variant="secondary" onClick={onCancel}>
+            继续推演
+          </XianxiaButton>
+          <XianxiaButton variant="danger" onClick={onConfirm}>
+            放弃返回
+          </XianxiaButton>
+        </>
+      }
+      className="ccui2-leave-confirm-dialog"
+      description="当前命盘尚未确认，返回会放弃本次角色创建。"
+      open={open}
+      title="放弃此生？"
+      tone="danger"
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) {
+          onCancel();
+        }
+      }}
+    >
+      <p data-leave-character-creation-warning="true">未确认的姓名、命盘、身世和随身物不会写入正式档案。</p>
+    </XianxiaDialog>
+  );
+}
+
+function StatQuickPanel({
+  viewModel,
+  onOpen
+}: {
+  readonly viewModel: CharacterCreationViewModel;
+  readonly onOpen: () => void;
+}): ReactElement {
+  const rows = [...viewModel.coreTreasureRows, ...viewModel.aptitudeRows];
   return (
     <XianxiaPanel className="ccui2-side-panel ccui2-stat-panel" tone="calm">
       <p className="ccui2-panel-kicker">左仪盘</p>
       <h2>九宫速览</h2>
       <div className="ccui2-stat-grid">
-        {rows.map(([label, value]) => (
-          <span key={label}>
-            {label}
-            <strong>{value}</strong>
-          </span>
+        {rows.map((row) => (
+          <button
+            key={row.id}
+            data-detail-target="stats"
+            title={row.description}
+            type="button"
+            onClick={onOpen}
+          >
+            {row.label}
+            <strong>{row.value}</strong>
+          </button>
         ))}
       </div>
     </XianxiaPanel>
   );
 }
 
-function FateAltar({ draft }: { readonly draft: CharacterCreationDraft }): ReactElement {
+function FateAltar({
+  viewModel,
+  onOpen
+}: {
+  readonly viewModel: CharacterCreationViewModel;
+  readonly onOpen: () => void;
+}): ReactElement {
+  const root = viewModel.spiritualRoot;
+  const rootLocked = viewModel.lockTargets.find((target) => target.key === "spiritualRoot")?.locked ?? false;
   return (
     <section className="ccui2-fate-altar" aria-label="中央命盘法阵">
       <div className="ccui2-orbit ccui2-orbit-outer" aria-hidden="true" />
       <div className="ccui2-orbit ccui2-orbit-middle" aria-hidden="true" />
       <div className="ccui2-orbit ccui2-orbit-inner" aria-hidden="true" />
-      <div className="ccui2-root-effect-layer" data-root={draft.spiritualRoot.elements.join(" ")} aria-hidden="true" />
+      <div className="ccui2-root-effect-layer" data-root={root.elements.map((element) => element.id).join(" ")} aria-hidden="true" />
       <div className="ccui2-destiny-effect-layer" aria-hidden="true" />
-      <div className="ccui2-meditation-silhouette" aria-label="黑色打坐小人">
-        <span className="ccui2-silhouette-head" aria-hidden="true" />
-        <span className="ccui2-silhouette-body" aria-hidden="true" />
-        <span className="ccui2-silhouette-legs" aria-hidden="true" />
-      </div>
+      <img
+        alt="黑色打坐小人"
+        className="ccui2-meditation-silhouette"
+        draggable={false}
+        src={MEDITATION_SILHOUETTE_SRC}
+      />
+      <button
+        className={`ccui2-root-metric-strip ${rootLocked ? "is-locked" : ""}`}
+        aria-label="灵根四维"
+        data-detail-target="root"
+        data-lock-state={rootLocked ? "locked" : "unlocked"}
+        type="button"
+        onClick={onOpen}
+      >
+        {root.metricRows.map((metric) => (
+          <span key={metric.id} data-root-metric={metric.id}>
+            {metric.label}
+            <strong>{metric.value}</strong>
+          </span>
+        ))}
+      </button>
       <div className="ccui2-altar-caption">
-        <strong>{draft.spiritualRoot.displayName}</strong>
-        <span>{draft.destinies.main.name}</span>
+        <strong>{root.displayName}</strong>
       </div>
     </section>
   );
 }
 
-function OriginFateSummary({ draft }: { readonly draft: CharacterCreationDraft }): ReactElement {
-  const omen = draft.originFate.visibleHiddenOmen;
+function OriginFateSummary({
+  viewModel,
+  onOpenOrigin,
+  onOpenItems
+}: {
+  readonly viewModel: CharacterCreationViewModel;
+  readonly onOpenOrigin: () => void;
+  readonly onOpenItems: () => void;
+}): ReactElement {
+  const origin = viewModel.originFate;
   return (
     <XianxiaPanel className="ccui2-side-panel ccui2-origin-panel" tone="calm">
       <p className="ccui2-panel-kicker">右命简</p>
-      <h2>{draft.originFate.backgroundOrigin.name}</h2>
-      <p>{draft.originFate.backgroundOrigin.visibleDescription}</p>
+      <div
+        data-detail-target="origin"
+        role="button"
+        tabIndex={0}
+        onClick={onOpenOrigin}
+        onKeyDown={(event) => activateWithKeyboard(event, onOpenOrigin)}
+      >
+        <h2>{origin.backgroundName}</h2>
+        <p>{origin.backgroundDescription}</p>
+      </div>
       <dl>
-        <div>
+        <div
+          data-detail-target="origin"
+          role="button"
+          tabIndex={0}
+          onClick={onOpenOrigin}
+          onKeyDown={(event) => activateWithKeyboard(event, onOpenOrigin)}
+        >
           <dt>血脉征兆</dt>
-          <dd>{[omen.levelLabel, ...omen.hints, omen.riskHint].join(" / ")}</dd>
+          <dd>{[origin.omen.levelLabel, ...origin.omen.hints, origin.omen.riskHint].join(" / ")}</dd>
         </div>
-        <div>
+        <div
+          data-detail-target="items"
+          role="button"
+          tabIndex={0}
+          onClick={onOpenItems}
+          onKeyDown={(event) => activateWithKeyboard(event, onOpenItems)}
+        >
           <dt>随身物</dt>
-          <dd>{draft.originFate.carriedItems.map((item) => `${item.name} / ${item.conversion.label}`).join(" / ")}</dd>
+          <dd>{origin.carriedItems.map((item) => `${item.name} / ${item.conversionLabel}`).join(" / ")}</dd>
         </div>
       </dl>
     </XianxiaPanel>
@@ -252,56 +504,65 @@ function OriginFateSummary({ draft }: { readonly draft: CharacterCreationDraft }
 
 function renderDetailBody(
   tab: DetailTab,
-  draft: CharacterCreationDraft,
-  selectedTrait: DestinyTraitState,
+  selectedCard: CharacterCreationDestinyCardViewModel,
   viewModel: CharacterCreationViewModel
 ): ReactElement {
   switch (tab) {
     case "stats":
       return (
-        <section>
+        <section data-detail-section="stats">
           <h2>属性详情</h2>
           <p>
             精、气、神与六维资质来自当前开局生成器。命盘重 Roll 只更新未锁定的数据，不写入正式存档。
           </p>
+          <h3>精气神</h3>
           <ul>
-            <li>精 {draft.coreStats.jing} / 气 {draft.coreStats.qi} / 神 {draft.coreStats.shen}</li>
-            <li>根骨 {draft.aptitude.rootBone}，悟性 {draft.aptitude.comprehension}，灵感 {draft.aptitude.inspiration}</li>
-            <li>气运 {draft.aptitude.fortune}，心性 {draft.aptitude.heart}，寿元 {draft.aptitude.lifespan}</li>
+            {viewModel.coreTreasureRows.map((row) => (
+              <li key={row.id}>
+                <strong>{row.label} {row.value}</strong>：{row.description}
+              </li>
+            ))}
           </ul>
-          <p>
-            长描述会限制在详情抽屉内部滚动。底部操作条与命格卡行不参与整页滚动，用于验证 1366x768 时关键操作仍然可见。
-          </p>
-          <p>
-            占位说明一：后续接入真实开局属性时，这里展示可解释的来源、稀有度和锁定状态，不在页面主体制造额外滚动。
-          </p>
-          <p>
-            占位说明二：命盘推演台只负责角色创建展示，不触碰战斗模拟、不写入 `src/sim/**`，确认此生后沿用现有 profile 写入流程。
-          </p>
-          <p>
-            占位说明三：较长的命格、灵根、身世文本都应收束在这个详情抽屉中，让命格卡和底部按钮始终停留在视野内。
-          </p>
+          <h3>六维资质</h3>
+          <ul>
+            {viewModel.aptitudeRows.map((row) => (
+              <li key={row.id}>
+                <strong>{row.label} {row.value}</strong>：{row.description}
+              </li>
+            ))}
+          </ul>
+          <p>详情抽屉只展示当前 draft 的可见数据；确认此生后沿用现有 profile 写入流程。</p>
         </section>
       );
     case "root":
+      const root = viewModel.spiritualRoot;
       return (
-        <section>
-          <h2>{draft.spiritualRoot.displayName}</h2>
-          <p>灵根元素：{draft.spiritualRoot.elements.map((element) => ELEMENT_LABELS[element] ?? element).join(" / ")}</p>
-          <p>占位倾向：{draft.spiritualRoot.tags.join(" / ")}</p>
-          <p>
-            灵根特效层只影响中央命盘的 DOM/CSS 光环，不读取外部图片，也不写入模拟层。
-          </p>
+        <section data-detail-section="root">
+          <h2>{root.displayName}</h2>
+          <p>类型：{root.categoryLabel}</p>
+          <p>元素：{root.elements.map((element) => `${element.label} ${element.percentage}%`).join(" / ")}</p>
+          <p>主灵根：{root.primaryElement ?? "未显"}；副灵根：{root.secondaryElements.join(" / ") || "无"}；潜藏：{root.latentRoot ?? "无"}</p>
+          <ul>
+            {root.metricRows.map((metric) => (
+              <li key={metric.id} data-root-metric={metric.id}>
+                <strong>{metric.label} {metric.value}</strong>：{metric.description}
+              </li>
+            ))}
+          </ul>
+          <p>关系：{root.relationTags.length === 0 ? "无" : root.relationTags.join(" / ")}</p>
+          <p>标签：{root.tags.join(" / ")}</p>
         </section>
       );
     case "destiny":
       return (
-        <section>
-          <h2>{selectedTrait.name}</h2>
-          <p>品质：{selectedTrait.qualityLabel ?? selectedTrait.rarity}</p>
-          {selectedTrait.description === undefined ? null : <p>{selectedTrait.description}</p>}
-          <p>正向语义：{selectedTrait.positiveEffects.join(" / ")}</p>
-          <p className="ccui2-detail-warning">代价语义：{selectedTrait.negativeEffects.join(" / ")}</p>
+        <section data-detail-section="destiny" data-selected-detail-slot={selectedCard.slot}>
+          <h2>{selectedCard.name}</h2>
+          <p>品质：{selectedCard.qualityLabel}</p>
+          <p>{selectedCard.description}</p>
+          <p>{selectedCard.tags.join(" / ")}</p>
+          <p>正向语义：{selectedCard.positiveEffects.join(" / ")}</p>
+          <p className="ccui2-detail-warning">代价语义：{selectedCard.negativeEffects.join(" / ")}</p>
+          <p>锁定状态：{selectedCard.locked ? "已锁定" : "未锁定"}</p>
           <p>天机值：{viewModel.fateMeter.value}，剩余锁：{viewModel.lockBudget.locksRemaining}/{viewModel.lockBudget.maxLocks}</p>
           {viewModel.synergyWarnings.map((warning) => (
             <p key={warning}>共鸣：{warning}</p>
@@ -312,274 +573,88 @@ function renderDetailBody(
         </section>
       );
     case "origin":
-      const omen = draft.originFate.visibleHiddenOmen;
+      const origin = viewModel.originFate;
       return (
-        <section>
-          <h2>{draft.originFate.backgroundOrigin.name}</h2>
-          <p>{draft.originFate.backgroundOrigin.visibleDescription}</p>
-          <p>可见效果：{draft.background.visibleEffects.join(" / ")}</p>
-          <p>{omen.levelLabel}</p>
-          {omen.hints.map((hint) => (
+        <section data-detail-section="origin">
+          <h2>{origin.backgroundName}</h2>
+          <p>{origin.backgroundDescription}</p>
+          <p>可见标签：{origin.backgroundTags.join(" / ")}</p>
+          <p>{origin.omen.levelLabel}</p>
+          {origin.omen.hints.map((hint) => (
             <p key={hint}>隐藏征兆：{hint}</p>
           ))}
-          <p className="ccui2-detail-warning">{omen.riskHint}</p>
+          <p className="ccui2-detail-warning">{origin.omen.riskHint}</p>
+          <p>相关标签：{origin.omen.relatedTags.join(" / ") || "无"}</p>
         </section>
       );
     case "items":
       return (
-        <section>
+        <section data-detail-section="items">
           <h2>随身物</h2>
-          {draft.originFate.carriedItems.map((item) => (
-            <p key={item.itemId}>
-              <strong>{item.name}</strong>：{item.visibleDescription} / {item.conversion.label}
-            </p>
+          {viewModel.originFate.carriedItems.map((item) => (
+            <article key={item.itemId}>
+              <h3>{item.name}</h3>
+              <p>{item.visibleDescription}</p>
+              <p>十八岁转换：{item.conversionLabel}</p>
+              <p>外战效果：{item.outerBattlefieldEffect}</p>
+              <p>洞府钩子：{item.dongfuHook}</p>
+              <p>标签：{item.tags.join(" / ")}</p>
+            </article>
           ))}
-          <p>
-            随身物当前只用于占位展示，不转换外域战场资源，也不影响人生模拟或战斗配置。
-          </p>
+          <p>随身物只展示创建阶段可见信息；十八岁转换由后续流程处理。</p>
         </section>
       );
   }
 }
 
-function getDestinyTraitForSlot(draft: CharacterCreationDraft, slot: DestinyCardSlot): DestinyTraitState {
-  switch (slot) {
-    case "main":
-      return draft.destinies.main;
-    case "secondary0":
-      return draft.destinies.secondary[0];
-    case "secondary1":
-      return draft.destinies.secondary[1];
-    case "flaw":
-      return draft.destinies.flaw;
-  }
+function getDestinyCardForSlot(
+  viewModel: CharacterCreationViewModel,
+  slot: DestinyCardSlot
+): CharacterCreationDestinyCardViewModel {
+  return viewModel.destinyCards.find((card) => card.slot === slot) ?? viewModel.destinyCards[0]!;
 }
 
 function updateDraft(
   setDraft: Dispatch<SetStateAction<CharacterCreationDraft>>,
   update: () => CharacterCreationDraft,
   setActionError: Dispatch<SetStateAction<string | undefined>>
-): void {
+): boolean {
   try {
     const next = update();
     setDraft(next);
     setActionError(undefined);
+    return true;
   } catch (error) {
     setActionError(error instanceof Error ? error.message : String(error));
+    return false;
   }
 }
 
-function createPlaceholderDraft(slotId: string, nowMs: number): CharacterCreationDraft {
+function getRerollName(value: string): string | undefined {
+  const trimmed = value.trim();
+  return trimmed.length === 0 ? undefined : trimmed;
+}
+
+function buildRerollOptions(
+  nowMs: number,
+  nameInput: string,
+  useDivination?: true
+): {
+  readonly nowMs: number;
+  readonly name?: string;
+  readonly useDivination?: true;
+} {
+  const name = getRerollName(nameInput);
   return {
-    draftId: `${slotId}_ccui2_placeholder`,
-    slotId,
-    name: "未定道号",
-    appearance: {
-      templateId: "ccui2_black_meditation_placeholder",
-      genderPresentation: "androgynous",
-      temperament: "calm",
-      robeColor: "ink"
-    },
-    coreStats: { jing: 62, qi: 71, shen: 68 },
-    aptitude: {
-      rootBone: 64,
-      comprehension: 72,
-      inspiration: 66,
-      fortune: 58,
-      heart: 76,
-      lifespan: 61
-    },
-    spiritualRoot: {
-      rootId: "placeholder_thunder_wood",
-      displayName: "雷木灵根",
-      elements: ["thunder", "wood"],
-      rarity: "rare",
-      tags: ["雷法", "生机", "试炼占位"]
-    },
-    openingInnateDraft: createPlaceholderOpeningInnateDraft(slotId),
-    destinies: {
-      main: destiny("placeholder_main_fate", "雷心照命", "epic", ["雷法", "命盘"], ["开局法术反馈更清晰"], ["高压试炼更容易显形"]),
-      secondary: [
-        destiny("placeholder_secondary_sword", "剑骨微鸣", "rare", ["剑修", "法宝"], ["飞剑语义增强"], ["尚未接入真实加成"]),
-        destiny("placeholder_secondary_alchemy", "丹火留香", "rare", ["丹药", "火候"], ["丹药提示更醒目"], ["尚未接入真实消化"])
-      ],
-      flaw: destiny("placeholder_flaw", "劫云压顶", "flaw", ["劫命", "天象"], ["雷劫语义明确"], ["危险预兆更频繁"]),
-      synergies: [],
-      softConflicts: [],
-      synergyWarnings: [],
-      conflictWarnings: [],
-      warnings: []
-    },
-    originFate: createPlaceholderOriginFateDraft(slotId),
-    background: {
-      backgroundId: "placeholder_mountain_orphan",
-      name: "青云山脚孤童",
-      rarity: "common",
-      description: "你从青云山脚醒来，随身只有半枚旧玉和一段记不清来源的雷纹梦。",
-      visibleEffects: ["外域试炼初始说明", "洞府入口占位"]
-    },
-    hiddenFate: {
-      hiddenFateId: "placeholder_hidden_thunder",
-      hint: "每逢雷雨，命盘外圈会有细小电光回旋。",
-      rarity: "rare",
-      tags: ["雷纹", "未揭示"],
-      revealed: false
-    },
-    carriedItems: [
-      {
-        itemId: "placeholder_jade_half",
-        name: "半枚旧玉",
-        rarity: "common",
-        description: "只作为 CCUI2 骨架占位，不参与真实资源投射。",
-        tags: ["旧物", "占位"]
-      },
-      {
-        itemId: "placeholder_bamboo_slip",
-        name: "无字竹简",
-        rarity: "uncommon",
-        description: "详情抽屉滚动验证用的占位随身物。",
-        tags: ["竹简", "占位"]
-      }
-    ],
-    locks: {
-      spiritualRoot: false,
-      mainDestiny: false,
-      secondaryDestiny0: false,
-      secondaryDestiny1: false,
-      flawDestiny: false,
-      background: false,
-      hiddenFate: false,
-      carriedItems: false
-    },
-    attributeLock: false,
-    spiritualRootLock: false,
-    rerollCount: 0,
-    divinationTokens: 1,
-    createdAtMs: nowMs,
-    updatedAtMs: nowMs
+    nowMs,
+    ...(name === undefined ? {} : { name }),
+    ...(useDivination === undefined ? {} : { useDivination })
   };
 }
 
-function createPlaceholderOriginFateDraft(slotId: string): CharacterCreationDraft["originFate"] {
-  return {
-    draftId: `${slotId}_ccui2_placeholder`,
-    seed: `${slotId}:ccui2_origin_placeholder`,
-    rerollIndex: 0,
-    backgroundOrigin: {
-      originId: "placeholder_mountain_orphan",
-      name: "Origin placeholder",
-      visibleDescription: "Visible origin placeholder for the CCUI2 shell.",
-      appliedWeight: 1,
-      matchedTags: ["origin:placeholder"]
-    },
-    hiddenFateInternal: {
-      hiddenFateId: "placeholder_hidden_fate",
-      trueName: "Internal placeholder fate",
-      category: "karmicSeed",
-      progress: 12,
-      progressBand: "faint",
-      matchedTags: ["hidden:placeholder"],
-      appliedWeight: 1
-    },
-    visibleHiddenOmen: {
-      vagueLevel: "faint",
-      levelLabel: "Faint omen",
-      hints: ["A faint sign moves at the edge of the chart."],
-      riskHint: "Risk remains unclear."
-    },
-    carriedItems: [
-      {
-        itemId: "placeholder_jade_half",
-        name: "Placeholder jade",
-        visibleDescription: "Visible carried item placeholder.",
-        conversion: {
-          type: "treasure_fragment",
-          label: "vague treasure clue",
-          outerBattlefieldEffect: "minor battlefield clue",
-          dongfuHook: "placeholder_dongfu_hook"
-        },
-        matchedTags: ["item:placeholder"],
-        appliedWeight: 1
-      }
-    ],
-    lifeEventBiasTags: ["origin:placeholder"],
-    modeProjectionTags: ["mode:placeholder"],
-    age18ConversionHooks: ["placeholder_dongfu_hook"]
-  };
-}
-
-function createPlaceholderOpeningInnateDraft(slotId: string): CharacterCreationDraft["openingInnateDraft"] {
-  return {
-    draftId: `${slotId}_ccui2_placeholder`,
-    seed: `${slotId}:ccui2_placeholder`,
-    rerollIndex: 0,
-    archetype: {
-      id: "ccui2_placeholder",
-      name: "CCUI2 placeholder",
-      description: "Layout placeholder only.",
-      tags: ["archetype:placeholder"]
-    },
-    aptitude: {
-      rootBone: 64,
-      comprehension: 72,
-      inspiration: 66,
-      fortune: 58,
-      heart: 76,
-      lifespan: 61
-    },
-    coreSeed: { jing: 62, qi: 71, shen: 68 },
-    spiritualRoot: {
-      categoryId: "dual",
-      displayName: "闆锋湪鐏垫牴",
-      elements: { thunder: 52, wood: 48 },
-      primaryElement: "thunder",
-      secondaryElements: ["wood"],
-      purity: 72,
-      stability: 58,
-      conflict: 34,
-      breadth: 55,
-      relationTags: [],
-      tags: ["rootCategory:dual", "root:thunder", "root:wood", "mode:thunder", "mode:growth"]
-    },
-    growthBias: {
-      jingGrowth: 1,
-      qiGrowth: 1,
-      shenGrowth: 1,
-      studyBias: 1,
-      martialBias: 1,
-      alchemyBias: 1,
-      artifactBias: 1,
-      seclusionBias: 1,
-      adventureBias: 1
-    },
-    tags: {
-      destinyBiasTags: [],
-      lifeEventBiasTags: ["archetype:placeholder"],
-      modeBiasTags: ["mode:thunder", "mode:growth"],
-      hiddenFateBiasTags: []
-    },
-    distinctivenessScore: 0
-  };
-}
-
-function destiny(
-  traitId: string,
-  name: string,
-  rarity: CharacterCreationRarity,
-  tags: readonly string[],
-  positiveEffects: readonly string[],
-  negativeEffects: readonly string[]
-): DestinyTraitState {
-  return {
-    traitId,
-    name,
-    rarity,
-    tags,
-    positiveEffects,
-    negativeEffects
-  };
-}
-
-function noop(): void {
-  return undefined;
+function activateWithKeyboard(event: KeyboardEvent<HTMLElement>, action: () => void): void {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    action();
+  }
 }
