@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy MLC directly integrates old half-year choices into LifeSimulationScreen instead of the current LFP/LifeSimulationV02 route.
+> Replacement route: MIG-C005/MIG-C008 plus SIM-C007/SIM-C008.
+
 # MLC-C005：人生模拟 UI 集成
 
 目标：LifeSimulationScreen 每 6 个月暂停并显示重大选择。

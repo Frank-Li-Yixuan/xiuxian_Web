@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy MLC tests cover old half-year choice distribution instead of MC2/LPI/LSTG acceptance.
+> Replacement route: MIG-C005/SIM-C007, then SIM-C011.
+
 # MLC-C007：测试与分布验收
 
 目标：补齐半年重大选择系统测试。

@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy A18 converts life stats directly into an outer-battlefield first-war start, which should now be gated by AdultNode resolution.
+> Replacement route: MIG-C009 plus SIM-C010.
+
 # A18-C003：属性转化与第一战修正
 
 目标：把 18 岁最终人生属性转化为域外战场第一战初始战斗属性。

@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it composes character-creation controls around PNG background/border layers, which conflicts with the current DOM/React + local UI System route.
+> Replacement route: CCUI2 baseline, then MIG-C003/SIM-C008.
+
 # CC-C003：创建角色页 DOM 组件
 
 当前项目没有 React 依赖，默认用 vanilla TypeScript 实现 DOM 组件。不要引入 UI 框架。

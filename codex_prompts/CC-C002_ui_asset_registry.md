@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it creates generated PNG UI asset registries for character-creation controls, which conflicts with the current DOM/React + local UI System route.
+> Replacement route: CCUI2 baseline, then MIG-C003/SIM-C008.
+
 # CC-C002：创建角色 UI 资产 Manifest 与 Registry
 
 你正在实现 UI 资产接入。不要实现屏幕，不要生成新图片。

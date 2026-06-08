@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it wires LifeSimulation completion directly into age-18 awakening and outer-battlefield UI, bypassing AdultNode path scoring.
+> Replacement route: MIG-C009 plus SIM-C010.
+
 # A18-C007：UI Flow 集成
 
 目标：把 LifeSimulation 216 月结束后接入 18 岁系统觉醒页面、第一战战前页面、系统家园开启页面。

@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy LM dev UI is not LST/LPI/LSTG/ME2/MC2-aware and should not become the current playable UI surface.
+> Replacement route: MIG-C008 plus SIM-C008.
+
 # LM-C007：开发调试页 /dev/life-sim
 
 范围：

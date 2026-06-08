@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy LM persistence resumes the old LifeSimulationScreen state instead of the LFP/LifeSimulationV02 route.
+> Replacement route: MIG-C008 plus SIM-C008.
+
 # LM-C006：人生模拟存档与恢复
 
 范围：

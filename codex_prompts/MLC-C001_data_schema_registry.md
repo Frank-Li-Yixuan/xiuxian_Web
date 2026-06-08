@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy MLC v0.1 schema is superseded by MC2/LPI/LSTG-aware major-choice migration.
+> Replacement route: MIG-C005 plus SIM-C007.
+
 # MLC-C001：数据 Schema 与 Registry
 
 目标：接入半年重大选择系统的数据表、类型和校验。

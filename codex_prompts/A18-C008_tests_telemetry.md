@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy A18 tests assert the old life_simulation_completed -> age18_awakening -> outer_battlefield_pending route instead of AdultNode path scoring.
+> Replacement route: MIG-C009/SIM-C010, then SIM-C011.
+
 # A18-C008：测试与遥测
 
 目标：补齐 18 岁觉醒、第一战、家园开启的测试与调试输出。

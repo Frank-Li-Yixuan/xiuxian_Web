@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy MLC v0.1 choice generation is not MC2/LPI/LSTG-aware and is superseded by the v0.2 choice route.
+> Replacement route: MIG-C005 plus SIM-C007.
+
 # MLC-C002：半年选择生成引擎
 
 目标：从 LifeSimulationState 和最近 6 个月月度事件生成 PendingMajorChoiceState。

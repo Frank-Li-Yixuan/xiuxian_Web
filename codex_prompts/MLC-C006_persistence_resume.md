@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy MLC persistence resumes old half-year choice state instead of the current MC2/LFP route.
+> Replacement route: MIG-C005/MIG-C008 plus SIM-C007/SIM-C008.
+
 # MLC-C006：半年选择存档与恢复
 
 目标：人生模拟在半年选择节点可中途退出并恢复。

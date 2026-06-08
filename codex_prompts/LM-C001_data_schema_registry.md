@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy LM v0.1 monthly-event work is not LST/LPI/LSTG/ME2-aware and is superseded by MIG-C004 plus SIM-C006.
+> Keep this file only as source context for migration.
+
 # LM-C001：月度事件数据 Schema 与 Registry
 
 你正在实现《0–18 岁人生模拟月度事件系统 v0.1》的第一步。

@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy LM distribution tests cover the old monthly-event model and must be replaced by ME2/storyline/density acceptance.
+> Replacement route: MIG-C004/SIM-C006, then SIM-C011.
+
 # LM-C008：测试与分布验收
 
 范围：

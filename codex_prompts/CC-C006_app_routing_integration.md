@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it belongs to the old CC-C routing flow and should not be used to override the current CCUI2/SIM-REDESIGN app flow.
+> Replacement route: CCUI2 baseline, then MIG-C003/SIM-C008.
+
 # CC-C006：接入新游戏路由
 
 目标：把 CharacterCreationScreen 接入新游戏主流程。

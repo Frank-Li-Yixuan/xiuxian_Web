@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy MLC v0.1 success resolution is not MC2/LPI/LSTG-aware and is superseded by the v0.2 choice route.
+> Replacement route: MIG-C005 plus SIM-C007.
+
 # MLC-C003：成功判定引擎
 
 目标：玩家选择某个选项后，计算 outcome tier。

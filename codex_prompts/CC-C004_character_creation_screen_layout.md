@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it restores the old generated-asset, portrait-frame character-creation layout instead of the current black seated figure + destiny plate + effect-layer direction.
+> Replacement route: CCUI2 baseline, then MIG-C003/SIM-C008.
+
 # CC-C004：CharacterCreationScreen 静态布局
 
 目标：使用生成好的 UI 资产搭出完整创建角色页面。

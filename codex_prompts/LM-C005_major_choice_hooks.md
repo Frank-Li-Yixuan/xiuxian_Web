@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy LM hooks into the old major-choice flow instead of MC2/LPI/LSTG-aware integration.
+> Replacement route: MIG-C004/MIG-C005 plus SIM-C006/SIM-C007.
+
 # LM-C005：半年重大选择 Hook 集成
 
 范围：

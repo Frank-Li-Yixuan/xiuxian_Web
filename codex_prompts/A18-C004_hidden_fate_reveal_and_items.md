@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy A18 reveal/item conversion is tied to the age-18 outer-battlefield flow and must be rechecked through the AdultNode bridge and hidden-info safety rules.
+> Replacement route: MIG-C006/MIG-C009 plus SIM-C010.
+
 # A18-C004：隐藏命揭示与随身物转化
 
 目标：实现隐藏血脉 / 前世 / 系统共鸣的揭示，以及随身物的第一战/洞府转化。

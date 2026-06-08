@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: the old CC-C series is superseded by the CCUI2 DOM/React route plus MIG-C003/SIM-C008, and may revive pre-redesign character-creation assumptions.
+> Keep this file only for historical context and prompt inventory evidence.
+
 # CC-C001：角色创建数据、类型与 Draft 生成器
 
 你正在实现修仙模拟器的角色创建系统第一步。不要实现 UI。

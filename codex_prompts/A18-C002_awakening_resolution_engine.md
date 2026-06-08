@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy A18 awakening assumes a fixed age-18 resolution instead of the AdultNode path-scoring bridge.
+> Replacement route: MIG-C009 plus SIM-C010.
+
 # A18-C002：觉醒结算引擎
 
 目标：实现 `resolveAge18Awakening(input)`，从人生模拟结果生成 18 岁觉醒结算。

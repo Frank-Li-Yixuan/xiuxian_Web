@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy home unlock follows the fixed A18 outer-battlefield chain instead of the AdultNode/first-trial bridge.
+> Replacement route: MIG-C009 plus SIM-C010.
+
 # A18-C006：系统家园开启计划
 
 目标：第一战成功后生成 `SystemHomeUnlockPlan`，开启草创洞府。

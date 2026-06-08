@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it fixes the first post-life route to `outer_battlefield_intro`; current design requires AdultNode path scoring with outer battlefield only as a possible fallback.
+> Replacement route: MIG-C009 plus SIM-C010.
+
 # A18-C005：域外战场第一战 RunConfig
 
 目标：从 Age18AwakeningResolution 生成第一战 `OuterBattlefieldIntroRunConfig`。

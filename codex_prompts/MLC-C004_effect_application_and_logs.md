@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy MLC v0.1 effects/logs are not MC2/LPI/LSTG-aware and are superseded by the v0.2 choice route.
+> Replacement route: MIG-C005 plus SIM-C007.
+
 # MLC-C004：效果应用与日志
 
 目标：将 MajorChoiceResolution 的效果应用到 LifeSimulationState，并写入人生日志。

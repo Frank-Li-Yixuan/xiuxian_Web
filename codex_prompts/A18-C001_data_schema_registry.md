@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy A18 hard-couples 18-year awakening to the outer-battlefield route and is superseded by AdultNode path scoring.
+> Replacement route: MIG-C009 plus SIM-C010.
+
 # A18-C001：数据 Schema 与 Registry
 
 目标：接入《18 岁系统觉醒与域外战场开局转化 v0.1》的数据、类型和校验脚本。

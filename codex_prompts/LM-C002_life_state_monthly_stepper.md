@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: legacy LM v0.1 monthly stepping is not LST/LPI/LSTG/ME2-aware and is superseded by MIG-C004 plus SIM-C006.
+> Keep this file only as source context for migration.
+
 # LM-C002：LifeSimulationState 与月度推进器
 
 范围：

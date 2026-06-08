@@ -1,3 +1,7 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it belongs to the old CC-C flow and should not be used to drive the current CCUI2/SIM-REDESIGN character-creation route.
+> Replacement route: CCUI2 baseline, then MIG-C003/SIM-C008.
+
 # CC-C005：创建角色交互与存档写入
 
 目标：让创建角色页面可操作，能保存角色并进入人生模拟入口。
