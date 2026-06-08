@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "world",
+  "id": "world.registry.v0_2",
+  "items": [
+    {
+      "id": "world.region.qingshi_village",
+      "name": {
+        "zhCN": "青石村"
+      },
+      "tags": ["mortal_borderland", "low_spirit_density"],
+      "summary": "凡域边地村落，用作人生模拟早期世界锚点。"
+    }
+  ]
+}

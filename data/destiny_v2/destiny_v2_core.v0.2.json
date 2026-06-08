@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "destiny_v2",
+  "id": "destiny_v2.registry.v0_2",
+  "items": [
+    {
+      "id": "destiny_v2.eligibility.heaven_jealous_talent",
+      "name": {
+        "zhCN": "天妒英才成立条件"
+      },
+      "requires": ["fate_matrix.nine_palace.core_stats"],
+      "summary": "用于替代旧版平铺随机天命的成立条件样例。"
+    }
+  ]
+}

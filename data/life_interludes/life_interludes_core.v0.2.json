@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "life_interludes",
+  "id": "life_interludes.registry.v0_2",
+  "items": [
+    {
+      "id": "life_interlude.rain_backhill_stg",
+      "name": {
+        "zhCN": "雨夜后山插曲"
+      },
+      "candidateType": "short_trial",
+      "summary": "半年选择可能触发的玩法插曲候选，不直接进入战斗重构。"
+    }
+  ]
+}

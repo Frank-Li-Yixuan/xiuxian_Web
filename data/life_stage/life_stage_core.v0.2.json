@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "life_stage",
+  "id": "life_stage.registry.v0_2",
+  "items": [
+    {
+      "id": "life_stage.identity.mortal_child",
+      "name": {
+        "zhCN": "凡童"
+      },
+      "monthRange": [0, 72],
+      "summary": "人生模拟早期身份阶段，用于事件密度和选择门槛。"
+    }
+  ]
+}

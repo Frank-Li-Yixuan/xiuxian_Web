@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "life_choices_v02",
+  "id": "life_choices_v02.registry.v0_2",
+  "items": [
+    {
+      "id": "life_choices_v02.major_choice.rain_backhill_age7",
+      "name": {
+        "zhCN": "雨夜是否上山"
+      },
+      "linkedInterludes": ["life_interlude.rain_backhill_stg"],
+      "summary": "v0.2 半年重大选择最小样例，支持风险收益与插曲候选。"
+    }
+  ]
+}

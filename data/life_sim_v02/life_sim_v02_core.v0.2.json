@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "life_sim_v02",
+  "id": "life_sim_v02.registry.v0_2",
+  "items": [
+    {
+      "id": "life_sim_v02.monthly_event.rain_backhill_whisper",
+      "name": {
+        "zhCN": "后山雨声"
+      },
+      "densityTags": ["quiet", "omen"],
+      "summary": "v0.2 月度事件池最小样例，供 registry 和 validator 接入。"
+    }
+  ]
+}

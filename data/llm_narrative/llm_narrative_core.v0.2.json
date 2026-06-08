@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "llm_narrative",
+  "id": "llm_narrative.registry.v0_2",
+  "items": [
+    {
+      "id": "llm_narrative.template.monthly_safe",
+      "name": {
+        "zhCN": "月度安全润色模板"
+      },
+      "mode": "fallback_template",
+      "summary": "LLM 只做文本润色，默认离线 fallback，不暴露隐藏真名。"
+    }
+  ]
+}

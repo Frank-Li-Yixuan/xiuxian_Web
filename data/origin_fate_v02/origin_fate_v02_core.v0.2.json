@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "origin_fate_v02",
+  "id": "origin_fate_v02.registry.v0_2",
+  "items": [
+    {
+      "id": "origin_fate_v02.story.apothecary_apprentice",
+      "name": {
+        "zhCN": "药铺学徒身世线"
+      },
+      "safeHints": ["草木气息亲近", "旧药柜木纹泛光"],
+      "summary": "隐藏因果只记录安全预兆，不暴露未揭示真名。"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "fate_matrix",
+  "id": "fate_matrix.registry.v0_2",
+  "items": [
+    {
+      "id": "fate_matrix.nine_palace.core_stats",
+      "name": {
+        "zhCN": "九宫核心属性矩阵"
+      },
+      "axes": ["body", "mind", "spirit", "fate"],
+      "summary": "承接 OAG 输出并为后续天命成立条件提供评分坐标。"
+    }
+  ]
+}

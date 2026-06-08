@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "life_storylines",
+  "id": "life_storylines.registry.v0_2",
+  "items": [
+    {
+      "id": "life_storyline.alchemy_apothecary",
+      "name": {
+        "zhCN": "药香与炉火"
+      },
+      "linkedOrigins": ["origin_fate_v02.story.apothecary_apprentice"],
+      "summary": "将身世、月度事件和半年选择串成长期人生主线。"
+    }
+  ]
+}

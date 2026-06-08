@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "0.2",
+  "domain": "life_playable",
+  "id": "life_playable.registry.v0_2",
+  "items": [
+    {
+      "id": "life_playable.state.default",
+      "name": {
+        "zhCN": "人生模拟首版可玩状态"
+      },
+      "visiblePanels": ["month_log", "stage_summary", "pending_choice"],
+      "summary": "首版可玩 UI 状态配置，只描述数据入口，不改 UI。"
+    }
+  ]
+}
