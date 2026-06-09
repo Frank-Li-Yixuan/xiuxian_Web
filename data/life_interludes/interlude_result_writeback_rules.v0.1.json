@@ -1,0 +1,185 @@
+{
+  "version": "0.1",
+  "rules": [
+    {
+      "id": "writeback_thunder_back_mountain",
+      "outcomes": {
+        "success": [
+          {
+            "type": "modifyStat",
+            "stat": "inspiration",
+            "amount": 4
+          },
+          {
+            "type": "modifyStat",
+            "stat": "shen",
+            "amount": 2
+          },
+          {
+            "type": "modifyHiddenFateProgress",
+            "hiddenFateId": "hidden_ancient_thunder_blood",
+            "amount": 10,
+            "visibleHint": "你感到雷声离自己更近了一些。"
+          },
+          {
+            "type": "addAge18Hook",
+            "hookId": "outer_battlefield_omen",
+            "amount": 1
+          }
+        ],
+        "failure": [
+          {
+            "type": "addWound",
+            "woundId": "wound_cold_rain_bone",
+            "severity": 1
+          },
+          {
+            "type": "addHeartKnot",
+            "knotId": "knot_fear_thunder",
+            "severity": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "writeback_medicine_field",
+      "outcomes": {
+        "success": [
+          {
+            "type": "modifyStat",
+            "stat": "herbalism",
+            "amount": 5
+          },
+          {
+            "type": "modifyKarmaMerit",
+            "merit": 3
+          },
+          {
+            "type": "modifyCarriedItemAffinity",
+            "itemId": "item_copper_furnace",
+            "amount": 8
+          },
+          {
+            "type": "addAge18Hook",
+            "hookId": "alchemy_fire_control",
+            "amount": 1
+          }
+        ],
+        "failure": [
+          {
+            "type": "modifyStat",
+            "stat": "familyWealth",
+            "amount": -2
+          },
+          {
+            "type": "addWound",
+            "woundId": "wound_insect_poison",
+            "severity": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "writeback_symbol_trial",
+      "outcomes": {
+        "success": [
+          {
+            "type": "modifyStat",
+            "stat": "comprehension",
+            "amount": 3
+          },
+          {
+            "type": "modifyStat",
+            "stat": "heart",
+            "amount": 2
+          },
+          {
+            "type": "addAge18Hook",
+            "hookId": "spell_talisman_memory",
+            "amount": 1
+          }
+        ],
+        "failure": [
+          {
+            "type": "addHeartKnot",
+            "knotId": "knot_failed_questioning",
+            "severity": 1
+          },
+          {
+            "type": "modifyStat",
+            "stat": "shen",
+            "amount": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "writeback_ancestral_jade_board",
+      "outcomes": {
+        "success": [
+          {
+            "type": "modifyStat",
+            "stat": "qi",
+            "amount": 2
+          },
+          {
+            "type": "modifyStat",
+            "stat": "heart",
+            "amount": 3
+          },
+          {
+            "type": "modifyCarriedItemAffinity",
+            "itemId": "item_ancestral_jade",
+            "amount": 12
+          },
+          {
+            "type": "addAge18Hook",
+            "hookId": "formation_insight",
+            "amount": 1
+          }
+        ],
+        "failure": [
+          {
+            "type": "addHeartKnot",
+            "knotId": "knot_array_confusion",
+            "severity": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "writeback_outer_battlefield_dream",
+      "outcomes": {
+        "success": [
+          {
+            "type": "addAge18Hook",
+            "hookId": "outer_battlefield_omen",
+            "amount": 2
+          },
+          {
+            "type": "modifyStat",
+            "stat": "shen",
+            "amount": 3
+          },
+          {
+            "type": "modifyStat",
+            "stat": "inspiration",
+            "amount": 3
+          }
+        ],
+        "failure": [
+          {
+            "type": "addHeartKnot",
+            "knotId": "knot_outer_battlefield_fright",
+            "severity": 2
+          },
+          {
+            "type": "addAge18Hook",
+            "hookId": "first_battle_fright",
+            "amount": 1
+          }
+        ]
+      }
+    }
+  ]
+}

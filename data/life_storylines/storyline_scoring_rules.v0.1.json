@@ -1,0 +1,82 @@
+{
+  "version": "0.1",
+  "statusThresholds": {
+    "dormant": [
+      0,
+      19
+    ],
+    "hinted": [
+      20,
+      39
+    ],
+    "active": [
+      40,
+      69
+    ],
+    "dominant": [
+      70,
+      99
+    ],
+    "fated": [
+      100,
+      999
+    ]
+  },
+  "limits": {
+    "maxDominantStorylines": 2,
+    "targetActiveStorylines": [
+      1,
+      3
+    ],
+    "maxFatedStorylines": 1
+  },
+  "scoreFormula": "baseWeight + signalWeights - suppressionWeights + recentChoiceAdjustments",
+  "defaultDecayPerYear": {
+    "dormant": 0,
+    "hinted": -2,
+    "active": -4,
+    "dominant": -6,
+    "fated": -3
+  },
+  "threadStageThresholds": {
+    "seeded": {
+      "progress": 1
+    },
+    "hinted": {
+      "progress": 20
+    },
+    "developing": {
+      "progress": 40
+    },
+    "crisis": {
+      "tension": 70
+    },
+    "resolved": {
+      "progress": 85,
+      "clarity": 60
+    },
+    "failed": {
+      "risk": 90
+    }
+  },
+  "playInterludeCandidateRules": [
+    {
+      "condition": "thread.stage == crisis && thread.tension >= 70",
+      "weight": 20
+    },
+    {
+      "condition": "storyline.status in ['dominant','fated'] && recentMajorChoice.risk in ['risky','dangerous','forbidden']",
+      "weight": 12
+    }
+  ],
+  "transitionCandidateRules": [
+    {
+      "condition": "thread.stage == resolved",
+      "hookSource": "thread.resolutionHooks"
+    },
+    {
+      "condition": "storyline.status == fated && ageMonths >= 168",
+      "hookSource": "storyline.possibleTransitionHooks"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+flowchart TD
+  A[Main Menu] --> B[Save Slot]
+  B --> C[Character Creation]
+  C --> D[Nine Palace Evaluation]
+  D --> E[Destiny V2 Mutation]
+  E --> F[Origin Fate Narrative]
+  F --> G[Life Simulation]
+  G --> H[Monthly Events V02]
+  H --> I[Major Choices V02]
+  I --> J{Playable Interlude?}
+  J -- yes --> K[Interlude Run/Auto Resolve]
+  K --> G
+  J -- no --> G
+  G --> L[Stage Summary]
+  L --> M{216 months?}
+  M -- no --> G
+  M -- yes --> N[Adult Node]
+  N --> O[Trial Bridge / Dongfu Pending]

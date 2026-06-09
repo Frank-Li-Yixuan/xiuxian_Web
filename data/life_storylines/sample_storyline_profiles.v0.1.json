@@ -1,0 +1,52 @@
+{
+  "version": "0.1",
+  "samples": [
+    {
+      "id": "sample_alchemy_child",
+      "summary": "药铺学徒 + 木火灵根 + 丹道奇才 + 药铺铜炉",
+      "expectedTopStorylines": [
+        "storyline_apothecary_alchemy",
+        "storyline_system_prelude"
+      ],
+      "expectedThreads": [
+        "thread_apothecary_sorting_herbs",
+        "thread_furnace_dream"
+      ]
+    },
+    {
+      "id": "sample_waste_sword",
+      "summary": "破落修士之后 + 残破木剑 + 废灵逆命 + 前世剑魄",
+      "expectedTopStorylines": [
+        "storyline_fallen_cultivator_lineage"
+      ],
+      "expectedThreads": [
+        "thread_wooden_sword_rings",
+        "thread_failed_breathing_reversal"
+      ]
+    },
+    {
+      "id": "sample_yin_dream",
+      "summary": "守墓人之子 + 阴灵根 + 太阴残脉 + 黑骨短笛",
+      "expectedTopStorylines": [
+        "storyline_yin_dream_soul"
+      ],
+      "expectedThreads": [
+        "thread_grave_fire",
+        "thread_black_flute_whispers"
+      ]
+    },
+    {
+      "id": "sample_thunder_talent",
+      "summary": "山村孤儿 + 雷灵根 + 天妒英才 + 劫雷亲和",
+      "expectedTopStorylines": [
+        "storyline_system_prelude",
+        "storyline_village_calamity",
+        "storyline_poor_scholar"
+      ],
+      "expectedThreads": [
+        "thread_outer_battlefield_dream",
+        "thread_bandit_smoke"
+      ]
+    }
+  ]
+}

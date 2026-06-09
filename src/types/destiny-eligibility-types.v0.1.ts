@@ -1,0 +1,132 @@
+export type Id = string;
+
+export type DestinyQuality =
+  | "mortal"
+  | "good"
+  | "rare"
+  | "arcane"
+  | "earth"
+  | "heaven"
+  | "reversal"
+  | "forbidden"
+  | "flaw";
+
+export type DestinyKind = "destiny" | "flaw" | "mutated";
+export type DestinySlot = "main" | "secondary" | "flaw" | "mutated";
+
+export interface NinePalaceInputSnapshot {
+  jing: number;
+  qi: number;
+  shen: number;
+  rootBone: number;
+  comprehension: number;
+  inspiration: number;
+  fortune: number;
+  heart: number;
+  lifespan: number;
+  tags: readonly string[];
+}
+
+export interface NinePalaceDerivedScores {
+  talentScore: number;
+  vesselScore: number;
+  stabilityScore: number;
+  destinyPressureScore: number;
+  lateBloomScore: number;
+  rebellionScore: number;
+}
+
+export type EligibilityExpression =
+  | { readonly attr: keyof Omit<NinePalaceInputSnapshot, "tags">; readonly gte?: number; readonly lte?: number; readonly note?: string }
+  | { readonly score: keyof NinePalaceDerivedScores; readonly gte?: number; readonly lte?: number; readonly note?: string }
+  | { readonly tag: string; readonly note?: string }
+  | { readonly id: Id; readonly note?: string; readonly severity?: "hard" | "soft" }
+  | { readonly flaw: Id; readonly note?: string }
+  | { readonly sumAttrs: readonly (keyof Omit<NinePalaceInputSnapshot, "tags">)[]; readonly gte?: number; readonly lte?: number; readonly note?: string }
+  | { readonly all: readonly EligibilityExpression[]; readonly note?: string };
+
+export interface DestinyEligibilityRule {
+  readonly any?: readonly EligibilityExpression[];
+  readonly all?: readonly EligibilityExpression[];
+  readonly supportAny?: readonly EligibilityExpression[];
+  readonly anti?: readonly EligibilityExpression[];
+  readonly sourceMutationOf?: readonly Id[];
+}
+
+export interface DestinyMutationRule {
+  readonly antiResult?: Id;
+  readonly weakSupportResult?: Id;
+  readonly sourceConflictResult?: Id;
+}
+
+export interface DestinyEffectsProjection {
+  readonly lifeSim?: readonly string[];
+  readonly outerBattlefield?: readonly string[];
+  readonly outgame?: readonly string[];
+  readonly horde?: readonly string[];
+  readonly deckbuilder?: readonly string[];
+  readonly autochess?: readonly string[];
+}
+
+export interface DestinyDefinitionV2 {
+  readonly id: Id;
+  readonly name: string;
+  readonly quality: DestinyQuality;
+  readonly kind: DestinyKind;
+  readonly allowedSlots: readonly DestinySlot[];
+  readonly tags: readonly string[];
+  readonly oneLine: string;
+  readonly description: string;
+  readonly eligibility: DestinyEligibilityRule;
+  readonly mutation?: DestinyMutationRule;
+  readonly effects: DestinyEffectsProjection;
+}
+
+export interface DestinyEligibilityResult {
+  readonly destinyId: Id;
+  readonly eligible: boolean;
+  readonly supportLevel: "none" | "weak" | "normal" | "strong";
+  readonly antiMatched: readonly EligibilityExpression[];
+  readonly supportMatched: readonly EligibilityExpression[];
+  readonly reasonTags: readonly string[];
+  readonly mutationCandidate?: Id;
+}
+
+export interface HardConflictRule {
+  readonly a: Id;
+  readonly b: Id;
+  readonly mutation?: Id;
+  readonly reason: string;
+}
+
+export interface SoftConflictRule {
+  readonly a: Id;
+  readonly b: Id;
+  readonly warning: string;
+}
+
+export interface DestinySynergyRule {
+  readonly ids: readonly Id[];
+  readonly name: string;
+  readonly effectTags: readonly string[];
+  readonly warning?: string;
+}
+
+export interface DestinyConflictSynergyResult {
+  readonly finalDestinyIds: readonly Id[];
+  readonly removedDestinyIds: readonly Id[];
+  readonly mutatedDestinyIds: readonly Id[];
+  readonly warnings: readonly string[];
+  readonly synergies: readonly DestinySynergyRule[];
+}
+
+export interface DestinyManifestationEventHook {
+  readonly phase: string;
+  readonly hook: string;
+  readonly visible: string;
+}
+
+export interface DestinyManifestationDefinition {
+  readonly destinyId: Id;
+  readonly events: readonly DestinyManifestationEventHook[];
+}

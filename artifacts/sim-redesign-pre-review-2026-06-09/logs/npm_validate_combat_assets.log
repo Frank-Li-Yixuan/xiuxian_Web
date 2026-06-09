@@ -1,0 +1,10 @@
+﻿# npm run validate:combat-assets
+
+> xiuxian-stg@0.1.0 validate:combat-assets
+> node scripts/validate-combat-assets.mjs
+
+Combat asset manifests OK
+2D manifest: public/assets/2d/manifest.v0.1.json
+2D assets: 17
+Audio manifest: public/assets/audio/manifest.v0.1.json
+Audio assets: 12

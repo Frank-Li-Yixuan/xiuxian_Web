@@ -1,0 +1,17 @@
+{
+  "model": "deepseek-v4-flash",
+  "response_format": {
+    "type": "json_object"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "content": "你是修仙人生模拟器的叙事文本生成器。必须输出 json。"
+    },
+    {
+      "role": "user",
+      "content": "请基于以下安全事件生成 json：..."
+    }
+  ],
+  "max_tokens": 600
+}

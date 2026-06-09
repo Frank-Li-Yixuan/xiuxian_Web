@@ -1,0 +1,198 @@
+{
+  "version": "0.1",
+  "id": "three_powers_yinyang_wuxing",
+  "threePowers": {
+    "heaven": {
+      "name": "天宫",
+      "attrs": [
+        "comprehension",
+        "inspiration",
+        "fortune"
+      ],
+      "meaning": "天授之才、机缘、异象、天机感应",
+      "scoreFormula": {
+        "comprehension": 0.4,
+        "inspiration": 0.35,
+        "fortune": 0.25
+      }
+    },
+    "human": {
+      "name": "人宫",
+      "attrs": [
+        "jing",
+        "qi",
+        "shen"
+      ],
+      "meaning": "当前生命结构，精气神是否成体系",
+      "scoreFormula": {
+        "jing": 0.34,
+        "qi": 0.33,
+        "shen": 0.33
+      }
+    },
+    "earth": {
+      "name": "地宫",
+      "attrs": [
+        "rootBone",
+        "heart",
+        "lifespan"
+      ],
+      "meaning": "承载、道心、命火，决定能否托住天赋",
+      "scoreFormula": {
+        "rootBone": 0.35,
+        "heart": 0.35,
+        "lifespan": 0.3
+      }
+    }
+  },
+  "derivedScores": {
+    "talentScore": {
+      "formula": {
+        "comprehension": 0.5,
+        "inspiration": 0.3,
+        "shen": 0.2
+      },
+      "meaning": "悟道/学法/天机接受能力"
+    },
+    "vesselScore": {
+      "formula": {
+        "rootBone": 0.35,
+        "jing": 0.3,
+        "qi": 0.2,
+        "lifespan": 0.15
+      },
+      "meaning": "身体与气机承载天赋、血脉、禁术的能力"
+    },
+    "stabilityScore": {
+      "formula": {
+        "heart": 0.45,
+        "qi": 0.2,
+        "shen": 0.2,
+        "lifespan": 0.15
+      },
+      "meaning": "是否能避免走火、心魔、天劫失控"
+    },
+    "destinyPressureScore": {
+      "formula": {
+        "comprehension": 0.25,
+        "inspiration": 0.25,
+        "fortune": 0.2,
+        "lifespan_inverse": 0.2,
+        "heart_inverse": 0.1
+      },
+      "meaning": "天赋/异象越强但承载越弱，越容易被天道注视"
+    },
+    "lateBloomScore": {
+      "formula": {
+        "lifespan": 0.4,
+        "heart": 0.3,
+        "rootBone": 0.2,
+        "comprehension": 0.1
+      },
+      "meaning": "是否适合大器晚成、苟道、闭关路线"
+    },
+    "rebellionScore": {
+      "formula": {
+        "rootBone_inverse": 0.25,
+        "comprehension_inverse": 0.15,
+        "heart": 0.3,
+        "inspiration": 0.2,
+        "fortune_inverse": 0.1
+      },
+      "meaning": "低资质但高心性/异常感应，适合逆命路线"
+    }
+  },
+  "wuxingMapping": {
+    "metal": {
+      "attrs": [
+        "rootBone",
+        "shen",
+        "comprehension"
+      ],
+      "routes": [
+        "剑修",
+        "炼器",
+        "破甲",
+        "决断"
+      ]
+    },
+    "wood": {
+      "attrs": [
+        "jing",
+        "fortune",
+        "lifespan"
+      ],
+      "routes": [
+        "药理",
+        "生机",
+        "恢复",
+        "灵植"
+      ]
+    },
+    "water": {
+      "attrs": [
+        "qi",
+        "shen",
+        "heart",
+        "lifespan"
+      ],
+      "routes": [
+        "清心",
+        "护盾",
+        "真元",
+        "隐匿"
+      ]
+    },
+    "fire": {
+      "attrs": [
+        "qi",
+        "comprehension"
+      ],
+      "routes": [
+        "爆发",
+        "炼丹",
+        "悟道",
+        "灼烧"
+      ]
+    },
+    "earth": {
+      "attrs": [
+        "jing",
+        "rootBone",
+        "heart"
+      ],
+      "routes": [
+        "阵法",
+        "承载",
+        "防御",
+        "聚灵"
+      ]
+    },
+    "thunder": {
+      "attrs": [
+        "inspiration",
+        "fortune",
+        "qi"
+      ],
+      "routes": [
+        "雷法",
+        "天劫",
+        "域外",
+        "爆发"
+      ]
+    },
+    "yin": {
+      "attrs": [
+        "shen",
+        "inspiration",
+        "heart"
+      ],
+      "routes": [
+        "魂修",
+        "梦境",
+        "太阴",
+        "心魔"
+      ]
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "version": "0.1",
+  "modules": [
+    {
+      "id": "WORLD",
+      "status": "design_complete",
+      "supersedes": [],
+      "mustRunBefore": [
+        "ME2",
+        "MC2",
+        "LFP"
+      ]
+    },
+    {
+      "id": "NPF",
+      "status": "design_complete",
+      "supersedes": [
+        "loose_attribute_randomness"
+      ],
+      "mustRunBefore": [
+        "DEM",
+        "ME2",
+        "MC2"
+      ]
+    },
+    {
+      "id": "DEM",
+      "status": "design_complete",
+      "supersedes": [
+        "DT-v0.1-direct-reroll"
+      ],
+      "mustRunBefore": [
+        "ME2",
+        "MC2",
+        "LFP"
+      ]
+    },
+    {
+      "id": "LST",
+      "status": "design_complete",
+      "supersedes": [
+        "random_monthly_logs"
+      ],
+      "mustRunBefore": [
+        "ME2",
+        "MC2"
+      ]
+    },
+    {
+      "id": "LPI",
+      "status": "design_complete",
+      "supersedes": [
+        "text_only_choice"
+      ],
+      "mustRunBefore": [
+        "MC2",
+        "LFP"
+      ]
+    },
+    {
+      "id": "LSTG",
+      "status": "design_complete",
+      "supersedes": [
+        "hard_age18_cut"
+      ],
+      "mustRunBefore": [
+        "LFP",
+        "A18"
+      ]
+    },
+    {
+      "id": "ME2",
+      "status": "design_complete",
+      "supersedes": [
+        "LM-v0.1"
+      ],
+      "mustRunBefore": [
+        "MC2",
+        "LFP"
+      ]
+    },
+    {
+      "id": "MC2",
+      "status": "design_complete",
+      "supersedes": [
+        "MLC-v0.1"
+      ],
+      "mustRunBefore": [
+        "LFP"
+      ]
+    },
+    {
+      "id": "HFO2",
+      "status": "design_complete",
+      "supersedes": [
+        "HFO-v0.1-simple-origin"
+      ],
+      "mustRunBefore": [
+        "ME2",
+        "MC2",
+        "LFP"
+      ]
+    },
+    {
+      "id": "LLM",
+      "status": "design_complete",
+      "optional": true,
+      "mustRunBefore": []
+    },
+    {
+      "id": "LFP",
+      "status": "design_complete",
+      "mustRunBefore": [
+        "A18",
+        "STG-R"
+      ]
+    }
+  ]
+}

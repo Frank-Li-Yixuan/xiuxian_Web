@@ -1,0 +1,759 @@
+﻿{
+    "auditId":  "REVIEW-PRE-001",
+    "artifactDate":  "2026-06-09",
+    "generatedAt":  "2026-06-09T22:44:47.9674876+08:00",
+    "workspace":  "D:\\Game_1",
+    "artifactDirectory":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09",
+    "branch":  "main",
+    "head":  "c85dbf0871cb8d5fb24d6682e88f2e2d7c809432",
+    "gitStatusSb":  "## main...origin/main\r\n M docs/codex_execution_order_v0.1.md\r\n M docs/testing_acceptance_v0.1.md\r\n?? codex_prompts/00_GLOBAL_PREFIX_SIM_REDESIGN.md\r\n?? codex_prompts/00_SIM_REDESIGN_BOOTSTRAP.md\r\n?? codex_prompts/DEM-C001_schema_registry.md\r\n?? codex_prompts/DEM-C002_eligibility_evaluator.md\r\n?? codex_prompts/DEM-C003_mutation_resolver.md\r\n?? codex_prompts/DEM-C004_conflict_synergy_engine_v2.md\r\n?? codex_prompts/DEM-C005_life_manifestation_hooks.md\r\n?? codex_prompts/DEM-C006_character_creation_integration.md\r\n?? codex_prompts/DEM-C007_tests_telemetry.md\r\n?? codex_prompts/E2E-SIM-001_life_sim_redesign_full_flow.md\r\n?? codex_prompts/HFO2-C001_data_schema_registry.md\r\n?? codex_prompts/HFO2-C002_hidden_fate_narrative_engine.md\r\n?? codex_prompts/HFO2-C003_origin_storyline_engine.md\r\n?? codex_prompts/HFO2-C004_carried_item_lifecycle_engine.md\r\n?? codex_prompts/HFO2-C005_reveal_misdirection_engine.md\r\n?? codex_prompts/HFO2-C006_life_sim_integration.md\r\n?? codex_prompts/HFO2-C007_age18_conversion_integration.md\r\n?? codex_prompts/HFO2-C008_tests_telemetry.md\r\n?? codex_prompts/LFP-C001_state_machine_and_registry.md\r\n?? codex_prompts/LFP-C002_ui_shell_and_route.md\r\n?? codex_prompts/LFP-C003_monthly_auto_playback.md\r\n?? codex_prompts/LFP-C004_major_choice_experience.md\r\n?? codex_prompts/LFP-C005_playable_interlude_flow.md\r\n?? codex_prompts/LFP-C006_stage_summaries_chronicle.md\r\n?? codex_prompts/LFP-C007_speed_controls_persistence.md\r\n?? codex_prompts/LFP-C008_llm_narrative_optional_integration.md\r\n?? codex_prompts/LFP-C009_e2e_tests_screenshots.md\r\n?? codex_prompts/LLM-C001_data_schema_registry.md\r\n?? codex_prompts/LLM-C002_sanitizer_and_hidden_leak_detector.md\r\n?? codex_prompts/LLM-C003_fallback_template_renderer.md\r\n?? codex_prompts/LLM-C004_deepseek_client_optional.md\r\n?? codex_prompts/LLM-C005_narrative_service_and_cache.md\r\n?? codex_prompts/LLM-C006_life_sim_integration_hooks.md\r\n?? codex_prompts/LLM-C007_dev_narrative_lab.md\r\n?? codex_prompts/LLM-C008_tests_telemetry.md\r\n?? codex_prompts/LPI-C001_data_schema_registry.md\r\n?? codex_prompts/LPI-C002_trigger_engine.md\r\n?? codex_prompts/LPI-C003_interlude_run_config_factory.md\r\n?? codex_prompts/LPI-C004_result_writeback_engine.md\r\n?? codex_prompts/LPI-C005_life_sim_major_choice_integration.md\r\n?? codex_prompts/LPI-C006_ui_flow_and_transition.md\r\n?? codex_prompts/LPI-C007_dev_interlude_lab.md\r\n?? codex_prompts/LPI-C008_tests_telemetry.md\r\n?? codex_prompts/LST-C001_data_schema_registry.md\r\n?? codex_prompts/LST-C002_storyline_scoring_engine.md\r\n?? codex_prompts/LST-C003_event_thread_engine.md\r\n?? codex_prompts/LST-C004_life_sim_monthly_integration.md\r\n?? codex_prompts/LST-C005_major_choice_integration.md\r\n?? codex_prompts/LST-C006_dev_storyline_debug_page.md\r\n?? codex_prompts/LST-C007_tests_telemetry.md\r\n?? codex_prompts/LSTG-C001_data_schema_registry.md\r\n?? codex_prompts/LSTG-C002_stage_state_engine.md\r\n?? codex_prompts/LSTG-C003_transition_trigger_engine.md\r\n?? codex_prompts/LSTG-C004_initiation_node_resolution.md\r\n?? codex_prompts/LSTG-C005_life_sim_interlude_integration.md\r\n?? codex_prompts/LSTG-C006_ui_flow_pacing.md\r\n?? codex_prompts/LSTG-C007_dev_stage_lab.md\r\n?? codex_prompts/LSTG-C008_tests_telemetry.md\r\n?? codex_prompts/MC2-C001_data_schema_registry.md\r\n?? codex_prompts/MC2-C002_choice_generation_engine.md\r\n?? codex_prompts/MC2-C003_risk_resolution_engine.md\r\n?? codex_prompts/MC2-C004_hidden_branch_engine.md\r\n?? codex_prompts/MC2-C005_interlude_stage_integration.md\r\n?? codex_prompts/MC2-C006_effect_writeback_logs.md\r\n?? codex_prompts/MC2-C007_ui_integration.md\r\n?? codex_prompts/MC2-C008_tests_telemetry.md\r\n?? codex_prompts/ME2-C001_data_schema_registry.md\r\n?? codex_prompts/ME2-C002_event_pool_upgrade.md\r\n?? codex_prompts/ME2-C003_weight_selector.md\r\n?? codex_prompts/ME2-C004_density_controller.md\r\n?? codex_prompts/ME2-C005_storyline_stage_integration.md\r\n?? codex_prompts/ME2-C006_effect_applier_logs.md\r\n?? codex_prompts/ME2-C007_llm_text_hooks.md\r\n?? codex_prompts/ME2-C008_dev_page_tests_telemetry.md\r\n?? codex_prompts/MIG-C001_prompt_inventory_and_deprecation.md\r\n?? codex_prompts/MIG-C002_data_registry_unification.md\r\n?? codex_prompts/MIG-C003_character_creation_v02_adapter.md\r\n?? codex_prompts/MIG-C004_life_sim_v02_core_integration.md\r\n?? codex_prompts/MIG-C005_life_choice_interlude_stage_integration.md\r\n?? codex_prompts/MIG-C006_origin_fate_item_narrative_upgrade.md\r\n?? codex_prompts/MIG-C007_llm_narrative_pipeline_optional.md\r\n?? codex_prompts/MIG-C008_life_sim_playable_ui_and_persistence.md\r\n?? codex_prompts/MIG-C009_age18_or_adult_node_bridge.md\r\n?? codex_prompts/NPF-C001_data_schema_registry.md\r\n?? codex_prompts/NPF-C002_scoring_engine.md\r\n?? codex_prompts/NPF-C003_destiny_eligibility_mutation_engine.md\r\n?? codex_prompts/NPF-C004_opening_destiny_integration.md\r\n?? codex_prompts/NPF-C005_life_event_hooks_integration.md\r\n?? codex_prompts/NPF-C006_tests_telemetry.md\r\n?? codex_prompts/RC-SIM-001_life_sim_first_playable_gate.md\r\n?? codex_prompts/REVIEW-PRE-001_current_implementation_audit.md\r\n?? codex_prompts/SIM-C001_current_state_audit.md\r\n?? codex_prompts/SIM-C001_inventory_and_migration_plan.md\r\n?? codex_prompts/SIM-C002_data_registry_unification.md\r\n?? codex_prompts/SIM-C003_nine_palace_destiny_upgrade.md\r\n?? codex_prompts/SIM-C003_world_and_nine_palace_integration.md\r\n?? codex_prompts/SIM-C004_destiny_eligibility_v2_integration.md\r\n?? codex_prompts/SIM-C004_origin_storyline_item_upgrade.md\r\n?? codex_prompts/SIM-C005_life_storyline_stage_interlude_core.md\r\n?? codex_prompts/SIM-C005_origin_storyline_item_v2_integration.md\r\n?? codex_prompts/SIM-C006_monthly_event_v02_upgrade.md\r\n?? codex_prompts/SIM-C006_storyline_monthly_choice_engine.md\r\n?? codex_prompts/SIM-C007_interlude_stage_transition_engine.md\r\n?? codex_prompts/SIM-C007_major_choice_v02_upgrade.md\r\n?? codex_prompts/SIM-C008_life_playable_ui_and_persistence.md\r\n?? codex_prompts/SIM-C008_life_playable_ui_flow.md\r\n?? codex_prompts/SIM-C009_llm_narrative_offline_first.md\r\n?? codex_prompts/SIM-C009_optional_llm_narrative_pipeline.md\r\n?? codex_prompts/SIM-C010_adult_node_and_trial_bridge.md\r\n?? codex_prompts/SIM-C010_e2e_quality_gate.md\r\n?? codex_prompts/SIM-C011_e2e_rc_gate.md\r\n?? data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json\r\n?? data/destiny_v2/core_destiny_definitions.v0.1.json\r\n?? data/destiny_v2/destiny_groups.v0.1.json\r\n?? data/destiny_v2/eligibility_signal_rules.v0.1.json\r\n?? data/destiny_v2/life_manifestation_hooks.v0.1.json\r\n?? data/destiny_v2/mode_projection_hooks.v0.1.json\r\n?? data/destiny_v2/sample_evaluation_cases.v0.1.json\r\n?? data/fate_matrix/attribute_correlation_rules.v0.1.json\r\n?? data/fate_matrix/attribute_event_bias_rules.v0.1.json\r\n?? data/fate_matrix/destiny_eligibility_rules.v0.1.json\r\n?? data/fate_matrix/generation_algorithm_upgrade_rules.v0.1.json\r\n?? data/fate_matrix/nine_attributes.v0.1.json\r\n?? data/fate_matrix/three_powers_yinyang_wuxing.v0.1.json\r\n?? data/life_choices_v02/choice_archetypes.v0.2.json\r\n?? data/life_choices_v02/choice_generation_rules.v0.2.json\r\n?? data/life_choices_v02/hidden_branch_rules.v0.2.json\r\n?? data/life_choices_v02/major_choice_events.v0.2.json\r\n?? data/life_choices_v02/outcome_effect_tables.v0.2.json\r\n?? data/life_choices_v02/sample_choice_results.v0.2.json\r\n?? data/life_interludes/interlude_event_catalog.v0.1.json\r\n?? data/life_interludes/interlude_frequency_budget.v0.1.json\r\n?? data/life_interludes/interlude_mode_definitions.v0.1.json\r\n?? data/life_interludes/interlude_result_writeback_rules.v0.1.json\r\n?? data/life_interludes/interlude_trigger_rules.v0.1.json\r\n?? data/life_interludes/sample_interlude_timeline.v0.1.json\r\n?? data/life_playable/content_minimums.v0.1.json\r\n?? data/life_playable/first_playable_flow.v0.1.json\r\n?? data/life_playable/pacing_budgets.v0.1.json\r\n?? data/life_playable/sample_playthroughs.v0.1.json\r\n?? data/life_playable/telemetry_targets.v0.1.json\r\n?? data/life_playable/ui_state_machine.v0.1.json\r\n?? data/life_sim_v02/monthly_event_categories.v0.2.json\r\n?? data/life_sim_v02/monthly_event_pool.v0.2.json\r\n?? data/life_sim_v02/monthly_event_tiers.v0.2.json\r\n?? data/life_sim_v02/monthly_event_weighting_rules.v0.2.json\r\n?? data/life_sim_v02/narrative_density_rules.v0.2.json\r\n?? data/life_sim_v02/sample_monthly_timeline.v0.2.json\r\n?? data/life_sim_v02/storyline_event_mapping.v0.2.json\r\n?? data/life_stage/cultivation_identity_stages.v0.1.json\r\n?? data/life_stage/initiation_node_definitions.v0.1.json\r\n?? data/life_stage/life_age_phase_definitions.v0.1.json\r\n?? data/life_stage/rhythm_budget_rules.v0.1.json\r\n?? data/life_stage/sample_stage_timelines.v0.1.json\r\n?? data/life_stage/transition_event_catalog.v0.1.json\r\n?? data/life_stage/transition_trigger_rules.v0.1.json\r\n?? data/life_storylines/event_threads.v0.1.json\r\n?? data/life_storylines/sample_storyline_profiles.v0.1.json\r\n?? data/life_storylines/storyline_definitions.v0.1.json\r\n?? data/life_storylines/storyline_scoring_rules.v0.1.json\r\n?? data/llm_narrative/cache_rules.v0.1.json\r\n?? data/llm_narrative/fallback_templates.v0.1.json\r\n?? data/llm_narrative/forbidden_terms.v0.1.json\r\n?? data/llm_narrative/narrative_task_definitions.v0.1.json\r\n?? data/llm_narrative/output_schemas.v0.1.json\r\n?? data/llm_narrative/prompt_templates.v0.1.json\r\n?? data/llm_narrative/sample_requests.v0.1.json\r\n?? data/llm_narrative/sanitization_rules.v0.1.json\r\n?? data/origin_fate_v02/carried_item_narrative_chains.v0.2.json\r\n?? data/origin_fate_v02/hidden_fate_definitions.v0.2.json\r\n?? data/origin_fate_v02/omen_phrase_bank.v0.2.json\r\n?? data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json\r\n?? data/origin_fate_v02/origin_storyline_definitions.v0.2.json\r\n?? data/origin_fate_v02/reveal_stage_rules.v0.2.json\r\n?? data/origin_fate_v02/sample_origin_fate_timelines.v0.2.json\r\n?? data/sim_redesign/\r\n?? diagrams/\r\n?? docs/acceptance_gates_and_test_matrix_v0.1.md\r\n?? docs/algorithm_and_balance_v0.2.md\r\n?? docs/architecture_and_boundaries_v0.1.md\r\n?? docs/attribute_causality_and_destiny_eligibility_v0.1.md\r\n?? docs/cache_reproducibility_offline_v0.1.md\r\n?? docs/carried_item_lifecycle_v0.2.md\r\n?? docs/codex_agent_guidance_v0.1.md\r\n?? docs/codex_execution_order_v0.2.md\r\n?? docs/current_prompt_status_and_deprecation_v0.1.md\r\n?? docs/data_merge_plan_v0.1.md\r\n?? docs/data_model_migration_plan_v0.1.md\r\n?? docs/deprecated_prompt_policy_v0.1.md\r\n?? docs/destiny_anatomy_and_quality_v0.1.md\r\n?? docs/destiny_eligibility_conflict_mutation_v0.1.md\r\n?? docs/event_taxonomy_schema_v0.2.md\r\n?? docs/generation_algorithm_upgrade_v0.1.md\r\n?? docs/hidden_fate_taxonomy_schema_v0.2.md\r\n?? docs/hidden_origin_item_narrative_chain_v0.2.md\r\n?? docs/implementation_phases_v0.1.md\r\n?? docs/integration_with_events_destiny_roots_v0.1.md\r\n?? docs/integration_with_interludes_life_sim_age18_v0.1.md\r\n?? docs/integration_with_life_choices_interludes_age18_v0.2.md\r\n?? docs/integration_with_life_sim_choices_interludes_v0.1.md\r\n?? docs/integration_with_life_sim_v0.1.md\r\n?? docs/integration_with_monthly_storylines_interludes_stages_v0.2.md\r\n?? docs/integration_with_storylines_interludes_stages_v0.2.md\r\n?? docs/integration_with_storylines_life_stages_v0.1.md\r\n?? docs/interlude_taxonomy_schema_v0.1.md\r\n?? docs/life_manifestation_hooks_v0.1.md\r\n?? docs/life_sim_first_playable_experience_v0.1.md\r\n?? docs/life_stage_transition_initiation_rhythm_v0.1.md\r\n?? docs/life_storylines_event_threads_v0.1.md\r\n?? docs/llm_narrative_pipeline_v0.1.md\r\n?? docs/major_choice_playable_interludes_v0.1.md\r\n?? docs/major_choice_risk_hidden_branch_v0.2.md\r\n?? docs/migration_plan_current_to_v02.md\r\n?? docs/mode_contracts_and_result_writeback_v0.1.md\r\n?? docs/module_migration_matrix_v0.1.md\r\n?? docs/monthly_event_pool_weight_density_v0.2.md\r\n?? docs/mutation_design_catalog_v0.1.md\r\n?? docs/mvp_scope_and_cuts_v0.1.md\r\n?? docs/narrative_density_controller_v0.2.md\r\n?? docs/nine_palace_fate_matrix_v0.1.md\r\n?? docs/npf_dem_execution_order_v0.1.md\r\n?? docs/origin_as_storyline_system_v0.2.md\r\n?? docs/player_flow_pacing_v0.1.md\r\n?? docs/prompt_execution_order_v0.1.md\r\n?? docs/request_response_schema_v0.1.md\r\n?? docs/reveal_pacing_misdirection_v0.2.md\r\n?? docs/risk_register_v0.1.md\r\n?? docs/scoring_and_progression_algorithm_v0.1.md\r\n?? docs/sim_redesign_integration_codex_roadmap_v0.1.md\r\n?? docs/sim_redesign_integration_codex_route_v0.1.md\r\n?? docs/sim_redesign_total_integration_v0.1.md\r\n?? docs/stage_taxonomy_schema_v0.1.md\r\n?? docs/storyline_taxonomy_schema_v0.1.md\r\n?? docs/style_and_world_guardrails_v0.1.md\r\n?? docs/system_integration_spec_v0.1.md\r\n?? docs/target_architecture_v0.1.md\r\n?? docs/testing_acceptance_gates_v0.1.md\r\n?? docs/testing_acceptance_v0.2.md\r\n?? docs/transition_algorithm_balance_v0.1.md\r\n?? docs/trigger_frequency_balance_v0.1.md\r\n?? docs/ui_ux_spec_v0.1.md\r\n?? docs/weight_algorithm_integration_v0.2.md\r\n?? scripts/validate_destiny_eligibility_data.mjs\r\n?? scripts/validate_life_interludes_data.mjs\r\n?? scripts/validate_life_playable_data.mjs\r\n?? scripts/validate_life_stage_data.mjs\r\n?? scripts/validate_life_storylines_data.mjs\r\n?? scripts/validate_llm_narrative_data.mjs\r\n?? scripts/validate_major_choices_v02.mjs\r\n?? scripts/validate_monthly_events_v02.mjs\r\n?? scripts/validate_nine_palace_data.mjs\r\n?? scripts/validate_origin_fate_v02.mjs\r\n?? scripts/validate_sim_redesign_bundle.mjs\r\n?? scripts/validate_sim_redesign_data.mjs\r\n?? scripts/validate_sim_redesign_package.mjs\r\n?? src/types/destiny-eligibility-types.v0.1.ts\r\n?? src/types/life-interlude-types.v0.1.ts\r\n?? src/types/life-sim-playable-types.v0.1.ts\r\n?? src/types/life-stage-transition-types.v0.1.ts\r\n?? src/types/life-storylines-types.v0.1.ts\r\n?? src/types/llm-narrative-types.v0.1.ts\r\n?? src/types/major-life-choice-v02-types.ts\r\n?? src/types/monthly-event-v02-types.ts\r\n?? src/types/nine-palace-fate-types.v0.1.ts\r\n?? src/types/origin-fate-narrative-types.v0.2.ts\r\n?? src/types/sim-redesign-integration-types.v0.1.ts\r\n?? src/types/sim-redesign-types.v0.1.ts\r\n?? templates/AGENTS_SIM_REDESIGN_PATCH.md\r\n?? templates/CODEX_TASK_REPORT_TEMPLATE.md\r\n?? templates/SIM_REDESIGN_PLAYTEST_REPORT.md\r\n?? templates/deepseek_request_example.json\r\n?? templates/playtest_report_template.md",
+    "srcSimDiffNameOnly":  "",
+    "srcSimDiffEmpty":  true,
+    "requiredReports":  [
+                            "IMPLEMENTATION_STATUS.md",
+                            "PROMPT_STATUS.md",
+                            "DATA_REGISTRY_STATUS.md",
+                            "CHARACTER_CREATION_STATUS.md",
+                            "LIFE_SIM_STATUS.md",
+                            "HIDDEN_LEAK_RISK.md",
+                            "TEST_RESULTS.md",
+                            "REVIEW_SUMMARY_FOR_CHATGPT.md"
+                        ],
+    "evidenceFiles":  [
+                          "COMMAND_LOGS.md",
+                          "browser_smoke_metrics.json",
+                          "browser_smoke.mjs"
+                      ],
+    "commands":  [
+                     {
+                         "id":  "artifact_previous_listing",
+                         "command":  "powershell -NoProfile -Command Get-ChildItem -Path artifacts\\sim-redesign-pre-review-2026-06-08 -Force -ErrorAction SilentlyContinue | Select-Object Name,Length,LastWriteTime | Format-Table -AutoSize",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "browser_smoke",
+                         "command":  null,
+                         "exitCode":  1,
+                         "startedAt":  "2026-06-09T22:29:33.2052492+08:00",
+                         "endedAt":  "2026-06-09T22:30:03.0861391+08:00",
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  true,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "browser_smoke_retry",
+                         "command":  null,
+                         "exitCode":  1,
+                         "startedAt":  "2026-06-09T22:30:57.4996213+08:00",
+                         "endedAt":  "2026-06-09T22:31:11.6111319+08:00",
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  true,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "browser_smoke_retry2",
+                         "command":  null,
+                         "exitCode":  1,
+                         "startedAt":  "2026-06-09T22:32:07.3040680+08:00",
+                         "endedAt":  "2026-06-09T22:32:41.5924575+08:00",
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  true,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "browser_smoke_retry3",
+                         "command":  "npm run dev -- --port 5176; node browser_smoke.mjs http://127.0.0.1:5176 D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09",
+                         "exitCode":  1,
+                         "startedAt":  "2026-06-09T22:37:11.7235026+08:00",
+                         "endedAt":  "2026-06-09T22:37:22.2789711+08:00",
+                         "durationMs":  10555,
+                         "log":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\logs\\browser_smoke_retry3.log",
+                         "ready":  true,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "browser_smoke_retry4",
+                         "command":  "npm run dev -- --port 5177; node browser_smoke.mjs http://127.0.0.1:5177 D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09",
+                         "exitCode":  1,
+                         "startedAt":  "2026-06-09T22:38:18.2954129+08:00",
+                         "endedAt":  "2026-06-09T22:38:58.9347866+08:00",
+                         "durationMs":  40639,
+                         "log":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\logs\\browser_smoke_retry4.log",
+                         "ready":  true,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "git_diff_name_only_src_sim_baseline",
+                         "command":  "git diff --name-only -- src/sim",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "git_diff_name_only_src_sim_final_commands",
+                         "command":  "git diff --name-only -- src/sim",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "git_diff_name_only_src_sim_post_reports",
+                         "command":  "git diff --name-only -- src/sim",
+                         "exitCode":  0,
+                         "startedAt":  "2026-06-09T22:44:16.6251348+08:00",
+                         "endedAt":  "2026-06-09T22:44:16.7170936+08:00",
+                         "durationMs":  92,
+                         "log":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\logs\\git_diff_name_only_src_sim_post_reports.log",
+                         "ready":  null,
+                         "empty":  true
+                     },
+                     {
+                         "id":  "git_diff_stat_baseline",
+                         "command":  "git diff --stat",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "git_ls_files",
+                         "command":  "git ls-files",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "git_ls_files_sim_redesign_related",
+                         "command":  "powershell -NoProfile -Command git ls-files src data docs codex_prompts scripts tools tests | rg \"(SimRedesign|sim-redesign|fate_matrix|destiny_v2|life_|llm_narrative|origin_fate_v02|NPF|DEM|LST|ME2|MC2|HFO2|LFP|LLM)\"",
+                         "exitCode":  1,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "git_status_sb_baseline",
+                         "command":  "git status -sb",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "git_untracked_files",
+                         "command":  "git ls-files --others --exclude-standard",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_build",
+                         "command":  "npm run build",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_check_forbidden",
+                         "command":  "npm run check:forbidden",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_test",
+                         "command":  "npm test",
+                         "exitCode":  1,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_test_determinism",
+                         "command":  "npm run test:determinism",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_test_headless_stage01",
+                         "command":  "npm run test:headless:stage01",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_typecheck",
+                         "command":  "npm run typecheck",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_validate_combat_assets",
+                         "command":  "npm run validate:combat-assets",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_validate_data",
+                         "command":  "npm run validate:data",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "npm_validate_sim_redesign_data_extra",
+                         "command":  "npm run validate:sim-redesign-data",
+                         "exitCode":  1,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "package_json",
+                         "command":  "powershell -NoProfile -Command Get-Content -Path package.json -Encoding UTF8",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "rg_generated_png_ui",
+                         "command":  "rg -n generated PNG|generated image|GeneratedUi|CharacterPortraitFrame|CharacterCreationScreen|LifeSimulationScreen src docs codex_prompts tests",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     },
+                     {
+                         "id":  "rg_keywords",
+                         "command":  "rg -n NinePalaceEvaluation|eligibility|mutation|storyline|density|interlude|NarrativeService|trueName|18 岁|域外 src data docs codex_prompts scripts tools tests",
+                         "exitCode":  0,
+                         "startedAt":  null,
+                         "endedAt":  null,
+                         "durationMs":  null,
+                         "log":  null,
+                         "ready":  null,
+                         "empty":  null
+                     }
+                 ],
+    "verificationSummary":  {
+                                "typecheck":  "pass",
+                                "test":  "failed: tests/content/sim-redesign-content-registry.test.ts, 1 failed / 457 passed",
+                                "build":  "pass",
+                                "validateData":  "pass: 189 JSON files, 92 content ids, contentHash=8fcee14b",
+                                "checkForbidden":  "pass",
+                                "validateCombatAssets":  "pass",
+                                "testDeterminism":  "pass",
+                                "testHeadlessStage01":  "pass",
+                                "validateSimRedesignDataExtra":  "failed: mixed re-imported schema outside MIG-C002 wrapper scope",
+                                "browserSmoke":  "failed: reached character creation/confirm dialog, did not reach life simulation"
+                            },
+    "checksums":  [
+                      {
+                          "path":  "browser_dom_text_01_main_menu.txt",
+                          "sha256":  "b8277f5a51ccf755d6b3151ea20bb907668655d0961d78633827e4688f49b257",
+                          "bytes":  67
+                      },
+                      {
+                          "path":  "browser_dom_text_02_save_slots.txt",
+                          "sha256":  "b13f0dc3a2a4deb710060a39410f7f379578580f51db7d63655708f8d1083256",
+                          "bytes":  175
+                      },
+                      {
+                          "path":  "browser_dom_text_03_save_slot_dialog.txt",
+                          "sha256":  "68bd78f38500ba62e20e2e4151f3bc7ac55c08d0e968339cbeb5157ddcb5a6f8",
+                          "bytes":  281
+                      },
+                      {
+                          "path":  "browser_dom_text_04_character_creation.txt",
+                          "sha256":  "bd13ebbf82e22c2193729f8c7ec6d57850b49139b588657bf8b2cd55b37acb40",
+                          "bytes":  2271
+                      },
+                      {
+                          "path":  "browser_dom_text_05_confirm_life_dialog.txt",
+                          "sha256":  "bd2477ba4969cb622b0d82437fcff7bf76d49515e6dae3ed785a4e54a9fd0dc4",
+                          "bytes":  2456
+                      },
+                      {
+                          "path":  "browser_smoke.mjs",
+                          "sha256":  "9e516f7ef32b1633976ab2a4146e62ba1713e88eec4deb260d770c249bc498ec",
+                          "bytes":  5360
+                      },
+                      {
+                          "path":  "browser_smoke_metrics.json",
+                          "sha256":  "df8e5b063b1cc9d0c399074c6e31f06a941bcbb7b50e073f3b70a5d4b2e2da94",
+                          "bytes":  8285
+                      },
+                      {
+                          "path":  "CHARACTER_CREATION_STATUS.md",
+                          "sha256":  "5bb1dac9635ce46096cc17853372ba1d8f50442a43e8b12be5b8eda86cb3882e",
+                          "bytes":  2399
+                      },
+                      {
+                          "path":  "COMMAND_LOGS.md",
+                          "sha256":  "6d5de81292c79cee5fd3b8e13a84df4efae0875535d7e2805bb61878a2548727",
+                          "bytes":  2536
+                      },
+                      {
+                          "path":  "DATA_REGISTRY_STATUS.md",
+                          "sha256":  "0e4e0d38e7c9539f346eb048bed04eaa4e85e8620aeea3eed172c14be4a835f6",
+                          "bytes":  4135
+                      },
+                      {
+                          "path":  "HIDDEN_LEAK_RISK.md",
+                          "sha256":  "ad99b2d5a4da85308c2863934c498eec67bdadcc0c93a218403afbe241beec2d",
+                          "bytes":  2537
+                      },
+                      {
+                          "path":  "IMPLEMENTATION_STATUS.md",
+                          "sha256":  "def741818e4992c02eac1574c60a79a9b16bddace87e3532067a5a694ff0eb88",
+                          "bytes":  5904
+                      },
+                      {
+                          "path":  "LIFE_SIM_STATUS.md",
+                          "sha256":  "9c3380f9c9daa3256e12e5495b4f74968a3717585d5f9ee7f6e55ef85d20cc61",
+                          "bytes":  3052
+                      },
+                      {
+                          "path":  "logs/artifact_path.txt",
+                          "sha256":  "c0c0ae8e4564854b6c06079ca2a2f8f4025eb437c6344e1a7b49d8e02236759e",
+                          "bytes":  68
+                      },
+                      {
+                          "path":  "logs/artifact_previous_listing.log",
+                          "sha256":  "86de7f87e74a6833e419d9adc84184c18950048baa92d7c3047913367328020a",
+                          "bytes":  1412
+                      },
+                      {
+                          "path":  "logs/artifact_previous_listing.meta.json",
+                          "sha256":  "bb291457f1388917e2bbb78a0e040529558856234167f36eec773aed8ea9518f",
+                          "bytes":  395
+                      },
+                      {
+                          "path":  "logs/audit_started_at.txt",
+                          "sha256":  "37bdc40c8c6bc8481f2449fbeb24fa91802a3b38de7d3bb6e90fa75e9415c443",
+                          "bytes":  38
+                      },
+                      {
+                          "path":  "logs/browser_smoke.log",
+                          "sha256":  "a2296e7957c73443a634fd27d1b655cc24ce28f91314ff26d11cc1a423f27839",
+                          "bytes":  106
+                      },
+                      {
+                          "path":  "logs/browser_smoke.meta.json",
+                          "sha256":  "4da9b8cd9087d8543239945da8e2d1b33c91a00e18624328e19d73e1b238c670",
+                          "bytes":  243
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry.log",
+                          "sha256":  "78fe89b247db7b62bcab210b19eb3df0d6eb2de039120f4771e8137b2974f5bd",
+                          "bytes":  106
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry.meta.json",
+                          "sha256":  "5acdcb6e31f809494de160b730973a99c337b0515c55130db48bc696738238af",
+                          "bytes":  243
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry_vite.err.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry_vite.out.log",
+                          "sha256":  "5e3055cab571911d3c135ed0257154a97f57863b250795f302a3c66fb642a343",
+                          "bytes":  221
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry2.log",
+                          "sha256":  "971fea63554563a3e2f26a880396d03b19d55f1a5e4cbb6852202c6f52e7c872",
+                          "bytes":  106
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry2.meta.json",
+                          "sha256":  "669f45011029b7c38546343620a9fd08969b43537627aef8145789d4c2e989d1",
+                          "bytes":  243
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry2_vite.err.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry2_vite.out.log",
+                          "sha256":  "d4524a2ea33a003958489143d3c0fa8892bfed21a7a9fc8721ff5b530ce6f547",
+                          "bytes":  221
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry3.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry3.meta.json",
+                          "sha256":  "11f5b1a8bea8e9fd819ed893e277083131c2217f1e9498192c83bc60dd8dfa96",
+                          "bytes":  771
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry3_vite.err.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry3_vite.out.log",
+                          "sha256":  "15817e6a9a8078ce1e003414b3eaf7adcbad8f8ac7386ecd5a13af66532c9654",
+                          "bytes":  221
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry4.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry4.meta.json",
+                          "sha256":  "b4c3016b143a439b2fbbaf55c1260afc52718800fca8daf9c645eaac33d82682",
+                          "bytes":  771
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry4_vite.err.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/browser_smoke_retry4_vite.out.log",
+                          "sha256":  "0b6d428368baf061e1dfcd2c161168aece5436633726f164babf4a83fd574829",
+                          "bytes":  221
+                      },
+                      {
+                          "path":  "logs/browser_smoke_vite.err.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/browser_smoke_vite.out.log",
+                          "sha256":  "c2ed1d9d4c223461e990fe4c4c4880717ad509cec6c375a2ee6013387d4cd56a",
+                          "bytes":  221
+                      },
+                      {
+                          "path":  "logs/git_diff_name_only_src_sim_baseline.log",
+                          "sha256":  "2d6ae784d7cbd6fa2ba63dd1e43e5eb40ebee80620135e5ddc076291aecccf7d",
+                          "bytes":  38
+                      },
+                      {
+                          "path":  "logs/git_diff_name_only_src_sim_baseline.meta.json",
+                          "sha256":  "5eae676d20690241f6a2fd762e0ffd8e8157e3c520dce4e92388cc5f2158ca84",
+                          "bytes":  236
+                      },
+                      {
+                          "path":  "logs/git_diff_name_only_src_sim_final_commands.log",
+                          "sha256":  "2d6ae784d7cbd6fa2ba63dd1e43e5eb40ebee80620135e5ddc076291aecccf7d",
+                          "bytes":  38
+                      },
+                      {
+                          "path":  "logs/git_diff_name_only_src_sim_final_commands.meta.json",
+                          "sha256":  "53c4010c9c660835958532a5d580206905bb615ecbe96c012fcb190163645b7e",
+                          "bytes":  242
+                      },
+                      {
+                          "path":  "logs/git_diff_name_only_src_sim_post_reports.log",
+                          "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                          "bytes":  0
+                      },
+                      {
+                          "path":  "logs/git_diff_name_only_src_sim_post_reports.meta.json",
+                          "sha256":  "9fe914cef792488364aae1021a6e0339389fe6294804cbad3f259a304bd45b49",
+                          "bytes":  361
+                      },
+                      {
+                          "path":  "logs/git_diff_stat_baseline.log",
+                          "sha256":  "a574a48ff0959a6d193b6b12016fe3fc17ae6ee3d7feadcf8d897b89f046745e",
+                          "bytes":  480
+                      },
+                      {
+                          "path":  "logs/git_diff_stat_baseline.meta.json",
+                          "sha256":  "bd56fe59f28c97369a0df4020f6c60d40a926c62ae79181e6aea45f092765c43",
+                          "bytes":  207
+                      },
+                      {
+                          "path":  "logs/git_ls_files.log",
+                          "sha256":  "dd8ac1aa948796d4929cd3bec7b72df10207b519dd77d195474b44a2d73aa316",
+                          "bytes":  49501
+                      },
+                      {
+                          "path":  "logs/git_ls_files.meta.json",
+                          "sha256":  "1d49c0a3f58c34de42fb8785a1d9e0270a70b9dbfe96871f62a0b9257681b136",
+                          "bytes":  194
+                      },
+                      {
+                          "path":  "logs/git_ls_files_sim_redesign_related.log",
+                          "sha256":  "4114094d29262bddea5b597b78b0546e46daad9cd5988d536c02171d4e71ca2b",
+                          "bytes":  782
+                      },
+                      {
+                          "path":  "logs/git_ls_files_sim_redesign_related.meta.json",
+                          "sha256":  "6d7951a618b35a522143bc72006c38d9f4b7adce1fdac0894f91813a8ef35607",
+                          "bytes":  422
+                      },
+                      {
+                          "path":  "logs/git_status_sb_baseline.log",
+                          "sha256":  "6597628599fbb051e4634ab54f336d46ebfd818be038a6402e75c4175114b10a",
+                          "bytes":  14163
+                      },
+                      {
+                          "path":  "logs/git_status_sb_baseline.meta.json",
+                          "sha256":  "66d03797b58f8022b175117d0296fd690eaad43be244a51141e9497bdea6173a",
+                          "bytes":  206
+                      },
+                      {
+                          "path":  "logs/git_untracked_files.log",
+                          "sha256":  "d8cc73ef4114ba72ee878419ac514949844a7b72815cb5bb350ea3eb55a4dff7",
+                          "bytes":  13916
+                      },
+                      {
+                          "path":  "logs/git_untracked_files.meta.json",
+                          "sha256":  "8b00a36b5d183d3cc2d0b837aefc3a2b40adb1c80cf4820feb9bcb31d98fd8c8",
+                          "bytes":  229
+                      },
+                      {
+                          "path":  "logs/npm_build.log",
+                          "sha256":  "110fa6596251a7ed4687d2fe553aef9bb403e96cb7e18646c33d29c4d5d71a06",
+                          "bytes":  981
+                      },
+                      {
+                          "path":  "logs/npm_build.meta.json",
+                          "sha256":  "7879e354311fc6ab9d9fe0f89682c0bf4d2ab7ba1e58e5d7f9b2ea4df2118620",
+                          "bytes":  192
+                      },
+                      {
+                          "path":  "logs/npm_check_forbidden.log",
+                          "sha256":  "f538c47bd4cb196983c4bc285c50df747c4a4f9cce091763ac24cc2c496ef3d5",
+                          "bytes":  1006
+                      },
+                      {
+                          "path":  "logs/npm_check_forbidden.meta.json",
+                          "sha256":  "70c7ac3e91df13f7feffa4f38099dd7817b21bd1d86dd252c670a3df29914922",
+                          "bytes":  212
+                      },
+                      {
+                          "path":  "logs/npm_test.log",
+                          "sha256":  "6313cfab2426b31240f46ffbe5e80a615743d2882a6db1b0e838adbaad1f2579",
+                          "bytes":  67822
+                      },
+                      {
+                          "path":  "logs/npm_test.meta.json",
+                          "sha256":  "2fbd48a3c858b2d58608ad784076aa36114b8dfd19e46ccf7fcddaf5ac8ec395",
+                          "bytes":  186
+                      },
+                      {
+                          "path":  "logs/npm_test_determinism.log",
+                          "sha256":  "c64dfd7ddf6bac28ecd5a674561b1c2ad38eab3f32014a19fba5b99b92a0a0f8",
+                          "bytes":  603
+                      },
+                      {
+                          "path":  "logs/npm_test_determinism.meta.json",
+                          "sha256":  "f32821884e3e7c2157ace3739a53da604e467e9362a70de820b19b47e46e3b29",
+                          "bytes":  214
+                      },
+                      {
+                          "path":  "logs/npm_test_headless_stage01.log",
+                          "sha256":  "3c2bd0ab26d7c435dd9047324a0b74fcbc1c533e7eea9c235c7ad3c69427586e",
+                          "bytes":  614
+                      },
+                      {
+                          "path":  "logs/npm_test_headless_stage01.meta.json",
+                          "sha256":  "a6c3fd53ac991f734ab2dd689dfc1d35b117e37d61ece656c895788db7513cde",
+                          "bytes":  224
+                      },
+                      {
+                          "path":  "logs/npm_typecheck.log",
+                          "sha256":  "51c98e9cd8d7ea1f37e5bc2d9a279fd0517d9565aefcad18d96fc419cda51875",
+                          "bytes":  75
+                      },
+                      {
+                          "path":  "logs/npm_typecheck.meta.json",
+                          "sha256":  "632565304ff64c7f9fbbed3518841eaf95951aeed3d348a9a8c45c369ef0d818",
+                          "bytes":  200
+                      },
+                      {
+                          "path":  "logs/npm_validate_combat_assets.log",
+                          "sha256":  "cf89b161bd94b039e01312531fcef2c079e6ee79f0bb49fdd62b942ebdda140a",
+                          "bytes":  294
+                      },
+                      {
+                          "path":  "logs/npm_validate_combat_assets.meta.json",
+                          "sha256":  "1d60a74ad9941fe98c8e79fc1431220d5b13147881aaeaad93614f8d3bdb4dad",
+                          "bytes":  226
+                      },
+                      {
+                          "path":  "logs/npm_validate_data.log",
+                          "sha256":  "dce6e1762bf1a1b8bad57c3d6a3399b4afda7a23797eba2aeb8ed7298711e300",
+                          "bytes":  162
+                      },
+                      {
+                          "path":  "logs/npm_validate_data.meta.json",
+                          "sha256":  "3f9766806603345a2f129c07110f1f02bfe30748d69d5c7a7839d56d8a3ab3bc",
+                          "bytes":  208
+                      },
+                      {
+                          "path":  "logs/npm_validate_sim_redesign_data_extra.log",
+                          "sha256":  "cfa55aff6583e9da2b9efff52bf96ae919a55ec3d73e2b4097fe6427f39be391",
+                          "bytes":  20811
+                      },
+                      {
+                          "path":  "logs/npm_validate_sim_redesign_data_extra.meta.json",
+                          "sha256":  "b752642f78873479058d54ce74295cecc272d39e1628b23b0b5c936dfd64de83",
+                          "bytes":  240
+                      },
+                      {
+                          "path":  "logs/package_json.log",
+                          "sha256":  "9a20c71b73453de025644d257453984a87fea347f5e054b33ae7804035ba060f",
+                          "bytes":  2694
+                      },
+                      {
+                          "path":  "logs/package_json.meta.json",
+                          "sha256":  "96b49c34e5cecc5c2c6d0144ff05f386bd1f1edef4799becca88167df24cb767",
+                          "bytes":  258
+                      },
+                      {
+                          "path":  "logs/rg_generated_png_ui.log",
+                          "sha256":  "c3453fb9bcd48cdf1647c47832bda6a12f3a8222f78579ea1c7b492daec60180",
+                          "bytes":  23239
+                      },
+                      {
+                          "path":  "logs/rg_generated_png_ui.meta.json",
+                          "sha256":  "68976ce49c4faaf0c902ec0c869ac19d39e17d142f0074d8d1cb61aacac25c37",
+                          "bytes":  333
+                      },
+                      {
+                          "path":  "logs/rg_keywords.log",
+                          "sha256":  "4189f6b590def4bca8c0f32ac1b2020376ef816ebd117e47f769f8212e33cd76",
+                          "bytes":  140964
+                      },
+                      {
+                          "path":  "logs/rg_keywords.meta.json",
+                          "sha256":  "7221a383d7aff0cfc67cafd56842c31b3fc1d903432e5a259f084b5796646bd8",
+                          "bytes":  344
+                      },
+                      {
+                          "path":  "PROMPT_STATUS.md",
+                          "sha256":  "e04c48c739fe4144052f12dd043b15b43d06ec3504937ec541b87674f9ad3558",
+                          "bytes":  2655
+                      },
+                      {
+                          "path":  "REVIEW_SUMMARY_FOR_CHATGPT.md",
+                          "sha256":  "d2c40c5f0d437b0e9ac7ad99fe2b0cc791fefe03f8b10576de1ad3d12f757fa3",
+                          "bytes":  2446
+                      },
+                      {
+                          "path":  "screenshots/01_main_menu.png",
+                          "sha256":  "faee54dba6668e2e31f4abb70b32f28c519ba2bd518b118e8b91c3da310554a5",
+                          "bytes":  1530167
+                      },
+                      {
+                          "path":  "screenshots/02_save_slots.png",
+                          "sha256":  "9912b6b39d841b12668997be81268a4a97d90f0c544807f89f2472c7fb5ab082",
+                          "bytes":  1089838
+                      },
+                      {
+                          "path":  "screenshots/03_save_slot_dialog.png",
+                          "sha256":  "6246cc64bae9299af2fb3cc97972fca85d1e2882a5afb50f9bec165f85159f2f",
+                          "bytes":  398523
+                      },
+                      {
+                          "path":  "screenshots/04_character_creation.png",
+                          "sha256":  "a00efeba04795a72ac7d6a9b9a4119fb3040d65293c567cc2a15a029adb807c0",
+                          "bytes":  758259
+                      },
+                      {
+                          "path":  "screenshots/05_confirm_life_dialog.png",
+                          "sha256":  "1dbd6e221ffa2364785dc2b76dd4c10bf198c9dc819f3c1e3e8e08e06fb098f8",
+                          "bytes":  806026
+                      },
+                      {
+                          "path":  "screenshots/error.png",
+                          "sha256":  "9e8020a477815e16fac83c0acd58d13b93c7536712a19564bfe081a756449499",
+                          "bytes":  381742
+                      },
+                      {
+                          "path":  "TEST_RESULTS.md",
+                          "sha256":  "b132d83eba9d96dbba74ed74fa67427cb919e0c352e27186c19761cf0b0a1aac",
+                          "bytes":  3331
+                      }
+                  ]
+}

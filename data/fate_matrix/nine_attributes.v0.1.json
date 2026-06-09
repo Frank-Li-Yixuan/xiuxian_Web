@@ -1,0 +1,362 @@
+{
+  "version": "0.1",
+  "id": "nine_palace_attributes",
+  "note": "九宫命盘属性定义。数值范围建议 1-120，100 以上视为非凡/溢出，战斗转化需软上限。",
+  "attributes": [
+    {
+      "id": "jing",
+      "name": "精",
+      "palace": "human",
+      "polarity": "yang",
+      "primaryElements": [
+        "earth",
+        "wood"
+      ],
+      "keywords": [
+        "肉身",
+        "体魄",
+        "血肉",
+        "承载",
+        "恢复"
+      ],
+      "lifeUse": [
+        "健康",
+        "练武",
+        "抗病",
+        "救援"
+      ],
+      "combatUse": [
+        "生命上限",
+        "受击容错",
+        "丹药承受",
+        "精血渡魂"
+      ],
+      "badWhenLow": [
+        "体弱",
+        "伤病",
+        "早夭风险"
+      ],
+      "badWhenTooHigh": [
+        "肉身执着",
+        "悟道迟钝风险"
+      ]
+    },
+    {
+      "id": "qi",
+      "name": "气",
+      "palace": "human",
+      "polarity": "balanced",
+      "primaryElements": [
+        "water",
+        "fire"
+      ],
+      "keywords": [
+        "真元",
+        "周天",
+        "吐纳",
+        "法力",
+        "炼化"
+      ],
+      "lifeUse": [
+        "吐纳",
+        "闭关",
+        "初修",
+        "炼丹火候"
+      ],
+      "combatUse": [
+        "真元池",
+        "法术频率",
+        "修为吐纳"
+      ],
+      "badWhenLow": [
+        "法术枯竭",
+        "周天不畅"
+      ],
+      "badWhenTooHigh": [
+        "气机冲突",
+        "走火风险"
+      ]
+    },
+    {
+      "id": "shen",
+      "name": "神",
+      "palace": "human",
+      "polarity": "yin",
+      "primaryElements": [
+        "water",
+        "metal",
+        "yin"
+      ],
+      "keywords": [
+        "神识",
+        "识海",
+        "感知",
+        "心念",
+        "魂魄"
+      ],
+      "lifeUse": [
+        "梦境",
+        "识破异象",
+        "研法",
+        "抗幻"
+      ],
+      "combatUse": [
+        "索敌",
+        "拾取",
+        "暴击",
+        "抗心魔"
+      ],
+      "badWhenLow": [
+        "迟钝",
+        "易受幻象"
+      ],
+      "badWhenTooHigh": [
+        "神游不归",
+        "心魔感应"
+      ]
+    },
+    {
+      "id": "rootBone",
+      "name": "根骨",
+      "palace": "earth",
+      "polarity": "yang",
+      "primaryElements": [
+        "earth",
+        "metal"
+      ],
+      "keywords": [
+        "骨相",
+        "资质",
+        "承载",
+        "法体"
+      ],
+      "lifeUse": [
+        "炼体",
+        "修行承载",
+        "重伤恢复"
+      ],
+      "combatUse": [
+        "生命成长",
+        "修为效率",
+        "护体"
+      ],
+      "badWhenLow": [
+        "废灵",
+        "修炼迟缓"
+      ],
+      "badWhenTooHigh": [
+        "身强心钝",
+        "执拗"
+      ]
+    },
+    {
+      "id": "comprehension",
+      "name": "悟性",
+      "palace": "heaven",
+      "polarity": "yang",
+      "primaryElements": [
+        "fire",
+        "metal"
+      ],
+      "keywords": [
+        "明悟",
+        "慧光",
+        "学法",
+        "顿悟"
+      ],
+      "lifeUse": [
+        "读书",
+        "学法",
+        "参悟残卷"
+      ],
+      "combatUse": [
+        "顿悟奖励质量",
+        "法术熟练",
+        "卡牌理解"
+      ],
+      "badWhenLow": [
+        "学法困难"
+      ],
+      "badWhenTooHigh": [
+        "慧极伤身",
+        "天机反噬"
+      ]
+    },
+    {
+      "id": "inspiration",
+      "name": "灵感",
+      "palace": "heaven",
+      "polarity": "yin",
+      "primaryElements": [
+        "water",
+        "yin",
+        "thunder"
+      ],
+      "keywords": [
+        "感应",
+        "梦兆",
+        "异象",
+        "天机"
+      ],
+      "lifeUse": [
+        "隐藏预兆",
+        "奇遇",
+        "梦境"
+      ],
+      "combatUse": [
+        "稀有事件",
+        "隐藏血脉触发",
+        "特殊奖励池"
+      ],
+      "badWhenLow": [
+        "错过机缘"
+      ],
+      "badWhenTooHigh": [
+        "异象缠身",
+        "精神不稳"
+      ]
+    },
+    {
+      "id": "fortune",
+      "name": "气运",
+      "palace": "heaven",
+      "polarity": "variable",
+      "primaryElements": [
+        "wood",
+        "thunder"
+      ],
+      "keywords": [
+        "福缘",
+        "命数",
+        "偶然",
+        "天眷"
+      ],
+      "lifeUse": [
+        "奇遇",
+        "避灾",
+        "贵人"
+      ],
+      "combatUse": [
+        "掉落",
+        "重Roll",
+        "保命",
+        "稀有奖励"
+      ],
+      "badWhenLow": [
+        "灾祸",
+        "错失"
+      ],
+      "badWhenTooHigh": [
+        "天机显眼",
+        "劫数随行"
+      ]
+    },
+    {
+      "id": "heart",
+      "name": "心性",
+      "palace": "earth",
+      "polarity": "yin",
+      "primaryElements": [
+        "earth",
+        "water"
+      ],
+      "keywords": [
+        "道心",
+        "定力",
+        "忍耐",
+        "清静"
+      ],
+      "lifeUse": [
+        "抗心魔",
+        "长期闭关",
+        "选择稳定"
+      ],
+      "combatUse": [
+        "抗混乱",
+        "雷劫稳定",
+        "心魔抵抗"
+      ],
+      "badWhenLow": [
+        "心魔",
+        "冲动"
+      ],
+      "badWhenTooHigh": [
+        "迟滞保守",
+        "错过激进机缘"
+      ]
+    },
+    {
+      "id": "lifespan",
+      "name": "寿元",
+      "palace": "earth",
+      "polarity": "hidden",
+      "primaryElements": [
+        "wood",
+        "water",
+        "earth"
+      ],
+      "keywords": [
+        "命火",
+        "生机",
+        "岁月",
+        "闭关成本"
+      ],
+      "lifeUse": [
+        "病弱",
+        "借寿",
+        "闭关时限"
+      ],
+      "combatUse": [
+        "短命天命副作用",
+        "禁术资源",
+        "长期养成"
+      ],
+      "badWhenLow": [
+        "短寿",
+        "病灾",
+        "天妒"
+      ],
+      "badWhenTooHigh": [
+        "大器晚成",
+        "慢热"
+      ]
+    }
+  ],
+  "ratingBands": [
+    {
+      "min": 1,
+      "max": 19,
+      "label": "破败"
+    },
+    {
+      "min": 20,
+      "max": 39,
+      "label": "下等"
+    },
+    {
+      "min": 40,
+      "max": 59,
+      "label": "平庸"
+    },
+    {
+      "min": 60,
+      "max": 74,
+      "label": "尚佳"
+    },
+    {
+      "min": 75,
+      "max": 89,
+      "label": "上乘"
+    },
+    {
+      "min": 90,
+      "max": 100,
+      "label": "天资"
+    },
+    {
+      "min": 101,
+      "max": 120,
+      "label": "非凡"
+    }
+  ]
+}

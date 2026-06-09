@@ -1,0 +1,50 @@
+{
+  "version": "0.1",
+  "narrativeResponse": {
+    "type": "object",
+    "required": [
+      "version",
+      "taskType",
+      "text",
+      "toneTags",
+      "safetyFlags"
+    ],
+    "properties": {
+      "version": {
+        "const": "0.1"
+      },
+      "taskType": {
+        "type": "string"
+      },
+      "text": {
+        "type": "string",
+        "minLength": 1
+      },
+      "optionTexts": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "visibleHints": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "toneTags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "safetyFlags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "additionalProperties": false
+  }
+}

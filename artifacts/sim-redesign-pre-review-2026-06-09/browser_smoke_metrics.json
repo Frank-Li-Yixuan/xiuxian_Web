@@ -1,0 +1,103 @@
+{
+  "url": "http://127.0.0.1:5177",
+  "steps": [
+    {
+      "id": "01",
+      "label": "main_menu",
+      "url": "http://127.0.0.1:5177/",
+      "textSample": "双人雷霆战机修仙版\n新的游戏\n继续游戏\n设置\n退出"
+    },
+    {
+      "action": "click",
+      "note": "open new game save slots",
+      "matched": "新的游戏"
+    },
+    {
+      "id": "02",
+      "label": "save_slots",
+      "url": "http://127.0.0.1:5177/",
+      "textSample": "返回\n选择命簿\n\n择一卷玉简，写下此生开端。\n\n空存档\n命簿未书，静候入道\n空存档\n命簿未书，静候入道\n空存档\n命簿未书，静候入道"
+    },
+    {
+      "action": "click",
+      "note": "select first empty save slot",
+      "selector": ".xianxia-save-card.is-empty"
+    },
+    {
+      "id": "03",
+      "label": "save_slot_dialog",
+      "url": "http://127.0.0.1:5177/",
+      "textSample": "返回\n选择命簿\n\n择一卷玉简，写下此生开端。\n\n空存档\n命簿未书，静候入道\n空存档\n命簿未书，静候入道\n空存档\n命簿未书，静候入道\n填写存档名\n\n输入存档名后，将进入创建角色页面。\n\n存档名\n返回\n进入创建角色"
+    },
+    {
+      "action": "click",
+      "note": "create profile",
+      "selector": ".save-slot-action-dialog button:not([disabled]) last"
+    },
+    {
+      "id": "04",
+      "label": "character_creation",
+      "url": "http://127.0.0.1:5177/",
+      "textSample": "存档名 / 推演\n\nslot_1\n第 0 次\n角色名\n命盘推演台 · 天机值 0/12\n推演天命\n剩余锁 2/2\n返回\n关闭\n\n左仪盘\n\n九宫速览\n精\n21\n气\n11\n神\n9\n根骨\n91\n悟性\n45\n灵感\n39\n气运\n50\n心性\n64\n寿元\n66\n纯度\n66\n稳定\n61\n冲突\n43\n广度\n53\n双灵根\n\n右命简\n\n破落修士之后\n\n你的祖上似乎出过修士，但家道早已败落，只留下几件无人能辨的旧物。\n\n血脉征兆\n隐约 / 你偶尔觉得，有什么东西在注视你的人生。 / 你曾在梦中听见冷漠的计数声。 / 你总觉得十八岁之后会发生无法逃避的事。 / 系统觉醒、域外战场、异常选择与命运偏移事件更容易出现。\n随身物\n祖传玉佩 / 八卦玉佩·残\n主天命 · 未锁\n劫雷亲和\n玄命 · thunder / tribulation / spell\n副天命 1 · 未锁\n丹道奇才\n玄命 · alchemy / wood / fire / outgame\n副天命 2 · 未锁\n灵觉微明\n凡命 · inspiration / sense\n劫命 · 未锁\n怯战心结\n劫命 · fear / combat\n属性详情\n灵根详情\n天命详情\n身世血脉\n随身物\n属性详情\n\n精、气、神与六维资质来自当前开局生成器。命盘重 Roll 只更新未锁定的数据，不写入正式存档。\n\n精气神\n精 21：精代表体魄血气、筋骨耐受和开局生命底子；当前值越高，越适合承受高压开局。\n气 11：气代表先天真元种子、呼吸吐纳和施法续航；当前值越高，法术循环越顺。\n神 9：神代表神魂清明、感知抗扰和悟道稳定性；当前值越高，越不容易被异兆扰乱。\n六维资质"
+    },
+    {
+      "action": "click",
+      "note": "request confirm life",
+      "matched": "locator"
+    },
+    {
+      "id": "05",
+      "label": "confirm_life_dialog",
+      "url": "http://127.0.0.1:5177/",
+      "textSample": "存档名 / 推演\n\nslot_1\n第 0 次\n角色名\n命盘推演台 · 天机值 0/12\n推演天命\n剩余锁 2/2\n返回\n关闭\n\n左仪盘\n\n九宫速览\n精\n21\n气\n11\n神\n9\n根骨\n91\n悟性\n45\n灵感\n39\n气运\n50\n心性\n64\n寿元\n66\n纯度\n66\n稳定\n61\n冲突\n43\n广度\n53\n双灵根\n\n右命简\n\n破落修士之后\n\n你的祖上似乎出过修士，但家道早已败落，只留下几件无人能辨的旧物。\n\n血脉征兆\n隐约 / 你偶尔觉得，有什么东西在注视你的人生。 / 你曾在梦中听见冷漠的计数声。 / 你总觉得十八岁之后会发生无法逃避的事。 / 系统觉醒、域外战场、异常选择与命运偏移事件更容易出现。\n随身物\n祖传玉佩 / 八卦玉佩·残\n主天命 · 未锁\n劫雷亲和\n玄命 · thunder / tribulation / spell\n副天命 1 · 未锁\n丹道奇才\n玄命 · alchemy / wood / fire / outgame\n副天命 2 · 未锁\n灵觉微明\n凡命 · inspiration / sense\n劫命 · 未锁\n怯战心结\n劫命 · fear / combat\n属性详情\n灵根详情\n天命详情\n身世血脉\n随身物\n属性详情\n\n精、气、神与六维资质来自当前开局生成器。命盘重 Roll 只更新未锁定的数据，不写入正式存档。\n\n精气神\n精 21：精代表体魄血气、筋骨耐受和开局生命底子；当前值越高，越适合承受高压开局。\n气 11：气代表先天真元种子、呼吸吐纳和施法续航；当前值越高，法术循环越顺。\n神 9：神代表神魂清明、感知抗扰和悟道稳定性；当前值越高，越不容易被异兆扰乱。\n六维资质"
+    },
+    {
+      "action": "force-click",
+      "note": "confirm life dialog",
+      "selector": ".ccui2-confirm-life-dialog button last"
+    }
+  ],
+  "console": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting..."
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected."
+    },
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"
+    }
+  ],
+  "pageErrors": [],
+  "uiRisks": [
+    {
+      "note": "confirm life dialog normal click failed; forced click used only to continue audit smoke",
+      "error": "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.ccui2-confirm-life-dialog button').last()\u001b[22m\n\u001b[2m    - locator resolved to <button tabindex=\"0\" type=\"button\" class=\"xianxia-button xianxia-button-primary\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"xianxia-dialog-overlay\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"xianxia-dialog-overlay\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-state=\"open\" aria-hidden=\"true\" data-aria-hidden=\"true\" class=\"xianxia-dialog-overlay\"></div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n"
+    }
+  ],
+  "errors": [
+    "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('life-simulation-screen') to be visible\u001b[22m\n\n    at D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\browser_smoke.mjs:87:52"
+  ],
+  "startedAt": "2026-06-09T14:38:19.494Z",
+  "hiddenLeak": {
+    "bodyContainsTrueNameLiteral": false,
+    "bodyContainsKnownHiddenTerms": []
+  },
+  "status": "fail",
+  "endedAt": "2026-06-09T14:38:58.019Z"
+}

@@ -1,0 +1,2151 @@
+{
+  "version": "0.2",
+  "events": [
+    {
+      "id": "choice_child_private_school_first_test",
+      "title": "五岁·私塾初试",
+      "phaseIds": [
+        "child"
+      ],
+      "ageMonthRange": [
+        60,
+        84
+      ],
+      "themes": [
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_study"
+      ],
+      "relatedThreadIds": [
+        "thread_private_school"
+      ],
+      "baseWeight": 18,
+      "sourceHooks": [
+        "hook_private_school",
+        "hook_old_book"
+      ],
+      "description": "私塾先生让你背一段启蒙旧文，旁人只当是寻常功课，你却隐约觉得字里藏着别的意思。",
+      "options": [
+        {
+          "id": "safe_memorize_slowly",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "按先生所教，慢慢背熟。",
+          "check": {
+            "primary": "comprehension",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 25
+          },
+          "visibleHints": [
+            "悟性、心性"
+          ],
+          "outcomeEffectKey": "study_small"
+        },
+        {
+          "id": "steady_ask_hidden_meaning",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "向先生追问字句中的隐义。",
+          "check": {
+            "primary": "comprehension",
+            "support": [
+              "inspiration"
+            ],
+            "difficulty": 45
+          },
+          "visibleHints": [
+            "悟性、灵感"
+          ],
+          "outcomeEffectKey": "study_insight"
+        },
+        {
+          "id": "risky_read_forbidden_margin",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "偷偷翻看书页边角的旧批注。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 58
+          },
+          "visibleHints": [
+            "灵感、气运"
+          ],
+          "outcomeEffectKey": "forbidden_page_seed"
+        }
+      ],
+      "cooldownMonths": 24,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_child_rain_backhill",
+      "title": "七岁·雨夜后山",
+      "phaseIds": [
+        "child"
+      ],
+      "ageMonthRange": [
+        72,
+        108
+      ],
+      "themes": [
+        "omen",
+        "interlude"
+      ],
+      "relatedStorylineIds": [
+        "storyline_system_omen",
+        "storyline_disaster"
+      ],
+      "relatedThreadIds": [
+        "thread_rain_backhill",
+        "thread_thunder_omen"
+      ],
+      "baseWeight": 16,
+      "sourceHooks": [
+        "hook_rain_backhill",
+        "hook_thunderstorm",
+        "hook_backhill_mist"
+      ],
+      "description": "暴雨夜，后山传来低沉的雷鸣，像有人在天边敲鼓。父母劝你不要出门。",
+      "options": [
+        {
+          "id": "safe_stay_home",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "留在家中，闭门读书。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "comprehension"
+            ],
+            "difficulty": 20
+          },
+          "visibleHints": [
+            "心性、悟性"
+          ],
+          "outcomeEffectKey": "safe_study"
+        },
+        {
+          "id": "risky_go_backhill",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "偷偷前往后山查看。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "shen",
+              "fortune"
+            ],
+            "difficulty": 62
+          },
+          "visibleHints": [
+            "灵感、神、气运"
+          ],
+          "interludeCandidateId": "interlude_rain_backhill_stg",
+          "outcomeEffectKey": "thunder_omen_gain"
+        },
+        {
+          "id": "destiny_face_thunder",
+          "archetypeId": "destiny",
+          "label": "命",
+          "text": "迎着雷声打坐，任那声音靠近。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "root:thunder",
+                "destiny:thunder_affinity",
+                "hiddenFate:thunder"
+              ]
+            }
+          ],
+          "hiddenBranch": {
+            "id": "hidden_branch_ancient_thunder_omen",
+            "type": "hiddenFateBranch",
+            "visibleHint": "雷声在你耳边近得不合常理。"
+          },
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "qi",
+              "heart"
+            ],
+            "difficulty": 78
+          },
+          "visibleHints": [
+            "天机难测"
+          ],
+          "outcomeEffectKey": "hidden_thunder_branch"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_child_herb_slope",
+      "title": "七岁·山坡草香",
+      "phaseIds": [
+        "child"
+      ],
+      "ageMonthRange": [
+        72,
+        108
+      ],
+      "themes": [
+        "growth",
+        "relationship"
+      ],
+      "relatedStorylineIds": [
+        "storyline_alchemy"
+      ],
+      "relatedThreadIds": [
+        "thread_sorting_herbs",
+        "thread_wild_ginseng"
+      ],
+      "baseWeight": 15,
+      "sourceHooks": [
+        "hook_herb_scent",
+        "hook_medicine_shop"
+      ],
+      "description": "山坡上草香异常，你认出几株药铺里见过的草叶，却也看见更深处有一抹异色。",
+      "options": [
+        {
+          "id": "safe_collect_known_herbs",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "只采认得的药草。",
+          "check": {
+            "primary": "alchemy",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 22
+          },
+          "visibleHints": [
+            "药理、心性"
+          ],
+          "outcomeEffectKey": "herb_small"
+        },
+        {
+          "id": "risky_seek_strange_root",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "循着异色深入山坡。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "fortune",
+              "alchemy"
+            ],
+            "difficulty": 58
+          },
+          "visibleHints": [
+            "灵感、气运、药理"
+          ],
+          "outcomeEffectKey": "wild_ginseng_seed"
+        },
+        {
+          "id": "destiny_fire_control",
+          "archetypeId": "destiny",
+          "label": "命",
+          "text": "你忽然想到，药性也许和火候一样，有进退缓急。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "destiny:alchemy_talent",
+                "origin:medicine_shop",
+                "item:old_copper_furnace"
+              ]
+            }
+          ],
+          "check": {
+            "primary": "comprehension",
+            "support": [
+              "alchemy",
+              "qi"
+            ],
+            "difficulty": 66
+          },
+          "visibleHints": [
+            "丹道相关"
+          ],
+          "outcomeEffectKey": "alchemy_insight"
+        }
+      ],
+      "cooldownMonths": 24,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_youth_wandering_daoist",
+      "title": "十岁·游方道士",
+      "phaseIds": [
+        "youth"
+      ],
+      "ageMonthRange": [
+        108,
+        156
+      ],
+      "themes": [
+        "trial",
+        "transition"
+      ],
+      "relatedStorylineIds": [
+        "storyline_temple",
+        "storyline_study"
+      ],
+      "relatedThreadIds": [
+        "thread_wandering_daoist",
+        "thread_heart_trial"
+      ],
+      "baseWeight": 16,
+      "sourceHooks": [
+        "hook_wandering_daoist",
+        "hook_temple_incense"
+      ],
+      "description": "一名游方道士在村外歇脚，见你目光清明，随手画了三道符阵，问你可愿一试。",
+      "options": [
+        {
+          "id": "safe_decline_politely",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "恭敬谢过，不贸然入阵。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 18
+          },
+          "visibleHints": [
+            "心性"
+          ],
+          "outcomeEffectKey": "daoist_goodwill"
+        },
+        {
+          "id": "steady_enter_first_array",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "只入第一道符阵。",
+          "check": {
+            "primary": "shen",
+            "support": [
+              "heart",
+              "comprehension"
+            ],
+            "difficulty": 48
+          },
+          "visibleHints": [
+            "神、心性、悟性"
+          ],
+          "outcomeEffectKey": "first_array_insight"
+        },
+        {
+          "id": "risky_complete_three_arrays",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "三阵皆入，看看自己极限。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "shen",
+              "comprehension"
+            ],
+            "difficulty": 68
+          },
+          "visibleHints": [
+            "心性、神、悟性"
+          ],
+          "interludeCandidateId": "interlude_talisman_heart_dbg",
+          "outcomeEffectKey": "heart_trial_thread"
+        }
+      ],
+      "cooldownMonths": 48,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_youth_bandit_smoke",
+      "title": "十岁·山贼烟尘",
+      "phaseIds": [
+        "youth"
+      ],
+      "ageMonthRange": [
+        108,
+        156
+      ],
+      "themes": [
+        "crisis",
+        "interlude"
+      ],
+      "relatedStorylineIds": [
+        "storyline_disaster",
+        "storyline_martial"
+      ],
+      "relatedThreadIds": [
+        "thread_bandit_smoke",
+        "thread_guard_or_flee"
+      ],
+      "baseWeight": 15,
+      "sourceHooks": [
+        "hook_bandit_threat",
+        "hook_village_crisis"
+      ],
+      "description": "村外传来山贼过境的消息，烟尘隐约已到山坳后。大人们乱作一团。",
+      "options": [
+        {
+          "id": "safe_hide_family",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "带家人藏入山中旧窑。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 30
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "family_protected"
+        },
+        {
+          "id": "steady_ask_town_for_help",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "奔向县城，向镇妖司分署求援。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "heart"
+            ],
+            "difficulty": 56
+          },
+          "visibleHints": [
+            "气运、精、心性"
+          ],
+          "outcomeEffectKey": "seek_help"
+        },
+        {
+          "id": "dangerous_guard_village_gate",
+          "archetypeId": "dangerous",
+          "label": "凶",
+          "text": "守在村口，拖延山贼入村。",
+          "check": {
+            "primary": "jing",
+            "support": [
+              "rootBone",
+              "heart"
+            ],
+            "difficulty": 82
+          },
+          "visibleHints": [
+            "精、根骨、心性"
+          ],
+          "interludeCandidateId": "interlude_village_gate_horde",
+          "outcomeEffectKey": "guard_village"
+        }
+      ],
+      "cooldownMonths": 60,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_youth_moon_in_well",
+      "title": "十一岁·井中月梦",
+      "phaseIds": [
+        "youth"
+      ],
+      "ageMonthRange": [
+        120,
+        168
+      ],
+      "themes": [
+        "omen",
+        "trial"
+      ],
+      "relatedStorylineIds": [
+        "storyline_yin_dream"
+      ],
+      "relatedThreadIds": [
+        "thread_moon_well",
+        "thread_soul_dream"
+      ],
+      "baseWeight": 14,
+      "sourceHooks": [
+        "hook_moon_dream",
+        "hook_yin_omen"
+      ],
+      "description": "你在井中看见一轮不属于今夜的月，月影里似乎有人坐在黑水之上。",
+      "options": [
+        {
+          "id": "safe_leave_well",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "立刻离开井边，不再多看。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "shen"
+            ],
+            "difficulty": 24
+          },
+          "visibleHints": [
+            "心性、神"
+          ],
+          "outcomeEffectKey": "avoid_yin"
+        },
+        {
+          "id": "steady_watch_until_dawn",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "静静守到天明，记下月影变化。",
+          "check": {
+            "primary": "shen",
+            "support": [
+              "heart",
+              "inspiration"
+            ],
+            "difficulty": 52
+          },
+          "visibleHints": [
+            "神、心性、灵感"
+          ],
+          "outcomeEffectKey": "moon_insight"
+        },
+        {
+          "id": "destiny_answer_moon_shadow",
+          "archetypeId": "destiny",
+          "label": "命",
+          "text": "向月影中的人影点头。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "root:yin",
+                "hiddenFate:yinyue",
+                "destiny:moon_dream"
+              ]
+            }
+          ],
+          "check": {
+            "primary": "shen",
+            "support": [
+              "inspiration"
+            ],
+            "difficulty": 74
+          },
+          "visibleHints": [
+            "天机难测"
+          ],
+          "outcomeEffectKey": "yin_hidden_branch"
+        }
+      ],
+      "cooldownMonths": 48,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_youth_wooden_sword_hum",
+      "title": "十一岁·木剑轻鸣",
+      "phaseIds": [
+        "youth"
+      ],
+      "ageMonthRange": [
+        120,
+        168
+      ],
+      "themes": [
+        "omen",
+        "trial"
+      ],
+      "relatedStorylineIds": [
+        "storyline_fallen_lineage",
+        "storyline_martial"
+      ],
+      "relatedThreadIds": [
+        "thread_wooden_sword",
+        "thread_past_sword"
+      ],
+      "baseWeight": 16,
+      "sourceHooks": [
+        "hook_wooden_sword",
+        "hook_old_family_item"
+      ],
+      "description": "夜里，墙角那柄残破木剑忽然轻轻震了一下，像有什么东西醒了半息。",
+      "options": [
+        {
+          "id": "safe_store_sword",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "把木剑收好，不再惊扰它。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 25
+          },
+          "visibleHints": [
+            "心性"
+          ],
+          "outcomeEffectKey": "item_affinity_small"
+        },
+        {
+          "id": "steady_practice_basic_cut",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "照着梦中记忆，练一记最简单的斩。",
+          "check": {
+            "primary": "jing",
+            "support": [
+              "rootBone",
+              "shen"
+            ],
+            "difficulty": 55
+          },
+          "visibleHints": [
+            "精、根骨、神"
+          ],
+          "outcomeEffectKey": "sword_memory"
+        },
+        {
+          "id": "destiny_follow_sword_dream",
+          "archetypeId": "destiny",
+          "label": "命",
+          "text": "闭眼握剑，让那半息剑鸣牵着你动。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "item:broken_wooden_sword",
+                "hiddenFate:sword",
+                "destiny:sword_bone"
+              ]
+            }
+          ],
+          "hiddenBranch": {
+            "id": "hidden_branch_past_sword_memory",
+            "type": "itemBranch",
+            "visibleHint": "木剑上传来一瞬陌生的握感。"
+          },
+          "check": {
+            "primary": "shen",
+            "support": [
+              "jing",
+              "comprehension"
+            ],
+            "difficulty": 78
+          },
+          "visibleHints": [
+            "天机难测"
+          ],
+          "interludeCandidateId": "interlude_sword_memory_stg",
+          "outcomeEffectKey": "past_sword_branch"
+        }
+      ],
+      "cooldownMonths": 48,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_alchemy_furnace_heat",
+      "title": "十三岁·药炉火候",
+      "phaseIds": [
+        "youth",
+        "teen"
+      ],
+      "ageMonthRange": [
+        144,
+        192
+      ],
+      "themes": [
+        "growth",
+        "trial"
+      ],
+      "relatedStorylineIds": [
+        "storyline_alchemy"
+      ],
+      "relatedThreadIds": [
+        "thread_fire_control",
+        "thread_furnace_dream"
+      ],
+      "baseWeight": 15,
+      "sourceHooks": [
+        "hook_fire_control_choice",
+        "hook_old_furnace"
+      ],
+      "description": "药铺的铜炉火候忽然不稳，老师傅不在，你必须自己决定如何处置。",
+      "options": [
+        {
+          "id": "safe_lower_fire",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "立刻转文火，稳住炉内药性。",
+          "check": {
+            "primary": "alchemy",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 30
+          },
+          "visibleHints": [
+            "药理、心性"
+          ],
+          "outcomeEffectKey": "alchemy_safe"
+        },
+        {
+          "id": "steady_balance_fire",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "文武交替，试着调和药力。",
+          "check": {
+            "primary": "alchemy",
+            "support": [
+              "qi",
+              "comprehension"
+            ],
+            "difficulty": 60
+          },
+          "visibleHints": [
+            "药理、气、悟性"
+          ],
+          "outcomeEffectKey": "alchemy_balance"
+        },
+        {
+          "id": "risky_add_strange_herb",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "加入那株异香草，赌一炉变药。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "alchemy",
+              "fortune"
+            ],
+            "difficulty": 76
+          },
+          "visibleHints": [
+            "灵感、药理、气运"
+          ],
+          "outcomeEffectKey": "alchemy_mutation"
+        },
+        {
+          "id": "destiny_furnace_memory",
+          "archetypeId": "destiny",
+          "label": "命",
+          "text": "你按梦中火候，封炉三息再开。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "destiny:alchemy_talent",
+                "item:old_copper_furnace",
+                "hiddenFate:alchemy"
+              ]
+            }
+          ],
+          "check": {
+            "primary": "comprehension",
+            "support": [
+              "alchemy",
+              "qi"
+            ],
+            "difficulty": 78
+          },
+          "visibleHints": [
+            "丹道相关"
+          ],
+          "outcomeEffectKey": "alchemy_hidden_branch"
+        }
+      ],
+      "cooldownMonths": 48,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_deserted_shrine_shadow",
+      "title": "十四岁·荒祠黑影",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        168,
+        204
+      ],
+      "themes": [
+        "temptation",
+        "omen"
+      ],
+      "relatedStorylineIds": [
+        "storyline_yin_dream",
+        "storyline_disaster"
+      ],
+      "relatedThreadIds": [
+        "thread_deserted_shrine",
+        "thread_demon_whisper"
+      ],
+      "baseWeight": 14,
+      "sourceHooks": [
+        "hook_forbidden_shadow",
+        "hook_heart_demon"
+      ],
+      "description": "荒祠里有黑影低语，声称可以替你解决眼前困境，只要你记住一个字。",
+      "options": [
+        {
+          "id": "safe_leave_shrine",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "转身离开，不听那声音。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "shen"
+            ],
+            "difficulty": 34
+          },
+          "visibleHints": [
+            "心性、神"
+          ],
+          "outcomeEffectKey": "resist_demon"
+        },
+        {
+          "id": "steady_light_incense",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "点香祈告，以正念压住杂声。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "merit",
+              "shen"
+            ],
+            "difficulty": 58
+          },
+          "visibleHints": [
+            "心性、功德、神"
+          ],
+          "outcomeEffectKey": "cleanse_shadow"
+        },
+        {
+          "id": "forbidden_remember_word",
+          "archetypeId": "forbidden",
+          "label": "禁",
+          "text": "记住那个字。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "destiny:demon_seed",
+                "heartDemon:high",
+                "item:black_bone_flute"
+              ]
+            }
+          ],
+          "hiddenBranch": {
+            "id": "hidden_branch_demon_whisper",
+            "type": "forbiddenBranch",
+            "visibleHint": "有个念头告诉你，代价可以以后再付。"
+          },
+          "check": {
+            "primary": "shen",
+            "support": [
+              "inspiration"
+            ],
+            "difficulty": 86
+          },
+          "visibleHints": [
+            "天机难测"
+          ],
+          "outcomeEffectKey": "forbidden_demon_word"
+        }
+      ],
+      "cooldownMonths": 60,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_closed_door_hundred_days",
+      "title": "十六岁·闭门百日",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        180,
+        210
+      ],
+      "themes": [
+        "growth",
+        "transition"
+      ],
+      "relatedStorylineIds": [
+        "storyline_temple",
+        "storyline_system_omen"
+      ],
+      "relatedThreadIds": [
+        "thread_seclusion",
+        "thread_first_qi"
+      ],
+      "baseWeight": 16,
+      "sourceHooks": [
+        "hook_seclusion",
+        "hook_first_qi_sensed"
+      ],
+      "description": "你已能隐约感觉体内气息流转。若闭门百日，也许能真正摸到那道门槛。",
+      "options": [
+        {
+          "id": "safe_short_seclusion",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "只闭关十日，见好就收。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "qi"
+            ],
+            "difficulty": 35
+          },
+          "visibleHints": [
+            "心性、气"
+          ],
+          "outcomeEffectKey": "seclusion_small"
+        },
+        {
+          "id": "steady_hundred_days",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "闭门百日，稳守一息。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "qi",
+              "shen"
+            ],
+            "difficulty": 66
+          },
+          "visibleHints": [
+            "心性、气、神"
+          ],
+          "outcomeEffectKey": "first_qi_transition"
+        },
+        {
+          "id": "destiny_hidden_turtle",
+          "archetypeId": "destiny",
+          "label": "命",
+          "text": "不见人、不言语、不争一念，任外界如何变化。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "destiny:coward_supreme",
+                "destiny:sitting_still",
+                "stage:seeker"
+              ]
+            }
+          ],
+          "check": {
+            "primary": "heart",
+            "support": [
+              "lifespan",
+              "qi"
+            ],
+            "difficulty": 64
+          },
+          "visibleHints": [
+            "苟道/静修相关"
+          ],
+          "outcomeEffectKey": "hidden_turtle_layer"
+        }
+      ],
+      "cooldownMonths": 48,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_heavenly_war_drum",
+      "title": "十五岁·天外战鼓",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        174,
+        214
+      ],
+      "themes": [
+        "omen",
+        "interlude",
+        "transition"
+      ],
+      "relatedStorylineIds": [
+        "storyline_system_omen"
+      ],
+      "relatedThreadIds": [
+        "thread_outer_battlefield_dream",
+        "thread_system_static"
+      ],
+      "baseWeight": 15,
+      "sourceHooks": [
+        "hook_outer_battlefield_omen",
+        "hook_system_static",
+        "hook_heavenly_drum"
+      ],
+      "description": "夜半时分，你听见天外有战鼓轰鸣。醒来后，耳边还残留着断续杂音。",
+      "options": [
+        {
+          "id": "safe_ignore_drum",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "压下杂念，装作什么都没听见。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "shen"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、神"
+          ],
+          "outcomeEffectKey": "ignore_system_omen"
+        },
+        {
+          "id": "steady_record_drum_rhythm",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "把战鼓节奏记在纸上。",
+          "check": {
+            "primary": "shen",
+            "support": [
+              "comprehension",
+              "inspiration"
+            ],
+            "difficulty": 58
+          },
+          "visibleHints": [
+            "神、悟性、灵感"
+          ],
+          "outcomeEffectKey": "system_pattern_recorded"
+        },
+        {
+          "id": "risky_enter_war_dream",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "顺着战鼓声入梦。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "shen",
+              "fortune"
+            ],
+            "difficulty": 76
+          },
+          "visibleHints": [
+            "灵感、神、气运"
+          ],
+          "interludeCandidateId": "interlude_outer_drum_stg",
+          "outcomeEffectKey": "outer_battlefield_omen"
+        },
+        {
+          "id": "destiny_answer_static",
+          "archetypeId": "destiny",
+          "label": "命",
+          "text": "对那断续杂音回应一声。",
+          "requirements": [
+            {
+              "type": "anySignal",
+              "signals": [
+                "hiddenFate:system",
+                "storyline:system_omen",
+                "item:wordless_page"
+              ]
+            }
+          ],
+          "hiddenBranch": {
+            "id": "hidden_branch_system_static",
+            "type": "hiddenFateBranch",
+            "visibleHint": "耳边杂音短暂拼成了不像人声的句子。"
+          },
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "fortune",
+              "shen"
+            ],
+            "difficulty": 90
+          },
+          "visibleHints": [
+            "天机难测"
+          ],
+          "outcomeEffectKey": "system_resonance_branch"
+        }
+      ],
+      "cooldownMonths": 48,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_infant_nameless_script",
+      "title": "三岁·无名古字",
+      "phaseIds": [
+        "infant"
+      ],
+      "ageMonthRange": [
+        24,
+        48
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_study"
+      ],
+      "relatedThreadIds": [
+        "thread_old_book"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_old_script"
+      ],
+      "description": "家中旧墙上剥落出几道不像文字的痕迹，你看久了便开始发热。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_child_temple_incense",
+      "title": "八岁·道观香火",
+      "phaseIds": [
+        "child"
+      ],
+      "ageMonthRange": [
+        84,
+        108
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_temple"
+      ],
+      "relatedThreadIds": [
+        "thread_temple_incense"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_temple_incense"
+      ],
+      "description": "白鹿观香火冷清，你却在烟气里看见一圈细小阵纹。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_child_river_fight",
+      "title": "八岁·河边争斗",
+      "phaseIds": [
+        "child"
+      ],
+      "ageMonthRange": [
+        84,
+        108
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_martial"
+      ],
+      "relatedThreadIds": [
+        "thread_child_fight"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_child_fight"
+      ],
+      "description": "几个孩子在河边推搡，你被卷入争斗。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_youth_winter_sickness",
+      "title": "十二岁·寒冬重病",
+      "phaseIds": [
+        "youth"
+      ],
+      "ageMonthRange": [
+        132,
+        156
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_system_omen"
+      ],
+      "relatedThreadIds": [
+        "thread_sickness"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_winter_sickness"
+      ],
+      "description": "寒冬来得极早，你高烧不退，梦里却似有一息暖流。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_youth_first_blood",
+      "title": "十二岁·第一次见血",
+      "phaseIds": [
+        "youth"
+      ],
+      "ageMonthRange": [
+        132,
+        162
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_martial"
+      ],
+      "relatedThreadIds": [
+        "thread_first_blood"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_first_blood"
+      ],
+      "description": "山中小兽受伤，你第一次真正面对血腥气。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_youth_family_debt",
+      "title": "十三岁·家中债务",
+      "phaseIds": [
+        "youth"
+      ],
+      "ageMonthRange": [
+        144,
+        168
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_fallen_lineage"
+      ],
+      "relatedThreadIds": [
+        "thread_old_family_item"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_family_debt"
+      ],
+      "description": "家里欠下银钱，有人提议卖掉一件祖传旧物。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_human_attachment",
+      "title": "十四岁·人间牵挂",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        168,
+        198
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_study"
+      ],
+      "relatedThreadIds": [
+        "thread_attachment"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_worldly_attachment"
+      ],
+      "description": "有人希望你留下，过一个安稳的人生。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_no_teacher_breath",
+      "title": "十五岁·无师吐纳",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        174,
+        204
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_temple"
+      ],
+      "relatedThreadIds": [
+        "thread_first_qi"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_first_qi_sensed"
+      ],
+      "description": "无人教你，你却在夜里摸索出一段笨拙吐纳。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_cracked_coin",
+      "title": "十五岁·裂纹铜钱",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        174,
+        204
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_system_omen"
+      ],
+      "relatedThreadIds": [
+        "thread_luck_coin"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_cracked_coin"
+      ],
+      "description": "那枚裂纹铜钱忽然滚向你没有选择的路口。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_river_rescue",
+      "title": "十六岁·河中呼救",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        180,
+        210
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_disaster"
+      ],
+      "relatedThreadIds": [
+        "thread_merit_choice"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_rescue"
+      ],
+      "description": "玄溪暴涨，有人在水中呼救。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_old_jade_crack",
+      "title": "十七岁·旧玉裂光",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        198,
+        216
+      ],
+      "themes": [
+        "omen",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_fallen_lineage"
+      ],
+      "relatedThreadIds": [
+        "thread_jade_formation"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_old_jade"
+      ],
+      "description": "旧玉佩在夜里裂出一道细光，照出你从未见过的阵纹。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_leave_home",
+      "title": "十七岁·离家之念",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        198,
+        216
+      ],
+      "themes": [
+        "relationship",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_system_omen"
+      ],
+      "relatedThreadIds": [
+        "thread_leave_home"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_leave_home"
+      ],
+      "description": "你隐约明白，若继续留在这里，也许此生不会再有第二次机会。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    },
+    {
+      "id": "choice_teen_birthday_thundercloud",
+      "title": "十七岁·生辰前雷云",
+      "phaseIds": [
+        "teen"
+      ],
+      "ageMonthRange": [
+        204,
+        216
+      ],
+      "themes": [
+        "omen",
+        "growth"
+      ],
+      "relatedStorylineIds": [
+        "storyline_system_omen"
+      ],
+      "relatedThreadIds": [
+        "thread_age18_countdown"
+      ],
+      "baseWeight": 12,
+      "sourceHooks": [
+        "hook_age18_thunder"
+      ],
+      "description": "十八岁生辰将近，青云山外连续三日雷云不散。",
+      "options": [
+        {
+          "id": "safe_step_back",
+          "archetypeId": "safe",
+          "label": "稳",
+          "text": "先稳住局面，不贸然深入。",
+          "check": {
+            "primary": "heart",
+            "support": [
+              "fortune"
+            ],
+            "difficulty": 28
+          },
+          "visibleHints": [
+            "心性、气运"
+          ],
+          "outcomeEffectKey": "generic_safe"
+        },
+        {
+          "id": "steady_follow_clue",
+          "archetypeId": "steady",
+          "label": "正",
+          "text": "顺着线索小心探查。",
+          "check": {
+            "primary": "inspiration",
+            "support": [
+              "heart"
+            ],
+            "difficulty": 54
+          },
+          "visibleHints": [
+            "灵感、心性"
+          ],
+          "outcomeEffectKey": "generic_progress"
+        },
+        {
+          "id": "risky_force_ahead",
+          "archetypeId": "risky",
+          "label": "险",
+          "text": "不顾旁人劝阻，继续向前。",
+          "check": {
+            "primary": "fortune",
+            "support": [
+              "jing",
+              "shen"
+            ],
+            "difficulty": 70
+          },
+          "visibleHints": [
+            "气运、精、神"
+          ],
+          "outcomeEffectKey": "generic_risky"
+        }
+      ],
+      "cooldownMonths": 36,
+      "maxTriggersPerLife": 1
+    }
+  ]
+}

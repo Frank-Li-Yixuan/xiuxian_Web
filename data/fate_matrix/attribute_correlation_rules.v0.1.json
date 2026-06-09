@@ -1,0 +1,101 @@
+{
+  "version": "0.1",
+  "id": "attribute_correlation_rules",
+  "generationGuidelines": [
+    {
+      "name": "高天低地",
+      "condition": {
+        "heavenMinusEarthGte": 25
+      },
+      "meaning": "天赋高于承载，适合天妒、早慧、异象、短命、天道注视"
+    },
+    {
+      "name": "低天高地",
+      "condition": {
+        "earthMinusHeavenGte": 25
+      },
+      "meaning": "承载强于悟道，适合炼体、苟道、大器晚成、守成路线"
+    },
+    {
+      "name": "人宫不稳",
+      "condition": {
+        "humanSpreadGte": 40
+      },
+      "meaning": "精气神失衡，适合走火、病弱、心魔、特殊血脉异动"
+    },
+    {
+      "name": "三才均衡",
+      "condition": {
+        "maxPalaceSpreadLte": 12
+      },
+      "meaning": "适合中正、清修、宗门正道，不适合极端天命"
+    },
+    {
+      "name": "命火薄",
+      "condition": {
+        "lifespanLte": 35
+      },
+      "meaning": "短命、借寿、天妒、病弱、禁术路线权重提高"
+    },
+    {
+      "name": "心性孤高",
+      "condition": {
+        "heartGte": 85,
+        "fortuneLte": 60
+      },
+      "meaning": "闭关、坐忘、清净，亦可能错过人缘机缘"
+    },
+    {
+      "name": "灵感过盛",
+      "condition": {
+        "inspirationGte": 90,
+        "heartLte": 60
+      },
+      "meaning": "异象、梦境、心魔、隐藏血脉事件权重提高"
+    }
+  ],
+  "antiWeirdnessRules": [
+    {
+      "id": "no_heaven_jealous_without_talent",
+      "targetTrait": "destiny_heaven_jealous_talent",
+      "badIf": {
+        "talentScoreLte": 55
+      },
+      "action": "mutate",
+      "mutation": "destiny_false_heaven_burden"
+    },
+    {
+      "id": "no_waste_root_for_complete_prodigy",
+      "targetTrait": "destiny_waste_root_reversal",
+      "badIf": {
+        "rootBoneGte": 85,
+        "comprehensionGte": 85,
+        "fortuneGte": 75
+      },
+      "action": "mutate",
+      "mutation": "destiny_prodigy_under_calamity"
+    },
+    {
+      "id": "no_cowardly_for_battle_maniac",
+      "targetTrait": "destiny_cowardly_supreme",
+      "badIf": {
+        "hasTags": [
+          "destiny:war_feeds_war"
+        ]
+      },
+      "action": "mutate",
+      "mutation": "destiny_hidden_killer"
+    },
+    {
+      "id": "no_clean_heart_with_unresolved_demon",
+      "targetTrait": "destiny_clean_glass_heart",
+      "badIf": {
+        "hasTags": [
+          "destiny:demon_seed"
+        ]
+      },
+      "action": "mutate",
+      "mutation": "destiny_shadowed_lotus"
+    }
+  ]
+}

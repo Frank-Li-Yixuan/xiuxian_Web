@@ -1,0 +1,115 @@
+{
+  "version": "0.1",
+  "agePhases": [
+    {
+      "id": "infant",
+      "name": "婴幼年",
+      "minAgeMonths": 0,
+      "maxAgeMonths": 47,
+      "description": "命火、家庭、体质、异象、随身物微动。",
+      "allowedInterludeIntensity": {
+        "realCombat": false,
+        "maxDurationSeconds": 0,
+        "maxTurns": 0
+      },
+      "eventPoolTags": [
+        "family",
+        "body",
+        "omen",
+        "infant"
+      ],
+      "narrativeToneTags": [
+        "gentle",
+        "ominous",
+        "family"
+      ]
+    },
+    {
+      "id": "childhood",
+      "name": "童年",
+      "minAgeMonths": 48,
+      "maxAgeMonths": 107,
+      "description": "性格、初学、早期机缘、梦境/幻象短插曲。",
+      "allowedInterludeIntensity": {
+        "realCombat": false,
+        "maxDurationSeconds": 60,
+        "maxTurns": 5
+      },
+      "eventPoolTags": [
+        "study",
+        "play",
+        "minor_omen",
+        "dream"
+      ],
+      "narrativeToneTags": [
+        "curious",
+        "mysterious"
+      ]
+    },
+    {
+      "id": "youth",
+      "name": "少年",
+      "minAgeMonths": 108,
+      "maxAgeMonths": 167,
+      "description": "灵根显现、首次冲突、身世线索、第一次小历练。",
+      "allowedInterludeIntensity": {
+        "realCombat": true,
+        "maxDurationSeconds": 150,
+        "maxTurns": 6
+      },
+      "eventPoolTags": [
+        "root_manifest",
+        "first_conflict",
+        "mentor",
+        "minor_trial"
+      ],
+      "narrativeToneTags": [
+        "growing",
+        "danger"
+      ]
+    },
+    {
+      "id": "adolescence",
+      "name": "青春",
+      "minAgeMonths": 168,
+      "maxAgeMonths": 215,
+      "description": "流派初显、天命显化、系统前兆、核心插曲。",
+      "allowedInterludeIntensity": {
+        "realCombat": true,
+        "maxDurationSeconds": 300,
+        "maxTurns": 10
+      },
+      "eventPoolTags": [
+        "lineage",
+        "destiny_manifest",
+        "system_omen",
+        "major_trial"
+      ],
+      "narrativeToneTags": [
+        "turning_point",
+        "fate"
+      ]
+    },
+    {
+      "id": "adulthood_threshold",
+      "name": "成年节点",
+      "minAgeMonths": 216,
+      "maxAgeMonths": 216,
+      "description": "人生模拟结算与成年试炼路径决策。",
+      "allowedInterludeIntensity": {
+        "realCombat": true,
+        "maxDurationSeconds": 420,
+        "maxTurns": 12
+      },
+      "eventPoolTags": [
+        "age18",
+        "awakening",
+        "trial"
+      ],
+      "narrativeToneTags": [
+        "ceremony",
+        "threshold"
+      ]
+    }
+  ]
+}

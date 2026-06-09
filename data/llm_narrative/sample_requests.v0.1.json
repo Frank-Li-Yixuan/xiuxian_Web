@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "samples": [
+    {
+      "taskType": "monthly_event_log",
+      "safeEventPayload": {
+        "ageMonth": 84,
+        "phase": "child",
+        "place": "青云山外缘",
+        "eventTitle": "雨夜后山低语",
+        "visibleTags": [
+          "雷雨",
+          "后山",
+          "异象"
+        ],
+        "visibleEffects": [
+          "灵感微增"
+        ],
+        "hiddenOmenAliases": [
+          "thunder_omen"
+        ]
+      },
+      "expectedStyle": "雷雨、后山、骨节/心口异样；不写古雷真血。"
+    },
+    {
+      "taskType": "major_choice_intro",
+      "safeEventPayload": {
+        "ageMonth": 180,
+        "phase": "teen",
+        "recentEvents": [
+          "天外战鼓",
+          "耳边杂音",
+          "闭门百日"
+        ],
+        "storyline": "系统前兆线",
+        "risk": "destiny"
+      },
+      "expectedStyle": "系统前兆明显，但不说系统共鸣体。"
+    }
+  ]
+}

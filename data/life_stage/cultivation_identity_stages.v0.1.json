@@ -1,0 +1,197 @@
+{
+  "version": "0.1",
+  "identityStages": [
+    {
+      "id": "mortal_child",
+      "name": "凡人孩童",
+      "category": "mortal",
+      "description": "初始身份。只经历凡域日常、家庭、体质、早期异象。",
+      "canCoexistWith": [],
+      "unlocks": [
+        "daily_life_events"
+      ],
+      "eventBiasTags": [
+        "family",
+        "body",
+        "ordinary"
+      ],
+      "transitionInTags": [
+        "birth"
+      ],
+      "transitionOutTags": [
+        "first_omen",
+        "hidden_fate_20"
+      ]
+    },
+    {
+      "id": "omen_touched",
+      "name": "异象之子",
+      "category": "omen",
+      "description": "角色已有异常，但未入道。梦境、异象、随身物、预兆事件权重上升。",
+      "canCoexistWith": [
+        "system_candidate"
+      ],
+      "unlocks": [
+        "dream_interlude_low"
+      ],
+      "eventBiasTags": [
+        "omen",
+        "dream",
+        "hidden_fate"
+      ],
+      "transitionInTags": [
+        "first_omen",
+        "hidden_fate_20"
+      ],
+      "transitionOutTags": [
+        "path_seed_candidate"
+      ]
+    },
+    {
+      "id": "path_seed",
+      "name": "求道苗子",
+      "category": "seeker",
+      "description": "开始主动接触修行。可触发读书、吐纳、道观、药理、练武相关重大选择。",
+      "canCoexistWith": [
+        "system_candidate"
+      ],
+      "unlocks": [
+        "practice_choices",
+        "minor_trials"
+      ],
+      "eventBiasTags": [
+        "study",
+        "practice",
+        "mentor"
+      ],
+      "transitionInTags": [
+        "study_success",
+        "mentor_hint",
+        "root_manifest"
+      ],
+      "transitionOutTags": [
+        "first_qi_sense",
+        "teacher_trial"
+      ]
+    },
+    {
+      "id": "half_initiated",
+      "name": "半修行者",
+      "category": "seeker",
+      "description": "已有实际修行经验，但还未正式入道。可触发小规模真实玩法插曲。",
+      "canCoexistWith": [
+        "system_candidate"
+      ],
+      "unlocks": [
+        "real_minor_interludes",
+        "cultivation_costs"
+      ],
+      "eventBiasTags": [
+        "practice_cost",
+        "minor_combat",
+        "heart_trial"
+      ],
+      "transitionInTags": [
+        "first_qi_sense",
+        "interlude_success"
+      ],
+      "transitionOutTags": [
+        "initiation_candidate_token"
+      ]
+    },
+    {
+      "id": "initiation_candidate",
+      "name": "入道候选",
+      "category": "initiated",
+      "description": "已经接近真正入道。可触发入道节点。",
+      "canCoexistWith": [
+        "system_candidate"
+      ],
+      "unlocks": [
+        "initiation_nodes",
+        "major_trials"
+      ],
+      "eventBiasTags": [
+        "initiation",
+        "lineage_trial"
+      ],
+      "transitionInTags": [
+        "storyline_70",
+        "thread_resolved",
+        "hidden_fate_70"
+      ],
+      "transitionOutTags": [
+        "initiation_node_success"
+      ]
+    },
+    {
+      "id": "initiated_cultivator",
+      "name": "入道者",
+      "category": "initiated",
+      "description": "正式跨入修行门槛。成年节点将转为试炼/系统权限，而非初次入道。",
+      "canCoexistWith": [
+        "system_candidate"
+      ],
+      "unlocks": [
+        "cultivator_identity",
+        "age18_custom_trial"
+      ],
+      "eventBiasTags": [
+        "cultivator",
+        "lineage"
+      ],
+      "transitionInTags": [
+        "initiation_node_success"
+      ],
+      "transitionOutTags": [
+        "age18_trial"
+      ]
+    },
+    {
+      "id": "system_candidate",
+      "name": "系统候选者",
+      "category": "system",
+      "description": "系统前兆显著。成年节点更可能走系统征召/域外战场路径。",
+      "canCoexistWith": [
+        "omen_touched",
+        "path_seed",
+        "half_initiated",
+        "initiation_candidate",
+        "initiated_cultivator"
+      ],
+      "unlocks": [
+        "system_omens",
+        "outer_dream"
+      ],
+      "eventBiasTags": [
+        "system_static",
+        "outer_battlefield_omen"
+      ],
+      "transitionInTags": [
+        "system_static",
+        "system_dream_survived"
+      ],
+      "transitionOutTags": [
+        "age18_system_path"
+      ]
+    },
+    {
+      "id": "home_owner",
+      "name": "洞府之主",
+      "category": "home",
+      "description": "成年试炼或系统家园开启后进入。",
+      "canCoexistWith": [],
+      "unlocks": [
+        "dongfu_home",
+        "outgame_cultivation"
+      ],
+      "eventBiasTags": [
+        "home"
+      ],
+      "transitionInTags": [
+        "system_home_unlocked"
+      ],
+      "transitionOutTags": []
+    }
+  ]
+}

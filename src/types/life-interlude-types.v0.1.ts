@@ -1,0 +1,163 @@
+export type LifeInterludeMode = "stg" | "horde" | "deckbuilder" | "formation_auto" | "text_check";
+
+export type InterludeRealityLayer =
+  | "real_event"
+  | "dream"
+  | "training"
+  | "spirit_projection"
+  | "system_preview";
+
+export type InterludeDifficultyTier =
+  | "safe"
+  | "steady"
+  | "risky"
+  | "dangerous"
+  | "forbidden"
+  | "destiny";
+
+export type LifeInterludeOutcome =
+  | "failure"
+  | "partialSuccess"
+  | "success"
+  | "greatSuccess"
+  | "hiddenSuccess"
+  | "abandon";
+
+export interface LifeInterludeDefinition {
+  readonly id: string;
+  readonly name: string;
+  readonly mode: LifeInterludeMode;
+  readonly realityLayer: InterludeRealityLayer;
+  readonly ageRange: readonly [number, number];
+  readonly baseWeight: number;
+  readonly storylineTags: readonly string[];
+  readonly threadTags: readonly string[];
+  readonly requiredHooks?: readonly string[];
+  readonly preferredRoots?: readonly string[];
+  readonly preferredDestinies?: readonly string[];
+  readonly preferredOrigins?: readonly string[];
+  readonly preferredItems?: readonly string[];
+  readonly difficultyTier: InterludeDifficultyTier;
+  readonly durationTargetSeconds?: number;
+  readonly turnLimit?: number;
+  readonly description: string;
+  readonly worldExplanation: string;
+  readonly rewardProfileId: string;
+  readonly failurePolicyId: string;
+  readonly resultWritebackId: string;
+}
+
+export interface LifeInterludeTriggerContext {
+  readonly ageMonth: number;
+  readonly phaseId: string;
+  readonly recentMonthlyEventIds: readonly string[];
+  readonly recentHooks: readonly string[];
+  readonly activeStorylineTags: readonly string[];
+  readonly activeThreadTags: readonly string[];
+  readonly openingTags: readonly string[];
+  readonly destinyTags: readonly string[];
+  readonly rootTags: readonly string[];
+  readonly originTags: readonly string[];
+  readonly itemTags: readonly string[];
+  readonly currentWoundIds: readonly string[];
+  readonly currentHeartKnotIds: readonly string[];
+  readonly merit: number;
+  readonly karma: number;
+  readonly recentInterludesLast24Months: number;
+  readonly interludeHistory: readonly LifeInterludeHistoryEntry[];
+}
+
+export interface LifeInterludeHistoryEntry {
+  readonly interludeId: string;
+  readonly mode: LifeInterludeMode;
+  readonly ageMonth: number;
+  readonly outcome: LifeInterludeOutcome;
+  readonly sourceChoiceId?: string;
+  readonly sourceThreadId?: string;
+}
+
+export interface LifeInterludeCandidate {
+  readonly definitionId: string;
+  readonly mode: LifeInterludeMode;
+  readonly name: string;
+  readonly difficultyTier: InterludeDifficultyTier;
+  readonly displayRisk: string;
+  readonly durationPreview?: string;
+  readonly worldExplanation: string;
+  readonly autoResolveAllowed: boolean;
+  readonly finalWeight: number;
+  readonly debug?: unknown;
+}
+
+export interface LifeInterludeRunConfig {
+  readonly interludeRunId: string;
+  readonly definitionId: string;
+  readonly mode: LifeInterludeMode;
+  readonly seed: string;
+  readonly ageMonth: number;
+  readonly sourceChoiceId: string;
+  readonly sourceThreadId?: string;
+  readonly difficultyTier: InterludeDifficultyTier;
+  readonly durationTargetSeconds?: number;
+  readonly turnLimit?: number;
+  readonly playerProjection: LifeInterludePlayerProjection;
+  readonly scenario: LifeInterludeScenario;
+  readonly rewards: LifeInterludeRewardTable;
+  readonly failurePolicy: LifeInterludeFailurePolicy;
+}
+
+export interface LifeInterludePlayerProjection {
+  readonly maxHp: number;
+  readonly maxQi?: number;
+  readonly moveSpeed?: number;
+  readonly skillTags: readonly string[];
+  readonly destinyModifiers: readonly string[];
+  readonly itemModifiers: readonly string[];
+}
+
+export interface LifeInterludeScenario {
+  readonly title: string;
+  readonly description: string;
+  readonly worldExplanation: string;
+  readonly enemyPool?: readonly string[];
+  readonly cardPool?: readonly string[];
+  readonly boardPreset?: string;
+}
+
+export interface LifeInterludeRewardTable {
+  readonly successEffects: readonly LifeInterludeWritebackEffect[];
+  readonly failureEffects: readonly LifeInterludeWritebackEffect[];
+  readonly hiddenSuccessEffects?: readonly LifeInterludeWritebackEffect[];
+}
+
+export interface LifeInterludeFailurePolicy {
+  readonly canGameOver: false;
+  readonly preserveLifeSimulation: true;
+  readonly allowRetry?: boolean;
+  readonly autoResolveFallback?: LifeInterludeOutcome;
+}
+
+export type LifeInterludeWritebackEffect =
+  | { readonly type: "modifyStat"; readonly stat: string; readonly amount: number }
+  | { readonly type: "addWound"; readonly woundId: string; readonly severity: number }
+  | { readonly type: "addHeartKnot"; readonly knotId: string; readonly severity: number }
+  | { readonly type: "modifyHiddenFateProgress"; readonly hiddenFateId: string; readonly amount: number; readonly visibleHint: string }
+  | { readonly type: "modifyCarriedItemAffinity"; readonly itemId: string; readonly amount: number }
+  | { readonly type: "modifyStorylineScore"; readonly storylineId: string; readonly amount: number }
+  | { readonly type: "modifyThreadProgress"; readonly threadId: string; readonly progress: number; readonly tension?: number }
+  | { readonly type: "modifyKarmaMerit"; readonly karma?: number; readonly merit?: number }
+  | { readonly type: "addAge18Hook"; readonly hookId: string; readonly amount?: number }
+  | { readonly type: "addLifeLog"; readonly text: string };
+
+export interface LifeInterludeResult {
+  readonly interludeRunId: string;
+  readonly definitionId: string;
+  readonly mode: LifeInterludeMode;
+  readonly outcome: LifeInterludeOutcome;
+  readonly score?: number;
+  readonly durationSeconds?: number;
+  readonly playerChoseManual: boolean;
+  readonly visibleSummary: string;
+  readonly effects: readonly LifeInterludeWritebackEffect[];
+  readonly generatedHooks: readonly string[];
+}

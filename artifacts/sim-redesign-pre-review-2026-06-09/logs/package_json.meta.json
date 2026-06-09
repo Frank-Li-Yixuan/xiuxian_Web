@@ -1,0 +1,7 @@
+﻿{
+    "name":  "package_json",
+    "command":  "powershell -NoProfile -Command Get-Content -Path package.json -Encoding UTF8",
+    "exitCode":  0,
+    "start":  "2026-06-09T22:26:56.1888404+08:00",
+    "end":  "2026-06-09T22:26:56.4474734+08:00"
+}

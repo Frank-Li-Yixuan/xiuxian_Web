@@ -1,0 +1,113 @@
+{
+  "version": "0.2",
+  "progressBands": [
+    {
+      "id": "seed",
+      "min": 0,
+      "max": 19,
+      "uiLabel": "隐约无形",
+      "canShowTrueName": false
+    },
+    {
+      "id": "omen",
+      "min": 20,
+      "max": 39,
+      "uiLabel": "偶有异象",
+      "canShowTrueName": false
+    },
+    {
+      "id": "stirring",
+      "min": 40,
+      "max": 59,
+      "uiLabel": "命中异动",
+      "canShowTrueName": false
+    },
+    {
+      "id": "halfReveal",
+      "min": 60,
+      "max": 79,
+      "uiLabel": "似有所指",
+      "canShowTrueName": false
+    },
+    {
+      "id": "nearAwake",
+      "min": 80,
+      "max": 99,
+      "uiLabel": "封印将醒",
+      "canShowTrueName": false
+    },
+    {
+      "id": "awakened",
+      "min": 100,
+      "max": 999,
+      "uiLabel": "已可揭示",
+      "canShowTrueName": true
+    }
+  ],
+  "revealPolicies": {
+    "characterCreation": {
+      "allowTrueName": false,
+      "allowExactProgress": false,
+      "allowVagueBand": true,
+      "maxOmenLines": 2
+    },
+    "monthlyLog": {
+      "allowTrueName": false,
+      "allowExactProgress": false,
+      "allowVagueBand": false
+    },
+    "majorChoice": {
+      "allowTrueName": false,
+      "allowExactProgress": false,
+      "allowVagueBand": true,
+      "allowDestinyOptionHint": true
+    },
+    "age18": {
+      "allowTrueName": true,
+      "allowExactProgress": false,
+      "allowResolution": true
+    }
+  },
+  "misdirectionRules": [
+    {
+      "id": "mislead_thunder_tribulation",
+      "signals": [
+        "thunder",
+        "bone_heat",
+        "heaven_attention"
+      ],
+      "possibleTruths": [
+        "hidden_ancient_thunder_blood",
+        "destiny_thunder_affinity",
+        "destiny_heaven_jealous_talent",
+        "hidden_outer_battlefield_echo"
+      ]
+    },
+    {
+      "id": "mislead_soul_fear",
+      "signals": [
+        "yin",
+        "night_dream",
+        "grave_mist"
+      ],
+      "possibleTruths": [
+        "hidden_taiyin_remnant_vein",
+        "hidden_demon_mark",
+        "destiny_clear_glass_heart"
+      ]
+    },
+    {
+      "id": "mislead_old_book",
+      "signals": [
+        "old_book",
+        "blank_page",
+        "lost_text"
+      ],
+      "possibleTruths": [
+        "hidden_book_of_heaven_fragment",
+        "hidden_system_resonance",
+        "destiny_over_memory"
+      ]
+    }
+  ]
+}

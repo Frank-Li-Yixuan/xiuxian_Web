@@ -1,0 +1,119 @@
+{
+  "version": "0.2",
+  "archetypes": [
+    {
+      "id": "safe",
+      "label": "稳",
+      "name": "稳健",
+      "riskLevel": 0,
+      "rewardBudgetRange": [
+        1,
+        4
+      ],
+      "failureBudgetRange": [
+        0,
+        1
+      ],
+      "defaultDifficultyModifier": -15,
+      "visibility": "always",
+      "canTriggerInterlude": false,
+      "canTriggerTransition": false,
+      "description": "低风险，小收益，通常不会造成严重后果。"
+    },
+    {
+      "id": "steady",
+      "label": "正",
+      "name": "进取",
+      "riskLevel": 1,
+      "rewardBudgetRange": [
+        4,
+        8
+      ],
+      "failureBudgetRange": [
+        1,
+        3
+      ],
+      "defaultDifficultyModifier": 0,
+      "visibility": "always",
+      "canTriggerInterlude": false,
+      "canTriggerTransition": true,
+      "description": "按常理推进，有一定判定，收益稳定。"
+    },
+    {
+      "id": "risky",
+      "label": "险",
+      "name": "冒险",
+      "riskLevel": 2,
+      "rewardBudgetRange": [
+        8,
+        13
+      ],
+      "failureBudgetRange": [
+        3,
+        7
+      ],
+      "defaultDifficultyModifier": 12,
+      "visibility": "always",
+      "canTriggerInterlude": true,
+      "canTriggerTransition": true,
+      "description": "高收益，但失败会留下代价。"
+    },
+    {
+      "id": "dangerous",
+      "label": "凶",
+      "name": "凶险",
+      "riskLevel": 3,
+      "rewardBudgetRange": [
+        12,
+        20
+      ],
+      "failureBudgetRange": [
+        7,
+        14
+      ],
+      "defaultDifficultyModifier": 24,
+      "visibility": "conditional",
+      "canTriggerInterlude": true,
+      "canTriggerTransition": true,
+      "description": "危机选择，可能造成伤病、心结或业力。"
+    },
+    {
+      "id": "forbidden",
+      "label": "禁",
+      "name": "禁忌",
+      "riskLevel": 4,
+      "rewardBudgetRange": [
+        18,
+        30
+      ],
+      "failureBudgetRange": [
+        12,
+        25
+      ],
+      "defaultDifficultyModifier": 32,
+      "visibility": "hidden",
+      "canTriggerInterlude": true,
+      "canTriggerTransition": true,
+      "description": "借寿、魔念、禁书、违逆天理等路线。"
+    },
+    {
+      "id": "destiny",
+      "label": "命",
+      "name": "命选",
+      "riskLevel": 5,
+      "rewardBudgetRange": [
+        10,
+        35
+      ],
+      "failureBudgetRange": [
+        5,
+        30
+      ],
+      "defaultDifficultyModifier": 0,
+      "visibility": "hidden",
+      "canTriggerInterlude": true,
+      "canTriggerTransition": true,
+      "description": "由天命、隐藏血脉、随身物或系统共鸣开启的专属选项。"
+    }
+  ]
+}

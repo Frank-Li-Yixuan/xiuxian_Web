@@ -1,0 +1,121 @@
+{
+  "version": "0.2",
+  "choiceCount": {
+    "min": 3,
+    "max": 5,
+    "default": 4
+  },
+  "requiredFallbackOptions": [
+    "fallback_retreat_and_stabilize",
+    "fallback_follow_common_sense"
+  ],
+  "hiddenOptionRules": {
+    "maxHiddenOptionsPerChoice": 1,
+    "allowForbiddenWithoutSignal": false,
+    "minSignalsForDestinyOption": 1,
+    "minSignalsForForbiddenOption": 2
+  },
+  "frequencyBudget": {
+    "sixMonthWindow": {
+      "maxDangerousOrForbidden": 1,
+      "maxInterludeOptions": 1,
+      "preferSafeIfPressureCountGte": 3
+    },
+    "lifeTotal": {
+      "targetInterludeCandidateCount": [
+        8,
+        12
+      ],
+      "targetActualInterludeCount": [
+        6,
+        10
+      ],
+      "maxForbiddenChoiceCount": 8,
+      "maxDestinyChoiceCount": 14
+    }
+  },
+  "riskHintBands": [
+    {
+      "id": "nearly_certain",
+      "minEstimatedChance": 0.85,
+      "label": "十拿九稳"
+    },
+    {
+      "id": "high",
+      "minEstimatedChance": 0.7,
+      "label": "胜算颇高"
+    },
+    {
+      "id": "moderate",
+      "minEstimatedChance": 0.55,
+      "label": "可堪一试"
+    },
+    {
+      "id": "uncertain",
+      "minEstimatedChance": 0.4,
+      "label": "吉凶参半"
+    },
+    {
+      "id": "dangerous",
+      "minEstimatedChance": 0.25,
+      "label": "凶险"
+    },
+    {
+      "id": "deadly",
+      "minEstimatedChance": 0.0,
+      "label": "九死一生"
+    },
+    {
+      "id": "unknown",
+      "label": "天机难测",
+      "hidden": true
+    }
+  ],
+  "outcomeBands": [
+    {
+      "id": "criticalFailure",
+      "maxScore": 29
+    },
+    {
+      "id": "failure",
+      "minScore": 30,
+      "maxScore": 44
+    },
+    {
+      "id": "partialSuccess",
+      "minScore": 45,
+      "maxScore": 64
+    },
+    {
+      "id": "success",
+      "minScore": 65,
+      "maxScore": 84
+    },
+    {
+      "id": "greatSuccess",
+      "minScore": 85,
+      "maxScore": 99
+    },
+    {
+      "id": "perfectSuccess",
+      "minScore": 100
+    },
+    {
+      "id": "hiddenSuccess",
+      "minScore": 100,
+      "requiresHiddenCondition": true
+    }
+  ],
+  "eventWeightFormula": {
+    "baseWeight": 1,
+    "sourceHookMatch": 8,
+    "storylineMatch": 6,
+    "threadCrisisMatch": 10,
+    "transitionNeedMatch": 8,
+    "destinyMatch": 5,
+    "originMatch": 4,
+    "itemMatch": 4,
+    "densityAdjustMin": -8,
+    "densityAdjustMax": 8
+  }
+}

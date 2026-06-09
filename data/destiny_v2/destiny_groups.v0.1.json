@@ -1,0 +1,155 @@
+{
+  "version": "0.1",
+  "qualities": [
+    {
+      "id": "mortal",
+      "name": "凡命",
+      "rank": 1,
+      "positiveBudget": [
+        1,
+        2
+      ],
+      "negativeBudget": [
+        0,
+        0
+      ],
+      "mainWeight": 0,
+      "secondaryWeight": 25,
+      "description": "轻度倾向，适合作为副命格补足角色性格。"
+    },
+    {
+      "id": "good",
+      "name": "良命",
+      "rank": 2,
+      "positiveBudget": [
+        2,
+        4
+      ],
+      "negativeBudget": [
+        0,
+        1
+      ],
+      "mainWeight": 38,
+      "secondaryWeight": 38,
+      "description": "明确倾向，但代价较轻。"
+    },
+    {
+      "id": "rare",
+      "name": "奇命",
+      "rank": 3,
+      "positiveBudget": [
+        4,
+        7
+      ],
+      "negativeBudget": [
+        1,
+        2
+      ],
+      "mainWeight": 30,
+      "secondaryWeight": 25,
+      "description": "具有构筑方向的命格。"
+    },
+    {
+      "id": "arcane",
+      "name": "玄命",
+      "rank": 4,
+      "positiveBudget": [
+        7,
+        11
+      ],
+      "negativeBudget": [
+        2,
+        5
+      ],
+      "mainWeight": 20,
+      "secondaryWeight": 10,
+      "description": "强机制，优缺点明显。"
+    },
+    {
+      "id": "earth",
+      "name": "地命",
+      "rank": 5,
+      "positiveBudget": [
+        11,
+        16
+      ],
+      "negativeBudget": [
+        5,
+        8
+      ],
+      "mainWeight": 8,
+      "secondaryWeight": 2,
+      "description": "改变玩法路线，通常要求命盘支撑。"
+    },
+    {
+      "id": "heaven",
+      "name": "天命",
+      "rank": 6,
+      "positiveBudget": [
+        16,
+        24
+      ],
+      "negativeBudget": [
+        8,
+        14
+      ],
+      "mainWeight": 3,
+      "secondaryWeight": 0,
+      "description": "极强命格，必定伴随劫数或承载问题。"
+    },
+    {
+      "id": "reversal",
+      "name": "逆命",
+      "rank": 7,
+      "positiveBudget": [
+        18,
+        28
+      ],
+      "negativeBudget": [
+        10,
+        18
+      ],
+      "mainWeight": 0.8,
+      "secondaryWeight": 0,
+      "description": "失败、缺陷或压制反而成为成长源。"
+    },
+    {
+      "id": "forbidden",
+      "name": "禁命",
+      "rank": 8,
+      "positiveBudget": [
+        24,
+        40
+      ],
+      "negativeBudget": [
+        15,
+        30
+      ],
+      "mainWeight": 0.2,
+      "secondaryWeight": 0,
+      "description": "禁忌强度，高风险高回报，不适合无支撑命盘。"
+    }
+  ],
+  "slots": [
+    {
+      "id": "main",
+      "name": "主天命",
+      "description": "决定此生核心路数，不出凡命。"
+    },
+    {
+      "id": "secondary",
+      "name": "副天命",
+      "description": "补充方向与性格。"
+    },
+    {
+      "id": "flaw",
+      "name": "劫命",
+      "description": "缺陷、灾劫、反噬或宿命压力。"
+    },
+    {
+      "id": "mutated",
+      "name": "变异命格",
+      "description": "当抽中的天命与命盘不符时，由规则变异生成。"
+    }
+  ]
+}

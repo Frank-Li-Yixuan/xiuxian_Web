@@ -1,0 +1,101 @@
+{
+  "version": "0.2",
+  "categories": [
+    {
+      "id": "ambient_world",
+      "name": "凡域日常",
+      "purpose": "低强度铺垫，维持世界呼吸感",
+      "densityCost": 1
+    },
+    {
+      "id": "family_bond",
+      "name": "亲缘家事",
+      "purpose": "塑造家庭、亲缘、牵挂与心结",
+      "densityCost": 1
+    },
+    {
+      "id": "body_health",
+      "name": "体质伤病",
+      "purpose": "表现精、根骨、寿元与病弱短命线",
+      "densityCost": 2
+    },
+    {
+      "id": "study_scholar",
+      "name": "读书学识",
+      "purpose": "支撑寒门读书线、悟性、旧书残卷",
+      "densityCost": 2
+    },
+    {
+      "id": "martial_labor",
+      "name": "练武劳作",
+      "purpose": "支撑猎户练武线、精、根骨、战斗倾向",
+      "densityCost": 2
+    },
+    {
+      "id": "alchemy_herb",
+      "name": "药理丹道",
+      "purpose": "支撑药铺丹道线、药性、火候、丹炉",
+      "densityCost": 2
+    },
+    {
+      "id": "temple_talisman",
+      "name": "道观符箓",
+      "purpose": "支撑道观香火线、符阵、香火、问心",
+      "densityCost": 2
+    },
+    {
+      "id": "dream_spirit",
+      "name": "梦境神识",
+      "purpose": "支撑阴梦魂修、系统前兆、隐藏命预兆",
+      "densityCost": 2
+    },
+    {
+      "id": "origin_clue",
+      "name": "身世旧物",
+      "purpose": "推动破落遗脉、祖传旧物、隐藏身世",
+      "densityCost": 2
+    },
+    {
+      "id": "destiny_manifest",
+      "name": "天命显化",
+      "purpose": "让天命在人生中出现，而非只停留在卡牌",
+      "densityCost": 3
+    },
+    {
+      "id": "hidden_omen",
+      "name": "隐藏预兆",
+      "purpose": "推动隐藏血脉/前世/系统共鸣进度，但不泄露真名",
+      "densityCost": 3
+    },
+    {
+      "id": "disaster_karmic",
+      "name": "灾劫因果",
+      "purpose": "山贼、妖祸、兵灾、功德/业力分歧",
+      "densityCost": 3
+    },
+    {
+      "id": "storyline_thread",
+      "name": "主线推进",
+      "purpose": "推进人生主线事件线 seed/omen/development/crisis/resolution",
+      "densityCost": 3
+    },
+    {
+      "id": "interlude_hook",
+      "name": "玩法插曲钩子",
+      "purpose": "为半年选择生成 STG/割草/DBG/棋局候选",
+      "densityCost": 4
+    },
+    {
+      "id": "stage_transition",
+      "name": "阶段转化候选",
+      "purpose": "推动求道苗子、半修行者、系统候选者、入道候选等身份变化",
+      "densityCost": 4
+    },
+    {
+      "id": "system_omen",
+      "name": "系统前兆",
+      "purpose": "耳边杂音、天外战鼓、命盘裂光，连接成年节点",
+      "densityCost": 4
+    }
+  ]
+}

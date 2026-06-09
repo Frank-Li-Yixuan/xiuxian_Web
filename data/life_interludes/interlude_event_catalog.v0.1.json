@@ -1,0 +1,201 @@
+{
+  "version": "0.1",
+  "interludes": [
+    {
+      "id": "interlude_rainy_back_mountain",
+      "name": "雨夜后山",
+      "mode": "stg",
+      "realityLayer": "spirit_projection",
+      "ageRange": [
+        72,
+        167
+      ],
+      "baseWeight": 18,
+      "storylineTags": [
+        "system_omen",
+        "village_disaster"
+      ],
+      "threadTags": [
+        "back_mountain_shadow",
+        "thunder_omen"
+      ],
+      "requiredHooks": [
+        "thunderstorm_omen"
+      ],
+      "preferredRoots": [
+        "thunder",
+        "metal"
+      ],
+      "preferredDestinies": [
+        "destiny_heaven_jealous_talent",
+        "destiny_tribulation_affinity"
+      ],
+      "preferredItems": [
+        "item_broken_wooden_sword"
+      ],
+      "difficultyTier": "risky",
+      "durationTargetSeconds": 90,
+      "description": "暴雨夜，后山似有妖影。你的灵识被雷声牵引，短暂卷入一场御器幻战。",
+      "worldExplanation": "不是肉身出战，而是灵识被雷雨与后山灵隙牵动。",
+      "rewardProfileId": "reward_thunder_omen_stg",
+      "failurePolicyId": "fail_minor_wound_fear_thunder",
+      "resultWritebackId": "writeback_thunder_back_mountain"
+    },
+    {
+      "id": "interlude_guard_medicine_field",
+      "name": "守护药田",
+      "mode": "horde",
+      "realityLayer": "real_event",
+      "ageRange": [
+        132,
+        215
+      ],
+      "baseWeight": 16,
+      "storylineTags": [
+        "alchemy"
+      ],
+      "threadTags": [
+        "protect_medicine_field",
+        "insect_tide"
+      ],
+      "requiredHooks": [
+        "wild_ginseng_field"
+      ],
+      "preferredRoots": [
+        "wood",
+        "earth",
+        "fire"
+      ],
+      "preferredDestinies": [
+        "destiny_alchemy_prodigy",
+        "destiny_protect_life_merit"
+      ],
+      "preferredOrigins": [
+        "origin_herb_shop_apprentice"
+      ],
+      "difficultyTier": "risky",
+      "durationTargetSeconds": 180,
+      "description": "药田夜里黑土翻涌，细密妖虫从地缝中涌出。你必须守住药苗到天亮。",
+      "worldExplanation": "真实事件，失败会影响药田与家境。",
+      "rewardProfileId": "reward_medicine_field_horde",
+      "failurePolicyId": "fail_field_damaged_wound",
+      "resultWritebackId": "writeback_medicine_field"
+    },
+    {
+      "id": "interlude_daoist_symbol_trial",
+      "name": "符阵问心",
+      "mode": "deckbuilder",
+      "realityLayer": "training",
+      "ageRange": [
+        96,
+        180
+      ],
+      "baseWeight": 15,
+      "storylineTags": [
+        "daoist_temple",
+        "cold_study"
+      ],
+      "threadTags": [
+        "wandering_daoist_question",
+        "forbidden_page"
+      ],
+      "preferredRoots": [
+        "water",
+        "yin",
+        "thunder"
+      ],
+      "preferredDestinies": [
+        "destiny_clear_glass_heart",
+        "destiny_demon_heart_seed"
+      ],
+      "preferredOrigins": [
+        "origin_daoist_temple_helper",
+        "origin_private_school_child"
+      ],
+      "preferredItems": [
+        "item_wordless_page",
+        "item_old_talisman"
+      ],
+      "difficultyTier": "steady",
+      "turnLimit": 6,
+      "description": "游方道士以三张符纸布下问心阵，问你心中所求究竟是什么。",
+      "worldExplanation": "训练与问心，不是生死斗。",
+      "rewardProfileId": "reward_symbol_trial_dbg",
+      "failurePolicyId": "fail_heart_knot_minor",
+      "resultWritebackId": "writeback_symbol_trial"
+    },
+    {
+      "id": "interlude_ancestral_jade_board",
+      "name": "祖玉阵局",
+      "mode": "formation_auto",
+      "realityLayer": "dream",
+      "ageRange": [
+        120,
+        215
+      ],
+      "baseWeight": 14,
+      "storylineTags": [
+        "daoist_temple",
+        "fallen_lineage"
+      ],
+      "threadTags": [
+        "ancestral_jade_warm",
+        "geomantic_board"
+      ],
+      "preferredRoots": [
+        "earth",
+        "water"
+      ],
+      "preferredDestinies": [
+        "destiny_seated_forgetfulness",
+        "destiny_cowardly_supreme"
+      ],
+      "preferredItems": [
+        "item_ancestral_jade"
+      ],
+      "difficultyTier": "steady",
+      "turnLimit": 5,
+      "description": "夜里祖传玉佩微温，你梦见九宫阵盘缓缓展开，仿佛要你推演一局。",
+      "worldExplanation": "梦中阵局，成功会提高玉佩亲和。",
+      "rewardProfileId": "reward_ancestral_jade_board",
+      "failurePolicyId": "fail_mild_fatigue",
+      "resultWritebackId": "writeback_ancestral_jade_board"
+    },
+    {
+      "id": "interlude_outer_battlefield_dream",
+      "name": "天外战鼓",
+      "mode": "stg",
+      "realityLayer": "system_preview",
+      "ageRange": [
+        168,
+        215
+      ],
+      "baseWeight": 12,
+      "storylineTags": [
+        "system_omen"
+      ],
+      "threadTags": [
+        "outer_battlefield_dream",
+        "system_static"
+      ],
+      "requiredHooks": [
+        "system_static"
+      ],
+      "preferredRoots": [
+        "thunder",
+        "yin"
+      ],
+      "preferredDestinies": [
+        "destiny_heaven_jealous_talent",
+        "destiny_system_resonance"
+      ],
+      "difficultyTier": "dangerous",
+      "durationTargetSeconds": 120,
+      "description": "梦中天外战鼓轰鸣，你像被某种冷光牵引，看见一片陌生战场。",
+      "worldExplanation": "系统预演，可能为成年节点埋下强 hook。",
+      "rewardProfileId": "reward_outer_battlefield_dream",
+      "failurePolicyId": "fail_first_battle_fright",
+      "resultWritebackId": "writeback_outer_battlefield_dream"
+    }
+  ]
+}

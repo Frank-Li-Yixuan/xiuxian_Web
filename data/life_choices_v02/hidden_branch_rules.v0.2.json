@@ -1,0 +1,75 @@
+{
+  "version": "0.2",
+  "rules": [
+    {
+      "id": "hidden_branch_ancient_thunder_omen",
+      "type": "hiddenFateBranch",
+      "requiredSignals": [
+        "hiddenFate:thunder",
+        "hook:thunderstorm",
+        "root:thunder"
+      ],
+      "minAnySignals": 2,
+      "visibleHint": "雷声在你耳边近得不合常理。",
+      "mustNotReveal": [
+        "古雷真血"
+      ]
+    },
+    {
+      "id": "hidden_branch_past_sword_memory",
+      "type": "itemBranch",
+      "requiredSignals": [
+        "item:broken_wooden_sword",
+        "thread:wooden_sword",
+        "hiddenFate:sword"
+      ],
+      "minAnySignals": 2,
+      "visibleHint": "木剑上传来一瞬陌生的握感。",
+      "mustNotReveal": [
+        "前世剑魄"
+      ]
+    },
+    {
+      "id": "hidden_branch_alchemy_fire",
+      "type": "storylineBranch",
+      "requiredSignals": [
+        "storyline:alchemy",
+        "item:old_copper_furnace",
+        "destiny:alchemy"
+      ],
+      "minAnySignals": 2,
+      "visibleHint": "炉火的进退在你眼中像是活物。",
+      "mustNotReveal": [
+        "丹圣遗骨"
+      ]
+    },
+    {
+      "id": "hidden_branch_system_static",
+      "type": "hiddenFateBranch",
+      "requiredSignals": [
+        "storyline:system_omen",
+        "hook:system_static",
+        "hiddenFate:system"
+      ],
+      "minAnySignals": 2,
+      "visibleHint": "耳边杂音短暂拼成了不像人声的句子。",
+      "mustNotReveal": [
+        "系统共鸣体"
+      ]
+    },
+    {
+      "id": "hidden_branch_demon_whisper",
+      "type": "forbiddenBranch",
+      "requiredSignals": [
+        "destiny:demon_seed",
+        "hook:forbidden_shadow",
+        "heartDemon:high"
+      ],
+      "minAnySignals": 1,
+      "visibleHint": "有个念头告诉你，代价可以以后再付。",
+      "mustNotReveal": [
+        "魔印微痕"
+      ]
+    }
+  ]
+}

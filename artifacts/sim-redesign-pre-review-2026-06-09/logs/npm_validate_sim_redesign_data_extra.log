@@ -1,0 +1,243 @@
+﻿# npm run validate:sim-redesign-data
+
+> xiuxian-stg@0.1.0 validate:sim-redesign-data
+> tsx tools/validate-sim-redesign-data.ts
+
+data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json:domain: domain must be 'destiny_v2'
+data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json:id: id must be a string
+data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json:items: items must be an array
+data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/destiny_v2/core_destiny_definitions.v0.1.json:domain: domain must be 'destiny_v2'
+data/destiny_v2/core_destiny_definitions.v0.1.json:id: id must be a string
+data/destiny_v2/core_destiny_definitions.v0.1.json:items: items must be an array
+data/destiny_v2/core_destiny_definitions.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/destiny_v2/destiny_groups.v0.1.json:domain: domain must be 'destiny_v2'
+data/destiny_v2/destiny_groups.v0.1.json:id: id must be a string
+data/destiny_v2/destiny_groups.v0.1.json:items: items must be an array
+data/destiny_v2/destiny_groups.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/destiny_v2/eligibility_signal_rules.v0.1.json:domain: domain must be 'destiny_v2'
+data/destiny_v2/eligibility_signal_rules.v0.1.json:id: id must be a string
+data/destiny_v2/eligibility_signal_rules.v0.1.json:items: items must be an array
+data/destiny_v2/eligibility_signal_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/destiny_v2/life_manifestation_hooks.v0.1.json:domain: domain must be 'destiny_v2'
+data/destiny_v2/life_manifestation_hooks.v0.1.json:id: id must be a string
+data/destiny_v2/life_manifestation_hooks.v0.1.json:items: items must be an array
+data/destiny_v2/life_manifestation_hooks.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/destiny_v2/mode_projection_hooks.v0.1.json:domain: domain must be 'destiny_v2'
+data/destiny_v2/mode_projection_hooks.v0.1.json:id: id must be a string
+data/destiny_v2/mode_projection_hooks.v0.1.json:items: items must be an array
+data/destiny_v2/mode_projection_hooks.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/destiny_v2/sample_evaluation_cases.v0.1.json:domain: domain must be 'destiny_v2'
+data/destiny_v2/sample_evaluation_cases.v0.1.json:id: id must be a string
+data/destiny_v2/sample_evaluation_cases.v0.1.json:items: items must be an array
+data/destiny_v2/sample_evaluation_cases.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/fate_matrix/attribute_correlation_rules.v0.1.json:domain: domain must be 'fate_matrix'
+data/fate_matrix/attribute_correlation_rules.v0.1.json:items: items must be an array
+data/fate_matrix/attribute_correlation_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/fate_matrix/attribute_event_bias_rules.v0.1.json:domain: domain must be 'fate_matrix'
+data/fate_matrix/attribute_event_bias_rules.v0.1.json:items: items must be an array
+data/fate_matrix/attribute_event_bias_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/fate_matrix/destiny_eligibility_rules.v0.1.json:domain: domain must be 'fate_matrix'
+data/fate_matrix/destiny_eligibility_rules.v0.1.json:items: items must be an array
+data/fate_matrix/destiny_eligibility_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/fate_matrix/generation_algorithm_upgrade_rules.v0.1.json:domain: domain must be 'fate_matrix'
+data/fate_matrix/generation_algorithm_upgrade_rules.v0.1.json:items: items must be an array
+data/fate_matrix/generation_algorithm_upgrade_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/fate_matrix/nine_attributes.v0.1.json:domain: domain must be 'fate_matrix'
+data/fate_matrix/nine_attributes.v0.1.json:items: items must be an array
+data/fate_matrix/nine_attributes.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/fate_matrix/three_powers_yinyang_wuxing.v0.1.json:domain: domain must be 'fate_matrix'
+data/fate_matrix/three_powers_yinyang_wuxing.v0.1.json:items: items must be an array
+data/fate_matrix/three_powers_yinyang_wuxing.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_choices_v02/choice_archetypes.v0.2.json:domain: domain must be 'life_choices_v02'
+data/life_choices_v02/choice_archetypes.v0.2.json:id: id must be a string
+data/life_choices_v02/choice_archetypes.v0.2.json:items: items must be an array
+data/life_choices_v02/choice_archetypes.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_choices_v02/choice_generation_rules.v0.2.json:domain: domain must be 'life_choices_v02'
+data/life_choices_v02/choice_generation_rules.v0.2.json:id: id must be a string
+data/life_choices_v02/choice_generation_rules.v0.2.json:items: items must be an array
+data/life_choices_v02/choice_generation_rules.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_choices_v02/hidden_branch_rules.v0.2.json:domain: domain must be 'life_choices_v02'
+data/life_choices_v02/hidden_branch_rules.v0.2.json:id: id must be a string
+data/life_choices_v02/hidden_branch_rules.v0.2.json:items: items must be an array
+data/life_choices_v02/hidden_branch_rules.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_choices_v02/major_choice_events.v0.2.json:domain: domain must be 'life_choices_v02'
+data/life_choices_v02/major_choice_events.v0.2.json:id: id must be a string
+data/life_choices_v02/major_choice_events.v0.2.json:items: items must be an array
+data/life_choices_v02/major_choice_events.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_choices_v02/outcome_effect_tables.v0.2.json:domain: domain must be 'life_choices_v02'
+data/life_choices_v02/outcome_effect_tables.v0.2.json:id: id must be a string
+data/life_choices_v02/outcome_effect_tables.v0.2.json:items: items must be an array
+data/life_choices_v02/outcome_effect_tables.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_choices_v02/sample_choice_results.v0.2.json:domain: domain must be 'life_choices_v02'
+data/life_choices_v02/sample_choice_results.v0.2.json:id: id must be a string
+data/life_choices_v02/sample_choice_results.v0.2.json:items: items must be an array
+data/life_choices_v02/sample_choice_results.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_interludes/interlude_event_catalog.v0.1.json:domain: domain must be 'life_interludes'
+data/life_interludes/interlude_event_catalog.v0.1.json:id: id must be a string
+data/life_interludes/interlude_event_catalog.v0.1.json:items: items must be an array
+data/life_interludes/interlude_event_catalog.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_interludes/interlude_frequency_budget.v0.1.json:domain: domain must be 'life_interludes'
+data/life_interludes/interlude_frequency_budget.v0.1.json:id: id must be a string
+data/life_interludes/interlude_frequency_budget.v0.1.json:items: items must be an array
+data/life_interludes/interlude_frequency_budget.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_interludes/interlude_mode_definitions.v0.1.json:domain: domain must be 'life_interludes'
+data/life_interludes/interlude_mode_definitions.v0.1.json:id: id must be a string
+data/life_interludes/interlude_mode_definitions.v0.1.json:items: items must be an array
+data/life_interludes/interlude_mode_definitions.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_interludes/interlude_result_writeback_rules.v0.1.json:domain: domain must be 'life_interludes'
+data/life_interludes/interlude_result_writeback_rules.v0.1.json:id: id must be a string
+data/life_interludes/interlude_result_writeback_rules.v0.1.json:items: items must be an array
+data/life_interludes/interlude_result_writeback_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_interludes/interlude_trigger_rules.v0.1.json:domain: domain must be 'life_interludes'
+data/life_interludes/interlude_trigger_rules.v0.1.json:id: id must be a string
+data/life_interludes/interlude_trigger_rules.v0.1.json:items: items must be an array
+data/life_interludes/interlude_trigger_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_interludes/sample_interlude_timeline.v0.1.json:domain: domain must be 'life_interludes'
+data/life_interludes/sample_interlude_timeline.v0.1.json:id: id must be a string
+data/life_interludes/sample_interlude_timeline.v0.1.json:items: items must be an array
+data/life_interludes/sample_interlude_timeline.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_playable/content_minimums.v0.1.json:domain: domain must be 'life_playable'
+data/life_playable/content_minimums.v0.1.json:id: id must be a string
+data/life_playable/content_minimums.v0.1.json:items: items must be an array
+data/life_playable/content_minimums.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_playable/first_playable_flow.v0.1.json:domain: domain must be 'life_playable'
+data/life_playable/first_playable_flow.v0.1.json:id: id must be a string
+data/life_playable/first_playable_flow.v0.1.json:items: items must be an array
+data/life_playable/first_playable_flow.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_playable/pacing_budgets.v0.1.json:domain: domain must be 'life_playable'
+data/life_playable/pacing_budgets.v0.1.json:id: id must be a string
+data/life_playable/pacing_budgets.v0.1.json:items: items must be an array
+data/life_playable/pacing_budgets.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_playable/sample_playthroughs.v0.1.json:domain: domain must be 'life_playable'
+data/life_playable/sample_playthroughs.v0.1.json:id: id must be a string
+data/life_playable/sample_playthroughs.v0.1.json:items: items must be an array
+data/life_playable/sample_playthroughs.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_playable/telemetry_targets.v0.1.json:domain: domain must be 'life_playable'
+data/life_playable/telemetry_targets.v0.1.json:id: id must be a string
+data/life_playable/telemetry_targets.v0.1.json:items: items must be an array
+data/life_playable/telemetry_targets.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_playable/ui_state_machine.v0.1.json:domain: domain must be 'life_playable'
+data/life_playable/ui_state_machine.v0.1.json:id: id must be a string
+data/life_playable/ui_state_machine.v0.1.json:items: items must be an array
+data/life_playable/ui_state_machine.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_sim_v02/monthly_event_categories.v0.2.json:domain: domain must be 'life_sim_v02'
+data/life_sim_v02/monthly_event_categories.v0.2.json:id: id must be a string
+data/life_sim_v02/monthly_event_categories.v0.2.json:items: items must be an array
+data/life_sim_v02/monthly_event_categories.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_sim_v02/monthly_event_pool.v0.2.json:domain: domain must be 'life_sim_v02'
+data/life_sim_v02/monthly_event_pool.v0.2.json:id: id must be a string
+data/life_sim_v02/monthly_event_pool.v0.2.json:items: items must be an array
+data/life_sim_v02/monthly_event_pool.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_sim_v02/monthly_event_tiers.v0.2.json:domain: domain must be 'life_sim_v02'
+data/life_sim_v02/monthly_event_tiers.v0.2.json:id: id must be a string
+data/life_sim_v02/monthly_event_tiers.v0.2.json:items: items must be an array
+data/life_sim_v02/monthly_event_tiers.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_sim_v02/monthly_event_weighting_rules.v0.2.json:domain: domain must be 'life_sim_v02'
+data/life_sim_v02/monthly_event_weighting_rules.v0.2.json:id: id must be a string
+data/life_sim_v02/monthly_event_weighting_rules.v0.2.json:items: items must be an array
+data/life_sim_v02/monthly_event_weighting_rules.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_sim_v02/narrative_density_rules.v0.2.json:domain: domain must be 'life_sim_v02'
+data/life_sim_v02/narrative_density_rules.v0.2.json:id: id must be a string
+data/life_sim_v02/narrative_density_rules.v0.2.json:items: items must be an array
+data/life_sim_v02/narrative_density_rules.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_sim_v02/sample_monthly_timeline.v0.2.json:domain: domain must be 'life_sim_v02'
+data/life_sim_v02/sample_monthly_timeline.v0.2.json:id: id must be a string
+data/life_sim_v02/sample_monthly_timeline.v0.2.json:items: items must be an array
+data/life_sim_v02/sample_monthly_timeline.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_sim_v02/storyline_event_mapping.v0.2.json:domain: domain must be 'life_sim_v02'
+data/life_sim_v02/storyline_event_mapping.v0.2.json:id: id must be a string
+data/life_sim_v02/storyline_event_mapping.v0.2.json:items: items must be an array
+data/life_sim_v02/storyline_event_mapping.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/life_stage/cultivation_identity_stages.v0.1.json:domain: domain must be 'life_stage'
+data/life_stage/cultivation_identity_stages.v0.1.json:id: id must be a string
+data/life_stage/cultivation_identity_stages.v0.1.json:items: items must be an array
+data/life_stage/cultivation_identity_stages.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_stage/initiation_node_definitions.v0.1.json:domain: domain must be 'life_stage'
+data/life_stage/initiation_node_definitions.v0.1.json:id: id must be a string
+data/life_stage/initiation_node_definitions.v0.1.json:items: items must be an array
+data/life_stage/initiation_node_definitions.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_stage/life_age_phase_definitions.v0.1.json:domain: domain must be 'life_stage'
+data/life_stage/life_age_phase_definitions.v0.1.json:id: id must be a string
+data/life_stage/life_age_phase_definitions.v0.1.json:items: items must be an array
+data/life_stage/life_age_phase_definitions.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_stage/rhythm_budget_rules.v0.1.json:domain: domain must be 'life_stage'
+data/life_stage/rhythm_budget_rules.v0.1.json:id: id must be a string
+data/life_stage/rhythm_budget_rules.v0.1.json:items: items must be an array
+data/life_stage/rhythm_budget_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_stage/sample_stage_timelines.v0.1.json:domain: domain must be 'life_stage'
+data/life_stage/sample_stage_timelines.v0.1.json:id: id must be a string
+data/life_stage/sample_stage_timelines.v0.1.json:items: items must be an array
+data/life_stage/sample_stage_timelines.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_stage/transition_event_catalog.v0.1.json:domain: domain must be 'life_stage'
+data/life_stage/transition_event_catalog.v0.1.json:id: id must be a string
+data/life_stage/transition_event_catalog.v0.1.json:items: items must be an array
+data/life_stage/transition_event_catalog.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_stage/transition_trigger_rules.v0.1.json:domain: domain must be 'life_stage'
+data/life_stage/transition_trigger_rules.v0.1.json:id: id must be a string
+data/life_stage/transition_trigger_rules.v0.1.json:items: items must be an array
+data/life_stage/transition_trigger_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_storylines/event_threads.v0.1.json:domain: domain must be 'life_storylines'
+data/life_storylines/event_threads.v0.1.json:id: id must be a string
+data/life_storylines/event_threads.v0.1.json:items: items must be an array
+data/life_storylines/event_threads.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_storylines/sample_storyline_profiles.v0.1.json:domain: domain must be 'life_storylines'
+data/life_storylines/sample_storyline_profiles.v0.1.json:id: id must be a string
+data/life_storylines/sample_storyline_profiles.v0.1.json:items: items must be an array
+data/life_storylines/sample_storyline_profiles.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_storylines/storyline_definitions.v0.1.json:domain: domain must be 'life_storylines'
+data/life_storylines/storyline_definitions.v0.1.json:id: id must be a string
+data/life_storylines/storyline_definitions.v0.1.json:items: items must be an array
+data/life_storylines/storyline_definitions.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/life_storylines/storyline_scoring_rules.v0.1.json:domain: domain must be 'life_storylines'
+data/life_storylines/storyline_scoring_rules.v0.1.json:id: id must be a string
+data/life_storylines/storyline_scoring_rules.v0.1.json:items: items must be an array
+data/life_storylines/storyline_scoring_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/cache_rules.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/cache_rules.v0.1.json:id: id must be a string
+data/llm_narrative/cache_rules.v0.1.json:items: items must be an array
+data/llm_narrative/cache_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/fallback_templates.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/fallback_templates.v0.1.json:id: id must be a string
+data/llm_narrative/fallback_templates.v0.1.json:items: items must be an array
+data/llm_narrative/fallback_templates.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/forbidden_terms.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/forbidden_terms.v0.1.json:id: id must be a string
+data/llm_narrative/forbidden_terms.v0.1.json:items: items must be an array
+data/llm_narrative/forbidden_terms.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/narrative_task_definitions.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/narrative_task_definitions.v0.1.json:id: id must be a string
+data/llm_narrative/narrative_task_definitions.v0.1.json:items: items must be an array
+data/llm_narrative/narrative_task_definitions.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/output_schemas.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/output_schemas.v0.1.json:id: id must be a string
+data/llm_narrative/output_schemas.v0.1.json:items: items must be an array
+data/llm_narrative/output_schemas.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/prompt_templates.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/prompt_templates.v0.1.json:id: id must be a string
+data/llm_narrative/prompt_templates.v0.1.json:items: items must be an array
+data/llm_narrative/prompt_templates.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/sample_requests.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/sample_requests.v0.1.json:id: id must be a string
+data/llm_narrative/sample_requests.v0.1.json:items: items must be an array
+data/llm_narrative/sample_requests.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/llm_narrative/sanitization_rules.v0.1.json:domain: domain must be 'llm_narrative'
+data/llm_narrative/sanitization_rules.v0.1.json:id: id must be a string
+data/llm_narrative/sanitization_rules.v0.1.json:items: items must be an array
+data/llm_narrative/sanitization_rules.v0.1.json:schemaVersion: schemaVersion must be '0.2'
+data/origin_fate_v02/carried_item_narrative_chains.v0.2.json:$: SIM-REDESIGN data file must be a JSON object
+data/origin_fate_v02/hidden_fate_definitions.v0.2.json:$: SIM-REDESIGN data file must be a JSON object
+data/origin_fate_v02/omen_phrase_bank.v0.2.json:domain: domain must be 'origin_fate_v02'
+data/origin_fate_v02/omen_phrase_bank.v0.2.json:id: id must be a string
+data/origin_fate_v02/omen_phrase_bank.v0.2.json:items: items must be an array
+data/origin_fate_v02/omen_phrase_bank.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json:domain: domain must be 'origin_fate_v02'
+data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json:id: id must be a string
+data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json:items: items must be an array
+data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/origin_fate_v02/origin_storyline_definitions.v0.2.json:$: SIM-REDESIGN data file must be a JSON object
+data/origin_fate_v02/reveal_stage_rules.v0.2.json:domain: domain must be 'origin_fate_v02'
+data/origin_fate_v02/reveal_stage_rules.v0.2.json:id: id must be a string
+data/origin_fate_v02/reveal_stage_rules.v0.2.json:items: items must be an array
+data/origin_fate_v02/reveal_stage_rules.v0.2.json:schemaVersion: schemaVersion must be '0.2'
+data/origin_fate_v02/sample_origin_fate_timelines.v0.2.json:$: SIM-REDESIGN data file must be a JSON object

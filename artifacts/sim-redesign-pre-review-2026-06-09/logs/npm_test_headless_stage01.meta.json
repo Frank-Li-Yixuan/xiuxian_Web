@@ -1,0 +1,7 @@
+﻿{
+    "name":  "npm_test_headless_stage01",
+    "command":  "npm run test:headless:stage01",
+    "exitCode":  0,
+    "start":  "2026-06-09T22:27:39.3070174+08:00",
+    "end":  "2026-06-09T22:27:40.5162933+08:00"
+}

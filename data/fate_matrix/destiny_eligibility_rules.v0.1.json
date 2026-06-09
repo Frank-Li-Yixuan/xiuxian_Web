@@ -1,0 +1,800 @@
+{
+  "version": "0.1",
+  "id": "destiny_eligibility_rules",
+  "note": "天命不是独立抽卡，而是命盘因果的结果。满足 requiredConditions 时为正统成立；不满足但被高权重强行命中时可变异。",
+  "traits": [
+    {
+      "id": "destiny_heaven_jealous_talent",
+      "name": "天妒英才",
+      "archetype": "天才短命",
+      "requiredAny": [
+        {
+          "score": "talentScore",
+          "gte": 85
+        },
+        {
+          "attrs": {
+            "comprehension": 90
+          }
+        },
+        {
+          "attrs": {
+            "inspiration": 90
+          }
+        },
+        {
+          "combined": {
+            "comprehension": 1,
+            "inspiration": 1
+          },
+          "gte": 160
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "lifespan": {
+              "lte": 50
+            }
+          }
+        },
+        {
+          "score": "destinyPressureScore",
+          "gte": 70
+        },
+        {
+          "tags": [
+            "omen:heaven_attention"
+          ]
+        },
+        {
+          "attrs": {
+            "heart": {
+              "lte": 58
+            }
+          }
+        }
+      ],
+      "antiConditions": [
+        {
+          "score": "talentScore",
+          "lte": 55
+        },
+        {
+          "attrs": {
+            "comprehension": {
+              "lte": 50
+            },
+            "inspiration": {
+              "lte": 50
+            }
+          }
+        },
+        {
+          "attrs": {
+            "lifespan": {
+              "gte": 85
+            },
+            "heart": {
+              "gte": 80
+            },
+            "fortune": {
+              "gte": 70
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_false_heaven_burden",
+      "lifeEventBias": [
+        "event:early_wisdom",
+        "event:heaven_attention",
+        "event:illness",
+        "event:blood_cough",
+        "event:forbidden_insight"
+      ],
+      "age18Hooks": [
+        "hook_high_insight_quality",
+        "hook_heaven_attention"
+      ],
+      "reason": "天妒不是泛用天才，而是天赋超出命火承载。"
+    },
+    {
+      "id": "destiny_false_heaven_burden",
+      "name": "妄承天机",
+      "archetype": "错承天机",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:from_heaven_jealous_talent"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:false_omen",
+        "event:misread_heaven",
+        "event:minoritiy_boon_major_cost"
+      ],
+      "reason": "低悟性/低灵感却被天机标记，不是天才，而是灾兆。"
+    },
+    {
+      "id": "destiny_cowardly_supreme",
+      "name": "苟道至尊",
+      "archetype": "避战潜修",
+      "requiredAny": [
+        {
+          "score": "lateBloomScore",
+          "gte": 75
+        },
+        {
+          "attrs": {
+            "heart": 85
+          }
+        },
+        {
+          "attrs": {
+            "lifespan": 85
+          }
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "fortune": {
+              "gte": 55
+            }
+          }
+        },
+        {
+          "tags": [
+            "origin:weak",
+            "origin:remote",
+            "route:seclusion"
+          ]
+        }
+      ],
+      "antiConditions": [
+        {
+          "tags": [
+            "destiny:war_feeds_war",
+            "destiny:killing_intent"
+          ]
+        },
+        {
+          "attrs": {
+            "heart": {
+              "lte": 45
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_hidden_killer",
+      "lifeEventBias": [
+        "event:hide_from_danger",
+        "event:secluded_cave",
+        "event:avoid_fight",
+        "event:long_seclusion"
+      ],
+      "age18Hooks": [
+        "hook_survival_reward",
+        "hook_hidden_shield"
+      ],
+      "reason": "苟道需要心性、寿元和避祸福缘支撑。"
+    },
+    {
+      "id": "destiny_hidden_killer",
+      "name": "隐杀之命",
+      "archetype": "避世杀机",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:cowardly_plus_killing"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:hidden_blade",
+        "event:avoid_until_strike",
+        "event:ambush_training"
+      ],
+      "reason": "苟道与杀伐强冲突时变异，平日藏拙，出手极绝。"
+    },
+    {
+      "id": "destiny_waste_root_reversal",
+      "name": "废灵逆命",
+      "archetype": "失败成长",
+      "requiredAny": [
+        {
+          "score": "rebellionScore",
+          "gte": 70
+        },
+        {
+          "attrs": {
+            "rootBone": {
+              "lte": 35
+            },
+            "heart": {
+              "gte": 65
+            }
+          }
+        },
+        {
+          "tags": [
+            "root:blocked",
+            "root:mixed_unstable"
+          ]
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "fortune": {
+              "lte": 55
+            }
+          }
+        },
+        {
+          "attrs": {
+            "inspiration": {
+              "gte": 60
+            }
+          }
+        },
+        {
+          "tags": [
+            "origin:fallen_cultivator",
+            "item:broken_sword"
+          ]
+        }
+      ],
+      "antiConditions": [
+        {
+          "tags": [
+            "root:heavenly"
+          ]
+        },
+        {
+          "attrs": {
+            "rootBone": {
+              "gte": 85
+            },
+            "comprehension": {
+              "gte": 85
+            },
+            "fortune": {
+              "gte": 75
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_prodigy_under_calamity",
+      "lifeEventBias": [
+        "event:failed_cultivation",
+        "event:mocked_no_immortal_fate",
+        "event:injury_turns_to_mark",
+        "event:break_chain"
+      ],
+      "age18Hooks": [
+        "hook_reversal_point",
+        "hook_failure_reward"
+      ],
+      "reason": "废灵逆命必须有低起点与高韧性。"
+    },
+    {
+      "id": "destiny_prodigy_under_calamity",
+      "name": "天骄遭厄",
+      "archetype": "高资劫压",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:waste_root_high_talent"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:sealed_talent",
+        "event:calamity_suppression",
+        "event:talent_breaks_seal"
+      ],
+      "reason": "高资质却出现废灵逆命时，解释为天资被劫数压制。"
+    },
+    {
+      "id": "destiny_war_feeds_war",
+      "name": "以战养战",
+      "archetype": "战斗修行",
+      "requiredAny": [
+        {
+          "attrs": {
+            "jing": {
+              "gte": 60
+            },
+            "qi": {
+              "gte": 55
+            }
+          }
+        },
+        {
+          "tags": [
+            "route:martial",
+            "origin:hunter",
+            "root:metal",
+            "root:thunder"
+          ]
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "heart": {
+              "gte": 45
+            }
+          }
+        },
+        {
+          "tags": [
+            "destiny:killing",
+            "item:weapon"
+          ]
+        }
+      ],
+      "antiConditions": [
+        {
+          "tags": [
+            "destiny:cowardly_supreme"
+          ]
+        },
+        {
+          "attrs": {
+            "jing": {
+              "lte": 35
+            },
+            "heart": {
+              "gte": 90
+            },
+            "lifespan": {
+              "gte": 85
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_forced_to_fight",
+      "lifeEventBias": [
+        "event:first_kill",
+        "event:defend_village",
+        "event:training_fight",
+        "event:blood_and_qi"
+      ],
+      "age18Hooks": [
+        "hook_combat_cultivation"
+      ],
+      "reason": "以战养战需要能承受冲突的精气底子。"
+    },
+    {
+      "id": "destiny_forced_to_fight",
+      "name": "被迫入杀",
+      "archetype": "非自愿战修",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:war_low_martial"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:forced_defense",
+        "event:trauma_after_fight",
+        "event:killing_fear"
+      ],
+      "reason": "低战斗底子却出现战斗命格时，解释为外劫逼迫。"
+    },
+    {
+      "id": "destiny_thunder_affinity",
+      "name": "劫雷亲和",
+      "archetype": "雷劫机缘",
+      "requiredAny": [
+        {
+          "tags": [
+            "root:thunder"
+          ]
+        },
+        {
+          "attrs": {
+            "inspiration": 80
+          }
+        },
+        {
+          "tags": [
+            "hidden:ancient_thunder_bias"
+          ]
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "qi": {
+              "gte": 55
+            }
+          }
+        },
+        {
+          "attrs": {
+            "fortune": {
+              "gte": 55
+            }
+          }
+        },
+        {
+          "tags": [
+            "destiny:heaven_attention"
+          ]
+        }
+      ],
+      "antiConditions": [
+        {
+          "attrs": {
+            "heart": {
+              "lte": 25
+            },
+            "lifespan": {
+              "lte": 25
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_thunder_calamity_mark",
+      "lifeEventBias": [
+        "event:thunderstorm",
+        "event:bone_pain_in_rain",
+        "event:heavenly_roar"
+      ],
+      "age18Hooks": [
+        "hook_thunder_pool",
+        "hook_tribulation_attention"
+      ],
+      "reason": "雷亲和既是机缘也是劫数。"
+    },
+    {
+      "id": "destiny_thunder_calamity_mark",
+      "name": "雷厄印",
+      "archetype": "雷劫灾印",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:thunder_unstable"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:thunder_fear",
+        "event:lightning_wound",
+        "event:omen_bad_thunder"
+      ],
+      "reason": "雷缘不足以亲和，只成灾印。"
+    },
+    {
+      "id": "destiny_alchemy_prodigy",
+      "name": "丹道奇才",
+      "archetype": "药性火候",
+      "requiredAny": [
+        {
+          "attrs": {
+            "comprehension": 65,
+            "qi": 55
+          }
+        },
+        {
+          "tags": [
+            "origin:medicine_shop"
+          ]
+        },
+        {
+          "tags": [
+            "root:wood",
+            "root:fire"
+          ]
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "heart": {
+              "gte": 50
+            }
+          }
+        },
+        {
+          "tags": [
+            "item:copper_furnace",
+            "hidden:alchemy_sage_bias"
+          ]
+        }
+      ],
+      "antiConditions": [
+        {
+          "tags": [
+            "destiny:artifact_blessing"
+          ]
+        },
+        {
+          "attrs": {
+            "heart": {
+              "lte": 25
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_reckless_alchemy",
+      "lifeEventBias": [
+        "event:herbs",
+        "event:furnace_fire",
+        "event:medicine_smell",
+        "event:alchemy_dream"
+      ],
+      "age18Hooks": [
+        "hook_initial_pills",
+        "hook_alchemy_room_bonus"
+      ],
+      "reason": "丹道需要悟性、气机、药性环境和心性。"
+    },
+    {
+      "id": "destiny_reckless_alchemy",
+      "name": "躁火炼药",
+      "archetype": "危险丹修",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:alchemy_low_heart"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:furnace_accident",
+        "event:pill_toxin",
+        "event:dangerous_fire"
+      ],
+      "reason": "丹道机缘与低心性相冲，转为高风险火候。"
+    },
+    {
+      "id": "destiny_artifact_blessing",
+      "name": "器灵之眷",
+      "archetype": "本命器缘",
+      "requiredAny": [
+        {
+          "tags": [
+            "item:weapon",
+            "item:jade_amulet",
+            "origin:fallen_cultivator"
+          ]
+        },
+        {
+          "attrs": {
+            "shen": 65
+          }
+        },
+        {
+          "attrs": {
+            "inspiration": 70
+          }
+        }
+      ],
+      "supportAny": [
+        {
+          "tags": [
+            "root:metal",
+            "root:earth"
+          ]
+        },
+        {
+          "attrs": {
+            "heart": {
+              "gte": 45
+            }
+          }
+        }
+      ],
+      "antiConditions": [
+        {
+          "tags": [
+            "destiny:alchemy_prodigy"
+          ]
+        },
+        {
+          "attrs": {
+            "qi": {
+              "lte": 25
+            },
+            "shen": {
+              "lte": 25
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_artifact_rejection",
+      "lifeEventBias": [
+        "event:old_object_warm",
+        "event:sword_hum",
+        "event:jade_light"
+      ],
+      "age18Hooks": [
+        "hook_artifact_resonance"
+      ],
+      "reason": "器灵之眷需要器物因果与神识/灵感感应。"
+    },
+    {
+      "id": "destiny_artifact_rejection",
+      "name": "法宝排异",
+      "archetype": "器缘反噬",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:artifact_low_resonance"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:artifact_cold",
+        "event:item_refuses_qi",
+        "event:broken_resonance"
+      ],
+      "reason": "有器缘因果但神识气机不足，变成排异。"
+    },
+    {
+      "id": "destiny_demon_seed",
+      "name": "魔心暗种",
+      "archetype": "心魔禁忌",
+      "requiredAny": [
+        {
+          "attrs": {
+            "shen": {
+              "gte": 65
+            },
+            "heart": {
+              "lte": 55
+            }
+          }
+        },
+        {
+          "tags": [
+            "origin:gravekeeper",
+            "place:deserted_temple"
+          ]
+        },
+        {
+          "tags": [
+            "hidden:demon_mark_bias"
+          ]
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "inspiration": {
+              "gte": 70
+            }
+          }
+        },
+        {
+          "tags": [
+            "item:black_bone_flute"
+          ]
+        }
+      ],
+      "antiConditions": [
+        {
+          "tags": [
+            "destiny:clean_glass_heart"
+          ]
+        },
+        {
+          "attrs": {
+            "heart": {
+              "gte": 90
+            },
+            "merit": {
+              "gte": 30
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_shadowed_lotus",
+      "lifeEventBias": [
+        "event:black_shadow",
+        "event:forbidden_whisper",
+        "event:nightmare",
+        "event:temptation"
+      ],
+      "age18Hooks": [
+        "hook_heart_demon_seed"
+      ],
+      "reason": "魔心需要高感应与心性裂缝。"
+    },
+    {
+      "id": "destiny_shadowed_lotus",
+      "name": "净莲藏影",
+      "archetype": "清净压魔",
+      "isMutation": true,
+      "requiredAny": [
+        {
+          "tags": [
+            "mutation:demon_plus_clean"
+          ]
+        }
+      ],
+      "lifeEventBias": [
+        "event:shadow_under_calm",
+        "event:purification_test",
+        "event:lotus_dream"
+      ],
+      "reason": "清净与魔心强冲突时，不简单互斥，可变为压魔之命。"
+    },
+    {
+      "id": "destiny_clean_glass_heart",
+      "name": "清净琉璃心",
+      "archetype": "净心抗魔",
+      "requiredAny": [
+        {
+          "attrs": {
+            "heart": {
+              "gte": 82
+            }
+          }
+        },
+        {
+          "score": "stabilityScore",
+          "gte": 78
+        },
+        {
+          "tags": [
+            "route:seclusion",
+            "origin:daoist_temple"
+          ]
+        }
+      ],
+      "supportAny": [
+        {
+          "attrs": {
+            "shen": {
+              "gte": 55
+            }
+          }
+        },
+        {
+          "tags": [
+            "root:water",
+            "root:yin"
+          ]
+        }
+      ],
+      "antiConditions": [
+        {
+          "tags": [
+            "destiny:demon_seed"
+          ]
+        },
+        {
+          "attrs": {
+            "karma": {
+              "gte": 50
+            }
+          }
+        }
+      ],
+      "ifContradictedMutateTo": "destiny_shadowed_lotus",
+      "lifeEventBias": [
+        "event:clean_mind",
+        "event:meditation",
+        "event:resist_temptation"
+      ],
+      "age18Hooks": [
+        "hook_demon_resist"
+      ],
+      "reason": "清净琉璃心是高心性与稳定命盘的表现。"
+    }
+  ]
+}

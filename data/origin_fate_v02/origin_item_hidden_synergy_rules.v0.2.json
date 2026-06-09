@@ -1,0 +1,93 @@
+{
+  "version": "0.2",
+  "rules": [
+    {
+      "id": "synergy_apothecary_furnace_dan_saint",
+      "originId": "origin_apothecary_apprentice",
+      "itemId": "item_apothecary_bronze_furnace",
+      "hiddenFateId": "hidden_alchemy_saint_bone",
+      "effects": [
+        {
+          "type": "progressBonus",
+          "target": "hidden_alchemy_saint_bone",
+          "value": 15
+        },
+        {
+          "type": "itemAffinityBonus",
+          "target": "item_apothecary_bronze_furnace",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "synergy_fallen_lineage_sword",
+      "originId": "origin_fallen_cultivator_descendant",
+      "itemId": "item_wooden_sword",
+      "hiddenFateId": "hidden_past_life_sword_soul",
+      "effects": [
+        {
+          "type": "progressBonus",
+          "target": "hidden_past_life_sword_soul",
+          "value": 18
+        },
+        {
+          "type": "unlockThread",
+          "target": "thread_wooden_sword_humming"
+        }
+      ]
+    },
+    {
+      "id": "synergy_grave_bone_flute_yin",
+      "originId": "origin_grave_keeper_child",
+      "itemId": "item_black_bone_flute",
+      "hiddenFateId": "hidden_taiyin_remnant_vein",
+      "effects": [
+        {
+          "type": "progressBonus",
+          "target": "hidden_taiyin_remnant_vein",
+          "value": 14
+        },
+        {
+          "type": "riskBonus",
+          "target": "heart_demon",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "id": "synergy_mountain_orphan_stone_system",
+      "originId": "origin_mountain_orphan",
+      "itemId": "item_childhood_stone_talisman",
+      "hiddenFateId": "hidden_system_resonance",
+      "effects": [
+        {
+          "type": "progressBonus",
+          "target": "hidden_system_resonance",
+          "value": 16
+        },
+        {
+          "type": "age18Hook",
+          "target": "hook_trial_mark_fragment"
+        }
+      ]
+    },
+    {
+      "id": "synergy_temple_jade_merit",
+      "originId": "origin_temple_servant",
+      "itemId": "item_jade_amulet",
+      "hiddenFateId": "hidden_merit_seed",
+      "effects": [
+        {
+          "type": "progressBonus",
+          "target": "hidden_merit_seed",
+          "value": 12
+        },
+        {
+          "type": "itemAffinityBonus",
+          "target": "item_jade_amulet",
+          "value": 12
+        }
+      ]
+    }
+  ]
+}

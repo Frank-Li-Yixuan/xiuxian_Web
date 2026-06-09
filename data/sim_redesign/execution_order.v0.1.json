@@ -1,0 +1,29 @@
+{
+  "version": "0.1",
+  "recommendedOrder": [
+    "SIM-C001",
+    "SIM-C002",
+    "SIM-C003",
+    "SIM-C004",
+    "SIM-C005",
+    "SIM-C006",
+    "SIM-C007",
+    "SIM-C008",
+    "SIM-C009",
+    "SIM-C010",
+    "SIM-C011"
+  ],
+  "minimalPlayableOrder": [
+    "SIM-C001",
+    "SIM-C002",
+    "SIM-C003",
+    "SIM-C004",
+    "SIM-C005",
+    "SIM-C006",
+    "SIM-C007",
+    "SIM-C008",
+    "SIM-C010",
+    "SIM-C011"
+  ],
+  "deprecated": ["CC-C001", "CC-C002", "CC-C003", "CC-C004", "CC-C005", "CC-C006"]
+}

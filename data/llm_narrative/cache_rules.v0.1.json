@@ -1,0 +1,19 @@
+{
+  "version": "0.1",
+  "cacheKeyParts": [
+    "profileId",
+    "characterId",
+    "seed",
+    "ageMonth",
+    "taskType",
+    "eventId",
+    "choiceId",
+    "outcomeId",
+    "templateVersion",
+    "locale"
+  ],
+  "storage": "profile.narrativeCache",
+  "llmDisabledBehavior": "fallback_only",
+  "regenerateRequiresDevFlag": true,
+  "maxEntriesPerProfile": 1000
+}

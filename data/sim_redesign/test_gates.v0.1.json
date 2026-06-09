@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "testCommands": [
+    "npm run typecheck",
+    "npm test",
+    "npm run build",
+    "npm run validate:data",
+    "npm run check:forbidden"
+  ],
+  "semanticGates": [
+    "hidden trueName never leaks before reveal",
+    "low comprehension + low inspiration cannot show original Heavenly Jealous Talent",
+    "same seed reproduces same life timeline",
+    "major choice derives from previous six months",
+    "interlude frequency budget is enforced",
+    "LLM disabled path works"
+  ]
+}

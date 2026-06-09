@@ -1,0 +1,202 @@
+﻿# rg -n generated PNG|generated image|GeneratedUi|CharacterPortraitFrame|CharacterCreationScreen|LifeSimulationScreen src docs codex_prompts tests
+codex_prompts\00_GLOBAL_PREFIX_SIM_REDESIGN.md:5:- 当前 UI 路线是场景化 DOM / React + 本地 UI System + CSS/Tailwind tokens + Motion。不要恢复 generated PNG 控件拼装方案。
+codex_prompts\00_GLOBAL_PREFIX_SIM_REDESIGN.md:6:- generated image 只用于背景、图标、插画、VFX 纹理、角色/物体素材，不作为按钮、弹窗、命格卡、存档卡的主要交互控件。
+codex_prompts\00_GLOBAL_PREFIX_AFTER_BAS.md:4:- 不再使用 generated PNG 作为按钮、面板、存档卡、弹窗、命格卡等交互控件。
+codex_prompts\00_GLOBAL_PREFIX_AFTER_BAS.md:6:- generated image 只可用于背景、插画、图标、法宝、人物、敌人、VFX 纹理、特效贴图，不可作为主要交互控件。
+tests\scripts\quality-character-creation-screenshots.test.ts:3:interface CharacterCreationScreenshotModule {
+tests\scripts\quality-character-creation-screenshots.test.ts:10:    readonly screenshots: readonly CharacterCreationScreenshot[];
+tests\scripts\quality-character-creation-screenshots.test.ts:24:interface CharacterCreationScreenshot {
+tests\scripts\quality-character-creation-screenshots.test.ts:43:  readonly screenshots: readonly CharacterCreationScreenshot[];
+tests\scripts\quality-character-creation-screenshots.test.ts:52:let qualityGate: CharacterCreationScreenshotModule;
+tests\scripts\quality-character-creation-screenshots.test.ts:56:  qualityGate = (await import("../../scripts/quality-character-creation-screenshots.mjs")) as CharacterCreationScreenshotModule;
+codex_prompts\BAS-C001_asset_policy_manifest.md:13:- 不使用 generated PNG 控件方案。
+codex_prompts\CC-C002_ui_asset_registry.md:2:> Do not execute this prompt directly. Reason: it creates generated PNG UI asset registries for character-creation controls, which conflicts with the current DOM/React + local UI System route.
+codex_prompts\CC-C001_data_types_generator.md:46:- 不要实现 CharacterCreationScreen。
+codex_prompts\DEM-C006_character_creation_integration.md:5:不要恢复旧 CC 页面，不要使用 generated PNG 控件。
+codex_prompts\CC-C004_character_creation_screen_layout.md:5:# CC-C004：CharacterCreationScreen 静态布局
+codex_prompts\CC-C004_character_creation_screen_layout.md:11:1. 创建 `src/app/screens/CharacterCreationScreen.ts`。
+codex_prompts\CC-C006_app_routing_integration.md:7:目标：把 CharacterCreationScreen 接入新游戏主流程。
+codex_prompts\CC-C006_app_routing_integration.md:15:  → CharacterCreationScreen
+codex_prompts\CC-C006_app_routing_integration.md:16:  → LifeSimulationScreen
+codex_prompts\CC-C006_app_routing_integration.md:32:3. 如果 profileStage = character_creation，进入 CharacterCreationScreen。
+codex_prompts\CC-C006_app_routing_integration.md:33:4. 如果 profileStage = life_simulation，进入 LifeSimulationScreen。
+codex_prompts\CC-C003_dom_components.md:20:src/app/components/CharacterPortraitFrame.ts
+codex_prompts\CC-C003_dom_components.md:36:- 不要实现完整 CharacterCreationScreen。
+codex_prompts\CC-C005_interactions_profile_save.md:25:   - 路由到 LifeSimulationScreen placeholder。
+tests\assets\ui-asset-registry.test.ts:108:    const source = readFileSync(join(process.cwd(), "src/app/screens/CharacterCreationScreen.tsx"), "utf8");
+docs\codex_prompt_inventory_v0.1.md:18:- Do not restore generated PNG controls for buttons, panels, destiny cards, save cards, or modal UI.
+docs\codex_prompt_inventory_v0.1.md:53:| `codex_prompts/CC-C002_ui_asset_registry.md` | Creates generated PNG UI asset registry. | CCUI2 baseline, then `MIG-C003` / `SIM-C008`. |
+docs\codex_prompt_inventory_v0.1.md:68:| `LM-C006_persistence_resume.md` | Resumes old `LifeSimulationScreen` state. | `MIG-C008` / `SIM-C008`. |
+docs\codex_prompt_inventory_v0.1.md:80:| `MLC-C005_ui_integration_life_sim.md` | Direct old UI integration into `LifeSimulationScreen`. | `MIG-C005` + `MIG-C008`. |
+tests\assets\generated-ui-assets.test.ts:9:interface GeneratedUiManifest {
+tests\assets\generated-ui-assets.test.ts:12:  readonly assets: Readonly<Record<string, GeneratedUiAssetEntry>>;
+tests\assets\generated-ui-assets.test.ts:15:interface GeneratedUiAssetEntry {
+tests\assets\generated-ui-assets.test.ts:110:function readManifest(): GeneratedUiManifest {
+tests\assets\generated-ui-assets.test.ts:111:  return JSON.parse(readFileSync(MANIFEST_PATH, "utf8")) as GeneratedUiManifest;
+docs\codex_execution_order_v0.1.md:41:不恢复 generated PNG 控件方案。
+docs\character_creation_implementation_v0.1.md:31:存档位 → 创建角色页面 → 确认此生 → LifeSimulationScreen 占位/入口
+docs\character_creation_implementation_v0.1.md:477:src/app/screens/CharacterCreationScreen.ts
+docs\character_creation_implementation_v0.1.md:478:src/app/screens/LifeSimulationScreen.ts
+docs\character_creation_implementation_v0.1.md:491:### 10.1 CharacterCreationScreen
+docs\character_creation_implementation_v0.1.md:499:- 路由到 LifeSimulationScreen。
+docs\character_creation_implementation_v0.1.md:603:  → CharacterCreationScreen(slotId)
+docs\character_creation_implementation_v0.1.md:641:6. 路由到 LifeSimulationScreen。
+docs\character_creation_implementation_v0.1.md:695:1. New Game → Save Slot → CharacterCreationScreen。
+docs\character_creation_implementation_v0.1.md:696:2. CharacterCreationScreen 渲染命格卡。
+docs\character_creation_implementation_v0.1.md:699:5. 点击 confirm 后进入 LifeSimulationScreen。
+docs\character_creation_implementation_v0.1.md:710:5. 确认此生后的 LifeSimulationScreen 入口。
+docs\deprecated_prompt_policy_v0.1.md:14:可能恢复 generated PNG 控件
+docs\deprecated_prompt_policy_v0.1.md:34:不使用 generated PNG 控件；UI 采用 DOM / React + 本地 ui-system；不恢复旧角色创建布局；除非任务明确要求，不修改 src/sim/**。
+docs\deprecated_prompt_policy_v0.1.md:63:- 是否使用 generated PNG 控件
+docs\current_prompt_status_and_deprecation_v0.1.md:30:2. 可能恢复 generated PNG 控件方案。
+codex_prompts\E2E-SIM-001_life_sim_redesign_full_flow.md:13:  → LifeSimulationScreen
+codex_prompts\LFP-C001_state_machine_and_registry.md:9:- 不恢复 generated PNG 控件方案。
+codex_prompts\LFP-C002_ui_shell_and_route.md:1:# LFP-C002：LifeSimulationScreen UI Shell and Route
+codex_prompts\LFP-C002_ui_shell_and_route.md:3:目标：实现 LifeSimulationScreen 的 DOM 页面骨架，让创建角色确认后有可进入的人生模拟页面。
+codex_prompts\LFP-C002_ui_shell_and_route.md:11:- 使用本地 `src/app/ui-system/`，不要 generated PNG 控件。
+codex_prompts\LFP-C002_ui_shell_and_route.md:14:1. 新增/重做 LifeSimulationScreen。
+codex_prompts\LFP-C002_ui_shell_and_route.md:22:- 从角色创建确认后能进入 LifeSimulationScreen。
+codex_prompts\LFP-C004_major_choice_experience.md:3:目标：把半年重大选择 v0.2 接到 LifeSimulationScreen。
+docs\integration_with_major_choices_age18_v0.1.md:182:  → 恢复 LifeSimulationScreen
+codex_prompts\LFP-C008_llm_narrative_optional_integration.md:13:1. LifeSimulationScreen 的月度日志、选择引入、阶段总结调用 NarrativeService。
+tests\app\main-menu-css.test.ts:28:  it("keeps generated image buttons transparent and contained across states", () => {
+docs\integration_with_interludes_life_sim_age18_v0.1.md:111:LifeSimulationScreen 需要增加：
+tests\app\generated-ui-pages.test.ts:8:import type { GeneratedUiAssetId, GeneratedUiAssetRegistry } from "../../src/assets/generatedUiAssets";
+tests\app\generated-ui-pages.test.ts:10:import { CharacterCreationScreen } from "../../src/app/screens/CharacterCreationScreen";
+tests\app\generated-ui-pages.test.ts:11:import { LifeSimulationScreen } from "../../src/app/screens/LifeSimulationScreen";
+tests\app\generated-ui-pages.test.ts:29:        generatedUiAssets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:59:        generatedUiAssets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:73:  it("renders CharacterCreationScreen as the CCUI2 DOM fate-altar skeleton", () => {
+tests\app\generated-ui-pages.test.ts:74:    const markup = renderToStaticMarkup(createElement(CharacterCreationScreen, { assets: loadGeneratedUiRegistry() }));
+tests\app\generated-ui-pages.test.ts:123:      createElement(CharacterCreationScreen, {
+tests\app\generated-ui-pages.test.ts:124:        assets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:130:    const source = readFileSync(join(process.cwd(), "src/app/screens/CharacterCreationScreen.tsx"), "utf8");
+tests\app\generated-ui-pages.test.ts:147:      createElement(CharacterCreationScreen, {
+tests\app\generated-ui-pages.test.ts:148:        assets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:155:      createElement(CharacterCreationScreen, {
+tests\app\generated-ui-pages.test.ts:156:        assets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:163:      createElement(CharacterCreationScreen, {
+tests\app\generated-ui-pages.test.ts:164:        assets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:181:  it("renders LifeSimulationScreen with timeline, log, event card, and choice buttons", () => {
+tests\app\generated-ui-pages.test.ts:182:    const markup = renderToStaticMarkup(createElement(LifeSimulationScreen, { assets: loadGeneratedUiRegistry() }));
+tests\app\generated-ui-pages.test.ts:191:  it("renders LifeSimulationScreen with confirmed character and initialized life state", () => {
+tests\app\generated-ui-pages.test.ts:201:      createElement(LifeSimulationScreen, {
+tests\app\generated-ui-pages.test.ts:202:        assets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:221:        generatedUiAssets: loadGeneratedUiRegistry(),
+tests\app\generated-ui-pages.test.ts:234:function loadGeneratedUiRegistry(): GeneratedUiAssetRegistry {
+tests\app\generated-ui-pages.test.ts:235:  return new AssetRegistry<GeneratedUiAssetId>(
+docs\life_sim_first_playable_experience_v0.1.md:202:2. LifeSimulationScreen DOM 页面
+docs\life_sim_first_playable_experience_v0.1.md:234:### 4.1 LifeSimulationScreen 布局
+tests\app\character-creation-origin-fate-ui.test.ts:8:import type { GeneratedUiAssetId, GeneratedUiAssetRegistry } from "../../src/assets/generatedUiAssets";
+tests\app\character-creation-origin-fate-ui.test.ts:9:import { CharacterCreationScreen } from "../../src/app/screens/CharacterCreationScreen";
+tests\app\character-creation-origin-fate-ui.test.ts:14:describe("CharacterCreationScreen origin fate UI", () => {
+tests\app\character-creation-origin-fate-ui.test.ts:22:      createElement(CharacterCreationScreen, {
+tests\app\character-creation-origin-fate-ui.test.ts:23:        assets: loadGeneratedUiRegistry(),
+tests\app\character-creation-origin-fate-ui.test.ts:50:      createElement(CharacterCreationScreen, {
+tests\app\character-creation-origin-fate-ui.test.ts:51:        assets: loadGeneratedUiRegistry(),
+tests\app\character-creation-origin-fate-ui.test.ts:101:      createElement(CharacterCreationScreen, {
+tests\app\character-creation-origin-fate-ui.test.ts:102:        assets: loadGeneratedUiRegistry(),
+tests\app\character-creation-origin-fate-ui.test.ts:151:    createElement(CharacterCreationScreen, {
+tests\app\character-creation-origin-fate-ui.test.ts:152:      assets: loadGeneratedUiRegistry(),
+tests\app\character-creation-origin-fate-ui.test.ts:160:function loadGeneratedUiRegistry(): GeneratedUiAssetRegistry {
+tests\app\character-creation-origin-fate-ui.test.ts:161:  return new AssetRegistry<GeneratedUiAssetId>(
+docs\prompt_execution_order_v0.1.md:8:当前项目 UI 路线已更新：不再使用 generated PNG 作为按钮、面板、卡牌、弹窗等交互控件。前端控件统一使用 DOM / React + 本地 src/app/ui-system/ + CSS/Tailwind tokens + Motion。图片只用于背景、图标、人物、特效、VFX 纹理。不要恢复旧的 PNG 控件拼装方案。角色创建页面主视觉是黑色打坐小人 + 命盘法阵 + 灵根/天命特效层。除非任务明确要求，不要修改 src/sim/**。
+tests\app\character-creation-dom-components.test.ts:10:import { createCharacterPortraitFrame } from "../../src/app/components/CharacterPortraitFrame";
+tests\app\character-creation-dom-components.test.ts:154:    const frame = createCharacterPortraitFrame({ showSilhouette: true });
+tests\app\character-creation-destiny-ui.test.ts:7:import { CharacterCreationScreen } from "../../src/app/screens/CharacterCreationScreen";
+tests\app\character-creation-destiny-ui.test.ts:9:import type { GeneratedUiAssetId, GeneratedUiAssetRegistry } from "../../src/assets/generatedUiAssets";
+tests\app\character-creation-destiny-ui.test.ts:12:describe("CharacterCreationScreen destiny reroll UI", () => {
+tests\app\character-creation-destiny-ui.test.ts:18:      createElement(CharacterCreationScreen, {
+tests\app\character-creation-destiny-ui.test.ts:19:        assets: loadGeneratedUiRegistry(),
+tests\app\character-creation-destiny-ui.test.ts:24:    const source = readFileSync(join(process.cwd(), "src/app/screens/CharacterCreationScreen.tsx"), "utf8");
+tests\app\character-creation-destiny-ui.test.ts:54:      createElement(CharacterCreationScreen, {
+tests\app\character-creation-destiny-ui.test.ts:55:        assets: loadGeneratedUiRegistry(),
+tests\app\character-creation-destiny-ui.test.ts:78:function loadGeneratedUiRegistry(): GeneratedUiAssetRegistry {
+tests\app\character-creation-destiny-ui.test.ts:79:  return new AssetRegistry<GeneratedUiAssetId>(
+docs\player_flow_pacing_v0.1.md:6:CharacterCreationScreen
+docs\player_flow_pacing_v0.1.md:8:  → LifeSimulationScreen
+codex_prompts\LM-C006_persistence_resume.md:2:> Do not execute this prompt directly. Reason: legacy LM persistence resumes the old LifeSimulationScreen state instead of the LFP/LifeSimulationV02 route.
+codex_prompts\LM-C006_persistence_resume.md:22:   - 如果 profile.stage === "life_simulation"，恢复到 LifeSimulationScreen。
+docs\sim_redesign_total_integration_v0.1.md:151:src/life/playable/              LifeSimulationScreen 状态机
+docs\sim_redesign_total_integration_v0.1.md:163:4. 把 generated PNG 当作按钮/面板/卡牌控件。
+docs\mvp_scope_and_cuts_v0.1.md:6:LifeSimulationScreen
+docs\sim_redesign_integration_codex_route_v0.1.md:34:正式路线不再使用 generated PNG 控件方案。按钮、卡牌、面板、弹窗、存档卡、命格卡全部用 DOM 组件。图片可用于：
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:34:正式路线不再使用 generated PNG 控件方案。按钮、卡牌、面板、弹窗、存档卡、命格卡全部用 DOM 组件。图片可用于：
+codex_prompts\LPI-C006_ui_flow_and_transition.md:26:5. 插曲结束后返回 LifeSimulationScreen。
+docs\ui_ux_spec_v0.1.md:5:LifeSimulationScreen 是“人生推演台”，不是普通日志页。
+docs\testing_acceptance_v0.1.md:6:1. 创建角色确认后进入 LifeSimulationScreen。
+docs\ui_asset_contract_v0.1.md:158:| CharacterCreationScreen | `cc.mainPanel` | DOM |
+docs\target_architecture_v0.1.md:51:  CharacterCreationScreen
+docs\target_architecture_v0.1.md:52:  LifeSimulationScreen
+codex_prompts\LSTG-C001_data_schema_registry.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C002_stage_state_engine.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C003_transition_trigger_engine.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C005_life_sim_interlude_integration.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C004_initiation_node_resolution.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C007_dev_stage_lab.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C008_tests_telemetry.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C006_ui_flow_pacing.md:2:- 不要使用 generated PNG 作为交互控件。
+codex_prompts\LSTG-C006_ui_flow_pacing.md:12:在 LifeSimulationScreen 中显示年龄阶段、修行身份、入道机缘、系统前兆和阶段转化提示。
+codex_prompts\LSTG-C006_ui_flow_pacing.md:22:8. 不使用 generated PNG 控件。
+codex_prompts\MC2-C007_ui_integration.md:3:目标：把半年重大选择 v0.2 接入 LifeSimulationScreen。
+src\assets\generatedUiAssets.ts:64:export type GeneratedUiAssetId = (typeof GENERATED_UI_ASSET_IDS)[keyof typeof GENERATED_UI_ASSET_IDS];
+src\assets\generatedUiAssets.ts:65:export type GeneratedUiAssetRegistry = AssetRegistry<GeneratedUiAssetId>;
+src\assets\generatedUiAssets.ts:67:export function loadGeneratedUiAssets(): Promise<GeneratedUiAssetRegistry> {
+src\assets\generatedUiAssets.ts:68:  return loadAssetRegistry<GeneratedUiAssetId>(GENERATED_UI_ASSET_MANIFEST_URL);
+src\app\MainMenuApp.tsx:3:import { loadGeneratedUiAssets, type GeneratedUiAssetRegistry } from "../assets/generatedUiAssets";
+src\app\MainMenuApp.tsx:14:import { CharacterCreationScreen } from "./screens/CharacterCreationScreen";
+src\app\MainMenuApp.tsx:16:import { LifeSimulationScreen } from "./screens/LifeSimulationScreen";
+src\app\MainMenuApp.tsx:28:  const [generatedUiAssets, setGeneratedUiAssets] = useState<GeneratedUiAssetRegistry | null>(null);
+src\app\MainMenuApp.tsx:40:    Promise.all([loadMainMenuAssets(), loadGeneratedUiAssets()])
+src\app\MainMenuApp.tsx:41:      .then(([loadedAssets, loadedGeneratedUiAssets]) => {
+src\app\MainMenuApp.tsx:44:          setGeneratedUiAssets(loadedGeneratedUiAssets);
+src\app\MainMenuApp.tsx:93:        <CharacterCreationScreen
+src\app\MainMenuApp.tsx:141:        <LifeSimulationScreen
+src\app\components\CharacterPortraitFrame.ts:3:export interface CharacterPortraitFrameOptions {
+src\app\components\CharacterPortraitFrame.ts:8:export function createCharacterPortraitFrame(options: CharacterPortraitFrameOptions = {}): HTMLDivElement {
+src\app\components\GeneratedUi.tsx:3:import { GENERATED_UI_ASSET_IDS, type GeneratedUiAssetId, type GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
+src\app\components\GeneratedUi.tsx:6:  readonly assets: GeneratedUiAssetRegistry;
+src\app\components\GeneratedUi.tsx:7:  readonly assetId: GeneratedUiAssetId;
+src\app\components\GeneratedUi.tsx:14:  readonly assets: GeneratedUiAssetRegistry;
+src\app\components\GeneratedUi.tsx:15:  readonly normalAssetId: GeneratedUiAssetId;
+src\app\components\GeneratedUi.tsx:16:  readonly hoverAssetId?: GeneratedUiAssetId;
+src\app\components\GeneratedUi.tsx:17:  readonly pressedAssetId?: GeneratedUiAssetId;
+src\app\components\GeneratedUi.tsx:18:  readonly disabledAssetId?: GeneratedUiAssetId;
+src\app\components\GeneratedUi.tsx:19:  readonly selectedAssetId?: GeneratedUiAssetId;
+src\app\components\GeneratedUi.tsx:77:  readonly assets: GeneratedUiAssetRegistry;
+src\app\components\GeneratedUi.tsx:96:function singleAssetStyle(assets: GeneratedUiAssetRegistry, assetId: GeneratedUiAssetId): CSSProperties {
+src\app\components\GeneratedUi.tsx:110:  readonly assets: GeneratedUiAssetRegistry;
+src\app\components\GeneratedUi.tsx:111:  readonly normalAssetId: GeneratedUiAssetId;
+src\app\components\GeneratedUi.tsx:112:  readonly hoverAssetId: GeneratedUiAssetId | undefined;
+src\app\components\GeneratedUi.tsx:113:  readonly pressedAssetId: GeneratedUiAssetId | undefined;
+src\app\components\GeneratedUi.tsx:114:  readonly disabledAssetId: GeneratedUiAssetId | undefined;
+src\app\components\GeneratedUi.tsx:115:  readonly selectedAssetId: GeneratedUiAssetId | undefined;
+codex_prompts\MIG-C008_life_sim_playable_ui_and_persistence.md:3:目标：实现首版可玩 LifeSimulationScreen，使用 LFP 规格。
+codex_prompts\MIG-C008_life_sim_playable_ui_and_persistence.md:7:1. LifeSimulationScreen UI：
+src\app\screens\CharacterCreationFateAltarState.ts:1:import { GENERATED_UI_ASSET_IDS, type GeneratedUiAssetId } from "../../assets/generatedUiAssets";
+src\app\screens\CharacterCreationFateAltarState.ts:12:const ROOT_AURA_BY_ELEMENT: Readonly<Record<string, GeneratedUiAssetId>> = {
+src\app\screens\CharacterCreationFateAltarState.ts:22:export function getRootAuraAssetId(root: SpiritualRootState): GeneratedUiAssetId {
+codex_prompts\MLC-C005_ui_integration_life_sim.md:2:> Do not execute this prompt directly. Reason: legacy MLC directly integrates old half-year choices into LifeSimulationScreen instead of the current LFP/LifeSimulationV02 route.
+codex_prompts\MLC-C005_ui_integration_life_sim.md:7:目标：LifeSimulationScreen 每 6 个月暂停并显示重大选择。
+src\app\screens\CharacterCreationScreen.tsx:21:export interface CharacterCreationScreenProps {
+src\app\screens\CharacterCreationScreen.tsx:48:export function CharacterCreationScreen({
+src\app\screens\CharacterCreationScreen.tsx:60:}: CharacterCreationScreenProps): ReactElement {
+src\app\screens\LifeSimulationScreen.tsx:3:import { GENERATED_UI_ASSET_IDS, type GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
+src\app\screens\LifeSimulationScreen.tsx:6:import { GeneratedFrame, GeneratedImageButton, GeneratedPanel } from "../components/GeneratedUi";
+src\app\screens\LifeSimulationScreen.tsx:8:export interface LifeSimulationScreenProps {
+src\app\screens\LifeSimulationScreen.tsx:9:  readonly assets: GeneratedUiAssetRegistry;
+src\app\screens\LifeSimulationScreen.tsx:18:export function LifeSimulationScreen({ assets, lifeSimulationState, onChoice, profile }: LifeSimulationScreenProps): ReactElement {
+codex_prompts\OAG-C004_character_creation_integration.md:28:5. UI 只使用 DOM/CSS，不依赖 generated PNG 控件。
+codex_prompts\README_EXECUTION_ORDER.md:46:- CC-C may restore old generated PNG control or portrait-frame character-creation assumptions.
+src\app\screens\SaveSlotScreen.tsx:3:import type { GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
+src\app\screens\SaveSlotScreen.tsx:12:  readonly generatedUiAssets: GeneratedUiAssetRegistry;
+src\app\screens\SettingsScreen.tsx:3:import type { GeneratedUiAssetRegistry } from "../../assets/generatedUiAssets";
+src\app\screens\SettingsScreen.tsx:5:import { GeneratedCloseButton } from "../components/GeneratedUi";
+src\app\screens\SettingsScreen.tsx:11:  readonly generatedUiAssets: GeneratedUiAssetRegistry;
+codex_prompts\SIM-C002_data_registry_unification.md:12:- 不引入 generated PNG 控件方案。
+codex_prompts\SIM-C003_nine_palace_destiny_upgrade.md:28:- 不使用 generated PNG 控件。
+codex_prompts\SIM-C008_life_playable_ui_and_persistence.md:18:1. 重做 LifeSimulationScreen。
+codex_prompts\SIM-C008_life_playable_ui_and_persistence.md:28:- 创建角色确认后进入 LifeSimulationScreen。
+codex_prompts\SIM-C008_life_playable_ui_flow.md:5:实现可玩的 LifeSimulationScreen。
+codex_prompts\SIM-C008_life_playable_ui_flow.md:9:1. 进入 LifeSimulationScreen 后初始化 LifeSimulationPlayableState。
+codex_prompts\SIM-C011_e2e_rc_gate.md:52:不使用 generated PNG 控件

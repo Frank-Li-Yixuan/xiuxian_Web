@@ -1,0 +1,25 @@
+flowchart TD
+  W[Worldbuilding\n凡域边地] --> NP[Nine Palace\n九宫命盘]
+  NP --> DEM[Destiny Eligibility\n天命成立/变异]
+  NP --> ROOT[Spiritual Root Support\n灵根支撑]
+  DEM --> CC[Character Creation ViewModel\n推演天命]
+  ROOT --> CC
+  HFO[Origin/Fate/Items v0.2\n身世隐藏随身物] --> CC
+  HFO --> LST[Life Storylines\n人生主线]
+  DEM --> LST
+  NP --> LST
+  LST --> ME2[Monthly Events v0.2\n月度事件]
+  LST --> MC2[Major Choices v0.2\n半年选择]
+  ME2 --> MC2
+  LPI[Playable Interludes\n玩法插曲] --> MC2
+  MC2 --> LPI
+  LSTG[Stage Transition\n阶段转化] --> ME2
+  LSTG --> MC2
+  LPI --> LSTG
+  LLM[LLM Narrative\n叙事增强] --> LFP[Life First Playable\n人生模拟首版]
+  ME2 --> LFP
+  MC2 --> LFP
+  LSTG --> LFP
+  LFP --> ADULT[Adult Node\n成年节点]
+  ADULT --> TRIAL[Trial Modes\n域外/割草/DBG/棋局]
+  ADULT --> DONGFU[Dongfu\n洞府]

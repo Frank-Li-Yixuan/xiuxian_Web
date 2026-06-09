@@ -1,0 +1,4318 @@
+{
+  "version": "0.2",
+  "events": [
+    {
+      "id": "infant_thunder_birth_cry",
+      "title": "雷雨夜啼",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "hidden_omen",
+      "tier": "omen",
+      "description": "你出生那夜雷雨大作，屋瓦震响，啼哭声却像与雷声相和。",
+      "baseWeight": 24,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "thunder",
+        "birth_omen",
+        "heaven_attention"
+      ],
+      "storylineIds": [
+        "system_omen",
+        "mountain_disaster"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "ancient_thunder",
+          "delta": 3
+        }
+      ],
+      "hooks": [
+        "hook_thunder_birth"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_silent_gaze",
+      "title": "静默凝望",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "dream_spirit",
+      "tier": "omen",
+      "description": "你常盯着屋梁阴影发怔，像在看旁人看不见的东西。",
+      "baseWeight": 30,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "yin",
+        "spirit",
+        "dream"
+      ],
+      "storylineIds": [
+        "yin_dream_soul"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "taiyin",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_child_spirit_gaze"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_weak_pulse",
+      "title": "脉象微弱",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "body_health",
+      "tier": "pressure",
+      "description": "村中老医替你把脉，叹你命火细弱，却又说脉中有一缕奇气不散。",
+      "baseWeight": 35,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "illness",
+        "lifespan_low"
+      ],
+      "storylineIds": [],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "jing",
+          "delta": -1
+        },
+        {
+          "aptitude": "lifespan",
+          "delta": -1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "flag": "fragile_life_flame",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_weak_life_flame"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_mother_lullaby",
+      "title": "母亲夜歌",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "family_bond",
+      "tier": "breath",
+      "description": "母亲抱你在灯下轻哼旧曲，那曲调似从更古老的年岁传来。",
+      "baseWeight": 45,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "family",
+        "heart"
+      ],
+      "storylineIds": [],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_family_warmth"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_jade_warm",
+      "title": "旧玉微温",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "origin_clue",
+      "tier": "omen",
+      "description": "襁褓中的旧玉忽然微温，家人只当是炉火映照。",
+      "baseWeight": 28,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "old_jade",
+        "carried_item",
+        "origin"
+      ],
+      "storylineIds": [
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "ancestral_jade_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "jade_amulet",
+          "delta": 4
+        }
+      ],
+      "hooks": [
+        "hook_old_jade_warm"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_dream_furnace_smoke",
+      "title": "梦中炉烟",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "hidden_omen",
+      "tier": "omen",
+      "description": "你睡梦中吐出一缕淡淡药香，转瞬便散。",
+      "baseWeight": 24,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "alchemy",
+        "dream",
+        "furnace"
+      ],
+      "storylineIds": [
+        "alchemy_path"
+      ],
+      "threadIds": [
+        "furnace_dream_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "alchemy_sage",
+          "delta": 3
+        }
+      ],
+      "hooks": [
+        "hook_furnace_dream"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_bone_heat",
+      "title": "骨节微热",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "hidden_omen",
+      "tier": "omen",
+      "description": "阴雨将至时，你的骨节微微发热，哭声也比平日尖细。",
+      "baseWeight": 20,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "dragon_bone",
+        "body_omen"
+      ],
+      "storylineIds": [
+        "hunter_martial"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "jing",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "dragon_bone",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_bone_heat"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_ancestral_smoke",
+      "title": "祖坟青烟",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "origin_clue",
+      "tier": "omen",
+      "description": "祖坟坡上无风起烟，父亲沉默良久，没再提起此事。",
+      "baseWeight": 22,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "ancestor",
+        "grave",
+        "origin"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "yin_dream_soul"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "originFateTag": "ancestor_omen",
+          "delta": 3
+        }
+      ],
+      "hooks": [
+        "hook_ancestor_smoke"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_fever_after_words",
+      "title": "古字高烧",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "destiny_manifest",
+      "tier": "omen",
+      "description": "你未满周岁，却在梦中咿呀出几个不像童音的古字，随后高烧一夜。",
+      "baseWeight": 18,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "early_wisdom",
+        "heaven_jealous"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "system_omen"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 1
+        },
+        {
+          "aptitude": "lifespan",
+          "delta": -1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "destinyTag": "heaven_jealous_signal",
+          "delta": 4
+        }
+      ],
+      "hooks": [
+        "hook_early_wisdom_fever"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_hidden_coin_ring",
+      "title": "铜钱轻响",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "origin_clue",
+      "tier": "breath",
+      "description": "床边裂纹铜钱无端轻响，像被谁轻轻拨动。",
+      "baseWeight": 25,
+      "cooldownMonths": 0,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "fortune",
+        "coin",
+        "carried_item"
+      ],
+      "storylineIds": [],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "fortune",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "cracked_coin",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_coin_ring"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_private_school_first",
+      "title": "私塾初启",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "study_scholar",
+      "tier": "growth",
+      "description": "你第一次坐进私塾，墨香与旧纸味让你莫名安静下来。",
+      "baseWeight": 50,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "study",
+        "school"
+      ],
+      "storylineIds": [
+        "scholar_poverty"
+      ],
+      "threadIds": [
+        "school_enlightenment"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 2
+        },
+        {
+          "skill": "learning",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_study_seed"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_herb_sorting",
+      "title": "分拣草药",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "alchemy_herb",
+      "tier": "growth",
+      "description": "你帮药铺分拣晒干的草药，竟能分出几味旁人常弄混的药材。",
+      "baseWeight": 50,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "herb",
+        "alchemy"
+      ],
+      "storylineIds": [
+        "alchemy_path"
+      ],
+      "threadIds": [
+        "herb_sorting_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 3
+        },
+        {
+          "stat": "qi",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_herb_sorting"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_chase_wooden_sword",
+      "title": "院中木剑",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "martial_labor",
+      "tier": "growth",
+      "description": "你拿着木剑在院中乱挥，手腕酸痛，却不肯先停。",
+      "baseWeight": 45,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "sword",
+        "martial"
+      ],
+      "storylineIds": [
+        "hunter_martial",
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "wooden_sword_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "martial",
+          "delta": 2
+        },
+        {
+          "stat": "jing",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_wood_sword_practice"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_stream_daydream",
+      "title": "溪边发呆",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "dream_spirit",
+      "tier": "breath",
+      "description": "你常坐在玄溪边看水，水声渐渐像在教你调息。",
+      "baseWeight": 42,
+      "cooldownMonths": 6,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "water",
+        "seclusion",
+        "spirit"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "yin_dream_soul"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": 1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_stream_meditation"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_peek_temple_ritual",
+      "title": "偷看法事",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "temple_talisman",
+      "tier": "omen",
+      "description": "白鹿观夜里设坛，你躲在柱后，看见符火绕坛一圈不灭。",
+      "baseWeight": 36,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "temple",
+        "talisman",
+        "formation"
+      ],
+      "storylineIds": [
+        "daoist_temple"
+      ],
+      "threadIds": [
+        "temple_ritual_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        },
+        {
+          "skill": "ritualSense",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_temple_ritual_seen"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_lost_lamb",
+      "title": "寻回走失羊羔",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "family_bond",
+      "tier": "growth",
+      "description": "你沿着泥脚印寻回走失的羊羔，邻人称你心细。",
+      "baseWeight": 45,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "merit",
+        "family",
+        "fortune"
+      ],
+      "storylineIds": [
+        "village_disaster"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "karma": "merit",
+          "delta": 1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_minor_merit"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_backhill_mist",
+      "title": "后山白雾",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "hidden_omen",
+      "tier": "omen",
+      "description": "后山白雾漫过石阶，你听见雾里有人喊你的乳名。",
+      "baseWeight": 24,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "mist",
+        "hidden_fate",
+        "mountain"
+      ],
+      "storylineIds": [
+        "system_omen",
+        "yin_dream_soul"
+      ],
+      "threadIds": [
+        "backhill_mist_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "system_or_yin",
+          "delta": 4
+        }
+      ],
+      "hooks": [
+        "hook_backhill_mist"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_old_book_margin",
+      "title": "旧书旁注",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "study_scholar",
+      "tier": "thread",
+      "description": "你翻到一本旧书，旁注里有几处墨迹像新写上去的。",
+      "baseWeight": 32,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "old_book",
+        "study",
+        "hidden_text"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "system_omen"
+      ],
+      "threadIds": [
+        "old_book_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 2
+        },
+        {
+          "skill": "learning",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "heavenly_book",
+          "delta": 3
+        }
+      ],
+      "hooks": [
+        "hook_old_book_note"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_first_brawl",
+      "title": "童年争斗",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "martial_labor",
+      "tier": "pressure",
+      "description": "邻家少年欺你瘦弱，你被推倒在泥里，最后还是爬了起来。",
+      "baseWeight": 38,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "fight",
+        "injury",
+        "heart"
+      ],
+      "storylineIds": [
+        "hunter_martial",
+        "village_disaster"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "jing",
+          "delta": 1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "flag": "minor_humiliation",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_child_brawl"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_rain_mountain_call",
+      "title": "雨夜后山低语",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "interlude_hook",
+      "tier": "choice_seed",
+      "description": "暴雨夜，后山传来低沉雷鸣，像有人在天边敲鼓。",
+      "baseWeight": 22,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "thunder",
+        "backhill",
+        "interlude_stg"
+      ],
+      "storylineIds": [
+        "system_omen",
+        "village_disaster"
+      ],
+      "threadIds": [
+        "rain_mountain_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "ancient_thunder",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_interlude_rain_mountain"
+      ],
+      "interludeCandidate": "interlude_rain_backhill_stg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_small_fever_recovery",
+      "title": "小病初愈",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "body_health",
+      "tier": "pressure",
+      "description": "你卧病三日，醒来后身体虚了些，心里却比从前安静。",
+      "baseWeight": 36,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "illness",
+        "recovery"
+      ],
+      "storylineIds": [],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "jing",
+          "delta": -1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_child_illness"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_father_chopping_wood",
+      "title": "随父砍柴",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "martial_labor",
+      "tier": "growth",
+      "description": "你随父亲上山砍柴，肩头被磨破，却第一次觉得身体里有一股热气。",
+      "baseWeight": 44,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "labor",
+        "rootBone",
+        "wood"
+      ],
+      "storylineIds": [
+        "hunter_martial"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "jing",
+          "delta": 2
+        },
+        {
+          "aptitude": "rootBone",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_chopping_wood"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_moon_old_grave",
+      "title": "月下旧坟",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "dream_spirit",
+      "tier": "omen",
+      "description": "你夜里醒来，望见祖坟坡方向有淡淡白光。",
+      "baseWeight": 24,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "grave",
+        "moon",
+        "yin"
+      ],
+      "storylineIds": [
+        "yin_dream_soul",
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "grave_moon_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 1
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "taiyin_or_pastlife",
+          "delta": 4
+        }
+      ],
+      "hooks": [
+        "hook_grave_moon"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_market_coin",
+      "title": "集市铜钱",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "ambient_world",
+      "tier": "breath",
+      "description": "集市喧闹，你摸着裂纹铜钱，总觉得摊贩的叫卖声里藏着某种规律。",
+      "baseWeight": 30,
+      "cooldownMonths": 6,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "market",
+        "coin",
+        "fortune"
+      ],
+      "storylineIds": [],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "fortune",
+          "delta": 1
+        },
+        {
+          "skill": "worldlySense",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "cracked_coin",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_market_coin"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_roaming_daoist",
+      "title": "游方道士",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "temple_talisman",
+      "tier": "thread",
+      "description": "一名游方道士路过村中，见你目光不散，问你是否愿看一眼符阵。",
+      "baseWeight": 36,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "daoist",
+        "trial",
+        "choice_seed"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "scholar_poverty"
+      ],
+      "threadIds": [
+        "roaming_daoist_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        },
+        {
+          "skill": "ritualSense",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_roaming_daoist_trial"
+      ],
+      "interludeCandidate": "interlude_talisman_heart_dbg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_bandit_smoke",
+      "title": "山贼烟尘",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "disaster_karmic",
+      "tier": "choice_seed",
+      "description": "县道尽头升起黑烟，大人们低声说山贼近了。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "bandit",
+        "danger",
+        "village"
+      ],
+      "storylineIds": [
+        "village_disaster",
+        "hunter_martial"
+      ],
+      "threadIds": [
+        "bandit_smoke_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "flag": "bandit_pressure",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_bandit_threat"
+      ],
+      "interludeCandidate": "interlude_village_defense_stg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_well_moon_dream",
+      "title": "井中月梦",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "dream_spirit",
+      "tier": "omen",
+      "description": "你俯身看井，井中月影忽然裂开，露出一片陌生夜空。",
+      "baseWeight": 28,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "moon",
+        "dream",
+        "yin"
+      ],
+      "storylineIds": [
+        "yin_dream_soul",
+        "system_omen"
+      ],
+      "threadIds": [
+        "well_moon_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "taiyin",
+          "delta": 6
+        }
+      ],
+      "hooks": [
+        "hook_well_moon_dream"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_wood_sword_hum",
+      "title": "木剑轻鸣",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "origin_clue",
+      "tier": "thread",
+      "description": "那柄不起眼的木剑在夜里轻轻震动，像是在回应你的呼吸。",
+      "baseWeight": 32,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "sword",
+        "carried_item",
+        "pastlife"
+      ],
+      "storylineIds": [
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "wooden_sword_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "martial",
+          "delta": 2
+        },
+        {
+          "stat": "shen",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "past_sword_soul",
+          "delta": 6
+        },
+        {
+          "carriedItemAffinityTag": "broken_wood_sword",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_wood_sword_hum"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_first_breath_failure",
+      "title": "吐纳失败",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "stage_transition",
+      "tier": "transition_seed",
+      "description": "你照着残页吐纳，胸口闷痛半日，像有什么堵在经脉里。",
+      "baseWeight": 38,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "cultivation_attempt",
+        "failure",
+        "reverse_fate"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "daoist_temple"
+      ],
+      "threadIds": [
+        "failed_breath_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": -1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "flag": "failed_breath_count",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_breath_failure",
+        "transition_seek_dao_seed"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_one_breath_clear",
+      "title": "一息通达",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "stage_transition",
+      "tier": "transition_seed",
+      "description": "某个清晨，你随溪水声吐纳，竟有一息清气贯入丹田。",
+      "baseWeight": 25,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "cultivation_attempt",
+        "success",
+        "qi"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "scholar_poverty"
+      ],
+      "threadIds": [
+        "first_qi_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": 5
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "stageToken": "first_qi_sensed",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_first_qi",
+        "transition_initiation_ready"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_forbidden_page",
+      "title": "禁书一页",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "study_scholar",
+      "tier": "choice_seed",
+      "description": "旧书夹层里藏着一页泛黑的纸，字迹像会自行游动。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "forbidden",
+        "old_book",
+        "dbg"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "yin_dream_soul",
+        "system_omen"
+      ],
+      "threadIds": [
+        "forbidden_page_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "flag": "forbidden_page_seen",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_forbidden_page"
+      ],
+      "interludeCandidate": "interlude_forbidden_page_dbg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_cold_winter_illness",
+      "title": "寒冬重病",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "body_health",
+      "tier": "pressure",
+      "description": "这一年冬雪太重，你病得几乎下不了床。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "illness",
+        "lifespan",
+        "winter"
+      ],
+      "storylineIds": [],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "jing",
+          "delta": -3
+        },
+        {
+          "aptitude": "lifespan",
+          "delta": -1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "flag": "serious_childhood_illness",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_winter_illness"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_first_blood",
+      "title": "第一次见血",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "disaster_karmic",
+      "tier": "pressure",
+      "description": "你在山道上看见受伤的野兽，血腥味让你久久不能忘。",
+      "baseWeight": 35,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "blood",
+        "beast",
+        "heart"
+      ],
+      "storylineIds": [
+        "hunter_martial",
+        "village_disaster"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "martial",
+          "delta": 2
+        },
+        {
+          "aptitude": "heart",
+          "delta": -1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "flag": "first_blood_memory",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_first_blood"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_furnace_heat_test",
+      "title": "药炉火候",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "alchemy_herb",
+      "tier": "choice_seed",
+      "description": "药铺师傅让你守一炉药，火小则药不成，火大则药焦。",
+      "baseWeight": 36,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "alchemy",
+        "fire_control",
+        "choice"
+      ],
+      "storylineIds": [
+        "alchemy_path"
+      ],
+      "threadIds": [
+        "fire_control_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 3
+        },
+        {
+          "stat": "qi",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_fire_control_choice"
+      ],
+      "interludeCandidate": "interlude_fire_control_text_check",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_jade_board_glimpse",
+      "title": "祖玉阵纹",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "interlude_hook",
+      "tier": "choice_seed",
+      "description": "祖传玉佩内侧浮起细细阵纹，像一局没有落完的棋。",
+      "baseWeight": 25,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "jade",
+        "formation",
+        "autochess"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "jade_board_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "ancestral_jade",
+          "delta": 6
+        }
+      ],
+      "hooks": [
+        "hook_jade_board"
+      ],
+      "interludeCandidate": "interlude_ancestral_jade_board",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_stone_chamber",
+      "title": "山腹石室",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "storyline_thread",
+      "tier": "thread",
+      "description": "你在后山裂石后发现一处小石室，壁上刻着残缺的阵线。",
+      "baseWeight": 25,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "mountain",
+        "formation",
+        "secret"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "system_omen",
+        "daoist_temple"
+      ],
+      "threadIds": [
+        "stone_chamber_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 3
+        },
+        {
+          "skill": "worldlySense",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "stageToken": "secret_chamber_found",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_stone_chamber"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_lantern_stranger",
+      "title": "灯会遇异人",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "ambient_world",
+      "tier": "omen",
+      "description": "灯会人潮中，有个陌生人看了你一眼，像认错了故人。",
+      "baseWeight": 26,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "stranger",
+        "karmic",
+        "pastlife"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "system_omen"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "fortune",
+          "delta": 2
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "past_life_or_system",
+          "delta": 4
+        }
+      ],
+      "hooks": [
+        "hook_stranger_recognition"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_rescue_in_stream",
+      "title": "溪中救人",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "disaster_karmic",
+      "tier": "choice_seed",
+      "description": "一个孩子跌入玄溪，水流湍急，大人们一时赶不过来。",
+      "baseWeight": 38,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "merit",
+        "water",
+        "risk"
+      ],
+      "storylineIds": [
+        "village_disaster",
+        "daoist_temple"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "karma": "merit",
+          "delta": 2
+        },
+        {
+          "stat": "jing",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_rescue_choice"
+      ],
+      "interludeCandidate": "interlude_stream_rescue_text_check",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_wild_ginseng",
+      "title": "野参年份",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "alchemy_herb",
+      "tier": "choice_seed",
+      "description": "药铺师傅说后山有一株老参将成，你若去采，可能遇上守参妖虫。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "herb",
+        "horde",
+        "risk"
+      ],
+      "storylineIds": [
+        "alchemy_path",
+        "village_disaster"
+      ],
+      "threadIds": [
+        "wild_ginseng_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_wild_ginseng"
+      ],
+      "interludeCandidate": "interlude_guard_herb_field_horde",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_black_shrine_shadow",
+      "title": "荒祠黑影",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "hidden_omen",
+      "tier": "choice_seed",
+      "description": "荒祠里有黑影低语，许你一夜之间强过所有同龄人。",
+      "baseWeight": 28,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "demon",
+        "heart_demon",
+        "forbidden"
+      ],
+      "storylineIds": [
+        "yin_dream_soul",
+        "village_disaster"
+      ],
+      "threadIds": [
+        "black_shrine_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "karma": "karma",
+          "delta": 2
+        },
+        {
+          "hiddenFateTag": "demon_mark",
+          "delta": 8
+        }
+      ],
+      "hooks": [
+        "hook_black_shrine_choice"
+      ],
+      "interludeCandidate": "interlude_demon_whisper_dbg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_family_debt",
+      "title": "家中债务",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "family_bond",
+      "tier": "pressure",
+      "description": "家中欠下银钱，父亲沉默，母亲把旧首饰压在箱底。",
+      "baseWeight": 40,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "family",
+        "poverty",
+        "choice"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "alchemy_path"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "flag": "family_debt",
+          "delta": 1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_family_debt"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_closed_hundred_days",
+      "title": "闭门百日",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "stage_transition",
+      "tier": "transition_seed",
+      "description": "你闭门百日，不问村中闲事，只听体内气息一日比一日绵长。",
+      "baseWeight": 25,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "seclusion",
+        "heart",
+        "cultivation"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "system_omen"
+      ],
+      "threadIds": [
+        "seclusion_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": 4
+        },
+        {
+          "aptitude": "heart",
+          "delta": 3
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "stageToken": "seclusion_breakthrough_seed",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_seclusion_hundred_days",
+        "transition_half_cultivator"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_dream_whisper_low",
+      "title": "梦中低语",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "dream_spirit",
+      "tier": "omen",
+      "description": "梦里有人在你耳边念一段倒转的经文，你醒来后只记得最后一个字。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "dream",
+        "forbidden",
+        "system"
+      ],
+      "storylineIds": [
+        "yin_dream_soul",
+        "system_omen"
+      ],
+      "threadIds": [
+        "dream_whisper_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 3
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "system_or_demon",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_dream_whisper"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_heavenly_drums",
+      "title": "天外战鼓",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "system_omen",
+      "tier": "choice_seed",
+      "description": "你在白日里听见战鼓，从天外一下一下敲入心口。",
+      "baseWeight": 25,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "system",
+        "outer_battlefield",
+        "stg"
+      ],
+      "storylineIds": [
+        "system_omen"
+      ],
+      "threadIds": [
+        "outer_battlefield_dream_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 3
+        },
+        {
+          "stat": "shen",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "outer_battlefield_omen",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_outer_battlefield_dream"
+      ],
+      "interludeCandidate": "interlude_outer_dream_stg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_untrained_breath",
+      "title": "无师吐纳",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "stage_transition",
+      "tier": "transition_seed",
+      "description": "你不知从何学会了一套吐纳，虽粗陋，却真的让丹田温热。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "first_qi",
+        "cultivation",
+        "stage"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "scholar_poverty",
+        "system_omen"
+      ],
+      "threadIds": [
+        "first_qi_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": 5
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "stageToken": "self_taught_breath",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_self_taught_breath",
+        "transition_seek_dao"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_cracked_coin_trade",
+      "title": "裂纹铜钱交易",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "ambient_world",
+      "tier": "choice_seed",
+      "description": "散修集上，有人愿用一本残书换你那枚裂纹铜钱。",
+      "baseWeight": 28,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "market",
+        "coin",
+        "trade"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "system_omen"
+      ],
+      "threadIds": [
+        "cracked_coin_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "fortune",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "cracked_coin",
+          "delta": 8
+        }
+      ],
+      "hooks": [
+        "hook_coin_trade_choice"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_save_stranger",
+      "title": "河中呼救",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "disaster_karmic",
+      "tier": "choice_seed",
+      "description": "暴雨涨水，有陌生人被困河中。你若去救，未必能全身而退。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "rescue",
+        "merit",
+        "risk"
+      ],
+      "storylineIds": [
+        "village_disaster",
+        "daoist_temple"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "karma": "merit",
+          "delta": 2
+        },
+        {
+          "aptitude": "heart",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_rescue_major_choice"
+      ],
+      "interludeCandidate": "interlude_rescue_stg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_jade_crack_light",
+      "title": "旧玉裂光",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "origin_clue",
+      "tier": "transition_seed",
+      "description": "祖传玉佩忽然裂开一线，里面透出的光照出一圈古阵。",
+      "baseWeight": 25,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "jade",
+        "formation",
+        "transition"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "daoist_temple"
+      ],
+      "threadIds": [
+        "jade_board_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "ancestral_jade",
+          "delta": 10
+        },
+        {
+          "stageToken": "formation_omen",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_jade_crack",
+        "transition_initiation_candidate"
+      ],
+      "interludeCandidate": "interlude_ancestral_jade_board",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_system_static",
+      "title": "耳边杂音",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "system_omen",
+      "tier": "omen",
+      "description": "你独处时，耳边偶尔传来断续杂音，像有人在很远处校准什么。",
+      "baseWeight": 28,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "system",
+        "static",
+        "omen"
+      ],
+      "storylineIds": [
+        "system_omen"
+      ],
+      "threadIds": [
+        "system_static_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "system_resonance",
+          "delta": 6
+        },
+        {
+          "age18Hook": "system_static",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_system_static"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_before_birthday_clouds",
+      "title": "生辰前雷云",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "system_omen",
+      "tier": "transition_seed",
+      "description": "十七岁末，青云山上空连日积云不散，夜里常有无声的雷光。",
+      "baseWeight": 22,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "age18",
+        "thunder",
+        "system"
+      ],
+      "storylineIds": [
+        "system_omen",
+        "village_disaster"
+      ],
+      "threadIds": [
+        "countdown_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "countdown_clouds",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_age18_countdown",
+        "transition_age18_pending"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_another_failure",
+      "title": "又一次失败",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "destiny_manifest",
+      "tier": "thread",
+      "description": "你再一次吐纳失败，旁人笑你无仙缘，只有你自己知道这次痛得不一样。",
+      "baseWeight": 28,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "failure",
+        "reverse_fate",
+        "cultivation"
+      ],
+      "storylineIds": [
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "failed_breath_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "heart",
+          "delta": 3
+        },
+        {
+          "flag": "failure_count",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "destinyTag": "reverse_fate_progress",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_reverse_failure"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_brilliant_cough_blood",
+      "title": "慧极咳血",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "destiny_manifest",
+      "tier": "thread",
+      "description": "你一夜看懂三页残经，晨起却在帕上咳出一丝血。",
+      "baseWeight": 22,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "heaven_jealous",
+        "study",
+        "illness"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "system_omen"
+      ],
+      "threadIds": [
+        "old_book_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 5
+        },
+        {
+          "aptitude": "lifespan",
+          "delta": -2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "destinyTag": "heaven_jealous_manifest",
+          "delta": 8
+        }
+      ],
+      "hooks": [
+        "hook_heaven_jealous_cough"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_blood_oath",
+      "title": "血誓诱惑",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "hidden_omen",
+      "tier": "choice_seed",
+      "description": "荒祠黑影说，只要滴一滴血，你便能换来今夜的力量。",
+      "baseWeight": 20,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "forbidden",
+        "blood_oath",
+        "demon"
+      ],
+      "storylineIds": [
+        "yin_dream_soul",
+        "village_disaster"
+      ],
+      "threadIds": [
+        "black_shrine_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "jing",
+          "delta": -1
+        },
+        {
+          "stat": "shen",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "demon_mark",
+          "delta": 10
+        },
+        {
+          "karma": "karma",
+          "delta": 3
+        }
+      ],
+      "hooks": [
+        "hook_blood_oath_choice"
+      ],
+      "interludeCandidate": "interlude_blood_oath_dbg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_hidden_cave_map",
+      "title": "旧洞府残图",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "origin_clue",
+      "tier": "choice_seed",
+      "description": "无字残页上浮出几笔地势，似乎指向青云山深处。",
+      "baseWeight": 25,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "map",
+        "cave",
+        "origin"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "system_omen"
+      ],
+      "threadIds": [
+        "stone_chamber_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 3
+        },
+        {
+          "skill": "worldlySense",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "hidden_cave_map",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_hidden_cave_map"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_kitchen_fire_spark",
+      "title": "灶火异亮",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "alchemy_herb",
+      "tier": "omen",
+      "description": "灶中火光忽然转青，你盯着看了许久，直到母亲唤你。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "fire",
+        "alchemy"
+      ],
+      "storylineIds": [
+        "alchemy_path"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": 1
+        },
+        {
+          "skill": "herbLore",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_blue_fire"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_bamboo_shadow_sword",
+      "title": "竹影如剑",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "origin_clue",
+      "tier": "omen",
+      "description": "夕阳下，竹影落在地上，竟像一式完整剑招。",
+      "baseWeight": 26,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "sword",
+        "metal",
+        "shadow"
+      ],
+      "storylineIds": [
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "wooden_sword_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "martial",
+          "delta": 1
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "past_sword_soul",
+          "delta": 3
+        }
+      ],
+      "hooks": [
+        "hook_bamboo_sword_shadow"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_small_merit_insect",
+      "title": "放生小虫",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "family_bond",
+      "tier": "breath",
+      "description": "你把将被踩死的小虫拨到草叶上，自己也说不清为何要这样。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "merit",
+        "life",
+        "insect"
+      ],
+      "storylineIds": [
+        "village_disaster",
+        "alchemy_path"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "karma": "merit",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_tiny_merit"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_strange_star",
+      "title": "异星入梦",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "system_omen",
+      "tier": "omen",
+      "description": "夜里你梦见一颗陌生星辰坠入掌心，醒来后掌纹有些发热。",
+      "baseWeight": 20,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "star",
+        "system",
+        "dream"
+      ],
+      "storylineIds": [
+        "system_omen"
+      ],
+      "threadIds": [
+        "system_static_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "system_resonance",
+          "delta": 4
+        }
+      ],
+      "hooks": [
+        "hook_star_dream"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_temple_bell_no_wind",
+      "title": "无风钟响",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "temple_talisman",
+      "tier": "omen",
+      "description": "白鹿观钟楼无风自鸣，观主看你的眼神变得有些古怪。",
+      "baseWeight": 26,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "temple",
+        "bell",
+        "omen"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "system_omen"
+      ],
+      "threadIds": [
+        "temple_ritual_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "stageToken": "temple_attention",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_temple_bell"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_herb_poison_faint",
+      "title": "误辨毒草",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "alchemy_herb",
+      "tier": "pressure",
+      "description": "你误将一味毒草当成药材，指尖发麻半日。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "herb",
+        "poison",
+        "lesson"
+      ],
+      "storylineIds": [
+        "alchemy_path"
+      ],
+      "threadIds": [
+        "herb_sorting_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 2
+        },
+        {
+          "wound": "minor_poison",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_poison_lesson"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_broken_talisman_burn",
+      "title": "残符自燃",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "temple_talisman",
+      "tier": "thread",
+      "description": "你触碰一张残符，符角忽然自燃，火光却没有伤你。",
+      "baseWeight": 24,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "talisman",
+        "fire",
+        "ritual"
+      ],
+      "storylineIds": [
+        "daoist_temple"
+      ],
+      "threadIds": [
+        "roaming_daoist_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "ritualSense",
+          "delta": 2
+        },
+        {
+          "stat": "qi",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "talisman_memory",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_talisman_burn"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_wolf_tracks",
+      "title": "山狼足迹",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "martial_labor",
+      "tier": "choice_seed",
+      "description": "猎户们在山口发现新鲜狼迹，父亲让你别再独自上山。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "wolf",
+        "hunt",
+        "danger"
+      ],
+      "storylineIds": [
+        "hunter_martial",
+        "village_disaster"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "martial",
+          "delta": 1
+        },
+        {
+          "stat": "jing",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_wolf_tracks"
+      ],
+      "interludeCandidate": "interlude_wolf_shadow_stg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_book_words_shift",
+      "title": "字迹游移",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "study_scholar",
+      "tier": "omen",
+      "description": "你读残书时，字迹忽然错位，像要拼成另一篇经文。",
+      "baseWeight": 28,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "old_book",
+        "system",
+        "comprehension"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "system_omen"
+      ],
+      "threadIds": [
+        "old_book_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 3
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "heavenly_book",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_words_shift"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_body_fire_and_ice",
+      "title": "冷热同身",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "body_health",
+      "tier": "omen",
+      "description": "一夜之间，你半身发热，半身发冷，汗湿衣襟。",
+      "baseWeight": 22,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "wuxing_conflict",
+        "body",
+        "omen"
+      ],
+      "storylineIds": [
+        "alchemy_path",
+        "yin_dream_soul"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": 2
+        },
+        {
+          "wound": "meridian_disorder",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "flag": "wuxing_conflict_omen",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_hot_cold_body"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_silent_compassion",
+      "title": "默然救济",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "family_bond",
+      "tier": "growth",
+      "description": "你把攒下的铜钱悄悄放到寡妇门前，没有告诉任何人。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "merit",
+        "heart",
+        "secret"
+      ],
+      "storylineIds": [
+        "village_disaster",
+        "daoist_temple"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "karma": "merit",
+          "delta": 2
+        },
+        {
+          "aptitude": "heart",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_secret_merit"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_dream_board_nine",
+      "title": "梦中九宫",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "dream_spirit",
+      "tier": "choice_seed",
+      "description": "梦里你站在九宫棋盘中央，每走一步，远处星辰便改换位置。",
+      "baseWeight": 22,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "formation",
+        "autochess",
+        "dream"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "system_omen"
+      ],
+      "threadIds": [
+        "jade_board_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "formation_dream",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_nine_board_dream"
+      ],
+      "interludeCandidate": "interlude_ancestral_jade_board",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_red_thread_wrist",
+      "title": "腕上红痕",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "hidden_omen",
+      "tier": "omen",
+      "description": "你腕上有一圈淡淡红痕，像无形细线绕过。",
+      "baseWeight": 22,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "karma",
+        "bond",
+        "omen"
+      ],
+      "storylineIds": [
+        "village_disaster"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "fortune",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "originFateTag": "karmic_thread",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_red_thread"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_father_silent_old_sword",
+      "title": "父亲藏剑",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "origin_clue",
+      "tier": "breath",
+      "description": "父亲偶尔看向箱底旧剑，神色复杂，却从不让你碰。",
+      "baseWeight": 26,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "family",
+        "sword",
+        "old_item"
+      ],
+      "storylineIds": [
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "wooden_sword_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "broken_wood_sword",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_father_old_sword"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_smell_medicine",
+      "title": "闻药而静",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "alchemy_herb",
+      "tier": "breath",
+      "description": "你哭闹时，只要闻到药草苦香，便会慢慢安静。",
+      "baseWeight": 32,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "herb",
+        "childhood"
+      ],
+      "storylineIds": [
+        "alchemy_path"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 1
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "alchemy_sage",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_medicine_calm"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "infant_dream_drums_far",
+      "title": "远鼓入梦",
+      "phase": "infant",
+      "ageMonthRange": [
+        0,
+        47
+      ],
+      "category": "system_omen",
+      "tier": "omen",
+      "description": "你在睡梦中皱眉，像听见远处有鼓声一下一下敲来。",
+      "baseWeight": 18,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "outer_battlefield",
+        "system",
+        "dream"
+      ],
+      "storylineIds": [
+        "system_omen"
+      ],
+      "threadIds": [
+        "outer_battlefield_dream_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "outer_battlefield_omen",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_far_drums"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_mud_formation",
+      "title": "泥中圆阵",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "temple_talisman",
+      "tier": "breath",
+      "description": "你在泥地随手画圆，竟画出一圈颇像阵纹的图案。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "formation",
+        "child_play"
+      ],
+      "storylineIds": [
+        "daoist_temple"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "ritualSense",
+          "delta": 1
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_mud_formation"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_hungry_winter",
+      "title": "饥冬",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "family_bond",
+      "tier": "pressure",
+      "description": "这一年冬粮不足，你学会把自己的那半碗粥留给家人。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "poverty",
+        "family",
+        "heart"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "village_disaster"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "heart",
+          "delta": 2
+        },
+        {
+          "stat": "jing",
+          "delta": -1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_hungry_winter"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_hidden_cave_sound",
+      "title": "石缝风声",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "origin_clue",
+      "tier": "omen",
+      "description": "后山石缝里传来风声，细听却像有人翻书。",
+      "baseWeight": 24,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "mountain",
+        "old_cave",
+        "book"
+      ],
+      "storylineIds": [
+        "broken_lineage",
+        "system_omen"
+      ],
+      "threadIds": [
+        "stone_chamber_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "hidden_cave_map",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_stone_wind"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "child_sick_neighbor",
+      "title": "邻童病重",
+      "phase": "child",
+      "ageMonthRange": [
+        48,
+        107
+      ],
+      "category": "alchemy_herb",
+      "tier": "choice_seed",
+      "description": "邻家孩子病了，药铺人手不够，师傅让你在旁递药。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "medicine",
+        "merit",
+        "choice"
+      ],
+      "storylineIds": [
+        "alchemy_path",
+        "village_disaster"
+      ],
+      "threadIds": [
+        "rescue_patient_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 2
+        },
+        {
+          "karma": "merit",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_sick_neighbor_choice"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_insect_swarm_field",
+      "title": "田中黑虫",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "interlude_hook",
+      "tier": "choice_seed",
+      "description": "村外药田忽然翻起黑土，细小妖虫从根下钻出。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "insect",
+        "horde",
+        "field"
+      ],
+      "storylineIds": [
+        "alchemy_path",
+        "village_disaster"
+      ],
+      "threadIds": [
+        "field_insect_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "herbLore",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_field_insects"
+      ],
+      "interludeCandidate": "interlude_guard_herb_field_horde",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_teacher_question",
+      "title": "先生三问",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "study_scholar",
+      "tier": "choice_seed",
+      "description": "私塾先生问你三道题，前两道易，第三道却像问你的本心。",
+      "baseWeight": 34,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "study",
+        "question",
+        "dbg"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "daoist_temple"
+      ],
+      "threadIds": [
+        "teacher_questions_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 2
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_teacher_three_questions"
+      ],
+      "interludeCandidate": "interlude_teacher_question_dbg",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_hidden_stream_stone",
+      "title": "溪底石符",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "origin_clue",
+      "tier": "thread",
+      "description": "玄溪退水后，溪底露出一枚刻着细纹的小石符。",
+      "baseWeight": 26,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "stone_talisman",
+        "water",
+        "origin"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "system_omen"
+      ],
+      "threadIds": [
+        "stone_talisman_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 1
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "childhood_stone_talisman",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_stream_stone_talisman"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_practice_bowstring",
+      "title": "旧弓残弦",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "martial_labor",
+      "tier": "growth",
+      "description": "你拾起猎户丢下的旧弓残弦，反复练习拉开它。",
+      "baseWeight": 38,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 2,
+      "tags": [
+        "bow",
+        "hunt",
+        "martial"
+      ],
+      "storylineIds": [
+        "hunter_martial"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "martial",
+          "delta": 3
+        },
+        {
+          "stat": "jing",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "carriedItemAffinityTag": "rusted_bowstring",
+          "delta": 2
+        }
+      ],
+      "hooks": [
+        "hook_bowstring_practice"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "youth_invisible_friend",
+      "title": "看不见的友人",
+      "phase": "youth",
+      "ageMonthRange": [
+        108,
+        167
+      ],
+      "category": "dream_spirit",
+      "tier": "omen",
+      "description": "你有时会对着空处说话，旁人问起，你却说那里站着一个朋友。",
+      "baseWeight": 24,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "spirit",
+        "yin",
+        "childhood"
+      ],
+      "storylineIds": [
+        "yin_dream_soul"
+      ],
+      "threadIds": [],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "taiyin",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_invisible_friend"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_mountain_fire",
+      "title": "山火一线",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "disaster_karmic",
+      "tier": "choice_seed",
+      "description": "后山起了火，火线若越过石梁，药田和村舍都保不住。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "fire",
+        "disaster",
+        "choice"
+      ],
+      "storylineIds": [
+        "village_disaster",
+        "alchemy_path"
+      ],
+      "threadIds": [
+        "mountain_fire_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "qi",
+          "delta": 2
+        },
+        {
+          "karma": "merit",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_mountain_fire_choice"
+      ],
+      "interludeCandidate": "interlude_fireline_horde",
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_river_mirror_self",
+      "title": "水中异我",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "hidden_omen",
+      "tier": "omen",
+      "description": "你在溪边看见倒影比自己慢了一息才抬头。",
+      "baseWeight": 24,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "mirror",
+        "self",
+        "system"
+      ],
+      "storylineIds": [
+        "system_omen",
+        "yin_dream_soul"
+      ],
+      "threadIds": [
+        "system_static_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "system_resonance",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_delayed_reflection"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_temple_ashes",
+      "title": "香灰成字",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "temple_talisman",
+      "tier": "thread",
+      "description": "白鹿观香炉中落下的灰，竟堆成一个你不认识的古字。",
+      "baseWeight": 26,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "temple",
+        "omen",
+        "talisman"
+      ],
+      "storylineIds": [
+        "daoist_temple",
+        "system_omen"
+      ],
+      "threadIds": [
+        "temple_ritual_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "ritualSense",
+          "delta": 2
+        },
+        {
+          "aptitude": "inspiration",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "heavenly_book",
+          "delta": 3
+        }
+      ],
+      "hooks": [
+        "hook_ashes_character"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_market_sword_seller",
+      "title": "集市卖剑人",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "origin_clue",
+      "tier": "choice_seed",
+      "description": "散修集来了个卖剑人，他看见你手中木剑，忽然笑了一下。",
+      "baseWeight": 24,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "sword",
+        "market",
+        "pastlife"
+      ],
+      "storylineIds": [
+        "broken_lineage"
+      ],
+      "threadIds": [
+        "wooden_sword_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "skill": "martial",
+          "delta": 2
+        },
+        {
+          "aptitude": "fortune",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "hiddenFateTag": "past_sword_soul",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_sword_seller_choice"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_sudden_compassion_enemy",
+      "title": "敌亦有亲",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "disaster_karmic",
+      "tier": "thread",
+      "description": "你发现一个偷药的小贼也只是为了救家中病母。",
+      "baseWeight": 30,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "merit",
+        "karma",
+        "choice"
+      ],
+      "storylineIds": [
+        "village_disaster",
+        "alchemy_path"
+      ],
+      "threadIds": [
+        "merit_karma_diverge_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "karma": "merit",
+          "delta": 2
+        },
+        {
+          "aptitude": "heart",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [],
+      "hooks": [
+        "hook_enemy_has_family"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_night_no_sleep",
+      "title": "整夜无眠",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "body_health",
+      "tier": "pressure",
+      "description": "你整夜无法入睡，闭上眼便看见命盘裂成细线。",
+      "baseWeight": 28,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "insomnia",
+        "system",
+        "pressure"
+      ],
+      "storylineIds": [
+        "system_omen"
+      ],
+      "threadIds": [
+        "countdown_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "stat": "shen",
+          "delta": 2
+        },
+        {
+          "wound": "insomnia",
+          "delta": 1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "age18Hook": "fate_matrix_crack",
+          "delta": 1
+        }
+      ],
+      "hooks": [
+        "hook_insomnia_fate_crack"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    },
+    {
+      "id": "teen_blood_on_page",
+      "title": "纸上血点",
+      "phase": "teen",
+      "ageMonthRange": [
+        168,
+        215
+      ],
+      "category": "destiny_manifest",
+      "tier": "omen",
+      "description": "你翻旧书时，一滴鼻血落在纸上，字迹竟在血边亮了一瞬。",
+      "baseWeight": 22,
+      "cooldownMonths": 12,
+      "maxTriggersPerLife": 1,
+      "tags": [
+        "heaven_jealous",
+        "book",
+        "blood"
+      ],
+      "storylineIds": [
+        "scholar_poverty",
+        "system_omen"
+      ],
+      "threadIds": [
+        "old_book_thread"
+      ],
+      "conditions": [],
+      "visibleEffects": [
+        {
+          "aptitude": "comprehension",
+          "delta": 3
+        },
+        {
+          "aptitude": "lifespan",
+          "delta": -1
+        }
+      ],
+      "hiddenEffects": [
+        {
+          "destinyTag": "heaven_jealous_manifest",
+          "delta": 5
+        }
+      ],
+      "hooks": [
+        "hook_blood_on_page"
+      ],
+      "interludeCandidate": null,
+      "stageTransitionSignal": null,
+      "llmBrief": {
+        "tone": "古雅但可读",
+        "maxChars": 90,
+        "mustNotRevealHiddenTrueName": true
+      }
+    }
+  ]
+}

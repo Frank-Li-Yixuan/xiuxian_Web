@@ -1,0 +1,16 @@
+{
+  "version": "0.1",
+  "packages": [
+    { "id": "world", "dependsOn": [], "consumedBy": ["monthly_events", "llm_guardrails"] },
+    { "id": "nine_palace", "dependsOn": ["world"], "consumedBy": ["destiny_v2", "monthly_events", "major_choices"] },
+    { "id": "destiny_v2", "dependsOn": ["nine_palace"], "consumedBy": ["character_creation", "life_storylines", "mode_projection"] },
+    { "id": "life_storylines", "dependsOn": ["world", "destiny_v2", "origin_fate_v02"], "consumedBy": ["monthly_events", "major_choices", "interludes"] },
+    { "id": "interludes", "dependsOn": ["life_storylines", "major_choices"], "consumedBy": ["stage_transition", "life_playable"] },
+    { "id": "stage_transition", "dependsOn": ["life_storylines", "interludes"], "consumedBy": ["adult_node"] },
+    { "id": "monthly_events_v02", "dependsOn": ["life_storylines", "stage_transition"], "consumedBy": ["major_choices"] },
+    { "id": "major_choices_v02", "dependsOn": ["monthly_events_v02", "interludes", "stage_transition"], "consumedBy": ["life_playable"] },
+    { "id": "origin_fate_v02", "dependsOn": ["world", "nine_palace", "destiny_v2"], "consumedBy": ["life_storylines", "monthly_events", "adult_node"] },
+    { "id": "llm_narrative", "dependsOn": ["world"], "consumedBy": ["life_playable"] },
+    { "id": "life_playable", "dependsOn": ["monthly_events_v02", "major_choices_v02", "llm_narrative"], "consumedBy": ["e2e"] }
+  ]
+}

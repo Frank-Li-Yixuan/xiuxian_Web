@@ -1,0 +1,29 @@
+{
+  "version": "0.1",
+  "requiredInputs": [
+    "NinePalaceEvaluation",
+    "OpeningInnateDraft",
+    "SpiritualRootState",
+    "optional Existing DestinySelection"
+  ],
+  "evaluationSteps": [
+    "scoreNinePalace",
+    "evaluateDestinyEligibility",
+    "removeHardConflicts",
+    "resolveAntiWeirdnessMutations",
+    "applySoftConflictWarnings",
+    "applySynergyTags",
+    "returnVisibleCardModels"
+  ],
+  "antiWeirdnessPolicy": {
+    "description": "当天命与命盘严重不符时，优先变异成合理命格，而不是硬删除。",
+    "maxMutationDepth": 1,
+    "fallbackIfNoMutation": "reroll_trait"
+  },
+  "visibilityRules": {
+    "showEligibilityReasonInDebug": true,
+    "showEligibilityReasonInPlayerUi": false,
+    "showMutationAsNormalCard": true,
+    "allowSubtleHintForMutation": true
+  }
+}

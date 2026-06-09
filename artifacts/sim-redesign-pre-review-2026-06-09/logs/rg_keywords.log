@@ -1,0 +1,1408 @@
+﻿# rg -n NinePalaceEvaluation|eligibility|mutation|storyline|density|interlude|NarrativeService|trueName|18 岁|域外 src data docs codex_prompts scripts tools tests
+scripts\quality-gate-screenshots.mjs:51:    id: "07_high_density_pressure",
+scripts\quality-gate-screenshots.mjs:53:    description: "100 enemy bullets with combat effects and outer battlefield background under simplified density mode.",
+scripts\validate_life_interludes_data.mjs:6:const dataDir = path.join(root, 'data/life_interludes');
+scripts\validate_life_interludes_data.mjs:14:const modes = readJson('interlude_mode_definitions.v0.1.json');
+scripts\validate_life_interludes_data.mjs:15:const catalog = readJson('interlude_event_catalog.v0.1.json');
+scripts\validate_life_interludes_data.mjs:16:const writebacks = readJson('interlude_result_writeback_rules.v0.1.json');
+scripts\validate_life_interludes_data.mjs:17:const freq = readJson('interlude_frequency_budget.v0.1.json');
+scripts\validate_life_interludes_data.mjs:28:for (const it of catalog.interludes) {
+scripts\validate_life_interludes_data.mjs:51:console.log(`Life interlude data validation passed: ${modes.modes.length} modes, ${catalog.interludes.length} interludes, ${writebacks.rules.length} writeback rules.`);
+scripts\validate_destiny_eligibility_data.mjs:11:const conflicts = readJson('conflict_synergy_mutation_rules.v0.1.json');
+scripts\validate_destiny_eligibility_data.mjs:27:  if (d.mutation) {
+scripts\validate_destiny_eligibility_data.mjs:29:      if (d.mutation[k]) assertId(d.mutation[k], `${d.id}.mutation.${k}`);
+scripts\validate_destiny_eligibility_data.mjs:32:  const src = d.eligibility?.sourceMutationOf;
+scripts\validate_destiny_eligibility_data.mjs:39:  if (c.mutation) assertId(c.mutation, 'hardConflict.mutation');
+scripts\validate_destiny_eligibility_data.mjs:56:console.log(`Destiny eligibility data validation passed: ${ids.size} destinies, ${(conflicts.hardConflicts||[]).length} hard conflicts, ${(conflicts.synergies||[]).length} synergies.`);
+tests\character\character-creation-controller-origin-fate.test.ts:23:    expect(JSON.stringify(draft.hiddenFate)).not.toContain(hiddenFateDefinition.trueName);
+scripts\validate_origin_fate_v02.mjs:15:const origins = readJson('data/origin_fate_v02/origin_storyline_definitions.v0.2.json');
+scripts\validate_origin_fate_v02.mjs:26:  if (!h.id || !h.trueName || !h.publicAlias) fail('hidden fate missing id/trueName/publicAlias');
+scripts\validate_origin_fate_v02.mjs:31:    if (o.text.includes(h.trueName)) fail(h.id + ' omen leaks trueName');
+scripts\validate_origin_fate_v02.mjs:41:  if (!Array.isArray(o.storylineBias) || o.storylineBias.length === 0) fail(o.id + ' missing storylineBias');
+scripts\validate_origin_fate_data.mjs:45:  assert(hf.trueName?.length > 0, `hiddenFate ${hf.id} needs trueName`);
+scripts\validate_origin_fate_data.mjs:64:assert(reveal.uiTextRules?.forbiddenAtCreation?.includes('trueName'), 'reveal rules must forbid trueName at creation');
+scripts\validate_nine_palace_data.mjs:8:  "data/fate_matrix/destiny_eligibility_rules.v0.1.json",
+scripts\validate_nine_palace_data.mjs:33:const traits = JSON.parse(fs.readFileSync(path.join(root, "data/fate_matrix/destiny_eligibility_rules.v0.1.json"), "utf8")).traits;
+scripts\validate_nine_palace_data.mjs:46:    console.error(`Missing mutation target ${t.ifContradictedMutateTo} for ${t.id}`);
+scripts\validate_nine_palace_data.mjs:52:console.log(`Nine palace data validation passed: ${traits.length} destiny eligibility entries.`);
+scripts\validate_life_storylines_data.mjs:6:const base = path.join(root, 'data', 'life_storylines');
+scripts\validate_life_storylines_data.mjs:12:const storylines = readJson('storyline_definitions.v0.1.json').storylines;
+scripts\validate_life_storylines_data.mjs:14:const rules = readJson('storyline_scoring_rules.v0.1.json');
+scripts\validate_life_storylines_data.mjs:19:for (const s of storylines) {
+scripts\validate_life_storylines_data.mjs:20:  if (!s.id || !s.name) errors.push(`storyline missing id/name: ${JSON.stringify(s)}`);
+scripts\validate_life_storylines_data.mjs:21:  if (ids.has(s.id)) errors.push(`duplicate storyline id: ${s.id}`);
+scripts\validate_life_storylines_data.mjs:27:const storylineIds = new Set(storylines.map(s => s.id));
+scripts\validate_life_storylines_data.mjs:31:  if (!t.id || !t.storylineId) errors.push(`thread missing id/storylineId: ${JSON.stringify(t)}`);
+scripts\validate_life_storylines_data.mjs:34:  if (!storylineIds.has(t.storylineId)) errors.push(`${t.id} references unknown storyline ${t.storylineId}`);
+scripts\validate_life_storylines_data.mjs:38:for (const s of storylines) {
+scripts\validate_life_storylines_data.mjs:47:  console.error('Life storyline data validation failed:');
+scripts\validate_life_storylines_data.mjs:52:console.log(`Life storyline data validation passed: ${storylines.length} storylines, ${threads.length} threads.`);
+scripts\validate_monthly_events_v02.mjs:47:  if (event.interludeCandidate && !String(event.interludeCandidate).startsWith('interlude_')) {
+scripts\validate_monthly_events_v02.mjs:48:    errors.push(`interludeCandidate should start with interlude_: ${event.id}`);
+data\world\world_core.v0.2.json:11:      "tags": ["mortal_borderland", "low_spirit_density"],
+codex_prompts\A18-C005_outer_battlefield_run_config.md:5:# A18-C005：域外战场第一战 RunConfig
+codex_prompts\BAS-C011_background_parallax_pass.md:5:让域外战场和第一阶段背景不再是纯色/简单线条。
+codex_prompts\BAS-C011_background_parallax_pass.md:15:2. 域外战场背景：
+codex_prompts\A18-C004_hidden_fate_reveal_and_items.md:15:2. 创建 UI 可见结果时，不泄露未揭示 trueName。
+codex_prompts\A18-C004_hidden_fate_reveal_and_items.md:26:- 未揭示时可见结果不包含 trueName
+tests\origin-fate\origin-fate-distribution-telemetry.test.ts:57:    expect(report.trueNameExposureCount).toBe(0);
+tests\origin-fate\origin-fate-distribution-telemetry.test.ts:62:    expect(JSON.stringify(report.debugSamples)).not.toContain("trueName");
+tests\origin-fate\origin-fate-distribution-telemetry.test.ts:96:  it("builds creation preview state without leaking internal trueName", () => {
+tests\origin-fate\origin-fate-distribution-telemetry.test.ts:118:    expect(previewJson).not.toContain(hiddenFate.trueName);
+codex_prompts\A18-C003_stat_conversion_and_modifiers.md:7:目标：把 18 岁最终人生属性转化为域外战场第一战初始战斗属性。
+tests\origin-fate\hidden-fate-generator.test.ts:30:    expect(first.internal.trueName.length).toBeGreaterThan(0);
+tests\origin-fate\hidden-fate-generator.test.ts:34:    expect(JSON.stringify(first.visibleOmen)).not.toContain(first.internal.trueName);
+tests\origin-fate\hidden-fate-generator.test.ts:38:  it("uses divination tokens to reveal an extra hint and category without leaking trueName", () => {
+tests\origin-fate\hidden-fate-generator.test.ts:62:    expect(JSON.stringify(divined.visibleOmen)).not.toContain(divined.internal.trueName);
+codex_prompts\A18-C002_awakening_resolution_engine.md:7:目标：实现 `resolveAge18Awakening(input)`，从人生模拟结果生成 18 岁觉醒结算。
+tests\origin-fate\age18-origin-fate-resolution.test.ts:95:        trueName: expect.any(String),
+tests\origin-fate\age18-origin-fate-resolution.test.ts:100:    expect(resolution.revealedHiddenFate?.trueName.length).toBeGreaterThan(0);
+codex_prompts\BAS-C003_download_audio_sfx.md:26:12. 域外战场环境底噪 loop
+codex_prompts\00_GLOBAL_PREFIX_SIM_REDESIGN.md:9:- 不要在 UI 或日志中泄露 hidden trueName，除非系统已经明确揭示。
+codex_prompts\00_GLOBAL_PREFIX_SIM_REDESIGN.md:10:- 不要把 18 岁硬写成唯一域外战场出口；默认成年节点可以 fallback 到域外，但需要支持路径评分。
+codex_prompts\A18-C001_data_schema_registry.md:7:目标：接入《18 岁系统觉醒与域外战场开局转化 v0.1》的数据、类型和校验脚本。
+codex_prompts\BAS-C002_download_2d_combat_assets.md:29:10. 域外战场背景或深色幻想背景层
+codex_prompts\DEM-C006_character_creation_integration.md:16:1. CharacterCreationController 使用 v2 eligibility/mutation/conflict 引擎。
+codex_prompts\DEM-C002_eligibility_evaluator.md:17:- mutationCandidate
+codex_prompts\DEM-C002_eligibility_evaluator.md:22:2. anti 条件命中时 eligible=false，并给 mutationCandidate。
+codex_prompts\DEM-C005_life_manifestation_hooks.md:10:4. 不泄露 hidden trueName。
+codex_prompts\DEM-C001_schema_registry.md:8:- 加载 core_destiny_definitions、conflict_synergy_mutation_rules、life_manifestation_hooks、mode_projection_hooks。
+codex_prompts\DEM-C001_schema_registry.md:14:2. 所有 mutation target 存在。
+codex_prompts\DEM-C001_schema_registry.md:22:node scripts/validate_destiny_eligibility_data.mjs
+src\types\sim-redesign-integration-types.v0.1.ts:31:  readonly useNinePalaceEvaluation: boolean;
+src\types\origin-fate-types.v0.1.ts:58:  readonly trueName: string;
+src\types\origin-fate-types.v0.1.ts:294:  readonly trueName: string;
+src\types\origin-fate-types.v0.1.ts:332:  /** Internal only. Do not expose trueName in creation UI. */
+src\types\origin-fate-types.v0.1.ts:356:  readonly trueName: string;
+tests\render\projectile-skin-renderer.test.ts:57:  it("uses simplified high-density drawing for 100 enemy bullets while preserving white cores and danger rings", async () => {
+codex_prompts\A18-C008_tests_telemetry.md:7:目标：补齐 18 岁觉醒、第一战、家园开启的测试与调试输出。
+codex_prompts\A18-C008_tests_telemetry.md:24:   - sealed hidden fate 不显示 trueName
+codex_prompts\DEM-C004_conflict_synergy_engine_v2.md:7:1. 硬互斥：若存在 mutation，则替换为变异命格；否则删除低优先级候选并 reroll。
+src\types\origin-fate-narrative-types.v0.2.ts:35:  readonly trueName: string; // internal only
+src\types\origin-fate-narrative-types.v0.2.ts:49:  readonly interludeHooks: readonly string[];
+src\types\origin-fate-narrative-types.v0.2.ts:59:  readonly storylineBias: readonly Id[];
+src\types\origin-fate-narrative-types.v0.2.ts:66:  readonly interludeBias: readonly Id[];
+src\types\origin-fate-narrative-types.v0.2.ts:93:  readonly interludeHooks: readonly Id[];
+src\types\origin-fate-narrative-types.v0.2.ts:103:  readonly trueNameRevealed: boolean;
+src\types\origin-fate-narrative-types.v0.2.ts:133:  readonly interludeBiasTags: readonly string[];
+codex_prompts\A18-C006_system_home_unlock.md:17:   - 试炼玄坛（仅域外战场）
+src\types\nine-palace-fate-types.v0.1.ts:62:export interface NinePalaceEvaluation {
+src\types\nine-palace-fate-types.v0.1.ts:88:  mutationTarget?: string;
+src\types\monthly-event-v02-types.ts:18:  | "storyline_thread"
+src\types\monthly-event-v02-types.ts:19:  | "interlude_hook"
+src\types\monthly-event-v02-types.ts:36:  readonly densityCost: number;
+src\types\monthly-event-v02-types.ts:59:  readonly storylineIds: readonly Id[];
+src\types\monthly-event-v02-types.ts:65:  readonly interludeCandidate?: Id | null;
+src\types\monthly-event-v02-types.ts:78:  | { readonly type: "storylineActive"; readonly storylineId: Id; readonly minScore?: number }
+src\types\monthly-event-v02-types.ts:98:  readonly densityUsed: number;
+src\types\monthly-event-v02-types.ts:112:  readonly storylineState?: unknown;
+src\types\monthly-event-v02-types.ts:114:  readonly densityWindow: NarrativeDensityWindowState;
+src\types\major-life-choice-v02-types.ts:23:  | "interlude";
+src\types\major-life-choice-v02-types.ts:76:  readonly interludeCandidateId?: Id;
+src\types\major-life-choice-v02-types.ts:93:    | "storylineBranch"
+src\types\major-life-choice-v02-types.ts:94:    | "interludeBranch"
+src\types\major-life-choice-v02-types.ts:113:  readonly type: "anySignal" | "allSignals" | "minStat" | "storylineState" | "threadState";
+src\types\major-life-choice-v02-types.ts:117:  readonly storylineId?: Id;
+src\types\major-life-choice-v02-types.ts:132:  readonly interludeCandidates: readonly Id[];
+src\types\major-life-choice-v02-types.ts:145:  readonly interludeCountInLife: number;
+src\types\major-life-choice-v02-types.ts:172:  readonly interludeCandidateId?: Id;
+src\types\major-life-choice-v02-types.ts:183:  readonly interludeResultId?: Id;
+codex_prompts\A18-C007_ui_flow_integration.md:7:目标：把 LifeSimulation 216 月结束后接入 18 岁系统觉醒页面、第一战战前页面、系统家园开启页面。
+codex_prompts\A18-C007_ui_flow_integration.md:20:   - 进入域外战场按钮
+codex_prompts\A18-C007_ui_flow_integration.md:21:3. 点击进入域外战场前，显示 `OuterBattlefieldBriefingScreen`：
+codex_prompts\DEM-C003_mutation_resolver.md:4:实现 resolveDestinyMutation(candidate, eligibilityResult, context)。
+src\types\llm-narrative-types.v0.1.ts:5:  | "interlude_intro"
+src\types\llm-narrative-types.v0.1.ts:6:  | "interlude_result"
+codex_prompts\E2E-SIM-001_life_sim_redesign_full_flow.md:14:  → 0–18 岁自动推进
+codex_prompts\E2E-SIM-001_life_sim_redesign_full_flow.md:23:1. 不泄露 hidden trueName。
+codex_prompts\E2E-SIM-001_life_sim_redesign_full_flow.md:53:- interlude prompt
+src\types\life-storylines-types.v0.1.ts:76:  readonly storylineId: Id;
+src\types\life-storylines-types.v0.1.ts:90:  readonly storylineId: Id;
+src\types\life-storylines-types.v0.1.ts:99:  readonly storylineId: Id;
+docs\generation_algorithm_upgrade_v0.1.md:126:mutationTarget
+docs\generation_algorithm_upgrade_v0.1.md:140:尝试 mutation
+docs\generation_algorithm_upgrade_v0.1.md:180:    mutationTarget?: string;
+docs\generation_algorithm_upgrade_v0.1.md:183:  mutations: AntiWeirdnessResult[];
+src\types\life-stage-transition-types.v0.1.ts:60:  readonly interludeCooldownMonths: number;
+src\types\life-stage-transition-types.v0.1.ts:121:  readonly triggerType: "age" | "token" | "score" | "choice" | "interlude" | "age18";
+src\types\life-sim-playable-types.v0.1.ts:9:  | "interlude_prompt"
+src\types\life-sim-playable-types.v0.1.ts:10:  | "interlude_running"
+src\types\life-sim-playable-types.v0.1.ts:11:  | "interlude_auto_resolving"
+src\types\life-sim-playable-types.v0.1.ts:34:  readonly storylineSummaries: readonly LifeStorylineSummaryView[];
+src\types\life-sim-playable-types.v0.1.ts:72:  readonly interludeHint?: string;
+src\types\life-sim-playable-types.v0.1.ts:77:  readonly interludeId: Id;
+src\types\life-sim-playable-types.v0.1.ts:93:  readonly storylineChanges: readonly string[];
+src\types\life-sim-playable-types.v0.1.ts:114:  readonly storylineId: Id;
+src\types\life-sim-playable-types.v0.1.ts:136:  readonly interludeCandidatesShown: number;
+src\types\life-monthly-events-types.v0.1.ts:1:// 0–18 岁人生模拟月度事件系统 v0.1
+docs\event_taxonomy_schema_v0.2.md:21:  storylineIds: string[];
+docs\event_taxonomy_schema_v0.2.md:30:  interludeCandidate?: string;
+docs\event_taxonomy_schema_v0.2.md:60:storyline_thread
+docs\event_taxonomy_schema_v0.2.md:61:interlude_hook
+docs\event_taxonomy_schema_v0.2.md:123:hook_interlude_rain_mountain
+docs\event_taxonomy_schema_v0.2.md:134:18 岁觉醒系统
+docs\event_taxonomy_schema_v0.2.md:139:## 6. interludeCandidate
+docs\event_taxonomy_schema_v0.2.md:146:[险] 前往后山查看 → interlude_rain_backhill_stg
+src\types\life-interlude-types.v0.1.ts:33:  readonly storylineTags: readonly string[];
+src\types\life-interlude-types.v0.1.ts:67:  readonly interludeHistory: readonly LifeInterludeHistoryEntry[];
+src\types\life-interlude-types.v0.1.ts:71:  readonly interludeId: string;
+src\types\life-interlude-types.v0.1.ts:93:  readonly interludeRunId: string;
+src\types\life-interlude-types.v0.1.ts:146:  | { readonly type: "modifyStorylineScore"; readonly storylineId: string; readonly amount: number }
+src\types\life-interlude-types.v0.1.ts:153:  readonly interludeRunId: string;
+codex_prompts\HFO-C003_hidden_fate_generator.md:15:5. 创建页不得显示 hiddenFate.trueName。
+codex_prompts\HFO-C003_hidden_fate_generator.md:16:6. 支持天机推演：消耗 token 显示额外 hint 和 category，但仍不显示 trueName。
+codex_prompts\HFO-C003_hidden_fate_generator.md:20:- 页面可见数据中不包含 trueName。
+src\types\destiny-eligibility-types.v0.1.ts:80:  readonly eligibility: DestinyEligibilityRule;
+src\types\destiny-eligibility-types.v0.1.ts:81:  readonly mutation?: DestinyMutationRule;
+src\types\destiny-eligibility-types.v0.1.ts:92:  readonly mutationCandidate?: Id;
+src\types\destiny-eligibility-types.v0.1.ts:98:  readonly mutation?: Id;
+codex_prompts\HFO-C005_character_creation_integration.md:16:4. 禁止显示隐藏命 trueName 和 exactProgress。
+codex_prompts\HFO-C005_character_creation_integration.md:24:- UI 没有显示 hiddenFate.id / trueName。
+codex_prompts\HFO-C006_life_sim_hooks.md:3:目标：让 0–18 岁人生模拟事件系统读取 originFate 的事件偏置。
+src\types\age18-awakening-types.v0.1.ts:1:// TypeScript draft types for 《18 岁系统觉醒与域外战场开局转化 v0.1》.
+src\types\age18-awakening-types.v0.1.ts:74:  readonly trueName: string;
+docs\data_model_migration_plan_v0.1.md:9:  → NinePalaceEvaluation
+docs\data_model_migration_plan_v0.1.md:25:| coreStats / aptitude | 保留，但加入 NinePalaceEvaluation |
+docs\data_model_migration_plan_v0.1.md:27:| destiny selection | 保留，但通过 DEM eligibility/mutation 重评估 |
+docs\data_model_migration_plan_v0.1.md:28:| background origin | 保留，但升级为 origin storyline |
+docs\data_model_migration_plan_v0.1.md:29:| hidden fate | 保留 trueName 内部字段，但 UI 永不泄露 |
+docs\data_model_migration_plan_v0.1.md:37:| 平铺随机天命 | 废弃，改为 eligibility/mutation |
+docs\data_model_migration_plan_v0.1.md:38:| 纯随机月度事件 | 废弃，改为 storyline/density weighted |
+docs\data_model_migration_plan_v0.1.md:40:| 18 岁硬切域外 | 弱化，改为成年节点路径评分 |
+docs\life_sim_first_playable_experience_v0.1.md:5:本规格把 0–18 岁人生模拟定义为玩家从“创建角色”进入“正式修行人生”的第一段可玩体验。它不是纯文本剧情，也不是单独小游戏合集，而是一个由命盘驱动的修真人生推演器。
+docs\life_sim_first_playable_experience_v0.1.md:12:  → 0–18 岁人生模拟
+docs\life_sim_first_playable_experience_v0.1.md:38:建议首版完整 0–18 岁模拟时长：
+docs\life_sim_first_playable_experience_v0.1.md:149:半年选择可以产生 `interludeCandidate`。首版建议只做插曲入口协议和 1–2 个可运行插曲，其他可走自动推演。
+docs\life_sim_first_playable_experience_v0.1.md:229:18 岁之后所有正式模式
+docs\life_sim_first_playable_experience_v0.1.md:247:│ Bottom：时间轴 0–18 岁 / 阶段节点 / 已发生玩法插曲 / 操作按钮  │
+docs\life_sim_first_playable_experience_v0.1.md:295:自动播放到 18 岁
+codex_prompts\HFO-C007_age18_conversion.md:1:# HFO-C007：18 岁系统觉醒与随身物转化
+codex_prompts\HFO-C007_age18_conversion.md:3:目标：18 岁时解析隐藏命和随身物，生成域外战场与洞府开局钩子。
+codex_prompts\HFO-C007_age18_conversion.md:23:- 隐藏进度越高，18 岁揭示概率越高。
+docs\architecture_and_boundaries_v0.1.md:26:  NarrativeService.ts
+docs\architecture_and_boundaries_v0.1.md:59:- hidden trueName 永远不进入 LLM input。
+codex_prompts\HFO-C008_tests_telemetry.md:10:4. 创建页不显示 trueName 测试。
+codex_prompts\HFO-C008_tests_telemetry.md:11:5. 18 岁转化测试。
+docs\character_creation_implementation_v0.1.md:22:  → 进入 0–18 岁人生模拟阶段
+docs\character_creation_implementation_v0.1.md:23:  → 18 岁系统觉醒
+docs\character_creation_implementation_v0.1.md:24:  → 域外战场第一战
+docs\character_creation_implementation_v0.1.md:34:不要求完整人生模拟，不要求域外战场，不要求洞府完成。但数据结构必须为后续三者预留接口。
+docs\character_creation_implementation_v0.1.md:177:   - `outer_battlefield` → 回到域外战场。
+docs\character_creation_implementation_v0.1.md:261:| 战斗型 | 改变域外战场和局内战斗倾向 |
+docs\character_creation_implementation_v0.1.md:753:- 完整 0–18 岁人生模拟。
+docs\character_creation_implementation_v0.1.md:754:- 域外战场第一战。
+codex_prompts\HFO2-C001_data_schema_registry.md:11:- 不接 18 岁觉醒。
+codex_prompts\HFO2-C001_data_schema_registry.md:15:2. 接入 origin_storyline_definitions.v0.2.json。
+codex_prompts\HFO2-C001_data_schema_registry.md:22:   - hidden trueName 不得出现在 omenStages 文本中。
+codex_prompts\HFO2-C001_data_schema_registry.md:25:   - 每个 origin 至少有 storylineBias 和 carriedItemBias。
+codex_prompts\HFO2-C001_data_schema_registry.md:38:- 是否发现 trueName 泄露
+docs\event_taxonomy_and_schema_v0.1.md:133:4. 不写现代系统词，18 岁前不明说“系统”。
+docs\event_taxonomy_and_schema_v0.1.md:134:5. 可以暗示域外战场，但不提前解释。
+docs\event_taxonomy_and_schema_v0.1.md:146:系统即将把你传送到域外战场。
+docs\data_merge_plan_v0.1.md:16:    storylines/
+docs\data_merge_plan_v0.1.md:17:    interludes/
+docs\data_merge_plan_v0.1.md:56:storylines + stages + interludes
+docs\data_merge_plan_v0.1.md:75:storyline.alchemy_apothecary
+docs\data_merge_plan_v0.1.md:79:interlude.rain_backhill_stg
+docs\data_merge_plan_v0.1.md:86:hiddenFateInternal.trueName
+docs\data_merge_plan_v0.1.md:106:validate_destiny_eligibility_data
+docs\data_merge_plan_v0.1.md:108:validate_life_storylines
+docs\data_merge_plan_v0.1.md:109:validate_life_interludes
+docs\life_manifestation_hooks_v0.1.md:24:| 18 岁 | 系统结算与模式投射 |
+docs\life_manifestation_hooks_v0.1.md:35:18 岁：首次顿悟品质提升，但天道注视增加。
+docs\life_manifestation_hooks_v0.1.md:44:18 岁：存活奖励提高，主动施法削弱。
+docs\life_manifestation_hooks_v0.1.md:53:18 岁：濒死触发逆命回响。
+codex_prompts\HFO2-C002_hidden_fate_narrative_engine.md:18:   - interludeBiasTags
+codex_prompts\HFO2-C002_hidden_fate_narrative_engine.md:23:4. 不泄露 trueName。
+codex_prompts\HFO2-C002_hidden_fate_narrative_engine.md:33:- trueName 不出现在 visibleOmenLines。
+tests\app\character-creation-view-model.test.ts:191:    expect(originJson).not.toContain(hiddenFate.trueName);
+tests\app\character-creation-origin-fate-ui.test.ts:39:    expect(markup).not.toContain(hiddenFate.trueName);
+tests\app\character-creation-origin-fate-ui.test.ts:82:    expect(markup).not.toContain(hiddenFate.trueName);
+tests\app\character-creation-origin-fate-ui.test.ts:109:    expect(visibleText).not.toContain(hiddenFate.trueName);
+tests\app\character-creation-origin-fate-ui.test.ts:143:    expect(combined).not.toContain(hiddenFate.trueName);
+codex_prompts\HFO2-C003_origin_storyline_engine.md:7:1. 根据 origin_storyline_definitions 生成 OriginNarrativeStateV02。
+codex_prompts\HFO2-C003_origin_storyline_engine.md:17:   - 给 storyline scoring 提供 origin bias。
+docs\carried_item_lifecycle_v0.2.md:13:18 岁转化材料
+codex_prompts\HFO2-C004_carried_item_lifecycle_engine.md:4:实现 CarriedItemLifecycleEngine，让随身物在 0–18 岁期间持续推进，而不是只在创建页和 18 岁出现。
+codex_prompts\HFO2-C004_carried_item_lifecycle_engine.md:17:7. 生成 18 岁 conversion input。
+codex_prompts\HFO2-C004_carried_item_lifecycle_engine.md:18:8. 不泄露隐藏命 trueName。
+docs\destiny_traits_rarity_conflict_reroll_v0.1.md:5:目标：让玩家在创建角色阶段获得“抽命、锁命、赌命、逆命”的 Roguelike 上头体验，并让这些结果真实影响 0–18 岁人生模拟、第一场域外战场和后续局外养成。
+docs\destiny_traits_rarity_conflict_reroll_v0.1.md:169:| 战斗类 | 改变域外战场、虫族入侵等模式表现。 | 以战养战、命悬一线、劫雷亲和 |
+docs\destiny_traits_rarity_conflict_reroll_v0.1.md:403:## 12. 对域外战场和多模式的影响
+docs\destiny_traits_rarity_conflict_reroll_v0.1.md:407:### 12.1 域外战场 STG
+docs\interlude_taxonomy_schema_v0.1.md:46:  storylineTags: string[];
+docs\interlude_taxonomy_schema_v0.1.md:84:  interludeHistory: LifeInterludeHistorySummary;
+docs\interlude_taxonomy_schema_v0.1.md:92:  interludeRunId: string;
+codex_prompts\HFO2-C006_life_sim_integration.md:17:   - interludeBiasTags
+codex_prompts\HFO2-C006_life_sim_integration.md:20:6. 所有日志不泄露 trueName。
+codex_prompts\HFO2-C005_reveal_misdirection_engine.md:4:实现 RevealMisdirectionEngine，统一控制隐藏信息在创建页、月度日志、半年选择、18 岁中的可见程度。
+codex_prompts\HFO2-C005_reveal_misdirection_engine.md:13:3. 创建页：不显示 trueName，不显示精确进度。
+codex_prompts\HFO2-C005_reveal_misdirection_engine.md:16:6. 18 岁：允许根据结算结果显示真名。
+codex_prompts\HFO2-C005_reveal_misdirection_engine.md:20:- trueName 不出现在 CharacterCreationViewModel。
+codex_prompts\HFO2-C005_reveal_misdirection_engine.md:21:- trueName 不出现在 MonthlyLifeLogEntry。
+codex_prompts\HFO2-C005_reveal_misdirection_engine.md:22:- trueName 不出现在 PendingMajorChoiceState。
+codex_prompts\HFO2-C005_reveal_misdirection_engine.md:23:- age18 revealed 时允许显示 trueName。
+docs\canvas_combat_integration_spec_v0.1.md:118:reduced audio spam in high density combat
+codex_prompts\HFO2-C008_tests_telemetry.md:12:   - UI safe view 不包含 trueName
+codex_prompts\HFO2-C008_tests_telemetry.md:13:   - 月度日志不包含 trueName
+codex_prompts\HFO2-C008_tests_telemetry.md:14:   - 半年选择不包含 trueName
+codex_prompts\HFO2-C008_tests_telemetry.md:20:   - 显示内部 trueName，仅 dev 可见
+docs\combat_asset_overhaul_plan_v0.1.md:73:| backgrounds | 域外战场、青云山、雷劫、虫巢 | PNG parallax layers | P1 |
+docs\combat_asset_overhaul_plan_v0.1.md:289:域外战场远景
+docs\destiny_eligibility_conflict_mutation_v0.1.md:37:NinePalaceEvaluation
+docs\destiny_eligibility_conflict_mutation_v0.1.md:67:### 4.1 成立条件 eligibility
+docs\destiny_eligibility_conflict_mutation_v0.1.md:100:### 4.4 变异规则 mutation
+docs\destiny_eligibility_conflict_mutation_v0.1.md:243:## 10. 与 18 岁觉醒的关系
+docs\destiny_eligibility_conflict_mutation_v0.1.md:245:18 岁时，天命将被投射为：
+docs\destiny_eligibility_conflict_mutation_v0.1.md:248:域外战场第一战修正
+codex_prompts\HFO2-C007_age18_conversion_integration.md:1:执行 HFO2-C007：HFO v0.2 与 18 岁系统觉醒转化集成。
+codex_prompts\HFO2-C007_age18_conversion_integration.md:8:2. 根据 revealBand、progress、item affinity、key choices、interludes 生成：
+codex_prompts\HFO2-C007_age18_conversion_integration.md:16:4. 如果 18 岁出现法宝/丹药/线索，之前必须有相关随身物或事件记录。
+docs\integration_with_storylines_life_stages_v0.1.md:40:interludeCandidate?: {
+docs\integration_with_storylines_life_stages_v0.1.md:71:## 5. 与 18 岁觉醒集成
+docs\integration_with_storylines_life_stages_v0.1.md:84:18 岁系统觉醒读取这些 hook 决定第一战开局、隐藏揭示和随身物转化。
+docs\algorithm_and_balance_v0.2.md:13:openingNinePalaceEvaluation
+docs\algorithm_and_balance_v0.2.md:36:  + storylineMatch * 6
+docs\algorithm_and_balance_v0.2.md:42:  + densityAdjust
+docs\algorithm_and_balance_v0.2.md:54:interlude 选项受频率预算限制
+codex_prompts\LFP-C001_state_machine_and_registry.md:8:- 不进入域外战场正式战斗。
+codex_prompts\LFP-C001_state_machine_and_registry.md:15:4. 建立 UI state machine：initializing / playing_months / major_choice_pending / interlude_prompt / stage_summary / adult_node_pending 等。
+codex_prompts\LFP-C004_major_choice_experience.md:13:8. 若选择携带 interludeCandidate，进入 interlude_prompt。
+codex_prompts\LFP-C004_major_choice_experience.md:14:9. 不泄露 hidden trueName。
+docs\codex_prompt_inventory_v0.1.md:20:- Do not expose hidden `trueName` or concrete hidden bloodline true names in UI, logs, snapshots, or prompt examples.
+docs\codex_prompt_inventory_v0.1.md:39:| `DT-C001` to `DT-C006` | Historical migration source | v0.1 destiny source; migrate through eligibility/mutation route instead of rerunning blindly. |
+docs\codex_prompt_inventory_v0.1.md:40:| `HFO-C001` to `HFO-C008` | Historical migration source | v0.1 origin/fate/item source; migrate through HFO2/storyline route instead of rerunning blindly. |
+docs\codex_prompt_inventory_v0.1.md:64:| `LM-C002_life_state_monthly_stepper.md` | v0.1 month stepper, not storyline/density-aware. | `MIG-C004` / `SIM-C006`. |
+docs\codex_prompt_inventory_v0.1.md:65:| `LM-C003_weight_conditions_engine.md` | v0.1 weight model, not ME2 density-aware. | `MIG-C004` / `SIM-C006`. |
+docs\codex_prompt_inventory_v0.1.md:109:  - `SIM-C004_origin_storyline_item_upgrade.md`
+docs\codex_prompt_inventory_v0.1.md:110:  - `SIM-C005_life_storyline_stage_interlude_core.md`
+docs\codex_prompt_inventory_v0.1.md:132:| `SIM-C004` | `SIM-C004_origin_storyline_item_upgrade.md`, `SIM-C004_destiny_eligibility_v2_integration.md` | Both describe relevant migration work; owner should assign unique order before execution. |
+docs\codex_prompt_inventory_v0.1.md:133:| `SIM-C005` | `SIM-C005_life_storyline_stage_interlude_core.md`, `SIM-C005_origin_storyline_item_v2_integration.md` | Prefer execution-order file; reconcile HFO2 integration dependency before execution. |
+docs\codex_prompt_inventory_v0.1.md:134:| `SIM-C006` | `SIM-C006_monthly_event_v02_upgrade.md`, `SIM-C006_storyline_monthly_choice_engine.md` | Prefer execution-order file; avoid overlapping LM/MC2 work. |
+docs\codex_prompt_inventory_v0.1.md:135:| `SIM-C007` | `SIM-C007_major_choice_v02_upgrade.md`, `SIM-C007_interlude_stage_transition_engine.md` | Prefer execution-order file; reconcile interlude/stage dependency before execution. |
+codex_prompts\LFP-C003_monthly_auto_playback.md:15:8. 禁止泄露 hidden trueName。
+docs\destiny_anatomy_and_quality_v0.1.md:10:成立条件：eligibility
+docs\destiny_anatomy_and_quality_v0.1.md:11:变异规则：mutation
+docs\destiny_anatomy_and_quality_v0.1.md:89:eligibility pass/fail
+docs\destiny_anatomy_and_quality_v0.1.md:90:mutation source
+docs\algorithm_and_balance_v0.1.md:5:18 岁转化必须满足：
+docs\algorithm_and_balance_v0.1.md:19:18 岁时生成一个综合评分，只用于调试和 UI 摘要，不直接决定强弱。
+docs\algorithm_and_balance_v0.1.md:86:普通 18 岁：
+docs\integration_with_storylines_interludes_stages_v0.2.md:8:storylineIds
+docs\integration_with_storylines_interludes_stages_v0.2.md:42:月度事件通过 `interludeCandidate` 埋下可玩插曲。
+docs\integration_with_storylines_interludes_stages_v0.2.md:48:→ interlude_rain_backhill_stg
+docs\integration_with_storylines_interludes_stages_v0.2.md:95:## 6. 与 18 岁觉醒系统
+docs\integration_with_storylines_interludes_stages_v0.2.md:107:18 岁觉醒读取这些 hook 决定：
+docs\integration_with_storylines_interludes_stages_v0.2.md:110:域外战场路径
+codex_prompts\LFP-C006_stage_summaries_chronicle.md:15:- 总结不泄露 hidden trueName。
+codex_prompts\LFP-C005_playable_interlude_flow.md:10:1. 从 major choice resolution 识别 interludeCandidate。
+codex_prompts\LFP-C008_llm_narrative_optional_integration.md:3:目标：接入 NarrativeService，但默认可只使用 fallback 模板。
+codex_prompts\LFP-C008_llm_narrative_optional_integration.md:9:- 不把 hidden trueName 传给 LLM。
+codex_prompts\LFP-C008_llm_narrative_optional_integration.md:13:1. LifeSimulationScreen 的月度日志、选择引入、阶段总结调用 NarrativeService。
+codex_prompts\LFP-C008_llm_narrative_optional_integration.md:21:- 输出不泄露 hidden trueName。
+docs\codex_execution_order_v0.2.md:15:narrative_density_rules.v0.2.json
+docs\codex_execution_order_v0.2.md:17:storyline_event_mapping.v0.2.json
+docs\codex_execution_order_v0.2.md:52:interlude candidate budget
+docs\codex_execution_order_v0.2.md:53:main storyline starvation protection
+docs\codex_execution_order_v0.2.md:65:interludeCandidate
+docs\codex_execution_order_v0.2.md:78:hidden trueName 不泄露
+codex_prompts\LFP-C007_speed_controls_persistence.md:9:4. 刷新页面后恢复当前月、当前日志、当前 pending choice / interlude / summary。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:1:# 《18 岁系统觉醒与域外战场开局转化 v0.1》
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:5:目标：让 Codex 能按此实现从 18 岁觉醒到域外战场第一战，再到系统家园开启的完整过渡流程。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:11:18 岁系统觉醒不是一个普通弹窗，而是整个新游戏流程的第一个高潮。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:20:  → 0–18 岁人生模拟
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:21:  → 18 岁系统觉醒
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:23:  → 投放域外战场第一战
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:32:1. 18 岁觉醒结算 Age18AwakeningResolution
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:60:都应该在 18 岁结算时得到回应。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:69:### 1.2 域外战场是第一场实战，不是完整常规关卡
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:71:域外战场第一战的目的不是测试完整 STG 系统，而是：
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:83:第一场域外战场失败不能让玩家重走 18 年人生模拟。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:90:记录“初战惊魂”或“域外劫伤”
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:91:允许再次挑战域外战场
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:193:## 4. 18 岁觉醒流程
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:198:进入 18 岁
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:212:生成域外战场 RunConfig
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:216:进入域外战场过渡界面
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:230:【域外战场征召开始。】
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:242:18 岁最终状态来自：
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:290:域外战场第一战使用简化战斗投射，不等于完整中后期模式数值。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:332:隐藏命在创建页不暴露真名。18 岁根据进度结算：
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:385:随身物在 18 岁时被系统扫描。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:407:| 随身物 | 域外战场 | 洞府 |
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:471:## 10. 域外战场第一战设计
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:506:写入“初战惊魂”或“域外劫伤”
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:518:域外战场结算完成。
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:544:| 诸天试炼台 | 第一战后显示域外战场入口，其他模式锁定 |
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:595:### 13.1 18 岁觉醒界面
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:603:底部：进入域外战场
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:624:### 13.2 域外战场战前界面
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:642:完整常规域外战场关卡
+docs\age18_awakening_outer_battlefield_conversion_v0.1.md:652:18 岁结算
+docs\integration_with_monthly_storylines_interludes_stages_v0.2.md:12:interludeCandidate
+docs\integration_with_monthly_storylines_interludes_stages_v0.2.md:30:  interludeCandidates: string[];
+docs\integration_with_monthly_storylines_interludes_stages_v0.2.md:57:interludeCandidateId
+docs\integration_with_monthly_storylines_interludes_stages_v0.2.md:82:## 5. 18 岁 hook
+docs\integration_with_monthly_storylines_interludes_stages_v0.2.md:93:后续 18 岁系统读取这些数据。
+docs\acceptance_and_screenshot_gates_v0.1.md:19:  11_high_density_stress.png
+codex_prompts\LFP-C009_e2e_tests_screenshots.md:39:- hidden trueName leak = 0。
+docs\codex_execution_order_v0.1.md:10:LFP-C005_playable_interlude_flow
+docs\codex_execution_order_v0.1.md:40:不泄露 hidden trueName。
+codex_prompts\LLM-C003_fallback_template_renderer.md:7:2. 支持 monthly_event_log、major_choice_intro、major_choice_options、interlude_result、stage_transition_summary、age18_awakening_log、life_chronicle_summary。
+docs\integration_with_monthly_age18_v0.1.md:1:# 《半年重大选择与月度事件、18 岁觉醒集成 v0.1》
+docs\integration_with_monthly_age18_v0.1.md:142:## 6. 与 18 岁觉醒系统的关系
+docs\integration_with_monthly_age18_v0.1.md:150:这些 hook 会在 18 岁系统觉醒时转化：
+docs\integration_with_monthly_age18_v0.1.md:154:| outer_battlefield_omen | 第一战特殊开场 / 域外战场熟悉感 |
+docs\integration_with_monthly_age18_v0.1.md:165:## 7. 18 岁前最后一次选择
+docs\integration_with_monthly_age18_v0.1.md:167:第 17 岁 6 月到 18 岁之间的最后一个重大选择应提高：
+docs\deprecated_prompt_policy_v0.1.md:62:- 是否泄露 hidden trueName
+codex_prompts\LLM-C002_sanitizer_and_hidden_leak_detector.md:7:2. 将 hidden trueName/id 替换成 safe omen aliases。
+codex_prompts\LLM-C002_sanitizer_and_hidden_leak_detector.md:9:4. 任何 LLM response 或 fallback response 包含 hidden trueName，都必须报错并替换为 fallback。
+docs\integration_with_major_choices_age18_v0.1.md:1:# 《月度事件与半年选择、18 岁觉醒的集成 v0.1》
+docs\integration_with_major_choices_age18_v0.1.md:84:## 3. 与 18 岁觉醒系统的边界
+docs\integration_with_major_choices_age18_v0.1.md:107:18 岁系统觉醒负责：
+docs\integration_with_major_choices_age18_v0.1.md:112:生成域外战场第一战 RunConfig
+docs\integration_with_major_choices_age18_v0.1.md:138:| outer_battlefield_omen | 域外战场预兆，第一战特殊开场 |
+docs\integration_with_major_choices_age18_v0.1.md:141:| system_countdown | 18 岁倒计时，必定触发系统觉醒特殊日志 |
+docs\integration_with_major_choices_age18_v0.1.md:156:| stg:sword | 域外战场飞剑/剑修初始池 |
+docs\integration_with_major_choices_age18_v0.1.md:157:| stg:thunder | 域外战场雷法初始池 |
+codex_prompts\LLM-C005_narrative_service_and_cache.md:1:# LLM-C005：NarrativeService 与缓存
+codex_prompts\LLM-C005_narrative_service_and_cache.md:8:3. 实现 NarrativeService.generate(request)。
+data\sim_redesign\test_gates.v0.1.json:11:    "hidden trueName never leaks before reveal",
+data\sim_redesign\test_gates.v0.1.json:15:    "interlude frequency budget is enforced",
+docs\integration_with_life_sim_v0.1.md:41:interlude_intro
+docs\integration_with_life_sim_v0.1.md:47:interlude_result
+docs\integration_with_life_sim_v0.1.md:60:## 18 岁与人生小传
+docs\integration_with_life_sim_v0.1.md:67:18 岁日志可以更有仪式感。人生小传用于存档回看和角色详情。
+codex_prompts\LLM-C004_deepseek_client_optional.md:23:- mock 泄露 hidden trueName 时 fallback。
+docs\integration_with_life_sim_choices_interludes_v0.1.md:90:## 5. 与 18 岁觉醒系统
+docs\integration_with_life_sim_choices_interludes_v0.1.md:106:→ 域外第一战：回春丹/清心丹概率增加
+docs\integration_with_life_sim_choices_interludes_v0.1.md:113:→ 18 岁系统觉醒文案增强
+data\sim_redesign\package_dependency_map.v0.1.json:6:    { "id": "destiny_v2", "dependsOn": ["nine_palace"], "consumedBy": ["character_creation", "life_storylines", "mode_projection"] },
+data\sim_redesign\package_dependency_map.v0.1.json:7:    { "id": "life_storylines", "dependsOn": ["world", "destiny_v2", "origin_fate_v02"], "consumedBy": ["monthly_events", "major_choices", "interludes"] },
+data\sim_redesign\package_dependency_map.v0.1.json:8:    { "id": "interludes", "dependsOn": ["life_storylines", "major_choices"], "consumedBy": ["stage_transition", "life_playable"] },
+data\sim_redesign\package_dependency_map.v0.1.json:9:    { "id": "stage_transition", "dependsOn": ["life_storylines", "interludes"], "consumedBy": ["adult_node"] },
+data\sim_redesign\package_dependency_map.v0.1.json:10:    { "id": "monthly_events_v02", "dependsOn": ["life_storylines", "stage_transition"], "consumedBy": ["major_choices"] },
+data\sim_redesign\package_dependency_map.v0.1.json:11:    { "id": "major_choices_v02", "dependsOn": ["monthly_events_v02", "interludes", "stage_transition"], "consumedBy": ["life_playable"] },
+data\sim_redesign\package_dependency_map.v0.1.json:12:    { "id": "origin_fate_v02", "dependsOn": ["world", "nine_palace", "destiny_v2"], "consumedBy": ["life_storylines", "monthly_events", "adult_node"] },
+docs\integration_with_life_sim_and_modes_v0.1.md:18:0–18 岁人生模拟
+docs\integration_with_life_sim_and_modes_v0.1.md:20:18 岁系统觉醒
+docs\integration_with_life_sim_and_modes_v0.1.md:22:域外战场第一战
+docs\integration_with_life_sim_and_modes_v0.1.md:72:雷雨夜、后山异象、天道注视、域外战场梦境权重提高。
+docs\integration_with_life_sim_and_modes_v0.1.md:106:## 5. 18 岁觉醒集成
+docs\integration_with_life_sim_and_modes_v0.1.md:108:18 岁结算时调用：
+docs\integration_with_life_sim_and_modes_v0.1.md:128:## 6. 域外战场第一战投射
+docs\integration_with_life_sim_and_modes_v0.1.md:132:| 隐藏命/随身物 | 域外战场效果 |
+docs\integration_with_life_sim_and_modes_v0.1.md:167:| 路线 | 域外战场 | 虫族入侵 | 万族试炼塔 | 天地棋局 |
+codex_prompts\LLM-C006_life_sim_integration_hooks.md:6:1. 月度事件生成后调用 NarrativeService 生成日志文本。
+codex_prompts\LLM-C006_life_sim_integration_hooks.md:8:3. 插曲结果写回后生成 interlude_result。
+codex_prompts\LLM-C006_life_sim_integration_hooks.md:16:- hidden trueName 不泄露。
+data\sim_redesign\migration_rules.v0.1.json:25:  "llmRule": "LLM narrative only; no rules or stats mutation."
+docs\integration_with_life_outgame_modes_v0.1.md:18:18 岁结算读取这些结果，但不重新生成月度事件。
+docs\integration_with_life_outgame_modes_v0.1.md:23:已发生的人生事件不可被 18 岁系统重 Roll。
+docs\integration_with_life_outgame_modes_v0.1.md:41:18 岁结算中，半年选择比普通月度事件权重更高。
+docs\integration_with_life_outgame_modes_v0.1.md:48:→ 18 岁古雷真血揭示概率提高
+docs\integration_with_life_outgame_modes_v0.1.md:64:18 岁时根据 reveal_rules 解析。
+docs\integration_with_life_outgame_modes_v0.1.md:109:18 岁结算将天命投射为：
+docs\integration_with_life_outgame_modes_v0.1.md:129:## 6. 与域外战场 STG 模式
+docs\integration_with_life_outgame_modes_v0.1.md:166:18 岁结算会写入长期标签，供未来模式读取。
+docs\integration_with_life_outgame_modes_v0.1.md:177:| 标签 | 域外战场 | 虫族入侵 | 万族试炼塔 | 天地棋局 |
+docs\integration_with_life_outgame_modes_v0.1.md:209:18 岁结算完成后保存
+docs\integration_with_life_outgame_modes_v0.1.md:220:绝对不能每次刷新页面都重新 Roll 18 岁结果。
+codex_prompts\LM-C002_life_state_monthly_stepper.md:10:- 不实现 18 岁结算。
+data\sim_redesign\integration_milestones.v0.1.json:6:    { "id": "m3_interlude_stage", "name": "插曲与阶段", "checks": ["插曲候选", "结果回写", "阶段token", "身份阶段变化"] },
+data\sim_redesign\integration_milestones.v0.1.json:8:    { "id": "m5_adult_bridge", "name": "成年节点桥接", "checks": ["成人路径评分", "默认域外fallback", "洞府/试炼钩子"] }
+codex_prompts\LM-C001_data_schema_registry.md:7:你正在实现《0–18 岁人生模拟月度事件系统 v0.1》的第一步。
+docs\integration_with_life_choices_interludes_age18_v0.2.md:10:NinePalaceEvaluation
+docs\integration_with_life_choices_interludes_age18_v0.2.md:54:interludeCandidateBias
+docs\integration_with_life_choices_interludes_age18_v0.2.md:55:interludeRunConfigModifiers
+docs\integration_with_life_choices_interludes_age18_v0.2.md:56:interludeWritebackMapping
+docs\integration_with_life_choices_interludes_age18_v0.2.md:81:## 6. 输出到 18 岁
+docs\integration_with_life_choices_interludes_age18_v0.2.md:109:→ 域外战场：初始回春丹
+data\sim_redesign\feature_flags.v0.1.json:4:    "useNinePalaceEvaluation": true,
+docs\integration_with_interludes_life_sim_age18_v0.1.md:1:# 与玩法插曲、人生模拟、18 岁系统的集成 v0.1
+docs\integration_with_interludes_life_sim_age18_v0.1.md:63:→ onFailure: interlude_failure_fright
+docs\integration_with_interludes_life_sim_age18_v0.1.md:91:## 6. 与 18 岁系统集成
+docs\integration_with_interludes_life_sim_age18_v0.1.md:93:18 岁系统不直接读全部人生历史，而读 `LifeStageState` 和核心结果：
+codex_prompts\LLM-C008_tests_telemetry.md:6:1. hidden trueName 不进入 request。
+data\sim_redesign\execution_plan.v0.1.json:38:      "gate": "成年节点可生成路径评分，默认可桥接域外战场"
+docs\hidden_origin_item_narrative_chain_v0.2.md:11:- 18 岁转化钩子
+docs\hidden_origin_item_narrative_chain_v0.2.md:23:  → 18 岁揭示 / 半揭示 / 误导 / 封印
+docs\hidden_origin_item_narrative_chain_v0.2.md:24:  → 域外战场 / 洞府初始方向
+docs\hidden_origin_item_narrative_chain_v0.2.md:72:converted      18 岁被系统解析
+docs\hidden_origin_item_narrative_chain_v0.2.md:76:随身物应当陪玩家走过人生，而不是 18 岁突然变道具。
+docs\hidden_origin_item_narrative_chain_v0.2.md:80:### 3.1 不早泄露 trueName
+docs\hidden_origin_item_narrative_chain_v0.2.md:130:18 岁前多数隐藏命应停留在：
+docs\hidden_origin_item_narrative_chain_v0.2.md:172:## 6. 与 18 岁觉醒的关系
+docs\hidden_origin_item_narrative_chain_v0.2.md:174:18 岁时，系统解析：
+docs\integration_with_events_destiny_roots_v0.1.md:6:NinePalaceEvaluation
+docs\integration_with_events_destiny_roots_v0.1.md:127:## 7. 给 18 岁系统觉醒的输入
+docs\integration_with_events_destiny_roots_v0.1.md:135:域外战场高危事件
+data\sim_redesign\acceptance_gates.v0.1.json:4:    {"id": "gate_data", "name": "Data Registry Gate", "checks": ["all json parses", "no missing refs", "hidden trueName marked internal"]},
+data\sim_redesign\acceptance_gates.v0.1.json:5:    {"id": "gate_creation", "name": "Character Creation Gate", "checks": ["reroll works", "locks work", "destiny mutation works", "no hidden leak"]},
+docs\hidden_fate_taxonomy_schema_v0.2.md:15:| battlefieldEcho | 域外战场回响 | 域外战场回响 |
+docs\hidden_fate_taxonomy_schema_v0.2.md:23:  trueName: string; // internal only
+docs\hidden_fate_taxonomy_schema_v0.2.md:37:  interludeHooks: string[];
+docs\hidden_fate_taxonomy_schema_v0.2.md:58:trueName
+docs\implementation_phases_v0.1.md:85:玩家能完整体验 0–18 岁模拟
+docs\hidden_bloodline_origin_items_system_v0.1.md:4:定位：角色创建阶段的第三层随机系统，承接「开局属性与灵根随机生成器」和「天命词条系统」，为 0–18 岁人生模拟、18 岁系统觉醒、域外战场第一战和洞府开局提供叙事与机制钩子。
+docs\hidden_bloodline_origin_items_system_v0.1.md:15:3. 玩家从凡俗人生中带着什么随身物进入 18 岁觉醒？
+docs\hidden_bloodline_origin_items_system_v0.1.md:68:  - age18ConversionHooks：18 岁觉醒转化钩子
+docs\hidden_bloodline_origin_items_system_v0.1.md:69:  - modeProjectionTags：域外战场和后续模式投射标签
+docs\hidden_bloodline_origin_items_system_v0.1.md:128:18 岁系统觉醒结算
+docs\hidden_bloodline_origin_items_system_v0.1.md:129:域外战场中濒死/顿悟/击杀精英
+docs\hidden_bloodline_origin_items_system_v0.1.md:146:18 岁转化方向
+docs\hidden_bloodline_origin_items_system_v0.1.md:183:| pastLife | 前世残魂/前世记忆 | 丹圣遗骨、前世剑魄、域外战场回响 |
+docs\hidden_bloodline_origin_items_system_v0.1.md:206:| 100 | 已觉醒 | 18 岁或特殊事件可揭示 |
+docs\hidden_bloodline_origin_items_system_v0.1.md:246:18 岁转化材料
+docs\hidden_bloodline_origin_items_system_v0.1.md:252:| 随身物 | 表面含义 | 18 岁转化 |
+docs\hidden_bloodline_origin_items_system_v0.1.md:390:## 10. 18 岁系统觉醒转化
+docs\hidden_bloodline_origin_items_system_v0.1.md:392:18 岁时系统会扫描：
+docs\hidden_bloodline_origin_items_system_v0.1.md:415:域外战场：开局获得回春丹 x1
+docs\hidden_bloodline_origin_items_system_v0.1.md:430:5. 隐藏命进度会影响 18 岁揭示概率。
+docs\player_flow_pacing_v0.1.md:11:  → Optional interlude
+codex_prompts\LM-C003_weight_conditions_engine.md:2:> Do not execute this prompt directly. Reason: legacy LM v0.1 weighting is not storyline/density/ME2-aware and is superseded by MIG-C004 plus SIM-C006.
+docs\outer_battlefield_first_run_design_v0.1.md:1:# 域外战场第一战设计 v0.1
+docs\outer_battlefield_first_run_design_v0.1.md:5:域外战场第一战是 18 岁系统觉醒后的第一场实战。
+docs\outer_battlefield_first_run_design_v0.1.md:22:宿主将被投放至域外战场边缘。
+docs\outer_battlefield_first_run_design_v0.1.md:100:域外残兵：基础小怪，直线移动。
+docs\outer_battlefield_first_run_design_v0.1.md:181:允许再次进入域外战场
+docs\outer_battlefield_first_run_design_v0.1.md:191:【宿主可再次接受域外战场投放。】
+codex_prompts\LPI-C001_data_schema_registry.md:3:目标：接入 `data/life_interludes/**`，建立 LifeInterludeRegistry。
+codex_prompts\LPI-C001_data_schema_registry.md:12:1. 导入/复制 `interlude_mode_definitions.v0.1.json`、`interlude_trigger_rules.v0.1.json`、`interlude_event_catalog.v0.1.json`、`interlude_result_writeback_rules.v0.1.json`、`interlude_frequency_budget.v0.1.json`。
+codex_prompts\LPI-C001_data_schema_registry.md:22:   - interlude 引用的 mode 存在
+codex_prompts\LPI-C004_result_writeback_engine.md:6:- 不泄露 hidden trueName。
+codex_prompts\LPI-C002_trigger_engine.md:19:   - storyline / thread 标签加成
+codex_prompts\LM-C008_tests_distribution.md:2:> Do not execute this prompt directly. Reason: legacy LM distribution tests cover the old monthly-event model and must be replaced by ME2/storyline/density acceptance.
+codex_prompts\LPI-C005_life_sim_major_choice_integration.md:8:- 只在已有 MajorChoice 流程上扩展 interludeCandidate。
+codex_prompts\LPI-C005_life_sim_major_choice_integration.md:12:2. 让部分选项包含 `interludeCandidate`。
+docs\module_migration_matrix_v0.1.md:5:| OAG v0.1 | Opening + NinePalaceEvaluation | 在 OAG 输出后增加 NPF 评分层 | Seeded RNG、灵根数据 | 松散权重 | 与 DT 集成顺序 |
+docs\module_migration_matrix_v0.1.md:7:| HFO v0.1 | HFO2 Narrative Chain | 隐藏命由一次生成升级为生命周期 | 身世/随身物池 | 直接显示隐藏名 | 泄露 trueName |
+docs\module_migration_matrix_v0.1.md:10:| A18 v0.1 | Adult Node Bridge | 保留 216 月结算，但不写死域外唯一出口 | 属性转化公式 | 必定域外 | 设计分支过多 |
+docs\narrative_density_controller_v0.2.md:26:  densityUsed: number;
+docs\narrative_density_controller_v0.2.md:37:densityBudgetPerSixMonths = 18
+docs\narrative_density_controller_v0.2.md:72:如果 active storyline 在过去 12 个月没有任何推进：
+docs\narrative_density_controller_v0.2.md:75:matching active storyline thread events +12
+docs\narrative_density_controller_v0.2.md:76:choice_seed related to active storyline +6
+docs\narrative_density_controller_v0.2.md:79:如果 fated storyline 过去 18 个月没有推进：
+docs\narrative_density_controller_v0.2.md:89:若过去 12 个月已有 2 个 interludeCandidate：
+docs\narrative_density_controller_v0.2.md:92:interlude_hook weight *= 0.35
+docs\narrative_density_controller_v0.2.md:98:interlude_hook weight += 8
+docs\origin_as_storyline_system_v0.2.md:17:18 岁结算方向
+docs\monthly_life_event_system_v0.1.md:1:# 《0–18 岁人生模拟月度事件系统 v0.1》
+docs\monthly_life_event_system_v0.1.md:16:5. 《18 岁系统觉醒与域外战场开局转化 v0.1》
+docs\monthly_life_event_system_v0.1.md:21:从 0 岁到 18 岁，共 216 个月；
+docs\monthly_life_event_system_v0.1.md:25:18 岁时把累计的人生状态交给系统觉醒结算。
+docs\monthly_life_event_system_v0.1.md:49:我到 18 岁时不是白板，而是带着伤病、随身物、心结、功德、业力、血脉线索进入域外战场。
+docs\monthly_life_event_system_v0.1.md:58:5. **服务 18 岁结算**：月度事件积累的状态会影响第一场域外战场与洞府开启。
+docs\monthly_life_event_system_v0.1.md:104:| 觉醒 | 18 岁 | 216 | 系统降临，域外战场征召 |
+docs\monthly_life_event_system_v0.1.md:161:| 系统前兆 | 18 岁系统觉醒和域外战场征召前兆 |
+docs\monthly_life_event_system_v0.1.md:317:| age18Hook | 埋下 18 岁觉醒修正 |
+docs\monthly_life_event_system_v0.1.md:400:## 10. 与 18 岁系统觉醒的关系
+docs\monthly_life_event_system_v0.1.md:411:18 岁结算读取：
+docs\monthly_life_event_system_v0.1.md:433:域外战场 RunConfig
+docs\monthly_life_event_system_v0.1.md:447:18 岁觉醒事件：20+
+docs\monthly_life_event_system_v0.1.md:495:18 岁系统觉醒结算
+docs\monthly_life_event_system_v0.1.md:496:域外战场战斗
+codex_prompts\LPI-C007_dev_interlude_lab.md:1:# LPI-C007：/dev/life-interlude-lab
+codex_prompts\LPI-C007_dev_interlude_lab.md:6:1. 创建 /dev/life-interlude-lab。
+docs\major_choice_playable_interludes_v0.1.md:5:本系统定义：在 0–18 岁人生模拟中，**每半年一次的重大选择**何时、如何触发短玩法插曲。
+docs\major_choice_playable_interludes_v0.1.md:66:| STG 雷霆战机 | 灵识御物、梦中域外、后山妖影、飞剑异动 | 雨夜后山、域外梦战、飞剑试炼 |
+docs\major_choice_playable_interludes_v0.1.md:222:18 岁 hook
+docs\major_choice_playable_interludes_v0.1.md:226:### 18 岁节点
+docs\major_choice_playable_interludes_v0.1.md:234:0–18 岁共 36 次半年选择。建议目标：
+docs\major_choice_playable_interludes_v0.1.md:281:interludeWeight =
+docs\major_choice_playable_interludes_v0.1.md:284:  + storylineWeight
+docs\major_choice_playable_interludes_v0.1.md:312:域外梦
+docs\major_choice_playable_interludes_v0.1.md:369:  interludeId: string;
+docs\major_choice_playable_interludes_v0.1.md:545:8. 插曲不会直接修改成年 Profile 战斗数据，除非通过 18 岁 hook。
+codex_prompts\LPI-C008_tests_telemetry.md:19:- interludeModeDistribution
+codex_prompts\LPI-C008_tests_telemetry.md:24:- interludeFatigueAverage
+docs\major_life_choice_system_v0.1.md:4:定位：0–18 岁人生模拟的玩家决策核心
+docs\major_life_choice_system_v0.1.md:33:4. 埋下 18 岁系统觉醒和第一场域外战场的开局修正。
+docs\major_life_choice_system_v0.1.md:45:0–18 岁 = 216 个月
+docs\major_life_choice_system_v0.1.md:49:18 岁：系统觉醒，不再触发普通半年选择
+docs\major_life_choice_system_v0.1.md:282:addAge18Hook           18 岁系统觉醒 hook
+docs\major_life_choice_system_v0.1.md:351:逆命点可在 18 岁结算中转化为根骨、心性或隐藏觉醒。
+docs\major_life_choice_system_v0.1.md:385:雷雨、后山、天道注视、域外战场梦境选项可能触发隐藏进度。
+docs\major_life_choice_system_v0.1.md:434:conversionHook 18 岁转化
+docs\major_life_choice_system_v0.1.md:573:10. 18 岁前可产生 age18 hooks。
+docs\major_choice_risk_hidden_branch_v0.2.md:5:本文件是 `半年重大选择与成功判定系统 v0.1` 的升级版，适用于 0–18 岁人生模拟。
+docs\major_choice_risk_hidden_branch_v0.2.md:213:| interlude | 玩法插曲候选 | STG、割草、DBG、自走棋 |
+docs\major_choice_risk_hidden_branch_v0.2.md:287:| storylineBranch | 人生主线 fated/dominant 后出现 |
+docs\major_choice_risk_hidden_branch_v0.2.md:288:| interludeBranch | 触发玩法插曲 |
+docs\major_choice_risk_hidden_branch_v0.2.md:301:storylineScore +/-
+docs\major_choice_risk_hidden_branch_v0.2.md:333:选择可以携带 `interludeCandidate`：
+docs\major_choice_risk_hidden_branch_v0.2.md:336:option.interludeCandidate = {
+docs\major_choice_risk_hidden_branch_v0.2.md:337:  interludeId: "interlude_rain_backhill_stg",
+docs\major_choice_risk_hidden_branch_v0.2.md:421:interlude 选项：8–12 个
+codex_prompts\LST-C001_data_schema_registry.md:3:目标：接入 `data/life_storylines/**` 数据，建立 StorylineRegistry 和数据校验。
+codex_prompts\LST-C001_data_schema_registry.md:13:1. 将 `data/life_storylines/storyline_definitions.v0.1.json`、`event_threads.v0.1.json`、`storyline_scoring_rules.v0.1.json` 接入工程。
+codex_prompts\LST-C001_data_schema_registry.md:19:   - listThreadsByStoryline(storylineId)
+codex_prompts\LST-C001_data_schema_registry.md:20:4. 接入校验脚本 `scripts/validate_life_storylines_data.mjs`，可作为 npm script。
+codex_prompts\LST-C001_data_schema_registry.md:24:   - 每条 thread 引用的 storyline 存在
+codex_prompts\LST-C001_data_schema_registry.md:31:- node scripts/validate_life_storylines_data.mjs
+docs\mode_contracts_and_result_writeback_v0.1.md:9:| STG | 域外战场历练 | 60–180 秒 |
+docs\mode_contracts_and_result_writeback_v0.1.md:21:域外梦战
+docs\mode_contracts_and_result_writeback_v0.1.md:161:  | { type: "modifyStorylineScore"; storylineId: string; amount: number }
+docs\mvp_scope_and_cuts_v0.1.md:7:0–18 岁时间推进
+docs\mvp_scope_and_cuts_v0.1.md:41:完整 18 岁域外战场重构
+docs\mvp_scope_and_cuts_v0.1.md:63:不要在模拟中硬编码 18 岁必定域外战场。
+docs\opening_attribute_root_generator_v0.1.md:13:  → 进入 0–18 岁人生模拟
+docs\opening_attribute_root_generator_v0.1.md:16:本系统只负责“先天底子”，不负责完整人生事件，也不负责最终域外战场数值。它输出一个稳定、可复现、可锁定重 Roll、能被后续系统消费的 `OpeningInnateDraft`。
+docs\opening_attribute_root_generator_v0.1.md:69:| 根骨 `rootBone` | 1–120 | 身体承载、炼体资质 | 人生体魄成长、域外生命、局外修炼效率 |
+docs\opening_attribute_root_generator_v0.1.md:81:| 属性 | 出生范围 | 18 岁转化 |
+docs\opening_attribute_root_generator_v0.1.md:92:`growthBias` 不直接显示给玩家，但会影响 0–18 岁事件收益：
+docs\opening_attribute_root_generator_v0.1.md:275:雷：偏战斗、天劫、域外战场、爆发
+docs\opening_attribute_root_generator_v0.1.md:333:雷 → 雷雨、天道注视、域外预兆事件
+docs\opening_attribute_root_generator_v0.1.md:343:| 灵根 | 域外战场 STG | 虫族入侵 | 万族试炼塔 | 天地棋局 |
+docs\opening_attribute_root_generator_v0.1.md:497:域外战场数值最终平衡
+docs\monthly_event_pool_weight_density_v0.2.md:5:适用范围：0–18 岁人生模拟，每月自动事件，216 个月完整推演
+docs\monthly_event_pool_weight_density_v0.2.md:151:densityBudgetPerSixMonths = 18
+docs\monthly_event_pool_weight_density_v0.2.md:155:每个事件有 `densityCost`：
+docs\monthly_event_pool_weight_density_v0.2.md:178:3. 获取 NinePalaceEvaluation
+docs\monthly_event_pool_weight_density_v0.2.md:183:8. 获取最近 6 个月 densityState
+docs\monthly_event_pool_weight_density_v0.2.md:188:13. 推进 eventThreads / storylines
+docs\monthly_event_pool_weight_density_v0.2.md:190:15. 更新 densityState
+docs\monthly_event_pool_weight_density_v0.2.md:211:   + storylineBonus
+docs\monthly_event_pool_weight_density_v0.2.md:214:   + densityAdjust
+docs\monthly_event_pool_weight_density_v0.2.md:317:hook_interlude_rain_mountain
+docs\monthly_event_pool_weight_density_v0.2.md:329:hook_interlude_rain_mountain
+docs\monthly_event_pool_weight_density_v0.2.md:451:18 岁觉醒系统
+codex_prompts\LST-C002_storyline_scoring_engine.md:11:   - NinePalaceEvaluation
+docs\llm_narrative_pipeline_v0.1.md:5:本系统服务于 0–18 岁人生模拟，不负责游戏逻辑本身。
+docs\llm_narrative_pipeline_v0.1.md:45:决定 18 岁觉醒路径
+docs\llm_narrative_pipeline_v0.1.md:46:泄露 hidden trueName
+docs\llm_narrative_pipeline_v0.1.md:91:interlude_intro
+docs\llm_narrative_pipeline_v0.1.md:92:interlude_result
+docs\llm_narrative_pipeline_v0.1.md:235:把 hidden trueName 发给 LLM
+docs\weight_algorithm_integration_v0.2.md:9:NinePalaceEvaluation
+docs\weight_algorithm_integration_v0.2.md:38:   + storylineBonus
+docs\weight_algorithm_integration_v0.2.md:41:   + densityAdjust
+docs\weight_algorithm_integration_v0.2.md:58:| 主线 | storyline_alchemy、storyline_system_omen |
+docs\migration_plan_current_to_v02.md:9:  → NinePalaceEvaluation
+docs\migration_plan_current_to_v02.md:25:| coreStats / aptitude | 保留，但加入 NinePalaceEvaluation |
+docs\migration_plan_current_to_v02.md:27:| destiny selection | 保留，但通过 DEM eligibility/mutation 重评估 |
+docs\migration_plan_current_to_v02.md:28:| background origin | 保留，但升级为 origin storyline |
+docs\migration_plan_current_to_v02.md:29:| hidden fate | 保留 trueName 内部字段，但 UI 永不泄露 |
+docs\migration_plan_current_to_v02.md:37:| 平铺随机天命 | 废弃，改为 eligibility/mutation |
+docs\migration_plan_current_to_v02.md:38:| 纯随机月度事件 | 废弃，改为 storyline/density weighted |
+docs\migration_plan_current_to_v02.md:40:| 18 岁硬切域外 | 弱化，改为成年节点路径评分 |
+docs\nine_palace_fate_matrix_v0.1.md:122:域外战场开局属性
+docs\nine_palace_fate_matrix_v0.1.md:218:| 雷 | 灵感、气运、气 | 雷法、天劫、域外、爆发 |
+docs\nine_palace_fate_matrix_v0.1.md:393:| 属性 | 域外战场 | 虫族入侵 | 万族试炼塔 | 天地棋局 |
+docs\npf_dem_execution_order_v0.1.md:38:eligibility evaluation
+docs\npf_dem_execution_order_v0.1.md:42:mutation resolution
+docs\npf_dem_execution_order_v0.1.md:67:DEM-C002_eligibility_evaluator
+docs\npf_dem_execution_order_v0.1.md:68:DEM-C003_mutation_resolver
+docs\npf_dem_execution_order_v0.1.md:70:NPF-C003_destiny_eligibility_mutation_engine
+docs\npf_dem_execution_order_v0.1.md:84:4. DEM evaluator checks legal destiny eligibility.
+docs\npf_dem_execution_order_v0.1.md:85:5. DEM mutation resolver handles anti-match and weak-support cases.
+docs\npf_dem_execution_order_v0.1.md:106:node scripts/validate_destiny_eligibility_data.mjs
+docs\npf_dem_execution_order_v0.1.md:132:MIG-C005_life_choice_interlude_stage_integration
+codex_prompts\LST-C006_dev_storyline_debug_page.md:1:# LST-C006：/dev/life-storylines 调试页
+codex_prompts\LST-C006_dev_storyline_debug_page.md:6:1. 新增 `/dev/life-storylines`。
+codex_prompts\LST-C006_dev_storyline_debug_page.md:18:   - candidate play interlude hooks
+docs\life_storylines_event_threads_v0.1.md:4:定位：0–18 岁人生模拟的叙事骨架与事件线系统  
+docs\life_storylines_event_threads_v0.1.md:34:阶段转化与 18 岁结算读取主线进度
+docs\life_storylines_event_threads_v0.1.md:51:4. 为月度事件系统提供 storylineWeight / storylineTags。
+docs\life_storylines_event_threads_v0.1.md:54:7. 为阶段转化和 18 岁系统觉醒提供 accumulatedLifeThreads。
+docs\life_storylines_event_threads_v0.1.md:63:4. 18 岁属性转化公式。
+docs\life_storylines_event_threads_v0.1.md:73:人生主线是角色 0–18 岁阶段不断被命盘、身世和选择推着靠近的“成长方向”。它不是职业，也不是玩家硬选的路线，而是事件权重和选择结果自然形成的倾向。
+docs\life_storylines_event_threads_v0.1.md:86:| 系统前兆线 | 杂音、天外战鼓、命盘裂光 | 系统共鸣体、灵感高、域外战场回响 |
+docs\life_storylines_event_threads_v0.1.md:102:每条主线拥有一个 `storylineScore`，范围建议为 0–100+。
+docs\life_storylines_event_threads_v0.1.md:112:NinePalaceEvaluation
+docs\life_storylines_event_threads_v0.1.md:118:storylineScore =
+docs\life_storylines_event_threads_v0.1.md:191:resolution：16–18 岁
+docs\life_storylines_event_threads_v0.1.md:310:| STG 雷霆战机 | 后山妖影、飞剑异动、域外梦战、山村灾劫 |
+docs\life_storylines_event_threads_v0.1.md:414:| 18 岁结算 | 决定第一战开局与洞府线索 |
+docs\ui_ux_spec_v0.1.md:76:0 岁 → 18 岁
+docs\ui_ux_spec_v0.1.md:100:当选择携带 interludeCandidate：
+docs\storyline_taxonomy_schema_v0.1.md:29:  storylineId: string;
+docs\storyline_taxonomy_schema_v0.1.md:104:  storylineId: string;
+docs\storyline_taxonomy_schema_v0.1.md:113:  storylineId: string;
+docs\scoring_and_progression_algorithm_v0.1.md:7:NinePalaceEvaluation
+docs\scoring_and_progression_algorithm_v0.1.md:18:for each storyline:
+docs\testing_acceptance_v0.1.md:21:创建页、月度日志、半年选择、阶段总结均不能显示隐藏命 trueName。
+docs\trigger_frequency_balance_v0.1.md:5:0–18 岁共有 36 次半年选择。建议全程：
+docs\trigger_frequency_balance_v0.1.md:43:interludeFatigue = recentInterludesLast24Months * 10
+docs\testing_acceptance_v0.2.md:20:interludeCandidate 格式正确
+docs\testing_acceptance_v0.2.md:38:每年 interlude candidates 在合理范围
+docs\testing_acceptance_v0.2.md:80:5. 18 岁 hook 能自然积累。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:5:本文件定义 0–18 岁人生模拟中的“阶段转化”系统。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:9:1. 是否必须 18 岁转阶段？
+docs\life_stage_transition_initiation_rhythm_v0.1.md:40:### 1.2 18 岁是默认成年大节点，不是硬编码唯一出口
+docs\life_stage_transition_initiation_rhythm_v0.1.md:45:18 岁 → 成年节点 → 系统觉醒 / 入道试炼 / 洞府开启前置
+docs\life_stage_transition_initiation_rhythm_v0.1.md:53:| 正常触发 | 18 岁成年节点默认进行人生结算 |
+docs\life_stage_transition_initiation_rhythm_v0.1.md:59:18 岁必定进入成年结算；
+docs\life_stage_transition_initiation_rhythm_v0.1.md:75:18 岁成年节点强制结算
+docs\life_stage_transition_initiation_rhythm_v0.1.md:78:如果玩家只是每月随机 +2，到了 18 岁突然“系统觉醒”，会很硬。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:82:玩法插曲是高亮节点，不是日常月报。推荐完整 0–18 岁：
+docs\life_stage_transition_initiation_rhythm_v0.1.md:97:用途：命火、家庭、体质、异象、随身物微动。限制：不触发真实战斗、不触发域外、不触发割草，最多有梦境/异象文本。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:109:用途：流派初显、天命显化、系统前兆、关键玩法插曲。允许虫潮守药田、域外梦战、心魔试炼、阵法推演、飞剑异动、血脉半觉醒。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:111:### 2.5 成年节点：18 岁
+docs\life_stage_transition_initiation_rhythm_v0.1.md:113:用途：人生模拟结算、系统觉醒 / 入道试炼 / 洞府权限试炼。v0.1 建议：18 岁触发成年结算界面，根据玩家当前身份与钩子，生成一条“成年试炼路径”。路径可为域外战场、宗门试炼、心魔问道、洞府开辟试炼等。默认 fallback 为域外战场第一战。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:141:角色正式跨入修行门槛。可获得初始法门、初始灵识、修行身份标签。18 岁前若已入道，成年节点不再是“初次入道”，而是“试炼/洞府/系统权限”。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:145:系统前兆已经显著。系统杂音、天外战鼓、命盘裂光、域外梦战权重提升。可与其他身份共存。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:164:| 系统预演 system_preview | 天外战鼓、命盘裂光、系统杂音、域外梦战 | 系统前兆线 | system_candidate |
+docs\life_stage_transition_initiation_rhythm_v0.1.md:178:| 系统转化 | 系统前兆/成年结算触发 | 系统候选者 → 域外征召 |
+docs\life_stage_transition_initiation_rhythm_v0.1.md:213:18 岁：成年试炼可独立设计。
+docs\life_stage_transition_initiation_rhythm_v0.1.md:218:## 7. 18 岁成年节点路径
+docs\life_stage_transition_initiation_rhythm_v0.1.md:220:v0.1 建议不再写死唯一“域外战场”，而是定义 5 个成年出口：
+docs\life_stage_transition_initiation_rhythm_v0.1.md:224:| 系统征召：域外战场 | 系统前兆线、雷灵根、天妒、劫雷亲和、高灵感 | STG |
+docs\life_stage_transition_initiation_rhythm_v0.1.md:243:| interlude_failure_fright | 心结增加，可能延后入道 |
+docs\life_stage_transition_initiation_rhythm_v0.1.md:283:18 岁成年节点路径选择
+docs\life_stage_transition_initiation_rhythm_v0.1.md:284:默认域外战场 fallback
+docs\stage_taxonomy_schema_v0.1.md:68:  triggerType: "age" | "token" | "score" | "choice" | "interlude" | "age18";
+codex_prompts\LSTG-C005_life_sim_interlude_integration.md:24:- interlude result stg_rain_mountain_success 推进阶段候选。
+docs\risk_register_v0.1.md:6:| 隐藏命泄露 | 高 | trueName 进入 DOM/LLM/日志 | Sanitizer + visible model test |
+docs\risk_register_v0.1.md:10:| 阶段转化太硬 | 中 | 18 岁强制域外造成割裂 | Adult path scoring + fallback |
+docs\risk_register_v0.1.md:14:| 存档不可恢复 | 高 | pending choice/interlude 结果刷新变化 | Cache + seeded + persistence tests |
+docs\transition_algorithm_balance_v0.1.md:42:  + interludeResultBonus
+docs\transition_algorithm_balance_v0.1.md:70:18 岁成年节点
+docs\transition_algorithm_balance_v0.1.md:161:所有 0–18 岁玩法插曲失败都不应结束人生。失败应回写：
+docs\reveal_pacing_misdirection_v0.2.md:14:  → 18 岁解析
+docs\reveal_pacing_misdirection_v0.2.md:47:雷雨 + 梦见战场 → 域外战场回响
+docs\reveal_pacing_misdirection_v0.2.md:57:| 18 岁系统解析 | 允许揭示、封印或不稳定觉醒 |
+docs\reveal_pacing_misdirection_v0.2.md:81:18 岁揭示：
+docs\prompt_execution_order_v0.1.md:17:SIM-C004_origin_storyline_item_upgrade
+docs\prompt_execution_order_v0.1.md:18:SIM-C005_life_storyline_stage_interlude_core
+docs\sim_redesign_total_integration_v0.1.md:10:  + 域外战场 STG 为其中一个重要试炼模式
+docs\sim_redesign_total_integration_v0.1.md:18:  → 0–18 岁人生模拟
+docs\sim_redesign_total_integration_v0.1.md:74:### 2.5 18 岁不是唯一硬切
+docs\sim_redesign_total_integration_v0.1.md:76:18 岁是默认成年节点，但阶段转化应分成：
+docs\sim_redesign_total_integration_v0.1.md:145:src/life/storylines/            人生主线、事件线
+docs\sim_redesign_total_integration_v0.1.md:148:src/life/interludes/            玩法插曲候选与回写
+docs\target_architecture_v0.1.md:29:  ├─ NarrativeService
+docs\target_architecture_v0.1.md:69:NarrativeService 不改数值
+docs\target_architecture_v0.1.md:83:  | "interlude_pending"
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:82:当前域外战场 STG 不应在本路线前半段继续重做。先完成：
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:108:life_storylines
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:109:life_interludes
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:123:  → NinePalaceEvaluation
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:141:NarrativeService
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:150:本阶段不强制 18 岁域外战场唯一结果，而是输出 AdultNodeResolution：
+docs\sim_redesign_integration_codex_roadmap_v0.1.md:160:v0.1 可先 fallback 到域外战场第一战，但数据结构必须支持后续多分支。
+docs\sim_redesign_integration_codex_route_v0.1.md:82:当前域外战场 STG 不应在本路线前半段继续重做。先完成：
+docs\sim_redesign_integration_codex_route_v0.1.md:108:life_storylines
+docs\sim_redesign_integration_codex_route_v0.1.md:109:life_interludes
+docs\sim_redesign_integration_codex_route_v0.1.md:123:  → NinePalaceEvaluation
+docs\sim_redesign_integration_codex_route_v0.1.md:141:NarrativeService
+docs\sim_redesign_integration_codex_route_v0.1.md:150:本阶段不强制 18 岁域外战场唯一结果，而是输出 AdultNodeResolution：
+docs\sim_redesign_integration_codex_route_v0.1.md:160:v0.1 可先 fallback 到域外战场第一战，但数据结构必须支持后续多分支。
+docs\system_integration_spec_v0.1.md:9:NinePalaceEvaluation
+docs\system_integration_spec_v0.1.md:24:interludeRecords
+docs\system_integration_spec_v0.1.md:27:storylineFinalState
+docs\system_integration_spec_v0.1.md:35:本包不要求完整 18 岁转化实现。只需要当 `ageMonths >= 216` 时生成：
+docs\system_integration_spec_v0.1.md:65:NarrativeService.renderMonthlyLog()
+docs\system_integration_spec_v0.1.md:66:NarrativeService.renderChoiceIntro()
+docs\system_integration_spec_v0.1.md:67:NarrativeService.renderStageSummary()
+docs\style_and_world_guardrails_v0.1.md:21:古雷真血、丹圣遗骨、系统共鸣体、前世剑魄、魔印微痕、天书残页、域外战场回响
+data\combat_assets\asset_wishlist.v0.1.json:112:      "notes": "域外战场背景"
+codex_prompts\MC2-C002_choice_generation_engine.md:11:6. 支持 interludeCandidateId。
+codex_prompts\MC2-C005_interlude_stage_integration.md:6:1. option 支持 interludeCandidateId。
+codex_prompts\LSTG-C008_tests_telemetry.md:18:4. 系统前兆高角色 18 岁 system path score 高。
+data\life_stage\sample_stage_timelines.v0.1.json:7:      "summary": "山村孤儿 + 雷灵根 + 天妒英才，童年异象，少年后山 STG，青春系统预演，18 岁走域外战场。",
+data\life_stage\sample_stage_timelines.v0.1.json:45:      "summary": "高心性高寿元 + 苟道至尊，长期避战，18 岁出现延后觉醒候选。",
+data\life_stage\sample_stage_timelines.v0.1.json:81:      "summary": "药铺学徒 + 丹道奇才 + 铜炉，少年火候试炼，18 岁走凡域入道/丹炉路线。",
+data\age18\system_home_unlock.v0.1.json:29:      "description": "域外战场结算后凝成的系统界面核心。"
+data\age18\system_home_unlock.v0.1.json:35:      "description": "暂时仅可重新进入域外战场。"
+data\age18\system_home_unlock.v0.1.json:91:      "description": "整理随身物转化后的线索，准备重新进入域外战场。"
+data\life_stage\initiation_node_definitions.v0.1.json:237:      "description": "天外战鼓、命盘裂光、系统杂音、域外梦战。",
+codex_prompts\ME2-C002_event_pool_upgrade.md:13:   - interludeCandidate
+codex_prompts\MC2-C008_tests_telemetry.md:9:4. 满足时显示模糊提示但不泄露 trueName。
+data\character_creation\hidden_fates.v0.1.json:10:      "revealConditions": ["雷雨事件累计 3 次", "域外战场遭遇雷击未死"],
+data\character_creation\hidden_fates.v0.1.json:72:      "tags": ["系统", "域外", "命运"],
+data\life_stage\cultivation_identity_stages.v0.1.json:35:        "dream_interlude_low"
+data\life_stage\cultivation_identity_stages.v0.1.json:86:        "real_minor_interludes",
+data\life_stage\cultivation_identity_stages.v0.1.json:96:        "interlude_success"
+data\life_stage\cultivation_identity_stages.v0.1.json:119:        "storyline_70",
+data\life_stage\cultivation_identity_stages.v0.1.json:154:      "description": "系统前兆显著。成年节点更可能走系统征召/域外战场路径。",
+codex_prompts\ME2-C001_data_schema_registry.md:15:4. 接入 narrative_density_rules.v0.2.json
+codex_prompts\ME2-C001_data_schema_registry.md:17:6. 接入 storyline_event_mapping.v0.2.json
+codex_prompts\ME2-C001_data_schema_registry.md:26:- hidden trueName 不泄露
+data\age18\destiny_projection_rules.v0.1.json:40:      "systemMessages": ["雷霆亲和已记录，域外雷痕将回应你。"]
+data\character_creation\destiny_traits.v0.1.json:51:      "positiveEffects": ["战斗中修为与灵气收益提高", "域外战场击杀收益提高"],
+data\fate_matrix\three_powers_yinyang_wuxing.v0.1.json:180:        "域外",
+codex_prompts\MC2-C007_ui_integration.md:17:- 如果有 interludeCandidate，先进入插曲简报。
+data\age18\outer_battlefield_intro_run.v0.1.json:5:  "displayName": "域外战场·初次征召",
+codex_prompts\ME2-C005_storyline_stage_integration.md:6:1. 事件绑定 storylineIds 时增加相应主线权重。
+codex_prompts\ME2-C005_storyline_stage_integration.md:9:4. interludeCandidate 交给半年选择系统。
+codex_prompts\ME2-C003_weight_selector.md:7:- NinePalaceEvaluation
+codex_prompts\ME2-C003_weight_selector.md:18:4. storylineBonus。
+data\age18\awakening_rules.v0.1.json:30:    { "id": "outer_battlefield_call", "text": "域外战场征召开始。" },
+codex_prompts\ME2-C004_density_controller.md:6:1. 六个月窗口 densityUsed。
+codex_prompts\ME2-C004_density_controller.md:19:- interludeCandidate 不过频
+codex_prompts\ME2-C007_llm_text_hooks.md:16:- forbidden hidden trueName 会被测试拦截
+codex_prompts\ME2-C008_dev_page_tests_telemetry.md:23:   - density
+codex_prompts\ME2-C008_dev_page_tests_telemetry.md:24:   - storyline bias
+codex_prompts\ME2-C008_dev_page_tests_telemetry.md:25:   - no hidden trueName leak
+data\fate_matrix\generation_algorithm_upgrade_rules.v0.1.json:26:    "mutationChanceWhenContradicted": 0.75
+codex_prompts\ME2-C006_effect_applier_logs.md:9:4. hidden trueName 不得出现在日志。
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:3:  "id": "destiny_eligibility_rules",
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:109:            "mutation:from_heaven_jealous_talent"
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:192:            "mutation:cowardly_plus_killing"
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:292:            "mutation:waste_root_high_talent"
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:382:            "mutation:war_low_martial"
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:467:            "mutation:thunder_unstable"
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:551:            "mutation:alchemy_low_heart"
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:636:            "mutation:artifact_low_resonance"
+data\fate_matrix\destiny_eligibility_rules.v0.1.json:725:            "mutation:demon_plus_clean"
+data\fate_matrix\attribute_correlation_rules.v0.1.json:65:      "mutation": "destiny_false_heaven_burden"
+data\fate_matrix\attribute_correlation_rules.v0.1.json:76:      "mutation": "destiny_prodigy_under_calamity"
+data\fate_matrix\attribute_correlation_rules.v0.1.json:87:      "mutation": "destiny_hidden_killer"
+data\fate_matrix\attribute_correlation_rules.v0.1.json:98:      "mutation": "destiny_shadowed_lotus"
+codex_prompts\MIG-C001_prompt_inventory_and_deprecation.md:13:   - 任何写死 18 岁必定域外的 prompt。
+codex_prompts\MIG-C002_data_registry_unification.md:10:- data/life_storylines/
+codex_prompts\MIG-C002_data_registry_unification.md:11:- data/life_interludes/
+data\life_sim_v02\life_sim_v02_core.v0.2.json:11:      "densityTags": ["quiet", "omen"],
+codex_prompts\MIG-C003_character_creation_v02_adapter.md:10:   - NinePalaceEvaluation
+codex_prompts\MIG-C003_character_creation_v02_adapter.md:22:5. 页面不显示隐藏 trueName。
+codex_prompts\MIG-C003_character_creation_v02_adapter.md:36:- hidden trueName 不在 ViewModel visible fields。
+data\life_sim_v02\monthly_event_categories.v0.2.json:8:      "densityCost": 1
+data\life_sim_v02\monthly_event_categories.v0.2.json:14:      "densityCost": 1
+data\life_sim_v02\monthly_event_categories.v0.2.json:20:      "densityCost": 2
+data\life_sim_v02\monthly_event_categories.v0.2.json:26:      "densityCost": 2
+data\life_sim_v02\monthly_event_categories.v0.2.json:32:      "densityCost": 2
+data\life_sim_v02\monthly_event_categories.v0.2.json:38:      "densityCost": 2
+data\life_sim_v02\monthly_event_categories.v0.2.json:44:      "densityCost": 2
+data\life_sim_v02\monthly_event_categories.v0.2.json:50:      "densityCost": 2
+data\life_sim_v02\monthly_event_categories.v0.2.json:56:      "densityCost": 2
+data\life_sim_v02\monthly_event_categories.v0.2.json:62:      "densityCost": 3
+data\life_sim_v02\monthly_event_categories.v0.2.json:68:      "densityCost": 3
+data\life_sim_v02\monthly_event_categories.v0.2.json:74:      "densityCost": 3
+data\life_sim_v02\monthly_event_categories.v0.2.json:77:      "id": "storyline_thread",
+data\life_sim_v02\monthly_event_categories.v0.2.json:80:      "densityCost": 3
+data\life_sim_v02\monthly_event_categories.v0.2.json:83:      "id": "interlude_hook",
+data\life_sim_v02\monthly_event_categories.v0.2.json:86:      "densityCost": 4
+data\life_sim_v02\monthly_event_categories.v0.2.json:92:      "densityCost": 4
+data\life_sim_v02\monthly_event_categories.v0.2.json:98:      "densityCost": 4
+codex_prompts\MIG-C004_life_sim_v02_core_integration.md:14:   - NinePalaceEvaluation
+codex_prompts\MIG-C004_life_sim_v02_core_integration.md:22:   - density window
+codex_prompts\MIG-C004_life_sim_v02_core_integration.md:32:- 不强制 18 岁域外。
+codex_prompts\MIG-C004_life_sim_v02_core_integration.md:40:- hidden trueName 不泄露。
+data\life_sim_v02\monthly_event_tiers.v0.2.json:37:      "description": "推进 active storyline 的事件线。",
+data\life_sim_v02\monthly_event_pool.v0.2.json:23:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:44:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:71:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:91:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:117:      "storylineIds": [],
+data\life_sim_v02\monthly_event_pool.v0.2.json:139:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:165:      "storylineIds": [],
+data\life_sim_v02\monthly_event_pool.v0.2.json:178:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:205:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:222:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:249:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:271:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:297:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:317:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:344:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:365:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:391:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:416:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:443:      "storylineIds": [],
+data\life_sim_v02\monthly_event_pool.v0.2.json:461:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:487:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:508:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:534:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:555:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:581:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:603:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:630:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:650:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:677:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:698:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:725:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:744:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:771:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:794:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:821:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:848:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:875:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:900:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:916:      "category": "interlude_hook",
+data\life_sim_v02\monthly_event_pool.v0.2.json:925:        "interlude_stg"
+data\life_sim_v02\monthly_event_pool.v0.2.json:927:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:948:        "hook_interlude_rain_mountain"
+data\life_sim_v02\monthly_event_pool.v0.2.json:950:      "interludeCandidate": "interlude_rain_backhill_stg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:976:      "storylineIds": [],
+data\life_sim_v02\monthly_event_pool.v0.2.json:993:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1020:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1039:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1066:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1093:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1120:      "storylineIds": [],
+data\life_sim_v02\monthly_event_pool.v0.2.json:1142:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1169:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1191:      "interludeCandidate": "interlude_talisman_heart_dbg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1218:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1236:      "interludeCandidate": "interlude_village_defense_stg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1263:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1290:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1317:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1347:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1374:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1402:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1429:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1457:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1484:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1508:      "interludeCandidate": "interlude_forbidden_page_dbg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1535:      "storylineIds": [],
+data\life_sim_v02\monthly_event_pool.v0.2.json:1561:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1588:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1613:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1640:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1661:      "interludeCandidate": "interlude_fire_control_text_check",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1677:      "category": "interlude_hook",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1688:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1715:      "interludeCandidate": "interlude_ancestral_jade_board",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1731:      "category": "storyline_thread",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1742:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1770:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1797:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1822:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:1849:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1869:      "interludeCandidate": "interlude_stream_rescue_text_check",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1896:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1914:      "interludeCandidate": "interlude_guard_herb_field_horde",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1941:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:1968:      "interludeCandidate": "interlude_demon_whisper_dbg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:1995:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2015:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2042:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2070:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2097:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2120:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2147:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2173:      "interludeCandidate": "interlude_outer_dream_stg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:2200:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2229:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2256:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2279:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2306:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2326:      "interludeCandidate": "interlude_rescue_stg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:2353:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2385:      "interludeCandidate": "interlude_ancestral_jade_board",
+data\life_sim_v02\monthly_event_pool.v0.2.json:2412:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2438:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2465:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2493:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2520:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2546:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2573:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2600:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2627:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2658:      "interludeCandidate": "interlude_blood_oath_dbg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:2685:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2712:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2738:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2757:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2784:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2810:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2837:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2853:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2880:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2902:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2929:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:2956:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:2983:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3004:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3031:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3057:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3084:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3104:      "interludeCandidate": "interlude_wolf_shadow_stg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:3131:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3158:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3185:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3210:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3237:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3257:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3284:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3311:      "interludeCandidate": "interlude_ancestral_jade_board",
+data\life_sim_v02\monthly_event_pool.v0.2.json:3338:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3358:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3385:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3407:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3433:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3457:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3484:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3506:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3532:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3551:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3578:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3598:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3625:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3648:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3675:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3697:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3713:      "category": "interlude_hook",
+data\life_sim_v02\monthly_event_pool.v0.2.json:3724:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3742:      "interludeCandidate": "interlude_guard_herb_field_horde",
+data\life_sim_v02\monthly_event_pool.v0.2.json:3769:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3791:      "interludeCandidate": "interlude_teacher_question_dbg",
+data\life_sim_v02\monthly_event_pool.v0.2.json:3818:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3845:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3872:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3896:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3923:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3947:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:3974:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:3996:      "interludeCandidate": "interlude_fireline_horde",
+data\life_sim_v02\monthly_event_pool.v0.2.json:4023:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:4046:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:4073:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:4100:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:4127:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:4153:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:4180:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:4202:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:4229:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:4255:      "interludeCandidate": null,
+data\life_sim_v02\monthly_event_pool.v0.2.json:4282:      "storylineIds": [
+data\life_sim_v02\monthly_event_pool.v0.2.json:4309:      "interludeCandidate": null,
+codex_prompts\MIG-C005_life_choice_interlude_stage_integration.md:10:   - active storylines
+codex_prompts\MIG-C005_life_choice_interlude_stage_integration.md:14:   - interlude frequency budget
+codex_prompts\MIG-C005_life_choice_interlude_stage_integration.md:16:4. 满足条件时显示隐藏分支，但不泄露 hidden trueName。
+codex_prompts\MIG-C005_life_choice_interlude_stage_integration.md:17:5. 选项可携带 interludeCandidate。
+data\life_sim_v02\monthly_event_weighting_rules.v0.2.json:3:  "baseFormula": "finalWeight = (baseWeight + tagBonus + storylineBonus + threadBonus + stageBonus + densityAdjust + destinyManifestBonus) * repeatPenalty * cooldownPenalty * phaseMultiplier",
+data\life_sim_v02\monthly_event_weighting_rules.v0.2.json:60:  "densityAdjust": {
+data\life_sim_v02\storyline_event_mapping.v0.2.json:3:  "storylineToPreferredCategories": {
+data\life_sim_v02\storyline_event_mapping.v0.2.json:13:      "interlude_hook",
+data\life_sim_v02\storyline_event_mapping.v0.2.json:14:      "storyline_thread"
+data\life_sim_v02\storyline_event_mapping.v0.2.json:19:      "interlude_hook",
+data\life_sim_v02\storyline_event_mapping.v0.2.json:26:      "storyline_thread"
+data\life_sim_v02\storyline_event_mapping.v0.2.json:38:      "interlude_hook"
+data\life_sim_v02\storyline_event_mapping.v0.2.json:50:      "interlude_hook"
+data\life_sim_v02\storyline_event_mapping.v0.2.json:69:      "interlude_hook"
+codex_prompts\MIG-C007_llm_narrative_pipeline_optional.md:3:目标：接入 LLM NarrativeService，但默认使用 fallback 模板，不强制真实 DeepSeek API。
+codex_prompts\MIG-C007_llm_narrative_pipeline_optional.md:8:2. 实现 sanitizer：禁止 hidden trueName、内部 hidden id、现代词进入请求。
+codex_prompts\MIG-C007_llm_narrative_pipeline_optional.md:10:4. 实现 NarrativeService：
+codex_prompts\MIG-C007_llm_narrative_pipeline_optional.md:27:- hidden trueName 被脱敏。
+data\life_interludes\interlude_event_catalog.v0.1.json:3:  "interludes": [
+data\life_interludes\interlude_event_catalog.v0.1.json:5:      "id": "interlude_rainy_back_mountain",
+data\life_interludes\interlude_event_catalog.v0.1.json:14:      "storylineTags": [
+data\life_interludes\interlude_event_catalog.v0.1.json:45:      "id": "interlude_guard_medicine_field",
+data\life_interludes\interlude_event_catalog.v0.1.json:54:      "storylineTags": [
+data\life_interludes\interlude_event_catalog.v0.1.json:85:      "id": "interlude_daoist_symbol_trial",
+data\life_interludes\interlude_event_catalog.v0.1.json:94:      "storylineTags": [
+data\life_interludes\interlude_event_catalog.v0.1.json:128:      "id": "interlude_ancestral_jade_board",
+data\life_interludes\interlude_event_catalog.v0.1.json:137:      "storylineTags": [
+data\life_interludes\interlude_event_catalog.v0.1.json:165:      "id": "interlude_outer_battlefield_dream",
+data\life_interludes\interlude_event_catalog.v0.1.json:174:      "storylineTags": [
+data\life_choices_v02\choice_generation_rules.v0.2.json:112:    "storylineMatch": 6,
+data\life_choices_v02\choice_generation_rules.v0.2.json:118:    "densityAdjustMin": -8,
+data\life_choices_v02\choice_generation_rules.v0.2.json:119:    "densityAdjustMax": 8
+data\life_sim_v02\narrative_density_rules.v0.2.json:5:    "densityBudgetPerSixMonths": 18,
+data\life_sim_v02\narrative_density_rules.v0.2.json:19:    "interludeCandidateBudgetPerYear": [
+codex_prompts\MIG-C006_origin_fate_item_narrative_upgrade.md:9:3. 身世支持 origin storyline 四段：earlyEcho / childhoodSeed / youthConflict / teenChoice。
+codex_prompts\MIG-C006_origin_fate_item_narrative_upgrade.md:13:7. 18 岁或成年节点才允许 trueName reveal。
+codex_prompts\MIG-C006_origin_fate_item_narrative_upgrade.md:17:- 创建页不泄露 trueName。
+codex_prompts\MIG-C006_origin_fate_item_narrative_upgrade.md:18:- 月度日志不泄露 trueName。
+codex_prompts\MIG-C006_origin_fate_item_narrative_upgrade.md:19:- 半年选择不泄露 trueName。
+codex_prompts\MIG-C009_age18_or_adult_node_bridge.md:3:目标：把旧 A18 系统改造成成年节点桥接，不再硬写 18 岁必定域外战场。
+data\life_interludes\interlude_mode_definitions.v0.1.json:10:        "梦中域外",
+data\life_interludes\interlude_mode_definitions.v0.1.json:32:        "域外预兆"
+data\life_playable\ui_state_machine.v0.1.json:9:    "interlude_prompt",
+data\life_playable\ui_state_machine.v0.1.json:10:    "interlude_running",
+data\life_playable\ui_state_machine.v0.1.json:11:    "interlude_auto_resolving",
+data\life_playable\ui_state_machine.v0.1.json:35:      "to": "interlude_prompt",
+data\life_playable\ui_state_machine.v0.1.json:36:      "event": "choice_has_interlude"
+data\life_playable\ui_state_machine.v0.1.json:44:      "from": "interlude_prompt",
+data\life_playable\ui_state_machine.v0.1.json:45:      "to": "interlude_running",
+data\life_playable\ui_state_machine.v0.1.json:46:      "event": "manual_interlude"
+data\life_playable\ui_state_machine.v0.1.json:49:      "from": "interlude_prompt",
+data\life_playable\ui_state_machine.v0.1.json:50:      "to": "interlude_auto_resolving",
+data\life_playable\ui_state_machine.v0.1.json:54:      "from": "interlude_running",
+data\life_playable\ui_state_machine.v0.1.json:56:      "event": "interlude_result_written"
+codex_prompts\MIG-C008_life_sim_playable_ui_and_persistence.md:25:- 不泄露 hidden trueName。
+data\life_sim\stat_growth_tables.v0.1.json:119:      "域外战场初始生命与闪避容错",
+data\life_sim\stat_growth_tables.v0.1.json:132:      "苟道事件、域外战场保命符权重"
+data\life_interludes\interlude_trigger_rules.v0.1.json:3:  "weightFormula": "baseWeight + sourceHookWeight + storylineWeight + threadStateWeight + destinyWeight + rootWeight + originWeight + itemWeight + agePhaseWeight - frequencyPenalty - cooldownPenalty",
+data\life_interludes\interlude_trigger_rules.v0.1.json:14:        "storyline:system_omen",
+data\life_interludes\interlude_trigger_rules.v0.1.json:15:        "storyline:village_disaster",
+data\life_interludes\interlude_trigger_rules.v0.1.json:29:        "storyline:alchemy",
+data\life_interludes\interlude_trigger_rules.v0.1.json:30:        "storyline:village_disaster",
+data\life_choices_v02\hidden_branch_rules.v0.2.json:34:      "type": "storylineBranch",
+data\life_choices_v02\hidden_branch_rules.v0.2.json:36:        "storyline:alchemy",
+data\life_choices_v02\hidden_branch_rules.v0.2.json:50:        "storyline:system_omen",
+data\life_playable\telemetry_targets.v0.1.json:12:    "interludeCandidatesShown": [
+data\life_playable\telemetry_targets.v0.1.json:30:    "interlude_prompted",
+data\life_playable\telemetry_targets.v0.1.json:31:    "interlude_resolved",
+data\life_choices_v02\life_choices_v02_core.v0.2.json:11:      "linkedInterludes": ["life_interlude.rain_backhill_stg"],
+data\origin_fate_v02\sample_origin_fate_timelines.v0.2.json:16:      "18 岁系统解析出残炉火候或回春丹初始补给。"
+data\origin_fate_v02\sample_origin_fate_timelines.v0.2.json:34:      "18 岁转化青霜飞剑·残或剑魄回响。"
+data\origin_fate_v02\sample_origin_fate_timelines.v0.2.json:51:      "18 岁可能解锁魂修线索或心魔种。"
+data\life_interludes\life_interludes_core.v0.2.json:3:  "domain": "life_interludes",
+data\life_interludes\life_interludes_core.v0.2.json:4:  "id": "life_interludes.registry.v0_2",
+data\life_interludes\life_interludes_core.v0.2.json:7:      "id": "life_interlude.rain_backhill_stg",
+data\life_choices_v02\major_choice_events.v0.2.json:18:        "storyline_study"
+data\life_choices_v02\major_choice_events.v0.2.json:97:        "interlude"
+data\life_choices_v02\major_choice_events.v0.2.json:100:        "storyline_system_omen",
+data\life_choices_v02\major_choice_events.v0.2.json:101:        "storyline_disaster"
+data\life_choices_v02\major_choice_events.v0.2.json:148:          "interludeCandidateId": "interlude_rain_backhill_stg",
+data\life_choices_v02\major_choice_events.v0.2.json:203:        "storyline_alchemy"
+data\life_choices_v02\major_choice_events.v0.2.json:298:        "storyline_temple",
+data\life_choices_v02\major_choice_events.v0.2.json:299:        "storyline_study"
+data\life_choices_v02\major_choice_events.v0.2.json:363:          "interludeCandidateId": "interlude_talisman_heart_dbg",
+data\life_choices_v02\major_choice_events.v0.2.json:382:        "interlude"
+data\life_choices_v02\major_choice_events.v0.2.json:385:        "storyline_disaster",
+data\life_choices_v02\major_choice_events.v0.2.json:386:        "storyline_martial"
+data\life_choices_v02\major_choice_events.v0.2.json:450:          "interludeCandidateId": "interlude_village_gate_horde",
+data\life_choices_v02\major_choice_events.v0.2.json:472:        "storyline_yin_dream"
+data\life_choices_v02\major_choice_events.v0.2.json:566:        "storyline_fallen_lineage",
+data\life_choices_v02\major_choice_events.v0.2.json:567:        "storyline_martial"
+data\life_choices_v02\major_choice_events.v0.2.json:646:          "interludeCandidateId": "interlude_sword_memory_stg",
+data\life_choices_v02\major_choice_events.v0.2.json:669:        "storyline_alchemy"
+data\life_choices_v02\major_choice_events.v0.2.json:733:          "outcomeEffectKey": "alchemy_mutation"
+data\life_choices_v02\major_choice_events.v0.2.json:782:        "storyline_yin_dream",
+data\life_choices_v02\major_choice_events.v0.2.json:783:        "storyline_disaster"
+data\life_choices_v02\major_choice_events.v0.2.json:882:        "storyline_temple",
+data\life_choices_v02\major_choice_events.v0.2.json:883:        "storyline_system_omen"
+data\life_choices_v02\major_choice_events.v0.2.json:975:        "interlude",
+data\life_choices_v02\major_choice_events.v0.2.json:979:        "storyline_system_omen"
+data\life_choices_v02\major_choice_events.v0.2.json:1044:          "interludeCandidateId": "interlude_outer_drum_stg",
+data\life_choices_v02\major_choice_events.v0.2.json:1057:                "storyline:system_omen",
+data\life_choices_v02\major_choice_events.v0.2.json:1099:        "storyline_study"
+data\life_choices_v02\major_choice_events.v0.2.json:1181:        "storyline_temple"
+data\life_choices_v02\major_choice_events.v0.2.json:1263:        "storyline_martial"
+data\life_choices_v02\major_choice_events.v0.2.json:1345:        "storyline_system_omen"
+data\life_choices_v02\major_choice_events.v0.2.json:1427:        "storyline_martial"
+data\life_choices_v02\major_choice_events.v0.2.json:1509:        "storyline_fallen_lineage"
+data\life_choices_v02\major_choice_events.v0.2.json:1591:        "storyline_study"
+data\life_choices_v02\major_choice_events.v0.2.json:1673:        "storyline_temple"
+data\life_choices_v02\major_choice_events.v0.2.json:1755:        "storyline_system_omen"
+data\life_choices_v02\major_choice_events.v0.2.json:1837:        "storyline_disaster"
+data\life_choices_v02\major_choice_events.v0.2.json:1919:        "storyline_fallen_lineage"
+data\life_choices_v02\major_choice_events.v0.2.json:2001:        "storyline_system_omen"
+data\life_choices_v02\major_choice_events.v0.2.json:2083:        "storyline_system_omen"
+data\life_sim\phase_definitions.v0.1.json:104:        "choiceTone": "进入高收益高风险阶段，明显塑造域外战场开局"
+data\life_playable\pacing_budgets.v0.1.json:32:    "densityBudget": 18,
+data\life_playable\pacing_budgets.v0.1.json:42:    "interludeCandidates": [
+data\life_sim\monthly_event_categories.v0.1.json:107:      "description": "18 岁系统觉醒和域外战场征召前兆"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:11:    "storylineBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:12:      "storyline_village_calamity",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:13:      "storyline_system_omen",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:14:      "storyline_poor_study"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:43:    "interludeBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:44:      "interlude_rain_backhill_stg",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:45:      "interlude_village_guard"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:57:    "storylineBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:58:      "storyline_alchemy_apothecary"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:84:    "interludeBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:85:      "interlude_guard_medicine_field",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:86:      "interlude_fire_control_check"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:98:    "storylineBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:99:      "storyline_temple_incense",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:100:      "storyline_system_omen"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:128:    "interludeBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:129:      "interlude_heart_trial",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:130:      "interlude_ancestral_jade_board"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:142:    "storylineBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:143:      "storyline_hunter_martial",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:144:      "storyline_village_calamity"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:170:    "interludeBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:171:      "interlude_hunt_horde",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:172:      "interlude_village_guard"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:184:    "storylineBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:185:      "storyline_fallen_lineage"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:213:    "interludeBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:214:      "interlude_bamboo_sword_stg",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:215:      "interlude_old_book_dbg"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:227:    "storylineBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:228:      "storyline_yin_dream_soul"
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:254:    "interludeBias": [
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:255:      "interlude_dream_deckbuilder",
+data\origin_fate_v02\origin_storyline_definitions.v0.2.json:256:      "interlude_heart_demon_dbg"
+data\life_sim\log_templates.v0.1.json:47:    "system": "18 岁前只出现异常感，不直接把系统说穿。"
+data\life_playable\content_minimums.v0.1.json:5:    "storylinesVisible": 8,
+data\life_playable\content_minimums.v0.1.json:13:  "interludeMvp": [
+data\life_playable\content_minimums.v0.1.json:15:      "id": "interlude_rain_backhill_stg",
+data\life_playable\content_minimums.v0.1.json:20:      "id": "interlude_heavenly_war_drum_stg",
+data\life_playable\content_minimums.v0.1.json:25:      "id": "interlude_herb_field_horde",
+data\life_playable\content_minimums.v0.1.json:30:      "id": "interlude_talisman_heart_trial_dbg",
+data\life_playable\content_minimums.v0.1.json:35:      "id": "interlude_ancestral_jade_board",
+data\life_choices_v02\sample_choice_results.v0.2.json:41:        "storyline:system_omen",
+data\life_choices_v02\sample_choice_results.v0.2.json:48:        "interlude",
+data\life_playable\first_playable_flow.v0.1.json:61:    "interlude_candidate",
+data\destiny_v2\sample_evaluation_cases.v0.1.json:106:        "mutation": "destiny_pure_lotus_shadow"
+data\destiny_v2\mode_projection_hooks.v0.1.json:91:        "monster_density_and_reward_up"
+codex_prompts\NPF-C001_data_schema_registry.md:9:data/fate_matrix/destiny_eligibility_rules.v0.1.json
+codex_prompts\MLC-C007_tests_distribution.md:21:7. 18 岁 hook 保留测试。
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:43:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:44:      "interlude_bamboo_sword_stg"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:97:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:98:      "interlude_ancestral_jade_board"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:149:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:150:      "interlude_guard_medicine_field",
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:151:      "interlude_fire_control_check"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:203:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:204:      "interlude_old_book_dbg"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:254:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:255:      "interlude_heart_trial"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:305:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:306:      "interlude_dream_deckbuilder",
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:307:      "interlude_heart_demon_dbg"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:359:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:360:      "interlude_village_guard"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:412:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:413:      "interlude_fate_check"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:464:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:465:      "interlude_hunt_horde"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:517:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:518:      "interlude_heart_trial",
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:519:      "interlude_soul_chess"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:571:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:572:      "interlude_old_book_dbg"
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:624:    "interludeHooks": [
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:625:      "interlude_outer_battlefield_dream",
+data\origin_fate_v02\carried_item_narrative_chains.v0.2.json:626:      "interlude_system_calibration"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:4:    "trueName": "古雷真血",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:65:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:66:      "interlude_rain_backhill_stg",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:67:      "interlude_outer_battlefield_dream"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:81:    "trueName": "太阴残脉",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:141:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:142:      "interlude_dream_deckbuilder",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:143:      "interlude_soul_chess"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:155:    "trueName": "龙骨未醒",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:210:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:211:      "interlude_hunt_horde",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:212:      "interlude_village_guard"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:224:    "trueName": "丹圣遗骨",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:285:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:286:      "interlude_guard_medicine_field",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:287:      "interlude_fire_control_check"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:299:    "trueName": "前世剑魄",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:358:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:359:      "interlude_bamboo_sword_stg"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:371:    "trueName": "功德种子",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:427:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:428:      "interlude_village_guard",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:429:      "interlude_heart_trial"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:441:    "trueName": "魔印微痕",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:502:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:503:      "interlude_heart_demon_dbg",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:504:      "interlude_dark_shrine"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:516:    "trueName": "系统共鸣体",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:578:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:579:      "interlude_outer_battlefield_dream",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:580:      "interlude_system_calibration"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:592:    "trueName": "天书残页",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:646:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:647:      "interlude_old_book_dbg"
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:659:    "trueName": "域外战场回响",
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:716:    "interludeHooks": [
+data\origin_fate_v02\hidden_fate_definitions.v0.2.json:717:      "interlude_outer_battlefield_dream"
+data\destiny_v2\eligibility_signal_rules.v0.1.json:4:    "NinePalaceEvaluation",
+codex_prompts\NPF-C002_scoring_engine.md:7:1. evaluateNinePalace(attributes): NinePalaceEvaluation
+codex_prompts\NPF-C003_destiny_eligibility_mutation_engine.md:12:   - mutationTarget
+data\destiny_v2\destiny_v2_core.v0.2.json:7:      "id": "destiny_v2.eligibility.heaven_jealous_talent",
+data\destiny_v2\core_destiny_definitions.v0.1.json:3:  "description": "核心天命、劫命与变异命格。eligibility 使用九宫派生评分与属性阈值。",
+data\destiny_v2\core_destiny_definitions.v0.1.json:22:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:93:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:129:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:162:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:197:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:231:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:263:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:297:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:344:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:376:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:411:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:446:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:480:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:515:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:543:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:575:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:608:      "description": "你对雷霆、天劫与域外裂隙有异常亲和。雷法更强，但天道也更容易找到你。",
+data\destiny_v2\core_destiny_definitions.v0.1.json:609:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:642:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:676:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:710:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:745:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:777:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:811:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:841:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:873:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:906:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:930:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:962:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:997:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1024:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1059:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1082:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1114:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1148:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1169:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1200:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1254:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1311:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1356:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1408:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1454:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1507:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1557:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1583:      "mutation": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1616:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1649:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1700:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1740:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1778:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1818:      "description": "你的神魂更容易被梦境、心魔、太阴或域外杂音影响。",
+data\destiny_v2\core_destiny_definitions.v0.1.json:1819:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1866:      "eligibility": {
+data\destiny_v2\core_destiny_definitions.v0.1.json:1905:      "eligibility": {
+data\destiny_v2\conflict_synergy_mutation_rules.v0.1.json:17:      "mutation": "destiny_pure_lotus_shadow",
+data\destiny_v2\conflict_synergy_mutation_rules.v0.1.json:23:      "mutation": "destiny_guardian_lone_star",
+data\origin_fate\carried_items.v0.1.json:4:  "description": "随身物池：人生模拟中保留的凡物/遗物。18 岁系统觉醒时会被扫描并转化为域外战场开局物品、洞府线索或长期因果标签。",
+data\origin_fate\carried_items.v0.1.json:18:        "outerBattlefieldEffect": "第一场域外战场中飞剑类本命法宝候选权重提高；若持有剑类隐藏命，开局获得剑意残响。",
+data\origin_fate\carried_items.v0.1.json:82:        "outerBattlefieldEffect": "第一场域外战场获得一次低阶护命符。",
+data\origin_fate\carried_items.v0.1.json:130:        "outerBattlefieldEffect": "第一场域外战场获得一次低阶重 Roll 或掉落修正。",
+data\life_storylines\storyline_scoring_rules.v0.1.json:68:      "condition": "storyline.status in ['dominant','fated'] && recentMajorChoice.risk in ['risky','dangerous','forbidden']",
+data\life_storylines\storyline_scoring_rules.v0.1.json:78:      "condition": "storyline.status == fated && ageMonths >= 168",
+data\life_storylines\storyline_scoring_rules.v0.1.json:79:      "hookSource": "storyline.possibleTransitionHooks"
+data\origin_fate\sample_generation_results.v0.1.json:14:        "riskHint": "雷雨、天劫、域外裂隙相关事件更容易靠近你。"
+data\origin_fate\sample_generation_results.v0.1.json:31:      "notes": "丹修开局，18 岁后应给回春丹/炼丹房线索。"
+data\life_storylines\storyline_definitions.v0.1.json:3:  "storylines": [
+data\life_storylines\storyline_definitions.v0.1.json:5:      "id": "storyline_poor_scholar",
+data\life_storylines\storyline_definitions.v0.1.json:100:      "id": "storyline_apothecary_alchemy",
+data\life_storylines\storyline_definitions.v0.1.json:193:      "id": "storyline_hunter_martial",
+data\life_storylines\storyline_definitions.v0.1.json:282:      "id": "storyline_taoist_incense",
+data\life_storylines\storyline_definitions.v0.1.json:369:      "id": "storyline_fallen_cultivator_lineage",
+data\life_storylines\storyline_definitions.v0.1.json:449:      "id": "storyline_village_calamity",
+data\life_storylines\storyline_definitions.v0.1.json:532:      "id": "storyline_yin_dream_soul",
+data\life_storylines\storyline_definitions.v0.1.json:619:      "id": "storyline_system_prelude",
+data\origin_fate\reveal_rules.v0.1.json:25:      "description": "人生模拟中可触发半觉醒事件，18 岁结算有概率揭示。"
+data\origin_fate\reveal_rules.v0.1.json:32:      "description": "创建页仍不直接显示真名，但人生模拟或 18 岁觉醒时可揭示。"
+data\origin_fate\reveal_rules.v0.1.json:36:    "forbiddenAtCreation": ["trueName", "exactProgressNumber", "fullEffectList"],
+data\origin_fate\reveal_rules.v0.1.json:38:    "allowedAfterAge18": ["trueNameIfRevealed", "thresholdEffects", "dongfuHooks", "outerBattlefieldEffects"]
+data\life_storylines\sample_storyline_profiles.v0.1.json:8:        "storyline_apothecary_alchemy",
+data\life_storylines\sample_storyline_profiles.v0.1.json:9:        "storyline_system_prelude"
+data\life_storylines\sample_storyline_profiles.v0.1.json:20:        "storyline_fallen_cultivator_lineage"
+data\life_storylines\sample_storyline_profiles.v0.1.json:31:        "storyline_yin_dream_soul"
+data\life_storylines\sample_storyline_profiles.v0.1.json:42:        "storyline_system_prelude",
+data\life_storylines\sample_storyline_profiles.v0.1.json:43:        "storyline_village_calamity",
+data\life_storylines\sample_storyline_profiles.v0.1.json:44:        "storyline_poor_scholar"
+data\origin_fate\hidden_fates.v0.1.json:4:  "description": "隐藏血脉/前世/系统共鸣池。创建页只显示 omenHint，不直接显示 trueName。18 岁觉醒或后续事件根据 progress 揭示。",
+data\origin_fate\hidden_fates.v0.1.json:8:      "trueName": "古雷真血",
+data\origin_fate\hidden_fates.v0.1.json:20:      "visibleRiskHint": "雷雨、天劫、域外裂隙相关事件更容易靠近你。",
+data\origin_fate\hidden_fates.v0.1.json:38:        { "threshold": 100, "effect": "域外战场开局获得【雷血初醒】：五雷正法候选权重提高，雷劫成功奖励提高。" }
+data\origin_fate\hidden_fates.v0.1.json:44:      "trueName": "太阴残脉",
+data\origin_fate\hidden_fates.v0.1.json:75:      "trueName": "龙骨未醒",
+data\origin_fate\hidden_fates.v0.1.json:106:      "trueName": "丹圣遗骨",
+data\origin_fate\hidden_fates.v0.1.json:137:      "trueName": "前世剑魄",
+data\origin_fate\hidden_fates.v0.1.json:168:      "trueName": "功德种子",
+data\origin_fate\hidden_fates.v0.1.json:198:      "trueName": "魔印微痕",
+data\origin_fate\hidden_fates.v0.1.json:228:      "trueName": "系统共鸣体",
+data\origin_fate\hidden_fates.v0.1.json:240:      "visibleRiskHint": "系统觉醒、域外战场、异常选择与命运偏移事件更容易出现。",
+data\origin_fate\hidden_fates.v0.1.json:250:        { "threshold": 25, "effect": "域外战场教程事件更清晰，系统提示更频繁。" },
+data\origin_fate\hidden_fates.v0.1.json:252:        { "threshold": 100, "effect": "开局获得【系统共鸣】：初次域外战场结算奖励提高，洞府开启资源 +1 档。" }
+data\origin_fate\hidden_fates.v0.1.json:258:      "trueName": "天书残页",
+data\origin_fate\hidden_fates.v0.1.json:288:      "trueName": "域外战场回响",
+data\origin_fate\hidden_fates.v0.1.json:300:      "visibleRiskHint": "战斗、杀伐、域外残响与实战类事件更容易出现。",
+data\origin_fate\hidden_fates.v0.1.json:310:        { "threshold": 30, "effect": "域外战场初始适应速度提高。" },
+data\origin_fate\hidden_fates.v0.1.json:312:        { "threshold": 100, "effect": "开局获得【战场旧识】：第一场域外战场奖励提高，但敌潮压力 +1。" }
+data\life_storylines\life_storylines_core.v0.2.json:3:  "domain": "life_storylines",
+data\life_storylines\life_storylines_core.v0.2.json:4:  "id": "life_storylines.registry.v0_2",
+data\life_storylines\life_storylines_core.v0.2.json:7:      "id": "life_storyline.alchemy_apothecary",
+src\originFate\OriginFateDistributionTelemetry.ts:68:  readonly trueNameExposureCount: number;
+src\originFate\OriginFateDistributionTelemetry.ts:144:  let trueNameExposureCount = 0;
+src\originFate\OriginFateDistributionTelemetry.ts:175:    if (JSON.stringify(preview).includes(hiddenFate.trueName)) {
+src\originFate\OriginFateDistributionTelemetry.ts:176:      trueNameExposureCount += 1;
+src\originFate\OriginFateDistributionTelemetry.ts:203:    trueNameExposureCount,
+src\originFate\OriginFateDistributionTelemetry.ts:336:    `trueNameExposureCount: ${report.trueNameExposureCount}`,
+data\life_storylines\event_threads.v0.1.json:6:      "storylineId": "storyline_poor_scholar",
+data\life_storylines\event_threads.v0.1.json:134:      "storylineId": "storyline_poor_scholar",
+data\life_storylines\event_threads.v0.1.json:255:      "storylineId": "storyline_apothecary_alchemy",
+data\life_storylines\event_threads.v0.1.json:375:      "storylineId": "storyline_apothecary_alchemy",
+data\life_storylines\event_threads.v0.1.json:496:      "storylineId": "storyline_hunter_martial",
+data\life_storylines\event_threads.v0.1.json:617:      "storylineId": "storyline_village_calamity",
+data\life_storylines\event_threads.v0.1.json:741:      "storylineId": "storyline_system_prelude",
+data\life_storylines\event_threads.v0.1.json:862:      "storylineId": "storyline_yin_dream_soul",
+data\life_storylines\event_threads.v0.1.json:983:      "storylineId": "storyline_poor_scholar",
+data\life_storylines\event_threads.v0.1.json:1105:      "storylineId": "storyline_poor_scholar",
+data\life_storylines\event_threads.v0.1.json:1227:      "storylineId": "storyline_apothecary_alchemy",
+data\life_storylines\event_threads.v0.1.json:1347:      "storylineId": "storyline_apothecary_alchemy",
+data\life_storylines\event_threads.v0.1.json:1467:      "storylineId": "storyline_apothecary_alchemy",
+data\life_storylines\event_threads.v0.1.json:1587:      "storylineId": "storyline_hunter_martial",
+data\life_storylines\event_threads.v0.1.json:1708:      "storylineId": "storyline_hunter_martial",
+data\life_storylines\event_threads.v0.1.json:1829:      "storylineId": "storyline_hunter_martial",
+data\life_storylines\event_threads.v0.1.json:1950:      "storylineId": "storyline_taoist_incense",
+data\life_storylines\event_threads.v0.1.json:2071:      "storylineId": "storyline_taoist_incense",
+data\life_storylines\event_threads.v0.1.json:2192:      "storylineId": "storyline_taoist_incense",
+data\life_storylines\event_threads.v0.1.json:2313:      "storylineId": "storyline_taoist_incense",
+data\life_storylines\event_threads.v0.1.json:2434:      "storylineId": "storyline_fallen_cultivator_lineage",
+data\life_storylines\event_threads.v0.1.json:2554:      "storylineId": "storyline_fallen_cultivator_lineage",
+data\life_storylines\event_threads.v0.1.json:2674:      "storylineId": "storyline_fallen_cultivator_lineage",
+data\life_storylines\event_threads.v0.1.json:2794:      "storylineId": "storyline_fallen_cultivator_lineage",
+data\life_storylines\event_threads.v0.1.json:2914:      "storylineId": "storyline_village_calamity",
+data\life_storylines\event_threads.v0.1.json:3034:      "storylineId": "storyline_village_calamity",
+data\life_storylines\event_threads.v0.1.json:3154:      "storylineId": "storyline_village_calamity",
+data\life_storylines\event_threads.v0.1.json:3274:      "storylineId": "storyline_yin_dream_soul",
+data\life_storylines\event_threads.v0.1.json:3394:      "storylineId": "storyline_yin_dream_soul",
+data\life_storylines\event_threads.v0.1.json:3514:      "storylineId": "storyline_yin_dream_soul",
+data\life_storylines\event_threads.v0.1.json:3634:      "storylineId": "storyline_system_prelude",
+data\life_storylines\event_threads.v0.1.json:3754:      "storylineId": "storyline_system_prelude",
+data\life_storylines\event_threads.v0.1.json:3874:      "storylineId": "storyline_system_prelude",
+src\data\registries\SimRedesignDomainRegistry.ts:6:  "life_storylines",
+src\data\registries\SimRedesignDomainRegistry.ts:7:  "life_interludes",
+src\data\registries\SimRedesignDomainRegistry.ts:61:  { domain: "life_storylines", directory: "data/life_storylines", moduleId: "lifeStorylines" },
+src\data\registries\SimRedesignDomainRegistry.ts:62:  { domain: "life_interludes", directory: "data/life_interludes", moduleId: "lifeInterludes" },
+data\llm_narrative\sample_requests.v0.1.json:35:        "storyline": "系统前兆线",
+src\originFate\HiddenFateGenerator.ts:130:    trueName: hiddenFate.trueName,
+data\llm_narrative\prompt_templates.v0.1.json:7:  "interlude_result": "请根据玩法插曲结果生成 json 格式结果文本，60到140字。只描述体验和可见后果，不新增奖励。",
+data\destiny\sample_roll_results.v0.1.json:14:      "playstyle": "高速成长、雷劫高压、域外战场雷法强势。"
+data\llm_narrative\narrative_task_definitions.v0.1.json:45:      "id": "interlude_intro",
+data\llm_narrative\narrative_task_definitions.v0.1.json:55:      "fallbackTemplateGroup": "interlude_intro"
+data\llm_narrative\narrative_task_definitions.v0.1.json:58:      "id": "interlude_result",
+data\llm_narrative\narrative_task_definitions.v0.1.json:69:      "fallbackTemplateGroup": "interlude_result"
+src\originFate\Age18OriginFateResolver.ts:147:    trueName: hiddenFate.trueName,
+data\destiny\destiny_traits.v0.1.json:53:        "域外战场存活奖励 +50%"
+data\destiny\destiny_traits.v0.1.json:84:        "首次域外战场濒死时触发逆命回响"
+data\destiny\destiny_traits.v0.1.json:752:        "域外战场初始移速 +3%",
+data\llm_narrative\forbidden_terms.v0.1.json:12:    "域外战场回响",
+data\llm_narrative\fallback_templates.v0.1.json:19:    "interlude_intro": {
+data\llm_narrative\fallback_templates.v0.1.json:22:    "interlude_result": {
+codex_prompts\SIM-C006_monthly_event_v02_upgrade.md:24:   - interludeCandidate
+codex_prompts\SIM-C004_destiny_eligibility_v2_integration.md:19:2. 在 DestinyGenerator 中加入 eligibility/mutation resolver。
+codex_prompts\SIM-C005_origin_storyline_item_v2_integration.md:20:3. 接入 storyline scoring。
+codex_prompts\SIM-C005_origin_storyline_item_v2_integration.md:21:4. 确保 UI 不泄露 hidden trueName。
+codex_prompts\SIM-C003_world_and_nine_palace_integration.md:18:1. 实现 NinePalaceEvaluation 计算。
+codex_prompts\SIM-C003_world_and_nine_palace_integration.md:19:2. 将 OAG 输出升级为 OpeningInnateDraft + NinePalaceEvaluation。
+codex_prompts\SIM-C005_life_storyline_stage_interlude_core.md:42:5. 不实现具体玩法，只生成 interludeCandidate 和 runConfig placeholder。
+codex_prompts\RC-SIM-001_life_sim_first_playable_gate.md:25:- hidden trueName 不提前泄露。
+codex_prompts\README_EXECUTION_ORDER.md:69:- Do not expose hidden `trueName` in UI, logs, snapshots, or prompt examples.
+codex_prompts\SIM-C003_nine_palace_destiny_upgrade.md:9:  → NinePalaceEvaluation
+codex_prompts\SIM-C003_nine_palace_destiny_upgrade.md:48:   - mutationCandidate
+codex_prompts\SIM-C011_e2e_rc_gate.md:50:hidden trueName 不泄露
+src\app\screens\DevCombatAssetPlaygroundScreen.tsx:37:  const [densityMode, setDensityMode] = useState<ProjectileDensityMode>("simplified");
+src\app\screens\DevCombatAssetPlaygroundScreen.tsx:85:        highDensityEnemyBulletThreshold: densityMode === "full" ? 120 : 80
+src\app\screens\DevCombatAssetPlaygroundScreen.tsx:90:  }, [densityMode, spriteRegistry]);
+src\app\screens\DevCombatAssetPlaygroundScreen.tsx:176:          Density {densityMode}
+codex_prompts\REVIEW-PRE-001_current_implementation_audit.md:25:2. 是否存在 NinePalaceEvaluation。
+codex_prompts\REVIEW-PRE-001_current_implementation_audit.md:26:3. Destiny 是否有 eligibility / mutation。
+codex_prompts\REVIEW-PRE-001_current_implementation_audit.md:28:5. LM 是否有 storyline/density 控制。
+codex_prompts\REVIEW-PRE-001_current_implementation_audit.md:29:6. MLC 是否有 risk/hidden branch/interlude candidate。
+codex_prompts\REVIEW-PRE-001_current_implementation_audit.md:30:7. A18 是否硬写 18 岁域外。
+codex_prompts\REVIEW-PRE-001_current_implementation_audit.md:31:8. 是否存在 LLM NarrativeService。
+codex_prompts\SIM-C004_origin_storyline_item_upgrade.md:16:- 创建页、月度日志、半年选择不得显示 hidden trueName。
+codex_prompts\SIM-C004_origin_storyline_item_upgrade.md:50:interludeBiasTags
+codex_prompts\SIM-C004_origin_storyline_item_upgrade.md:57:- 所有 visible 文本不含 trueName。
+codex_prompts\SIM-C002_data_registry_unification.md:30:life_storylines
+codex_prompts\SIM-C002_data_registry_unification.md:31:life_interludes
+codex_prompts\SIM-C009_optional_llm_narrative_pipeline.md:29:- hidden trueName 不进入请求。
+codex_prompts\SIM-C010_adult_node_and_trial_bridge.md:9:18 岁不是唯一硬切域外战场。成年节点应生成路径候选：
+codex_prompts\SIM-C010_adult_node_and_trial_bridge.md:12:系统征召：域外战场
+codex_prompts\SIM-C010_adult_node_and_trial_bridge.md:19:v0.1 可 fallback 到域外战场第一战，但结构必须支持多路径。
+codex_prompts\SIM-C010_adult_node_and_trial_bridge.md:45:- 不强制所有角色域外。
+codex_prompts\SIM-C010_adult_node_and_trial_bridge.md:46:- fallback 到域外可用。
+codex_prompts\SIM-C009_llm_narrative_offline_first.md:13:5. 实现 NarrativeService：
+codex_prompts\SIM-C009_llm_narrative_offline_first.md:33:- hidden trueName 进入 LLM request。
+codex_prompts\SIM-C009_llm_narrative_offline_first.md:38:- hidden trueName 不进入 request。
+codex_prompts\NPF-C004_opening_destiny_integration.md:4:让 OpeningGenerator 输出 NinePalaceEvaluation，并让 DestinyGenerator 使用天命成立条件与变异机制。
+codex_prompts\NPF-C004_opening_destiny_integration.md:12:   - 反怪组合调用 mutation
+codex_prompts\NPF-C004_opening_destiny_integration.md:23:- hidden trueName 不泄露
+src\render\ProjectileSkinRenderer.ts:43:    const densityMode = this.resolveDensityMode(presentation);
+src\render\ProjectileSkinRenderer.ts:58:        draw: (context) => this.drawEnemyProjectile(context, projectile, densityMode)
+src\render\ProjectileSkinRenderer.ts:123:    densityMode: ProjectileDensityMode
+src\render\ProjectileSkinRenderer.ts:132:    if (densityMode === "full") {

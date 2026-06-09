@@ -1,0 +1,91 @@
+{
+  "version": "0.2",
+  "purpose": "控制 216 个月人生模拟的叙事密度，避免流水账、重复和小游戏过频。",
+  "monthlyBudgets": {
+    "densityBudgetPerSixMonths": 18,
+    "hardEventBudgetPerSixMonths": 2,
+    "omenBudgetPerYear": [
+      2,
+      5
+    ],
+    "threadProgressBudgetPerYear": [
+      2,
+      6
+    ],
+    "pressureBudgetPerYear": [
+      1,
+      4
+    ],
+    "interludeCandidateBudgetPerYear": [
+      0,
+      2
+    ],
+    "stageTransitionCandidateBudgetPerYear": [
+      0,
+      1
+    ]
+  },
+  "phasePacing": {
+    "infant": {
+      "dominantTier": "breath",
+      "maxInterludeCandidates": 0,
+      "maxPressureEventsPerYear": 2
+    },
+    "child": {
+      "dominantTier": "growth",
+      "maxInterludeCandidates": 1,
+      "maxPressureEventsPerYear": 3
+    },
+    "youth": {
+      "dominantTier": "thread",
+      "maxInterludeCandidates": 2,
+      "maxPressureEventsPerYear": 4
+    },
+    "teen": {
+      "dominantTier": "thread",
+      "maxInterludeCandidates": 3,
+      "maxPressureEventsPerYear": 5
+    }
+  },
+  "antiRepetition": {
+    "sameCategoryPenaltyWithinMonths": {
+      "window": 6,
+      "penaltyMultiplier": 0.55
+    },
+    "sameTagPenaltyWithinMonths": {
+      "window": 4,
+      "penaltyMultiplier": 0.7
+    },
+    "sameEventCooldownDefaultMonths": 12,
+    "maxSameEventPerLifeDefault": 2
+  },
+  "mustHaveVarietyRules": [
+    {
+      "windowMonths": 12,
+      "requireAtLeastCategories": 3
+    },
+    {
+      "windowMonths": 24,
+      "requireAtLeastOneOfTiers": [
+        "omen",
+        "thread",
+        "pressure"
+      ]
+    },
+    {
+      "windowMonths": 36,
+      "requireAtLeastOneStorylineProgress": true
+    }
+  ],
+  "logCompression": {
+    "minorEventsCanCollapseInFastForward": true,
+    "collapseBreathEventsWhenAutoFastForward": true,
+    "alwaysShowTiers": [
+      "omen",
+      "thread",
+      "pressure",
+      "choice_seed",
+      "transition_seed"
+    ]
+  }
+}

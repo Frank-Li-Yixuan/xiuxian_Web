@@ -1,0 +1,78 @@
+{
+  "version": "0.2",
+  "phrases": [
+    {
+      "id": "omen_thunder_01",
+      "tags": [
+        "thunder"
+      ],
+      "text": "雷声来临前，你总比旁人先一步抬头。"
+    },
+    {
+      "id": "omen_thunder_02",
+      "tags": [
+        "thunder",
+        "bone"
+      ],
+      "text": "暴雨夜，你的骨节深处像有细雷游走。"
+    },
+    {
+      "id": "omen_moon_01",
+      "tags": [
+        "yin",
+        "moon"
+      ],
+      "text": "月光落在你掌心时，你觉得它比井水还冷。"
+    },
+    {
+      "id": "omen_furnace_01",
+      "tags": [
+        "alchemy",
+        "furnace"
+      ],
+      "text": "炉火摇晃，你却觉得它的呼吸很熟悉。"
+    },
+    {
+      "id": "omen_sword_01",
+      "tags": [
+        "sword"
+      ],
+      "text": "木剑在夜里发出一声轻响，像有人在很远处拔剑。"
+    },
+    {
+      "id": "omen_system_01",
+      "tags": [
+        "system"
+      ],
+      "text": "你耳边有断续杂音，像碎玉落在空碗里。"
+    },
+    {
+      "id": "omen_demon_01",
+      "tags": [
+        "demon"
+      ],
+      "text": "荒祠里的影子总比月色更黑，像在等你回头。"
+    },
+    {
+      "id": "omen_merit_01",
+      "tags": [
+        "merit"
+      ],
+      "text": "你救下那只小兽后，掌心暖了很久。"
+    },
+    {
+      "id": "omen_book_01",
+      "tags": [
+        "book"
+      ],
+      "text": "无字残页边缘洇出一笔墨痕，很快又淡去。"
+    },
+    {
+      "id": "omen_battle_01",
+      "tags": [
+        "outer_battlefield"
+      ],
+      "text": "夜半时分，你梦见天外战鼓，醒来后心跳仍不肯停。"
+    }
+  ]
+}

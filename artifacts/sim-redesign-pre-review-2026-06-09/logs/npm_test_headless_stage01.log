@@ -1,0 +1,15 @@
+﻿# npm run test:headless:stage01
+
+> xiuxian-stg@0.1.0 test:headless:stage01
+> vitest run tests/integration/stage01 --passWithNoTests
+
+
+[1m[46m RUN [49m[22m [36mv3.2.4 [39m[90mD:/Game_1[39m
+
+ [32m✓[39m tests/integration/stage01-waves.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m   Start at [22m 22:27:39
+[2m   Duration [22m 494ms[2m (transform 68ms, setup 0ms, collect 93ms, tests 24ms, environment 0ms, prepare 69ms)[22m
+

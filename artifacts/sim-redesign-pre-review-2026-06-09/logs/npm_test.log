@@ -1,0 +1,1351 @@
+﻿# npm test
+
+> xiuxian-stg@0.1.0 test
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv3.2.4 [39m[90mD:/Game_1[39m
+
+ [32m✓[39m tests/opening/opening-attribute-generator.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 109[2mms[22m[39m
+ [32m✓[39m tests/integration/stage01-waves.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 57[2mms[22m[39m
+ [32m✓[39m tests/content/content-registry.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 246[2mms[22m[39m
+ [32m✓[39m tests/character/character-creation-controller-opening.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 74[2mms[22m[39m
+ [32m✓[39m tests/app/character-creation-view-model.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 66[2mms[22m[39m
+ [32m✓[39m tests/scripts/quality-character-creation-screenshots.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 522[2mms[22m[39m
+ [32m✓[39m tests/origin-fate/hidden-fate-generator.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 189[2mms[22m[39m
+ [32m✓[39m tests/scripts/quality-gate-screenshots.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 538[2mms[22m[39m
+ [32m✓[39m tests/character/character-draft-generator.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 344[2mms[22m[39m
+ [32m✓[39m tests/opening/opening-spiritual-root-generator.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 560[2mms[22m[39m
+ [32m✓[39m tests/opening/opening-distribution-telemetry.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 710[2mms[22m[39m
+   [33m[2m✓[22m[39m OpeningDistributionTelemetry[2m > [22msummarizes 10000 deterministic drafts across archetype, root, and aptitude distributions [33m 632[2mms[22m[39m
+ [32m✓[39m tests/character/character-creation-controller-origin-fate.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 53[2mms[22m[39m
+ [32m✓[39m tests/character/character-profile-mapper.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 43[2mms[22m[39m
+ [32m✓[39m tests/origin-fate/carried-items-generator.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 58[2mms[22m[39m
+ [32m✓[39m tests/assets/3d-assets-validator.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 1211[2mms[22m[39m
+   [33m[2m✓[22m[39m 3D combat asset manifest validation[2m > [22mwarns when a texture exceeds 2048 pixels on either axis without failing validation [33m 365[2mms[22m[39m
+ [32m✓[39m tests/assets/main-menu-assets.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 80[2mms[22m[39m
+ [32m✓[39m tests/assets/3d-assets-inspector.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1223[2mms[22m[39m
+   [33m[2m✓[22m[39m 3D combat asset inspection[2m > [22mwarns for tiny and huge bounding boxes while still writing the report [33m 448[2mms[22m[39m
+ [32m✓[39m tests/integration/first-playable-e2e.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 148[2mms[22m[39m
+ [32m✓[39m tests/determinism/two-client-stage01.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 167[2mms[22m[39m
+ [32m✓[39m tests/character/character-creation-destiny-integration.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 274[2mms[22m[39m
+ [32m✓[39m tests/life-sim/origin-fate-life-hooks.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+ [32m✓[39m tests/character/character-profile-age18-origin-fate.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 38[2mms[22m[39m
+ [32m✓[39m tests/life-sim/destiny-projection-hooks.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m tests/app/dev-combat-asset-preview.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 34[2mms[22m[39m
+ [32m✓[39m tests/origin-fate/age18-origin-fate-resolution.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 31[2mms[22m[39m
+ [32m✓[39m tests/opening/opening-generator.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m tests/destiny/destiny-roller.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1428[2mms[22m[39m
+   [33m[2m✓[22m[39m DestinyRoller[2m > [22mruns 1000 deterministic rolls without hard-exclusive collisions or invalid slots [33m 384[2mms[22m[39m
+   [33m[2m✓[22m[39m DestinyRoller[2m > [22mkeeps main quality distribution close to the data quality table [33m 843[2mms[22m[39m
+ [32m✓[39m tests/app/dev-ui-atlas.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+ [32m✓[39m tests/render/sprite-entity-renderer.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m tests/assets/combat-assets-validator.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 1739[2mms[22m[39m
+   [33m[2m✓[22m[39m 2D and audio combat asset manifest validation[2m > [22mfails assets without sourceUrl, license, or an allowed license [33m 385[2mms[22m[39m
+ [32m✓[39m tests/app/browser-impact-vfx-runtime.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 130[2mms[22m[39m
+ [32m✓[39m tests/assets/sprite-asset-registry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m tests/integration/cultivation-tribulation.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m tests/app/browser-ability-vfx-runtime.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 176[2mms[22m[39m
+ [32m✓[39m tests/origin-fate/background-origin-generator.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m tests/app/ui-workbench-write-api.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [31m❯[39m tests/content/sim-redesign-content-registry.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 70[2mms[22m[39m
+[31m   [31m×[31m SimRedesignContentRegistry[2m > [22mloads checked-in SIM-REDESIGN v0.2 data for every required domain[39m[32m 64[2mms[22m[39m
+[31m     → expected [ Array(238) ] to deeply equal [][39m
+   [32m✓[39m SimRedesignContentRegistry[2m > [22mfails validation when a required domain file is missing[32m 1[2mms[22m[39m
+   [32m✓[39m SimRedesignContentRegistry[2m > [22mfails validation for invalid ids[32m 1[2mms[22m[39m
+   [32m✓[39m SimRedesignContentRegistry[2m > [22mfails validation for duplicate ids across domains[32m 1[2mms[22m[39m
+   [32m✓[39m SimRedesignContentRegistry[2m > [22mfails validation when file path and declared domain disagree[32m 0[2mms[22m[39m
+   [32m✓[39m SimRedesignContentRegistry[2m > [22mfails validation when a file does not match the minimum schema shape[32m 1[2mms[22m[39m
+ [32m✓[39m tests/integration/insight-session.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m tests/app/browser-entity-animation-runtime.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 311[2mms[22m[39m
+ [32m✓[39m tests/assets/combat-asset-registry.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m tests/app/browser-game-runtime.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 400[2mms[22m[39m
+ [32m✓[39m tests/app/dev-3d-assets.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m tests/unit/state-hash.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m tests/unit/seeded-rng.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m tests/render/pickup-presentation-system.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m tests/audio/audio-bus.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m tests/app/normalized-ui-primitives.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m tests/unit/viewstate-builder.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m tests/app/dev-ui-components.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m tests/destiny/destiny-distribution-telemetry.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 2004[2mms[22m[39m
+   [33m[2m✓[22m[39m DestinyDistributionTelemetry[2m > [22msummarizes 10000 deterministic destiny rolls inside tuning bounds [33m 1698[2mms[22m[39m
+ [32m✓[39m tests/integration/collision-drop.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m tests/app/dev-ui-workbench.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m tests/render/combat-3d-viewstate.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m tests/render/projectile-skin-renderer.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+ [32m✓[39m tests/integration/pill-digestion.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m tests/assets/ui-asset-registry.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m tests/app/character-creation-destiny-ui.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 79[2mms[22m[39m
+ [32m✓[39m tests/unit/telemetry.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m tests/app/character-creation-origin-fate-ui.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 213[2mms[22m[39m
+ [32m✓[39m tests/app/xianxia-ui-system.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+ [32m✓[39m tests/origin-fate/origin-fate-registry.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m tests/unit/render-layer-stack.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m tests/destiny/destiny-registry.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m tests/render/impact-vfx-renderer.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m tests/app/dev-canvas-vfx-demo.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m tests/opening/opening-generator-registry.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m tests/integration/player-artifact.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m tests/render/ability-vfx-renderer.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m tests/app/vfx-lab.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m tests/render/background-parallax-renderer.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m tests/unit/hud-viewstate.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m tests/save/save-slot-service.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m tests/integration/boss-qingyun.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m tests/integration/loadout-second-run.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/app/dev-combat-asset-playground.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m tests/app/main-menu-css.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/integration/outgame-loop.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m tests/integration/spell-system.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m tests/render/combat-vfx-renderer.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/integration/rescue-settlement.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m tests/app/generated-ui-pages.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 165[2mms[22m[39m
+ [32m✓[39m tests/app/character-creation-fate-altar-state.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/app/ui-workbench-state.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/destiny/destiny-combination-engine.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/unit/input-buffer.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/app/browser-combat-audio-runtime.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m tests/unit/vfx-registry.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m tests/audio/combat-sfx-mapper.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/unit/render-vfx-timeline.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/app/character-creation-dom-components.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m tests/assets/three-asset-registry.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/unit/fixed-tick-runner.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/app/main-menu-flow.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m tests/render/sprite-sheet-animator.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/app/fixed-browser-loop.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/app/browser-layout.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/unit/smoke.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/app/browser-debug-mode.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/assets/main-menu-audio.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/app/dev-3d-combat-lab.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m tests/app/save-slot-continuation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/assets/generated-ui-assets.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 4512[2mms[22m[39m
+   [33m[2m✓[22m[39m generated UI asset manifest[2m > [22mpoints every required entry at a non-empty transparent PNG with transparent corners [33m 2772[2mms[22m[39m
+   [33m[2m✓[22m[39m generated UI asset manifest[2m > [22mkeeps content rectangles and regions inside image bounds [33m 1734[2mms[22m[39m
+ [32m✓[39m tests/assets/ui-asset-normalization.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 5378[2mms[22m[39m
+   [33m[2m✓[22m[39m UI asset normalization analyzer[2m > [22mgenerates a report and normalized manifest into a custom output directory [33m 3313[2mms[22m[39m
+   [33m[2m✓[22m[39m UI asset normalization analyzer[2m > [22madds content rectangles, scaling recommendations, and warnings for composition risks [33m 2063[2mms[22m[39m
+ [32m✓[39m tests/origin-fate/origin-fate-distribution-telemetry.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 9503[2mms[22m[39m
+   [33m[2m✓[22m[39m OriginFateDistributionTelemetry[2m > [22msummarizes 10000 deterministic origin fate drafts inside tuning bounds [33m 8669[2mms[22m[39m
+   [33m[2m✓[22m[39m OriginFateDistributionTelemetry[2m > [22mis fully reproducible for the same telemetry seed prefix [33m 715[2mms[22m[39m
+System.Management.Automation.RemoteException
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+System.Management.Automation.RemoteException
+[41m[1m FAIL [22m[49m tests/content/sim-redesign-content-registry.test.ts[2m > [22mSimRedesignContentRegistry[2m > [22mloads checked-in SIM-REDESIGN v0.2 data for every required domain
+[31m[1mAssertionError[22m: expected [ Array(238) ] to deeply equal [][39m
+System.Management.Automation.RemoteException
+[32m- Expected[39m
+[31m+ Received[39m
+System.Management.Automation.RemoteException
+[32m- [][39m
+[31m+ [[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'destiny_v2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/destiny_v2/conflict_synergy_mutation_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/destiny_v2/core_destiny_definitions.v0.1.json",[39m
+[31m+     "reason": "domain must be 'destiny_v2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/destiny_v2/core_destiny_definitions.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/destiny_v2/core_destiny_definitions.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/destiny_v2/core_destiny_definitions.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/destiny_v2/destiny_groups.v0.1.json",[39m
+[31m+     "reason": "domain must be 'destiny_v2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/destiny_v2/destiny_groups.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/destiny_v2/destiny_groups.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/destiny_v2/destiny_groups.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/destiny_v2/eligibility_signal_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'destiny_v2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/destiny_v2/eligibility_signal_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/destiny_v2/eligibility_signal_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/destiny_v2/eligibility_signal_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/destiny_v2/life_manifestation_hooks.v0.1.json",[39m
+[31m+     "reason": "domain must be 'destiny_v2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/destiny_v2/life_manifestation_hooks.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/destiny_v2/life_manifestation_hooks.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/destiny_v2/life_manifestation_hooks.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/destiny_v2/mode_projection_hooks.v0.1.json",[39m
+[31m+     "reason": "domain must be 'destiny_v2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/destiny_v2/mode_projection_hooks.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/destiny_v2/mode_projection_hooks.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/destiny_v2/mode_projection_hooks.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/destiny_v2/sample_evaluation_cases.v0.1.json",[39m
+[31m+     "reason": "domain must be 'destiny_v2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/destiny_v2/sample_evaluation_cases.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/destiny_v2/sample_evaluation_cases.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/destiny_v2/sample_evaluation_cases.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/fate_matrix/attribute_correlation_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'fate_matrix'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/fate_matrix/attribute_correlation_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/fate_matrix/attribute_correlation_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/fate_matrix/attribute_event_bias_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'fate_matrix'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/fate_matrix/attribute_event_bias_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/fate_matrix/attribute_event_bias_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/fate_matrix/destiny_eligibility_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'fate_matrix'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/fate_matrix/destiny_eligibility_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/fate_matrix/destiny_eligibility_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/fate_matrix/generation_algorithm_upgrade_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'fate_matrix'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/fate_matrix/generation_algorithm_upgrade_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/fate_matrix/generation_algorithm_upgrade_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/fate_matrix/nine_attributes.v0.1.json",[39m
+[31m+     "reason": "domain must be 'fate_matrix'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/fate_matrix/nine_attributes.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/fate_matrix/nine_attributes.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/fate_matrix/three_powers_yinyang_wuxing.v0.1.json",[39m
+[31m+     "reason": "domain must be 'fate_matrix'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/fate_matrix/three_powers_yinyang_wuxing.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/fate_matrix/three_powers_yinyang_wuxing.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_choices_v02/choice_archetypes.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_choices_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_choices_v02/choice_archetypes.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_choices_v02/choice_archetypes.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_choices_v02/choice_archetypes.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_choices_v02/choice_generation_rules.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_choices_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_choices_v02/choice_generation_rules.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_choices_v02/choice_generation_rules.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_choices_v02/choice_generation_rules.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_choices_v02/hidden_branch_rules.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_choices_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_choices_v02/hidden_branch_rules.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_choices_v02/hidden_branch_rules.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_choices_v02/hidden_branch_rules.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_choices_v02/major_choice_events.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_choices_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_choices_v02/major_choice_events.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_choices_v02/major_choice_events.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_choices_v02/major_choice_events.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_choices_v02/outcome_effect_tables.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_choices_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_choices_v02/outcome_effect_tables.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_choices_v02/outcome_effect_tables.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_choices_v02/outcome_effect_tables.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_choices_v02/sample_choice_results.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_choices_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_choices_v02/sample_choice_results.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_choices_v02/sample_choice_results.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_choices_v02/sample_choice_results.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_interludes/interlude_event_catalog.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_interludes'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_interludes/interlude_event_catalog.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_interludes/interlude_event_catalog.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_interludes/interlude_event_catalog.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_interludes/interlude_frequency_budget.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_interludes'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_interludes/interlude_frequency_budget.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_interludes/interlude_frequency_budget.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_interludes/interlude_frequency_budget.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_interludes/interlude_mode_definitions.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_interludes'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_interludes/interlude_mode_definitions.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_interludes/interlude_mode_definitions.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_interludes/interlude_mode_definitions.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_interludes/interlude_result_writeback_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_interludes'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_interludes/interlude_result_writeback_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_interludes/interlude_result_writeback_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_interludes/interlude_result_writeback_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_interludes/interlude_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_interludes'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_interludes/interlude_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_interludes/interlude_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_interludes/interlude_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_interludes/sample_interlude_timeline.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_interludes'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_interludes/sample_interlude_timeline.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_interludes/sample_interlude_timeline.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_interludes/sample_interlude_timeline.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_playable/content_minimums.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_playable'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_playable/content_minimums.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_playable/content_minimums.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_playable/content_minimums.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_playable/first_playable_flow.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_playable'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_playable/first_playable_flow.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_playable/first_playable_flow.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_playable/first_playable_flow.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_playable/pacing_budgets.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_playable'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_playable/pacing_budgets.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_playable/pacing_budgets.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_playable/pacing_budgets.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_playable/sample_playthroughs.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_playable'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_playable/sample_playthroughs.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_playable/sample_playthroughs.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_playable/sample_playthroughs.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_playable/telemetry_targets.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_playable'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_playable/telemetry_targets.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_playable/telemetry_targets.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_playable/telemetry_targets.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_playable/ui_state_machine.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_playable'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_playable/ui_state_machine.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_playable/ui_state_machine.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_playable/ui_state_machine.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_categories.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_sim_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_categories.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_categories.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_categories.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_pool.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_sim_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_pool.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_pool.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_pool.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_tiers.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_sim_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_tiers.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_tiers.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_tiers.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_weighting_rules.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_sim_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_weighting_rules.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_weighting_rules.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_sim_v02/monthly_event_weighting_rules.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_sim_v02/narrative_density_rules.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_sim_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_sim_v02/narrative_density_rules.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_sim_v02/narrative_density_rules.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_sim_v02/narrative_density_rules.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_sim_v02/sample_monthly_timeline.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_sim_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_sim_v02/sample_monthly_timeline.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_sim_v02/sample_monthly_timeline.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_sim_v02/sample_monthly_timeline.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_sim_v02/storyline_event_mapping.v0.2.json",[39m
+[31m+     "reason": "domain must be 'life_sim_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_sim_v02/storyline_event_mapping.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_sim_v02/storyline_event_mapping.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_sim_v02/storyline_event_mapping.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_stage/cultivation_identity_stages.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_stage'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_stage/cultivation_identity_stages.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_stage/cultivation_identity_stages.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_stage/cultivation_identity_stages.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_stage/initiation_node_definitions.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_stage'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_stage/initiation_node_definitions.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_stage/initiation_node_definitions.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_stage/initiation_node_definitions.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_stage/life_age_phase_definitions.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_stage'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_stage/life_age_phase_definitions.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_stage/life_age_phase_definitions.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_stage/life_age_phase_definitions.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_stage/rhythm_budget_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_stage'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_stage/rhythm_budget_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_stage/rhythm_budget_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_stage/rhythm_budget_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_stage/sample_stage_timelines.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_stage'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_stage/sample_stage_timelines.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_stage/sample_stage_timelines.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_stage/sample_stage_timelines.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_stage/transition_event_catalog.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_stage'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_stage/transition_event_catalog.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_stage/transition_event_catalog.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_stage/transition_event_catalog.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_stage/transition_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_stage'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_stage/transition_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_stage/transition_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_stage/transition_trigger_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_storylines/event_threads.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_storylines'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_storylines/event_threads.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_storylines/event_threads.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_storylines/event_threads.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_storylines/sample_storyline_profiles.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_storylines'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_storylines/sample_storyline_profiles.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_storylines/sample_storyline_profiles.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_storylines/sample_storyline_profiles.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_storylines/storyline_definitions.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_storylines'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_storylines/storyline_definitions.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_storylines/storyline_definitions.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_storylines/storyline_definitions.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/life_storylines/storyline_scoring_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'life_storylines'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/life_storylines/storyline_scoring_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/life_storylines/storyline_scoring_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/life_storylines/storyline_scoring_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/cache_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/cache_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/cache_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/cache_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/fallback_templates.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/fallback_templates.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/fallback_templates.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/fallback_templates.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/forbidden_terms.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/forbidden_terms.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/forbidden_terms.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/forbidden_terms.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/narrative_task_definitions.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/narrative_task_definitions.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/narrative_task_definitions.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/narrative_task_definitions.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/output_schemas.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/output_schemas.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/output_schemas.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/output_schemas.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/prompt_templates.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/prompt_templates.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/prompt_templates.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/prompt_templates.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/sample_requests.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/sample_requests.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/sample_requests.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/sample_requests.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/llm_narrative/sanitization_rules.v0.1.json",[39m
+[31m+     "reason": "domain must be 'llm_narrative'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/llm_narrative/sanitization_rules.v0.1.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/llm_narrative/sanitization_rules.v0.1.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/llm_narrative/sanitization_rules.v0.1.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "$",[39m
+[31m+     "file": "data/origin_fate_v02/carried_item_narrative_chains.v0.2.json",[39m
+[31m+     "reason": "SIM-REDESIGN data file must be a JSON object",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "$",[39m
+[31m+     "file": "data/origin_fate_v02/hidden_fate_definitions.v0.2.json",[39m
+[31m+     "reason": "SIM-REDESIGN data file must be a JSON object",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/origin_fate_v02/omen_phrase_bank.v0.2.json",[39m
+[31m+     "reason": "domain must be 'origin_fate_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/origin_fate_v02/omen_phrase_bank.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/origin_fate_v02/omen_phrase_bank.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/origin_fate_v02/omen_phrase_bank.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json",[39m
+[31m+     "reason": "domain must be 'origin_fate_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/origin_fate_v02/origin_item_hidden_synergy_rules.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "$",[39m
+[31m+     "file": "data/origin_fate_v02/origin_storyline_definitions.v0.2.json",[39m
+[31m+     "reason": "SIM-REDESIGN data file must be a JSON object",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "domain",[39m
+[31m+     "file": "data/origin_fate_v02/reveal_stage_rules.v0.2.json",[39m
+[31m+     "reason": "domain must be 'origin_fate_v02'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "id",[39m
+[31m+     "file": "data/origin_fate_v02/reveal_stage_rules.v0.2.json",[39m
+[31m+     "reason": "id must be a string",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "items",[39m
+[31m+     "file": "data/origin_fate_v02/reveal_stage_rules.v0.2.json",[39m
+[31m+     "reason": "items must be an array",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "schemaVersion",[39m
+[31m+     "file": "data/origin_fate_v02/reveal_stage_rules.v0.2.json",[39m
+[31m+     "reason": "schemaVersion must be '0.2'",[39m
+[31m+   },[39m
+[31m+   {[39m
+[31m+     "fieldPath": "$",[39m
+[31m+     "file": "data/origin_fate_v02/sample_origin_fate_timelines.v0.2.json",[39m
+[31m+     "reason": "SIM-REDESIGN data file must be a JSON object",[39m
+[31m+   },[39m
+[31m+ ][39m
+System.Management.Automation.RemoteException
+[36m [2m❯[22m tests/content/sim-redesign-content-registry.test.ts:[2m19:58[22m[39m
+    [90m 17| [39m    const registry = buildSimRedesignContentRegistry(loadCheckedInSimR…
+    [90m 18| [39m
+    [90m 19| [39m    [34mexpect[39m([34mvalidateSimRedesignContentRegistry[39m(registry))[33m.[39m[34mtoEqual[39m([])[33m;[39m
+    [90m   | [39m                                                         [31m^[39m
+    [90m 20| [39m    [34mexpect[39m(registry[33m.[39m[34mgetDomains[39m())[33m.[39m[34mtoEqual[39m([33mSIM_REDESIGN_DATA_DOMAINS[39m)[33m;[39m
+    [90m 21| [39m    expect(registry.getAllEntries()).toHaveLength(SIM_REDESIGN_DATA_DO…
+System.Management.Automation.RemoteException
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+System.Management.Automation.RemoteException
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m103 passed[39m[22m[90m (104)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m457 passed[39m[22m[90m (458)[39m
+[2m   Start at [22m 22:27:18
+[2m   Duration [22m 10.52s[2m (transform 13.27s, setup 0ms, collect 46.10s, tests 33.72s, environment 20ms, prepare 13.73s)[22m
+

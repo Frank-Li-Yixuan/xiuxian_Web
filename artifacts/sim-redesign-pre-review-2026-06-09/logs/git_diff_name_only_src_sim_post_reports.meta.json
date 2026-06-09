@@ -1,0 +1,9 @@
+﻿{
+    "command":  "git diff --name-only -- src/sim",
+    "exitCode":  0,
+    "startedAt":  "2026-06-09T22:44:16.6251348+08:00",
+    "endedAt":  "2026-06-09T22:44:16.7170936+08:00",
+    "durationMs":  92,
+    "log":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\logs\\git_diff_name_only_src_sim_post_reports.log",
+    "empty":  true
+}

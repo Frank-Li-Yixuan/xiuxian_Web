@@ -1,0 +1,122 @@
+{
+  "version": "0.2",
+  "defaultOutcomeEffectBudgets": {
+    "criticalFailure": {
+      "negative": [
+        8,
+        18
+      ],
+      "positive": [
+        0,
+        2
+      ]
+    },
+    "failure": {
+      "negative": [
+        4,
+        10
+      ],
+      "positive": [
+        0,
+        3
+      ]
+    },
+    "partialSuccess": {
+      "negative": [
+        1,
+        4
+      ],
+      "positive": [
+        2,
+        5
+      ]
+    },
+    "success": {
+      "negative": [
+        0,
+        2
+      ],
+      "positive": [
+        5,
+        9
+      ]
+    },
+    "greatSuccess": {
+      "negative": [
+        0,
+        1
+      ],
+      "positive": [
+        9,
+        14
+      ]
+    },
+    "perfectSuccess": {
+      "negative": [
+        0,
+        0
+      ],
+      "positive": [
+        14,
+        22
+      ]
+    },
+    "hiddenSuccess": {
+      "negative": [
+        0,
+        4
+      ],
+      "positive": [
+        18,
+        35
+      ]
+    }
+  },
+  "destinyFailureOverrides": [
+    {
+      "destinyId": "destiny_waste_root_reversal",
+      "onBands": [
+        "failure",
+        "criticalFailure"
+      ],
+      "extraEffects": [
+        {
+          "type": "addCounter",
+          "target": "reverse_fate_points",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "destinyId": "destiny_unbreakable",
+      "onBands": [
+        "failure",
+        "criticalFailure"
+      ],
+      "extraEffects": [
+        {
+          "type": "modifyStat",
+          "target": "heart",
+          "amount": 1
+        }
+      ]
+    },
+    {
+      "destinyId": "destiny_demon_seed",
+      "onBands": [
+        "failure",
+        "criticalFailure"
+      ],
+      "extraEffects": [
+        {
+          "type": "modifyKarma",
+          "amount": 2
+        },
+        {
+          "type": "modifyHeartDemon",
+          "amount": 3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "version": "0.2",
+  "baseFormula": "finalWeight = (baseWeight + tagBonus + storylineBonus + threadBonus + stageBonus + densityAdjust + destinyManifestBonus) * repeatPenalty * cooldownPenalty * phaseMultiplier",
+  "tagBonuses": {
+    "matchingLifeEventBiasTag": 8,
+    "matchingDestinyHook": 10,
+    "matchingHiddenFateOmen": 10,
+    "matchingCarriedItem": 8,
+    "matchingActiveStoryline": 12,
+    "matchingDevelopingThread": 16,
+    "matchingCrisisThread": 24,
+    "matchingStageTransitionNeed": 14
+  },
+  "palaceScoreBonuses": {
+    "talentScoreHigh": {
+      "tags": [
+        "study",
+        "old_book",
+        "heaven_jealous",
+        "system"
+      ],
+      "bonus": 8
+    },
+    "vesselScoreHigh": {
+      "tags": [
+        "martial",
+        "body",
+        "dragon_bone",
+        "labor"
+      ],
+      "bonus": 8
+    },
+    "stabilityScoreHigh": {
+      "tags": [
+        "seclusion",
+        "temple",
+        "heart",
+        "cleanse"
+      ],
+      "bonus": 8
+    },
+    "destinyPressureHigh": {
+      "tags": [
+        "thunder",
+        "system",
+        "heaven_attention",
+        "illness"
+      ],
+      "bonus": 10
+    },
+    "rebellionScoreHigh": {
+      "tags": [
+        "failure",
+        "reverse_fate",
+        "humiliation"
+      ],
+      "bonus": 10
+    }
+  },
+  "densityAdjust": {
+    "ifSixMonthBudgetLow": {
+      "breath": 6,
+      "growth": 4,
+      "omen": -8,
+      "thread": -10,
+      "pressure": -10,
+      "choice_seed": -14,
+      "transition_seed": -18
+    },
+    "ifSixMonthBudgetHigh": {
+      "breath": -2,
+      "growth": 2,
+      "omen": 4,
+      "thread": 6,
+      "pressure": 4,
+      "choice_seed": 3,
+      "transition_seed": 2
+    }
+  },
+  "selectionGuards": [
+    "eligible ageMonthRange",
+    "conditions pass",
+    "cooldown pass",
+    "not over maxTriggersPerLife",
+    "hidden true names never exposed in visible log"
+  ]
+}

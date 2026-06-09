@@ -1,0 +1,67 @@
+{
+  "version": "0.1",
+  "flowId": "life_sim_first_playable",
+  "stages": [
+    {
+      "id": "enter_life_sim",
+      "name": "进入人生模拟",
+      "requires": [
+        "characterOrigin"
+      ],
+      "next": "infant_phase"
+    },
+    {
+      "id": "infant_phase",
+      "name": "婴幼年",
+      "ageRangeMonths": [
+        0,
+        47
+      ],
+      "summaryAtEnd": true
+    },
+    {
+      "id": "child_phase",
+      "name": "童年",
+      "ageRangeMonths": [
+        48,
+        107
+      ],
+      "summaryAtEnd": true
+    },
+    {
+      "id": "youth_phase",
+      "name": "少年",
+      "ageRangeMonths": [
+        108,
+        167
+      ],
+      "summaryAtEnd": true
+    },
+    {
+      "id": "teen_phase",
+      "name": "青春",
+      "ageRangeMonths": [
+        168,
+        215
+      ],
+      "summaryAtEnd": true
+    },
+    {
+      "id": "adult_node_pending",
+      "name": "成年节点候选",
+      "ageRangeMonths": [
+        216,
+        216
+      ],
+      "summaryAtEnd": false
+    }
+  ],
+  "playerStops": [
+    "major_choice",
+    "interlude_candidate",
+    "stage_summary",
+    "adult_node_pending",
+    "important_reveal"
+  ],
+  "defaultNextAfterAdultNode": "age18_system_pending"
+}

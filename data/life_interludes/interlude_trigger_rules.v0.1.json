@@ -1,0 +1,119 @@
+{
+  "version": "0.1",
+  "weightFormula": "baseWeight + sourceHookWeight + storylineWeight + threadStateWeight + destinyWeight + rootWeight + originWeight + itemWeight + agePhaseWeight - frequencyPenalty - cooldownPenalty",
+  "modePreferenceRules": [
+    {
+      "mode": "stg",
+      "preferredTags": [
+        "root:thunder",
+        "root:metal",
+        "destiny:tribulation_affinity",
+        "destiny:battle_nurtures_battle",
+        "item:broken_wooden_sword",
+        "hidden:past_life_sword_soul",
+        "storyline:system_omen",
+        "storyline:village_disaster",
+        "thread:back_mountain_shadow",
+        "hook:outer_battlefield_omen"
+      ],
+      "ageMinMonths": 48
+    },
+    {
+      "mode": "horde",
+      "preferredTags": [
+        "root:wood",
+        "root:earth",
+        "origin:herb_shop_apprentice",
+        "destiny:alchemy_prodigy",
+        "destiny:protect_life_merit",
+        "storyline:alchemy",
+        "storyline:village_disaster",
+        "thread:protect_medicine_field",
+        "hook:insect_tide"
+      ],
+      "ageMinMonths": 108
+    },
+    {
+      "mode": "deckbuilder",
+      "preferredTags": [
+        "aptitude:comprehension_high",
+        "attr:shen_high",
+        "origin:private_school_child",
+        "origin:daoist_temple_helper",
+        "item:wordless_page",
+        "destiny:clear_glass_heart",
+        "destiny:demon_heart_seed",
+        "thread:forbidden_page",
+        "thread:dream_debate"
+      ],
+      "ageMinMonths": 48
+    },
+    {
+      "mode": "formation_auto",
+      "preferredTags": [
+        "root:earth",
+        "root:water",
+        "aptitude:heart_high",
+        "origin:daoist_temple_helper",
+        "item:ancestral_jade",
+        "destiny:seated_forgetfulness",
+        "destiny:cowardly_supreme",
+        "thread:daoist_array",
+        "thread:geomantic_board"
+      ],
+      "ageMinMonths": 108
+    }
+  ],
+  "ageHardRules": [
+    {
+      "ageMonths": [
+        0,
+        47
+      ],
+      "allowedModes": [
+        "text_check"
+      ],
+      "note": "婴幼年不触发真实玩法"
+    },
+    {
+      "ageMonths": [
+        48,
+        107
+      ],
+      "allowedModes": [
+        "stg",
+        "deckbuilder",
+        "text_check"
+      ],
+      "maxDifficulty": "steady"
+    },
+    {
+      "ageMonths": [
+        108,
+        167
+      ],
+      "allowedModes": [
+        "stg",
+        "horde",
+        "deckbuilder",
+        "formation_auto",
+        "text_check"
+      ],
+      "maxDifficulty": "risky"
+    },
+    {
+      "ageMonths": [
+        168,
+        215
+      ],
+      "allowedModes": [
+        "stg",
+        "horde",
+        "deckbuilder",
+        "formation_auto",
+        "text_check"
+      ],
+      "maxDifficulty": "forbidden"
+    }
+  ]
+}

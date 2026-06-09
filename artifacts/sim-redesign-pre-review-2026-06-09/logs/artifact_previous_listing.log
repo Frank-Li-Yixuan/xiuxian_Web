@@ -1,0 +1,24 @@
+﻿# powershell -NoProfile -Command Get-ChildItem -Path artifacts\sim-redesign-pre-review-2026-06-08 -Force -ErrorAction SilentlyContinue | Select-Object Name,Length,LastWriteTime | Format-Table -AutoSize
+
+Name                             Length  LastWriteTime    
+----                             ------  -------------    
+logs                                     2026/6/8 15:00:44
+screenshots                              2026/6/8 14:57:20
+browser_dom_text.txt             4131    2026/6/8 14:55:24
+browser_dom_text_final.txt       4709    2026/6/8 14:57:20
+browser_smoke_metrics.json       7159    2026/6/8 14:55:55
+browser_smoke_metrics_final.json 6221    2026/6/8 14:57:20
+CHARACTER_CREATION_STATUS.md     1778    2026/6/8 15:00:05
+CHECKSUMS.sha256                 5882    2026/6/8 15:01:13
+COMMAND_LOGS.md                  1324    2026/6/8 15:00:05
+DATA_REGISTRY_STATUS.md          2035    2026/6/8 15:00:05
+HIDDEN_LEAK_RISK.md              1804    2026/6/8 15:00:05
+IMPLEMENTATION_STATUS.md         3463    2026/6/8 15:00:05
+LIFE_SIM_STATUS.md               2002    2026/6/8 15:00:05
+MANIFEST.json                    12706   2026/6/8 15:01:12
+PROMPT_STATUS.md                 1912    2026/6/8 15:00:05
+review_package.zip               8031496 2026/6/8 15:01:13
+REVIEW_SUMMARY_FOR_CHATGPT.md    1752    2026/6/8 15:00:05
+TEST_RESULTS.md                  2050    2026/6/8 15:00:05
+
+

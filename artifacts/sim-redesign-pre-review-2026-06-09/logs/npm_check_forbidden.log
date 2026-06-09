@@ -1,0 +1,6 @@
+﻿# npm run check:forbidden
+
+> xiuxian-stg@0.1.0 check:forbidden
+> node -e "const fs=require('node:fs');const path=require('node:path');const root='src/sim';const forbidden=['Math.random','Date.now','performance.now','document.','window.','requestAnimationFrame','setTimeout','setInterval','localStorage','new Audio','CanvasRenderingContext2D'];const failures=[];function walk(dir){if(!fs.existsSync(dir))return;for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())walk(file);else if(/\.(ts|tsx|js|jsx)$/.test(entry.name)){const text=fs.readFileSync(file,'utf8');for(const token of forbidden){const idx=text.indexOf(token);if(idx!==-1){const line=text.slice(0,idx).split('\n').length;failures.push(file+':'+line+' contains forbidden token: '+token);}}}}}walk(root);if(failures.length){console.error(failures.join('\n'));process.exit(1);}console.log('No forbidden gameplay patterns found.');"
+
+No forbidden gameplay patterns found.

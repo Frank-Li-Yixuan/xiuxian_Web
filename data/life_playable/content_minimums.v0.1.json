@@ -1,0 +1,40 @@
+{
+  "version": "0.1",
+  "mustHave": {
+    "agePhases": 4,
+    "storylinesVisible": 8,
+    "monthlyEventPoolMinimum": 80,
+    "majorChoiceEventsMinimum": 20,
+    "manualPlayableInterludesMinimum": 1,
+    "autoResolvableInterludeTypesMinimum": 4,
+    "stageSummariesMinimum": 4,
+    "presetScenarioTestsMinimum": 6
+  },
+  "interludeMvp": [
+    {
+      "id": "interlude_rain_backhill_stg",
+      "mode": "stg",
+      "implementation": "manual_or_existing_stg_shell"
+    },
+    {
+      "id": "interlude_heavenly_war_drum_stg",
+      "mode": "stg",
+      "implementation": "auto_or_manual_later"
+    },
+    {
+      "id": "interlude_herb_field_horde",
+      "mode": "horde",
+      "implementation": "auto_resolve"
+    },
+    {
+      "id": "interlude_talisman_heart_trial_dbg",
+      "mode": "deckbuilder",
+      "implementation": "auto_resolve"
+    },
+    {
+      "id": "interlude_ancestral_jade_board",
+      "mode": "formation_auto",
+      "implementation": "auto_resolve"
+    }
+  ]
+}

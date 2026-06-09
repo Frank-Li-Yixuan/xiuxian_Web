@@ -1,0 +1,7 @@
+﻿{
+    "name":  "rg_keywords",
+    "command":  "rg -n NinePalaceEvaluation|eligibility|mutation|storyline|density|interlude|NarrativeService|trueName|18 岁|域外 src data docs codex_prompts scripts tools tests",
+    "exitCode":  0,
+    "start":  "2026-06-09T22:26:39.5875171+08:00",
+    "end":  "2026-06-09T22:26:39.6500481+08:00"
+}

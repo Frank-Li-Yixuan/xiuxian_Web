@@ -1,0 +1,108 @@
+{
+  "version": "0.1",
+  "lifetimeHalfYearChoices": 36,
+  "targetManualPlayableInterludes": {
+    "min": 6,
+    "target": 9,
+    "max": 12
+  },
+  "agePhaseBudgets": [
+    {
+      "phaseId": "infancy",
+      "ageMonths": [
+        0,
+        47
+      ],
+      "maxPlayableInterludes": 0,
+      "allowedModes": [
+        "text_check"
+      ]
+    },
+    {
+      "phaseId": "childhood",
+      "ageMonths": [
+        48,
+        107
+      ],
+      "maxPlayableInterludes": 2,
+      "allowedModes": [
+        "stg",
+        "deckbuilder",
+        "text_check"
+      ],
+      "maxDifficulty": "steady"
+    },
+    {
+      "phaseId": "youth",
+      "ageMonths": [
+        108,
+        167
+      ],
+      "maxPlayableInterludes": 3,
+      "allowedModes": [
+        "stg",
+        "horde",
+        "deckbuilder",
+        "formation_auto",
+        "text_check"
+      ],
+      "maxDifficulty": "risky"
+    },
+    {
+      "phaseId": "adolescence",
+      "ageMonths": [
+        168,
+        215
+      ],
+      "maxPlayableInterludes": 5,
+      "allowedModes": [
+        "stg",
+        "horde",
+        "deckbuilder",
+        "formation_auto",
+        "text_check"
+      ],
+      "maxDifficulty": "forbidden"
+    }
+  ],
+  "cooldowns": {
+    "sameModeMonths": 12,
+    "sameThreadMonths": 12,
+    "coreStorylineInterludeMonths": 18
+  },
+  "fatigue": [
+    {
+      "recentPlayableInterludesLast24Months": [
+        0,
+        1
+      ],
+      "weightMultiplier": 1.0
+    },
+    {
+      "recentPlayableInterludesLast24Months": [
+        2,
+        2
+      ],
+      "weightMultiplier": 0.8
+    },
+    {
+      "recentPlayableInterludesLast24Months": [
+        3,
+        3
+      ],
+      "weightMultiplier": 0.6
+    },
+    {
+      "recentPlayableInterludesLast24Months": [
+        4,
+        99
+      ],
+      "weightMultiplier": 0.35
+    }
+  ],
+  "autoResolveRules": {
+    "manualMaxOutcome": "hiddenSuccess",
+    "autoResolveMaxOutcome": "success",
+    "abandonDefaultOutcome": "partialSuccessOrFailure"
+  }
+}

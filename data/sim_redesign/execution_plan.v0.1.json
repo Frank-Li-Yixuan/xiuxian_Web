@@ -1,0 +1,47 @@
+{
+  "version": "0.1",
+  "phases": [
+    {
+      "id": "phase_0_review",
+      "name": "迁移前审计与 Prompt 清理",
+      "prompts": ["REVIEW-PRE-001", "MIG-C001"],
+      "gate": "确认当前实现状态，标记 deprecated prompt，不修改 gameplay"
+    },
+    {
+      "id": "phase_1_registry",
+      "name": "数据 Registry 统一",
+      "prompts": ["MIG-C002", "NPF-C001", "NPF-C002", "DEM-C001", "DEM-C002", "HFO2-C001", "LST-C001", "LPI-C001", "LSTG-C001", "ME2-C001", "MC2-C001", "LLM-C001", "LFP-C001"],
+      "gate": "所有 v0.2 数据可加载、可校验"
+    },
+    {
+      "id": "phase_2_character_creation",
+      "name": "角色创建生成链升级",
+      "prompts": ["NPF-C003", "NPF-C004", "DEM-C003", "DEM-C004", "DEM-C005", "DEM-C006", "HFO2-C002", "HFO2-C003", "HFO2-C004", "HFO2-C005", "MIG-C003"],
+      "gate": "九宫与天命合理性、隐藏真名不泄露、角色创建 ViewModel 可显示"
+    },
+    {
+      "id": "phase_3_life_core",
+      "name": "人生模拟核心升级",
+      "prompts": ["LST-C002", "LST-C003", "LST-C004", "LST-C005", "LPI-C002", "LPI-C003", "LPI-C004", "LSTG-C002", "LSTG-C003", "LSTG-C004", "LSTG-C005", "ME2-C002", "ME2-C003", "ME2-C004", "ME2-C005", "ME2-C006", "MC2-C002", "MC2-C003", "MC2-C004", "MC2-C005", "MC2-C006", "MIG-C004", "MIG-C005"],
+      "gate": "216 个月可推进，半年选择、主线、插曲、阶段 token 生效"
+    },
+    {
+      "id": "phase_4_narrative_ui",
+      "name": "叙事增强与首版 UI 体验",
+      "prompts": ["LLM-C002", "LLM-C003", "LLM-C005", "LLM-C006", "LLM-C007", "LLM-C008", "LFP-C002", "LFP-C003", "LFP-C004", "LFP-C005", "LFP-C006", "LFP-C007", "LFP-C009", "MIG-C007", "MIG-C008"],
+      "gate": "LifeSimulationScreen 可玩，fallback 文案可用，存档恢复"
+    },
+    {
+      "id": "phase_5_adult_node",
+      "name": "成年节点与后续试炼桥接",
+      "prompts": ["MIG-C009", "A18-C002", "A18-C003", "A18-C004", "STG-R001", "A18-C005", "A18-C006"],
+      "gate": "成年节点可生成路径评分，默认可桥接域外战场"
+    },
+    {
+      "id": "phase_6_acceptance",
+      "name": "总验收",
+      "prompts": ["E2E-SIM-001", "RC-SIM-001"],
+      "gate": "人生模拟首版可玩"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "version": "0.1",
+  "cases": [
+    {
+      "id": "low_talent_should_not_heaven_jealous",
+      "input": {
+        "jing": 45,
+        "qi": 45,
+        "shen": 35,
+        "rootBone": 30,
+        "comprehension": 25,
+        "inspiration": 22,
+        "fortune": 55,
+        "heart": 75,
+        "lifespan": 90
+      },
+      "expected": {
+        "destiny_heaven_jealous_talent": "ineligible_or_mutate_false_heavenly_burden"
+      }
+    },
+    {
+      "id": "high_talent_low_life_supports_heaven_jealous",
+      "input": {
+        "jing": 42,
+        "qi": 55,
+        "shen": 72,
+        "rootBone": 44,
+        "comprehension": 95,
+        "inspiration": 84,
+        "fortune": 45,
+        "heart": 42,
+        "lifespan": 24
+      },
+      "expected": {
+        "destiny_heaven_jealous_talent": "eligible",
+        "lifeEventBias": [
+          "illness",
+          "heaven_attention"
+        ]
+      }
+    },
+    {
+      "id": "waste_root_reversal_valid",
+      "input": {
+        "jing": 35,
+        "qi": 30,
+        "shen": 50,
+        "rootBone": 18,
+        "comprehension": 42,
+        "inspiration": 66,
+        "fortune": 30,
+        "heart": 88,
+        "lifespan": 70
+      },
+      "expected": {
+        "destiny_waste_root_reversal": "eligible"
+      }
+    },
+    {
+      "id": "high_talent_not_waste_root",
+      "input": {
+        "jing": 80,
+        "qi": 80,
+        "shen": 82,
+        "rootBone": 92,
+        "comprehension": 91,
+        "inspiration": 70,
+        "fortune": 85,
+        "heart": 75,
+        "lifespan": 80
+      },
+      "expected": {
+        "destiny_waste_root_reversal": "mutate_heaven_pride_under_calamity_or_ineligible"
+      }
+    },
+    {
+      "id": "goudao_valid",
+      "input": {
+        "jing": 55,
+        "qi": 62,
+        "shen": 60,
+        "rootBone": 55,
+        "comprehension": 50,
+        "inspiration": 55,
+        "fortune": 62,
+        "heart": 91,
+        "lifespan": 96
+      },
+      "expected": {
+        "destiny_cowardly_supreme": "eligible",
+        "lifeEventBias": [
+          "seclusion",
+          "avoid_fight"
+        ]
+      }
+    },
+    {
+      "id": "demon_and_clear_glass_mutates",
+      "input": {
+        "destinies": [
+          "destiny_demon_seed",
+          "destiny_clear_glass_heart"
+        ]
+      },
+      "expected": {
+        "mutation": "destiny_pure_lotus_shadow"
+      }
+    }
+  ]
+}

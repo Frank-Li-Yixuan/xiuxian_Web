@@ -1,0 +1,3993 @@
+{
+  "version": "0.1",
+  "eventThreads": [
+    {
+      "id": "thread_private_school_enlightenment",
+      "storylineId": "storyline_poor_scholar",
+      "name": "私塾启蒙",
+      "description": "从识字、读书到偶然读懂旧经的读书线起点。",
+      "threadTags": [
+        "study",
+        "private_school",
+        "comprehension"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_private_school_child",
+          "weight": 18
+        },
+        {
+          "source": "ninePalace",
+          "stat": "comprehension",
+          "min": 70,
+          "weight": 12
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            84
+          ],
+          "monthlyEventTags": [
+            "private_school",
+            "literacy"
+          ],
+          "majorChoiceTags": [
+            "study_diligently",
+            "skip_class"
+          ],
+          "visibleNarrativeHints": [
+            "你开始接触私塾与识字。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            72,
+            120
+          ],
+          "monthlyEventTags": [
+            "old_words",
+            "unexpected_memory"
+          ],
+          "majorChoiceTags": [
+            "ask_teacher",
+            "hide_talent"
+          ],
+          "visibleNarrativeHints": [
+            "你偶尔会记住从未学过的句子。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            108,
+            168
+          ],
+          "monthlyEventTags": [
+            "scripture_understanding"
+          ],
+          "majorChoiceTags": [
+            "read_old_text",
+            "debate_teacher"
+          ],
+          "visibleNarrativeHints": [
+            "书卷中的某些句子似乎在发光。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            144,
+            204
+          ],
+          "monthlyEventTags": [
+            "forbidden_page"
+          ],
+          "majorChoiceTags": [
+            "read_forbidden_page",
+            "burn_page"
+          ],
+          "visibleNarrativeHints": [
+            "一页禁书落入你手中。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "bookish_seed_of_dao"
+          ],
+          "majorChoiceTags": [
+            "choose_study_path"
+          ],
+          "visibleNarrativeHints": [
+            "书卷开始与你的命盘相连。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_literacy",
+        "hook_old_scripture"
+      ],
+      "majorChoiceHooks": [
+        "choice_study_or_adventure"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_scripture_debate"
+      ],
+      "resolutionHooks": [
+        "age18_scripture_memory"
+      ],
+      "failureHooks": [
+        "heartKnot_failed_study"
+      ]
+    },
+    {
+      "id": "thread_old_book_hidden_words",
+      "storylineId": "storyline_poor_scholar",
+      "name": "旧书暗字",
+      "description": "旧书、残页和看似普通文字中的隐藏含义。",
+      "threadTags": [
+        "old_book",
+        "hidden_words",
+        "scripture"
+      ],
+      "triggerSignals": [
+        {
+          "source": "carriedItem",
+          "tag": "item_unwritten_page",
+          "weight": 20
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:heaven_jealous_talent",
+          "weight": 14
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            72,
+            132
+          ],
+          "monthlyEventTags": [
+            "old_book"
+          ],
+          "majorChoiceTags": [
+            "borrow_book"
+          ],
+          "visibleNarrativeHints": [
+            "你借到一本边角残破的旧书。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            96,
+            156
+          ],
+          "monthlyEventTags": [
+            "hidden_words"
+          ],
+          "majorChoiceTags": [
+            "trace_hidden_words"
+          ],
+          "visibleNarrativeHints": [
+            "字里似乎夹着另一层笔画。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            132,
+            192
+          ],
+          "monthlyEventTags": [
+            "scripture_resonance"
+          ],
+          "majorChoiceTags": [
+            "copy_secret_page"
+          ],
+          "visibleNarrativeHints": [
+            "你开始抄写那些只在夜里出现的字。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            168,
+            210
+          ],
+          "monthlyEventTags": [
+            "book_burns_or_reveals"
+          ],
+          "majorChoiceTags": [
+            "keep_or_destroy_page"
+          ],
+          "visibleNarrativeHints": [
+            "旧书忽然发烫。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            192,
+            216
+          ],
+          "monthlyEventTags": [
+            "scripture_memory_seed"
+          ],
+          "majorChoiceTags": [
+            "seal_scripture_memory"
+          ],
+          "visibleNarrativeHints": [
+            "那页旧书化作记忆留在识海。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_hidden_words"
+      ],
+      "majorChoiceHooks": [
+        "choice_forbidden_page"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_old_scripture"
+      ],
+      "resolutionHooks": [
+        "age18_scripture_memory",
+        "hook_unwritten_page_affinity"
+      ],
+      "failureHooks": [
+        "heartKnot_scripture_burned"
+      ]
+    },
+    {
+      "id": "thread_apothecary_sorting_herbs",
+      "storylineId": "storyline_apothecary_alchemy",
+      "name": "分拣草药",
+      "description": "在药铺分药、识药和照顾病人的日常中积累药理。",
+      "threadTags": [
+        "herb",
+        "medicine",
+        "apothecary"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_apothecary_apprentice",
+          "weight": 20
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:alchemy_talent",
+          "weight": 18
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            84
+          ],
+          "monthlyEventTags": [
+            "sort_herbs"
+          ],
+          "majorChoiceTags": [
+            "help_apothecary"
+          ],
+          "visibleNarrativeHints": [
+            "你开始替药铺分拣草药。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            72,
+            120
+          ],
+          "monthlyEventTags": [
+            "smell_medicine"
+          ],
+          "majorChoiceTags": [
+            "memorize_smell"
+          ],
+          "visibleNarrativeHints": [
+            "你能仅凭气味分辨几味药。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            108,
+            168
+          ],
+          "monthlyEventTags": [
+            "treat_minor_illness"
+          ],
+          "majorChoiceTags": [
+            "try_prescription"
+          ],
+          "visibleNarrativeHints": [
+            "邻里开始找你帮忙辨药。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            144,
+            204
+          ],
+          "monthlyEventTags": [
+            "wrong_dose_risk"
+          ],
+          "majorChoiceTags": [
+            "risk_strong_medicine"
+          ],
+          "visibleNarrativeHints": [
+            "一剂药可能救人，也可能害人。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "alchemy_seed"
+          ],
+          "majorChoiceTags": [
+            "keep_copper_furnace"
+          ],
+          "visibleNarrativeHints": [
+            "你对火候和药性有了自己的判断。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_herb_knowledge"
+      ],
+      "majorChoiceHooks": [
+        "choice_heal_or_risk"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_fire_control"
+      ],
+      "resolutionHooks": [
+        "age18_initial_pill_bonus"
+      ],
+      "failureHooks": [
+        "wound_medicine_mistake"
+      ]
+    },
+    {
+      "id": "thread_furnace_dream",
+      "storylineId": "storyline_apothecary_alchemy",
+      "name": "丹炉之梦",
+      "description": "梦见残炉、火候和陌生丹道记忆的隐藏线。",
+      "threadTags": [
+        "furnace_dream",
+        "alchemy_saint",
+        "fire_control"
+      ],
+      "triggerSignals": [
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:alchemy_saint_remains",
+          "weight": 24
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_copper_furnace",
+          "weight": 18
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            60,
+            120
+          ],
+          "monthlyEventTags": [
+            "dream_furnace"
+          ],
+          "majorChoiceTags": [
+            "record_dream"
+          ],
+          "visibleNarrativeHints": [
+            "你梦见一尊残破丹炉。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            96,
+            156
+          ],
+          "monthlyEventTags": [
+            "strange_fire_control"
+          ],
+          "majorChoiceTags": [
+            "test_fire"
+          ],
+          "visibleNarrativeHints": [
+            "你对火候有一种陌生的熟悉感。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            132,
+            192
+          ],
+          "monthlyEventTags": [
+            "furnace_memory"
+          ],
+          "majorChoiceTags": [
+            "follow_furnace_memory"
+          ],
+          "visibleNarrativeHints": [
+            "梦中有人教你辨火。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            168,
+            210
+          ],
+          "monthlyEventTags": [
+            "furnace_crack"
+          ],
+          "majorChoiceTags": [
+            "risk_furnace_trial"
+          ],
+          "visibleNarrativeHints": [
+            "梦中丹炉裂开一道缝。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            192,
+            216
+          ],
+          "monthlyEventTags": [
+            "furnace_affinity"
+          ],
+          "majorChoiceTags": [
+            "accept_furnace_memory"
+          ],
+          "visibleNarrativeHints": [
+            "醒来后，你仍记得那一缕炉火。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_furnace_dream"
+      ],
+      "majorChoiceHooks": [
+        "choice_fire_control_trial"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_fire_control"
+      ],
+      "resolutionHooks": [
+        "age18_alchemy_home_hook",
+        "hook_hidden_alchemy_progress"
+      ],
+      "failureHooks": [
+        "heartKnot_furnace_fear"
+      ]
+    },
+    {
+      "id": "thread_wooden_stake_training",
+      "storylineId": "storyline_hunter_martial",
+      "name": "院中木桩",
+      "description": "以木桩练力、练胆、练反应的早期练武线。",
+      "threadTags": [
+        "martial",
+        "wooden_stake",
+        "stamina"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_hunter_child",
+          "weight": 16
+        },
+        {
+          "source": "ninePalace",
+          "stat": "jing",
+          "min": 65,
+          "weight": 12
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            72,
+            108
+          ],
+          "monthlyEventTags": [
+            "wooden_stake"
+          ],
+          "majorChoiceTags": [
+            "practice_stake"
+          ],
+          "visibleNarrativeHints": [
+            "院里立起一根旧木桩。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            96,
+            144
+          ],
+          "monthlyEventTags": [
+            "bruised_knuckles"
+          ],
+          "majorChoiceTags": [
+            "keep_training"
+          ],
+          "visibleNarrativeHints": [
+            "你的手背常有淤青。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "body_strengthening"
+          ],
+          "majorChoiceTags": [
+            "train_harder"
+          ],
+          "visibleNarrativeHints": [
+            "你开始能一口气练完整套动作。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "injury_or_breakthrough"
+          ],
+          "majorChoiceTags": [
+            "risk_overtraining"
+          ],
+          "visibleNarrativeHints": [
+            "再练下去可能伤筋，也可能突破。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "martial_seed"
+          ],
+          "majorChoiceTags": [
+            "choose_martial_path"
+          ],
+          "visibleNarrativeHints": [
+            "你的身体记住了搏杀节奏。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_martial_training"
+      ],
+      "majorChoiceHooks": [
+        "choice_train_or_rest"
+      ],
+      "playInterludeHooks": [
+        "play_horde_training"
+      ],
+      "resolutionHooks": [
+        "age18_martial_start_bonus"
+      ],
+      "failureHooks": [
+        "wound_overtraining"
+      ]
+    },
+    {
+      "id": "thread_bandit_smoke",
+      "storylineId": "storyline_village_calamity",
+      "name": "山贼烟尘",
+      "description": "远处山贼、兵祸与村中恐惧逐渐逼近。",
+      "threadTags": [
+        "bandit",
+        "village",
+        "calamity",
+        "protect"
+      ],
+      "triggerSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:war_caliber",
+          "weight": 18
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:disaster_star",
+          "weight": 18
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            96,
+            144
+          ],
+          "monthlyEventTags": [
+            "bandit_rumor"
+          ],
+          "majorChoiceTags": [
+            "listen_bandit_rumor"
+          ],
+          "visibleNarrativeHints": [
+            "邻村传来山贼烟尘。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            120,
+            168
+          ],
+          "monthlyEventTags": [
+            "village_fear"
+          ],
+          "majorChoiceTags": [
+            "prepare_escape_or_defense"
+          ],
+          "visibleNarrativeHints": [
+            "大人们开始夜里关紧院门。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            144,
+            192
+          ],
+          "monthlyEventTags": [
+            "bandit_scout"
+          ],
+          "majorChoiceTags": [
+            "track_bandit"
+          ],
+          "visibleNarrativeHints": [
+            "你在山路上看见陌生脚印。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            168,
+            210
+          ],
+          "monthlyEventTags": [
+            "bandit_arrives"
+          ],
+          "majorChoiceTags": [
+            "defend_escape_or_beg_help"
+          ],
+          "visibleNarrativeHints": [
+            "山贼终于到了村外。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "calamity_aftermath"
+          ],
+          "majorChoiceTags": [
+            "process_after_calamity"
+          ],
+          "visibleNarrativeHints": [
+            "村口的烟尘散去，但一切都变了。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_bandit_threat"
+      ],
+      "majorChoiceHooks": [
+        "choice_village_calamity"
+      ],
+      "playInterludeHooks": [
+        "play_horde_village_defense",
+        "play_stg_escape_bandit_chase"
+      ],
+      "resolutionHooks": [
+        "age18_merit_protection",
+        "age18_karmic_enemy"
+      ],
+      "failureHooks": [
+        "wound_bandit_attack",
+        "heartKnot_village_loss"
+      ]
+    },
+    {
+      "id": "thread_system_static",
+      "storylineId": "storyline_system_prelude",
+      "name": "耳边杂音",
+      "description": "系统尚未觉醒前，偶尔出现的杂音、冷光和未知提示。",
+      "threadTags": [
+        "system_static",
+        "outer_realm",
+        "heavenly_mechanism"
+      ],
+      "triggerSignals": [
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:system_resonance_body",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "inspiration",
+          "min": 85,
+          "weight": 12
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            96,
+            156
+          ],
+          "monthlyEventTags": [
+            "faint_static"
+          ],
+          "majorChoiceTags": [
+            "ignore_or_listen"
+          ],
+          "visibleNarrativeHints": [
+            "你偶尔听见耳边有一声短促杂音。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            132,
+            180
+          ],
+          "monthlyEventTags": [
+            "cold_light_words"
+          ],
+          "majorChoiceTags": [
+            "trace_static"
+          ],
+          "visibleNarrativeHints": [
+            "杂音中似乎夹着一个陌生词。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            156,
+            204
+          ],
+          "monthlyEventTags": [
+            "system_fragment"
+          ],
+          "majorChoiceTags": [
+            "follow_system_signal"
+          ],
+          "visibleNarrativeHints": [
+            "你看见几行冷光从命盘边缘闪过。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "system_overload"
+          ],
+          "majorChoiceTags": [
+            "accept_or_resist_signal"
+          ],
+          "visibleNarrativeHints": [
+            "那声音越来越像是在呼唤你。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            204,
+            216
+          ],
+          "monthlyEventTags": [
+            "system_half_awake"
+          ],
+          "majorChoiceTags": [
+            "seal_system_mark"
+          ],
+          "visibleNarrativeHints": [
+            "你意识到，那不是幻觉。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_system_static"
+      ],
+      "majorChoiceHooks": [
+        "choice_system_signal"
+      ],
+      "playInterludeHooks": [
+        "play_stg_outer_battlefield_dream"
+      ],
+      "resolutionHooks": [
+        "age18_system_resonance"
+      ],
+      "failureHooks": [
+        "heartKnot_system_fear"
+      ]
+    },
+    {
+      "id": "thread_grave_fire",
+      "storylineId": "storyline_yin_dream_soul",
+      "name": "坟坡魂火",
+      "description": "祖坟、坟坡和月夜魂火带来的阴梦线索。",
+      "threadTags": [
+        "grave",
+        "soul_fire",
+        "yin",
+        "moon"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_grave_keeper_child",
+          "weight": 20
+        },
+        {
+          "source": "spiritualRoot",
+          "tag": "root:yin",
+          "weight": 20
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            60,
+            120
+          ],
+          "monthlyEventTags": [
+            "grave_moon"
+          ],
+          "majorChoiceTags": [
+            "visit_grave"
+          ],
+          "visibleNarrativeHints": [
+            "月夜里，坟坡似有青白微光。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            96,
+            156
+          ],
+          "monthlyEventTags": [
+            "soul_fire"
+          ],
+          "majorChoiceTags": [
+            "approach_soul_fire"
+          ],
+          "visibleNarrativeHints": [
+            "你看见一缕火在无风处摇晃。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            132,
+            192
+          ],
+          "monthlyEventTags": [
+            "ancestor_dream"
+          ],
+          "majorChoiceTags": [
+            "listen_to_dream"
+          ],
+          "visibleNarrativeHints": [
+            "梦里有人隔着雾喊你的名字。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            168,
+            210
+          ],
+          "monthlyEventTags": [
+            "ghost_shadow"
+          ],
+          "majorChoiceTags": [
+            "confront_or_flee_shadow"
+          ],
+          "visibleNarrativeHints": [
+            "那道影子不再只在梦里出现。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            192,
+            216
+          ],
+          "monthlyEventTags": [
+            "soul_sense_seed"
+          ],
+          "majorChoiceTags": [
+            "accept_soul_sense"
+          ],
+          "visibleNarrativeHints": [
+            "你开始能分辨生气与阴气。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_soul_fire"
+      ],
+      "majorChoiceHooks": [
+        "choice_grave_soul"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_dream_debate"
+      ],
+      "resolutionHooks": [
+        "age18_soul_form_bonus"
+      ],
+      "failureHooks": [
+        "heartDemon_grave_shadow"
+      ]
+    },
+    {
+      "id": "thread_questioning_wandering_teacher",
+      "storylineId": "storyline_poor_scholar",
+      "name": "questioning wandering teacher",
+      "description": "寒门读书线下的事件线：questioning wandering teacher。",
+      "threadTags": [
+        "study",
+        "scripture",
+        "comprehension"
+      ],
+      "triggerSignals": [
+        {
+          "source": "ninePalace",
+          "stat": "comprehension",
+          "min": 75,
+          "weight": 20,
+          "note": "悟性高"
+        },
+        {
+          "source": "ninePalace",
+          "tag": "talent_high",
+          "weight": 14
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_questioning_wandering_teacher:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_questioning_wandering_teacher:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "读书相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_questioning_wandering_teacher:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_questioning_wandering_teacher:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "读书的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_questioning_wandering_teacher:development"
+          ],
+          "majorChoiceTags": [
+            "thread_questioning_wandering_teacher:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "读书相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_questioning_wandering_teacher:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_questioning_wandering_teacher:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "读书事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_questioning_wandering_teacher:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_questioning_wandering_teacher:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "读书留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_questioning_wandering_teacher"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_questioning_wandering_teacher"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_scripture_debate"
+      ],
+      "resolutionHooks": [
+        "age18_scripture_memory"
+      ],
+      "failureHooks": [
+        "fail_thread_questioning_wandering_teacher"
+      ]
+    },
+    {
+      "id": "thread_forbidden_page",
+      "storylineId": "storyline_poor_scholar",
+      "name": "forbidden page",
+      "description": "寒门读书线下的事件线：forbidden page。",
+      "threadTags": [
+        "study",
+        "scripture",
+        "comprehension"
+      ],
+      "triggerSignals": [
+        {
+          "source": "ninePalace",
+          "stat": "comprehension",
+          "min": 75,
+          "weight": 20,
+          "note": "悟性高"
+        },
+        {
+          "source": "ninePalace",
+          "tag": "talent_high",
+          "weight": 14
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_forbidden_page:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_forbidden_page:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "读书相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_forbidden_page:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_forbidden_page:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "读书的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_forbidden_page:development"
+          ],
+          "majorChoiceTags": [
+            "thread_forbidden_page:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "读书相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_forbidden_page:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_forbidden_page:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "读书事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_forbidden_page:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_forbidden_page:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "读书留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_forbidden_page"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_forbidden_page"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_scripture_debate"
+      ],
+      "resolutionHooks": [
+        "age18_scripture_memory"
+      ],
+      "failureHooks": [
+        "fail_thread_forbidden_page"
+      ]
+    },
+    {
+      "id": "thread_mistaken_spirit_herb",
+      "storylineId": "storyline_apothecary_alchemy",
+      "name": "mistaken spirit herb",
+      "description": "药铺丹道线下的事件线：mistaken spirit herb。",
+      "threadTags": [
+        "alchemy",
+        "herb",
+        "medicine"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_apothecary_apprentice",
+          "weight": 28
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:alchemy_talent",
+          "weight": 25
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_mistaken_spirit_herb:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_mistaken_spirit_herb:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "丹道相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_mistaken_spirit_herb:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_mistaken_spirit_herb:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "丹道的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_mistaken_spirit_herb:development"
+          ],
+          "majorChoiceTags": [
+            "thread_mistaken_spirit_herb:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "丹道相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_mistaken_spirit_herb:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_mistaken_spirit_herb:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "丹道事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_mistaken_spirit_herb:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_mistaken_spirit_herb:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "丹道留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_mistaken_spirit_herb"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_mistaken_spirit_herb"
+      ],
+      "playInterludeHooks": [
+        "play_horde_guard_medicine_field"
+      ],
+      "resolutionHooks": [
+        "age18_initial_pill_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_mistaken_spirit_herb"
+      ]
+    },
+    {
+      "id": "thread_healing_a_neighbor",
+      "storylineId": "storyline_apothecary_alchemy",
+      "name": "healing a neighbor",
+      "description": "药铺丹道线下的事件线：healing a neighbor。",
+      "threadTags": [
+        "alchemy",
+        "herb",
+        "medicine"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_apothecary_apprentice",
+          "weight": 28
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:alchemy_talent",
+          "weight": 25
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_healing_a_neighbor:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_healing_a_neighbor:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "丹道相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_healing_a_neighbor:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_healing_a_neighbor:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "丹道的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_healing_a_neighbor:development"
+          ],
+          "majorChoiceTags": [
+            "thread_healing_a_neighbor:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "丹道相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_healing_a_neighbor:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_healing_a_neighbor:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "丹道事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_healing_a_neighbor:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_healing_a_neighbor:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "丹道留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_healing_a_neighbor"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_healing_a_neighbor"
+      ],
+      "playInterludeHooks": [
+        "play_horde_guard_medicine_field"
+      ],
+      "resolutionHooks": [
+        "age18_initial_pill_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_healing_a_neighbor"
+      ]
+    },
+    {
+      "id": "thread_furnace_fire_control",
+      "storylineId": "storyline_apothecary_alchemy",
+      "name": "furnace fire control",
+      "description": "药铺丹道线下的事件线：furnace fire control。",
+      "threadTags": [
+        "alchemy",
+        "herb",
+        "medicine"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_apothecary_apprentice",
+          "weight": 28
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:alchemy_talent",
+          "weight": 25
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_furnace_fire_control:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_furnace_fire_control:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "丹道相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_furnace_fire_control:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_furnace_fire_control:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "丹道的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_furnace_fire_control:development"
+          ],
+          "majorChoiceTags": [
+            "thread_furnace_fire_control:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "丹道相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_furnace_fire_control:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_furnace_fire_control:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "丹道事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_furnace_fire_control:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_furnace_fire_control:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "丹道留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_furnace_fire_control"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_furnace_fire_control"
+      ],
+      "playInterludeHooks": [
+        "play_horde_guard_medicine_field"
+      ],
+      "resolutionHooks": [
+        "age18_initial_pill_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_furnace_fire_control"
+      ]
+    },
+    {
+      "id": "thread_hill_hunt",
+      "storylineId": "storyline_hunter_martial",
+      "name": "hill hunt",
+      "description": "猎户练武线下的事件线：hill hunt。",
+      "threadTags": [
+        "martial",
+        "hunting",
+        "forest"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_hunter_child",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "jing",
+          "min": 70,
+          "weight": 14
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_hill_hunt:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_hill_hunt:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "练武相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_hill_hunt:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_hill_hunt:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "练武的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_hill_hunt:development"
+          ],
+          "majorChoiceTags": [
+            "thread_hill_hunt:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "练武相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_hill_hunt:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_hill_hunt:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "练武事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_hill_hunt:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_hill_hunt:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "练武留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_hill_hunt"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_hill_hunt"
+      ],
+      "playInterludeHooks": [
+        "play_stg_beast_chase"
+      ],
+      "resolutionHooks": [
+        "age18_martial_start_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_hill_hunt"
+      ]
+    },
+    {
+      "id": "thread_first_blood",
+      "storylineId": "storyline_hunter_martial",
+      "name": "first blood",
+      "description": "猎户练武线下的事件线：first blood。",
+      "threadTags": [
+        "martial",
+        "hunting",
+        "forest"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_hunter_child",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "jing",
+          "min": 70,
+          "weight": 14
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_first_blood:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_first_blood:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "练武相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_first_blood:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_first_blood:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "练武的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_first_blood:development"
+          ],
+          "majorChoiceTags": [
+            "thread_first_blood:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "练武相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_first_blood:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_first_blood:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "练武事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_first_blood:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_first_blood:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "练武留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_first_blood"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_first_blood"
+      ],
+      "playInterludeHooks": [
+        "play_stg_beast_chase"
+      ],
+      "resolutionHooks": [
+        "age18_martial_start_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_first_blood"
+      ]
+    },
+    {
+      "id": "thread_forest_beast_shadow",
+      "storylineId": "storyline_hunter_martial",
+      "name": "forest beast shadow",
+      "description": "猎户练武线下的事件线：forest beast shadow。",
+      "threadTags": [
+        "martial",
+        "hunting",
+        "forest"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_hunter_child",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "jing",
+          "min": 70,
+          "weight": 14
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_forest_beast_shadow:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_forest_beast_shadow:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "练武相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_forest_beast_shadow:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_forest_beast_shadow:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "练武的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_forest_beast_shadow:development"
+          ],
+          "majorChoiceTags": [
+            "thread_forest_beast_shadow:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "练武相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_forest_beast_shadow:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_forest_beast_shadow:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "练武事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_forest_beast_shadow:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_forest_beast_shadow:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "练武留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_forest_beast_shadow"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_forest_beast_shadow"
+      ],
+      "playInterludeHooks": [
+        "play_stg_beast_chase"
+      ],
+      "resolutionHooks": [
+        "age18_martial_start_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_forest_beast_shadow"
+      ]
+    },
+    {
+      "id": "thread_incense_sweeping",
+      "storylineId": "storyline_taoist_incense",
+      "name": "incense sweeping",
+      "description": "道观香火线下的事件线：incense sweeping。",
+      "threadTags": [
+        "daoist_temple",
+        "incense",
+        "talisman"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_taoist_temple_helper",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "heart",
+          "min": 75,
+          "weight": 16
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_incense_sweeping:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_incense_sweeping:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_incense_sweeping:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_incense_sweeping:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "道观的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_incense_sweeping:development"
+          ],
+          "majorChoiceTags": [
+            "thread_incense_sweeping:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_incense_sweeping:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_incense_sweeping:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "道观事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_incense_sweeping:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_incense_sweeping:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "道观留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_incense_sweeping"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_incense_sweeping"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_heart_questioning"
+      ],
+      "resolutionHooks": [
+        "age18_talisman_start"
+      ],
+      "failureHooks": [
+        "fail_thread_incense_sweeping"
+      ]
+    },
+    {
+      "id": "thread_talisman_copying",
+      "storylineId": "storyline_taoist_incense",
+      "name": "talisman copying",
+      "description": "道观香火线下的事件线：talisman copying。",
+      "threadTags": [
+        "daoist_temple",
+        "incense",
+        "talisman"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_taoist_temple_helper",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "heart",
+          "min": 75,
+          "weight": 16
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_talisman_copying:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_talisman_copying:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_talisman_copying:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_talisman_copying:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "道观的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_talisman_copying:development"
+          ],
+          "majorChoiceTags": [
+            "thread_talisman_copying:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_talisman_copying:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_talisman_copying:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "道观事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_talisman_copying:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_talisman_copying:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "道观留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_talisman_copying"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_talisman_copying"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_heart_questioning"
+      ],
+      "resolutionHooks": [
+        "age18_talisman_start"
+      ],
+      "failureHooks": [
+        "fail_thread_talisman_copying"
+      ]
+    },
+    {
+      "id": "thread_temple_formation_trial",
+      "storylineId": "storyline_taoist_incense",
+      "name": "temple formation trial",
+      "description": "道观香火线下的事件线：temple formation trial。",
+      "threadTags": [
+        "daoist_temple",
+        "incense",
+        "talisman"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_taoist_temple_helper",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "heart",
+          "min": 75,
+          "weight": 16
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_temple_formation_trial:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_temple_formation_trial:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_temple_formation_trial:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_temple_formation_trial:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "道观的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_temple_formation_trial:development"
+          ],
+          "majorChoiceTags": [
+            "thread_temple_formation_trial:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_temple_formation_trial:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_temple_formation_trial:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "道观事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_temple_formation_trial:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_temple_formation_trial:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "道观留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_temple_formation_trial"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_temple_formation_trial"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_heart_questioning"
+      ],
+      "resolutionHooks": [
+        "age18_talisman_start"
+      ],
+      "failureHooks": [
+        "fail_thread_temple_formation_trial"
+      ]
+    },
+    {
+      "id": "thread_heart_questioning",
+      "storylineId": "storyline_taoist_incense",
+      "name": "heart questioning",
+      "description": "道观香火线下的事件线：heart questioning。",
+      "threadTags": [
+        "daoist_temple",
+        "incense",
+        "talisman"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_taoist_temple_helper",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "heart",
+          "min": 75,
+          "weight": 16
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_heart_questioning:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_questioning:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_heart_questioning:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_questioning:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "道观的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_heart_questioning:development"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_questioning:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "道观相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_heart_questioning:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_questioning:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "道观事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_heart_questioning:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_questioning:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "道观留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_heart_questioning"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_heart_questioning"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_heart_questioning"
+      ],
+      "resolutionHooks": [
+        "age18_talisman_start"
+      ],
+      "failureHooks": [
+        "fail_thread_heart_questioning"
+      ]
+    },
+    {
+      "id": "thread_ancestral_object_warms",
+      "storylineId": "storyline_fallen_cultivator_lineage",
+      "name": "ancestral object warms",
+      "description": "破落修士遗脉线下的事件线：ancestral object warms。",
+      "threadTags": [
+        "fallen_lineage",
+        "ancestral_item",
+        "wooden_sword"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_fallen_cultivator_descendant",
+          "weight": 30
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:previous_life_sword_soul",
+          "weight": 24
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_ancestral_object_warms:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_ancestral_object_warms:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_ancestral_object_warms:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_ancestral_object_warms:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_ancestral_object_warms:development"
+          ],
+          "majorChoiceTags": [
+            "thread_ancestral_object_warms:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_ancestral_object_warms:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_ancestral_object_warms:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_ancestral_object_warms:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_ancestral_object_warms:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_ancestral_object_warms"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_ancestral_object_warms"
+      ],
+      "playInterludeHooks": [
+        "play_stg_sword_memory"
+      ],
+      "resolutionHooks": [
+        "age18_sword_soul_echo"
+      ],
+      "failureHooks": [
+        "fail_thread_ancestral_object_warms"
+      ]
+    },
+    {
+      "id": "thread_wooden_sword_rings",
+      "storylineId": "storyline_fallen_cultivator_lineage",
+      "name": "wooden sword rings",
+      "description": "破落修士遗脉线下的事件线：wooden sword rings。",
+      "threadTags": [
+        "fallen_lineage",
+        "ancestral_item",
+        "wooden_sword"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_fallen_cultivator_descendant",
+          "weight": 30
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:previous_life_sword_soul",
+          "weight": 24
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_wooden_sword_rings:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_wooden_sword_rings:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_wooden_sword_rings:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_wooden_sword_rings:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_wooden_sword_rings:development"
+          ],
+          "majorChoiceTags": [
+            "thread_wooden_sword_rings:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_wooden_sword_rings:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_wooden_sword_rings:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_wooden_sword_rings:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_wooden_sword_rings:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_wooden_sword_rings"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_wooden_sword_rings"
+      ],
+      "playInterludeHooks": [
+        "play_stg_sword_memory"
+      ],
+      "resolutionHooks": [
+        "age18_sword_soul_echo"
+      ],
+      "failureHooks": [
+        "fail_thread_wooden_sword_rings"
+      ]
+    },
+    {
+      "id": "thread_failed_breathing_reversal",
+      "storylineId": "storyline_fallen_cultivator_lineage",
+      "name": "failed breathing reversal",
+      "description": "破落修士遗脉线下的事件线：failed breathing reversal。",
+      "threadTags": [
+        "fallen_lineage",
+        "ancestral_item",
+        "wooden_sword"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_fallen_cultivator_descendant",
+          "weight": 30
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:previous_life_sword_soul",
+          "weight": 24
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_failed_breathing_reversal:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_failed_breathing_reversal:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_failed_breathing_reversal:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_failed_breathing_reversal:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_failed_breathing_reversal:development"
+          ],
+          "majorChoiceTags": [
+            "thread_failed_breathing_reversal:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_failed_breathing_reversal:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_failed_breathing_reversal:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_failed_breathing_reversal:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_failed_breathing_reversal:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_failed_breathing_reversal"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_failed_breathing_reversal"
+      ],
+      "playInterludeHooks": [
+        "play_stg_sword_memory"
+      ],
+      "resolutionHooks": [
+        "age18_sword_soul_echo"
+      ],
+      "failureHooks": [
+        "fail_thread_failed_breathing_reversal"
+      ]
+    },
+    {
+      "id": "thread_old_enemy_shadow",
+      "storylineId": "storyline_fallen_cultivator_lineage",
+      "name": "old enemy shadow",
+      "description": "破落修士遗脉线下的事件线：old enemy shadow。",
+      "threadTags": [
+        "fallen_lineage",
+        "ancestral_item",
+        "wooden_sword"
+      ],
+      "triggerSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_fallen_cultivator_descendant",
+          "weight": 30
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:previous_life_sword_soul",
+          "weight": 24
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_old_enemy_shadow:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_old_enemy_shadow:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_old_enemy_shadow:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_old_enemy_shadow:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_old_enemy_shadow:development"
+          ],
+          "majorChoiceTags": [
+            "thread_old_enemy_shadow:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_old_enemy_shadow:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_old_enemy_shadow:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_old_enemy_shadow:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_old_enemy_shadow:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "遗脉留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_old_enemy_shadow"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_old_enemy_shadow"
+      ],
+      "playInterludeHooks": [
+        "play_stg_sword_memory"
+      ],
+      "resolutionHooks": [
+        "age18_sword_soul_echo"
+      ],
+      "failureHooks": [
+        "fail_thread_old_enemy_shadow"
+      ]
+    },
+    {
+      "id": "thread_demon_beast_at_fence",
+      "storylineId": "storyline_village_calamity",
+      "name": "demon beast at fence",
+      "description": "山村灾劫线下的事件线：demon beast at fence。",
+      "threadTags": [
+        "calamity",
+        "bandit",
+        "demon_beast"
+      ],
+      "triggerSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:disaster_star",
+          "weight": 24
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:war_caliber",
+          "weight": 20
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_demon_beast_at_fence:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_demon_beast_at_fence:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_demon_beast_at_fence:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_demon_beast_at_fence:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_demon_beast_at_fence:development"
+          ],
+          "majorChoiceTags": [
+            "thread_demon_beast_at_fence:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_demon_beast_at_fence:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_demon_beast_at_fence:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_demon_beast_at_fence:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_demon_beast_at_fence:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_demon_beast_at_fence"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_demon_beast_at_fence"
+      ],
+      "playInterludeHooks": [
+        "play_horde_village_defense"
+      ],
+      "resolutionHooks": [
+        "age18_merit_protection"
+      ],
+      "failureHooks": [
+        "fail_thread_demon_beast_at_fence"
+      ]
+    },
+    {
+      "id": "thread_village_rescue_or_escape",
+      "storylineId": "storyline_village_calamity",
+      "name": "village rescue or escape",
+      "description": "山村灾劫线下的事件线：village rescue or escape。",
+      "threadTags": [
+        "calamity",
+        "bandit",
+        "demon_beast"
+      ],
+      "triggerSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:disaster_star",
+          "weight": 24
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:war_caliber",
+          "weight": 20
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_village_rescue_or_escape:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_village_rescue_or_escape:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_village_rescue_or_escape:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_village_rescue_or_escape:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_village_rescue_or_escape:development"
+          ],
+          "majorChoiceTags": [
+            "thread_village_rescue_or_escape:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_village_rescue_or_escape:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_village_rescue_or_escape:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_village_rescue_or_escape:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_village_rescue_or_escape:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_village_rescue_or_escape"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_village_rescue_or_escape"
+      ],
+      "playInterludeHooks": [
+        "play_horde_village_defense"
+      ],
+      "resolutionHooks": [
+        "age18_merit_protection"
+      ],
+      "failureHooks": [
+        "fail_thread_village_rescue_or_escape"
+      ]
+    },
+    {
+      "id": "thread_merit_or_karma_divergence",
+      "storylineId": "storyline_village_calamity",
+      "name": "merit or karma divergence",
+      "description": "山村灾劫线下的事件线：merit or karma divergence。",
+      "threadTags": [
+        "calamity",
+        "bandit",
+        "demon_beast"
+      ],
+      "triggerSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:disaster_star",
+          "weight": 24
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:war_caliber",
+          "weight": 20
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_merit_or_karma_divergence:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_merit_or_karma_divergence:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_merit_or_karma_divergence:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_merit_or_karma_divergence:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_merit_or_karma_divergence:development"
+          ],
+          "majorChoiceTags": [
+            "thread_merit_or_karma_divergence:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_merit_or_karma_divergence:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_merit_or_karma_divergence:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_merit_or_karma_divergence:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_merit_or_karma_divergence:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "灾劫留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_merit_or_karma_divergence"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_merit_or_karma_divergence"
+      ],
+      "playInterludeHooks": [
+        "play_horde_village_defense"
+      ],
+      "resolutionHooks": [
+        "age18_merit_protection"
+      ],
+      "failureHooks": [
+        "fail_thread_merit_or_karma_divergence"
+      ]
+    },
+    {
+      "id": "thread_moon_dream",
+      "storylineId": "storyline_yin_dream_soul",
+      "name": "moon dream",
+      "description": "阴梦魂修线下的事件线：moon dream。",
+      "threadTags": [
+        "dream",
+        "soul",
+        "yin"
+      ],
+      "triggerSignals": [
+        {
+          "source": "spiritualRoot",
+          "tag": "root:yin",
+          "weight": 26
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:taiyin_remnant_pulse",
+          "weight": 26
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_moon_dream:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_moon_dream:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_moon_dream:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_moon_dream:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_moon_dream:development"
+          ],
+          "majorChoiceTags": [
+            "thread_moon_dream:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_moon_dream:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_moon_dream:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_moon_dream:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_moon_dream:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_moon_dream"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_moon_dream"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_dream_debate"
+      ],
+      "resolutionHooks": [
+        "age18_soul_form_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_moon_dream"
+      ]
+    },
+    {
+      "id": "thread_black_flute_whispers",
+      "storylineId": "storyline_yin_dream_soul",
+      "name": "black flute whispers",
+      "description": "阴梦魂修线下的事件线：black flute whispers。",
+      "threadTags": [
+        "dream",
+        "soul",
+        "yin"
+      ],
+      "triggerSignals": [
+        {
+          "source": "spiritualRoot",
+          "tag": "root:yin",
+          "weight": 26
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:taiyin_remnant_pulse",
+          "weight": 26
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_black_flute_whispers:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_black_flute_whispers:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_black_flute_whispers:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_black_flute_whispers:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_black_flute_whispers:development"
+          ],
+          "majorChoiceTags": [
+            "thread_black_flute_whispers:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_black_flute_whispers:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_black_flute_whispers:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_black_flute_whispers:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_black_flute_whispers:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_black_flute_whispers"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_black_flute_whispers"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_dream_debate"
+      ],
+      "resolutionHooks": [
+        "age18_soul_form_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_black_flute_whispers"
+      ]
+    },
+    {
+      "id": "thread_heart_demon_shadow",
+      "storylineId": "storyline_yin_dream_soul",
+      "name": "heart demon shadow",
+      "description": "阴梦魂修线下的事件线：heart demon shadow。",
+      "threadTags": [
+        "dream",
+        "soul",
+        "yin"
+      ],
+      "triggerSignals": [
+        {
+          "source": "spiritualRoot",
+          "tag": "root:yin",
+          "weight": 26
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:taiyin_remnant_pulse",
+          "weight": 26
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_heart_demon_shadow:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_demon_shadow:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_heart_demon_shadow:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_demon_shadow:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_heart_demon_shadow:development"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_demon_shadow:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_heart_demon_shadow:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_demon_shadow:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_heart_demon_shadow:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_heart_demon_shadow:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "阴梦留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_heart_demon_shadow"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_heart_demon_shadow"
+      ],
+      "playInterludeHooks": [
+        "play_dbg_dream_debate"
+      ],
+      "resolutionHooks": [
+        "age18_soul_form_bonus"
+      ],
+      "failureHooks": [
+        "fail_thread_heart_demon_shadow"
+      ]
+    },
+    {
+      "id": "thread_outer_battlefield_dream",
+      "storylineId": "storyline_system_prelude",
+      "name": "outer battlefield dream",
+      "description": "系统前兆线下的事件线：outer battlefield dream。",
+      "threadTags": [
+        "system_prelude",
+        "outer_battlefield",
+        "static_noise"
+      ],
+      "triggerSignals": [
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:system_resonance_body",
+          "weight": 34
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:outer_battlefield_echo",
+          "weight": 26
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_outer_battlefield_dream:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_outer_battlefield_dream:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "系统相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_outer_battlefield_dream:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_outer_battlefield_dream:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "系统的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_outer_battlefield_dream:development"
+          ],
+          "majorChoiceTags": [
+            "thread_outer_battlefield_dream:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "系统相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_outer_battlefield_dream:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_outer_battlefield_dream:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "系统事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_outer_battlefield_dream:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_outer_battlefield_dream:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "系统留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_outer_battlefield_dream"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_outer_battlefield_dream"
+      ],
+      "playInterludeHooks": [
+        "play_stg_outer_battlefield_dream"
+      ],
+      "resolutionHooks": [
+        "age18_system_resonance"
+      ],
+      "failureHooks": [
+        "fail_thread_outer_battlefield_dream"
+      ]
+    },
+    {
+      "id": "thread_fate_disc_crack",
+      "storylineId": "storyline_system_prelude",
+      "name": "fate disc crack",
+      "description": "系统前兆线下的事件线：fate disc crack。",
+      "threadTags": [
+        "system_prelude",
+        "outer_battlefield",
+        "static_noise"
+      ],
+      "triggerSignals": [
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:system_resonance_body",
+          "weight": 34
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:outer_battlefield_echo",
+          "weight": 26
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_fate_disc_crack:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_fate_disc_crack:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "系统相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_fate_disc_crack:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_fate_disc_crack:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "系统的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_fate_disc_crack:development"
+          ],
+          "majorChoiceTags": [
+            "thread_fate_disc_crack:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "系统相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_fate_disc_crack:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_fate_disc_crack:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "系统事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_fate_disc_crack:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_fate_disc_crack:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "系统留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_fate_disc_crack"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_fate_disc_crack"
+      ],
+      "playInterludeHooks": [
+        "play_stg_outer_battlefield_dream"
+      ],
+      "resolutionHooks": [
+        "age18_system_resonance"
+      ],
+      "failureHooks": [
+        "fail_thread_fate_disc_crack"
+      ]
+    },
+    {
+      "id": "thread_age18_countdown",
+      "storylineId": "storyline_system_prelude",
+      "name": "age18 countdown",
+      "description": "系统前兆线下的事件线：age18 countdown。",
+      "threadTags": [
+        "system_prelude",
+        "outer_battlefield",
+        "static_noise"
+      ],
+      "triggerSignals": [
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:system_resonance_body",
+          "weight": 34
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:outer_battlefield_echo",
+          "weight": 26
+        }
+      ],
+      "stageSequence": [
+        {
+          "stage": "seed",
+          "recommendedAgeRange": [
+            48,
+            108
+          ],
+          "monthlyEventTags": [
+            "thread_age18_countdown:seed"
+          ],
+          "majorChoiceTags": [
+            "thread_age18_countdown:choice_seed"
+          ],
+          "visibleNarrativeHints": [
+            "系统相关的早期迹象出现。"
+          ]
+        },
+        {
+          "stage": "omen",
+          "recommendedAgeRange": [
+            84,
+            144
+          ],
+          "monthlyEventTags": [
+            "thread_age18_countdown:omen"
+          ],
+          "majorChoiceTags": [
+            "thread_age18_countdown:choice_omen"
+          ],
+          "visibleNarrativeHints": [
+            "系统的异动逐渐清晰。"
+          ]
+        },
+        {
+          "stage": "development",
+          "recommendedAgeRange": [
+            120,
+            180
+          ],
+          "monthlyEventTags": [
+            "thread_age18_countdown:development"
+          ],
+          "majorChoiceTags": [
+            "thread_age18_countdown:choice_development"
+          ],
+          "visibleNarrativeHints": [
+            "系统相关经历开始影响你的人生。"
+          ]
+        },
+        {
+          "stage": "crisis",
+          "recommendedAgeRange": [
+            156,
+            210
+          ],
+          "monthlyEventTags": [
+            "thread_age18_countdown:crisis"
+          ],
+          "majorChoiceTags": [
+            "thread_age18_countdown:choice_crisis"
+          ],
+          "visibleNarrativeHints": [
+            "系统事件进入关键节点。"
+          ]
+        },
+        {
+          "stage": "resolution",
+          "recommendedAgeRange": [
+            180,
+            216
+          ],
+          "monthlyEventTags": [
+            "thread_age18_countdown:resolution"
+          ],
+          "majorChoiceTags": [
+            "thread_age18_countdown:choice_resolution"
+          ],
+          "visibleNarrativeHints": [
+            "系统留下了可带入十八岁的痕迹。"
+          ]
+        }
+      ],
+      "monthlyEventHooks": [
+        "hook_thread_age18_countdown"
+      ],
+      "majorChoiceHooks": [
+        "choice_thread_age18_countdown"
+      ],
+      "playInterludeHooks": [
+        "play_stg_outer_battlefield_dream"
+      ],
+      "resolutionHooks": [
+        "age18_system_resonance"
+      ],
+      "failureHooks": [
+        "fail_thread_age18_countdown"
+      ]
+    }
+  ]
+}

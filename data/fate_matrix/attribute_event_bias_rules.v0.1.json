@@ -1,0 +1,133 @@
+{
+  "version": "0.1",
+  "id": "attribute_event_bias_rules",
+  "note": "LM/MLC 事件引擎读取这些标签，避免事件池只由独立随机驱动。",
+  "rules": [
+    {
+      "id": "high_comprehension",
+      "when": {
+        "comprehensionGte": 80
+      },
+      "addTags": [
+        "event:reading",
+        "event:insight",
+        "event:old_script",
+        "line:scholar"
+      ],
+      "weightBonus": 20
+    },
+    {
+      "id": "low_lifespan",
+      "when": {
+        "lifespanLte": 35
+      },
+      "addTags": [
+        "event:illness",
+        "event:short_life",
+        "event:blood_cough",
+        "choice:borrow_life"
+      ],
+      "weightBonus": 25
+    },
+    {
+      "id": "high_inspiration",
+      "when": {
+        "inspirationGte": 80
+      },
+      "addTags": [
+        "event:dream",
+        "event:omen",
+        "event:hidden_fate",
+        "event:system_static"
+      ],
+      "weightBonus": 22
+    },
+    {
+      "id": "high_rootBone",
+      "when": {
+        "rootBoneGte": 80
+      },
+      "addTags": [
+        "event:martial_training",
+        "event:body_tempering",
+        "line:body"
+      ],
+      "weightBonus": 18
+    },
+    {
+      "id": "low_rootBone_high_heart",
+      "when": {
+        "rootBoneLte": 35,
+        "heartGte": 65
+      },
+      "addTags": [
+        "event:failed_cultivation",
+        "event:reversal_mark",
+        "line:waste_reversal"
+      ],
+      "weightBonus": 24
+    },
+    {
+      "id": "high_fortune",
+      "when": {
+        "fortuneGte": 80
+      },
+      "addTags": [
+        "event:chance_find",
+        "event:benefactor",
+        "event:rare_item"
+      ],
+      "weightBonus": 20
+    },
+    {
+      "id": "low_fortune",
+      "when": {
+        "fortuneLte": 25
+      },
+      "addTags": [
+        "event:misfortune",
+        "event:injury",
+        "event:family_debt",
+        "choice:risky_counterfate"
+      ],
+      "weightBonus": 18
+    },
+    {
+      "id": "high_heart",
+      "when": {
+        "heartGte": 80
+      },
+      "addTags": [
+        "event:meditation",
+        "event:resist_temptation",
+        "line:seclusion"
+      ],
+      "weightBonus": 18
+    },
+    {
+      "id": "low_heart_high_shen",
+      "when": {
+        "heartLte": 45,
+        "shenGte": 70
+      },
+      "addTags": [
+        "event:heart_demon",
+        "event:nightmare",
+        "event:forbidden_whisper"
+      ],
+      "weightBonus": 22
+    },
+    {
+      "id": "high_destiny_pressure",
+      "when": {
+        "destinyPressureScoreGte": 70
+      },
+      "addTags": [
+        "event:heaven_attention",
+        "event:thunder_omen",
+        "event:fate_crack"
+      ],
+      "weightBonus": 25
+    }
+  ]
+}

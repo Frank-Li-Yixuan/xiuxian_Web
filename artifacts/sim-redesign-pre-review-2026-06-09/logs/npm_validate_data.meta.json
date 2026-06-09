@@ -1,0 +1,7 @@
+﻿{
+    "name":  "npm_validate_data",
+    "command":  "npm run validate:data",
+    "exitCode":  0,
+    "start":  "2026-06-09T22:27:36.8580642+08:00",
+    "end":  "2026-06-09T22:27:37.3214219+08:00"
+}

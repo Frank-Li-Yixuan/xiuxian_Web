@@ -1,0 +1,33 @@
+{
+  "version": "0.1",
+  "timeline": [
+    {
+      "ageMonth": 72,
+      "event": "雨夜后山",
+      "mode": "stg",
+      "outcome": "success",
+      "notes": "雷灵根 + 天妒英才触发"
+    },
+    {
+      "ageMonth": 102,
+      "event": "符阵问心",
+      "mode": "deckbuilder",
+      "outcome": "partialSuccess",
+      "notes": "私塾/道观线轻试炼"
+    },
+    {
+      "ageMonth": 150,
+      "event": "守护药田",
+      "mode": "horde",
+      "outcome": "failure",
+      "notes": "药铺丹道线 crisis"
+    },
+    {
+      "ageMonth": 186,
+      "event": "天外战鼓",
+      "mode": "stg",
+      "outcome": "success",
+      "notes": "系统前兆线 dominant"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "version": "0.1",
+  "redactions": {
+    "hidden_fate_ancient_thunder_blood": "thunder_omen",
+    "hidden_fate_dan_sage_bone": "alchemy_omen",
+    "hidden_fate_system_resonance": "system_static_omen",
+    "hidden_fate_previous_sword_soul": "sword_dream_omen",
+    "hidden_fate_demon_mark": "shadow_omen",
+    "hidden_fate_taiyin": "moon_shadow_omen"
+  },
+  "visibleOmenMap": {
+    "thunder_omen": "雷云深处的战鼓",
+    "alchemy_omen": "陌生火候",
+    "system_static_omen": "耳边断续杂音",
+    "sword_dream_omen": "木剑低鸣",
+    "shadow_omen": "荒祠黑影",
+    "moon_shadow_omen": "月下冰凉影子"
+  }
+}

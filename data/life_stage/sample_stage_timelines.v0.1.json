@@ -1,0 +1,116 @@
+{
+  "version": "0.1",
+  "samples": [
+    {
+      "id": "sample_thunder_system_candidate",
+      "name": "天妒雷修系统候选",
+      "summary": "山村孤儿 + 雷灵根 + 天妒英才，童年异象，少年后山 STG，青春系统预演，18 岁走域外战场。",
+      "milestones": [
+        {
+          "ageMonth": 24,
+          "event": "雷雨夜啼",
+          "stage": [
+            "mortal_child"
+          ],
+          "token": "first_omen"
+        },
+        {
+          "ageMonth": 72,
+          "event": "雨夜后山成功",
+          "stage": [
+            "omen_touched",
+            "path_seed"
+          ],
+          "token": "stg_rain_mountain_success"
+        },
+        {
+          "ageMonth": 150,
+          "event": "天外战鼓梦",
+          "stage": [
+            "half_initiated",
+            "system_candidate"
+          ],
+          "token": "system_dream_survived"
+        },
+        {
+          "ageMonth": 216,
+          "event": "成年节点",
+          "path": "system_outer_battlefield"
+        }
+      ]
+    },
+    {
+      "id": "sample_goudao_seclusion",
+      "name": "苟道坐忘隐修",
+      "summary": "高心性高寿元 + 苟道至尊，长期避战，18 岁出现延后觉醒候选。",
+      "milestones": [
+        {
+          "ageMonth": 60,
+          "event": "地窖避祸",
+          "stage": [
+            "omen_touched"
+          ],
+          "token": "avoid_disaster"
+        },
+        {
+          "ageMonth": 132,
+          "event": "闭门百日",
+          "stage": [
+            "path_seed"
+          ],
+          "token": "seclusion_layer"
+        },
+        {
+          "ageMonth": 198,
+          "event": "坐忘常定",
+          "stage": [
+            "half_initiated"
+          ],
+          "token": "seclusion_candidate"
+        },
+        {
+          "ageMonth": 216,
+          "event": "成年节点",
+          "path": "seclusion_delay_candidate"
+        }
+      ]
+    },
+    {
+      "id": "sample_alchemy_local_initiation",
+      "name": "药铺丹修凡域入道",
+      "summary": "药铺学徒 + 丹道奇才 + 铜炉，少年火候试炼，18 岁走凡域入道/丹炉路线。",
+      "milestones": [
+        {
+          "ageMonth": 78,
+          "event": "分拣草药",
+          "stage": [
+            "mortal_child"
+          ],
+          "token": "alchemy_interest"
+        },
+        {
+          "ageMonth": 124,
+          "event": "药炉火候成功",
+          "stage": [
+            "path_seed",
+            "half_initiated"
+          ],
+          "token": "first_qi_sense"
+        },
+        {
+          "ageMonth": 190,
+          "event": "火候试炼成功",
+          "stage": [
+            "initiation_candidate"
+          ],
+          "token": "teacher_trial_success"
+        },
+        {
+          "ageMonth": 216,
+          "event": "成年节点",
+          "path": "local_initiation_alchemy"
+        }
+      ]
+    }
+  ]
+}

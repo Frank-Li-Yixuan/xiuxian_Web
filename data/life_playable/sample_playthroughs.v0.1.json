@@ -1,0 +1,75 @@
+{
+  "version": "0.1",
+  "samples": [
+    {
+      "id": "alchemy_apprentice",
+      "title": "药铺丹道型",
+      "inputs": [
+        "origin:药铺学徒",
+        "root:木火",
+        "destiny:丹道奇才",
+        "item:药铺铜炉"
+      ],
+      "expectedStorylines": [
+        "药铺丹道线",
+        "系统前兆线:low"
+      ],
+      "expectedEvents": [
+        "分拣草药",
+        "药炉火候",
+        "丹炉之梦"
+      ],
+      "expectedInterludes": [
+        "守护药田:auto_or_manual"
+      ],
+      "successCriteria": "药理与随身物亲和应明显高于普通角色"
+    },
+    {
+      "id": "fallen_sword_heir",
+      "title": "破落剑魄型",
+      "inputs": [
+        "origin:破落修士之后",
+        "item:残破木剑",
+        "hidden:前世剑魄",
+        "destiny:废灵逆命"
+      ],
+      "expectedStorylines": [
+        "破落修士遗脉线"
+      ],
+      "expectedEvents": [
+        "木剑轻鸣",
+        "吐纳失败",
+        "旧洞府残图"
+      ],
+      "expectedInterludes": [
+        "雨夜后山:possible",
+        "竹影试剑:planned"
+      ],
+      "successCriteria": "失败事件应不只是惩罚，能推动逆命/剑魄线"
+    },
+    {
+      "id": "thunder_orphan",
+      "title": "山村雷劫型",
+      "inputs": [
+        "origin:山村孤儿",
+        "root:雷",
+        "destiny:天妒英才",
+        "hidden:古雷预兆"
+      ],
+      "expectedStorylines": [
+        "山村灾劫线",
+        "系统前兆线"
+      ],
+      "expectedEvents": [
+        "雷雨夜啼",
+        "雨夜后山低语",
+        "天外战鼓"
+      ],
+      "expectedInterludes": [
+        "雨夜后山",
+        "天外战鼓"
+      ],
+      "successCriteria": "雷相关日志、风险、预兆必须明显，但不能泄露古雷真名"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+flowchart TD
+  A[Confirm This Life] --> B[Initialize LifeSimulationPlayableState]
+  B --> C[Auto Monthly Playback]
+  C --> D{Six-month boundary?}
+  D -- no --> C
+  D -- yes --> E[Major Choice]
+  E --> F{Choice has interlude?}
+  F -- no --> G[Apply Choice Effects]
+  F -- yes --> H[Interlude Prompt]
+  H --> I{Manual or Auto?}
+  I -- manual --> J[Playable Interlude]
+  I -- auto --> K[Auto Resolve]
+  J --> L[Writeback Result]
+  K --> L
+  L --> G
+  G --> M{Age Phase End?}
+  M -- yes --> N[Stage Summary]
+  N --> C
+  M -- no --> O{Age 216?}
+  O -- no --> C
+  O -- yes --> P[Adult Node Pending]

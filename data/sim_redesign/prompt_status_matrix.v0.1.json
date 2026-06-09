@@ -1,0 +1,19 @@
+{
+  "version": "0.1",
+  "deprecated": [
+    { "prefix": "CC-C", "reason": "旧角色创建 UI / PNG 控件 / 旧布局假设，替换为 CCUI2 + MIG-C003" }
+  ],
+  "priorityNow": [
+    "REVIEW-PRE-001",
+    "MIG-C001",
+    "MIG-C002",
+    "NPF-C001",
+    "NPF-C002",
+    "DEM-C001",
+    "DEM-C002"
+  ],
+  "doNotRunYet": [
+    { "id": "STG-R003+", "reason": "人生模拟首版可玩之前，不进入大规模 STG 内容重构" },
+    { "id": "LLM-C004", "reason": "真实 DeepSeek 客户端可延后；先跑 fallback" }
+  ]
+}

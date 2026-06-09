@@ -1,0 +1,259 @@
+[
+  {
+    "id": "origin_mountain_orphan",
+    "name": "山村孤儿",
+    "regionTags": [
+      "青石村",
+      "青云山外缘",
+      "旧山神庙"
+    ],
+    "narrativeTheme": "孤身长于山村，最容易被村难、后山异象、系统前兆牵引。",
+    "storylineBias": [
+      "storyline_village_calamity",
+      "storyline_system_omen",
+      "storyline_poor_study"
+    ],
+    "earlyEchoEvents": [
+      "村中收养",
+      "夜里风声",
+      "旧家书"
+    ],
+    "childhoodSeedEvents": [
+      "后山白雾",
+      "山神庙避雨"
+    ],
+    "youthConflictEvents": [
+      "山贼烟尘",
+      "篱外妖影"
+    ],
+    "teenChoiceEvents": [
+      "守村或离村",
+      "天外战鼓"
+    ],
+    "hiddenFateBias": [
+      "hidden_ancient_thunder_blood",
+      "hidden_system_resonance",
+      "hidden_outer_battlefield_echo"
+    ],
+    "carriedItemBias": [
+      "item_old_family_letter",
+      "item_childhood_stone_talisman",
+      "item_cracked_coin"
+    ],
+    "interludeBias": [
+      "interlude_rain_backhill_stg",
+      "interlude_village_guard"
+    ]
+  },
+  {
+    "id": "origin_apothecary_apprentice",
+    "name": "药铺学徒",
+    "regionTags": [
+      "药王巷",
+      "药铺",
+      "药田"
+    ],
+    "narrativeTheme": "长于药香与炉火之间，丹道、救治、虫潮、火候事件更频繁。",
+    "storylineBias": [
+      "storyline_alchemy_apothecary"
+    ],
+    "earlyEchoEvents": [
+      "药香入梦",
+      "炉火摇影"
+    ],
+    "childhoodSeedEvents": [
+      "分拣草药",
+      "误辨药性"
+    ],
+    "youthConflictEvents": [
+      "病人求药",
+      "守炉试药"
+    ],
+    "teenChoiceEvents": [
+      "药炉火候",
+      "守护药田"
+    ],
+    "hiddenFateBias": [
+      "hidden_alchemy_saint_bone",
+      "hidden_merit_seed"
+    ],
+    "carriedItemBias": [
+      "item_apothecary_bronze_furnace",
+      "item_rain_stained_scripture"
+    ],
+    "interludeBias": [
+      "interlude_guard_medicine_field",
+      "interlude_fire_control_check"
+    ]
+  },
+  {
+    "id": "origin_temple_servant",
+    "name": "道观杂役",
+    "regionTags": [
+      "白鹿观",
+      "香火殿",
+      "符阵"
+    ],
+    "narrativeTheme": "从扫地添香开始接触道观，符箓、问心、功德与阵局事件更频繁。",
+    "storylineBias": [
+      "storyline_temple_incense",
+      "storyline_system_omen"
+    ],
+    "earlyEchoEvents": [
+      "香火绕身",
+      "钟声入梦"
+    ],
+    "childhoodSeedEvents": [
+      "偷看法事",
+      "符灰未灭"
+    ],
+    "youthConflictEvents": [
+      "游方试阵",
+      "问心一夜"
+    ],
+    "teenChoiceEvents": [
+      "祖玉阵局",
+      "香火愿力"
+    ],
+    "hiddenFateBias": [
+      "hidden_merit_seed",
+      "hidden_system_resonance",
+      "hidden_book_of_heaven_fragment"
+    ],
+    "carriedItemBias": [
+      "item_old_talisman",
+      "item_old_incense_burner",
+      "item_jade_amulet"
+    ],
+    "interludeBias": [
+      "interlude_heart_trial",
+      "interlude_ancestral_jade_board"
+    ]
+  },
+  {
+    "id": "origin_hunter_child",
+    "name": "猎户之子",
+    "regionTags": [
+      "青云山外缘",
+      "玄溪",
+      "林地"
+    ],
+    "narrativeTheme": "山林、狩猎、伤病与练武构成童年，容易触发真实冲突与肉身类隐藏线。",
+    "storylineBias": [
+      "storyline_hunter_martial",
+      "storyline_village_calamity"
+    ],
+    "earlyEchoEvents": [
+      "兽吼入梦",
+      "背弓随父"
+    ],
+    "childhoodSeedEvents": [
+      "院中木桩",
+      "溪边追兽"
+    ],
+    "youthConflictEvents": [
+      "山中妖影",
+      "第一次见血"
+    ],
+    "teenChoiceEvents": [
+      "守村口",
+      "追猎妖兽"
+    ],
+    "hiddenFateBias": [
+      "hidden_dragon_bone_unawakened",
+      "hidden_outer_battlefield_echo"
+    ],
+    "carriedItemBias": [
+      "item_rust_bowstring",
+      "item_wooden_sword"
+    ],
+    "interludeBias": [
+      "interlude_hunt_horde",
+      "interlude_village_guard"
+    ]
+  },
+  {
+    "id": "origin_fallen_cultivator_descendant",
+    "name": "破落修士之后",
+    "regionTags": [
+      "祖宅",
+      "旧书箱",
+      "祖坟坡"
+    ],
+    "narrativeTheme": "家中旧物与失落传承牵引人生，残剑、残页、祖辈因果是核心。",
+    "storylineBias": [
+      "storyline_fallen_lineage"
+    ],
+    "earlyEchoEvents": [
+      "旧木箱",
+      "祖宅冷光"
+    ],
+    "childhoodSeedEvents": [
+      "木剑轻鸣",
+      "无字残页"
+    ],
+    "youthConflictEvents": [
+      "吐纳失败",
+      "旧敌阴影"
+    ],
+    "teenChoiceEvents": [
+      "旧洞府残图",
+      "追查遗脉"
+    ],
+    "hiddenFateBias": [
+      "hidden_past_life_sword_soul",
+      "hidden_book_of_heaven_fragment",
+      "hidden_system_resonance"
+    ],
+    "carriedItemBias": [
+      "item_wooden_sword",
+      "item_blank_fragment",
+      "item_jade_amulet"
+    ],
+    "interludeBias": [
+      "interlude_bamboo_sword_stg",
+      "interlude_old_book_dbg"
+    ]
+  },
+  {
+    "id": "origin_grave_keeper_child",
+    "name": "守墓人之子",
+    "regionTags": [
+      "祖坟坡",
+      "荒祠",
+      "玄溪"
+    ],
+    "narrativeTheme": "月夜、坟坡、旧香与魂梦构成人生底色，阴梦魂修与魔印线更容易显化。",
+    "storylineBias": [
+      "storyline_yin_dream_soul"
+    ],
+    "earlyEchoEvents": [
+      "守夜风冷",
+      "坟坡月白"
+    ],
+    "childhoodSeedEvents": [
+      "旧香炉烟",
+      "黑骨短笛"
+    ],
+    "youthConflictEvents": [
+      "月下旧梦",
+      "荒祠黑影"
+    ],
+    "teenChoiceEvents": [
+      "梦中低语",
+      "魂火问心"
+    ],
+    "hiddenFateBias": [
+      "hidden_taiyin_remnant_vein",
+      "hidden_demon_mark"
+    ],
+    "carriedItemBias": [
+      "item_black_bone_flute",
+      "item_old_incense_burner"
+    ],
+    "interludeBias": [
+      "interlude_dream_deckbuilder",
+      "interlude_heart_demon_dbg"
+    ]
+  }
+]

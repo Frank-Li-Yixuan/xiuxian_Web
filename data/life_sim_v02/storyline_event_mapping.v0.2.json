@@ -1,0 +1,76 @@
+{
+  "version": "0.2",
+  "storylineToPreferredCategories": {
+    "scholar_poverty": [
+      "study_scholar",
+      "origin_clue",
+      "destiny_manifest",
+      "system_omen"
+    ],
+    "alchemy_path": [
+      "alchemy_herb",
+      "family_bond",
+      "interlude_hook",
+      "storyline_thread"
+    ],
+    "hunter_martial": [
+      "martial_labor",
+      "disaster_karmic",
+      "interlude_hook",
+      "body_health"
+    ],
+    "daoist_temple": [
+      "temple_talisman",
+      "dream_spirit",
+      "stage_transition",
+      "storyline_thread"
+    ],
+    "broken_lineage": [
+      "origin_clue",
+      "study_scholar",
+      "martial_labor",
+      "hidden_omen"
+    ],
+    "village_disaster": [
+      "disaster_karmic",
+      "family_bond",
+      "martial_labor",
+      "interlude_hook"
+    ],
+    "yin_dream_soul": [
+      "dream_spirit",
+      "hidden_omen",
+      "body_health",
+      "destiny_manifest"
+    ],
+    "system_omen": [
+      "system_omen",
+      "dream_spirit",
+      "stage_transition",
+      "interlude_hook"
+    ]
+  },
+  "threadStageToEventTier": {
+    "seed": [
+      "breath",
+      "growth"
+    ],
+    "omen": [
+      "omen",
+      "thread"
+    ],
+    "development": [
+      "thread",
+      "choice_seed"
+    ],
+    "crisis": [
+      "pressure",
+      "choice_seed",
+      "interlude_hook"
+    ],
+    "resolution": [
+      "thread",
+      "transition_seed"
+    ]
+  }
+}

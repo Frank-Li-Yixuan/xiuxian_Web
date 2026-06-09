@@ -1,0 +1,34 @@
+{
+  "version": "0.1",
+  "nodes": [
+    "world",
+    "opening",
+    "ninePalace",
+    "destinyV2",
+    "originFateV2",
+    "lifeStorylines",
+    "lifeStages",
+    "lifeInterludes",
+    "monthlyEventsV02",
+    "majorChoicesV02",
+    "llmNarrative",
+    "lifePlayable",
+    "adultNode",
+    "trialBridge"
+  ],
+  "edges": [
+    ["world", "monthlyEventsV02"],
+    ["opening", "ninePalace"],
+    ["ninePalace", "destinyV2"],
+    ["destinyV2", "originFateV2"],
+    ["originFateV2", "lifeStorylines"],
+    ["lifeStorylines", "monthlyEventsV02"],
+    ["lifeStages", "monthlyEventsV02"],
+    ["lifeInterludes", "majorChoicesV02"],
+    ["monthlyEventsV02", "majorChoicesV02"],
+    ["majorChoicesV02", "lifePlayable"],
+    ["llmNarrative", "lifePlayable"],
+    ["lifePlayable", "adultNode"],
+    ["adultNode", "trialBridge"]
+  ]
+}

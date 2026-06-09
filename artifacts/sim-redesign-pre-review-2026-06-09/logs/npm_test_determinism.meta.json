@@ -1,0 +1,7 @@
+﻿{
+    "name":  "npm_test_determinism",
+    "command":  "npm run test:determinism",
+    "exitCode":  0,
+    "start":  "2026-06-09T22:27:37.9229791+08:00",
+    "end":  "2026-06-09T22:27:39.3049636+08:00"
+}

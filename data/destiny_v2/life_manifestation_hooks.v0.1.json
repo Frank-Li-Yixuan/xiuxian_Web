@@ -1,0 +1,117 @@
+{
+  "version": "0.1",
+  "phaseManifestationRules": {
+    "infant_0_3": "只允许命火、异象、梦境、体弱、亲缘反应；不触发真实战斗。",
+    "child_4_8": "允许轻量梦境、灵识幻象、后山迷路、道观试探。",
+    "juvenile_9_13": "允许第一次真实冲突、游方道士、妖兽、符阵问心。",
+    "youth_14_17": "允许核心流派显化、玩法插曲、系统前兆、血脉半醒。",
+    "adult_18": "结算天命、命格、隐藏命与随身物，进入阶段转化。"
+  },
+  "destinyManifestations": [
+    {
+      "destinyId": "destiny_heaven_jealous_talent",
+      "events": [
+        {
+          "phase": "infant_0_3",
+          "hook": "early_speech_or_scripture",
+          "visible": "你比同龄孩子更早识字，偶尔会背出无人教过的句子。"
+        },
+        {
+          "phase": "child_4_8",
+          "hook": "fever_after_insight",
+          "visible": "你读完半页旧经后高烧三日，醒来却记住了更多。"
+        },
+        {
+          "phase": "juvenile_9_13",
+          "hook": "sees_through_crippled_method",
+          "visible": "游方道士演示残缺口诀，你一眼看出其中不通之处。"
+        },
+        {
+          "phase": "youth_14_17",
+          "hook": "blood_cough_insight",
+          "visible": "你咳血半夜，却在痛楚中悟出一段无名法诀。"
+        }
+      ]
+    },
+    {
+      "destinyId": "destiny_cowardly_supreme",
+      "events": [
+        {
+          "phase": "child_4_8",
+          "hook": "hides_from_disaster",
+          "visible": "村外喧乱时，你本能躲入地窖，避过一场横祸。"
+        },
+        {
+          "phase": "juvenile_9_13",
+          "hook": "secret_cave_found",
+          "visible": "你避开人群，反在后山石缝里发现一处清静之地。"
+        },
+        {
+          "phase": "youth_14_17",
+          "hook": "seclusion_choice_boost",
+          "visible": "同龄人争强斗狠，你闭门静坐，体内气息反而日渐绵长。"
+        }
+      ]
+    },
+    {
+      "destinyId": "destiny_waste_root_reversal",
+      "events": [
+        {
+          "phase": "child_4_8",
+          "hook": "first_failed_breathing",
+          "visible": "你第一次学吐纳便昏倒半日，醒来却觉得身体更能忍痛。"
+        },
+        {
+          "phase": "juvenile_9_13",
+          "hook": "mocked_no_immortal_root",
+          "visible": "有人说你没有仙缘，你低头不语，却把那句话记了很多年。"
+        },
+        {
+          "phase": "youth_14_17",
+          "hook": "chain_break_in_body",
+          "visible": "又一次失败后，你在梦中听见体内某处锁链断裂。"
+        }
+      ]
+    },
+    {
+      "destinyId": "destiny_alchemy_prodigy",
+      "events": [
+        {
+          "phase": "child_4_8",
+          "hook": "smells_herb_nature",
+          "visible": "你只闻一闻草药，就能分出温凉与苦辛。"
+        },
+        {
+          "phase": "juvenile_9_13",
+          "hook": "furnace_fire_control",
+          "visible": "药炉火候忽大忽小，你却像能听见炉中药性呼吸。"
+        },
+        {
+          "phase": "youth_14_17",
+          "hook": "dream_broken_furnace",
+          "visible": "你梦见一尊残炉，炉火灭了又燃。"
+        }
+      ]
+    },
+    {
+      "destinyId": "destiny_demon_seed",
+      "events": [
+        {
+          "phase": "child_4_8",
+          "hook": "forbidden_word_dream",
+          "visible": "梦中有人教你一个不能念的字。"
+        },
+        {
+          "phase": "juvenile_9_13",
+          "hook": "first_harmful_joy",
+          "visible": "愤怒中，你第一次伤人，心底却闪过一丝不该有的快意。"
+        },
+        {
+          "phase": "youth_14_17",
+          "hook": "shrine_shadow_bargain",
+          "visible": "荒祠黑影低声问你：要不要换一点力量？"
+        }
+      ]
+    }
+  ]
+}

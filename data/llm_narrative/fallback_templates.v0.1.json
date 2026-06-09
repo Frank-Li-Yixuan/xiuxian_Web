@@ -1,0 +1,36 @@
+{
+  "version": "0.1",
+  "templates": {
+    "monthly": {
+      "default": "{season}，{place}里有些异样。{surface_event}。你把这件事记在心底。",
+      "omen": "{season}，{omen_phrase}又一次靠近你。旁人只当寻常，你却觉得心口微微发紧。"
+    },
+    "choice_intro": {
+      "default": "过去半年，{summary}。眼下你必须做出选择。"
+    },
+    "choice_options": {
+      "default": [
+        "稳妥行事",
+        "主动探查",
+        "冒险一试",
+        "顺其命数"
+      ]
+    },
+    "interlude_intro": {
+      "default": "你踏入那片异样之中，四周景色渐渐脱离凡俗。"
+    },
+    "interlude_result": {
+      "success": "你撑过了这场异变。回过神时，掌心仍残留一缕温热。",
+      "failure": "你未能完全压住那股异变。醒来后，胸口仍闷得发疼。"
+    },
+    "stage_transition": {
+      "default": "从这以后，你不再只是旁观异象。那些散落的线索，开始在你身上聚成一条路。"
+    },
+    "age18": {
+      "default": "十八岁生辰夜，你听见天外有钟声响起。那些年里的梦、伤、旧物与预兆，在这一刻一并亮了起来。"
+    },
+    "chronicle": {
+      "default": "十八年来，你在凡域边地长大。童年的异象、少年的选择、随身旧物的微光，一步步把你推向修行之门。"
+    }
+  }
+}

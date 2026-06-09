@@ -1,0 +1,112 @@
+{
+  "version": "0.1",
+  "tasks": [
+    {
+      "id": "monthly_event_log",
+      "displayName": "月度事件日志",
+      "maxChars": 100,
+      "allowOptions": false,
+      "requiredFields": [
+        "text",
+        "toneTags",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-flash",
+      "fallbackTemplateGroup": "monthly"
+    },
+    {
+      "id": "major_choice_intro",
+      "displayName": "半年选择引入",
+      "maxChars": 160,
+      "allowOptions": false,
+      "requiredFields": [
+        "text",
+        "toneTags",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-flash",
+      "fallbackTemplateGroup": "choice_intro"
+    },
+    {
+      "id": "major_choice_options",
+      "displayName": "半年选择选项润色",
+      "maxChars": 240,
+      "allowOptions": true,
+      "requiredFields": [
+        "text",
+        "optionTexts",
+        "toneTags",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-flash",
+      "fallbackTemplateGroup": "choice_options"
+    },
+    {
+      "id": "interlude_intro",
+      "displayName": "玩法插曲引入",
+      "maxChars": 160,
+      "allowOptions": false,
+      "requiredFields": [
+        "text",
+        "toneTags",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-flash",
+      "fallbackTemplateGroup": "interlude_intro"
+    },
+    {
+      "id": "interlude_result",
+      "displayName": "玩法插曲结果",
+      "maxChars": 180,
+      "allowOptions": false,
+      "requiredFields": [
+        "text",
+        "toneTags",
+        "visibleHints",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-flash",
+      "fallbackTemplateGroup": "interlude_result"
+    },
+    {
+      "id": "stage_transition_summary",
+      "displayName": "阶段转化总结",
+      "maxChars": 240,
+      "allowOptions": false,
+      "requiredFields": [
+        "text",
+        "toneTags",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-pro",
+      "fallbackTemplateGroup": "stage_transition"
+    },
+    {
+      "id": "age18_awakening_log",
+      "displayName": "成年觉醒日志",
+      "maxChars": 300,
+      "allowOptions": false,
+      "requiredFields": [
+        "text",
+        "toneTags",
+        "visibleHints",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-pro",
+      "fallbackTemplateGroup": "age18"
+    },
+    {
+      "id": "life_chronicle_summary",
+      "displayName": "十八年人生小传",
+      "maxChars": 700,
+      "allowOptions": false,
+      "requiredFields": [
+        "text",
+        "toneTags",
+        "safetyFlags"
+      ],
+      "preferredModel": "deepseek-v4-pro",
+      "fallbackTemplateGroup": "chronicle"
+    }
+  ]
+}

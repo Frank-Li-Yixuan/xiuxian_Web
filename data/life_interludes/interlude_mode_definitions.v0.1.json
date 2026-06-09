@@ -1,0 +1,149 @@
+{
+  "version": "0.1",
+  "modes": [
+    {
+      "id": "stg",
+      "name": "灵识御器",
+      "displayName": "雷霆战机式试炼",
+      "worldWrappers": [
+        "灵识御物",
+        "梦中域外",
+        "后山妖影",
+        "飞剑异动",
+        "系统预演"
+      ],
+      "recommendedAgeRange": [
+        48,
+        215
+      ],
+      "defaultDurationSeconds": 120,
+      "resultMetrics": [
+        "survived",
+        "kills",
+        "damageTaken",
+        "pickupCount",
+        "specialTriggers"
+      ],
+      "primaryRewards": [
+        "武艺",
+        "神",
+        "灵感",
+        "法宝亲和",
+        "域外预兆"
+      ]
+    },
+    {
+      "id": "horde",
+      "name": "守境除潮",
+      "displayName": "肉鸽割草式生存",
+      "worldWrappers": [
+        "守药田",
+        "村口防守",
+        "虫潮入侵",
+        "妖兽潮"
+      ],
+      "recommendedAgeRange": [
+        108,
+        215
+      ],
+      "defaultDurationSeconds": 180,
+      "resultMetrics": [
+        "survivalTime",
+        "wavesCleared",
+        "resourceProtectedPercent",
+        "eliteKilled"
+      ],
+      "primaryRewards": [
+        "精",
+        "药理",
+        "功德",
+        "灵草",
+        "虫核线索"
+      ]
+    },
+    {
+      "id": "deckbuilder",
+      "name": "问心斗法",
+      "displayName": "DBG 论道试炼",
+      "worldWrappers": [
+        "符阵问心",
+        "梦中论道",
+        "旧书试炼",
+        "心魔辩法"
+      ],
+      "recommendedAgeRange": [
+        48,
+        215
+      ],
+      "defaultTurnLimit": 6,
+      "resultMetrics": [
+        "turns",
+        "hpRemaining",
+        "cardsPlayed",
+        "curseCount"
+      ],
+      "primaryRewards": [
+        "悟性",
+        "神",
+        "心性",
+        "学识",
+        "法术线索"
+      ]
+    },
+    {
+      "id": "formation_auto",
+      "name": "阵盘推演",
+      "displayName": "天地棋局 / 阵法自走棋",
+      "worldWrappers": [
+        "道观阵盘",
+        "祖传玉佩",
+        "地脉棋局",
+        "天机推演"
+      ],
+      "recommendedAgeRange": [
+        108,
+        215
+      ],
+      "defaultTurnLimit": 5,
+      "resultMetrics": [
+        "rounds",
+        "formationIntegrity",
+        "piecesSurvived",
+        "comboTriggered"
+      ],
+      "primaryRewards": [
+        "心性",
+        "气",
+        "阵法感悟",
+        "随身物亲和",
+        "护体线索"
+      ]
+    },
+    {
+      "id": "text_check",
+      "name": "命理判定",
+      "displayName": "文本判定",
+      "worldWrappers": [
+        "读书",
+        "吐纳",
+        "说服",
+        "忍耐",
+        "调息"
+      ],
+      "recommendedAgeRange": [
+        0,
+        215
+      ],
+      "defaultTurnLimit": 0,
+      "resultMetrics": [
+        "checkScore",
+        "outcome"
+      ],
+      "primaryRewards": [
+        "属性",
+        "技能",
+        "日志"
+      ]
+    }
+  ]
+}

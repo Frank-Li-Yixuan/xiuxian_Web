@@ -1,0 +1,10 @@
+{
+  "version": "0.1",
+  "gates": [
+    {"id": "gate_data", "name": "Data Registry Gate", "checks": ["all json parses", "no missing refs", "hidden trueName marked internal"]},
+    {"id": "gate_creation", "name": "Character Creation Gate", "checks": ["reroll works", "locks work", "destiny mutation works", "no hidden leak"]},
+    {"id": "gate_life", "name": "Life Simulation Gate", "checks": ["216 months deterministic", "major choices every 6 months", "stage summaries", "persistence"]},
+    {"id": "gate_adult", "name": "Adult Node Gate", "checks": ["adult path candidates", "fallback route", "no duplicate resolution"]},
+    {"id": "gate_e2e", "name": "E2E Gate", "checks": ["new game full flow", "screenshots", "tests pass"]}
+  ]
+}

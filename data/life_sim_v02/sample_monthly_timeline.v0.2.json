@@ -1,0 +1,45 @@
+{
+  "version": "0.2",
+  "profile": "药铺学徒 + 木火灵根 + 丹道奇才",
+  "months": [
+    {
+      "ageMonth": 52,
+      "eventId": "child_herb_sorting",
+      "visible": "你帮药铺分拣草药，药理小增。"
+    },
+    {
+      "ageMonth": 67,
+      "eventId": "child_sick_neighbor",
+      "visible": "邻童病重，你在旁递药。"
+    },
+    {
+      "ageMonth": 112,
+      "eventId": "youth_herb_poison_faint",
+      "visible": "你误辨毒草，得了教训。"
+    },
+    {
+      "ageMonth": 150,
+      "eventId": "youth_furnace_heat_test",
+      "visible": "药炉火候成为半年选择钩子。"
+    },
+    {
+      "ageMonth": 174,
+      "eventId": "teen_wild_ginseng",
+      "visible": "老参将成，守参妖虫可能触发割草插曲。"
+    },
+    {
+      "ageMonth": 199,
+      "eventId": "teen_mountain_fire",
+      "visible": "山火威胁药田，产生灾劫选择。"
+    }
+  ],
+  "expectedStorylines": [
+    "alchemy_path",
+    "village_disaster"
+  ],
+  "expectedHooks": [
+    "hook_herb_sorting",
+    "hook_fire_control_choice",
+    "hook_wild_ginseng"
+  ]
+}

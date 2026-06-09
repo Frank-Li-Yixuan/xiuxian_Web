@@ -1,0 +1,325 @@
+{
+  "version": "0.1",
+  "initiationNodes": [
+    {
+      "id": "first_qi_sense",
+      "name": "初感灵气",
+      "description": "第一次明确感到天地灵气入体。",
+      "worldWrapper": "吐纳、道观香火、静坐、山中灵隙。",
+      "triggerTags": [
+        "qi_sense",
+        "quiet_practice",
+        "temple_incense"
+      ],
+      "requiredIdentityStages": [
+        "path_seed",
+        "omen_touched"
+      ],
+      "recommendedAgeRange": [
+        48,
+        167
+      ],
+      "possibleInterludeModes": [
+        "text_check",
+        "deckbuilder"
+      ],
+      "successEffects": [
+        {
+          "type": "addIdentityStage",
+          "value": "half_initiated"
+        },
+        {
+          "type": "addToken",
+          "value": "first_qi_sense"
+        }
+      ],
+      "failureEffects": [
+        {
+          "type": "addHeartKnot",
+          "value": "吐纳受挫"
+        }
+      ],
+      "age18Hooks": [
+        "early_qi_sense"
+      ]
+    },
+    {
+      "id": "teacher_trial",
+      "name": "游方试阵",
+      "description": "游方道士、白鹿观道人或散修布下试阵。",
+      "worldWrapper": "符阵问心、道观试阵、散修考校。",
+      "triggerTags": [
+        "mentor",
+        "dao_temple",
+        "formation_trial"
+      ],
+      "requiredIdentityStages": [
+        "path_seed",
+        "half_initiated"
+      ],
+      "recommendedAgeRange": [
+        96,
+        190
+      ],
+      "possibleInterludeModes": [
+        "deckbuilder",
+        "formation_auto"
+      ],
+      "successEffects": [
+        {
+          "type": "addToken",
+          "value": "teacher_trial_success"
+        },
+        {
+          "type": "addScore",
+          "score": "initiationReadiness",
+          "value": 12
+        }
+      ],
+      "failureEffects": [
+        {
+          "type": "addHeartKnot",
+          "value": "问心受挫"
+        }
+      ],
+      "age18Hooks": [
+        "teacher_trial_memory"
+      ]
+    },
+    {
+      "id": "artifact_resonance",
+      "name": "随身物共鸣",
+      "description": "残破木剑、祖传玉佩、无字残页等突然异动。",
+      "worldWrapper": "旧物发热、木剑轻鸣、玉佩现纹。",
+      "triggerTags": [
+        "carried_item",
+        "old_object",
+        "artifact"
+      ],
+      "requiredIdentityStages": [
+        "omen_touched",
+        "path_seed",
+        "half_initiated"
+      ],
+      "recommendedAgeRange": [
+        72,
+        210
+      ],
+      "possibleInterludeModes": [
+        "stg",
+        "formation_auto",
+        "text_check"
+      ],
+      "successEffects": [
+        {
+          "type": "addToken",
+          "value": "artifact_resonance_success"
+        },
+        {
+          "type": "addScore",
+          "score": "initiationReadiness",
+          "value": 10
+        }
+      ],
+      "failureEffects": [
+        {
+          "type": "addWound",
+          "value": "灵机反噬"
+        }
+      ],
+      "age18Hooks": [
+        "item_resonance"
+      ]
+    },
+    {
+      "id": "bloodline_stirring",
+      "name": "血脉半醒",
+      "description": "隐藏血脉或前世残魂显著异动。",
+      "worldWrapper": "骨痛、月梦、雷纹、黑影、前世残像。",
+      "triggerTags": [
+        "hidden_fate",
+        "bloodline",
+        "past_life"
+      ],
+      "requiredIdentityStages": [
+        "omen_touched",
+        "half_initiated",
+        "initiation_candidate"
+      ],
+      "recommendedAgeRange": [
+        108,
+        215
+      ],
+      "possibleInterludeModes": [
+        "stg",
+        "deckbuilder"
+      ],
+      "successEffects": [
+        {
+          "type": "addToken",
+          "value": "bloodline_stirring_success"
+        },
+        {
+          "type": "addScore",
+          "score": "initiationReadiness",
+          "value": 15
+        },
+        {
+          "type": "addScore",
+          "score": "karmicPressure",
+          "value": 8
+        }
+      ],
+      "failureEffects": [
+        {
+          "type": "addHeartDemon",
+          "value": 5
+        }
+      ],
+      "age18Hooks": [
+        "bloodline_half_awake"
+      ]
+    },
+    {
+      "id": "calamity_choice",
+      "name": "大灾择路",
+      "description": "山贼、妖兽、虫潮、家变、村难。",
+      "worldWrapper": "生死灾劫推动凡人离开原有命数。",
+      "triggerTags": [
+        "calamity",
+        "bandit",
+        "demon",
+        "family_crisis"
+      ],
+      "requiredIdentityStages": [
+        "mortal_child",
+        "omen_touched",
+        "path_seed",
+        "half_initiated"
+      ],
+      "recommendedAgeRange": [
+        108,
+        215
+      ],
+      "possibleInterludeModes": [
+        "horde",
+        "stg",
+        "text_check"
+      ],
+      "successEffects": [
+        {
+          "type": "addToken",
+          "value": "calamity_survived"
+        },
+        {
+          "type": "addScore",
+          "score": "initiationReadiness",
+          "value": 8
+        }
+      ],
+      "failureEffects": [
+        {
+          "type": "addWound",
+          "value": "灾劫伤"
+        },
+        {
+          "type": "addHeartKnot",
+          "value": "灾劫心结"
+        }
+      ],
+      "age18Hooks": [
+        "calamity_memory"
+      ]
+    },
+    {
+      "id": "system_preview",
+      "name": "系统预演",
+      "description": "天外战鼓、命盘裂光、系统杂音、域外梦战。",
+      "worldWrapper": "天机试炼机制在成年前投下片段影像。",
+      "triggerTags": [
+        "system_omen",
+        "outer_battlefield_omen",
+        "system_static"
+      ],
+      "requiredIdentityStages": [
+        "omen_touched",
+        "path_seed",
+        "half_initiated",
+        "system_candidate"
+      ],
+      "recommendedAgeRange": [
+        156,
+        215
+      ],
+      "possibleInterludeModes": [
+        "stg",
+        "deckbuilder"
+      ],
+      "successEffects": [
+        {
+          "type": "addIdentityStage",
+          "value": "system_candidate"
+        },
+        {
+          "type": "addScore",
+          "score": "systemResonance",
+          "value": 18
+        }
+      ],
+      "failureEffects": [
+        {
+          "type": "addHeartKnot",
+          "value": "初战惊魂"
+        }
+      ],
+      "age18Hooks": [
+        "system_preview_survived"
+      ]
+    },
+    {
+      "id": "heart_trial",
+      "name": "问心入道",
+      "description": "梦中论道、心魔问答、禁书试心。",
+      "worldWrapper": "以心为关，测其是否能承受修行。",
+      "triggerTags": [
+        "heart_trial",
+        "mind",
+        "forbidden_book",
+        "demon_seed"
+      ],
+      "requiredIdentityStages": [
+        "path_seed",
+        "half_initiated",
+        "initiation_candidate"
+      ],
+      "recommendedAgeRange": [
+        96,
+        215
+      ],
+      "possibleInterludeModes": [
+        "deckbuilder",
+        "text_check"
+      ],
+      "successEffects": [
+        {
+          "type": "addScore",
+          "score": "initiationReadiness",
+          "value": 12
+        },
+        {
+          "type": "addToken",
+          "value": "heart_trial_success"
+        }
+      ],
+      "failureEffects": [
+        {
+          "type": "addHeartDemon",
+          "value": 4
+        }
+      ],
+      "age18Hooks": [
+        "heart_trial_memory"
+      ]
+    }
+  ]
+}

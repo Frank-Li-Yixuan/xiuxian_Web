@@ -1,0 +1,636 @@
+[
+  {
+    "id": "item_wooden_sword",
+    "name": "残破木剑",
+    "surfaceDescription": "一柄旧木剑，剑身有裂，却怎么也折不断。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "你从旧箱底找到它。"
+      },
+      {
+        "stage": "noticed",
+        "text": "它握起来比木头更沉。"
+      },
+      {
+        "stage": "resonating",
+        "text": "夜深时，剑中似有低鸣。"
+      },
+      {
+        "stage": "tested",
+        "text": "你在竹林中试剑，风声像被切开。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出一道残缺剑魄。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_fallen_cultivator_descendant",
+      "origin_hunter_child"
+    ],
+    "preferredHiddenFates": [
+      "hidden_past_life_sword_soul"
+    ],
+    "preferredDestinies": [
+      "destiny_sword_bone",
+      "destiny_artifact_favored"
+    ],
+    "eventHooks": [
+      "hook_wooden_sword",
+      "hook_bamboo_shadow"
+    ],
+    "interludeHooks": [
+      "interlude_bamboo_sword_stg"
+    ],
+    "age18Conversions": [
+      "qingshuang_sword_fragment",
+      "sword_soul_echo"
+    ],
+    "dongfuHooks": [
+      "artifact_repair_line",
+      "sword_lineage_hint"
+    ]
+  },
+  {
+    "id": "item_jade_amulet",
+    "name": "祖传玉佩",
+    "surfaceDescription": "一枚旧玉佩，纹路像八卦，又像未完成的阵图。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "长辈说它能护身。"
+      },
+      {
+        "stage": "noticed",
+        "text": "你受惊时，它会微微发热。"
+      },
+      {
+        "stage": "resonating",
+        "text": "玉纹在梦里排成一个小阵。"
+      },
+      {
+        "stage": "tested",
+        "text": "你尝试按玉纹摆下石子。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出八卦玉佩残片。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_temple_servant",
+      "origin_fallen_cultivator_descendant"
+    ],
+    "preferredHiddenFates": [
+      "hidden_merit_seed",
+      "hidden_system_resonance"
+    ],
+    "preferredDestinies": [
+      "destiny_good_star",
+      "destiny_seated_stillness"
+    ],
+    "eventHooks": [
+      "hook_jade_warm",
+      "hook_ancestral_pattern"
+    ],
+    "interludeHooks": [
+      "interlude_ancestral_jade_board"
+    ],
+    "age18Conversions": [
+      "bagua_amulet_fragment",
+      "first_hit_shield"
+    ],
+    "dongfuHooks": [
+      "treasure_repair_line",
+      "formation_starter_hint"
+    ]
+  },
+  {
+    "id": "item_apothecary_bronze_furnace",
+    "name": "药铺铜炉",
+    "surfaceDescription": "药铺里淘汰下来的小铜炉，炉底却异常干净。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "掌柜把它丢给你练手。"
+      },
+      {
+        "stage": "noticed",
+        "text": "炉火一旺，你便能嗅出药性变化。"
+      },
+      {
+        "stage": "resonating",
+        "text": "你梦见它曾炼过一炉无名丹。"
+      },
+      {
+        "stage": "tested",
+        "text": "你守炉到天明，火候忽然变得清晰。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出残炉火候。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_apothecary_apprentice"
+    ],
+    "preferredHiddenFates": [
+      "hidden_alchemy_saint_bone"
+    ],
+    "preferredDestinies": [
+      "destiny_alchemy_genius",
+      "destiny_medicine_affinity"
+    ],
+    "eventHooks": [
+      "hook_furnace_dream",
+      "hook_fire_control"
+    ],
+    "interludeHooks": [
+      "interlude_guard_medicine_field",
+      "interlude_fire_control_check"
+    ],
+    "age18Conversions": [
+      "starter_pill_bundle",
+      "alchemy_fire_control"
+    ],
+    "dongfuHooks": [
+      "broken_alchemy_furnace_bonus"
+    ]
+  },
+  {
+    "id": "item_blank_fragment",
+    "name": "无字残页",
+    "surfaceDescription": "一页没有字的旧纸，雨天时边缘会发暗。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "它夹在一本破书里。"
+      },
+      {
+        "stage": "noticed",
+        "text": "你总觉得上面本应有字。"
+      },
+      {
+        "stage": "resonating",
+        "text": "雨夜里，它浮出一笔墨痕。"
+      },
+      {
+        "stage": "tested",
+        "text": "你照着墨痕临摹，却忘了自己写过什么。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出天书残纹。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_fallen_cultivator_descendant",
+      "origin_scholar_child"
+    ],
+    "preferredHiddenFates": [
+      "hidden_book_of_heaven_fragment",
+      "hidden_system_resonance"
+    ],
+    "preferredDestinies": [
+      "destiny_heaven_jealous_talent",
+      "destiny_over_memory"
+    ],
+    "eventHooks": [
+      "hook_blank_page",
+      "hook_old_book"
+    ],
+    "interludeHooks": [
+      "interlude_old_book_dbg"
+    ],
+    "age18Conversions": [
+      "scripture_hint",
+      "deckbuilder_card_pool_bonus"
+    ],
+    "dongfuHooks": [
+      "scripture_wall_hint"
+    ]
+  },
+  {
+    "id": "item_old_talisman",
+    "name": "破旧符纸",
+    "surfaceDescription": "一张边角焦黑的黄符，符线已残缺。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "你在白鹿观后殿扫地时捡到它。"
+      },
+      {
+        "stage": "noticed",
+        "text": "夜里它会自己翻面。"
+      },
+      {
+        "stage": "resonating",
+        "text": "你看久了，符线似乎连成一条路。"
+      },
+      {
+        "stage": "tested",
+        "text": "你试着补上残线，指尖微微发麻。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出护命符残式。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_temple_servant"
+    ],
+    "preferredHiddenFates": [
+      "hidden_merit_seed",
+      "hidden_system_resonance"
+    ],
+    "preferredDestinies": [
+      "destiny_clear_glass_heart"
+    ],
+    "eventHooks": [
+      "hook_talisman_line",
+      "hook_incense_light"
+    ],
+    "interludeHooks": [
+      "interlude_heart_trial"
+    ],
+    "age18Conversions": [
+      "starter_protection_talisman"
+    ],
+    "dongfuHooks": [
+      "talisman_desk_hint"
+    ]
+  },
+  {
+    "id": "item_black_bone_flute",
+    "name": "黑骨短笛",
+    "surfaceDescription": "一截黑色短笛，不知取自何骨。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "它躺在旧坟旁的草里。"
+      },
+      {
+        "stage": "noticed",
+        "text": "月夜里，它总比手更冷。"
+      },
+      {
+        "stage": "resonating",
+        "text": "孔中偶尔透出白雾。"
+      },
+      {
+        "stage": "tested",
+        "text": "你几乎想吹响它，却又本能止住。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出一缕魂音残痕。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_grave_keeper_child"
+    ],
+    "preferredHiddenFates": [
+      "hidden_taiyin_remnant_vein",
+      "hidden_demon_mark"
+    ],
+    "preferredDestinies": [
+      "destiny_demon_seed",
+      "destiny_taiyin_dream"
+    ],
+    "eventHooks": [
+      "hook_bone_flute",
+      "hook_moon_dream"
+    ],
+    "interludeHooks": [
+      "interlude_dream_deckbuilder",
+      "interlude_heart_demon_dbg"
+    ],
+    "age18Conversions": [
+      "soul_line_hint",
+      "heart_demon_projection"
+    ],
+    "dongfuHooks": [
+      "soul_cultivation_hint",
+      "cleansing_pool_hint"
+    ]
+  },
+  {
+    "id": "item_old_family_letter",
+    "name": "残旧家书",
+    "surfaceDescription": "几行被水渍晕开的旧字，只能看清一个“归”字。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "它是你身世少有的线索。"
+      },
+      {
+        "stage": "noticed",
+        "text": "你每次展开它，心里都会静一些。"
+      },
+      {
+        "stage": "resonating",
+        "text": "危急时，你总想起那句看不清的话。"
+      },
+      {
+        "stage": "tested",
+        "text": "你在救人与逃走之间，想起了它。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出一缕亲缘因果。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_mountain_orphan",
+      "origin_refugee_orphan"
+    ],
+    "preferredHiddenFates": [
+      "hidden_merit_seed"
+    ],
+    "preferredDestinies": [
+      "destiny_protect_life",
+      "destiny_good_star"
+    ],
+    "eventHooks": [
+      "hook_family_letter",
+      "hook_merit_choice"
+    ],
+    "interludeHooks": [
+      "interlude_village_guard"
+    ],
+    "age18Conversions": [
+      "merit_protection",
+      "heart_stability_bonus"
+    ],
+    "dongfuHooks": [
+      "ancestral_memory_hook"
+    ]
+  },
+  {
+    "id": "item_cracked_coin",
+    "name": "裂纹铜钱",
+    "surfaceDescription": "一枚有裂的铜钱，正反面纹路都不像官铸。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "它不知何时出现在你荷包里。"
+      },
+      {
+        "stage": "noticed",
+        "text": "你每次做选择前，它都会微微转动。"
+      },
+      {
+        "stage": "resonating",
+        "text": "集市喧闹时，它总朝某个方向滚。"
+      },
+      {
+        "stage": "tested",
+        "text": "你用它决定是否相信陌生人。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出一缕天机砂。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_mountain_orphan",
+      "origin_refugee_orphan"
+    ],
+    "preferredHiddenFates": [
+      "hidden_system_resonance",
+      "hidden_outer_battlefield_echo"
+    ],
+    "preferredDestinies": [
+      "destiny_good_star",
+      "destiny_lone_star"
+    ],
+    "eventHooks": [
+      "hook_cracked_coin",
+      "hook_market_stranger"
+    ],
+    "interludeHooks": [
+      "interlude_fate_check"
+    ],
+    "age18Conversions": [
+      "fortune_token",
+      "reroll_memory"
+    ],
+    "dongfuHooks": [
+      "trial_market_hint"
+    ]
+  },
+  {
+    "id": "item_rust_bowstring",
+    "name": "锈弓残弦",
+    "surfaceDescription": "一截断弓弦，沾着褪色的黑血。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "父亲说这曾救过他的命。"
+      },
+      {
+        "stage": "noticed",
+        "text": "山兽靠近时，它会绷紧。"
+      },
+      {
+        "stage": "resonating",
+        "text": "你听见弦上残留的破空声。"
+      },
+      {
+        "stage": "tested",
+        "text": "你把它缠在木弓上，夜里守着村口。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出狩猎本能。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_hunter_child"
+    ],
+    "preferredHiddenFates": [
+      "hidden_dragon_bone_unawakened",
+      "hidden_outer_battlefield_echo"
+    ],
+    "preferredDestinies": [
+      "destiny_battle_nourishment",
+      "destiny_body_vessel"
+    ],
+    "eventHooks": [
+      "hook_hunt",
+      "hook_village_guard"
+    ],
+    "interludeHooks": [
+      "interlude_hunt_horde"
+    ],
+    "age18Conversions": [
+      "combat_instinct",
+      "first_battle_projectile_bonus"
+    ],
+    "dongfuHooks": [
+      "hunter_training_hint"
+    ]
+  },
+  {
+    "id": "item_old_incense_burner",
+    "name": "旧香炉",
+    "surfaceDescription": "一只小香炉，炉灰总也倒不干净。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "它来自白鹿观后殿或祖坟小龛。"
+      },
+      {
+        "stage": "noticed",
+        "text": "香灰有时会自己排成小阵。"
+      },
+      {
+        "stage": "resonating",
+        "text": "你祈愿时，炉中灰线会轻轻抖动。"
+      },
+      {
+        "stage": "tested",
+        "text": "你点香问心，香烟却朝下流。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出香火愿力。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_temple_servant",
+      "origin_grave_keeper_child"
+    ],
+    "preferredHiddenFates": [
+      "hidden_merit_seed",
+      "hidden_taiyin_remnant_vein"
+    ],
+    "preferredDestinies": [
+      "destiny_clear_glass_heart",
+      "destiny_seated_stillness"
+    ],
+    "eventHooks": [
+      "hook_incense",
+      "hook_ancestor_prayer"
+    ],
+    "interludeHooks": [
+      "interlude_heart_trial",
+      "interlude_soul_chess"
+    ],
+    "age18Conversions": [
+      "incense_merit_trace",
+      "formation_hint"
+    ],
+    "dongfuHooks": [
+      "incense_altar_hint"
+    ]
+  },
+  {
+    "id": "item_rain_stained_scripture",
+    "name": "雨渍旧经",
+    "surfaceDescription": "一本被雨水浸过的旧经，字迹有些地方反而更清。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "它从旧书摊上换来。"
+      },
+      {
+        "stage": "noticed",
+        "text": "雨天读它，你反而看得更明白。"
+      },
+      {
+        "stage": "resonating",
+        "text": "你发现某些字在不同雨夜会变。"
+      },
+      {
+        "stage": "tested",
+        "text": "你按书中残句试着调息。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出残缺经义。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_apothecary_apprentice",
+      "origin_scholar_child"
+    ],
+    "preferredHiddenFates": [
+      "hidden_book_of_heaven_fragment",
+      "hidden_alchemy_saint_bone"
+    ],
+    "preferredDestinies": [
+      "destiny_over_memory",
+      "destiny_alchemy_genius"
+    ],
+    "eventHooks": [
+      "hook_old_book",
+      "hook_rain_scripture"
+    ],
+    "interludeHooks": [
+      "interlude_old_book_dbg"
+    ],
+    "age18Conversions": [
+      "scripture_wall_hint",
+      "spell_pool_hint"
+    ],
+    "dongfuHooks": [
+      "scripture_wall_bonus"
+    ]
+  },
+  {
+    "id": "item_childhood_stone_talisman",
+    "name": "童年石符",
+    "surfaceDescription": "一块像符又像石子的东西，小时候你总攥着它睡觉。",
+    "lifecycle": [
+      {
+        "stage": "obtained",
+        "text": "它似乎从你记事起就在身边。"
+      },
+      {
+        "stage": "noticed",
+        "text": "你迷路时，它会让掌心发麻。"
+      },
+      {
+        "stage": "resonating",
+        "text": "雷雨和梦境中，它会浮出淡淡纹路。"
+      },
+      {
+        "stage": "tested",
+        "text": "你把它按在地上，周围泥水竟绕开一圈。"
+      },
+      {
+        "stage": "converted",
+        "text": "系统解析出试炼印残纹。"
+      }
+    ],
+    "preferredOrigins": [
+      "origin_mountain_orphan"
+    ],
+    "preferredHiddenFates": [
+      "hidden_ancient_thunder_blood",
+      "hidden_system_resonance",
+      "hidden_outer_battlefield_echo"
+    ],
+    "preferredDestinies": [
+      "destiny_heaven_jealous_talent",
+      "destiny_thunder_affinity"
+    ],
+    "eventHooks": [
+      "hook_stone_talisman",
+      "hook_system_static"
+    ],
+    "interludeHooks": [
+      "interlude_outer_battlefield_dream",
+      "interlude_system_calibration"
+    ],
+    "age18Conversions": [
+      "trial_mark_fragment",
+      "outer_battlefield_intro_bonus"
+    ],
+    "dongfuHooks": [
+      "trial_altar_hint"
+    ]
+  }
+]

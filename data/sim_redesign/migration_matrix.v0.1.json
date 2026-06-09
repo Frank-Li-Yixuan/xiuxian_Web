@@ -1,0 +1,12 @@
+{
+  "version": "0.1",
+  "modules": [
+    {"old": "OAG v0.1", "new": "Opening + NinePalace", "action": "extend_with_evaluation"},
+    {"old": "DT v0.1", "new": "DestinyV2", "action": "replace_generator_keep_ui_slots"},
+    {"old": "HFO v0.1", "new": "OriginFateV2", "action": "replace_hidden_reveal_logic"},
+    {"old": "LM v0.1", "new": "MonthlyEventsV02", "action": "replace_event_pool_and_weighting"},
+    {"old": "MLC v0.1", "new": "MajorChoicesV02", "action": "replace_choice_generation"},
+    {"old": "A18 v0.1", "new": "AdultNodeBridge", "action": "generalize_age18"},
+    {"old": "CC-C", "new": "CCUI2", "action": "deprecate"}
+  ]
+}

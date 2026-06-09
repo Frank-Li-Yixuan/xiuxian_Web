@@ -1,0 +1,727 @@
+[
+  {
+    "id": "hidden_ancient_thunder_blood",
+    "trueName": "古雷真血",
+    "publicAlias": "雷云深处的战鼓",
+    "category": "bloodline",
+    "rarity": "legendary",
+    "primaryTags": [
+      "thunder",
+      "bloodline",
+      "tribulation",
+      "outer_battlefield"
+    ],
+    "antiTags": [
+      "stable_mundane"
+    ],
+    "preferredOrigins": [
+      "origin_mountain_orphan",
+      "origin_hunter_child"
+    ],
+    "preferredRoots": [
+      "root_thunder",
+      "root_thunder_fire",
+      "root_thunder_water"
+    ],
+    "preferredDestinies": [
+      "destiny_thunder_affinity",
+      "destiny_heaven_jealous_talent"
+    ],
+    "preferredItems": [
+      "item_childhood_stone_talisman",
+      "item_old_family_letter"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "暴雨夜，你总比别人更早听见雷声。"
+      },
+      {
+        "band": "omen",
+        "text": "你偶尔能听见雷云深处有沉闷战鼓。"
+      },
+      {
+        "band": "stirring",
+        "text": "雷雨来临前，你的骨节会隐隐发热。"
+      },
+      {
+        "band": "halfReveal",
+        "text": "你逐渐意识到，那雷声似乎不是从天上传来。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_thunder_tribulation",
+      "mislead_system_battlefield"
+    ],
+    "lifeEventHooks": [
+      "hook_thunderstorm",
+      "hook_bone_heat",
+      "hook_heaven_attention"
+    ],
+    "majorChoiceHooks": [
+      "branch_rain_backhill",
+      "branch_answer_thunder"
+    ],
+    "interludeHooks": [
+      "interlude_rain_backhill_stg",
+      "interlude_outer_battlefield_dream"
+    ],
+    "stageTransitionTokens": [
+      "token_bloodline_thunder_stirred",
+      "token_system_candidate_thunder"
+    ],
+    "age18Outcomes": [
+      "age18_thunder_half_awakened",
+      "age18_thunder_unstable",
+      "age18_thunder_revealed"
+    ]
+  },
+  {
+    "id": "hidden_taiyin_remnant_vein",
+    "trueName": "太阴残脉",
+    "publicAlias": "月下冰凉的影子",
+    "category": "bloodline",
+    "rarity": "epic",
+    "primaryTags": [
+      "yin",
+      "soul",
+      "moon",
+      "dream"
+    ],
+    "antiTags": [
+      "fire_overflow"
+    ],
+    "preferredOrigins": [
+      "origin_grave_keeper_child",
+      "origin_temple_servant"
+    ],
+    "preferredRoots": [
+      "root_yin",
+      "root_yin_water"
+    ],
+    "preferredDestinies": [
+      "destiny_taiyin_dream",
+      "destiny_clear_glass_heart"
+    ],
+    "preferredItems": [
+      "item_black_bone_flute",
+      "item_old_incense_burner"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "月光照在你身上时，皮肤总会微微发凉。"
+      },
+      {
+        "band": "omen",
+        "text": "你常梦见一条没有尽头的白色河。"
+      },
+      {
+        "band": "stirring",
+        "text": "夜里，你似乎能听见坟坡下细碎的低语。"
+      },
+      {
+        "band": "halfReveal",
+        "text": "你知道那些梦并非普通梦境，它们像在唤你回去。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_soul_fear",
+      "mislead_heart_demon"
+    ],
+    "lifeEventHooks": [
+      "hook_moon_dream",
+      "hook_grave_mist",
+      "hook_soul_chill"
+    ],
+    "majorChoiceHooks": [
+      "branch_moon_well",
+      "branch_bone_flute"
+    ],
+    "interludeHooks": [
+      "interlude_dream_deckbuilder",
+      "interlude_soul_chess"
+    ],
+    "stageTransitionTokens": [
+      "token_yin_soul_stirred"
+    ],
+    "age18Outcomes": [
+      "age18_yin_half_awakened",
+      "age18_soul_line_unlocked"
+    ]
+  },
+  {
+    "id": "hidden_dragon_bone_unawakened",
+    "trueName": "龙骨未醒",
+    "publicAlias": "骨中沉睡的低吼",
+    "category": "bloodline",
+    "rarity": "epic",
+    "primaryTags": [
+      "body",
+      "bone",
+      "earth",
+      "martial"
+    ],
+    "antiTags": [
+      "weak_vessel"
+    ],
+    "preferredOrigins": [
+      "origin_hunter_child",
+      "origin_village_orphan"
+    ],
+    "preferredRoots": [
+      "root_earth",
+      "root_metal",
+      "root_mixed"
+    ],
+    "preferredDestinies": [
+      "destiny_body_vessel",
+      "destiny_hundred_falls"
+    ],
+    "preferredItems": [
+      "item_rust_bowstring",
+      "item_wooden_sword"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "你摔倒时，总比同龄孩子更快站起来。"
+      },
+      {
+        "band": "omen",
+        "text": "劳作之后，你骨头深处会传来沉闷热意。"
+      },
+      {
+        "band": "stirring",
+        "text": "山中兽吼响起时，你胸骨也像在回应。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_martial_talent"
+    ],
+    "lifeEventHooks": [
+      "hook_bone_heat",
+      "hook_hunt_strength"
+    ],
+    "majorChoiceHooks": [
+      "branch_hunt_beast",
+      "branch_protect_family"
+    ],
+    "interludeHooks": [
+      "interlude_hunt_horde",
+      "interlude_village_guard"
+    ],
+    "stageTransitionTokens": [
+      "token_body_vessel_ready"
+    ],
+    "age18Outcomes": [
+      "age18_dragon_bone_sealed",
+      "age18_body_boost"
+    ]
+  },
+  {
+    "id": "hidden_alchemy_saint_bone",
+    "trueName": "丹圣遗骨",
+    "publicAlias": "陌生火候",
+    "category": "pastLife",
+    "rarity": "legendary",
+    "primaryTags": [
+      "alchemy",
+      "fire_control",
+      "medicine",
+      "past_life"
+    ],
+    "antiTags": [
+      "artifact_only"
+    ],
+    "preferredOrigins": [
+      "origin_apothecary_apprentice"
+    ],
+    "preferredRoots": [
+      "root_wood",
+      "root_fire",
+      "root_earth",
+      "root_wood_fire"
+    ],
+    "preferredDestinies": [
+      "destiny_alchemy_genius",
+      "destiny_medicine_affinity"
+    ],
+    "preferredItems": [
+      "item_apothecary_bronze_furnace",
+      "item_rain_stained_scripture"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "你闻见药香时，会下意识分辨火候。"
+      },
+      {
+        "band": "omen",
+        "text": "你偶尔梦见一尊残破丹炉。"
+      },
+      {
+        "band": "stirring",
+        "text": "炉火摇晃时，你脑中会浮现陌生的控火手法。"
+      },
+      {
+        "band": "halfReveal",
+        "text": "你知道自己从未学过这些药理，但它们像早已刻在骨里。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_good_memory",
+      "mislead_fire_root"
+    ],
+    "lifeEventHooks": [
+      "hook_medicine_smell",
+      "hook_furnace_dream",
+      "hook_fire_control"
+    ],
+    "majorChoiceHooks": [
+      "branch_guard_furnace",
+      "branch_try_medicine"
+    ],
+    "interludeHooks": [
+      "interlude_guard_medicine_field",
+      "interlude_fire_control_check"
+    ],
+    "stageTransitionTokens": [
+      "token_alchemy_line_opened"
+    ],
+    "age18Outcomes": [
+      "age18_alchemy_furnace_memory",
+      "age18_dan_room_bonus"
+    ]
+  },
+  {
+    "id": "hidden_past_life_sword_soul",
+    "trueName": "前世剑魄",
+    "publicAlias": "木剑里的低鸣",
+    "category": "pastLife",
+    "rarity": "legendary",
+    "primaryTags": [
+      "sword",
+      "metal",
+      "past_life",
+      "artifact"
+    ],
+    "antiTags": [
+      "artifact_rejection"
+    ],
+    "preferredOrigins": [
+      "origin_fallen_cultivator_descendant"
+    ],
+    "preferredRoots": [
+      "root_metal",
+      "root_heaven_metal",
+      "root_mixed"
+    ],
+    "preferredDestinies": [
+      "destiny_sword_bone",
+      "destiny_artifact_favored"
+    ],
+    "preferredItems": [
+      "item_wooden_sword",
+      "item_blank_fragment"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "那柄木剑握在手中时，总比看上去更沉。"
+      },
+      {
+        "band": "omen",
+        "text": "夜深时，你似乎听见木剑里有细微低鸣。"
+      },
+      {
+        "band": "stirring",
+        "text": "竹影摇动时，你总觉得它们像一排排剑痕。"
+      },
+      {
+        "band": "halfReveal",
+        "text": "你并未学过剑，却知道怎样出剑最省力。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_artifact_spirit"
+    ],
+    "lifeEventHooks": [
+      "hook_wooden_sword",
+      "hook_bamboo_shadow",
+      "hook_old_cave"
+    ],
+    "majorChoiceHooks": [
+      "branch_trial_sword",
+      "branch_follow_sword_sound"
+    ],
+    "interludeHooks": [
+      "interlude_bamboo_sword_stg"
+    ],
+    "stageTransitionTokens": [
+      "token_sword_memory_stirred"
+    ],
+    "age18Outcomes": [
+      "age18_qingshuang_sword_fragment",
+      "age18_sword_soul_echo"
+    ]
+  },
+  {
+    "id": "hidden_merit_seed",
+    "trueName": "功德种子",
+    "publicAlias": "掌心温光",
+    "category": "karmicSeed",
+    "rarity": "rare",
+    "primaryTags": [
+      "merit",
+      "protection",
+      "karma_light"
+    ],
+    "antiTags": [
+      "heavy_killing"
+    ],
+    "preferredOrigins": [
+      "origin_temple_servant",
+      "origin_village_orphan"
+    ],
+    "preferredRoots": [
+      "root_wood",
+      "root_water",
+      "root_earth"
+    ],
+    "preferredDestinies": [
+      "destiny_protect_life",
+      "destiny_good_star"
+    ],
+    "preferredItems": [
+      "item_old_family_letter",
+      "item_old_incense_burner",
+      "item_jade_amulet"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "你救下小兽后，掌心会暖上一阵。"
+      },
+      {
+        "band": "omen",
+        "text": "香火缭绕时，你偶尔看见一点金光。"
+      },
+      {
+        "band": "stirring",
+        "text": "有人受难时，你心口会发紧，像被什么牵住。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_kind_heart"
+    ],
+    "lifeEventHooks": [
+      "hook_rescue",
+      "hook_incense_light",
+      "hook_merit_choice"
+    ],
+    "majorChoiceHooks": [
+      "branch_save_villager",
+      "branch_protect_family"
+    ],
+    "interludeHooks": [
+      "interlude_village_guard",
+      "interlude_heart_trial"
+    ],
+    "stageTransitionTokens": [
+      "token_merit_seed_lit"
+    ],
+    "age18Outcomes": [
+      "age18_merit_shield",
+      "age18_dongfu_merit_hook"
+    ]
+  },
+  {
+    "id": "hidden_demon_mark",
+    "trueName": "魔印微痕",
+    "publicAlias": "荒祠黑影",
+    "category": "curseSeal",
+    "rarity": "forbidden",
+    "primaryTags": [
+      "demon",
+      "curse",
+      "heart_demon",
+      "forbidden"
+    ],
+    "antiTags": [
+      "pure_merit"
+    ],
+    "preferredOrigins": [
+      "origin_grave_keeper_child",
+      "origin_refugee_orphan"
+    ],
+    "preferredRoots": [
+      "root_yin",
+      "root_fire",
+      "root_mixed"
+    ],
+    "preferredDestinies": [
+      "destiny_demon_seed",
+      "destiny_life_borrowing"
+    ],
+    "preferredItems": [
+      "item_black_bone_flute",
+      "item_cracked_coin"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "荒祠附近的影子总比别处更黑。"
+      },
+      {
+        "band": "omen",
+        "text": "你愤怒时，指尖会有一瞬间发凉。"
+      },
+      {
+        "band": "stirring",
+        "text": "梦里有人教你一个不能念出口的字。"
+      },
+      {
+        "band": "halfReveal",
+        "text": "你知道那不是普通梦魇，它在等你回应。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_yin_soul",
+      "mislead_night_fear"
+    ],
+    "lifeEventHooks": [
+      "hook_dark_shrine",
+      "hook_forbidden_word",
+      "hook_anger_cold"
+    ],
+    "majorChoiceHooks": [
+      "branch_accept_shadow",
+      "branch_blood_oath"
+    ],
+    "interludeHooks": [
+      "interlude_heart_demon_dbg",
+      "interlude_dark_shrine"
+    ],
+    "stageTransitionTokens": [
+      "token_demon_mark_stirred"
+    ],
+    "age18Outcomes": [
+      "age18_demon_unstable",
+      "age18_heart_demon_seed"
+    ]
+  },
+  {
+    "id": "hidden_system_resonance",
+    "trueName": "系统共鸣体",
+    "publicAlias": "耳边断续杂音",
+    "category": "systemResonance",
+    "rarity": "legendary",
+    "primaryTags": [
+      "system",
+      "outer_battlefield",
+      "fate_interface",
+      "unknown"
+    ],
+    "antiTags": [],
+    "preferredOrigins": [
+      "origin_mountain_orphan",
+      "origin_fallen_cultivator_descendant",
+      "origin_scholar_child"
+    ],
+    "preferredRoots": [
+      "root_thunder",
+      "root_yin",
+      "root_mixed",
+      "root_hidden"
+    ],
+    "preferredDestinies": [
+      "destiny_heaven_jealous_talent",
+      "destiny_fate_miscarried"
+    ],
+    "preferredItems": [
+      "item_blank_fragment",
+      "item_cracked_coin",
+      "item_childhood_stone_talisman"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "你偶尔会听见像是碎裂玉石的细响。"
+      },
+      {
+        "band": "omen",
+        "text": "耳边有时传来断续杂音，像有人隔着很远呼唤你。"
+      },
+      {
+        "band": "stirring",
+        "text": "你梦见一面没有字的光幕。"
+      },
+      {
+        "band": "halfReveal",
+        "text": "那杂音开始变得有规律，像是在等待你回应。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_tinnitus",
+      "mislead_outer_war"
+    ],
+    "lifeEventHooks": [
+      "hook_system_static",
+      "hook_outer_battle_dream",
+      "hook_blank_screen"
+    ],
+    "majorChoiceHooks": [
+      "branch_answer_static",
+      "branch_record_war_drum"
+    ],
+    "interludeHooks": [
+      "interlude_outer_battlefield_dream",
+      "interlude_system_calibration"
+    ],
+    "stageTransitionTokens": [
+      "token_system_candidate"
+    ],
+    "age18Outcomes": [
+      "age18_system_resonance",
+      "age18_outer_battlefield_invite"
+    ]
+  },
+  {
+    "id": "hidden_book_of_heaven_fragment",
+    "trueName": "天书残页",
+    "publicAlias": "无字残页自现墨痕",
+    "category": "karmicObject",
+    "rarity": "epic",
+    "primaryTags": [
+      "book",
+      "comprehension",
+      "fate_text",
+      "scripture"
+    ],
+    "antiTags": [],
+    "preferredOrigins": [
+      "origin_scholar_child",
+      "origin_fallen_cultivator_descendant"
+    ],
+    "preferredRoots": [
+      "root_mixed",
+      "root_water",
+      "root_yin"
+    ],
+    "preferredDestinies": [
+      "destiny_over_memory",
+      "destiny_heaven_jealous_talent"
+    ],
+    "preferredItems": [
+      "item_blank_fragment",
+      "item_rain_stained_scripture"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "你总觉得某些空白纸页上应当有字。"
+      },
+      {
+        "band": "omen",
+        "text": "无字残页在雨夜似乎洇出一笔墨痕。"
+      },
+      {
+        "band": "stirring",
+        "text": "你梦见自己读完一页书，却醒来忘得干干净净。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_old_book"
+    ],
+    "lifeEventHooks": [
+      "hook_old_book",
+      "hook_blank_page",
+      "hook_lost_text"
+    ],
+    "majorChoiceHooks": [
+      "branch_read_blank_fragment",
+      "branch_copy_old_text"
+    ],
+    "interludeHooks": [
+      "interlude_old_book_dbg"
+    ],
+    "stageTransitionTokens": [
+      "token_heaven_book_stirred"
+    ],
+    "age18Outcomes": [
+      "age18_scripture_hint",
+      "age18_card_pool_bonus"
+    ]
+  },
+  {
+    "id": "hidden_outer_battlefield_echo",
+    "trueName": "域外战场回响",
+    "publicAlias": "天外战鼓",
+    "category": "battlefieldEcho",
+    "rarity": "epic",
+    "primaryTags": [
+      "outer_battlefield",
+      "war_drum",
+      "system",
+      "combat"
+    ],
+    "antiTags": [
+      "pure_seclusion"
+    ],
+    "preferredOrigins": [
+      "origin_hunter_child",
+      "origin_mountain_orphan",
+      "origin_refugee_orphan"
+    ],
+    "preferredRoots": [
+      "root_thunder",
+      "root_metal",
+      "root_mixed"
+    ],
+    "preferredDestinies": [
+      "destiny_battle_nourishment",
+      "destiny_thunder_affinity"
+    ],
+    "preferredItems": [
+      "item_cracked_coin",
+      "item_childhood_stone_talisman",
+      "item_rust_bowstring"
+    ],
+    "omenStages": [
+      {
+        "band": "seed",
+        "text": "你偶尔梦见远处有鼓声。"
+      },
+      {
+        "band": "omen",
+        "text": "夜半时分，天外似有战鼓轰鸣。"
+      },
+      {
+        "band": "stirring",
+        "text": "你闭上眼，便看见灰色战场上有流星坠落。"
+      }
+    ],
+    "misleadingOmenIds": [
+      "mislead_system_resonance"
+    ],
+    "lifeEventHooks": [
+      "hook_outer_war_drum",
+      "hook_battlefield_dream"
+    ],
+    "majorChoiceHooks": [
+      "branch_enter_war_dream",
+      "branch_record_war_drum"
+    ],
+    "interludeHooks": [
+      "interlude_outer_battlefield_dream"
+    ],
+    "stageTransitionTokens": [
+      "token_outer_battlefield_called"
+    ],
+    "age18Outcomes": [
+      "age18_outer_battlefield_bonus",
+      "age18_first_battle_omen"
+    ]
+  }
+]

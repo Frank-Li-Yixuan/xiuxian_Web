@@ -1,0 +1,91 @@
+{
+  "version": "0.1",
+  "rhythmBudgetRules": [
+    {
+      "id": "rhythm_infant",
+      "agePhaseId": "infant",
+      "maxPlayableInterludes": 0,
+      "maxForcedInterludes": 0,
+      "minMonthsBetweenInterludes": 999,
+      "minMonthsBetweenIdentityTransitions": 12,
+      "allowedInterludeModes": [
+        "text_check"
+      ],
+      "notes": "婴幼年只做文本/异象，不进入真实玩法。"
+    },
+    {
+      "id": "rhythm_childhood",
+      "agePhaseId": "childhood",
+      "maxPlayableInterludes": 2,
+      "maxForcedInterludes": 0,
+      "minMonthsBetweenInterludes": 12,
+      "minMonthsBetweenIdentityTransitions": 12,
+      "allowedInterludeModes": [
+        "stg",
+        "deckbuilder",
+        "text_check"
+      ],
+      "notes": "仅允许梦境、幻象、训练包装的短插曲。"
+    },
+    {
+      "id": "rhythm_youth",
+      "agePhaseId": "youth",
+      "maxPlayableInterludes": 4,
+      "maxForcedInterludes": 1,
+      "minMonthsBetweenInterludes": 9,
+      "minMonthsBetweenIdentityTransitions": 12,
+      "allowedInterludeModes": [
+        "stg",
+        "horde",
+        "deckbuilder",
+        "formation_auto",
+        "text_check"
+      ],
+      "notes": "可出现第一次真实小历练。"
+    },
+    {
+      "id": "rhythm_adolescence",
+      "agePhaseId": "adolescence",
+      "maxPlayableInterludes": 6,
+      "maxForcedInterludes": 2,
+      "minMonthsBetweenInterludes": 6,
+      "minMonthsBetweenIdentityTransitions": 12,
+      "allowedInterludeModes": [
+        "stg",
+        "horde",
+        "deckbuilder",
+        "formation_auto",
+        "text_check"
+      ],
+      "notes": "核心玩法插曲期。"
+    },
+    {
+      "id": "rhythm_adult_threshold",
+      "agePhaseId": "adulthood_threshold",
+      "maxPlayableInterludes": 1,
+      "maxForcedInterludes": 1,
+      "minMonthsBetweenInterludes": 0,
+      "minMonthsBetweenIdentityTransitions": 0,
+      "allowedInterludeModes": [
+        "stg",
+        "horde",
+        "deckbuilder",
+        "formation_auto"
+      ],
+      "notes": "成年试炼独立处理。"
+    }
+  ],
+  "globalLimits": {
+    "targetPlayableInterludesTotal": [
+      8,
+      12
+    ],
+    "targetCoreInterludesTotal": [
+      2,
+      4
+    ],
+    "maxIdentityTransitionsBeforeAge18": 6,
+    "minMonthsBetweenSystemPreviews": 12,
+    "minMonthsBetweenInitiationNodes": 18
+  }
+}

@@ -1,0 +1,7 @@
+﻿{
+    "name":  "git_ls_files_sim_redesign_related",
+    "command":  "powershell -NoProfile -Command git ls-files src data docs codex_prompts scripts tools tests | rg \"(SimRedesign|sim-redesign|fate_matrix|destiny_v2|life_|llm_narrative|origin_fate_v02|NPF|DEM|LST|ME2|MC2|HFO2|LFP|LLM)\"",
+    "exitCode":  1,
+    "start":  "2026-06-09T22:26:55.8275921+08:00",
+    "end":  "2026-06-09T22:26:56.1604331+08:00"
+}

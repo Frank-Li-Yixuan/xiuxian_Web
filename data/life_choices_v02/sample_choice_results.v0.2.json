@@ -1,0 +1,56 @@
+{
+  "version": "0.2",
+  "samples": [
+    {
+      "preset": "药铺丹道",
+      "inputTags": [
+        "origin:medicine_shop",
+        "root:wood",
+        "root:fire",
+        "destiny:alchemy_talent",
+        "item:old_copper_furnace"
+      ],
+      "expectedChoiceThemes": [
+        "growth",
+        "trial"
+      ],
+      "likelyChoices": [
+        "choice_child_herb_slope",
+        "choice_teen_alchemy_furnace_heat"
+      ]
+    },
+    {
+      "preset": "破落剑修",
+      "inputTags": [
+        "origin:fallen_cultivator",
+        "item:broken_wooden_sword",
+        "hiddenFate:sword",
+        "destiny:sword_bone"
+      ],
+      "expectedChoiceThemes": [
+        "omen",
+        "trial"
+      ],
+      "likelyChoices": [
+        "choice_youth_wooden_sword_hum"
+      ]
+    },
+    {
+      "preset": "系统前兆",
+      "inputTags": [
+        "storyline:system_omen",
+        "hiddenFate:system",
+        "hook:system_static",
+        "hook_outer_battlefield_omen"
+      ],
+      "expectedChoiceThemes": [
+        "omen",
+        "interlude",
+        "transition"
+      ],
+      "likelyChoices": [
+        "choice_teen_heavenly_war_drum"
+      ]
+    }
+  ]
+}

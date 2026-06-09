@@ -1,0 +1,1925 @@
+{
+  "version": "0.1",
+  "description": "核心天命、劫命与变异命格。eligibility 使用九宫派生评分与属性阈值。",
+  "destinies": [
+    {
+      "id": "destiny_heaven_jealous_talent",
+      "name": "天妒英才",
+      "quality": "heaven",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main"
+      ],
+      "tags": [
+        "talent",
+        "heaven_pressure",
+        "short_life",
+        "study",
+        "tribulation"
+      ],
+      "oneLine": "慧光过盛，命数难承；修行极快，劫数亦近。",
+      "description": "你生而早慧，学法如饮水，常能无师自通。但此等天机并非白来，命火薄弱，天道也更容易注视你。",
+      "eligibility": {
+        "any": [
+          {
+            "score": "talentScore",
+            "gte": 85
+          },
+          {
+            "attr": "comprehension",
+            "gte": 90
+          },
+          {
+            "attr": "inspiration",
+            "gte": 90
+          },
+          {
+            "sumAttrs": [
+              "comprehension",
+              "inspiration"
+            ],
+            "gte": 160
+          }
+        ],
+        "supportAny": [
+          {
+            "attr": "lifespan",
+            "lte": 50
+          },
+          {
+            "score": "destinyPressureScore",
+            "gte": 75
+          },
+          {
+            "attr": "heart",
+            "lte": 55
+          }
+        ],
+        "anti": [
+          {
+            "score": "talentScore",
+            "lte": 55
+          },
+          {
+            "all": [
+              {
+                "attr": "comprehension",
+                "lte": 55
+              },
+              {
+                "attr": "inspiration",
+                "lte": 55
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "attr": "lifespan",
+                "gte": 80
+              },
+              {
+                "attr": "heart",
+                "gte": 75
+              },
+              {
+                "attr": "fortune",
+                "gte": 70
+              }
+            ]
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_false_heavenly_burden",
+        "weakSupportResult": "destiny_bright_but_fragile"
+      },
+      "effects": {
+        "lifeSim": [
+          "study_yield_x1_8",
+          "illness_event_weight_up",
+          "heaven_attention_hook"
+        ],
+        "outerBattlefield": [
+          "first_insight_quality_plus_1",
+          "danger_event_plus_1"
+        ],
+        "outgame": [
+          "method_research_speed_plus",
+          "tribulation_pressure_plus"
+        ]
+      }
+    },
+    {
+      "id": "destiny_false_heavenly_burden",
+      "name": "妄承天机",
+      "quality": "rare",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "false_talent",
+        "heaven_pressure",
+        "omens"
+      ],
+      "oneLine": "你被某种天机误照，偶有神异，更多时候只是灾兆。",
+      "description": "你并非真正的绝世天才，却被不明天机缠上。它带来片段式启示，也带来不属于你的劫数。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_heaven_jealous_talent"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "omen_event_weight_up",
+          "unstable_insight_small"
+        ],
+        "outerBattlefield": [
+          "random_warning_event"
+        ],
+        "outgame": [
+          "divination_hint_plus"
+        ]
+      }
+    },
+    {
+      "id": "destiny_bright_but_fragile",
+      "name": "慧极易折",
+      "quality": "arcane",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main"
+      ],
+      "tags": [
+        "talent",
+        "fragile",
+        "illness"
+      ],
+      "oneLine": "你确有慧光，却如薄冰承火。",
+      "description": "你的悟性极佳，但根器与命火不足以支撑长期高强度修行。若不补承载，越聪明越伤身。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_heaven_jealous_talent"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "study_yield_x1_4",
+          "wound_if_overstudy"
+        ],
+        "outerBattlefield": [
+          "spell_choice_weight_up",
+          "max_hp_penalty_small"
+        ],
+        "outgame": [
+          "body_refining_need_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_late_bloomer",
+      "name": "大器晚成",
+      "quality": "arcane",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "late_bloom",
+        "seclusion",
+        "long_life"
+      ],
+      "oneLine": "少年迟钝，后劲深长；越过前期，底蕴渐厚。",
+      "description": "你前期修行不显，但命火稳、道心耐久，越到后期越能厚积薄发。",
+      "eligibility": {
+        "any": [
+          {
+            "score": "lateBloomScore",
+            "gte": 78
+          },
+          {
+            "all": [
+              {
+                "attr": "lifespan",
+                "gte": 75
+              },
+              {
+                "attr": "heart",
+                "gte": 70
+              }
+            ]
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_heaven_jealous_talent"
+          },
+          {
+            "attr": "lifespan",
+            "lte": 35
+          },
+          {
+            "score": "talentScore",
+            "gte": 92,
+            "note": "极端早慧更倾向天妒英才而非大器晚成"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_delayed_by_calamiity"
+      },
+      "effects": {
+        "lifeSim": [
+          "age_before_14_growth_down",
+          "age_after_16_growth_up"
+        ],
+        "outerBattlefield": [
+          "early_combat_bonus_low",
+          "survival_reward_up"
+        ],
+        "outgame": [
+          "long_seclusion_efficiency_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_delayed_by_calamiity",
+      "name": "劫压晚成",
+      "quality": "rare",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "late_bloom",
+        "calamity"
+      ],
+      "oneLine": "并非迟钝，而是被劫数压住了势头。",
+      "description": "你的底子不差，但幼年多灾多滞，成长节奏被外劫压低。若能破劫，反而比常人更稳。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_late_bloomer"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "calamity_choices_more",
+          "success_after_failure_bonus"
+        ],
+        "outerBattlefield": [
+          "resilience_small"
+        ],
+        "outgame": [
+          "tribulation_recovery_bonus"
+        ]
+      }
+    },
+    {
+      "id": "destiny_waste_root_reversal",
+      "name": "废灵逆命",
+      "quality": "reversal",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main"
+      ],
+      "tags": [
+        "reversal",
+        "failure_growth",
+        "waste_root",
+        "heart"
+      ],
+      "oneLine": "灵根驳杂，前路艰难；每次失败都留下逆命之痕。",
+      "description": "你先天灵机闭塞，修行初期举步维艰。但你越失败，命盘越会把失败刻成新的阶梯。",
+      "eligibility": {
+        "any": [
+          {
+            "score": "rebellionScore",
+            "gte": 76
+          },
+          {
+            "all": [
+              {
+                "attr": "rootBone",
+                "lte": 35
+              },
+              {
+                "attr": "heart",
+                "gte": 70
+              }
+            ]
+          },
+          {
+            "tag": "root:blocked"
+          },
+          {
+            "tag": "root:mixed"
+          }
+        ],
+        "anti": [
+          {
+            "all": [
+              {
+                "attr": "rootBone",
+                "gte": 80
+              },
+              {
+                "attr": "comprehension",
+                "gte": 80
+              },
+              {
+                "attr": "fortune",
+                "gte": 70
+              }
+            ]
+          },
+          {
+            "tag": "root:heavenly"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_heaven_pride_under_calamity"
+      },
+      "effects": {
+        "lifeSim": [
+          "failure_grants_reversal_point",
+          "early_cultivation_down"
+        ],
+        "outerBattlefield": [
+          "first_near_death_clear_bullets",
+          "start_stats_down_small"
+        ],
+        "outgame": [
+          "breakthrough_failure_partial_reward"
+        ]
+      }
+    },
+    {
+      "id": "destiny_heaven_pride_under_calamity",
+      "name": "天骄遭厄",
+      "quality": "earth",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main"
+      ],
+      "tags": [
+        "talent",
+        "calamity",
+        "reversal"
+      ],
+      "oneLine": "你不是废柴，只是本该顺遂的天资被劫数压住。",
+      "description": "你的资质足以称天骄，却被某种外劫缠身。失败并非无能，而是劫数。破劫之后，天资会重新显现。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_waste_root_reversal"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "calamity_pressure_up",
+          "success_after_reversal_up"
+        ],
+        "outerBattlefield": [
+          "calamity_elite_event",
+          "reward_after_boss_up"
+        ],
+        "outgame": [
+          "anti_calamity_cultivation_path"
+        ]
+      }
+    },
+    {
+      "id": "destiny_cowardly_supreme",
+      "name": "苟道至尊",
+      "quality": "earth",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main"
+      ],
+      "tags": [
+        "seclusion",
+        "avoid_fight",
+        "survival",
+        "long_life"
+      ],
+      "oneLine": "不争即是争，藏拙即是修。",
+      "description": "你天生懂得避险。越是远离杀伐，越能悄悄积累底蕴；但一旦频繁主动争斗，潜修之势会被打断。",
+      "eligibility": {
+        "any": [
+          {
+            "all": [
+              {
+                "attr": "heart",
+                "gte": 80
+              },
+              {
+                "attr": "lifespan",
+                "gte": 70
+              }
+            ]
+          },
+          {
+            "score": "stabilityScore",
+            "gte": 82
+          },
+          {
+            "score": "lateBloomScore",
+            "gte": 82
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_battle_nourished"
+          },
+          {
+            "id": "destiny_killing_star"
+          },
+          {
+            "tag": "combat:aggressive"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_hidden_killer"
+      },
+      "effects": {
+        "lifeSim": [
+          "avoid_fight_builds_hidden_layers",
+          "seclusion_choice_bonus",
+          "fight_choice_breaks_layers"
+        ],
+        "outerBattlefield": [
+          "survival_bonus",
+          "active_spell_damage_down_small"
+        ],
+        "outgame": [
+          "idle_cultivation_up_if_no_trials"
+        ]
+      }
+    },
+    {
+      "id": "destiny_hidden_killer",
+      "name": "隐杀之命",
+      "quality": "arcane",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "seclusion",
+        "burst",
+        "assassin"
+      ],
+      "oneLine": "平日避世，出手必绝。",
+      "description": "苟藏并非怯弱，而是蓄杀。你越少出手，真正出手时越狠。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_cowardly_supreme"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "avoid_fight_builds_burst",
+          "first_fight_after_seclusion_bonus"
+        ],
+        "outerBattlefield": [
+          "first_spell_after_delay_crit"
+        ],
+        "outgame": [
+          "stealth_trial_bias"
+        ]
+      }
+    },
+    {
+      "id": "destiny_battle_nourished",
+      "name": "以战养战",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "combat",
+        "kill",
+        "recovery",
+        "outer_battlefield"
+      ],
+      "oneLine": "战中取气，杀中养身。",
+      "description": "你在真正的危险中更容易成长。战斗会磨损你，也会让你迅速凝聚修为与战意。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "jing",
+            "gte": 55
+          },
+          {
+            "attr": "rootBone",
+            "gte": 60
+          },
+          {
+            "tag": "life:combat"
+          },
+          {
+            "tag": "origin:hunter"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_cowardly_supreme"
+          },
+          {
+            "attr": "heart",
+            "lte": 25,
+            "note": "心性太弱会变为怯战而非以战养战"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_blood_frightened"
+      },
+      "effects": {
+        "lifeSim": [
+          "combat_choice_yield_up",
+          "wound_risk_up"
+        ],
+        "outerBattlefield": [
+          "elite_kill_heal_qi",
+          "combat_cultivation_up"
+        ],
+        "outgame": [
+          "idle_cultivation_down"
+        ]
+      }
+    },
+    {
+      "id": "destiny_blood_frightened",
+      "name": "血惊未定",
+      "quality": "good",
+      "kind": "mutated",
+      "allowedSlots": [
+        "secondary",
+        "flaw"
+      ],
+      "tags": [
+        "fear",
+        "combat_trauma"
+      ],
+      "oneLine": "你并非不能战，只是第一次见血会留下阴影。",
+      "description": "危险会刺激你的成长，也可能让你形成心结。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_battle_nourished"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "first_blood_choice_hook",
+          "heart_knot_on_failure"
+        ],
+        "outerBattlefield": [
+          "first_hit_fear_short"
+        ],
+        "outgame": [
+          "clear_heart_training_needed"
+        ]
+      }
+    },
+    {
+      "id": "destiny_thunder_tribulation_affinity",
+      "name": "劫雷亲和",
+      "quality": "arcane",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "thunder",
+        "tribulation",
+        "risk_reward"
+      ],
+      "oneLine": "雷劫既是灾，也是缘。",
+      "description": "你对雷霆、天劫与域外裂隙有异常亲和。雷法更强，但天道也更容易找到你。",
+      "eligibility": {
+        "any": [
+          {
+            "tag": "root:thunder"
+          },
+          {
+            "score": "destinyPressureScore",
+            "gte": 78
+          },
+          {
+            "attr": "inspiration",
+            "gte": 85
+          },
+          {
+            "tag": "hidden:ancient_thunder_bias"
+          }
+        ],
+        "anti": [
+          {
+            "all": [
+              {
+                "attr": "heart",
+                "lte": 30
+              },
+              {
+                "attr": "jing",
+                "lte": 30
+              }
+            ],
+            "note": "承载太差时雷亲和会变为雷厄缠身"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "calamity_thunder_scar"
+      },
+      "effects": {
+        "lifeSim": [
+          "thunderstorm_event_weight_up",
+          "tribulation_omen_up"
+        ],
+        "outerBattlefield": [
+          "thunder_spell_up",
+          "extra_thunder_warning"
+        ],
+        "outgame": [
+          "tribulation_reward_up",
+          "tribulation_pressure_up"
+        ]
+      }
+    },
+    {
+      "id": "calamity_thunder_scar",
+      "name": "雷厄缠身",
+      "quality": "flaw",
+      "kind": "flaw",
+      "allowedSlots": [
+        "flaw",
+        "secondary"
+      ],
+      "tags": [
+        "thunder",
+        "scar",
+        "calamity"
+      ],
+      "oneLine": "雷不亲你，只是记住了你。",
+      "description": "你与雷有缘，却不是善缘。雷雨与天劫相关事件更容易发生，但收益并不稳定。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_thunder_tribulation_affinity"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "thunder_disaster_up"
+        ],
+        "outerBattlefield": [
+          "random_thunder_hazard"
+        ],
+        "outgame": [
+          "needs_thunder_cleansing"
+        ]
+      }
+    },
+    {
+      "id": "destiny_alchemy_prodigy",
+      "name": "丹道奇才",
+      "quality": "arcane",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "alchemy",
+        "medicine",
+        "fire_control",
+        "pill"
+      ],
+      "oneLine": "你对药性与火候有近乎本能的直觉。",
+      "description": "灵草、火候、药性在你眼中会形成特殊秩序。炼丹路线更顺，但器道与杀伐不一定适配。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "comprehension",
+            "gte": 70
+          },
+          {
+            "attr": "inspiration",
+            "gte": 70
+          },
+          {
+            "tag": "origin:apothecary"
+          },
+          {
+            "tag": "root:wood"
+          },
+          {
+            "tag": "root:fire"
+          }
+        ],
+        "supportAny": [
+          {
+            "tag": "item:bronze_furnace"
+          },
+          {
+            "tag": "hidden:alchemy_saint_bias"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_artifact_blessed",
+            "severity": "soft"
+          }
+        ]
+      },
+      "mutation": {
+        "weakSupportResult": "destiny_medicine_sense"
+      },
+      "effects": {
+        "lifeSim": [
+          "herb_event_weight_up",
+          "alchemy_choice_yield_up",
+          "furnace_event_up"
+        ],
+        "outerBattlefield": [
+          "start_pill_rejuvenation",
+          "pill_digest_speed_up"
+        ],
+        "outgame": [
+          "alchemy_room_start_exp_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_medicine_sense",
+      "name": "药性亲和",
+      "quality": "good",
+      "kind": "mutated",
+      "allowedSlots": [
+        "secondary"
+      ],
+      "tags": [
+        "alchemy",
+        "medicine"
+      ],
+      "oneLine": "你不算丹道奇才，却天生闻得出药性的偏差。",
+      "description": "你对药材、病症和丹毒有较好感应。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_alchemy_prodigy"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "herb_event_weight_up_small"
+        ],
+        "outerBattlefield": [
+          "pill_drop_weight_up_small"
+        ],
+        "outgame": [
+          "basic_alchemy_success_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_artifact_blessed",
+      "name": "器灵之眷",
+      "quality": "arcane",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "artifact",
+        "spirit_treasure",
+        "sword",
+        "object_fate"
+      ],
+      "oneLine": "死物近你而有灵。",
+      "description": "本命法宝、旧物与器灵更容易与你产生共鸣。功法修行或许慢些，但器道会回应你。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "shen",
+            "gte": 65
+          },
+          {
+            "attr": "inspiration",
+            "gte": 70
+          },
+          {
+            "tag": "item:old_sword"
+          },
+          {
+            "tag": "item:jade_amulet"
+          },
+          {
+            "tag": "origin:fallen_cultivator"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_alchemy_prodigy",
+            "severity": "soft"
+          },
+          {
+            "flaw": "flaw_artifact_rejection"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_object_haunted"
+      },
+      "effects": {
+        "lifeSim": [
+          "old_object_event_up",
+          "artifact_affinity_up"
+        ],
+        "outerBattlefield": [
+          "artifact_echo_event"
+        ],
+        "outgame": [
+          "artifact_warming_efficiency_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_object_haunted",
+      "name": "器物缠魂",
+      "quality": "rare",
+      "kind": "mutated",
+      "allowedSlots": [
+        "secondary",
+        "flaw"
+      ],
+      "tags": [
+        "artifact",
+        "haunting",
+        "soul"
+      ],
+      "oneLine": "旧物回应你，但回应的未必是器灵。",
+      "description": "你容易与旧器、残物、亡魂产生联系。若处理得当，这是机缘；若处理不当，会成心魔。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_artifact_blessed"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "haunted_item_events_up"
+        ],
+        "outerBattlefield": [
+          "spirit_echo_random"
+        ],
+        "outgame": [
+          "artifact_cleansing_needed"
+        ]
+      }
+    },
+    {
+      "id": "destiny_stillness_meditation",
+      "name": "坐忘常定",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "seclusion",
+        "heart",
+        "meditation"
+      ],
+      "oneLine": "心能久定，气自归根。",
+      "description": "你极适合静修、闭关、观想。若被频繁卷入争斗，优势会被削弱。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "heart",
+            "gte": 78
+          },
+          {
+            "score": "stabilityScore",
+            "gte": 76
+          },
+          {
+            "tag": "origin:daoist_temple"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_battle_nourished",
+            "severity": "soft"
+          },
+          {
+            "id": "destiny_demon_seed"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_silent_obsession"
+      },
+      "effects": {
+        "lifeSim": [
+          "seclusion_choice_yield_up",
+          "mental_stability_up"
+        ],
+        "outerBattlefield": [
+          "focus_mode_bonus"
+        ],
+        "outgame": [
+          "idle_cultivation_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_silent_obsession",
+      "name": "静极生执",
+      "quality": "rare",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "seclusion",
+        "obsession",
+        "heart_knot"
+      ],
+      "oneLine": "能定，也易困于一念。",
+      "description": "你很会入定，但也可能在某个念头中越陷越深。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_stillness_meditation"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "seclusion_yield_up",
+          "heart_knot_on_failure"
+        ],
+        "outerBattlefield": [
+          "calm_bonus_until_hit"
+        ],
+        "outgame": [
+          "clear_heart_practice_needed"
+        ]
+      }
+    },
+    {
+      "id": "destiny_demon_seed",
+      "name": "魔心暗种",
+      "quality": "earth",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "demon",
+        "heart_demon",
+        "forbidden",
+        "karma"
+      ],
+      "oneLine": "黑影在心底生根，越压越深。",
+      "description": "你更容易接触禁忌、心魔与高风险机缘。它带来力量，也让你的心境更容易被侵蚀。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "shen",
+            "gte": 70
+          },
+          {
+            "attr": "inspiration",
+            "gte": 75
+          },
+          {
+            "attr": "heart",
+            "lte": 55
+          },
+          {
+            "tag": "origin:gravekeeper"
+          },
+          {
+            "tag": "hidden:demon_mark_bias"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_clear_glass_heart"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_pure_lotus_shadow"
+      },
+      "effects": {
+        "lifeSim": [
+          "demon_dream_event_up",
+          "forbidden_choice_bonus",
+          "heart_demon_up"
+        ],
+        "outerBattlefield": [
+          "crit_up_small",
+          "heart_demon_projectile_event"
+        ],
+        "outgame": [
+          "demon_path_unlocked_later"
+        ]
+      }
+    },
+    {
+      "id": "destiny_clear_glass_heart",
+      "name": "清净琉璃心",
+      "quality": "arcane",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "purity",
+        "heart",
+        "anti_demon",
+        "clarity"
+      ],
+      "oneLine": "心如琉璃，不染尘魔。",
+      "description": "你对杂念、心魔和业力侵染有天然抵抗，但也较难走极端禁忌路线。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "heart",
+            "gte": 85
+          },
+          {
+            "score": "stabilityScore",
+            "gte": 82
+          },
+          {
+            "tag": "merit"
+          },
+          {
+            "tag": "origin:daoist_temple"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_demon_seed"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_pure_lotus_shadow"
+      },
+      "effects": {
+        "lifeSim": [
+          "heart_demon_resist_up",
+          "clear_mind_choices_up"
+        ],
+        "outerBattlefield": [
+          "confusion_resist",
+          "cleanse_effect_up"
+        ],
+        "outgame": [
+          "tribulation_mental_phase_stable"
+        ]
+      }
+    },
+    {
+      "id": "destiny_pure_lotus_shadow",
+      "name": "净莲藏影",
+      "quality": "earth",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main"
+      ],
+      "tags": [
+        "purity",
+        "demon",
+        "sealed"
+      ],
+      "oneLine": "清净之下，镇着一枚魔影。",
+      "description": "你能压住心魔，也能借其力量。越清净，魔影越深；越放纵，琉璃越裂。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_demon_seed",
+          "destiny_clear_glass_heart"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "purity_demon_dual_events"
+        ],
+        "outerBattlefield": [
+          "controlled_demon_burst_once"
+        ],
+        "outgame": [
+          "dual_path_unlock_hook"
+        ]
+      }
+    },
+    {
+      "id": "destiny_borrow_life_cultivation",
+      "name": "借寿修行",
+      "quality": "arcane",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "lifespan",
+        "forbidden",
+        "exchange"
+      ],
+      "oneLine": "命火可燃，修为可换。",
+      "description": "你能把寿元转化为修为、真元或顿悟，但每次借寿都是真正的命数消耗。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "lifespan",
+            "gte": 65
+          },
+          {
+            "id": "flaw_short_life_flame"
+          },
+          {
+            "tag": "forbidden"
+          }
+        ],
+        "anti": [
+          {
+            "attr": "lifespan",
+            "lte": 18,
+            "note": "寿元太低时不应再抽借寿，而应作为劫命呈现"
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "flaw_life_flame_cracked"
+      },
+      "effects": {
+        "lifeSim": [
+          "borrow_life_options_unlock"
+        ],
+        "outerBattlefield": [
+          "spend_life_for_qi_option"
+        ],
+        "outgame": [
+          "lifespan_resource_visible"
+        ]
+      }
+    },
+    {
+      "id": "destiny_poisoned_medicine",
+      "name": "饮鸩止渴",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "pill",
+        "toxicity",
+        "risk_reward"
+      ],
+      "oneLine": "药效翻倍，毒亦翻倍。",
+      "description": "你对丹药反应极强，好的药能救命，坏的毒也更沉。",
+      "eligibility": {
+        "any": [
+          {
+            "tag": "origin:apothecary"
+          },
+          {
+            "attr": "qi",
+            "gte": 55
+          },
+          {
+            "attr": "jing",
+            "lte": 45
+          },
+          {
+            "tag": "alchemy"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_clear_glass_heart",
+            "severity": "soft"
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "medicine_event_stronger",
+          "toxicity_event_stronger"
+        ],
+        "outerBattlefield": [
+          "pill_effect_up",
+          "pill_side_effect_up"
+        ],
+        "outgame": [
+          "dan_toxicity_management_needed"
+        ]
+      }
+    },
+    {
+      "id": "destiny_thread_of_life",
+      "name": "命悬一线",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "low_hp",
+        "burst",
+        "risk"
+      ],
+      "oneLine": "越近死线，越见锋芒。",
+      "description": "你在濒危时反而心神集中，爆发极强；但常规恢复难以让你长久安稳。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "heart",
+            "gte": 60
+          },
+          {
+            "attr": "fortune",
+            "lte": 45
+          },
+          {
+            "id": "flaw_weak_body"
+          },
+          {
+            "tag": "calamity"
+          }
+        ],
+        "anti": [
+          {
+            "attr": "jing",
+            "gte": 90
+          },
+          {
+            "attr": "lifespan",
+            "gte": 90
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "danger_choice_bonus"
+        ],
+        "outerBattlefield": [
+          "low_hp_damage_up",
+          "healing_cap_penalty"
+        ],
+        "outgame": [
+          "risk_training_path"
+        ]
+      }
+    },
+    {
+      "id": "destiny_unyielding",
+      "name": "百折不摧",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "secondary",
+        "main"
+      ],
+      "tags": [
+        "resilience",
+        "failure",
+        "heart"
+      ],
+      "oneLine": "折而不绝，败而不散。",
+      "description": "你失败后的恢复和成长能力极强，尤其能与逆命类天命形成共鸣。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "heart",
+            "gte": 75
+          },
+          {
+            "score": "rebellionScore",
+            "gte": 65
+          },
+          {
+            "id": "destiny_waste_root_reversal"
+          }
+        ],
+        "anti": []
+      },
+      "effects": {
+        "lifeSim": [
+          "failure_penalty_down",
+          "failure_growth_up"
+        ],
+        "outerBattlefield": [
+          "first_defeat_reward_up"
+        ],
+        "outgame": [
+          "breakthrough_fail_recovery_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_natural_sword_bone",
+      "name": "天生剑骨",
+      "quality": "arcane",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "sword",
+        "metal",
+        "artifact"
+      ],
+      "oneLine": "骨中有锋，梦里闻剑。",
+      "description": "你天生适合剑道。飞剑、剑诀与器灵相关路线更容易回应你。",
+      "eligibility": {
+        "any": [
+          {
+            "tag": "root:metal"
+          },
+          {
+            "attr": "rootBone",
+            "gte": 75
+          },
+          {
+            "attr": "shen",
+            "gte": 65
+          },
+          {
+            "tag": "item:old_sword"
+          }
+        ],
+        "anti": [
+          {
+            "id": "flaw_artifact_rejection"
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "sword_event_weight_up",
+          "old_sword_affinity_up"
+        ],
+        "outerBattlefield": [
+          "sword_artifact_damage_up"
+        ],
+        "outgame": [
+          "sword_method_research_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_five_elements_mixed",
+      "name": "五行杂糅",
+      "quality": "good",
+      "kind": "destiny",
+      "allowedSlots": [
+        "secondary",
+        "main"
+      ],
+      "tags": [
+        "mixed_root",
+        "multi_mode",
+        "wuxing"
+      ],
+      "oneLine": "五气不纯，却也不绝。",
+      "description": "你单修慢，但多路都能摸到边。适合未来多模式、多流派发展。",
+      "eligibility": {
+        "any": [
+          {
+            "tag": "root:mixed"
+          },
+          {
+            "tag": "root:triple"
+          },
+          {
+            "tag": "root:chaos"
+          }
+        ],
+        "anti": [
+          {
+            "tag": "root:heavenly"
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "diverse_event_pool_up"
+        ],
+        "outerBattlefield": [
+          "reward_pool_broad"
+        ],
+        "outgame": [
+          "cross_lineage_discount_small"
+        ]
+      }
+    },
+    {
+      "id": "destiny_taiyin_dreaming",
+      "name": "太阴入梦",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "yin",
+        "dream",
+        "soul"
+      ],
+      "oneLine": "月下梦深，魂识自明。",
+      "description": "你的梦境比白日更真实。太阴、魂修、梦境、心魔与前世线更容易显现。",
+      "eligibility": {
+        "any": [
+          {
+            "tag": "root:yin"
+          },
+          {
+            "attr": "shen",
+            "gte": 70
+          },
+          {
+            "attr": "inspiration",
+            "gte": 70
+          },
+          {
+            "tag": "origin:gravekeeper"
+          }
+        ],
+        "anti": [
+          {
+            "attr": "shen",
+            "lte": 35
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "dream_event_weight_up",
+          "soul_event_up"
+        ],
+        "outerBattlefield": [
+          "soul_form_hint"
+        ],
+        "outgame": [
+          "soul_path_hook"
+        ]
+      }
+    },
+    {
+      "id": "destiny_lucky_star",
+      "name": "福星高照",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "fortune",
+        "merit",
+        "luck"
+      ],
+      "oneLine": "险中有路，难处逢生。",
+      "description": "你不一定天赋最强，但常能遇到转机。机缘与贵人事件更易出现。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "fortune",
+            "gte": 80
+          },
+          {
+            "tag": "merit"
+          },
+          {
+            "tag": "origin:orphan",
+            "note": "孤苦而有福缘可形成反差"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_killing_star"
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "lucky_event_weight_up",
+          "bad_event_soften"
+        ],
+        "outerBattlefield": [
+          "rare_drop_up_small",
+          "one_lucky_save_chance"
+        ],
+        "outgame": [
+          "random_opportunity_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_killing_star",
+      "name": "天煞孤星",
+      "quality": "earth",
+      "kind": "destiny",
+      "allowedSlots": [
+        "main",
+        "flaw"
+      ],
+      "tags": [
+        "kill",
+        "isolation",
+        "karma"
+      ],
+      "oneLine": "孤煞入命，杀伐易成，人缘难聚。",
+      "description": "你独行时更强，杀伐线更顺，但亲缘、道侣、护法与弟子关系更容易受损。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "fortune",
+            "lte": 35
+          },
+          {
+            "tag": "calamity"
+          },
+          {
+            "tag": "combat"
+          },
+          {
+            "id": "flaw_thin_kinship"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_merciful_merit"
+          },
+          {
+            "attr": "merit",
+            "gte": 20
+          }
+        ]
+      },
+      "mutation": {
+        "antiResult": "destiny_guardian_lone_star"
+      },
+      "effects": {
+        "lifeSim": [
+          "kinship_event_down",
+          "kill_event_up"
+        ],
+        "outerBattlefield": [
+          "solo_damage_up",
+          "rescue_bonus_down"
+        ],
+        "outgame": [
+          "companion_bond_difficulty_up"
+        ]
+      }
+    },
+    {
+      "id": "destiny_guardian_lone_star",
+      "name": "孤星护命",
+      "quality": "arcane",
+      "kind": "mutated",
+      "allowedSlots": [
+        "main",
+        "secondary"
+      ],
+      "tags": [
+        "isolation",
+        "merit",
+        "guardian"
+      ],
+      "oneLine": "孤星未必害人，也可能只护一线生机。",
+      "description": "你命中孤薄，但若积功护生，孤星会转为守命之星。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_killing_star"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "protective_merit_choices_up"
+        ],
+        "outerBattlefield": [
+          "solo_survival_up"
+        ],
+        "outgame": [
+          "guardian_path_hook"
+        ]
+      }
+    },
+    {
+      "id": "destiny_merciful_merit",
+      "name": "护生有德",
+      "quality": "rare",
+      "kind": "destiny",
+      "allowedSlots": [
+        "secondary",
+        "main"
+      ],
+      "tags": [
+        "merit",
+        "rescue",
+        "guardian"
+      ],
+      "oneLine": "一念护生，天机留路。",
+      "description": "你更容易在救人、护家、护灵事件中积累功德。功德能在关键时刻化劫。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "heart",
+            "gte": 70
+          },
+          {
+            "attr": "fortune",
+            "gte": 60
+          },
+          {
+            "tag": "merit"
+          },
+          {
+            "tag": "origin:village"
+          }
+        ],
+        "anti": [
+          {
+            "id": "destiny_killing_star"
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "rescue_choice_yield_up",
+          "merit_gain_up"
+        ],
+        "outerBattlefield": [
+          "one_merit_protection"
+        ],
+        "outgame": [
+          "tribulation_merit_offset"
+        ]
+      }
+    },
+    {
+      "id": "flaw_short_life_flame",
+      "name": "命火早衰",
+      "quality": "mortal",
+      "kind": "flaw",
+      "allowedSlots": [
+        "flaw"
+      ],
+      "tags": [
+        "lifespan",
+        "illness",
+        "short_life"
+      ],
+      "oneLine": "命火薄弱，少时多病。",
+      "description": "你寿元偏薄，病弱和借寿相关事件更容易出现。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "lifespan",
+            "lte": 40
+          },
+          {
+            "id": "destiny_heaven_jealous_talent"
+          },
+          {
+            "tag": "illness"
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "illness_event_weight_up"
+        ],
+        "outerBattlefield": [
+          "max_hp_down_small"
+        ],
+        "outgame": [
+          "lifespan_pressure_visible"
+        ]
+      }
+    },
+    {
+      "id": "flaw_weak_body",
+      "name": "先天体弱",
+      "quality": "mortal",
+      "kind": "flaw",
+      "allowedSlots": [
+        "flaw"
+      ],
+      "tags": [
+        "weak_body",
+        "illness"
+      ],
+      "oneLine": "肉身薄弱，风寒亦伤。",
+      "description": "你的精与根骨承载不足，幼年伤病事件更频繁。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "jing",
+            "lte": 35
+          },
+          {
+            "attr": "rootBone",
+            "lte": 35
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "wound_event_up"
+        ],
+        "outerBattlefield": [
+          "max_hp_down"
+        ],
+        "outgame": [
+          "body_refining_need_up"
+        ]
+      }
+    },
+    {
+      "id": "flaw_karma_entangled",
+      "name": "宿业缠身",
+      "quality": "mortal",
+      "kind": "flaw",
+      "allowedSlots": [
+        "flaw"
+      ],
+      "tags": [
+        "karma",
+        "calamity"
+      ],
+      "oneLine": "旧因未了，今生易遇横事。",
+      "description": "你容易被无形因果卷入灾劫、争斗和旧怨。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "fortune",
+            "lte": 35
+          },
+          {
+            "tag": "karma"
+          },
+          {
+            "tag": "calamity"
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "karma_event_up"
+        ],
+        "outerBattlefield": [
+          "elite_pressure_small"
+        ],
+        "outgame": [
+          "karma_management_needed"
+        ]
+      }
+    },
+    {
+      "id": "flaw_spirit_unstable",
+      "name": "神魂不稳",
+      "quality": "mortal",
+      "kind": "flaw",
+      "allowedSlots": [
+        "flaw"
+      ],
+      "tags": [
+        "soul",
+        "dream",
+        "instability"
+      ],
+      "oneLine": "梦多而神散，识海易动。",
+      "description": "你的神魂更容易被梦境、心魔、太阴或域外杂音影响。",
+      "eligibility": {
+        "any": [
+          {
+            "attr": "shen",
+            "lte": 35
+          },
+          {
+            "all": [
+              {
+                "attr": "inspiration",
+                "gte": 80
+              },
+              {
+                "attr": "heart",
+                "lte": 45
+              }
+            ]
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "dream_event_up",
+          "heart_demon_risk_up"
+        ],
+        "outerBattlefield": [
+          "confusion_risk_small"
+        ],
+        "outgame": [
+          "soul_stabilize_need"
+        ]
+      }
+    },
+    {
+      "id": "flaw_artifact_rejection",
+      "name": "法宝排斥",
+      "quality": "mortal",
+      "kind": "flaw",
+      "allowedSlots": [
+        "flaw"
+      ],
+      "tags": [
+        "artifact",
+        "rejection"
+      ],
+      "oneLine": "器物近身，灵机不合。",
+      "description": "你与法宝温养不易相合，但若强行走器道，可能形成特殊反差。",
+      "eligibility": {
+        "any": [
+          {
+            "score": "vesselScore",
+            "lte": 45
+          },
+          {
+            "attr": "shen",
+            "lte": 35
+          }
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "artifact_affinity_down"
+        ],
+        "outerBattlefield": [
+          "artifact_echo_down"
+        ],
+        "outgame": [
+          "artifact_warming_cost_up"
+        ]
+      }
+    },
+    {
+      "id": "flaw_life_flame_cracked",
+      "name": "命火裂痕",
+      "quality": "mortal",
+      "kind": "flaw",
+      "allowedSlots": [
+        "flaw"
+      ],
+      "tags": [
+        "lifespan",
+        "forbidden",
+        "cracked_fate"
+      ],
+      "oneLine": "命火已薄，又被禁法烧出裂痕。",
+      "description": "你并非不能借寿，只是命火太薄，任何燃烧寿元的选择都更危险。",
+      "eligibility": {
+        "sourceMutationOf": [
+          "destiny_borrow_life_cultivation"
+        ]
+      },
+      "effects": {
+        "lifeSim": [
+          "lifespan_warning_up",
+          "borrow_life_options_dangerous"
+        ],
+        "outerBattlefield": [
+          "max_hp_down_small",
+          "forbidden_burst_if_low_life"
+        ],
+        "outgame": [
+          "lifespan_repair_needed"
+        ]
+      }
+    }
+  ]
+}

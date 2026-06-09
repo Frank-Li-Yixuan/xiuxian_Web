@@ -1,0 +1,120 @@
+{
+  "version": "0.1",
+  "hardConflicts": [
+    {
+      "a": "destiny_heaven_jealous_talent",
+      "b": "destiny_late_bloomer",
+      "reason": "早慧伤命与后发厚积的叙事核心相冲。"
+    },
+    {
+      "a": "destiny_cowardly_supreme",
+      "b": "destiny_battle_nourished",
+      "reason": "避战潜修与以战养战的核心循环相冲。"
+    },
+    {
+      "a": "destiny_demon_seed",
+      "b": "destiny_clear_glass_heart",
+      "mutation": "destiny_pure_lotus_shadow",
+      "reason": "清净与魔种可通过变异合并，而非直接共存。"
+    },
+    {
+      "a": "destiny_lucky_star",
+      "b": "destiny_killing_star",
+      "mutation": "destiny_guardian_lone_star",
+      "reason": "福缘护生与孤煞杀伐冲突。"
+    },
+    {
+      "a": "destiny_natural_sword_bone",
+      "b": "flaw_artifact_rejection",
+      "reason": "剑骨与法宝排斥硬冲突，除非后续专门做反差变异。"
+    }
+  ],
+  "softConflicts": [
+    {
+      "a": "destiny_alchemy_prodigy",
+      "b": "destiny_artifact_blessed",
+      "warning": "丹道与器道都会分流长期资源，v0.1 作为软冲突提示。"
+    },
+    {
+      "a": "destiny_stillness_meditation",
+      "b": "destiny_battle_nourished",
+      "warning": "静修与战修路线相斥，但可由玩家主动选择平衡。"
+    },
+    {
+      "a": "destiny_poisoned_medicine",
+      "b": "destiny_clear_glass_heart",
+      "warning": "药毒路线会削弱清净路线的稳定性。"
+    }
+  ],
+  "synergies": [
+    {
+      "ids": [
+        "destiny_heaven_jealous_talent",
+        "destiny_thunder_tribulation_affinity"
+      ],
+      "name": "慧光引雷",
+      "effectTags": [
+        "tribulation_reward_up",
+        "thunder_omen_up"
+      ],
+      "warning": "雷劫压力大幅提高。"
+    },
+    {
+      "ids": [
+        "destiny_cowardly_supreme",
+        "destiny_stillness_meditation"
+      ],
+      "name": "潜修坐忘",
+      "effectTags": [
+        "seclusion_layer_cap_up"
+      ],
+      "warning": "主动战斗收益进一步降低。"
+    },
+    {
+      "ids": [
+        "destiny_waste_root_reversal",
+        "destiny_unyielding"
+      ],
+      "name": "百折逆命",
+      "effectTags": [
+        "failure_reward_up"
+      ],
+      "warning": "前期强度仍然偏低。"
+    },
+    {
+      "ids": [
+        "destiny_alchemy_prodigy",
+        "destiny_poisoned_medicine"
+      ],
+      "name": "猛药成丹",
+      "effectTags": [
+        "pill_power_up",
+        "toxicity_management_core"
+      ],
+      "warning": "丹毒成为核心风险。"
+    },
+    {
+      "ids": [
+        "destiny_artifact_blessed",
+        "destiny_natural_sword_bone"
+      ],
+      "name": "剑器相知",
+      "effectTags": [
+        "sword_artifact_spirit_up"
+      ],
+      "warning": "对非剑法宝收益有限。"
+    },
+    {
+      "ids": [
+        "destiny_demon_seed",
+        "destiny_borrow_life_cultivation"
+      ],
+      "name": "借寿入魔",
+      "effectTags": [
+        "forbidden_power_up",
+        "lifespan_and_heart_demon_risk_up"
+      ],
+      "warning": "寿元与心魔双重压力。"
+    }
+  ]
+}

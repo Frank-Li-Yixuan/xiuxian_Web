@@ -1,0 +1,101 @@
+{
+  "version": "0.1",
+  "modeProjectionPrinciple": "天命只输出模式修正标签，不直接改模式内最终数值；具体数值由 ModeProjection 消费。",
+  "projections": [
+    {
+      "destinyId": "destiny_heaven_jealous_talent",
+      "outerBattlefield": [
+        "first_insight_quality_plus_1",
+        "danger_event_plus_1"
+      ],
+      "horde": [
+        "elite_pressure_up"
+      ],
+      "deckbuilder": [
+        "rare_card_weight_up",
+        "curse_weight_up"
+      ],
+      "autochess": [
+        "genius_core_piece_bonus",
+        "fragile_core_penalty"
+      ]
+    },
+    {
+      "destinyId": "destiny_cowardly_supreme",
+      "outerBattlefield": [
+        "survival_reward_up",
+        "active_spell_damage_down"
+      ],
+      "horde": [
+        "avoid_combat_bonus_if_low_kill"
+      ],
+      "deckbuilder": [
+        "defense_stall_cards_up"
+      ],
+      "autochess": [
+        "backline_formation_bonus"
+      ]
+    },
+    {
+      "destinyId": "destiny_waste_root_reversal",
+      "outerBattlefield": [
+        "near_death_reversal_once"
+      ],
+      "horde": [
+        "failure_growth_stack"
+      ],
+      "deckbuilder": [
+        "on_damage_gain_reversal"
+      ],
+      "autochess": [
+        "loss_streak_scaling"
+      ]
+    },
+    {
+      "destinyId": "destiny_alchemy_prodigy",
+      "outerBattlefield": [
+        "start_pill_rejuvenation",
+        "pill_digest_speed_up"
+      ],
+      "horde": [
+        "medicine_drop_up"
+      ],
+      "deckbuilder": [
+        "pill_cards_up"
+      ],
+      "autochess": [
+        "support_healer_piece_bonus"
+      ]
+    },
+    {
+      "destinyId": "destiny_artifact_blessed",
+      "outerBattlefield": [
+        "artifact_echo_event"
+      ],
+      "horde": [
+        "weapon_evolution_up"
+      ],
+      "deckbuilder": [
+        "relic_weight_up"
+      ],
+      "autochess": [
+        "artifact_spirit_piece_unlock"
+      ]
+    },
+    {
+      "destinyId": "destiny_demon_seed",
+      "outerBattlefield": [
+        "heart_demon_projectile_event"
+      ],
+      "horde": [
+        "monster_density_and_reward_up"
+      ],
+      "deckbuilder": [
+        "demon_card_pool"
+      ],
+      "autochess": [
+        "demon_piece_high_risk"
+      ]
+    }
+  ]
+}

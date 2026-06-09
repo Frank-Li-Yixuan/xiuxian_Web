@@ -1,0 +1,36 @@
+{
+  "version": "0.1",
+  "targets": {
+    "fullLifeDurationMinutesStandard": [
+      8,
+      12
+    ],
+    "majorChoicesShown": [
+      18,
+      24
+    ],
+    "interludeCandidatesShown": [
+      4,
+      8
+    ],
+    "manualInterludesCompleted": [
+      1,
+      3
+    ],
+    "stageSummariesShown": 4,
+    "hiddenTrueNameLeakCount": 0,
+    "seedDeterminismFailures": 0,
+    "saveResumeFailures": 0
+  },
+  "eventsToLog": [
+    "life_sim_started",
+    "monthly_event_applied",
+    "major_choice_generated",
+    "major_choice_resolved",
+    "interlude_prompted",
+    "interlude_resolved",
+    "stage_summary_viewed",
+    "adult_node_reached",
+    "life_sim_resumed"
+  ]
+}

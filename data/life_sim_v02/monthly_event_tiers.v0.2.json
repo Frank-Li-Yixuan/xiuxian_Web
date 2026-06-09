@@ -1,0 +1,75 @@
+{
+  "version": "0.2",
+  "tiers": [
+    {
+      "id": "breath",
+      "name": "气息事件",
+      "description": "轻量背景或日常，不改变主线方向。",
+      "baseDensityCost": 1,
+      "recommendedPerYear": [
+        4,
+        8
+      ]
+    },
+    {
+      "id": "growth",
+      "name": "成长事件",
+      "description": "小幅属性/技能成长，支撑玩家长期感知。",
+      "baseDensityCost": 2,
+      "recommendedPerYear": [
+        3,
+        6
+      ]
+    },
+    {
+      "id": "omen",
+      "name": "预兆事件",
+      "description": "隐藏命、随身物、天命显化的线索。",
+      "baseDensityCost": 3,
+      "recommendedPerYear": [
+        1,
+        4
+      ]
+    },
+    {
+      "id": "thread",
+      "name": "事件线推进",
+      "description": "推进 active storyline 的事件线。",
+      "baseDensityCost": 3,
+      "recommendedPerYear": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": "pressure",
+      "name": "压力事件",
+      "description": "伤病、心结、灾厄、亲缘压力。",
+      "baseDensityCost": 3,
+      "recommendedPerYear": [
+        1,
+        3
+      ]
+    },
+    {
+      "id": "choice_seed",
+      "name": "半年选择种子",
+      "description": "为下一次半年重大选择埋钩子。",
+      "baseDensityCost": 4,
+      "recommendedPerYear": [
+        0,
+        2
+      ]
+    },
+    {
+      "id": "transition_seed",
+      "name": "阶段转化种子",
+      "description": "可能推动修行身份阶段变化。",
+      "baseDensityCost": 4,
+      "recommendedPerYear": [
+        0,
+        1
+      ]
+    }
+  ]
+}

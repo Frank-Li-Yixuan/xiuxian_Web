@@ -1,0 +1,6 @@
+﻿# npm run validate:data
+
+> xiuxian-stg@0.1.0 validate:data
+> tsx tools/validate-data.ts
+
+Validated 189 JSON files, 92 content ids, contentHash=8fcee14b.

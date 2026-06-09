@@ -1,0 +1,15 @@
+﻿{
+    "command":  "npm run dev -- --port 5176; node browser_smoke.mjs http://127.0.0.1:5176 D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09",
+    "exitCode":  1,
+    "startedAt":  "2026-06-09T22:37:11.7235026+08:00",
+    "endedAt":  "2026-06-09T22:37:22.2789711+08:00",
+    "durationMs":  10555,
+    "port":  5176,
+    "ready":  true,
+    "log":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\logs\\browser_smoke_retry3.log",
+    "viteStdout":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\logs\\browser_smoke_retry3_vite.out.log",
+    "viteStderr":  "D:\\Game_1\\artifacts\\sim-redesign-pre-review-2026-06-09\\logs\\browser_smoke_retry3_vite.err.log",
+    "remainingListeners":  [
+
+                           ]
+}

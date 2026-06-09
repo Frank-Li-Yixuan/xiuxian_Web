@@ -1,0 +1,74 @@
+{
+  "version": "0.1",
+  "states": [
+    "initializing",
+    "playing_months",
+    "paused",
+    "major_choice_pending",
+    "major_choice_resolving",
+    "interlude_prompt",
+    "interlude_running",
+    "interlude_auto_resolving",
+    "stage_summary",
+    "adult_node_pending",
+    "saving",
+    "error"
+  ],
+  "transitions": [
+    {
+      "from": "initializing",
+      "to": "playing_months",
+      "event": "initialized"
+    },
+    {
+      "from": "playing_months",
+      "to": "major_choice_pending",
+      "event": "six_month_boundary"
+    },
+    {
+      "from": "major_choice_pending",
+      "to": "major_choice_resolving",
+      "event": "select_choice"
+    },
+    {
+      "from": "major_choice_resolving",
+      "to": "interlude_prompt",
+      "event": "choice_has_interlude"
+    },
+    {
+      "from": "major_choice_resolving",
+      "to": "playing_months",
+      "event": "choice_resolved"
+    },
+    {
+      "from": "interlude_prompt",
+      "to": "interlude_running",
+      "event": "manual_interlude"
+    },
+    {
+      "from": "interlude_prompt",
+      "to": "interlude_auto_resolving",
+      "event": "auto_resolve"
+    },
+    {
+      "from": "interlude_running",
+      "to": "playing_months",
+      "event": "interlude_result_written"
+    },
+    {
+      "from": "playing_months",
+      "to": "stage_summary",
+      "event": "age_phase_completed"
+    },
+    {
+      "from": "stage_summary",
+      "to": "playing_months",
+      "event": "continue"
+    },
+    {
+      "from": "playing_months",
+      "to": "adult_node_pending",
+      "event": "age_216_reached"
+    }
+  ]
+}

@@ -1,0 +1,706 @@
+{
+  "version": "0.1",
+  "storylines": [
+    {
+      "id": "storyline_poor_scholar",
+      "name": "寒门读书线",
+      "shortName": "读书",
+      "description": "从私塾、旧书、残卷和问学中逐渐靠近修行。适合悟性高、神识清明或天妒英才命盘。",
+      "themeTags": [
+        "study",
+        "scripture",
+        "comprehension",
+        "old_book",
+        "exam",
+        "questioning"
+      ],
+      "worldContextTags": [
+        "private_school",
+        "county",
+        "old_scripture",
+        "wandering_teacher"
+      ],
+      "baseWeight": 8,
+      "agePhaseAffinity": {
+        "infancy": 0,
+        "childhood": 12,
+        "youth": 18,
+        "adolescence": 22
+      },
+      "activationSignals": [
+        {
+          "source": "ninePalace",
+          "stat": "comprehension",
+          "min": 75,
+          "weight": 20,
+          "note": "悟性高"
+        },
+        {
+          "source": "ninePalace",
+          "tag": "talent_high",
+          "weight": 14
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:heaven_jealous_talent",
+          "weight": 18
+        },
+        {
+          "source": "origin",
+          "tag": "origin_private_school_child",
+          "weight": 22
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_unwritten_page",
+          "weight": 16
+        }
+      ],
+      "suppressionSignals": [
+        {
+          "source": "ninePalace",
+          "stat": "comprehension",
+          "max": 30,
+          "weight": -16
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:war_fed_by_war",
+          "weight": -8
+        }
+      ],
+      "eventThreadIds": [
+        "thread_private_school_enlightenment",
+        "thread_old_book_hidden_words",
+        "thread_questioning_wandering_teacher",
+        "thread_forbidden_page"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "deckbuilder",
+          "weight": 18,
+          "hook": "play_dbg_scripture_debate"
+        },
+        {
+          "mode": "stg",
+          "weight": 4,
+          "hook": "play_stg_book_vision"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_bookish_seed_of_dao",
+        "transition_scripture_recognition"
+      ],
+      "possibleAge18Hooks": [
+        "age18_scripture_memory",
+        "age18_insight_quality_boost"
+      ]
+    },
+    {
+      "id": "storyline_apothecary_alchemy",
+      "name": "药铺丹道线",
+      "shortName": "丹道",
+      "description": "在药铺、灵草、火候和救治事件中发展出丹道与药理倾向。",
+      "themeTags": [
+        "alchemy",
+        "herb",
+        "medicine",
+        "furnace",
+        "fire_control",
+        "healing"
+      ],
+      "worldContextTags": [
+        "medicine_lane",
+        "apothecary",
+        "herb_hill",
+        "furnace_dream"
+      ],
+      "baseWeight": 8,
+      "agePhaseAffinity": {
+        "infancy": 2,
+        "childhood": 18,
+        "youth": 20,
+        "adolescence": 24
+      },
+      "activationSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_apothecary_apprentice",
+          "weight": 28
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:alchemy_talent",
+          "weight": 25
+        },
+        {
+          "source": "spiritualRoot",
+          "tag": "root:wood",
+          "weight": 12
+        },
+        {
+          "source": "spiritualRoot",
+          "tag": "root:fire",
+          "weight": 10
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:alchemy_saint_remains",
+          "weight": 22
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_copper_furnace",
+          "weight": 22
+        }
+      ],
+      "suppressionSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:artifact_blessed",
+          "weight": -6
+        }
+      ],
+      "eventThreadIds": [
+        "thread_apothecary_sorting_herbs",
+        "thread_mistaken_spirit_herb",
+        "thread_furnace_dream",
+        "thread_healing_a_neighbor",
+        "thread_furnace_fire_control"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "horde",
+          "weight": 14,
+          "hook": "play_horde_guard_medicine_field"
+        },
+        {
+          "mode": "deckbuilder",
+          "weight": 12,
+          "hook": "play_dbg_fire_control"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_alchemy_apprentice",
+        "transition_furnace_affinity"
+      ],
+      "possibleAge18Hooks": [
+        "age18_initial_pill_bonus",
+        "age18_alchemy_home_hook"
+      ]
+    },
+    {
+      "id": "storyline_hunter_martial",
+      "name": "猎户练武线",
+      "shortName": "练武",
+      "description": "通过山林、狩猎、练武、受伤与搏杀积累实战底子。",
+      "themeTags": [
+        "martial",
+        "hunting",
+        "forest",
+        "beast",
+        "blood",
+        "bow",
+        "stamina"
+      ],
+      "worldContextTags": [
+        "hunter_family",
+        "mountain_forest",
+        "beast_trail"
+      ],
+      "baseWeight": 7,
+      "agePhaseAffinity": {
+        "infancy": 2,
+        "childhood": 12,
+        "youth": 22,
+        "adolescence": 26
+      },
+      "activationSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_hunter_child",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "jing",
+          "min": 70,
+          "weight": 14
+        },
+        {
+          "source": "ninePalace",
+          "stat": "rootBone",
+          "min": 70,
+          "weight": 14
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:war_fed_by_war",
+          "weight": 18
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_rusty_bowstring",
+          "weight": 16
+        }
+      ],
+      "suppressionSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:cowardly_survivor",
+          "weight": -12
+        }
+      ],
+      "eventThreadIds": [
+        "thread_wooden_stake_training",
+        "thread_hill_hunt",
+        "thread_first_blood",
+        "thread_forest_beast_shadow"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "stg",
+          "weight": 14,
+          "hook": "play_stg_beast_chase"
+        },
+        {
+          "mode": "horde",
+          "weight": 16,
+          "hook": "play_horde_village_gate"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_martial_seed",
+        "transition_first_blood_memory"
+      ],
+      "possibleAge18Hooks": [
+        "age18_martial_start_bonus",
+        "age18_beast_sense"
+      ]
+    },
+    {
+      "id": "storyline_taoist_incense",
+      "name": "道观香火线",
+      "shortName": "道观",
+      "description": "围绕道观、香火、符箓、问心、阵盘与清修展开的入道线。",
+      "themeTags": [
+        "daoist_temple",
+        "incense",
+        "talisman",
+        "formation",
+        "heart_test",
+        "purification"
+      ],
+      "worldContextTags": [
+        "white_deer_temple",
+        "incense",
+        "ritual",
+        "old_priest"
+      ],
+      "baseWeight": 8,
+      "agePhaseAffinity": {
+        "infancy": 3,
+        "childhood": 18,
+        "youth": 22,
+        "adolescence": 24
+      },
+      "activationSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_taoist_temple_helper",
+          "weight": 28
+        },
+        {
+          "source": "ninePalace",
+          "stat": "heart",
+          "min": 75,
+          "weight": 16
+        },
+        {
+          "source": "ninePalace",
+          "stat": "shen",
+          "min": 70,
+          "weight": 12
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:clear_glass_heart",
+          "weight": 20
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:sitting_forgetfulness",
+          "weight": 16
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_old_talisman",
+          "weight": 16
+        }
+      ],
+      "eventThreadIds": [
+        "thread_incense_sweeping",
+        "thread_talisman_copying",
+        "thread_temple_formation_trial",
+        "thread_heart_questioning"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "deckbuilder",
+          "weight": 18,
+          "hook": "play_dbg_heart_questioning"
+        },
+        {
+          "mode": "autochess",
+          "weight": 12,
+          "hook": "play_autochess_temple_array"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_temple_heart_passed",
+        "transition_talisman_seed"
+      ],
+      "possibleAge18Hooks": [
+        "age18_talisman_start",
+        "age18_heart_demon_resist"
+      ]
+    },
+    {
+      "id": "storyline_fallen_cultivator_lineage",
+      "name": "破落修士遗脉线",
+      "shortName": "遗脉",
+      "description": "祖传旧物、残卷、木剑和旧敌线索逐渐显现的遗脉线。",
+      "themeTags": [
+        "fallen_lineage",
+        "ancestral_item",
+        "wooden_sword",
+        "old_scroll",
+        "legacy",
+        "old_enemy"
+      ],
+      "worldContextTags": [
+        "ancestral_house",
+        "old_sword",
+        "family_ruin",
+        "lineage_memory"
+      ],
+      "baseWeight": 7,
+      "agePhaseAffinity": {
+        "infancy": 4,
+        "childhood": 14,
+        "youth": 24,
+        "adolescence": 28
+      },
+      "activationSignals": [
+        {
+          "source": "origin",
+          "tag": "origin_fallen_cultivator_descendant",
+          "weight": 30
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:previous_life_sword_soul",
+          "weight": 24
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_broken_wooden_sword",
+          "weight": 24
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:waste_root_reversal",
+          "weight": 18
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:natural_sword_bone",
+          "weight": 18
+        }
+      ],
+      "eventThreadIds": [
+        "thread_ancestral_object_warms",
+        "thread_wooden_sword_rings",
+        "thread_failed_breathing_reversal",
+        "thread_old_enemy_shadow"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "stg",
+          "weight": 20,
+          "hook": "play_stg_sword_memory"
+        },
+        {
+          "mode": "deckbuilder",
+          "weight": 10,
+          "hook": "play_dbg_old_scroll"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_old_item_recognizes_owner",
+        "transition_lineage_seed_awake"
+      ],
+      "possibleAge18Hooks": [
+        "age18_sword_soul_echo",
+        "age18_initial_sword_artifact"
+      ]
+    },
+    {
+      "id": "storyline_village_calamity",
+      "name": "山村灾劫线",
+      "shortName": "灾劫",
+      "description": "围绕山贼、妖兽、兵祸、村难、守护与逃亡展开的灾劫线。",
+      "themeTags": [
+        "calamity",
+        "bandit",
+        "demon_beast",
+        "village_attack",
+        "protect",
+        "karma",
+        "merit"
+      ],
+      "worldContextTags": [
+        "qingstone_village",
+        "mountain_bandit",
+        "demon_shadow",
+        "township_guard"
+      ],
+      "baseWeight": 7,
+      "agePhaseAffinity": {
+        "infancy": 4,
+        "childhood": 12,
+        "youth": 24,
+        "adolescence": 30
+      },
+      "activationSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:disaster_star",
+          "weight": 24
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:war_caliber",
+          "weight": 20
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:life_protection_merit",
+          "weight": 16
+        },
+        {
+          "source": "origin",
+          "tag": "origin_mountain_village_orphan",
+          "weight": 18
+        },
+        {
+          "source": "ninePalace",
+          "stat": "fortune",
+          "max": 30,
+          "weight": 10
+        }
+      ],
+      "eventThreadIds": [
+        "thread_bandit_smoke",
+        "thread_demon_beast_at_fence",
+        "thread_village_rescue_or_escape",
+        "thread_merit_or_karma_divergence"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "horde",
+          "weight": 20,
+          "hook": "play_horde_village_defense"
+        },
+        {
+          "mode": "stg",
+          "weight": 14,
+          "hook": "play_stg_escape_bandit_chase"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_village_guardian",
+        "transition_fugitive_seed",
+        "transition_merit_seed"
+      ],
+      "possibleAge18Hooks": [
+        "age18_merit_protection",
+        "age18_karmic_enemy"
+      ]
+    },
+    {
+      "id": "storyline_yin_dream_soul",
+      "name": "阴梦魂修线",
+      "shortName": "阴梦",
+      "description": "梦境、墓地、月夜、魂火、黑骨短笛与心魔共同构成的魂修线。",
+      "themeTags": [
+        "dream",
+        "soul",
+        "yin",
+        "grave",
+        "moon",
+        "heart_demon",
+        "ghost_fire"
+      ],
+      "worldContextTags": [
+        "grave_slope",
+        "old_tomb",
+        "moon_night",
+        "black_flute"
+      ],
+      "baseWeight": 6,
+      "agePhaseAffinity": {
+        "infancy": 8,
+        "childhood": 14,
+        "youth": 22,
+        "adolescence": 28
+      },
+      "activationSignals": [
+        {
+          "source": "spiritualRoot",
+          "tag": "root:yin",
+          "weight": 26
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:taiyin_remnant_pulse",
+          "weight": 26
+        },
+        {
+          "source": "origin",
+          "tag": "origin_grave_keeper_child",
+          "weight": 28
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_black_bone_flute",
+          "weight": 22
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:demon_heart_seed",
+          "weight": 18
+        },
+        {
+          "source": "ninePalace",
+          "stat": "shen",
+          "min": 75,
+          "weight": 12
+        }
+      ],
+      "eventThreadIds": [
+        "thread_moon_dream",
+        "thread_grave_fire",
+        "thread_black_flute_whispers",
+        "thread_heart_demon_shadow"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "deckbuilder",
+          "weight": 18,
+          "hook": "play_dbg_dream_debate"
+        },
+        {
+          "mode": "stg",
+          "weight": 10,
+          "hook": "play_stg_soul_escape"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_soul_sense_awake",
+        "transition_heart_demon_seeded"
+      ],
+      "possibleAge18Hooks": [
+        "age18_soul_form_bonus",
+        "age18_heart_demon_risk"
+      ]
+    },
+    {
+      "id": "storyline_system_prelude",
+      "name": "系统前兆线",
+      "shortName": "系统",
+      "description": "耳边杂音、天外战鼓、命盘裂光、无字残页自现字迹等系统觉醒前兆。",
+      "themeTags": [
+        "system_prelude",
+        "outer_battlefield",
+        "static_noise",
+        "fate_crack",
+        "heavenly_signal"
+      ],
+      "worldContextTags": [
+        "outer_realm_omen",
+        "heavenly_mechanism",
+        "unwritten_page",
+        "age18"
+      ],
+      "baseWeight": 4,
+      "agePhaseAffinity": {
+        "infancy": 4,
+        "childhood": 6,
+        "youth": 14,
+        "adolescence": 28
+      },
+      "activationSignals": [
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:system_resonance_body",
+          "weight": 34
+        },
+        {
+          "source": "hiddenFate",
+          "tag": "hidden:outer_battlefield_echo",
+          "weight": 26
+        },
+        {
+          "source": "carriedItem",
+          "tag": "item_unwritten_page",
+          "weight": 18
+        },
+        {
+          "source": "ninePalace",
+          "stat": "inspiration",
+          "min": 85,
+          "weight": 14
+        },
+        {
+          "source": "destiny",
+          "tag": "destiny:heaven_jealous_talent",
+          "weight": 10
+        }
+      ],
+      "suppressionSignals": [
+        {
+          "source": "destiny",
+          "tag": "destiny:cowardly_survivor",
+          "weight": -4
+        }
+      ],
+      "eventThreadIds": [
+        "thread_system_static",
+        "thread_outer_battlefield_dream",
+        "thread_fate_disc_crack",
+        "thread_age18_countdown"
+      ],
+      "playInterludeAffinities": [
+        {
+          "mode": "stg",
+          "weight": 24,
+          "hook": "play_stg_outer_battlefield_dream"
+        },
+        {
+          "mode": "deckbuilder",
+          "weight": 12,
+          "hook": "play_dbg_system_query"
+        }
+      ],
+      "possibleTransitionHooks": [
+        "transition_system_half_awake",
+        "transition_outer_trial_candidate"
+      ],
+      "possibleAge18Hooks": [
+        "age18_system_resonance",
+        "age18_outer_battlefield_forced"
+      ]
+    }
+  ]
+}

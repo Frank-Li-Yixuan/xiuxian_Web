@@ -1,0 +1,9 @@
+﻿# powershell -NoProfile -Command git ls-files src data docs codex_prompts scripts tools tests | rg "(SimRedesign|sim-redesign|fate_matrix|destiny_v2|life_|llm_narrative|origin_fate_v02|NPF|DEM|LST|ME2|MC2|HFO2|LFP|LLM)"
+SimRedesign : The term 'SimRedesign' is not recognized as the name of a cmdlet, function, script file, or operable prog
+ram. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:68
++ ... data docs codex_prompts scripts tools tests | rg (SimRedesign|sim-red ...
++                                                       ~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (SimRedesign:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 

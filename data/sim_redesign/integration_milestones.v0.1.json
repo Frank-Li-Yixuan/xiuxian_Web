@@ -1,0 +1,10 @@
+{
+  "version": "0.1",
+  "milestones": [
+    { "id": "m1_character_reasonable", "name": "角色创建合理性", "checks": ["九宫评价", "天命成立/变异", "隐藏真名不泄露", "重Roll锁定"] },
+    { "id": "m2_life_core", "name": "人生模拟核心", "checks": ["216个月推进", "主线事件线", "密度控制", "半年选择"] },
+    { "id": "m3_interlude_stage", "name": "插曲与阶段", "checks": ["插曲候选", "结果回写", "阶段token", "身份阶段变化"] },
+    { "id": "m4_playable_ui", "name": "可玩 UI", "checks": ["LifeSimulationScreen", "速度控制", "阶段总结", "存档恢复"] },
+    { "id": "m5_adult_bridge", "name": "成年节点桥接", "checks": ["成人路径评分", "默认域外fallback", "洞府/试炼钩子"] }
+  ]
+}

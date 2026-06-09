@@ -1,0 +1,62 @@
+{
+  "version": "0.1",
+  "id": "generation_algorithm_upgrade_rules",
+  "algorithmSteps": [
+    "rollAttributeArchetype",
+    "generateNineAttributes",
+    "derivePalaceScores",
+    "deriveWuxingInclinations",
+    "deriveCausalityTags",
+    "generateSpiritualRootWithAttributeSupport",
+    "generateDestinyCandidatesByEligibility",
+    "applyAntiWeirdnessRulesAndMutations",
+    "generateOriginFateAndItems",
+    "buildCharacterCreationViewModel"
+  ],
+  "destinyRollPolicy": {
+    "candidatePoolRule": "先按权重选候选，再检查成立条件；硬不成立时不直接丢弃，优先尝试变异命格。",
+    "minEligibleMainDestinyCandidates": 5,
+    "maxGenerationAttempts": 40,
+    "fallbackMainDestinyTags": [
+      "良命",
+      "奇命",
+      "中正",
+      "潜力"
+    ],
+    "mutationChanceWhenContradicted": 0.75
+  },
+  "rootRollPolicy": {
+    "spiritualRootShouldUseAttributeSupport": true,
+    "examples": [
+      {
+        "condition": "metalInclination high + rootBone/shen high",
+        "boost": [
+          "金灵根",
+          "天金灵根"
+        ]
+      },
+      {
+        "condition": "fireInclination high + qi/comprehension high",
+        "boost": [
+          "火灵根",
+          "雷火双灵根"
+        ]
+      },
+      {
+        "condition": "yinInclination high + shen/inspiration high",
+        "boost": [
+          "阴灵根",
+          "太阴相关隐命"
+        ]
+      },
+      {
+        "condition": "low rootBone + high heart",
+        "boost": [
+          "闭塞灵根",
+          "杂灵根",
+          "废灵逆命线"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "version": "0.1",
+  "deprecatedPromptPrefixes": [
+    "CC-C"
+  ],
+  "deprecatedSystems": [
+    "LM-v0.1 direct monthly selection",
+    "MLC-v0.1 simple choices",
+    "A18 hard 18-year outer battlefield cut"
+  ],
+  "newSystems": [
+    "WORLD",
+    "NPF",
+    "DEM",
+    "LST",
+    "LPI",
+    "LSTG",
+    "ME2",
+    "MC2",
+    "HFO2",
+    "LLM",
+    "LFP"
+  ],
+  "uiRule": "DOM UI system; generated PNG only for background/icon/VFX/illustration, not controls.",
+  "llmRule": "LLM narrative only; no rules or stats mutation."
+}

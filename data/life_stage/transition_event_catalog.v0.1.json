@@ -1,0 +1,92 @@
+{
+  "version": "0.1",
+  "transitionEvents": [
+    {
+      "id": "ev_first_omen",
+      "name": "初现异象",
+      "ageRange": [
+        0,
+        107
+      ],
+      "sourceTags": [
+        "omen",
+        "hidden_fate",
+        "artifact"
+      ],
+      "grantsTokens": [
+        "first_omen"
+      ],
+      "candidateTransition": "tr_mortal_to_omen",
+      "uiHint": "你身上似有不属于凡人的细微异象。"
+    },
+    {
+      "id": "ev_qi_sense",
+      "name": "灵气入体",
+      "ageRange": [
+        48,
+        167
+      ],
+      "sourceTags": [
+        "quiet_practice",
+        "dao_temple",
+        "water_meditation"
+      ],
+      "grantsTokens": [
+        "first_qi_sense"
+      ],
+      "initiationNodeId": "first_qi_sense",
+      "uiHint": "你第一次明确感到天地间有清凉之气入体。"
+    },
+    {
+      "id": "ev_artifact_resonance",
+      "name": "旧物共鸣",
+      "ageRange": [
+        72,
+        215
+      ],
+      "sourceTags": [
+        "carried_item",
+        "old_object",
+        "artifact"
+      ],
+      "grantsTokens": [
+        "artifact_resonance_hint"
+      ],
+      "initiationNodeId": "artifact_resonance",
+      "uiHint": "随身旧物在无人处微微发热。"
+    },
+    {
+      "id": "ev_system_static",
+      "name": "天机杂音",
+      "ageRange": [
+        156,
+        215
+      ],
+      "sourceTags": [
+        "system_omen",
+        "outer_battlefield_omen"
+      ],
+      "grantsTokens": [
+        "system_static"
+      ],
+      "initiationNodeId": "system_preview",
+      "uiHint": "耳边忽然响起断续杂音，仿佛有人在天外点名。"
+    },
+    {
+      "id": "ev_age18_threshold",
+      "name": "成年节点",
+      "ageRange": [
+        216,
+        216
+      ],
+      "sourceTags": [
+        "age18"
+      ],
+      "grantsTokens": [
+        "age18_threshold"
+      ],
+      "candidateTransition": "tr_age18_threshold",
+      "uiHint": "十八岁已至，你这一世的前缘开始结算。"
+    }
+  ]
+}

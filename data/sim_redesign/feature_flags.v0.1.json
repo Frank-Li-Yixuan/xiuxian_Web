@@ -1,0 +1,17 @@
+{
+  "version": "0.1",
+  "flags": {
+    "useNinePalaceEvaluation": true,
+    "useDestinyV2Mutation": true,
+    "useOriginFateNarrativeV2": true,
+    "useLifeStorylines": true,
+    "usePlayableInterludes": true,
+    "useLifeStageIdentity": true,
+    "useMonthlyEventsV02": true,
+    "useMajorChoicesV02": true,
+    "useLlmNarrativeFallback": true,
+    "useDeepSeekNarrativeApi": false,
+    "forceOuterBattlefieldAt18": false,
+    "allowAdultNodeFallbackToOuterBattlefield": true
+  }
+}

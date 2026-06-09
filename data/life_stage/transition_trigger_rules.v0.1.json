@@ -1,0 +1,165 @@
+{
+  "version": "0.1",
+  "transitionRules": [
+    {
+      "id": "tr_mortal_to_omen",
+      "from": [
+        "mortal_child"
+      ],
+      "to": [
+        "omen_touched"
+      ],
+      "triggerType": "token",
+      "requirements": [
+        {
+          "type": "anyToken",
+          "values": [
+            "first_omen",
+            "hidden_fate_progress_20",
+            "artifact_warmth"
+          ]
+        }
+      ],
+      "priority": 20,
+      "cooldownMonths": 0,
+      "playerChoicePolicy": "automatic"
+    },
+    {
+      "id": "tr_omen_to_path_seed",
+      "from": [
+        "omen_touched"
+      ],
+      "to": [
+        "path_seed"
+      ],
+      "triggerType": "score",
+      "requirements": [
+        {
+          "type": "scoreAtLeast",
+          "score": "pathSeedScore",
+          "value": 60
+        }
+      ],
+      "priority": 30,
+      "cooldownMonths": 12,
+      "playerChoicePolicy": "prompt",
+      "promptText": "天机微动，你似乎已经不再只是凡人。"
+    },
+    {
+      "id": "tr_path_to_half",
+      "from": [
+        "path_seed"
+      ],
+      "to": [
+        "half_initiated"
+      ],
+      "triggerType": "token",
+      "requirements": [
+        {
+          "type": "anyToken",
+          "values": [
+            "first_qi_sense",
+            "dbg_heart_trial_success",
+            "stg_rain_mountain_success"
+          ]
+        }
+      ],
+      "priority": 40,
+      "cooldownMonths": 12,
+      "playerChoicePolicy": "automatic"
+    },
+    {
+      "id": "tr_half_to_candidate",
+      "from": [
+        "half_initiated"
+      ],
+      "to": [
+        "initiation_candidate"
+      ],
+      "triggerType": "score",
+      "requirements": [
+        {
+          "type": "scoreAtLeast",
+          "score": "initiationReadiness",
+          "value": 75
+        }
+      ],
+      "priority": 50,
+      "cooldownMonths": 12,
+      "playerChoicePolicy": "prompt",
+      "promptText": "你已站在入道门前。"
+    },
+    {
+      "id": "tr_system_candidate",
+      "from": [
+        "mortal_child",
+        "omen_touched",
+        "path_seed",
+        "half_initiated",
+        "initiation_candidate",
+        "initiated_cultivator"
+      ],
+      "to": [
+        "system_candidate"
+      ],
+      "triggerType": "score",
+      "requirements": [
+        {
+          "type": "scoreAtLeast",
+          "score": "systemResonance",
+          "value": 65
+        }
+      ],
+      "priority": 45,
+      "cooldownMonths": 12,
+      "playerChoicePolicy": "automatic"
+    },
+    {
+      "id": "tr_initiated",
+      "from": [
+        "initiation_candidate"
+      ],
+      "to": [
+        "initiated_cultivator"
+      ],
+      "triggerType": "token",
+      "requirements": [
+        {
+          "type": "anyToken",
+          "values": [
+            "initiation_node_success",
+            "teacher_trial_success",
+            "bloodline_stirring_success"
+          ]
+        }
+      ],
+      "priority": 70,
+      "cooldownMonths": 18,
+      "playerChoicePolicy": "automatic"
+    },
+    {
+      "id": "tr_age18_threshold",
+      "from": [
+        "mortal_child",
+        "omen_touched",
+        "path_seed",
+        "half_initiated",
+        "initiation_candidate",
+        "initiated_cultivator"
+      ],
+      "to": [
+        "age18_resolution_pending"
+      ],
+      "triggerType": "age18",
+      "requirements": [
+        {
+          "type": "ageMonthsAtLeast",
+          "value": 216
+        }
+      ],
+      "priority": 100,
+      "cooldownMonths": 0,
+      "playerChoicePolicy": "forced"
+    }
+  ]
+}
