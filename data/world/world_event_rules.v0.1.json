@@ -1,0 +1,44 @@
+{
+  "version": "0.1",
+  "truthLevels": [
+    { "id": "mundane", "name": "凡俗真实", "description": "生活中真实发生的普通事件。" },
+    { "id": "anomalous", "name": "现实异常", "description": "发生在现实中，但带有修仙异象。" },
+    { "id": "dream", "name": "梦境识海", "description": "梦、识海、神魂中的体验。" },
+    { "id": "trial", "name": "试炼幻阵", "description": "由人、阵、祖灵或法器触发的试炼。" },
+    { "id": "combat", "name": "真实冲突", "description": "真实危险遭遇，会造成伤病、功德、业力等后果。" },
+    { "id": "system_omen", "name": "系统前兆", "description": "天机印/系统尚未完全觉醒前的异常信号。" }
+  ],
+  "ageRestrictions": [
+    {
+      "phase": "infancy",
+      "ageRangeMonths": [0, 47],
+      "allowedTruthLevels": ["mundane", "anomalous", "dream"],
+      "forbiddenGameplayInterludes": ["stg", "horde", "deckbuilder", "autochess"],
+      "notes": "婴幼年不得触发真实战斗。"
+    },
+    {
+      "phase": "childhood",
+      "ageRangeMonths": [48, 107],
+      "allowedTruthLevels": ["mundane", "anomalous", "dream", "trial"],
+      "allowedGameplayInterludes": ["stg_short_dream", "deckbuilder_trial"],
+      "notes": "童年可以有梦境/轻试炼，不宜真实杀戮。"
+    },
+    {
+      "phase": "youth",
+      "ageRangeMonths": [108, 167],
+      "allowedTruthLevels": ["mundane", "anomalous", "dream", "trial", "combat", "system_omen"],
+      "allowedGameplayInterludes": ["stg_short", "horde_short", "deckbuilder_trial", "autochess_trial"],
+      "notes": "少年阶段开始允许小规模真实冲突。"
+    },
+    {
+      "phase": "adolescence",
+      "ageRangeMonths": [168, 215],
+      "allowedTruthLevels": ["mundane", "anomalous", "dream", "trial", "combat", "system_omen"],
+      "allowedGameplayInterludes": ["stg", "horde", "deckbuilder", "autochess"],
+      "notes": "青春阶段是玩法插曲和系统前兆高发期。"
+    }
+  ],
+  "forbiddenModernTerms": ["手机", "电脑", "网吧", "公司", "现代学校", "医院", "警察", "汽车", "地铁", "互联网", "游戏机"],
+  "hiddenNameLeakForbidden": true,
+  "requiredFieldsForEvents": ["settingTags", "truthLevel", "worldTags"]
+}

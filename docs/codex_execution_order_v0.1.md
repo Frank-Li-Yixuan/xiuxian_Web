@@ -1,43 +1,19 @@
-# Codex 执行顺序 v0.1
+# Codex 执行顺序：凡域边地世界观接入 v0.1
 
-## 推荐顺序
+这份世界观文档暂时不是立刻大改代码，而是为 LM/MLC/DeepSeek 文案管线提供世界语境、标签和校验规则。
 
-```text
-LFP-C001_state_machine_and_registry
-LFP-C002_ui_shell_and_route
-LFP-C003_monthly_auto_playback
-LFP-C004_major_choice_experience
-LFP-C005_playable_interlude_flow
-LFP-C006_stage_summaries_chronicle
-LFP-C007_speed_controls_persistence
-LFP-C008_llm_narrative_optional_integration
-LFP-C009_e2e_tests_screenshots
-```
+建议分 3 步实现。
 
-## 不要跳过
+## WORLD-C001：世界观数据 Schema 与 Registry
 
-```text
-LFP-C001
-LFP-C002
-LFP-C003
-LFP-C004
-LFP-C007
-LFP-C009
-```
+目标：接入世界层级、地点、势力、事件标签数据。
 
-## 可以推迟
+## WORLD-C002：事件设置标签校验
 
-```text
-LFP-C005 中除 1 个 STG 插曲外的完整玩法
-LFP-C008 真实 DeepSeek API
-```
+目标：要求每个月度事件/半年选择必须有 settingTag、truthLevel、worldTags。
 
-## 每步必须遵守
+## WORLD-C003：世界观词典与文案约束
 
-```text
-不修改 src/sim/**，除非明确涉及可选 STG 插曲并经确认。
-不让 LLM 决定数值。
-不泄露 hidden trueName。
-不恢复 generated PNG 控件方案。
-人生模拟 UI 使用 DOM / React / ui-system。
-```
+目标：为本地模板和 LLM prompt 提供允许词、禁用词、地点词、势力词。
+
+WORLD-C004 / WORLD-C005 暂无独立 prompt 文件；相关玩法插曲包装和一致性测试应在后续 WORLD-C002/C003 或专门补充 prompt 中明确范围后再执行。

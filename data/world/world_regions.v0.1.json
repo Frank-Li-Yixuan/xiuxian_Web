@@ -1,0 +1,121 @@
+{
+  "version": "0.1",
+  "worldId": "world_xuanyuan",
+  "worldName": "玄元界",
+  "startingRegionId": "region_qinglan_border",
+  "layers": [
+    {
+      "id": "layer_mundane_domain",
+      "name": "凡域",
+      "description": "凡人王朝、村镇、县城、私塾、药铺、道观与普通生活所在。",
+      "earlyLifeAllowed": true
+    },
+    {
+      "id": "layer_spirit_rift",
+      "name": "灵隙",
+      "description": "灵气、旧阵、妖气、祖灵或域外气息渗入凡域的异常点。",
+      "earlyLifeAllowed": true
+    },
+    {
+      "id": "layer_cultivation_edge",
+      "name": "修真边缘",
+      "description": "散修、游方道士、镇妖司与宗门外缘活动区域。",
+      "earlyLifeAllowed": true
+    },
+    {
+      "id": "layer_sect_world",
+      "name": "宗门世家",
+      "description": "真正宗门与修真世家的势力层。早期只作为远景。",
+      "earlyLifeAllowed": false
+    },
+    {
+      "id": "layer_outer_realms",
+      "name": "域外诸天",
+      "description": "域外战场、万族试炼、天地棋局与诸天试炼机制。早期以梦境与预兆出现。",
+      "earlyLifeAllowed": false
+    }
+  ],
+  "regions": [
+    {
+      "id": "region_qinglan_border",
+      "name": "青岚边郡",
+      "parent": "大胤王朝",
+      "tags": ["region:qinglyn_border", "borderland", "mundane_with_spirit_rifts"],
+      "description": "大胤王朝西南边郡，北靠青云山脉，凡俗村镇与灵隙并存。"
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc_qingshi_village",
+      "name": "青石村",
+      "layer": "layer_mundane_domain",
+      "tags": ["village", "family", "rural", "bandit", "minor_demon"],
+      "lifePhases": ["infancy", "childhood", "youth", "adolescence"],
+      "description": "青云山脚下的小村落，玩家常见出生地之一。"
+    },
+    {
+      "id": "loc_qingshi_county",
+      "name": "青石县",
+      "layer": "layer_mundane_domain",
+      "tags": ["county", "private_school", "medicine_shop", "official_order"],
+      "lifePhases": ["childhood", "youth", "adolescence"],
+      "description": "青岚边郡的小县城，私塾、药铺、县衙与镇妖司分署皆在此。"
+    },
+    {
+      "id": "loc_yaowang_lane",
+      "name": "药王巷",
+      "layer": "layer_mundane_domain",
+      "tags": ["medicine_shop", "alchemy", "herbs", "danxia_bias"],
+      "lifePhases": ["childhood", "youth", "adolescence"],
+      "description": "药铺与草药商集中之地，常与丹霞谷商路有微弱关联。"
+    },
+    {
+      "id": "loc_bailu_temple",
+      "name": "白鹿观",
+      "layer": "layer_cultivation_edge",
+      "tags": ["daoist_temple", "talisman", "incense", "merit", "formation_trial"],
+      "lifePhases": ["childhood", "youth", "adolescence"],
+      "description": "青石县外的小道观，非大宗门，却保留浅符与斋醮。"
+    },
+    {
+      "id": "loc_qingyun_outer_mountain",
+      "name": "青云山外缘",
+      "layer": "layer_spirit_rift",
+      "tags": ["back_mountain", "forest", "spirit_rift", "minor_demon", "thunderstorm"],
+      "lifePhases": ["childhood", "youth", "adolescence"],
+      "description": "青云山脉外层，偶有灵气渗漏与妖影出没。"
+    },
+    {
+      "id": "loc_abandoned_shrine",
+      "name": "荒祠",
+      "layer": "layer_spirit_rift",
+      "tags": ["abandoned_shrine", "demonic", "heart_demon", "forbidden"],
+      "lifePhases": ["youth", "adolescence"],
+      "description": "供奉对象已不可考的荒废祠堂，常与魔念、禁书和心魔相关。"
+    },
+    {
+      "id": "loc_ancestral_grave_slope",
+      "name": "祖坟坡",
+      "layer": "layer_spirit_rift",
+      "tags": ["ancestral_grave", "yin", "old_object", "past_life", "ancestor"],
+      "lifePhases": ["childhood", "youth", "adolescence"],
+      "description": "各族坟地交错之地，阴气重，旧物与祖灵线索常在此出现。"
+    },
+    {
+      "id": "loc_xuanxi_river",
+      "name": "玄溪",
+      "layer": "layer_spirit_rift",
+      "tags": ["river", "water", "moon", "yin", "dream"],
+      "lifePhases": ["childhood", "youth", "adolescence"],
+      "description": "山脚溪流，水气与阴气交汇，常触发水灵根与太阴梦境事件。"
+    },
+    {
+      "id": "loc_rogue_market",
+      "name": "散修集",
+      "layer": "layer_cultivation_edge",
+      "tags": ["rogue_market", "wandering_cultivator", "trade", "chance", "deception"],
+      "lifePhases": ["youth", "adolescence"],
+      "description": "不定期出现的小型散修集会，真假机缘并存。"
+    }
+  ]
+}

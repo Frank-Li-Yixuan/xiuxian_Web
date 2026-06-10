@@ -1,0 +1,69 @@
+{
+  "version": "0.1",
+  "factions": [
+    {
+      "id": "faction_great_yin",
+      "name": "大胤王朝",
+      "type": "mundane_dynasty",
+      "visibilityInEarlyLife": "common",
+      "tags": ["great_yin_dynasty", "mundane_order", "tax", "law"],
+      "description": "凡俗统治者，维持县城、乡约、赋税和镇妖司体系。"
+    },
+    {
+      "id": "faction_monster_suppression_office",
+      "name": "镇妖司",
+      "type": "border_authority",
+      "visibilityInEarlyLife": "occasional",
+      "tags": ["monster_suppression_office", "minor_demon", "official", "martial"],
+      "description": "王朝基层镇妖机构，处理小妖、小祸与山中异动。"
+    },
+    {
+      "id": "faction_qingyun_sect",
+      "name": "青云宗",
+      "type": "orthodox_sect",
+      "visibilityInEarlyLife": "distant",
+      "tags": ["qingyun_sect", "orthodox", "mountain", "outer_disciple"],
+      "description": "青云山深处宗门，凡人只闻其名，偶见外门弟子。"
+    },
+    {
+      "id": "faction_danxia_valley",
+      "name": "丹霞谷",
+      "type": "alchemy_lineage",
+      "visibilityInEarlyLife": "distant",
+      "tags": ["danxia_valley", "alchemy", "herbs", "furnace"],
+      "description": "丹道法脉，与药材、丹炉、火候和药铺线相关。"
+    },
+    {
+      "id": "faction_xuanlei_temple",
+      "name": "玄雷观",
+      "type": "thunder_lineage",
+      "visibilityInEarlyLife": "rumor",
+      "tags": ["xuanlei_temple", "thunder", "talisman", "tribulation"],
+      "description": "雷法与符令法脉，和雷雨、劫雷、古雷预兆相关。"
+    },
+    {
+      "id": "faction_wanjian_mountain",
+      "name": "万剑山",
+      "type": "sword_lineage",
+      "visibilityInEarlyLife": "rumor",
+      "tags": ["wanjian_mountain", "sword", "past_life", "artifact"],
+      "description": "剑修法脉，传闻曾在青云山外缘留下断剑遗迹。"
+    },
+    {
+      "id": "faction_wandering_cultivators",
+      "name": "游方散修",
+      "type": "loose_cultivators",
+      "visibilityInEarlyLife": "occasional",
+      "tags": ["wandering_cultivator", "rogue_market", "chance", "deception"],
+      "description": "真假难辨的修行边缘人物，是凡人与修真接触的重要通道。"
+    },
+    {
+      "id": "faction_folk_spirits",
+      "name": "民间神祇与祖灵",
+      "type": "folk_spirit",
+      "visibilityInEarlyLife": "common_but_ambiguous",
+      "tags": ["folk_temple", "ancestor", "merit", "omen"],
+      "description": "不一定是强大神明，多以灵应、祖梦和香火反馈出现。"
+    }
+  ]
+}
