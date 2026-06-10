@@ -13,13 +13,27 @@ import {
 
 describe("SimRedesignContentRegistry", () => {
   it("loads checked-in SIM-REDESIGN v0.2 data for every required domain", () => {
-    const registry = buildSimRedesignContentRegistry(loadCheckedInSimRedesignFiles());
+    const files = loadCheckedInSimRedesignFiles();
+    const registry = buildSimRedesignContentRegistry(files);
 
     expect(validateSimRedesignContentRegistry(registry)).toEqual([]);
     expect(registry.getDomains()).toEqual(SIM_REDESIGN_DATA_DOMAINS);
     expect(registry.getAllEntries()).toHaveLength(SIM_REDESIGN_DATA_DOMAINS.length * 2);
     expect(registry.getById("world.region.qingshi_village")?.domain).toBe("world");
     expect(registry.getById("fate_matrix.nine_palace.core_stats")?.moduleId).toBe("ninePalace");
+  });
+
+  it("loads only canonical SIM-REDESIGN core wrapper files from checked-in data", () => {
+    const files = loadCheckedInSimRedesignFiles();
+
+    expect(files).toHaveLength(SIM_REDESIGN_DATA_DOMAINS.length);
+    expect(files.map((file) => file.path)).toEqual(
+      SIM_REDESIGN_DATA_DOMAINS.map((domain) => getSimRedesignCoreFilePath(domain)).sort((a, b) =>
+        a.localeCompare(b)
+      )
+    );
+    expect(files.some((file) => file.path === "data/world/world_regions.v0.1.json")).toBe(false);
+    expect(files.every((file) => file.path.endsWith("_core.v0.2.json"))).toBe(true);
   });
 
   it("fails validation when a required domain file is missing", () => {

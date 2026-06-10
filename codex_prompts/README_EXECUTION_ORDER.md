@@ -21,6 +21,12 @@ For SIM-REDESIGN migration work, read the global prefix first, then use the exec
 Recommended next prompt after this inventory:
 
 ```text
+WORLD-C001_data_schema_registry.md
+```
+
+After WORLD-C001~C003 have a dedicated schema/validator/runtime plan, continue with:
+
+```text
 NPF-C001_data_schema_registry.md
 ```
 
@@ -59,6 +65,7 @@ Reasons:
 00_GLOBAL_PREFIX_SIM_REDESIGN.md
 00_SIM_REDESIGN_BOOTSTRAP.md
 MIG-C002~MIG-C009
+WORLD-C001~WORLD-C003
 NPF-C001~NPF-C006
 DEM-C001~DEM-C007
 HFO2-C001~HFO2-C008
@@ -84,7 +91,6 @@ The following names are still referenced by planning docs but are not present as
 
 ```text
 POST-BAS-001
-WORLD-C001~C003
 CCUI2-C001~C006
 STG-R001~R002
 E2E-C001

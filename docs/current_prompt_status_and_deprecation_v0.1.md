@@ -8,7 +8,8 @@
 | OAG v0.1 | 已完成基础实现 | 需要被 NPF/DEM 规则覆盖和升级 |
 | DT v0.1 | 已完成基础实现 | 需要被 DEM v0.1 覆盖和升级 |
 | HFO-C001~C006 | 已完成基础实现 | 作为 HFO2 v0.2 迁移来源，不直接推进 18 岁转化 |
-| NPF-C001~C006 | 已导入 | 推荐下一步从 `NPF-C001_data_schema_registry.md` 开始 |
+| WORLD-C001~C003 | 已导入 | 世界观底座；推荐下一步从 `WORLD-C001_data_schema_registry.md` 开始，然后进入 NPF |
+| NPF-C001~C006 | 已导入 | 等待 WORLD schema/validator 口径明确后接入 |
 | DEM-C001~C007 | 已导入 | 等待 NPF registry/scoring 后接入 |
 | HFO2-C001~C008 | 已导入 | 替代旧 HFO-C007/C008 年龄转化路径 |
 | LST/LPI/LSTG/ME2/MC2/LLM/LFP | 已导入 | 按 execution order 分阶段执行 |
@@ -46,6 +47,7 @@ HFO-C008_tests_telemetry.md
 ## 3. 已导入的新推荐系列
 
 ```text
+WORLD-C001~C003
 NPF-C001~C006
 DEM-C001~C007
 HFO2-C001~C008
@@ -66,7 +68,6 @@ RC-SIM-001
 
 ```text
 POST-BAS-001
-WORLD-C001~C003
 CCUI2-C001~C006
 STG-R001~R002
 E2E-C001

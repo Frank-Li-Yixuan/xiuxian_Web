@@ -22,7 +22,7 @@ Hard guards:
 
 ## Current Inventory Result
 
-`rg --files codex_prompts` found 205 prompt files, including 24 First Playable `fp_tasks` prompts and 5 `review_and_qa` prompts.
+`rg --files codex_prompts` found 208 prompt files, including 24 First Playable `fp_tasks` prompts and 5 `review_and_qa` prompts.
 
 | Area | Status | Handling |
 |---|---|---|
@@ -30,7 +30,8 @@ Hard guards:
 | `00_SIM_REDESIGN_BOOTSTRAP.md` | Active orientation | Use before migration planning if the current thread lacks SIM-REDESIGN context. |
 | `MIG-C001_prompt_inventory_and_deprecation.md` | Re-executed | This refreshed inventory and file-top deprecated markers are its output. |
 | `MIG-C002` to `MIG-C009` | Active migration prompts | Use after this inventory, with the global prefix and current implementation evidence. |
-| `NPF-C001` to `NPF-C006` | Active SIM-REDESIGN prompts | Nine Palace Fate matrix route; recommended next prompt is `NPF-C001_data_schema_registry.md`. |
+| `WORLD-C001` to `WORLD-C003` | Active SIM-REDESIGN prompts | Worldbuilding foundation route; recommended next prompt is `WORLD-C001_data_schema_registry.md`, then NPF. |
+| `NPF-C001` to `NPF-C006` | Active SIM-REDESIGN prompts | Nine Palace Fate matrix route; execute after WORLD schema/validator scope is clear. |
 | `DEM-C001` to `DEM-C007` | Active SIM-REDESIGN prompts | Destiny eligibility / mutation route; execute after NPF registry/scoring dependencies. |
 | `HFO2-C001` to `HFO2-C008` | Active SIM-REDESIGN prompts | v0.2 origin/fate/item narrative route; replaces old age-18 HFO conversion work. |
 | `LST-C001` to `LST-C007` | Active SIM-REDESIGN prompts | Storyline/event-thread route. |
@@ -120,6 +121,7 @@ These prompts may still be executed when their scope matches the current task:
 - `codex_prompts/00_GLOBAL_PREFIX_SIM_REDESIGN.md` as a mandatory SIM-REDESIGN guard.
 - `codex_prompts/00_SIM_REDESIGN_BOOTSTRAP.md` for SIM-REDESIGN orientation.
 - `codex_prompts/MIG-C002_data_registry_unification.md` through `MIG-C009_age18_or_adult_node_bridge.md`.
+- `codex_prompts/WORLD-C001_data_schema_registry.md` through `WORLD-C003_llm_glossary_context.md`.
 - `codex_prompts/NPF-C001_data_schema_registry.md` through `NPF-C006_tests_telemetry.md`.
 - `codex_prompts/DEM-C001_schema_registry.md` through `DEM-C007_tests_telemetry.md`.
 - `codex_prompts/HFO2-C001_data_schema_registry.md` through `HFO2-C008_tests_telemetry.md`.
@@ -171,7 +173,6 @@ The following names are referenced by planning docs but are not present as indiv
 
 ```text
 POST-BAS-001
-WORLD-C001~C003
 CCUI2-C001~C006
 STG-R001~R002
 E2E-C001
@@ -184,8 +185,8 @@ This is not automatically a blocker: current `SIM-C00x`, `MIG-C00x`, `E2E-SIM-00
 
 After this inventory:
 
-1. Default to `NPF-C001_data_schema_registry.md`.
-2. If `npm run validate:sim-redesign-data` still fails because the imported SIM-REDESIGN payload mixes v0.1/v0.2 wrapper shapes, schedule a registry/validator range repair before runtime or UI migration.
+1. Default to `WORLD-C001_data_schema_registry.md`.
+2. After WORLD-C001~C003 have a dedicated schema/validator/runtime plan, continue with `NPF-C001_data_schema_registry.md`.
 3. Keep `MIG-C003` before any character-creation v0.2 implementation.
 4. Do not run `CC-*`, `LM-*`, `MLC-*`, `A18-*`, `HFO-C007`, or `HFO-C008` directly.
 5. Before touching runtime, resolve duplicate SIM IDs or state the chosen canonical prompt in the task scope.
