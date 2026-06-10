@@ -1,3 +1,6 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it tests the old age-18 origin/fate conversion path instead of HFO2 reveal pacing and the AdultNode bridge. Use HFO2-C008 plus MIG-C006 and MIG-C009 / SIM-C010 acceptance instead.
+
 # HFO-C008：测试与调试输出
 
 目标：补齐本系统的确定性、分布、隐藏显示和转化测试。

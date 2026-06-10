@@ -1,3 +1,6 @@
+> Deprecated / legacy reference only (SIM-REDESIGN).
+> Do not execute this prompt directly. Reason: it binds hidden origin/fate conversion to the old age-18 route and emits outer-battlefield/dongfu hooks before the AdultNode path-scoring bridge. Use HFO2-C007 plus MIG-C006 and MIG-C009 / SIM-C010 instead.
+
 # HFO-C007：18 岁系统觉醒与随身物转化
 
 目标：18 岁时解析隐藏命和随身物，生成域外战场与洞府开局钩子。
