@@ -1,13 +1,13 @@
 #!/usr/bin/env tsx
-import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 
 import {
   buildSimRedesignContentRegistry,
+  getSimRedesignCoreFilePath,
   SIM_REDESIGN_DATA_DOMAINS,
   type SimRedesignContentFile
 } from "../src/data/SimRedesignRegistry";
-import { getSimRedesignDomainSpec } from "../src/data/registries/SimRedesignDomainRegistry";
 import { validateSimRedesignContentRegistry } from "../src/data/SimRedesignRegistry";
 
 const rootDir = process.argv[2] ?? "data";
@@ -33,41 +33,19 @@ export function loadSimRedesignDataFiles(root: string): SimRedesignContentFile[]
   const files: SimRedesignContentFile[] = [];
 
   for (const domain of SIM_REDESIGN_DATA_DOMAINS) {
-    const spec = getSimRedesignDomainSpec(domain);
-    const domainRelativePath = spec.directory.replace(/^data\//, "");
-    const absoluteDomainPath = join(absoluteRoot, domainRelativePath);
+    const canonicalPath = getSimRedesignCoreFilePath(domain);
+    const rootRelativePath = canonicalPath.replace(/^data\//, "");
+    const absolutePath = join(absoluteRoot, rootRelativePath);
 
-    if (!existsDirectory(absoluteDomainPath)) {
+    if (!existsSync(absolutePath)) {
       continue;
     }
 
-    walk(absoluteDomainPath, (absolutePath) => {
-      files.push({
-        path: join(root, domainRelativePath, relative(absoluteDomainPath, absolutePath)).replaceAll("\\", "/"),
-        data: JSON.parse(readFileSync(absolutePath, "utf8")) as unknown
-      });
+    files.push({
+      path: canonicalPath,
+      data: JSON.parse(readFileSync(absolutePath, "utf8")) as unknown
     });
   }
 
   return files.sort((a, b) => a.path.localeCompare(b.path));
-}
-
-function existsDirectory(path: string): boolean {
-  try {
-    return statSync(path).isDirectory();
-  } catch {
-    return false;
-  }
-}
-
-function walk(dir: string, onFile: (file: string) => void): void {
-  for (const name of readdirSync(dir)) {
-    const path = join(dir, name);
-    const stat = statSync(path);
-    if (stat.isDirectory()) {
-      walk(path, onFile);
-    } else if (name.endsWith(".json")) {
-      onFile(path);
-    }
-  }
 }

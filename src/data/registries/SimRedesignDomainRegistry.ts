@@ -108,6 +108,11 @@ export function getSimRedesignDomainRegistry(domain: SimRedesignDataDomain): Sim
   return registry;
 }
 
+export function getSimRedesignCoreFilePath(domain: SimRedesignDataDomain): string {
+  const spec = getSimRedesignDomainSpec(domain);
+  return `${spec.directory}/${domain}_core.v0.2.json`;
+}
+
 function createSimRedesignDomainRegistry(spec: SimRedesignDomainSpec): SimRedesignDomainRegistry {
   return {
     spec,

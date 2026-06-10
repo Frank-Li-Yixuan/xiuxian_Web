@@ -1,6 +1,7 @@
 import {
   getSimRedesignDomainRegistry,
   getSimRedesignDomainSpec,
+  getSimRedesignCoreFilePath,
   inferSimRedesignDomainFromPath,
   isSimRedesignDataDomain,
   normalizeSimRedesignPath,
@@ -15,6 +16,7 @@ import {
 export {
   SIM_REDESIGN_DATA_DOMAINS,
   SIM_REDESIGN_DOMAIN_REGISTRIES,
+  getSimRedesignCoreFilePath,
   type SimRedesignDataDomain,
   type SimRedesignModuleId,
   type SimRedesignValidationIssue
