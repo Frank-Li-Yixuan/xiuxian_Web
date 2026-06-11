@@ -36,14 +36,29 @@ export interface NinePalaceDerivedScores {
   rebellionScore: number;
 }
 
+export type DestinyEligibilityBaseAttributes = Omit<NinePalaceInputSnapshot, "tags">;
+export type DestinyEligibilityExtraAttributeId = "merit" | "karma";
+export type DestinyEligibilityAttributeId =
+  | keyof DestinyEligibilityBaseAttributes
+  | DestinyEligibilityExtraAttributeId;
+
 export type EligibilityExpression =
-  | { readonly attr: keyof Omit<NinePalaceInputSnapshot, "tags">; readonly gte?: number; readonly lte?: number; readonly note?: string }
+  | { readonly attr: DestinyEligibilityAttributeId; readonly gte?: number; readonly lte?: number; readonly note?: string }
   | { readonly score: keyof NinePalaceDerivedScores; readonly gte?: number; readonly lte?: number; readonly note?: string }
   | { readonly tag: string; readonly note?: string }
   | { readonly id: Id; readonly note?: string; readonly severity?: "hard" | "soft" }
   | { readonly flaw: Id; readonly note?: string }
-  | { readonly sumAttrs: readonly (keyof Omit<NinePalaceInputSnapshot, "tags">)[]; readonly gte?: number; readonly lte?: number; readonly note?: string }
+  | { readonly sumAttrs: readonly DestinyEligibilityAttributeId[]; readonly gte?: number; readonly lte?: number; readonly note?: string }
   | { readonly all: readonly EligibilityExpression[]; readonly note?: string };
+
+export interface DestinyEligibilityEvaluationInput {
+  readonly attributes: DestinyEligibilityBaseAttributes;
+  readonly derivedScores: NinePalaceDerivedScores;
+  readonly tags: readonly string[];
+  readonly selectedDestinyIds?: readonly Id[];
+  readonly selectedFlawIds?: readonly Id[];
+  readonly extraAttributes?: Readonly<Record<string, number>>;
+}
 
 export interface DestinyEligibilityRule {
   readonly any?: readonly EligibilityExpression[];
