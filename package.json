@@ -15,6 +15,7 @@
     "validate:data": "tsx tools/validate-data.ts",
     "validate:sim-redesign-data": "tsx tools/validate-sim-redesign-data.ts",
     "validate:world-data": "node scripts/validate_world_data.mjs",
+    "validate:nine-palace-data": "node scripts/validate_nine_palace_data.mjs",
     "validate:combat-assets": "node scripts/validate-combat-assets.mjs",
     "validate:3d-assets": "node scripts/validate-3d-assets.mjs",
     "inspect:3d-assets": "node scripts/inspect-3d-assets.mjs",
