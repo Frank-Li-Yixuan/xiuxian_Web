@@ -130,3 +130,46 @@ export interface DestinyManifestationDefinition {
   readonly destinyId: Id;
   readonly events: readonly DestinyManifestationEventHook[];
 }
+
+export interface CoreDestinyDefinitionsDataFile {
+  readonly version: string;
+  readonly description: string;
+  readonly destinies: readonly DestinyDefinitionV2[];
+}
+
+export interface DestinyV2ConflictSynergyMutationRulesDataFile {
+  readonly version: string;
+  readonly hardConflicts: readonly HardConflictRule[];
+  readonly softConflicts: readonly SoftConflictRule[];
+  readonly synergies: readonly DestinySynergyRule[];
+}
+
+export type LifeManifestationPhaseId =
+  | "infant_0_3"
+  | "child_4_8"
+  | "juvenile_9_13"
+  | "youth_14_17"
+  | "adult_18";
+
+export interface LifeManifestationHooksDataFile {
+  readonly version: string;
+  readonly phaseManifestationRules: Readonly<Record<LifeManifestationPhaseId, string>>;
+  readonly destinyManifestations: readonly DestinyManifestationDefinition[];
+}
+
+export interface DestinyModeProjectionDefinition extends DestinyEffectsProjection {
+  readonly destinyId: Id;
+}
+
+export interface ModeProjectionHooksDataFile {
+  readonly version: string;
+  readonly modeProjectionPrinciple: string;
+  readonly projections: readonly DestinyModeProjectionDefinition[];
+}
+
+export interface DestinyV2DataBundle {
+  readonly coreDestinyDefinitions?: CoreDestinyDefinitionsDataFile;
+  readonly conflictSynergyMutationRules?: DestinyV2ConflictSynergyMutationRulesDataFile;
+  readonly lifeManifestationHooks?: LifeManifestationHooksDataFile;
+  readonly modeProjectionHooks?: ModeProjectionHooksDataFile;
+}
