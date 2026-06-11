@@ -32,6 +32,16 @@ export interface WorldLayerDefinition {
   readonly earlyLifeAllowed: boolean;
 }
 
+export interface WorldRegionsDataFile {
+  readonly version: string;
+  readonly worldId: string;
+  readonly worldName: string;
+  readonly startingRegionId: RegionId;
+  readonly layers: readonly WorldLayerDefinition[];
+  readonly regions: readonly RegionDefinition[];
+  readonly locations: readonly LocationDefinition[];
+}
+
 export interface RegionDefinition {
   readonly id: RegionId;
   readonly name: string;
@@ -58,6 +68,11 @@ export interface FactionDefinition {
   readonly description: string;
 }
 
+export interface WorldFactionsDataFile {
+  readonly version: string;
+  readonly factions: readonly FactionDefinition[];
+}
+
 export interface WorldEventRuleSet {
   readonly version: string;
   readonly truthLevels: readonly {
@@ -69,6 +84,20 @@ export interface WorldEventRuleSet {
   readonly forbiddenModernTerms: readonly string[];
   readonly hiddenNameLeakForbidden: boolean;
   readonly requiredFieldsForEvents: readonly string[];
+}
+
+export interface WorldGlossaryDataFile {
+  readonly version: string;
+  readonly preferredTerms: Readonly<Record<string, readonly string[]>>;
+  readonly toneRules: readonly string[];
+  readonly bannedTone: readonly string[];
+}
+
+export interface WorldbuildingDataBundle {
+  readonly regions?: WorldRegionsDataFile;
+  readonly factions?: WorldFactionsDataFile;
+  readonly eventRules?: WorldEventRuleSet;
+  readonly glossary?: WorldGlossaryDataFile;
 }
 
 export interface AgeEventRestriction {
@@ -86,4 +115,45 @@ export interface LifeEventWorldContext {
   readonly factionTags?: readonly string[];
   readonly truthLevel: EventTruthLevel;
   readonly gameplayInterlude?: GameplayInterludeType;
+}
+
+export type WorldNarrativeSafetyFlag = "hidden_term_redacted" | "forbidden_term_redacted";
+
+export interface WorldNarrativeContextBuildInput {
+  readonly locationIds: readonly LocationId[];
+  readonly factionIds?: readonly FactionId[];
+  readonly truthLevel: EventTruthLevel;
+  readonly lifePhase: LifePhaseId;
+  readonly hiddenTrueNames?: readonly string[];
+  readonly hiddenInternalIds?: readonly string[];
+  readonly visibleOmenAliases?: readonly string[];
+}
+
+export interface WorldFallbackTemplateContext {
+  readonly locationNames: readonly string[];
+  readonly locationTags: readonly string[];
+  readonly factionNames: readonly string[];
+  readonly factionTags: readonly string[];
+  readonly truthLevel: EventTruthLevel;
+  readonly lifePhase: LifePhaseId;
+  readonly preferredTerms: Readonly<Record<string, readonly string[]>>;
+  readonly toneRules: readonly string[];
+  readonly bannedTone: readonly string[];
+  readonly visibleOmenAliases: readonly string[];
+  readonly allowedTerms: readonly string[];
+}
+
+export interface WorldNarrativeContextFragment {
+  readonly systemPromptFragment: string;
+  readonly contextPromptFragment: string;
+  readonly fallbackTemplateContext: WorldFallbackTemplateContext;
+  readonly safeWorldContext: {
+    readonly regionId: string;
+    readonly agePhaseId: string;
+    readonly locationIds: readonly string[];
+    readonly allowedTerms: readonly string[];
+    readonly forbiddenTerms: readonly string[];
+  };
+  readonly forbiddenTerms: readonly string[];
+  readonly safetyFlags: readonly WorldNarrativeSafetyFlag[];
 }
