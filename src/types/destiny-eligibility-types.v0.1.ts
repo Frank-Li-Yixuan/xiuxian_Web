@@ -157,12 +157,31 @@ export interface DestinySynergyRule {
   readonly warning?: string;
 }
 
+export interface DestinyConflictSynergyRegistryLookup {
+  readonly hardConflicts: readonly HardConflictRule[];
+  readonly softConflicts: readonly SoftConflictRule[];
+  readonly synergies: readonly DestinySynergyRule[];
+  getDestiny(id: Id): DestinyDefinitionV2;
+}
+
+export interface DestinyConflictSynergyEngineContext {
+  readonly registry?: DestinyConflictSynergyRegistryLookup;
+  readonly hardConflicts?: readonly HardConflictRule[];
+  readonly softConflicts?: readonly SoftConflictRule[];
+  readonly synergies?: readonly DestinySynergyRule[];
+}
+
 export interface DestinyConflictSynergyResult {
   readonly finalDestinyIds: readonly Id[];
   readonly removedDestinyIds: readonly Id[];
   readonly mutatedDestinyIds: readonly Id[];
+  readonly rerollDestinyIds: readonly Id[];
   readonly warnings: readonly string[];
+  readonly conflictWarnings: readonly string[];
+  readonly synergyWarnings: readonly string[];
+  readonly synergyTags: readonly string[];
   readonly synergies: readonly DestinySynergyRule[];
+  readonly debugTags: readonly string[];
 }
 
 export interface DestinyManifestationEventHook {
