@@ -107,6 +107,36 @@ export interface DestinyEligibilityResult {
   readonly mutationCandidate?: Id;
 }
 
+export type DestinyMutationResolutionAction = "keep" | "mutate" | "reroll";
+export type DestinyMutationResolutionReason =
+  | "eligible_original"
+  | "anti_result"
+  | "weak_support_result"
+  | "missing_mutation_candidate"
+  | "missing_mutation_target"
+  | "invalid_mutation_source"
+  | "max_mutation_depth"
+  | "source_mutation_only";
+
+export interface DestinyMutationRegistryLookup {
+  getDestiny(id: Id): DestinyDefinitionV2;
+}
+
+export interface DestinyMutationResolverContext {
+  readonly registry?: DestinyMutationRegistryLookup;
+  readonly mutationDepth?: number;
+}
+
+export interface DestinyMutationResolutionResult {
+  readonly originalDestinyId: Id;
+  readonly resolvedDestinyId?: Id;
+  readonly action: DestinyMutationResolutionAction;
+  readonly reason: DestinyMutationResolutionReason;
+  readonly mutationDepth: number;
+  readonly resolvedDestiny?: DestinyDefinitionV2;
+  readonly debugTags: readonly string[];
+}
+
 export interface HardConflictRule {
   readonly a: Id;
   readonly b: Id;
