@@ -7,7 +7,37 @@ import type {
   DestinyTraitState
 } from "../../character/CharacterCreationTypes";
 import { loadDestinyRegistry } from "../../characterCreation/destiny/DestinyRegistry";
+import { loadDestinyV2Registry } from "../../destinyV2/DestinyV2Registry";
 import type { ElementId, SpiritualRootCategoryId } from "../../types/opening-generator-types.v0.1";
+
+type CharacterCreationModeProjectionBucketId = "outerBattlefield" | "horde" | "deckbuilder" | "autochess";
+
+export interface CharacterCreationModeProjectionViewModel {
+  readonly bucket: CharacterCreationModeProjectionBucketId;
+  readonly label: string;
+  readonly tags: readonly string[];
+}
+
+export interface CharacterCreationLifeHookViewModel {
+  readonly destinyId: string;
+  readonly phase: string;
+  readonly phaseRule: string;
+  readonly hook: string;
+  readonly visible: string;
+}
+
+export interface CharacterCreationDestinySynergyViewModel {
+  readonly id: string;
+  readonly name: string;
+  readonly traits: readonly string[];
+  readonly description: string;
+  readonly effects: readonly string[];
+}
+
+export interface CharacterCreationDebugMutationSourceViewModel {
+  readonly traitId: string;
+  readonly reasonTags: readonly string[];
+}
 
 export type CharacterCreationDetailTab = "stats" | "root" | "destiny" | "origin" | "items";
 export type CharacterCreationDestinyCardSlot = "main" | "secondary0" | "secondary1" | "flaw";
@@ -83,9 +113,17 @@ export interface CharacterCreationDestinyCardViewModel {
   readonly tags: readonly string[];
   readonly positiveEffects: readonly string[];
   readonly negativeEffects: readonly string[];
+  readonly fateAlignment?: DestinyTraitState["fateAlignment"];
+  readonly fateAlignmentLabel: string;
+  readonly fateAlignmentReasonTags: readonly string[];
+  readonly mutatedFromTraitId?: string;
   readonly locked: boolean;
   readonly synergyWarnings: readonly string[];
   readonly conflictWarnings: readonly string[];
+  readonly synergies: readonly CharacterCreationDestinySynergyViewModel[];
+  readonly lifeImpactHooks: readonly CharacterCreationLifeHookViewModel[];
+  readonly modeProjectionBuckets: readonly CharacterCreationModeProjectionViewModel[];
+  readonly debugMutationSource?: CharacterCreationDebugMutationSourceViewModel;
 }
 
 export interface CharacterCreationLockTargetViewModel {
@@ -146,6 +184,8 @@ const DESTINY_CARD_CONFIG = [
   { slot: "flaw", slotLabel: "劫命", lockKey: "flawDestiny" }
 ] as const;
 const DESTINY_REROLL_RULES = loadDestinyRegistry().rerollRules;
+const DESTINY_V2_REGISTRY = loadDestinyV2Registry();
+const MODE_PROJECTION_BUCKETS = ["outerBattlefield", "horde", "deckbuilder", "autochess"] as const;
 
 const LOCK_TARGET_CONFIG: readonly { readonly key: CharacterCreationLockKey; readonly label: string }[] = [
   { key: "spiritualRoot", label: "灵根" },
@@ -257,6 +297,7 @@ export function createCharacterCreationViewModel(
     originFate: toOriginFateViewModel(draft),
     destinyCards: DESTINY_CARD_CONFIG.map((config) => {
       const trait = getTraitForCard(draft, config.slot);
+      const debugMutationSource = getDebugMutationSource(trait);
       return {
         slot: config.slot,
         slotLabel: config.slotLabel,
@@ -269,9 +310,17 @@ export function createCharacterCreationViewModel(
         tags: trait.tags,
         positiveEffects: trait.positiveEffects,
         negativeEffects: trait.negativeEffects,
+        fateAlignment: trait.fateAlignment ?? "neutral",
+        fateAlignmentLabel: trait.fateAlignmentLabel ?? "命盘未定",
+        fateAlignmentReasonTags: trait.fateAlignmentReasonTags ?? [],
+        ...(trait.mutatedFromTraitId === undefined ? {} : { mutatedFromTraitId: trait.mutatedFromTraitId }),
         locked: draft.locks[config.lockKey],
         synergyWarnings: draft.destinies.synergyWarnings,
-        conflictWarnings: draft.destinies.conflictWarnings
+        conflictWarnings: draft.destinies.conflictWarnings,
+        synergies: getSynergiesForTrait(draft, trait.traitId),
+        lifeImpactHooks: getLifeImpactHooksForTrait(draft, trait.traitId),
+        modeProjectionBuckets: getModeProjectionBucketsForTrait(trait.traitId),
+        ...(debugMutationSource === undefined ? {} : { debugMutationSource })
       };
     }),
     ...(selectedLockKey === undefined ? {} : { selectedLockKey }),
@@ -437,6 +486,63 @@ function getTraitForCard(
     case "flaw":
       return draft.destinies.flaw;
   }
+}
+
+function getSynergiesForTrait(
+  draft: CharacterCreationDraft,
+  traitId: string
+): readonly CharacterCreationDestinySynergyViewModel[] {
+  return draft.destinies.synergies
+    .filter((synergy) => synergy.traits.includes(traitId))
+    .map((synergy) => ({
+      id: synergy.id,
+      name: synergy.name,
+      traits: synergy.traits,
+      description: synergy.description,
+      effects: synergy.effects
+    }));
+}
+
+function getLifeImpactHooksForTrait(
+  draft: CharacterCreationDraft,
+  traitId: string
+): readonly CharacterCreationLifeHookViewModel[] {
+  return draft.destinies.lifeManifestationHooks?.hooks
+    .filter((hook) => hook.destinyId === traitId)
+    .map((hook) => ({
+      destinyId: hook.destinyId,
+      phase: hook.phase,
+      phaseRule: hook.phaseRule,
+      hook: hook.hook,
+      visible: hook.visible
+    })) ?? [];
+}
+
+function getModeProjectionBucketsForTrait(traitId: string): readonly CharacterCreationModeProjectionViewModel[] {
+  try {
+    const projection = DESTINY_V2_REGISTRY.getModeProjection(traitId);
+    return MODE_PROJECTION_BUCKETS
+      .map((bucket) => ({
+        bucket,
+        label: bucket,
+        tags: projection[bucket] ?? []
+      }))
+      .filter((bucket) => bucket.tags.length > 0);
+  } catch {
+    return [];
+  }
+}
+
+function getDebugMutationSource(
+  trait: DestinyTraitState
+): CharacterCreationDebugMutationSourceViewModel | undefined {
+  if (trait.mutatedFromTraitId === undefined) {
+    return undefined;
+  }
+  return {
+    traitId: trait.mutatedFromTraitId,
+    reasonTags: (trait.fateAlignmentReasonTags ?? []).filter((tag) => tag.startsWith("mutation:"))
+  };
 }
 
 function getActiveBudgetedLocks(locks: CharacterCreationLocks): readonly CharacterCreationLockKey[] {

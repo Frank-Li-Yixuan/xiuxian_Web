@@ -9,6 +9,9 @@ import type {
   SpiritualRootCategoryId,
   SpiritualRootState
 } from "../types/opening-generator-types.v0.1";
+import { evaluateNinePalace } from "../ninePalace/NinePalaceScoring";
+import { loadNinePalaceRegistry, type NinePalaceRegistry } from "../ninePalace/NinePalaceRegistry";
+import type { FateCausalityTags } from "../types/nine-palace-fate-types.v0.1";
 import { DefaultOpeningAttributeGenerator } from "./OpeningAttributeGenerator";
 import { DefaultOpeningSpiritualRootGenerator } from "./OpeningSpiritualRootGenerator";
 
@@ -17,13 +20,16 @@ const RARE_ROOT_CATEGORY_IDS = new Set<SpiritualRootCategoryId>(["heavenly", "va
 export class DefaultOpeningGenerator implements OpeningGenerator {
   private readonly attributeGenerator: DefaultOpeningAttributeGenerator;
   private readonly spiritualRootGenerator: DefaultOpeningSpiritualRootGenerator;
+  private readonly ninePalaceRegistry: NinePalaceRegistry;
 
   constructor(options: {
     readonly attributeGenerator?: DefaultOpeningAttributeGenerator;
     readonly spiritualRootGenerator?: DefaultOpeningSpiritualRootGenerator;
+    readonly ninePalaceRegistry?: NinePalaceRegistry;
   } = {}) {
     this.attributeGenerator = options.attributeGenerator ?? new DefaultOpeningAttributeGenerator();
     this.spiritualRootGenerator = options.spiritualRootGenerator ?? new DefaultOpeningSpiritualRootGenerator();
+    this.ninePalaceRegistry = options.ninePalaceRegistry ?? loadNinePalaceRegistry();
   }
 
   generate(input: GenerateOpeningInnateInput): OpeningInnateDraft {
@@ -44,6 +50,10 @@ export class DefaultOpeningGenerator implements OpeningGenerator {
       ...(input.locks === undefined ? {} : { locks: input.locks }),
       ...(previousSpiritualRootDraft === undefined ? {} : { previousDraft: previousSpiritualRootDraft })
     });
+    const ninePalaceEvaluation = evaluateNinePalace({
+      ...attributeDraft.coreSeed,
+      ...attributeDraft.aptitude
+    }, this.ninePalaceRegistry);
 
     return deepFreeze({
       draftId: input.draftId,
@@ -54,7 +64,11 @@ export class DefaultOpeningGenerator implements OpeningGenerator {
       coreSeed: attributeDraft.coreSeed,
       spiritualRoot: spiritualRootDraft.spiritualRoot,
       growthBias: attributeDraft.growthBias,
-      tags: mergeDraftTags(attributeDraft.tags, spiritualRootDraft.tags),
+      tags: mergeDraftTags(
+        mergeDraftTags(attributeDraft.tags, spiritualRootDraft.tags),
+        toOpeningTags(ninePalaceEvaluation.tags)
+      ),
+      ninePalaceEvaluation,
       distinctivenessScore: attributeDraft.distinctivenessScore + spiritualRootDraft.distinctivenessScore,
       ...(input.locks === undefined ? {} : { locks: input.locks }),
       debug: mergeDebugInfo(attributeDraft.debug, spiritualRootDraft.debug)
@@ -69,6 +83,7 @@ export function generateOpeningInnateDraft(input: GenerateOpeningInnateInput): O
 function toAttributeDraft(draft: OpeningInnateDraft): OpeningAttributeDraft {
   const {
     spiritualRoot: _spiritualRoot,
+    ninePalaceEvaluation: _ninePalaceEvaluation,
     ...attributeDraft
   } = draft;
   return attributeDraft;
@@ -93,6 +108,15 @@ function mergeDraftTags(first: OpeningDraftTags, second: OpeningDraftTags): Open
     lifeEventBiasTags: uniqueStable([...first.lifeEventBiasTags, ...second.lifeEventBiasTags]),
     modeBiasTags: uniqueStable([...first.modeBiasTags, ...second.modeBiasTags]),
     hiddenFateBiasTags: uniqueStable([...first.hiddenFateBiasTags, ...second.hiddenFateBiasTags])
+  };
+}
+
+function toOpeningTags(tags: FateCausalityTags): OpeningDraftTags {
+  return {
+    destinyBiasTags: tags.destinyBiasTags,
+    lifeEventBiasTags: tags.lifeEventBiasTags,
+    hiddenFateBiasTags: tags.hiddenFateBiasTags,
+    modeBiasTags: tags.modeBiasTags
   };
 }
 

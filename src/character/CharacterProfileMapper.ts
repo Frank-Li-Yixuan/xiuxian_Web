@@ -46,6 +46,7 @@ export function mapCharacterDraftToOrigin(draft: CharacterCreationDraft, confirm
     openingInnateDraft: draft.openingInnateDraft,
     destinies: draft.destinies,
     originFate: draft.originFate,
+    ...(draft.originFateNarrativeState === undefined ? {} : { originFateNarrativeState: draft.originFateNarrativeState }),
     background: draft.background,
     hiddenFate: draft.hiddenFate,
     carriedItems: draft.carriedItems,

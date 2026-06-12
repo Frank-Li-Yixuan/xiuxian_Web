@@ -1,4 +1,10 @@
 import type { OpeningInnateDraft } from "./opening-generator-types.v0.1";
+import type {
+  DestinyConflictSynergyResult,
+  DestinyEligibilityResult as DestinyV2EligibilityResult,
+  DestinyLifeManifestationHookProjection,
+  DestinyMutationResolutionResult
+} from "./destiny-eligibility-types.v0.1";
 
 export type DestinyQuality =
   | "mortal"
@@ -80,6 +86,7 @@ export interface DestinySelectionState {
   readonly synergyWarnings: readonly string[];
   readonly conflictWarnings: readonly string[];
   readonly warnings: readonly string[];
+  readonly lifeManifestationHooks?: DestinyLifeManifestationHookProjection;
 }
 
 export interface FateMeterState {
@@ -100,10 +107,31 @@ export interface DestinyRerollSession {
   readonly previousTraitIds: readonly string[];
 }
 
+export type DestinyFateAlignment = "matched" | "conflicted" | "mutated" | "neutral";
+export type DestinyRollSlotKey = "main" | "secondary0" | "secondary1" | "flaw";
+
+export interface DestinyFateAlignmentInfo {
+  readonly traitId: string;
+  readonly alignment: DestinyFateAlignment;
+  readonly label: string;
+  readonly reasonTags: readonly string[];
+  readonly sourceTraitId?: string;
+}
+
+export interface NinePalaceDestinyRollDebugInfo {
+  readonly slotAlignments: Readonly<Record<DestinyRollSlotKey, DestinyFateAlignmentInfo>>;
+  readonly finalDestinyIds: readonly string[];
+  readonly rerollDestinyIds: readonly string[];
+  readonly eligibilityResults: readonly DestinyV2EligibilityResult[];
+  readonly mutationResults: readonly DestinyMutationResolutionResult[];
+  readonly conflictSynergyResult: DestinyConflictSynergyResult;
+  readonly debugTags: readonly string[];
+}
+
 export interface GenerateDestinyDraftInput {
   readonly session: DestinyRerollSession;
   readonly previousDraft?: CharacterCreationDraftLike;
-  readonly openingInnateDraft?: Pick<OpeningInnateDraft, "tags">;
+  readonly openingInnateDraft?: Pick<OpeningInnateDraft, "tags" | "ninePalaceEvaluation">;
   readonly accountMeta?: Record<string, unknown>;
 }
 
@@ -125,13 +153,14 @@ export interface DestinyRollDebugInfo {
   readonly selectedWeights: Record<string, number>;
   readonly fateMeterBefore: FateMeterState;
   readonly fateMeterAfter: FateMeterState;
+  readonly ninePalace?: NinePalaceDestinyRollDebugInfo;
 }
 
 export interface GenerateDestinyRollInput {
   readonly seed: string;
   readonly draftId: string;
   readonly rerollIndex: number;
-  readonly openingInnateDraft?: Pick<OpeningInnateDraft, "tags">;
+  readonly openingInnateDraft?: Pick<OpeningInnateDraft, "tags" | "ninePalaceEvaluation">;
   readonly locks?: CharacterCreationLocks;
   readonly previousDraft?: DestinyRollDraft;
   readonly fateMeter?: FateMeterState;

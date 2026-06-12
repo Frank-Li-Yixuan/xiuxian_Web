@@ -1,7 +1,12 @@
 import type { OpeningInnateDraft } from "./opening-generator-types.v0.1";
 import type { OriginFateDraft } from "./origin-fate-types.v0.1";
+import type { OriginFateNarrativeStateV02 } from "./origin-fate-narrative-types.v0.2";
+import type {
+  DestinyLifeManifestationHookProjection
+} from "./destiny-eligibility-types.v0.1";
 import type {
   DestinyQuality,
+  DestinyFateAlignment,
   DestinyRollDraft,
   DestinyRerollSession,
   DestinySynergyRule
@@ -77,6 +82,7 @@ export interface DestinySelectionState {
   readonly synergyWarnings: readonly string[];
   readonly conflictWarnings: readonly string[];
   readonly warnings: readonly string[];
+  readonly lifeManifestationHooks?: DestinyLifeManifestationHookProjection;
 }
 
 export interface DestinyTraitState {
@@ -89,6 +95,10 @@ export interface DestinyTraitState {
   readonly tags: readonly string[];
   readonly positiveEffects: readonly string[];
   readonly negativeEffects: readonly string[];
+  readonly fateAlignment?: DestinyFateAlignment;
+  readonly fateAlignmentLabel?: string;
+  readonly fateAlignmentReasonTags?: readonly string[];
+  readonly mutatedFromTraitId?: string;
 }
 
 export interface BackgroundOriginDefinition {
@@ -162,6 +172,7 @@ export interface CharacterCreationDraft {
   readonly destinyRollDraft?: DestinyRollDraft;
   readonly destinyRerollSession?: DestinyRerollSession;
   readonly originFate: OriginFateDraft;
+  readonly originFateNarrativeState?: OriginFateNarrativeStateV02;
   readonly background: BackgroundOriginState;
   readonly hiddenFate: HiddenFateState;
   readonly carriedItems: readonly CarriedItemDraft[];
@@ -184,6 +195,7 @@ export interface CharacterOriginState {
   readonly openingInnateDraft: OpeningInnateDraft;
   readonly destinies: DestinySelectionState;
   readonly originFate: OriginFateDraft;
+  readonly originFateNarrativeState?: OriginFateNarrativeStateV02;
   readonly background: BackgroundOriginState;
   readonly hiddenFate: HiddenFateState;
   readonly carriedItems: readonly CarriedItemDraft[];

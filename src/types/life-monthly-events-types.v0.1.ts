@@ -1,6 +1,20 @@
 // 0–18 岁人生模拟月度事件系统 v0.1
 // These types are implementation guidance for Codex. Integrate with the project's existing shared Id/RNG/Profile types.
 
+import type {
+  DerivedFateScores,
+  FateAttributeId,
+  NinePalaceAttributes,
+  ThreePowerScores,
+  WuxingInclination
+} from "./nine-palace-fate-types.v0.1";
+import type {
+  OriginFateNarrativeLifeEventContext,
+  OriginFateNarrativeLifeEventSummary,
+  OriginFateNarrativeStageTransitionContext,
+  OriginFateNarrativeStateV02
+} from "./origin-fate-narrative-types.v0.2";
+
 export type Id = string;
 
 export type LifePhaseId =
@@ -188,6 +202,19 @@ export interface PendingMajorChoiceRef {
   };
 }
 
+export interface NinePalaceLifeEventSummary {
+  readonly attributes: NinePalaceAttributes;
+  readonly derivedScores: DerivedFateScores;
+  readonly threePowers: ThreePowerScores;
+  readonly wuxing: WuxingInclination;
+  readonly lifeEventBiasTags: readonly string[];
+  readonly highAttributes: readonly FateAttributeId[];
+  readonly lowAttributes: readonly FateAttributeId[];
+  readonly threePowerImbalanceTags: readonly string[];
+  readonly majorChoiceBiasTags: readonly string[];
+  readonly debugTags: readonly string[];
+}
+
 export interface LifeSimulationState {
   readonly profileId: Id;
   readonly characterId: Id;
@@ -212,6 +239,8 @@ export interface LifeSimulationState {
 
   readonly hiddenFateProgress: Readonly<Record<Id, number>>;
   readonly carriedItemAffinity: Readonly<Record<Id, number>>;
+  readonly ninePalaceSummary?: NinePalaceLifeEventSummary;
+  readonly originFateNarrativeState?: OriginFateNarrativeStateV02;
 
   readonly flags: Readonly<Record<string, number | boolean | string>>;
 
@@ -243,3 +272,9 @@ export interface LifeSimulationResult {
   readonly hiddenFateProgress: Readonly<Record<Id, number>>;
   readonly carriedItemAffinity: Readonly<Record<Id, number>>;
 }
+
+export type {
+  OriginFateNarrativeLifeEventContext,
+  OriginFateNarrativeLifeEventSummary,
+  OriginFateNarrativeStageTransitionContext
+};

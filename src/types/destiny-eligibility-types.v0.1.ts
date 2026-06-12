@@ -195,6 +195,37 @@ export interface DestinyManifestationDefinition {
   readonly events: readonly DestinyManifestationEventHook[];
 }
 
+export interface DestinyLifeManifestationProjectedHook {
+  readonly destinyId: Id;
+  readonly phase: LifeManifestationPhaseId;
+  readonly hook: string;
+  readonly visible: string;
+  readonly phaseRule: string;
+}
+
+export type DestinyLifeManifestationHooksByPhase = Readonly<Record<
+  LifeManifestationPhaseId,
+  readonly DestinyLifeManifestationProjectedHook[]
+>>;
+
+export interface DestinyLifeManifestationHookProjection {
+  readonly traitIds: readonly Id[];
+  readonly phaseRules: Readonly<Record<LifeManifestationPhaseId, string>>;
+  readonly hooks: readonly DestinyLifeManifestationProjectedHook[];
+  readonly hooksByPhase: DestinyLifeManifestationHooksByPhase;
+  readonly missingManifestationTraitIds: readonly Id[];
+  readonly debugTags: readonly string[];
+}
+
+export interface DestinyLifeManifestationRegistryLookup {
+  readonly phaseManifestationRules: Readonly<Record<LifeManifestationPhaseId, string>>;
+  getManifestation(destinyId: Id): DestinyManifestationDefinition;
+}
+
+export interface DestinyLifeManifestationHooksContext {
+  readonly registry?: DestinyLifeManifestationRegistryLookup;
+}
+
 export interface CoreDestinyDefinitionsDataFile {
   readonly version: string;
   readonly description: string;

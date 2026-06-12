@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import { DestinyCombinationEngine } from "../../src/characterCreation/destiny/DestinyCombinationEngine";
 import { createDestinyRegistry, loadDestinyRegistry } from "../../src/characterCreation/destiny/DestinyRegistry";
+import { applyDestinyConflictSynergy } from "../../src/destinyV2/DestinyConflictSynergyEngine";
+import { loadDestinyV2Registry } from "../../src/destinyV2/DestinyV2Registry";
 import { CharacterDraftGenerator } from "../../src/character/CharacterDraftGenerator";
 import type { DestinyTraitState } from "../../src/character/CharacterCreationTypes";
 import type { DestinyDataBundle, DestinyQuality, DestinyQualityDefinition } from "../../src/types/destiny-types.v0.1";
@@ -47,13 +49,15 @@ describe("CharacterDraftGenerator", () => {
   });
 
   it("does not select destiny traits that are exclusive with each other", () => {
-    const registry = loadDestinyRegistry();
-    const engine = new DestinyCombinationEngine(registry);
+    const registry = loadDestinyV2Registry();
     const generator = new CharacterDraftGenerator({ seed: "cc-c001-exclusive" });
 
     for (let index = 0; index < 80; index += 1) {
       const draft = generator.generate({ slotId: "slot_1", nowMs: 1_000 + index });
-      expect(engine.hasHardExclusive(allDestinyTraits(draft.destinies).map((trait) => trait.traitId))).toBe(false);
+      const selected = allDestinyTraits(draft.destinies).map((trait) => registry.getDestiny(trait.traitId));
+      const result = applyDestinyConflictSynergy(selected, { registry });
+      expect(result.finalDestinyIds).toEqual(selected.map((destiny) => destiny.id));
+      expect(result.rerollDestinyIds).toEqual([]);
     }
   });
 

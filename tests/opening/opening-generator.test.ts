@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 import { DefaultOpeningGenerator } from "../../src/opening/OpeningGenerator";
+import { evaluateNinePalace } from "../../src/ninePalace/NinePalaceScoring";
 
 describe("OpeningGenerator", () => {
   it("generates reproducible full opening innate drafts for the same seed and reroll index", () => {
@@ -26,6 +27,22 @@ describe("OpeningGenerator", () => {
     expect(draft.distinctivenessScore).toBeGreaterThanOrEqual(0);
   });
 
+  it("adds a deterministic nine palace evaluation from generated core seed and aptitude", () => {
+    const generator = new DefaultOpeningGenerator();
+    const draft = generator.generate({ seed: "npf-c004-opening-evaluation", draftId: "draft_npf_c004", rerollIndex: 0 });
+
+    expect(draft.ninePalaceEvaluation).toEqual(evaluateNinePalace({
+      ...draft.coreSeed,
+      ...draft.aptitude
+    }));
+    expect(draft.tags.destinyBiasTags).toEqual(
+      expect.arrayContaining(draft.ninePalaceEvaluation.tags.destinyBiasTags)
+    );
+    expect(draft.tags.lifeEventBiasTags).toEqual(
+      expect.arrayContaining(draft.ninePalaceEvaluation.tags.lifeEventBiasTags)
+    );
+  });
+
   it("preserves the attribute side when attribute locks are active", () => {
     const generator = new DefaultOpeningGenerator();
     const first = generator.generate({ seed: "oag-c004-lock-attribute", draftId: "draft_attr_lock", rerollIndex: 0 });
@@ -41,6 +58,7 @@ describe("OpeningGenerator", () => {
     expect(rerolled.archetype).toEqual(first.archetype);
     expect(rerolled.aptitude).toEqual(first.aptitude);
     expect(rerolled.coreSeed).toEqual(first.coreSeed);
+    expect(rerolled.ninePalaceEvaluation).toEqual(first.ninePalaceEvaluation);
     expect(rootSignature(rerolled)).not.toBe(rootSignature(first));
   });
 

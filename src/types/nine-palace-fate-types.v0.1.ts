@@ -1,3 +1,15 @@
+import type {
+  DestinyConflictSynergyResult,
+  DestinyDefinitionV2,
+  DestinyEligibilityEvaluationInput,
+  DestinyEligibilityResult as DestinyV2EligibilityResult,
+  DestinyMutationResolutionResult,
+  HardConflictRule,
+  Id,
+  SoftConflictRule,
+  DestinySynergyRule
+} from "./destiny-eligibility-types.v0.1";
+
 export type FateAttributeId =
   | "jing"
   | "qi"
@@ -97,6 +109,30 @@ export interface AntiWeirdnessResult {
   acceptedTraitId: string;
   action: "accept" | "reject" | "mutate" | "warn";
   warnings: string[];
+}
+
+export interface NinePalaceDestinyEngineContext {
+  readonly destinyRegistry?: {
+    readonly hardConflicts: readonly HardConflictRule[];
+    readonly softConflicts: readonly SoftConflictRule[];
+    readonly synergies: readonly DestinySynergyRule[];
+    getDestiny(id: Id): DestinyDefinitionV2;
+  };
+  readonly tags?: readonly string[];
+  readonly selectedDestinyIds?: readonly Id[];
+  readonly selectedFlawIds?: readonly Id[];
+  readonly extraAttributes?: DestinyEligibilityEvaluationInput["extraAttributes"];
+}
+
+export interface NinePalaceDestinyResolutionResult {
+  readonly finalDestinyIds: readonly Id[];
+  readonly rerollDestinyIds: readonly Id[];
+  readonly eligibilityResults: readonly DestinyEligibilityResult[];
+  readonly destinyEligibilityResults: readonly DestinyV2EligibilityResult[];
+  readonly mutationResults: readonly DestinyMutationResolutionResult[];
+  readonly conflictSynergyResult: DestinyConflictSynergyResult;
+  readonly warnings: readonly string[];
+  readonly debugTags: readonly string[];
 }
 
 export interface NinePalaceCondition {

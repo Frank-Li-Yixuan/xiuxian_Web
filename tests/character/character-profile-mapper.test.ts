@@ -36,6 +36,7 @@ describe("CharacterProfileMapper", () => {
       openingInnateDraft: draft.openingInnateDraft,
       destinies: draft.destinies,
       originFate: draft.originFate,
+      originFateNarrativeState: draft.originFateNarrativeState,
       background: draft.background,
       hiddenFate: draft.hiddenFate,
       carriedItems: draft.carriedItems,
@@ -52,6 +53,7 @@ describe("CharacterProfileMapper", () => {
         phaseId: "infancy",
         core: draft.coreStats,
         aptitude: draft.aptitude,
+        originFateNarrativeState: draft.originFateNarrativeState,
         monthlyLogs: []
       })
     );

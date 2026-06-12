@@ -1,6 +1,8 @@
 // Opening Attribute & Spiritual Root Generator Types v0.1
 // 本文件是实现草案，可并入项目正式 types 目录。
 
+import type { NinePalaceEvaluation } from "./nine-palace-fate-types.v0.1";
+
 export type OpeningId = string;
 
 export type ElementId =
@@ -210,12 +212,13 @@ export interface OpeningInnateDraft {
   readonly spiritualRoot: SpiritualRootState;
   readonly growthBias: OpeningGrowthBias;
   readonly tags: OpeningDraftTags;
+  readonly ninePalaceEvaluation: NinePalaceEvaluation;
   readonly distinctivenessScore: number;
   readonly locks?: OpeningGenerationLocks;
   readonly debug?: OpeningGenerationDebugInfo;
 }
 
-export type OpeningAttributeDraft = Omit<OpeningInnateDraft, "spiritualRoot">;
+export type OpeningAttributeDraft = Omit<OpeningInnateDraft, "spiritualRoot" | "ninePalaceEvaluation">;
 
 export interface OpeningSpiritualRootDraft {
   readonly draftId: string;

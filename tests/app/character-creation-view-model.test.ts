@@ -6,7 +6,15 @@ import {
 } from "../../src/app/screens/CharacterCreationViewModel";
 import { getCharacterCreationSelectionForDetailTarget } from "../../src/app/screens/CharacterCreationDetailInteractions";
 import { CharacterCreationController } from "../../src/character/CharacterCreationController";
+import { evaluateNinePalace } from "../../src/ninePalace/NinePalaceScoring";
 import { loadOriginFateRegistry } from "../../src/originFate/OriginFateRegistry";
+import type { NinePalaceAttributes } from "../../src/types/nine-palace-fate-types.v0.1";
+import type {
+  GenerateOpeningInnateInput,
+  OpeningDraftTags,
+  OpeningGenerator,
+  OpeningInnateDraft
+} from "../../src/types/opening-generator-types.v0.1";
 
 describe("CharacterCreationViewModel", () => {
   it("maps clickable CCUI2 detail targets to stable tab and card selection", () => {
@@ -192,4 +200,149 @@ describe("CharacterCreationViewModel", () => {
     expect(originJson).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
     expect(originJson).not.toContain(String(draft.originFate.hiddenFateInternal.progress));
   });
+
+  it("exposes safe nine-palace destiny alignment labels without leaking hidden names", () => {
+    const registry = loadOriginFateRegistry();
+    const controller = new CharacterCreationController({ seed: "npf-c004-view-model-alignment" });
+    const draft = controller.generate({ slotId: "slot_npf_c004_vm", nowMs: 1_000 });
+    const hiddenFate = registry.getHiddenFate(draft.originFate.hiddenFateInternal.hiddenFateId);
+
+    const viewModel = createCharacterCreationViewModel(draft, {
+      selectedSlot: "main",
+      activeTab: "destiny"
+    });
+
+    expect(viewModel.destinyCards.every((card) => card.fateAlignment !== undefined)).toBe(true);
+    expect(viewModel.destinyCards.every((card) => card.fateAlignmentLabel.length > 0)).toBe(true);
+    expect(viewModel.destinyCards.map((card) => card.fateAlignment)).toContain("matched");
+    const serialized = JSON.stringify(viewModel);
+    expect(serialized).not.toContain(hiddenFate.trueName);
+    expect(serialized).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
+    expect(serialized).not.toContain("trueName");
+  });
+
+  it("exposes DEM-C006 destiny v2 detail projections without hidden leakage", () => {
+    const registry = loadOriginFateRegistry();
+    const controller = new CharacterCreationController({
+      seed: "dem-c006-view-model-detail",
+      openingGenerator: new FixedOpeningGenerator(makeOpeningDraft({
+        jing: 60,
+        qi: 70,
+        shen: 70,
+        rootBone: 60,
+        comprehension: 95,
+        inspiration: 95,
+        fortune: 75,
+        heart: 55,
+        lifespan: 35
+      }))
+    });
+    const draft = controller.generate({ slotId: "slot_dem_c006_vm_detail", nowMs: 1_000 });
+    const hiddenFate = registry.getHiddenFate(draft.originFate.hiddenFateInternal.hiddenFateId);
+
+    const viewModel = createCharacterCreationViewModel(draft, {
+      selectedSlot: "main",
+      activeTab: "destiny"
+    });
+    const card = viewModel.destinyCards.find((item) => item.traitId === "destiny_heaven_jealous_talent");
+
+    expect(card?.lifeImpactHooks.map((hook) => hook.hook)).toEqual(
+      expect.arrayContaining(["early_speech_or_scripture", "fever_after_insight"])
+    );
+    expect(card?.modeProjectionBuckets).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          bucket: "outerBattlefield",
+          tags: expect.arrayContaining(["first_insight_quality_plus_1"])
+        }),
+        expect.objectContaining({
+          bucket: "autochess",
+          tags: expect.arrayContaining(["genius_core_piece_bonus"])
+        })
+      ])
+    );
+    expect(card?.synergies).toEqual(expect.any(Array));
+    expect(card?.conflictWarnings).toEqual(expect.any(Array));
+    const serialized = JSON.stringify(viewModel);
+    expect(serialized).not.toContain(hiddenFate.trueName);
+    expect(serialized).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
+    expect(serialized).not.toContain("hiddenFateInternal");
+    expect(serialized).not.toContain("trueName");
+  });
 });
+
+class FixedOpeningGenerator implements OpeningGenerator {
+  constructor(private readonly draft: OpeningInnateDraft) {}
+
+  generate(input: GenerateOpeningInnateInput): OpeningInnateDraft {
+    return {
+      ...this.draft,
+      draftId: input.draftId,
+      seed: input.seed,
+      rerollIndex: input.rerollIndex,
+      ...(input.locks === undefined ? {} : { locks: input.locks })
+    };
+  }
+}
+
+function makeOpeningDraft(attributes: NinePalaceAttributes): OpeningInnateDraft {
+  const ninePalaceEvaluation = evaluateNinePalace(attributes);
+  const tags: OpeningDraftTags = {
+    destinyBiasTags: ninePalaceEvaluation.tags.destinyBiasTags,
+    lifeEventBiasTags: ninePalaceEvaluation.tags.lifeEventBiasTags,
+    hiddenFateBiasTags: ninePalaceEvaluation.tags.hiddenFateBiasTags,
+    modeBiasTags: ninePalaceEvaluation.tags.modeBiasTags
+  };
+
+  return {
+    draftId: "draft_dem_c006_vm",
+    seed: "fixed_opening",
+    rerollIndex: 0,
+    archetype: {
+      id: "fixed_archetype",
+      name: "Fixed Archetype",
+      description: "Test fixture",
+      tags: []
+    },
+    aptitude: {
+      rootBone: attributes.rootBone,
+      comprehension: attributes.comprehension,
+      inspiration: attributes.inspiration,
+      fortune: attributes.fortune,
+      heart: attributes.heart,
+      lifespan: attributes.lifespan
+    },
+    coreSeed: {
+      jing: attributes.jing,
+      qi: attributes.qi,
+      shen: attributes.shen
+    },
+    spiritualRoot: {
+      categoryId: "single",
+      displayName: "Fixed Root",
+      elements: { thunder: 100 },
+      primaryElement: "thunder",
+      secondaryElements: [],
+      purity: 80,
+      stability: 70,
+      conflict: 10,
+      breadth: 20,
+      relationTags: [],
+      tags: ["root:thunder"]
+    },
+    growthBias: {
+      jingGrowth: 1,
+      qiGrowth: 1,
+      shenGrowth: 1,
+      studyBias: 1,
+      martialBias: 1,
+      alchemyBias: 1,
+      artifactBias: 1,
+      seclusionBias: 1,
+      adventureBias: 1
+    },
+    tags,
+    ninePalaceEvaluation,
+    distinctivenessScore: 0
+  };
+}

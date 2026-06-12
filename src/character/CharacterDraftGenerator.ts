@@ -2,6 +2,7 @@ import { SeededRng, type RngSeed } from "../sim/core/SeededRng";
 import {
   DefaultDestinyRoller
 } from "../characterCreation/destiny/DestinyRoller";
+import { OpeningDestinyV2Roller } from "../characterCreation/destinyV2/OpeningDestinyV2Roller";
 import {
   loadDestinyRegistry,
   type DestinyRegistry
@@ -12,6 +13,7 @@ import {
   type GenerateOriginFateDraftInput,
   type OriginFateGenerator
 } from "../originFate/OriginFateGenerator";
+import { buildOriginFateNarrativeStateFromDraft } from "../originFate/OriginFateNarrativeDraftAdapter";
 import {
   loadOriginFateRegistry,
   type OriginFateRegistry
@@ -31,6 +33,7 @@ import type {
 import type {
   CharacterCreationLocks as DestinyGenerationLocks,
   DestinyQuality,
+  DestinyFateAlignmentInfo,
   DestinyRollDraft,
   DestinyRoller,
   DestinyTraitDefinition as GeneratedDestinyTraitDefinition,
@@ -126,7 +129,10 @@ export class CharacterDraftGenerator {
     this.originFateRegistry = options.originFateRegistry ?? loadOriginFateRegistry();
     this.originFateGenerator = options.originFateGenerator ?? new DefaultOriginFateGenerator(this.originFateRegistry);
     this.destinyRegistry = options.destinyRegistry ?? loadDestinyRegistry();
-    this.destinyRoller = options.destinyRoller ?? new DefaultDestinyRoller(this.destinyRegistry);
+    this.destinyRoller = options.destinyRoller ??
+      (options.destinyRegistry === undefined
+        ? new OpeningDestinyV2Roller(undefined, this.destinyRegistry)
+        : new DefaultDestinyRoller(this.destinyRegistry));
     this.openingSeed = String(options.seed);
   }
 
@@ -171,6 +177,13 @@ export class CharacterDraftGenerator {
       ...buildOriginFateContextTags(openingInnateDraft, destinies),
       divinationTokens
     });
+    const originFateNarrativeState = buildOriginFateNarrativeStateFromDraft({
+      originFate,
+      openingInnateDraft,
+      destinies,
+      seed: `${originFate.seed}:hfo2_c006`
+    });
+    const safeOriginFate = sanitizeOriginFateDraft(originFate);
 
     return deepFreeze({
       draftId,
@@ -184,10 +197,11 @@ export class CharacterDraftGenerator {
       destinies,
       destinyRollDraft,
       destinyRerollSession,
-      originFate,
-      background: this.projectOriginBackground(originFate),
-      hiddenFate: this.projectOriginHiddenFate(originFate),
-      carriedItems: this.projectOriginCarriedItems(originFate),
+      originFate: safeOriginFate,
+      originFateNarrativeState,
+      background: this.projectOriginBackground(safeOriginFate),
+      hiddenFate: this.projectOriginHiddenFate(safeOriginFate),
+      carriedItems: this.projectOriginCarriedItems(safeOriginFate),
       locks: DEFAULT_LOCKS,
       attributeLock: false,
       spiritualRootLock: false,
@@ -255,6 +269,13 @@ export class CharacterDraftGenerator {
       previousDraft: draft.originFate,
       divinationTokens: divination.nextDivinationTokens
     });
+    const originFateNarrativeState = buildOriginFateNarrativeStateFromDraft({
+      originFate,
+      openingInnateDraft,
+      destinies,
+      seed: `${originFate.seed}:hfo2_c006:${draft.rerollCount + 1}`
+    });
+    const safeOriginFate = sanitizeOriginFateDraft(originFate);
 
     return deepFreeze({
       ...draft,
@@ -267,10 +288,11 @@ export class CharacterDraftGenerator {
       destinies,
       destinyRollDraft,
       destinyRerollSession,
-      originFate,
-      background: this.projectOriginBackground(originFate),
-      hiddenFate: this.projectOriginHiddenFate(originFate),
-      carriedItems: this.projectOriginCarriedItems(originFate),
+      originFate: safeOriginFate,
+      originFateNarrativeState,
+      background: this.projectOriginBackground(safeOriginFate),
+      hiddenFate: this.projectOriginHiddenFate(safeOriginFate),
+      carriedItems: this.projectOriginCarriedItems(safeOriginFate),
       locks: {
         ...effectiveLocks,
         spiritualRoot: spiritualRootLock
@@ -387,19 +409,29 @@ function mapOpeningRootRarity(categoryId: OpeningSpiritualRootState["categoryId"
 }
 
 function projectDestinyRollSelection(draft: DestinyRollDraft): DestinySelectionState {
+  const alignments = draft.debug.ninePalace?.slotAlignments;
   return {
-    main: toDestinyTraitState(draft.destinies.main),
-    secondary: [toDestinyTraitState(draft.destinies.secondary[0]), toDestinyTraitState(draft.destinies.secondary[1])],
-    flaw: toDestinyTraitState(draft.destinies.flaw),
+    main: toDestinyTraitState(draft.destinies.main, alignments?.main),
+    secondary: [
+      toDestinyTraitState(draft.destinies.secondary[0], alignments?.secondary0),
+      toDestinyTraitState(draft.destinies.secondary[1], alignments?.secondary1)
+    ],
+    flaw: toDestinyTraitState(draft.destinies.flaw, alignments?.flaw),
     synergies: draft.destinies.synergies,
     softConflicts: draft.destinies.softConflicts,
     synergyWarnings: draft.destinies.synergyWarnings,
     conflictWarnings: draft.destinies.conflictWarnings,
-    warnings: draft.destinies.warnings
+    warnings: draft.destinies.warnings,
+    ...(draft.destinies.lifeManifestationHooks === undefined
+      ? {}
+      : { lifeManifestationHooks: draft.destinies.lifeManifestationHooks })
   };
 }
 
-function toDestinyTraitState(trait: GeneratedDestinyTraitDefinition): DestinyTraitState {
+function toDestinyTraitState(
+  trait: GeneratedDestinyTraitDefinition,
+  alignment?: DestinyFateAlignmentInfo
+): DestinyTraitState {
   return {
     traitId: trait.id,
     name: trait.name,
@@ -409,7 +441,15 @@ function toDestinyTraitState(trait: GeneratedDestinyTraitDefinition): DestinyTra
     description: trait.description,
     tags: trait.tags,
     positiveEffects: trait.positiveEffects,
-    negativeEffects: trait.negativeEffects
+    negativeEffects: trait.negativeEffects,
+    ...(alignment === undefined
+      ? {}
+      : {
+          fateAlignment: alignment.alignment,
+          fateAlignmentLabel: alignment.label,
+          fateAlignmentReasonTags: alignment.reasonTags,
+          ...(alignment.sourceTraitId === undefined ? {} : { mutatedFromTraitId: alignment.sourceTraitId })
+        })
   };
 }
 
@@ -685,6 +725,14 @@ function buildOriginFateLocks(originFate: OriginFateDraft, locks: CharacterCreat
     ...(locks.carriedItems ? { carriedItemIds: originFate.carriedItems.map((item) => item.itemId) } : {})
   };
   return Object.keys(nextLocks).length === 0 ? undefined : nextLocks;
+}
+
+function sanitizeOriginFateDraft(originFate: OriginFateDraft): OriginFateDraft {
+  const { trueName: _hiddenName, ...safeHiddenFateInternal } = originFate.hiddenFateInternal;
+  return {
+    ...originFate,
+    hiddenFateInternal: safeHiddenFateInternal as OriginFateDraft["hiddenFateInternal"]
+  };
 }
 
 function toCarriedItemDraft(item: CarriedItemResult, rarity: OriginRarity): CarriedItemDraft {

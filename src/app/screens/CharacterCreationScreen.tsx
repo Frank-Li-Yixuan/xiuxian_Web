@@ -204,6 +204,7 @@ export function CharacterCreationScreen({
             >
               <span className="ccui2-card-slot">{card.slotLabel} · {card.locked ? "已锁" : "未锁"}</span>
               <strong>{card.name}</strong>
+              <em>{card.fateAlignmentLabel}</em>
               <small>{card.qualityLabel} · {card.tags.join(" / ")}</small>
             </button>
           ))}
@@ -558,18 +559,51 @@ function renderDetailBody(
         <section data-detail-section="destiny" data-selected-detail-slot={selectedCard.slot}>
           <h2>{selectedCard.name}</h2>
           <p>品质：{selectedCard.qualityLabel}</p>
+          <p>{selectedCard.fateAlignmentLabel}</p>
           <p>{selectedCard.description}</p>
           <p>{selectedCard.tags.join(" / ")}</p>
           <p>正向语义：{selectedCard.positiveEffects.join(" / ")}</p>
           <p className="ccui2-detail-warning">代价语义：{selectedCard.negativeEffects.join(" / ")}</p>
           <p>锁定状态：{selectedCard.locked ? "已锁定" : "未锁定"}</p>
           <p>天机值：{viewModel.fateMeter.value}，剩余锁：{viewModel.lockBudget.locksRemaining}/{viewModel.lockBudget.maxLocks}</p>
+          {selectedCard.debugMutationSource === undefined ? null : (
+            <section data-destiny-mutation-source="true">
+              <h3>Debug 变异来源</h3>
+              <p>{selectedCard.debugMutationSource.traitId}</p>
+              <p>{selectedCard.debugMutationSource.reasonTags.join(" / ")}</p>
+            </section>
+          )}
+          {selectedCard.synergies.map((synergy) => (
+            <p key={synergy.id} data-destiny-synergy={synergy.id}>
+              共鸣：{synergy.name} / {synergy.effects.join(" / ")}
+            </p>
+          ))}
           {viewModel.synergyWarnings.map((warning) => (
-            <p key={warning}>共鸣：{warning}</p>
+            <p key={warning} data-destiny-synergy-warning="true">共鸣：{warning}</p>
           ))}
           {viewModel.conflictWarnings.map((warning) => (
-            <p key={warning} className="ccui2-detail-warning">警告：{warning}</p>
+            <p key={warning} className="ccui2-detail-warning" data-destiny-conflict-warning="true">警告：{warning}</p>
           ))}
+          {selectedCard.lifeImpactHooks.length === 0 ? null : (
+            <section data-destiny-life-impact="true">
+              <h3>人生影响</h3>
+              {selectedCard.lifeImpactHooks.map((hook) => (
+                <p key={`${hook.phase}:${hook.hook}`} data-destiny-life-hook={hook.hook}>
+                  {hook.phase} / {hook.hook} / {hook.visible}
+                </p>
+              ))}
+            </section>
+          )}
+          {selectedCard.modeProjectionBuckets.length === 0 ? null : (
+            <section data-destiny-mode-projections="true">
+              <h3>模式投射</h3>
+              {selectedCard.modeProjectionBuckets.map((bucket) => (
+                <p key={bucket.bucket} data-destiny-mode-projection={bucket.bucket}>
+                  {bucket.label}: {bucket.tags.join(" / ")}
+                </p>
+              ))}
+            </section>
+          )}
         </section>
       );
     case "origin":

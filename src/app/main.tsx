@@ -11,6 +11,8 @@ import { Dev3dCombatLabScreen } from "./screens/Dev3dCombatLabScreen";
 import { DevAudioAssetsScreen } from "./screens/DevAudioAssetsScreen";
 import { DevCanvasVfxDemoScreen } from "./screens/DevCanvasVfxDemoScreen";
 import { DevCombatAssetPlaygroundScreen } from "./screens/DevCombatAssetPlaygroundScreen";
+import { DevFateMatrixScreen } from "./screens/DevFateMatrixScreen";
+import { DevOriginFateDebugScreen } from "./screens/DevOriginFateDebugScreen";
 import { MainMenuApp } from "./MainMenuApp";
 import { VfxLabScreen } from "./vfx-lab/VfxLabScreen";
 import "./main-menu.css";
@@ -36,6 +38,10 @@ createRoot(root).render(
       <DevCanvasVfxDemoScreen />
     ) : window.location.pathname === "/dev/combat-asset-playground" ? (
       <DevCombatAssetPlaygroundScreen />
+    ) : window.location.pathname === "/dev/fate-matrix" ? (
+      <DevFateMatrixScreen />
+    ) : window.location.pathname === "/dev/origin-fate-debug" ? (
+      <DevOriginFateDebugScreen />
     ) : window.location.pathname === "/dev/ui-components" ? (
       <DevUiComponentsScreen />
     ) : window.location.pathname === "/dev/ui-system" ? (

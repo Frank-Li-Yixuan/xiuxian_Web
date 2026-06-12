@@ -8,6 +8,7 @@ import {
   DefaultDestinyRoller,
   generateDestinyRollDraft
 } from "../../src/characterCreation/destiny/DestinyRoller";
+import { evaluateNinePalace } from "../../src/ninePalace/NinePalaceScoring";
 import type {
   DestinyDataBundle,
   DestinyQuality,
@@ -268,6 +269,18 @@ function normalizeAvailableQualityWeights(
 }
 
 function makeOpeningDraft(destinyBiasTags: readonly string[]): OpeningInnateDraft {
+  const attributes = {
+    jing: 12,
+    qi: 12,
+    shen: 12,
+    rootBone: 50,
+    comprehension: 50,
+    inspiration: 50,
+    fortune: 50,
+    heart: 50,
+    lifespan: 50
+  };
+
   return {
     draftId: "opening_draft_for_destiny",
     seed: "opening-seed",
@@ -279,17 +292,17 @@ function makeOpeningDraft(destinyBiasTags: readonly string[]): OpeningInnateDraf
       tags: []
     },
     aptitude: {
-      rootBone: 50,
-      comprehension: 50,
-      inspiration: 50,
-      fortune: 50,
-      heart: 50,
-      lifespan: 50
+      rootBone: attributes.rootBone,
+      comprehension: attributes.comprehension,
+      inspiration: attributes.inspiration,
+      fortune: attributes.fortune,
+      heart: attributes.heart,
+      lifespan: attributes.lifespan
     },
     coreSeed: {
-      jing: 12,
-      qi: 12,
-      shen: 12
+      jing: attributes.jing,
+      qi: attributes.qi,
+      shen: attributes.shen
     },
     spiritualRoot: {
       categoryId: "dual",
@@ -321,6 +334,7 @@ function makeOpeningDraft(destinyBiasTags: readonly string[]): OpeningInnateDraf
       modeBiasTags: [],
       hiddenFateBiasTags: []
     },
+    ninePalaceEvaluation: evaluateNinePalace(attributes),
     distinctivenessScore: 2
   };
 }
