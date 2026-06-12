@@ -8,7 +8,6 @@ import { CharacterCreationScreen } from "../../src/app/screens/CharacterCreation
 import { AssetRegistry } from "../../src/assets/AssetRegistry";
 import type { GeneratedUiAssetId, GeneratedUiAssetRegistry } from "../../src/assets/generatedUiAssets";
 import { CharacterCreationController } from "../../src/character/CharacterCreationController";
-import { loadDestinyV2Registry } from "../../src/destinyV2/DestinyV2Registry";
 import { evaluateNinePalace } from "../../src/ninePalace/NinePalaceScoring";
 import { loadOriginFateRegistry } from "../../src/originFate/OriginFateRegistry";
 import type { NinePalaceAttributes } from "../../src/types/nine-palace-fate-types.v0.1";
@@ -143,7 +142,7 @@ describe("CharacterCreationScreen destiny reroll UI", () => {
     expect(markup).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
   });
 
-  it("renders DEM-C006 mutation source only in destiny detail debug metadata", () => {
+  it("renders MIG-C003 v0.2 summaries and safe mutation explanation without source debug ids", () => {
     const originRegistry = loadOriginFateRegistry();
     const controller = new CharacterCreationController({
       seed: "dem-c006-screen-mutation",
@@ -160,7 +159,6 @@ describe("CharacterCreationScreen destiny reroll UI", () => {
       }))
     });
     const draft = controller.generate({ slotId: "slot_dem_c006_screen_mutation", nowMs: 1_000 });
-    const sourceName = loadDestinyV2Registry().getDestiny("destiny_heaven_jealous_talent").name;
     const hiddenFate = originRegistry.getHiddenFate(draft.originFate.hiddenFateInternal.hiddenFateId);
 
     const markup = renderToStaticMarkup(
@@ -175,10 +173,16 @@ describe("CharacterCreationScreen destiny reroll UI", () => {
     const cardRow = markup.match(/<section class="ccui2-destiny-card-row"[\s\S]*?<\/section>/)?.[0] ?? "";
 
     expect(markup).toContain(draft.destinies.main.name);
-    expect(markup).toContain('data-destiny-mutation-source="true"');
-    expect(markup).toContain("destiny_heaven_jealous_talent");
-    expect(markup).toContain("mutation:anti_result");
-    expect(cardRow).not.toContain(sourceName);
+    expect(markup).toContain("原始天机产生偏转");
+    expect(markup).toContain('data-character-v02-nine-palace="true"');
+    expect(markup).toContain('data-character-v02-destiny-evaluation="true"');
+    expect(markup).toContain('data-character-v02-origin-chain="true"');
+    expect(markup).toContain('data-character-v02-carried-item="true"');
+    expect(markup).toContain('data-character-v02-life-storyline="true"');
+    expect(markup).not.toContain('data-destiny-mutation-source="true"');
+    expect(markup).not.toContain("destiny_heaven_jealous_talent");
+    expect(markup).not.toContain("mutation:anti_result");
+    expect(cardRow).not.toContain("destiny_heaven_jealous_talent");
     expect(markup).not.toContain(hiddenFate.trueName);
     expect(markup).not.toContain("trueName");
     expect(markup).not.toContain("hiddenFateInternal");

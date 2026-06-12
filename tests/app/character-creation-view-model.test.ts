@@ -8,6 +8,7 @@ import { getCharacterCreationSelectionForDetailTarget } from "../../src/app/scre
 import { CharacterCreationController } from "../../src/character/CharacterCreationController";
 import { evaluateNinePalace } from "../../src/ninePalace/NinePalaceScoring";
 import { loadOriginFateRegistry } from "../../src/originFate/OriginFateRegistry";
+import { loadOriginFateNarrativeRegistry } from "../../src/originFate/OriginFateNarrativeRegistry";
 import type { NinePalaceAttributes } from "../../src/types/nine-palace-fate-types.v0.1";
 import type {
   GenerateOpeningInnateInput,
@@ -268,6 +269,61 @@ describe("CharacterCreationViewModel", () => {
     expect(serialized).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
     expect(serialized).not.toContain("hiddenFateInternal");
     expect(serialized).not.toContain("trueName");
+  });
+
+  it("exposes MIG-C003 v0.2 adapter summaries without mutation source or hidden-name leakage", () => {
+    const originRegistry = loadOriginFateRegistry();
+    const narrativeRegistry = loadOriginFateNarrativeRegistry();
+    const controller = new CharacterCreationController({
+      seed: "mig-c003-view-model-v02",
+      openingGenerator: new FixedOpeningGenerator(makeOpeningDraft({
+        jing: 60,
+        qi: 60,
+        shen: 60,
+        rootBone: 60,
+        comprehension: 40,
+        inspiration: 40,
+        fortune: 60,
+        heart: 60,
+        lifespan: 60
+      }))
+    });
+    const draft = controller.generate({ slotId: "slot_mig_c003_vm", nowMs: 1_000 });
+    const hiddenFate = originRegistry.getHiddenFate(draft.originFate.hiddenFateInternal.hiddenFateId);
+
+    const viewModel = createCharacterCreationViewModel(draft, {
+      selectedSlot: "main",
+      activeTab: "destiny"
+    });
+    const mainCard = viewModel.destinyCards[0];
+
+    expect(viewModel.v02.ninePalace.derivedScores.talentScore).toBe(draft.openingInnateDraft.ninePalaceEvaluation.derived.talentScore);
+    expect(viewModel.v02.destinyEvaluationResults).toHaveLength(4);
+    expect(viewModel.v02.destinyEvaluationResults[0]).toMatchObject({
+      finalDestinyId: "destiny_false_heavenly_burden",
+      mutation: {
+        mutated: true,
+        visibleExplanation: "原始天机产生偏转"
+      }
+    });
+    expect(mainCard).toMatchObject({
+      traitId: "destiny_false_heavenly_burden",
+      mutationExplanation: "原始天机产生偏转"
+    });
+    expect(viewModel.v02.originNarrativeSummary.activeStorylineLabels.length).toBeGreaterThan(0);
+    expect(viewModel.v02.carriedItemLifecycleSummary.items.length).toBeGreaterThan(0);
+    expect(viewModel.v02.lifeStorylineInitialScores.storylines.length).toBeGreaterThan(0);
+    expect(viewModel.v02.lifeStageInitialState.identityStageIds).toContain("mortal_child");
+
+    const serialized = JSON.stringify(viewModel);
+    expect(serialized).not.toContain(hiddenFate.trueName);
+    expect(serialized).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
+    expect(serialized).not.toContain("destiny_heaven_jealous_talent");
+    expect(serialized).not.toContain("hiddenFateInternal");
+    expect(serialized).not.toContain("trueName");
+    for (const narrativeHiddenFate of narrativeRegistry.hiddenFates) {
+      expect(serialized).not.toContain(narrativeHiddenFate.trueName);
+    }
   });
 });
 

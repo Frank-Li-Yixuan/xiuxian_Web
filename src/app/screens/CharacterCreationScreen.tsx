@@ -389,7 +389,7 @@ function StatQuickPanel({
 }): ReactElement {
   const rows = [...viewModel.coreTreasureRows, ...viewModel.aptitudeRows];
   return (
-    <XianxiaPanel className="ccui2-side-panel ccui2-stat-panel" tone="calm">
+    <XianxiaPanel className="ccui2-side-panel ccui2-stat-panel" data-character-v02-nine-palace="true" tone="calm">
       <p className="ccui2-panel-kicker">左仪盘</p>
       <h2>九宫速览</h2>
       <div className="ccui2-stat-grid">
@@ -406,6 +406,9 @@ function StatQuickPanel({
           </button>
         ))}
       </div>
+      <p>
+        talentScore {viewModel.v02.ninePalace.derivedScores.talentScore} / destinyPressure {viewModel.v02.ninePalace.derivedScores.destinyPressureScore}
+      </p>
     </XianxiaPanel>
   );
 }
@@ -464,6 +467,12 @@ function OriginFateSummary({
   readonly onOpenItems: () => void;
 }): ReactElement {
   const origin = viewModel.originFate;
+  const legacyCarriedItemSummary = origin.carriedItems
+    .map((item) => `${item.name} / ${item.conversionLabel}`)
+    .join(" / ");
+  const v02CarriedItemSummary = viewModel.v02.carriedItemLifecycleSummary.items
+    .map((item) => `${item.name} / ${item.lifecycleStage} / ${item.affinityBand}`)
+    .join(" / ");
   return (
     <XianxiaPanel className="ccui2-side-panel ccui2-origin-panel" tone="calm">
       <p className="ccui2-panel-kicker">右命简</p>
@@ -479,6 +488,7 @@ function OriginFateSummary({
       </div>
       <dl>
         <div
+          data-character-v02-origin-chain="true"
           data-detail-target="origin"
           role="button"
           tabIndex={0}
@@ -486,9 +496,10 @@ function OriginFateSummary({
           onKeyDown={(event) => activateWithKeyboard(event, onOpenOrigin)}
         >
           <dt>血脉征兆</dt>
-          <dd>{[origin.omen.levelLabel, ...origin.omen.hints, origin.omen.riskHint].join(" / ")}</dd>
+          <dd>{[origin.omen.levelLabel, ...origin.omen.hints, origin.omen.riskHint, ...viewModel.v02.originNarrativeSummary.activeStorylineLabels].join(" / ")}</dd>
         </div>
         <div
+          data-character-v02-carried-item="true"
           data-detail-target="items"
           role="button"
           tabIndex={0}
@@ -496,7 +507,11 @@ function OriginFateSummary({
           onKeyDown={(event) => activateWithKeyboard(event, onOpenItems)}
         >
           <dt>随身物</dt>
-          <dd>{origin.carriedItems.map((item) => `${item.name} / ${item.conversionLabel}`).join(" / ")}</dd>
+          <dd>{[legacyCarriedItemSummary, v02CarriedItemSummary].filter(Boolean).join(" / ")}</dd>
+        </div>
+        <div data-character-v02-life-storyline="true">
+          <dt>人生主线</dt>
+          <dd>{viewModel.v02.lifeStorylineInitialScores.storylines.map((storyline) => `${storyline.label} ${storyline.score}`).join(" / ")}</dd>
         </div>
       </dl>
     </XianxiaPanel>
@@ -566,13 +581,19 @@ function renderDetailBody(
           <p className="ccui2-detail-warning">代价语义：{selectedCard.negativeEffects.join(" / ")}</p>
           <p>锁定状态：{selectedCard.locked ? "已锁定" : "未锁定"}</p>
           <p>天机值：{viewModel.fateMeter.value}，剩余锁：{viewModel.lockBudget.locksRemaining}/{viewModel.lockBudget.maxLocks}</p>
-          {selectedCard.debugMutationSource === undefined ? null : (
-            <section data-destiny-mutation-source="true">
-              <h3>Debug 变异来源</h3>
-              <p>{selectedCard.debugMutationSource.traitId}</p>
-              <p>{selectedCard.debugMutationSource.reasonTags.join(" / ")}</p>
-            </section>
-          )}
+          {viewModel.v02.destinyEvaluationResults
+            .filter((evaluation) => evaluation.slot === selectedCard.slot)
+            .map((evaluation) => (
+              <section key={evaluation.slot} data-character-v02-destiny-evaluation="true">
+                <h3>天命成立 / 变异</h3>
+                <p>{evaluation.eligibility} / {evaluation.alignmentLabel}</p>
+                {selectedCard.mutationExplanation === undefined ? null : (
+                  <p data-destiny-mutation-explanation="true">{selectedCard.mutationExplanation}</p>
+                )}
+                {evaluation.synergyTags.length === 0 ? null : <p>synergy {evaluation.synergyTags.join(" / ")}</p>}
+                {evaluation.conflictWarnings.length === 0 ? null : <p className="ccui2-detail-warning">conflict {evaluation.conflictWarnings.join(" / ")}</p>}
+              </section>
+            ))}
           {selectedCard.synergies.map((synergy) => (
             <p key={synergy.id} data-destiny-synergy={synergy.id}>
               共鸣：{synergy.name} / {synergy.effects.join(" / ")}

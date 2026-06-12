@@ -86,14 +86,18 @@ describe("Character creation DEM-C006 destiny v2 integration", () => {
     expect(ids).not.toContain("destiny_heaven_jealous_talent");
     expect(mutatedCard).toMatchObject({
       fateAlignment: "mutated",
-      mutatedFromTraitId: "destiny_heaven_jealous_talent",
-      debugMutationSource: {
-        traitId: "destiny_heaven_jealous_talent",
-        reasonTags: expect.arrayContaining(["mutation:anti_result"])
+      mutationExplanation: "原始天机产生偏转"
+    });
+    expect(viewModel.v02.destinyEvaluationResults.find((result) => result.slot === "main")).toMatchObject({
+      finalDestinyId: "destiny_false_heavenly_burden",
+      mutation: {
+        mutated: true,
+        visibleExplanation: "原始天机产生偏转"
       }
     });
     expect(JSON.stringify(viewModel)).not.toContain("trueName");
     expect(JSON.stringify(viewModel)).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
+    expect(JSON.stringify(viewModel)).not.toContain("destiny_heaven_jealous_talent");
   });
 });
 

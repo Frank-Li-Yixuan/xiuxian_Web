@@ -6,6 +6,15 @@ import type {
   CoreThreeTreasures,
   DestinyTraitState
 } from "../../character/CharacterCreationTypes";
+import {
+  CHARACTER_CREATION_V02_MUTATION_EXPLANATION,
+  createCharacterCreationV02Projection,
+  type CarriedItemLifecycleSummary,
+  type DestinyEvaluationResult,
+  type LifeStageInitialState,
+  type LifeStorylineInitialScores,
+  type OriginNarrativeChainSummary
+} from "../../character/CharacterCreationV02Adapter";
 import { loadDestinyRegistry } from "../../characterCreation/destiny/DestinyRegistry";
 import { loadDestinyV2Registry } from "../../destinyV2/DestinyV2Registry";
 import type { ElementId, SpiritualRootCategoryId } from "../../types/opening-generator-types.v0.1";
@@ -32,11 +41,6 @@ export interface CharacterCreationDestinySynergyViewModel {
   readonly traits: readonly string[];
   readonly description: string;
   readonly effects: readonly string[];
-}
-
-export interface CharacterCreationDebugMutationSourceViewModel {
-  readonly traitId: string;
-  readonly reasonTags: readonly string[];
 }
 
 export type CharacterCreationDetailTab = "stats" | "root" | "destiny" | "origin" | "items";
@@ -116,14 +120,13 @@ export interface CharacterCreationDestinyCardViewModel {
   readonly fateAlignment?: DestinyTraitState["fateAlignment"];
   readonly fateAlignmentLabel: string;
   readonly fateAlignmentReasonTags: readonly string[];
-  readonly mutatedFromTraitId?: string;
+  readonly mutationExplanation?: string;
   readonly locked: boolean;
   readonly synergyWarnings: readonly string[];
   readonly conflictWarnings: readonly string[];
   readonly synergies: readonly CharacterCreationDestinySynergyViewModel[];
   readonly lifeImpactHooks: readonly CharacterCreationLifeHookViewModel[];
   readonly modeProjectionBuckets: readonly CharacterCreationModeProjectionViewModel[];
-  readonly debugMutationSource?: CharacterCreationDebugMutationSourceViewModel;
 }
 
 export interface CharacterCreationLockTargetViewModel {
@@ -143,12 +146,28 @@ export interface CharacterCreationActionViewModel {
   readonly warning?: string;
 }
 
+export interface CharacterCreationV02ViewModel {
+  readonly ninePalace: {
+    readonly attributes: Readonly<Record<string, number>>;
+    readonly derivedScores: Readonly<Record<string, number>>;
+    readonly threePowers: Readonly<Record<string, number>>;
+    readonly wuxing: Readonly<Record<string, number>>;
+    readonly biasTags: readonly string[];
+  };
+  readonly destinyEvaluationResults: readonly DestinyEvaluationResult[];
+  readonly originNarrativeSummary: OriginNarrativeChainSummary;
+  readonly carriedItemLifecycleSummary: CarriedItemLifecycleSummary;
+  readonly lifeStorylineInitialScores: LifeStorylineInitialScores;
+  readonly lifeStageInitialState: LifeStageInitialState;
+}
+
 export interface CharacterCreationViewModel {
   readonly coreTreasureRows: readonly CharacterCreationNumericRow<CharacterCreationCoreTreasureId>[];
   readonly aptitudeRows: readonly CharacterCreationNumericRow<CharacterCreationAptitudeId>[];
   readonly spiritualRoot: CharacterCreationSpiritualRootViewModel;
   readonly originFate: CharacterCreationOriginFateViewModel;
   readonly destinyCards: readonly CharacterCreationDestinyCardViewModel[];
+  readonly v02: CharacterCreationV02ViewModel;
   readonly selectedLockKey?: CharacterCreationLockKey;
   readonly selectedLock?: CharacterCreationLockTargetViewModel;
   readonly lockTargets: readonly CharacterCreationLockTargetViewModel[];
@@ -276,6 +295,7 @@ export function createCharacterCreationViewModel(
     value: 0,
     guaranteeRareNext: false
   };
+  const v02 = toCharacterCreationV02ViewModel(createCharacterCreationV02Projection(draft));
 
   const selectedLockKey = getCharacterCreationLockKeyForSelection(selection);
   const lockTargets = toLockTargets(draft.locks, locksRemaining, maxLocks);
@@ -297,7 +317,7 @@ export function createCharacterCreationViewModel(
     originFate: toOriginFateViewModel(draft),
     destinyCards: DESTINY_CARD_CONFIG.map((config) => {
       const trait = getTraitForCard(draft, config.slot);
-      const debugMutationSource = getDebugMutationSource(trait);
+      const v02Destiny = v02.destinyEvaluationResults.find((result) => result.slot === config.slot);
       return {
         slot: config.slot,
         slotLabel: config.slotLabel,
@@ -312,17 +332,17 @@ export function createCharacterCreationViewModel(
         negativeEffects: trait.negativeEffects,
         fateAlignment: trait.fateAlignment ?? "neutral",
         fateAlignmentLabel: trait.fateAlignmentLabel ?? "命盘未定",
-        fateAlignmentReasonTags: trait.fateAlignmentReasonTags ?? [],
-        ...(trait.mutatedFromTraitId === undefined ? {} : { mutatedFromTraitId: trait.mutatedFromTraitId }),
+        fateAlignmentReasonTags: filterPublicReasonTags(trait.fateAlignmentReasonTags ?? []),
+        ...(v02Destiny?.mutation.mutated === true ? { mutationExplanation: CHARACTER_CREATION_V02_MUTATION_EXPLANATION } : {}),
         locked: draft.locks[config.lockKey],
         synergyWarnings: draft.destinies.synergyWarnings,
         conflictWarnings: draft.destinies.conflictWarnings,
         synergies: getSynergiesForTrait(draft, trait.traitId),
         lifeImpactHooks: getLifeImpactHooksForTrait(draft, trait.traitId),
-        modeProjectionBuckets: getModeProjectionBucketsForTrait(trait.traitId),
-        ...(debugMutationSource === undefined ? {} : { debugMutationSource })
+        modeProjectionBuckets: getModeProjectionBucketsForTrait(trait.traitId)
       };
     }),
+    v02,
     ...(selectedLockKey === undefined ? {} : { selectedLockKey }),
     ...(selectedLock === undefined ? {} : { selectedLock }),
     lockTargets,
@@ -349,6 +369,62 @@ export function createCharacterCreationViewModel(
     synergyWarnings: draft.destinies.synergyWarnings,
     conflictWarnings: draft.destinies.conflictWarnings,
     warnings: draft.destinies.warnings
+  };
+}
+
+function toCharacterCreationV02ViewModel(
+  projection: ReturnType<typeof createCharacterCreationV02Projection>
+): CharacterCreationV02ViewModel {
+  return {
+    ninePalace: {
+      attributes: { ...projection.ninePalaceEvaluation.attributes },
+      derivedScores: { ...projection.ninePalaceEvaluation.derived },
+      threePowers: { ...projection.ninePalaceEvaluation.threePowers },
+      wuxing: { ...projection.ninePalaceEvaluation.wuxing },
+      biasTags: [
+        ...projection.ninePalaceEvaluation.tags.destinyBiasTags,
+        ...projection.ninePalaceEvaluation.tags.lifeEventBiasTags,
+        ...projection.ninePalaceEvaluation.tags.hiddenFateBiasTags,
+        ...projection.ninePalaceEvaluation.tags.rootBiasTags,
+        ...projection.ninePalaceEvaluation.tags.modeBiasTags
+      ]
+    },
+    destinyEvaluationResults: projection.destinyEvaluationResults.map((result) => ({ ...result })),
+    originNarrativeSummary: {
+      ...projection.originNarrativeSummary,
+      activeStorylineIds: [...projection.originNarrativeSummary.activeStorylineIds],
+      activeStorylineLabels: [...projection.originNarrativeSummary.activeStorylineLabels],
+      canonicalLifeStorylineIds: [...projection.originNarrativeSummary.canonicalLifeStorylineIds],
+      regionTags: [...projection.originNarrativeSummary.regionTags],
+      eventPhaseSeeds: projection.originNarrativeSummary.eventPhaseSeeds.map((phase) => ({
+        ...phase,
+        events: [...phase.events]
+      }))
+    },
+    carriedItemLifecycleSummary: {
+      items: projection.carriedItemLifecycleSummary.items.map((item) => ({
+        ...item,
+        monthlyEventHooks: [...item.monthlyEventHooks],
+        majorChoiceHooks: [...item.majorChoiceHooks],
+        interludeHooks: [...item.interludeHooks],
+        age18Hooks: [...item.age18Hooks]
+      }))
+    },
+    lifeStorylineInitialScores: {
+      storylines: projection.lifeStorylineInitialScores.storylines.map((storyline) => ({
+        ...storyline,
+        tags: [...storyline.tags]
+      })),
+      monthlyEventTags: [...projection.lifeStorylineInitialScores.monthlyEventTags],
+      majorChoiceTags: [...projection.lifeStorylineInitialScores.majorChoiceTags]
+    },
+    lifeStageInitialState: {
+      agePhaseId: projection.lifeStageInitialState.agePhaseId,
+      identityStageIds: [...projection.lifeStageInitialState.identityStageIds],
+      scores: { ...projection.lifeStageInitialState.scores },
+      transitionTokens: [...projection.lifeStageInitialState.transitionTokens],
+      age18Hooks: [...projection.lifeStageInitialState.age18Hooks]
+    }
   };
 }
 
@@ -533,16 +609,8 @@ function getModeProjectionBucketsForTrait(traitId: string): readonly CharacterCr
   }
 }
 
-function getDebugMutationSource(
-  trait: DestinyTraitState
-): CharacterCreationDebugMutationSourceViewModel | undefined {
-  if (trait.mutatedFromTraitId === undefined) {
-    return undefined;
-  }
-  return {
-    traitId: trait.mutatedFromTraitId,
-    reasonTags: (trait.fateAlignmentReasonTags ?? []).filter((tag) => tag.startsWith("mutation:"))
-  };
+function filterPublicReasonTags(tags: readonly string[]): readonly string[] {
+  return tags.filter((tag) => !tag.startsWith("mutation:source:") && !tag.startsWith("mutation:target:"));
 }
 
 function getActiveBudgetedLocks(locks: CharacterCreationLocks): readonly CharacterCreationLockKey[] {
