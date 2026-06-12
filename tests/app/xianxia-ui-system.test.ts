@@ -9,7 +9,7 @@ import { AssetRegistry } from "../../src/assets/AssetRegistry";
 import type { MainMenuAssetId, MainMenuAssetRegistry } from "../../src/assets/mainMenuAssets";
 
 describe("xianxia UI system", () => {
-  it("renders the main menu with mist and spirit-light layers", () => {
+  it("renders the main menu with the original generated background and no mist overlay", () => {
     const markup = renderToStaticMarkup(
       createElement(MainMenuScreen, {
         assets: loadMainMenuRegistry(),
@@ -21,8 +21,9 @@ describe("xianxia UI system", () => {
       })
     );
 
-    expect(markup).toContain("xianxia-mist-layer");
-    expect(markup).toContain("xianxia-spirit-light");
+    expect(markup).toContain("main_menu_bg_qingyun.png");
+    expect(markup).not.toContain("xianxia-mist-layer");
+    expect(markup).not.toContain("xianxia-spirit-light");
     expect(markup).not.toContain("xianxia-cloud-layer");
     expect(markup).not.toContain("xianxia-auspicious-cloud");
     expect(markup).not.toContain("xianxia-crane");
