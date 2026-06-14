@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { CharacterDraftGenerator } from "../../src/character/CharacterDraftGenerator";
+import { buildCharacterOriginV02ProfileShape } from "../../src/character/CharacterCreationV02Adapter";
 import { applyCharacterDraftToProfile } from "../../src/character/CharacterProfileMapper";
 import { createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
 import { createSaveSlotService } from "../../src/save/SaveSlotService";
@@ -21,6 +22,7 @@ describe("CharacterProfileMapper", () => {
       draft,
       nowMs: 2_000
     });
+    const v02ProfileShape = buildCharacterOriginV02ProfileShape(draft);
     service.writeProfile("slot_1", confirmed);
     const loaded = service.readProfile("slot_1");
 
@@ -40,6 +42,9 @@ describe("CharacterProfileMapper", () => {
       background: draft.background,
       hiddenFate: draft.hiddenFate,
       carriedItems: draft.carriedItems,
+      destinyEvaluationResults: v02ProfileShape.destinyEvaluationResults,
+      carriedItemLifecycleSummary: v02ProfileShape.carriedItemLifecycleSummary,
+      lifeStorylineInitialScores: v02ProfileShape.lifeStorylineInitialScores,
       attributeLock: draft.attributeLock,
       spiritualRootLock: draft.spiritualRootLock,
       confirmedAtMs: 2_000

@@ -411,6 +411,7 @@ function toCharacterCreationV02ViewModel(
       }))
     },
     lifeStorylineInitialScores: {
+      source: projection.lifeStorylineInitialScores.source,
       storylines: projection.lifeStorylineInitialScores.storylines.map((storyline) => ({
         ...storyline,
         tags: [...storyline.tags]

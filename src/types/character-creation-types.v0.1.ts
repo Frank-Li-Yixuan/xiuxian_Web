@@ -2,7 +2,10 @@ import type { OpeningInnateDraft } from "./opening-generator-types.v0.1";
 import type { OriginFateDraft } from "./origin-fate-types.v0.1";
 import type { OriginFateNarrativeStateV02 } from "./origin-fate-narrative-types.v0.2";
 import type {
-  DestinyLifeManifestationHookProjection
+  DestinyEffectsProjection,
+  DestinyLifeManifestationHookProjection,
+  DestinyLifeManifestationProjectedHook,
+  DestinyMutationResolutionReason
 } from "./destiny-eligibility-types.v0.1";
 import type {
   DestinyQuality,
@@ -185,6 +188,114 @@ export interface CharacterCreationDraft {
   readonly updatedAtMs: number;
 }
 
+export type CharacterOriginV02Slot = "main" | "secondary0" | "secondary1" | "flaw";
+export type CharacterOriginV02DestinyEligibility = "eligible" | "blocked" | "unknown";
+export type CharacterOriginV02StorylineStatus = "hinted" | "active" | "dominant";
+
+export interface CharacterOriginV02SelectedDestiny {
+  readonly slot: CharacterOriginV02Slot;
+  readonly destinyId: string;
+  readonly name: string;
+  readonly qualityLabel: string;
+  readonly description: string;
+}
+
+export interface CharacterOriginV02DestinyEligibilityResult {
+  readonly destinyId: string;
+  readonly eligible: boolean;
+  readonly supportLevel: "none" | "weak" | "normal" | "strong";
+  readonly reasonTags: readonly string[];
+  readonly mutationCandidate?: string;
+}
+
+export interface CharacterOriginV02DestinyMutationSource {
+  readonly originalDestinyId: string;
+  readonly resolvedDestinyId?: string;
+  readonly reason: DestinyMutationResolutionReason;
+  readonly mutationDepth: number;
+}
+
+export interface CharacterOriginV02DestinyConflictSynergyResult {
+  readonly synergyTags: readonly string[];
+  readonly synergyWarnings: readonly string[];
+  readonly conflictWarnings: readonly string[];
+  readonly warnings: readonly string[];
+  readonly synergies: readonly {
+    readonly ids: readonly string[];
+    readonly name: string;
+    readonly effectTags: readonly string[];
+    readonly warning?: string;
+  }[];
+}
+
+export interface CharacterOriginV02DestinyEvaluationResult {
+  readonly slot: CharacterOriginV02Slot;
+  readonly selectedDestinyIds: readonly string[];
+  readonly selectedDestinies: readonly CharacterOriginV02SelectedDestiny[];
+  readonly originalDestinyId: string;
+  readonly finalDestinyId: string;
+  readonly finalDisplayedDestinyId: string;
+  readonly finalDestinyName: string;
+  readonly publicLabel: string;
+  readonly publicDescription: string;
+  readonly qualityLabel: string;
+  readonly alignment: DestinyFateAlignment;
+  readonly alignmentLabel: string;
+  readonly eligibility: CharacterOriginV02DestinyEligibility;
+  readonly supportLevel?: CharacterOriginV02DestinyEligibilityResult["supportLevel"];
+  readonly eligibilityResult?: CharacterOriginV02DestinyEligibilityResult;
+  readonly mutation: {
+    readonly mutated: boolean;
+    readonly visibleExplanation?: string;
+    readonly source?: CharacterOriginV02DestinyMutationSource;
+  };
+  readonly synergyTags: readonly string[];
+  readonly synergyWarnings: readonly string[];
+  readonly conflictWarnings: readonly string[];
+  readonly conflictSynergy: CharacterOriginV02DestinyConflictSynergyResult;
+  readonly lifeImpactHookTags: readonly string[];
+  readonly lifeManifestationHooks: readonly DestinyLifeManifestationProjectedHook[];
+  readonly modeProjectionTags: readonly string[];
+  readonly modeProjectionHooks: DestinyEffectsProjection;
+}
+
+export interface CharacterOriginV02CarriedItemLifecycleSummary {
+  readonly items: readonly {
+    readonly itemId: string;
+    readonly name: string;
+    readonly lifecycleStage: string;
+    readonly lifecycleText: string;
+    readonly affinity: number;
+    readonly affinityBand: "dormant" | "warm" | "resonant" | "bound";
+    readonly converted: boolean;
+    readonly publicOmenText: string;
+    readonly lifeEventTags: readonly string[];
+    readonly monthlyEventHooks: readonly string[];
+    readonly majorChoiceHooks: readonly string[];
+    readonly interludeHooks: readonly string[];
+    readonly age18Hooks: readonly string[];
+    readonly narrativeChainRefs: readonly string[];
+  }[];
+}
+
+export interface CharacterOriginV02LifeStorylineInitialScores {
+  readonly source: string;
+  readonly storylines: readonly {
+    readonly storylineId: string;
+    readonly label: string;
+    readonly score: number;
+    readonly status: CharacterOriginV02StorylineStatus;
+    readonly tags: readonly string[];
+  }[];
+  readonly monthlyEventTags: readonly string[];
+  readonly majorChoiceTags: readonly string[];
+  readonly debug?: {
+    readonly source: string;
+    readonly signalTags: readonly string[];
+    readonly scoreBreakdownByStoryline: Readonly<Record<string, readonly { readonly source: string; readonly weight: number; readonly note?: string }[]>>;
+  };
+}
+
 export interface CharacterOriginState {
   readonly characterId: string;
   readonly name: string;
@@ -199,6 +310,9 @@ export interface CharacterOriginState {
   readonly background: BackgroundOriginState;
   readonly hiddenFate: HiddenFateState;
   readonly carriedItems: readonly CarriedItemDraft[];
+  readonly destinyEvaluationResults?: readonly CharacterOriginV02DestinyEvaluationResult[];
+  readonly carriedItemLifecycleSummary?: CharacterOriginV02CarriedItemLifecycleSummary;
+  readonly lifeStorylineInitialScores?: CharacterOriginV02LifeStorylineInitialScores;
   readonly attributeLock: boolean;
   readonly spiritualRootLock: boolean;
   readonly confirmedAtMs: number;

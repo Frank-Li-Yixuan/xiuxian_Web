@@ -1,27 +1,40 @@
+import { loadDestinyV2Registry } from "../destinyV2/DestinyV2Registry";
+import { loadLifeStorylineRegistry } from "../lifeStorylines/LifeStorylineRegistry";
+import {
+  STORYLINE_SCORING_ENGINE_SOURCE,
+  StorylineScoringEngine
+} from "../lifeStorylines/StorylineScoringEngine";
 import { createCarriedItemLifecycleHooks } from "../originFate/CarriedItemLifecycleEngine";
 import { buildOriginFateNarrativeStateFromDraft } from "../originFate/OriginFateNarrativeDraftAdapter";
 import {
   loadOriginFateNarrativeRegistry,
   type OriginFateNarrativeRegistry
 } from "../originFate/OriginFateNarrativeRegistry";
-import { createOriginStorylineLifeContext } from "../originFate/OriginNarrativeEngine";
 import type {
   CarriedItemLifecycleStage,
   OriginFateNarrativeStateV02
 } from "../types/origin-fate-narrative-types.v0.2";
 import type {
   DestinyFateAlignment,
+  DestinyFateAlignmentInfo,
   DestinyRollSlotKey,
   NinePalaceDestinyRollDebugInfo
 } from "../types/destiny-types.v0.1";
 import type {
   DestinyConflictSynergyResult,
+  DestinyEffectsProjection,
   DestinyEligibilityResult,
+  DestinyLifeManifestationProjectedHook,
   DestinyMutationResolutionResult
 } from "../types/destiny-eligibility-types.v0.1";
+import type { StorylineStatus } from "../types/life-storylines-types.v0.1";
 import type { NinePalaceEvaluation } from "../types/nine-palace-fate-types.v0.1";
 import type {
   CharacterCreationDraft,
+  CharacterOriginV02CarriedItemLifecycleSummary,
+  CharacterOriginV02DestinyEvaluationResult,
+  CharacterOriginV02LifeStorylineInitialScores,
+  CharacterOriginV02SelectedDestiny,
   DestinyTraitState
 } from "./CharacterCreationTypes";
 
@@ -65,33 +78,9 @@ export interface OriginNarrativeChainSummary {
   }[];
 }
 
-export interface CarriedItemLifecycleSummary {
-  readonly items: readonly {
-    readonly itemId: string;
-    readonly name: string;
-    readonly lifecycleStage: CarriedItemLifecycleStage;
-    readonly lifecycleText: string;
-    readonly affinity: number;
-    readonly affinityBand: "dormant" | "warm" | "resonant" | "bound";
-    readonly converted: boolean;
-    readonly monthlyEventHooks: readonly string[];
-    readonly majorChoiceHooks: readonly string[];
-    readonly interludeHooks: readonly string[];
-    readonly age18Hooks: readonly string[];
-  }[];
-}
+export interface CarriedItemLifecycleSummary extends CharacterOriginV02CarriedItemLifecycleSummary {}
 
-export interface LifeStorylineInitialScores {
-  readonly storylines: readonly {
-    readonly storylineId: string;
-    readonly label: string;
-    readonly score: number;
-    readonly status: LifeStorylinePreviewStatus;
-    readonly tags: readonly string[];
-  }[];
-  readonly monthlyEventTags: readonly string[];
-  readonly majorChoiceTags: readonly string[];
-}
+export interface LifeStorylineInitialScores extends CharacterOriginV02LifeStorylineInitialScores {}
 
 export interface LifeStageInitialState {
   readonly agePhaseId: "infant";
@@ -118,11 +107,21 @@ export interface CharacterCreationV02Projection {
   readonly lifeStageInitialState: LifeStageInitialState;
 }
 
+export interface CharacterOriginV02ProfileShape {
+  readonly destinyEvaluationResults: readonly CharacterOriginV02DestinyEvaluationResult[];
+  readonly carriedItemLifecycleSummary: CarriedItemLifecycleSummary;
+  readonly lifeStorylineInitialScores: LifeStorylineInitialScores;
+}
+
 export interface CharacterCreationV02AdapterContext {
   readonly registry?: OriginFateNarrativeRegistry;
 }
 
 const SLOTS = ["main", "secondary0", "secondary1", "flaw"] as const satisfies readonly CharacterCreationV02Slot[];
+const MODE_PROJECTION_BUCKETS = ["lifeSim", "outerBattlefield", "outgame", "horde", "deckbuilder", "autochess"] as const;
+const DESTINY_V2_REGISTRY = loadDestinyV2Registry();
+const LIFE_STORYLINE_REGISTRY = loadLifeStorylineRegistry();
+const STORYLINE_SCORING_ENGINE = new StorylineScoringEngine({ registry: LIFE_STORYLINE_REGISTRY });
 const PHASE_LABELS = {
   earlyEcho: "早年回声",
   childhoodSeed: "童年伏笔",
@@ -152,8 +151,76 @@ export function createCharacterCreationV02Projection(
     originFateNarrativeState,
     originNarrativeSummary: buildOriginNarrativeSummary(originFateNarrativeState, registry),
     carriedItemLifecycleSummary: buildCarriedItemLifecycleSummary(originFateNarrativeState, registry),
-    lifeStorylineInitialScores: buildLifeStorylineInitialScores(originFateNarrativeState, registry),
+    lifeStorylineInitialScores: buildLifeStorylineInitialScores(draft, originFateNarrativeState),
     lifeStageInitialState: buildLifeStageInitialState(originFateNarrativeState, ninePalaceEvaluation)
+  });
+}
+
+export function buildCharacterOriginV02ProfileShape(
+  draft: CharacterCreationDraft,
+  context: CharacterCreationV02AdapterContext = {}
+): CharacterOriginV02ProfileShape {
+  const projection = createCharacterCreationV02Projection(draft, context);
+  return deepFreeze({
+    destinyEvaluationResults: buildCharacterOriginV02DestinyEvaluationResults(draft),
+    carriedItemLifecycleSummary: projection.carriedItemLifecycleSummary,
+    lifeStorylineInitialScores: projection.lifeStorylineInitialScores
+  });
+}
+
+function buildCharacterOriginV02DestinyEvaluationResults(
+  draft: CharacterCreationDraft
+): readonly CharacterOriginV02DestinyEvaluationResult[] {
+  const debug = draft.destinyRollDraft?.debug.ninePalace;
+  const selectedDestinies = buildSelectedDestinySummaries(draft);
+  const selectedDestinyIds = selectedDestinies.map((destiny) => destiny.destinyId);
+  return SLOTS.map<CharacterOriginV02DestinyEvaluationResult>((slot, index) => {
+    const trait = getTraitForSlot(draft, slot);
+    const alignment = debug?.slotAlignments[slot];
+    const eligibility = debug?.eligibilityResults[index];
+    const mutated = isMutatedDestiny(trait, alignment?.alignment, debug?.mutationResults, trait.traitId);
+    const conflictSynergy = debug?.conflictSynergyResult;
+    const originalDestinyId = getOriginalDestinyId(trait, alignment, debug?.mutationResults);
+    const mutationSource = getMutationSource(originalDestinyId, trait.traitId, debug?.mutationResults);
+    const lifeManifestationHooks = getLifeManifestationHooks(draft, trait.traitId);
+    const modeProjectionHooks = getModeProjectionHooks(trait.traitId);
+    const modeProjectionTags = uniqueStable([
+      ...trait.tags.filter((tag) => isPublicProjectionTag(tag)),
+      ...Object.values(modeProjectionHooks).flat()
+    ]);
+
+    const base = {
+      slot,
+      selectedDestinyIds,
+      selectedDestinies,
+      originalDestinyId,
+      finalDestinyId: trait.traitId,
+      finalDisplayedDestinyId: trait.traitId,
+      finalDestinyName: trait.name,
+      publicLabel: trait.name,
+      publicDescription: trait.description ?? "",
+      qualityLabel: trait.qualityLabel ?? trait.rarity,
+      alignment: alignment?.alignment ?? trait.fateAlignment ?? "neutral",
+      alignmentLabel: alignment?.label ?? trait.fateAlignmentLabel ?? "unknown",
+      eligibility: toEligibilityStatus(eligibility),
+      mutation: toProfileMutationResult(mutated, mutationSource),
+      synergyTags: getSynergyTags(conflictSynergy, trait.traitId),
+      synergyWarnings: conflictSynergy?.synergyWarnings ?? [],
+      conflictWarnings: conflictSynergy?.conflictWarnings ?? [],
+      conflictSynergy: toPublicConflictSynergyResult(conflictSynergy),
+      lifeImpactHookTags: lifeManifestationHooks.map((hook) => hook.hook),
+      lifeManifestationHooks,
+      modeProjectionTags,
+      modeProjectionHooks
+    };
+    if (eligibility === undefined) {
+      return base;
+    }
+    return {
+      ...base,
+      supportLevel: eligibility.supportLevel,
+      eligibilityResult: toPublicEligibilityResult(eligibility)
+    };
   });
 }
 
@@ -229,39 +296,63 @@ function buildCarriedItemLifecycleSummary(
         affinity: itemState.affinity,
         affinityBand: toAffinityBand(itemState.affinity),
         converted: itemState.converted,
+        publicOmenText: state.visibleOmenLines.join(" / ") || item.surfaceDescription,
+        lifeEventTags: uniqueStable([
+          ...item.eventHooks,
+          ...state.lifeEventBiasTags,
+          `item:${item.id}`,
+          `itemLifecycle:${itemState.lifecycleStage}`,
+          `itemAffinity:${toAffinityBand(itemState.affinity)}`
+        ]),
         monthlyEventHooks: item.eventHooks,
         majorChoiceHooks: hookProjection.majorChoiceHooks.filter((hook) => hook.includes(item.id)),
         interludeHooks: item.interludeHooks,
-        age18Hooks: item.age18Conversions
+        age18Hooks: item.age18Conversions,
+        narrativeChainRefs: uniqueStable([
+          `origin:${state.origin.originId}`,
+          `item:${item.id}`,
+          `lifecycle:${itemState.lifecycleStage}`,
+          ...item.interludeHooks.map((id) => `interlude:${id}`),
+          ...item.age18Conversions.map((id) => `age18:${id}`)
+        ])
       };
     })
   };
 }
 
 function buildLifeStorylineInitialScores(
-  state: OriginFateNarrativeStateV02,
-  registry: OriginFateNarrativeRegistry
+  draft: CharacterCreationDraft,
+  state: OriginFateNarrativeStateV02
 ): LifeStorylineInitialScores {
-  const context = createOriginStorylineLifeContext(state.origin, { registry });
-  const storylines = state.origin.activeStorylineIds.map((storylineId) => {
-    const score = clampInteger(45 + Math.round((state.origin.originThreadProgress[storylineId] ?? 0) * 0.4), 0, 100);
+  const evaluation = STORYLINE_SCORING_ENGINE.evaluateDetailed({
+    ageMonths: 0,
+    openingDraft: draft.openingInnateDraft,
+    ninePalaceEvaluation: draft.openingInnateDraft.ninePalaceEvaluation,
+    destinySelection: draft.destinies,
+    originFate: draft.originFate,
+    originFateNarrativeState: state
+  });
+  const storylines = evaluation.storylines.map((storyline) => {
+    const definition = LIFE_STORYLINE_REGISTRY.getStoryline(storyline.storylineId);
     return {
-      storylineId,
-      label: toDisplayId(storylineId),
-      score,
-      status: toStorylineStatus(score),
-      tags: uniqueStable([
-        `storyline:${storylineId}`,
-        ...state.origin.canonicalLifeStorylineIds.map((id) => `lifeStoryline:${id}`),
-        ...state.origin.regionTags.map((tag) => `region:${tag}`)
-      ])
+      storylineId: storyline.storylineId,
+      label: definition.shortName || definition.name || toDisplayId(definition.id),
+      score: storyline.score,
+      status: toPreviewStorylineStatus(storyline.status),
+      tags: [...storyline.tags]
     };
   });
 
   return {
+    source: STORYLINE_SCORING_ENGINE_SOURCE,
     storylines,
-    monthlyEventTags: context.monthlyEventTags.filter(isPublicPreviewTag),
-    majorChoiceTags: context.majorChoiceTags.filter(isPublicPreviewTag)
+    monthlyEventTags: evaluation.monthlyEventTags.filter(isPublicPreviewTag),
+    majorChoiceTags: evaluation.majorChoiceTags.filter(isPublicPreviewTag),
+    debug: {
+      source: STORYLINE_SCORING_ENGINE_SOURCE,
+      signalTags: evaluation.debug.signalTags,
+      scoreBreakdownByStoryline: evaluation.debug.scoreBreakdownByStoryline
+    }
   };
 }
 
@@ -328,6 +419,137 @@ function getSynergyTags(
     .flatMap((synergy) => synergy.effectTags));
 }
 
+function buildSelectedDestinySummaries(draft: CharacterCreationDraft): readonly CharacterOriginV02SelectedDestiny[] {
+  return SLOTS.map((slot) => {
+    const trait = getTraitForSlot(draft, slot);
+    return {
+      slot,
+      destinyId: trait.traitId,
+      name: trait.name,
+      qualityLabel: trait.qualityLabel ?? trait.rarity,
+      description: trait.description ?? ""
+    };
+  });
+}
+
+function getOriginalDestinyId(
+  trait: DestinyTraitState,
+  alignment: DestinyFateAlignmentInfo | undefined,
+  mutationResults: readonly DestinyMutationResolutionResult[] | undefined
+): string {
+  return alignment?.sourceTraitId ??
+    trait.mutatedFromTraitId ??
+    mutationResults?.find((result) => result.action === "mutate" && result.resolvedDestinyId === trait.traitId)?.originalDestinyId ??
+    trait.traitId;
+}
+
+function getMutationSource(
+  originalDestinyId: string,
+  finalDestinyId: string,
+  mutationResults: readonly DestinyMutationResolutionResult[] | undefined
+): CharacterOriginV02DestinyEvaluationResult["mutation"]["source"] {
+  if (originalDestinyId === finalDestinyId) {
+    return undefined;
+  }
+  const result = mutationResults?.find((entry) =>
+    entry.action === "mutate" &&
+    entry.originalDestinyId === originalDestinyId &&
+    entry.resolvedDestinyId === finalDestinyId
+  ) ?? mutationResults?.find((entry) => entry.action === "mutate" && entry.resolvedDestinyId === finalDestinyId);
+  if (result === undefined) {
+    return undefined;
+  }
+  return {
+    originalDestinyId: result.originalDestinyId,
+    ...(result.resolvedDestinyId === undefined ? {} : { resolvedDestinyId: result.resolvedDestinyId }),
+    reason: result.reason,
+    mutationDepth: result.mutationDepth
+  };
+}
+
+function toProfileMutationResult(
+  mutated: boolean,
+  source: CharacterOriginV02DestinyEvaluationResult["mutation"]["source"] | undefined
+): CharacterOriginV02DestinyEvaluationResult["mutation"] {
+  if (!mutated) {
+    return { mutated: false };
+  }
+  if (source === undefined) {
+    return {
+      mutated: true,
+      visibleExplanation: CHARACTER_CREATION_V02_MUTATION_EXPLANATION
+    };
+  }
+  return {
+    mutated: true,
+    visibleExplanation: CHARACTER_CREATION_V02_MUTATION_EXPLANATION,
+    source
+  };
+}
+
+function toPublicEligibilityResult(
+  result: DestinyEligibilityResult
+): NonNullable<CharacterOriginV02DestinyEvaluationResult["eligibilityResult"]> {
+  return {
+    destinyId: result.destinyId,
+    eligible: result.eligible,
+    supportLevel: result.supportLevel,
+    reasonTags: result.reasonTags.filter(isPublicProjectionTag),
+    ...(result.mutationCandidate === undefined ? {} : { mutationCandidate: result.mutationCandidate })
+  };
+}
+
+function toPublicConflictSynergyResult(
+  result: DestinyConflictSynergyResult | undefined
+): CharacterOriginV02DestinyEvaluationResult["conflictSynergy"] {
+  if (result === undefined) {
+    return {
+      synergyTags: [],
+      synergyWarnings: [],
+      conflictWarnings: [],
+      warnings: [],
+      synergies: []
+    };
+  }
+  return {
+    synergyTags: [...result.synergyTags],
+    synergyWarnings: [...result.synergyWarnings],
+    conflictWarnings: [...result.conflictWarnings],
+    warnings: [...result.warnings],
+    synergies: result.synergies.map((synergy) => ({
+      ids: [...synergy.ids],
+      name: synergy.name,
+      effectTags: [...synergy.effectTags],
+      ...(synergy.warning === undefined ? {} : { warning: synergy.warning })
+    }))
+  };
+}
+
+function getLifeManifestationHooks(
+  draft: CharacterCreationDraft,
+  destinyId: string
+): readonly DestinyLifeManifestationProjectedHook[] {
+  return draft.destinies.lifeManifestationHooks?.hooks
+    .filter((hook) => hook.destinyId === destinyId)
+    .map((hook) => ({ ...hook })) ?? [];
+}
+
+function getModeProjectionHooks(destinyId: string): DestinyEffectsProjection {
+  try {
+    const projection = DESTINY_V2_REGISTRY.getModeProjection(destinyId);
+    return Object.fromEntries(
+      MODE_PROJECTION_BUCKETS
+        .map((bucket) => [bucket, projection[bucket]] as const)
+        .filter((entry): entry is readonly [typeof MODE_PROJECTION_BUCKETS[number], readonly string[]] =>
+          entry[1] !== undefined && entry[1].length > 0
+        )
+        .map(([bucket, values]) => [bucket, [...values]])
+    ) as DestinyEffectsProjection;
+  } catch {
+    return {};
+  }
+}
+
 function isPublicProjectionTag(tag: string): boolean {
   return !tag.startsWith("mutation:source:") && !tag.startsWith("mutation:target:");
 }
@@ -349,12 +571,12 @@ function toAffinityBand(value: number): CarriedItemLifecycleSummary["items"][num
   return "dormant";
 }
 
-function toStorylineStatus(score: number): LifeStorylinePreviewStatus {
-  if (score >= 80) {
-    return "dominant";
-  }
-  if (score >= 55) {
+function toPreviewStorylineStatus(status: StorylineStatus): LifeStorylinePreviewStatus {
+  if (status === "active") {
     return "active";
+  }
+  if (status === "dominant" || status === "fated") {
+    return "dominant";
   }
   return "hinted";
 }

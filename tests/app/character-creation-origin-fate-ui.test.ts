@@ -35,9 +35,7 @@ describe("CharacterCreationScreen origin fate UI", () => {
       expect(markup).toContain(item.name);
       expect(markup).toContain(item.conversion.label);
     }
-    expect(markup).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
-    expect(markup).not.toContain(hiddenFate.trueName);
-    expect(markup).not.toContain(String(draft.originFate.hiddenFateInternal.progress));
+    expectNoHiddenFateSpoilers(markup, hiddenFate, draft.originFate.hiddenFateInternal);
   });
 
   it("renders real opening attributes, spiritual root metrics, four destiny cards, and safe origin data", () => {
@@ -79,9 +77,7 @@ describe("CharacterCreationScreen origin fate UI", () => {
       expect(markup).toContain(item.name);
       expect(markup).toContain(item.conversion.label);
     }
-    expect(markup).not.toContain(hiddenFate.trueName);
-    expect(markup).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
-    expect(markup).not.toContain(String(draft.originFate.hiddenFateInternal.progress));
+    expectNoHiddenFateSpoilers(markup, hiddenFate, draft.originFate.hiddenFateInternal);
   });
 
   it("keeps hidden fate internals private after reroll, lock, and divination actions", () => {
@@ -106,9 +102,7 @@ describe("CharacterCreationScreen origin fate UI", () => {
     );
     const visibleText = `${markup}\n${JSON.stringify(viewModel.originFate)}`;
 
-    expect(visibleText).not.toContain(hiddenFate.trueName);
-    expect(visibleText).not.toContain(divined.originFate.hiddenFateInternal.hiddenFateId);
-    expect(visibleText).not.toContain(String(divined.originFate.hiddenFateInternal.progress));
+    expectNoHiddenFateSpoilers(visibleText, hiddenFate, divined.originFate.hiddenFateInternal);
   });
 
   it("renders stats, root, origin, and item drawer bodies with explanatory visible text only", () => {
@@ -140,11 +134,20 @@ describe("CharacterCreationScreen origin fate UI", () => {
       expect(itemMarkup).toContain(item.conversion.label);
       expect(itemMarkup).toContain(item.conversion.dongfuHook);
     }
-    expect(combined).not.toContain(hiddenFate.trueName);
-    expect(combined).not.toContain(draft.originFate.hiddenFateInternal.hiddenFateId);
-    expect(combined).not.toContain(String(draft.originFate.hiddenFateInternal.progress));
+    expectNoHiddenFateSpoilers(combined, hiddenFate, draft.originFate.hiddenFateInternal);
   });
 });
+
+function expectNoHiddenFateSpoilers(
+  visibleText: string,
+  hiddenFate: { readonly trueName: string },
+  hiddenFateInternal: { readonly hiddenFateId: string; readonly progress: number }
+): void {
+  expect(visibleText).not.toContain(hiddenFate.trueName);
+  expect(visibleText).not.toContain(hiddenFateInternal.hiddenFateId);
+  expect(visibleText).not.toContain("hiddenFateInternal");
+  expect(visibleText).not.toContain(`"progress":${hiddenFateInternal.progress}`);
+}
 
 function renderForDetail(draft: ReturnType<CharacterCreationController["generate"]>, activeTab: "stats" | "root" | "origin" | "items"): string {
   return renderToStaticMarkup(

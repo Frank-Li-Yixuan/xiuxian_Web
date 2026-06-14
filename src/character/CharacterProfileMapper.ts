@@ -1,5 +1,6 @@
 import { cloneOutgameProfile, type OutgameProfileState } from "../outgame/ProfileState";
 import { createInitialLifeSimulationState } from "../lifeSimulation/LifeSimulationInitializer";
+import { buildCharacterOriginV02ProfileShape } from "./CharacterCreationV02Adapter";
 import type { CharacterCreationDraft, CharacterOriginState } from "./CharacterCreationTypes";
 
 export interface ApplyCharacterDraftToProfileOptions {
@@ -36,6 +37,7 @@ export function mapCharacterDraftToOrigin(draft: CharacterCreationDraft, confirm
   if (name.length === 0) {
     throw new Error("character draft name must not be empty");
   }
+  const v02ProfileShape = buildCharacterOriginV02ProfileShape(draft);
   return {
     characterId: draft.draftId,
     name,
@@ -50,6 +52,9 @@ export function mapCharacterDraftToOrigin(draft: CharacterCreationDraft, confirm
     background: draft.background,
     hiddenFate: draft.hiddenFate,
     carriedItems: draft.carriedItems,
+    destinyEvaluationResults: v02ProfileShape.destinyEvaluationResults,
+    carriedItemLifecycleSummary: v02ProfileShape.carriedItemLifecycleSummary,
+    lifeStorylineInitialScores: v02ProfileShape.lifeStorylineInitialScores,
     attributeLock: draft.attributeLock,
     spiritualRootLock: draft.spiritualRootLock,
     confirmedAtMs
