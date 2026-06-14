@@ -1,3 +1,10 @@
+import type { DestinySelectionState } from "./character-creation-types.v0.1";
+import type { LifeSimulationState } from "./life-monthly-events-types.v0.1";
+import type { NinePalaceEvaluation } from "./nine-palace-fate-types.v0.1";
+import type { OpeningInnateDraft } from "./opening-generator-types.v0.1";
+import type { OriginFateNarrativeStateV02 } from "./origin-fate-narrative-types.v0.2";
+import type { OriginFateDraft } from "./origin-fate-types.v0.1";
+
 export type Id = string;
 
 export type LifePhaseId = "infancy" | "childhood" | "youth" | "adolescence" | "awakening";
@@ -86,6 +93,50 @@ export interface EventThreadDefinition {
   readonly failureHooks: readonly string[];
 }
 
+export interface LifeStorylineDefinitionsDataFile {
+  readonly version: string;
+  readonly storylines: readonly LifeStorylineDefinition[];
+}
+
+export interface EventThreadsDataFile {
+  readonly version: string;
+  readonly eventThreads: readonly EventThreadDefinition[];
+}
+
+export interface StorylineStageThreshold {
+  readonly progress?: number;
+  readonly tension?: number;
+  readonly clarity?: number;
+  readonly risk?: number;
+}
+
+export interface StorylineScoringRulesDataFile {
+  readonly version: string;
+  readonly statusThresholds: Readonly<Record<StorylineStatus, readonly [number, number]>>;
+  readonly limits: {
+    readonly maxDominantStorylines: number;
+    readonly targetActiveStorylines: readonly [number, number];
+    readonly maxFatedStorylines: number;
+  };
+  readonly scoreFormula: string;
+  readonly defaultDecayPerYear: Readonly<Record<StorylineStatus, number>>;
+  readonly threadStageThresholds: Readonly<Partial<Record<EventThreadStage, StorylineStageThreshold>>>;
+  readonly playInterludeCandidateRules: readonly {
+    readonly condition: string;
+    readonly weight: number;
+  }[];
+  readonly transitionCandidateRules: readonly {
+    readonly condition: string;
+    readonly hookSource: string;
+  }[];
+}
+
+export interface LifeStorylineDataBundle {
+  readonly storylineDefinitions?: LifeStorylineDefinitionsDataFile;
+  readonly eventThreads?: EventThreadsDataFile;
+  readonly storylineScoringRules?: StorylineScoringRulesDataFile;
+}
+
 export interface StorylineProgress {
   readonly storylineId: Id;
   readonly score: number;
@@ -128,15 +179,30 @@ export interface LifeStorylineDebugInfo {
   readonly scoreBreakdownByStoryline: Readonly<Record<Id, ReadonlyArray<{ source: string; weight: number; note?: string }>>>;
   readonly selectedThreads: readonly Id[];
   readonly suppressedStorylines: readonly Id[];
+  readonly signalTags?: readonly string[];
 }
 
-export interface GenerateStorylineInput {
-  readonly ageMonths: number;
-  readonly openingDraft: unknown;
-  readonly ninePalaceEvaluation: unknown;
-  readonly destinySelection: unknown;
-  readonly originFate: unknown;
-  readonly lifeSimulationState?: unknown;
+export interface StorylineScoringInput {
+  readonly ageMonths?: number;
+  readonly openingDraft: OpeningInnateDraft;
+  readonly ninePalaceEvaluation?: NinePalaceEvaluation;
+  readonly destinySelection: DestinySelectionState;
+  readonly originFate: OriginFateDraft;
+  readonly originFateNarrativeState?: OriginFateNarrativeStateV02;
+  readonly lifeSimulationState?: LifeSimulationState;
+}
+
+export interface StorylineScoringEvaluation {
+  readonly storylines: readonly StorylineProgress[];
+  readonly activeStorylines: readonly StorylineProgress[];
+  readonly monthlyEventTags: readonly string[];
+  readonly majorChoiceTags: readonly string[];
+  readonly debug: LifeStorylineDebugInfo & {
+    readonly signalTags: readonly string[];
+  };
+}
+
+export interface GenerateStorylineInput extends StorylineScoringInput {
   readonly recentMonthlyLogs?: readonly unknown[];
   readonly recentMajorChoiceResults?: readonly unknown[];
   readonly seed: string;
