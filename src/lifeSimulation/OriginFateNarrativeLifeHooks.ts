@@ -10,6 +10,7 @@ import type {
   LifeInterludeHistoryEntry,
   LifeInterludeTriggerContext
 } from "../types/life-interlude-types.v0.1";
+import type { LifeStorylineState } from "../types/life-storylines-types.v0.1";
 import type {
   HiddenFateRevealBand,
   OriginFateNarrativeLifeEventContext,
@@ -23,6 +24,10 @@ import {
   type OriginFateNarrativeRegistry
 } from "../originFate/OriginFateNarrativeRegistry";
 import { buildPublicOmenView } from "../originFate/RevealMisdirectionEngine";
+import {
+  applyMonthlyEventStorylineWeight,
+  type MonthlyEventStorylineProjection
+} from "./MonthlyEventStorylineAdapter";
 
 export interface OriginFateNarrativeLifeHooksContext {
   readonly registry?: OriginFateNarrativeRegistry;
@@ -38,6 +43,8 @@ export interface CreateOriginFateNarrativeLifeEventContextOptions {
 
 export interface OriginFateNarrativeMonthlyLifeEventWeightOptions {
   readonly unknownConditionPolicy?: "ignore" | "block";
+  readonly lifeStorylineState?: LifeStorylineState;
+  readonly storylineProjection?: MonthlyEventStorylineProjection;
 }
 
 export interface CreateOriginFateNarrativeMajorChoiceContextOptions {
@@ -225,7 +232,8 @@ export function calculateOriginFateNarrativeMonthlyLifeEventWeight(
   }
   const tagMatches = event.tags.filter((tag) => hasTag(context.allTags, tag)).length;
   const conditionMatches = event.conditions.filter((condition) => conditionMatchesOriginFateNarrative(condition, context)).length;
-  return event.baseWeight + tagMatches * 10 + conditionMatches * 8;
+  const baseWeight = event.baseWeight + tagMatches * 10 + conditionMatches * 8;
+  return applyMonthlyEventStorylineWeight(event, baseWeight, options.storylineProjection ?? options.lifeStorylineState);
 }
 
 export function filterOriginFateNarrativeMonthlyLifeEventCandidates(

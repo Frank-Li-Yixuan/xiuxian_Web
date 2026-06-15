@@ -14,6 +14,11 @@ import type {
   ChoiceContext,
   LifePhaseId as MajorChoiceLifePhaseId
 } from "../types/major-life-choice-types.v0.1";
+import type { LifeStorylineState } from "../types/life-storylines-types.v0.1";
+import {
+  applyMonthlyEventStorylineWeight,
+  type MonthlyEventStorylineProjection
+} from "./MonthlyEventStorylineAdapter";
 
 const ATTRIBUTE_IDS = [
   "jing",
@@ -59,6 +64,8 @@ export interface NinePalaceLifeEventContext extends LifeEventContext {
 
 export interface NinePalaceMonthlyLifeEventWeightOptions {
   readonly unknownConditionPolicy?: "ignore" | "block";
+  readonly lifeStorylineState?: LifeStorylineState;
+  readonly storylineProjection?: MonthlyEventStorylineProjection;
 }
 
 export interface CreateNinePalaceMajorChoiceContextOptions {
@@ -153,7 +160,8 @@ export function calculateNinePalaceMonthlyLifeEventWeight(
   const tagMatches = event.tags.filter((tag) => hasTag(context.allTags, tag)).length;
   const conditionMatches = event.conditions.filter((condition) => conditionMatchesNinePalace(condition, context)).length;
 
-  return event.baseWeight + tagMatches * 10 + conditionMatches * 8;
+  const baseWeight = event.baseWeight + tagMatches * 10 + conditionMatches * 8;
+  return applyMonthlyEventStorylineWeight(event, baseWeight, options.storylineProjection ?? options.lifeStorylineState);
 }
 
 export function createMajorChoiceContextFromNinePalace(

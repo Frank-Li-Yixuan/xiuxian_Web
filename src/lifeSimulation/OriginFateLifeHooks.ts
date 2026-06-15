@@ -8,6 +8,7 @@ import type {
   ChoiceContext,
   LifePhaseId as MajorChoiceLifePhaseId
 } from "../types/major-life-choice-types.v0.1";
+import type { LifeStorylineState } from "../types/life-storylines-types.v0.1";
 import type {
   BackgroundOriginDefinition,
   CarriedItemDefinition,
@@ -15,6 +16,10 @@ import type {
   HiddenFateVagueLevel,
   OriginFateDraft
 } from "../types/origin-fate-types.v0.1";
+import {
+  applyMonthlyEventStorylineWeight,
+  type MonthlyEventStorylineProjection
+} from "./MonthlyEventStorylineAdapter";
 import {
   loadOriginFateRegistry,
   type OriginFateRegistry
@@ -56,6 +61,8 @@ export interface OriginFateLifeEventContext extends LifeEventContext {
 
 export interface MonthlyLifeEventWeightOptions {
   readonly unknownConditionPolicy?: "ignore" | "block";
+  readonly lifeStorylineState?: LifeStorylineState;
+  readonly storylineProjection?: MonthlyEventStorylineProjection;
 }
 
 export interface CreateMajorChoiceContextOptions {
@@ -144,7 +151,8 @@ export function calculateMonthlyLifeEventWeight(
   const tagMatches = event.tags.filter((tag) => hasTag(context.allTags, tag)).length;
   const conditionMatches = event.conditions.filter((condition) => conditionMatchesOriginFate(condition, context)).length;
 
-  return event.baseWeight + tagMatches * 10 + conditionMatches * 8;
+  const baseWeight = event.baseWeight + tagMatches * 10 + conditionMatches * 8;
+  return applyMonthlyEventStorylineWeight(event, baseWeight, options.storylineProjection ?? options.lifeStorylineState);
 }
 
 export function filterMonthlyLifeEventCandidates(
