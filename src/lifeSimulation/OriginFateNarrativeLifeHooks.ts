@@ -28,6 +28,10 @@ import {
   applyMonthlyEventStorylineWeight,
   type MonthlyEventStorylineProjection
 } from "./MonthlyEventStorylineAdapter";
+import {
+  appendStorylineHooksToChoiceContext,
+  type MajorChoiceStorylineProjection
+} from "./MajorChoiceStorylineAdapter";
 
 export interface OriginFateNarrativeLifeHooksContext {
   readonly registry?: OriginFateNarrativeRegistry;
@@ -58,6 +62,8 @@ export interface CreateOriginFateNarrativeMajorChoiceContextOptions {
   readonly heartKnots?: readonly string[];
   readonly flags?: Readonly<Record<string, number | boolean | string>>;
   readonly repeatedChoiceTags?: Readonly<Record<string, number>>;
+  readonly lifeStorylineState?: LifeStorylineState;
+  readonly storylineChoiceProjection?: MajorChoiceStorylineProjection;
 }
 
 export interface CreateOriginFateNarrativeInterludeContextOptions {
@@ -251,7 +257,7 @@ export function createMajorChoiceContextFromOriginFateNarrative(
 ): ChoiceContext {
   const summary = toSummary(value, context);
 
-  return deepFreeze({
+  const choiceContext = deepFreeze({
     ageMonths: options.ageMonths ?? 0,
     phaseId: options.phaseId ?? "infancy",
     recentMonthlyEventIds: options.recentMonthlyEventIds ?? [],
@@ -277,6 +283,7 @@ export function createMajorChoiceContextFromOriginFateNarrative(
     },
     repeatedChoiceTags: options.repeatedChoiceTags ?? {}
   });
+  return appendStorylineHooksToChoiceContext(choiceContext, options.storylineChoiceProjection ?? options.lifeStorylineState);
 }
 
 export function createLifeInterludeContextFromOriginFateNarrative(

@@ -21,6 +21,10 @@ import {
   type MonthlyEventStorylineProjection
 } from "./MonthlyEventStorylineAdapter";
 import {
+  appendStorylineHooksToChoiceContext,
+  type MajorChoiceStorylineProjection
+} from "./MajorChoiceStorylineAdapter";
+import {
   loadOriginFateRegistry,
   type OriginFateRegistry
 } from "../originFate/OriginFateRegistry";
@@ -77,6 +81,8 @@ export interface CreateMajorChoiceContextOptions {
   readonly flags?: Readonly<Record<string, number | boolean | string>>;
   readonly repeatedChoiceTags?: Readonly<Record<string, number>>;
   readonly registry?: OriginFateRegistry;
+  readonly lifeStorylineState?: LifeStorylineState;
+  readonly storylineChoiceProjection?: MajorChoiceStorylineProjection;
 }
 
 export function getLifeEventBiasFromOriginFate(
@@ -192,7 +198,7 @@ export function createMajorChoiceContextFromOriginFate(
   const bias = getLifeEventBiasFromOriginFate(originFate, options.registry);
   const hiddenOptionsEnabled = shouldAllowHiddenMajorChoiceOptions(originFate);
 
-  return {
+  const context = {
     ageMonths: options.ageMonths ?? 0,
     phaseId: options.phaseId ?? "infancy",
     recentMonthlyEventIds: options.recentMonthlyEventIds ?? [],
@@ -212,6 +218,7 @@ export function createMajorChoiceContextFromOriginFate(
     },
     repeatedChoiceTags: options.repeatedChoiceTags ?? {}
   };
+  return appendStorylineHooksToChoiceContext(context, options.storylineChoiceProjection ?? options.lifeStorylineState);
 }
 
 function isMonthlyLifeEventCandidate(

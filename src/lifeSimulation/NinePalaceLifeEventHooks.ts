@@ -19,6 +19,10 @@ import {
   applyMonthlyEventStorylineWeight,
   type MonthlyEventStorylineProjection
 } from "./MonthlyEventStorylineAdapter";
+import {
+  appendStorylineHooksToChoiceContext,
+  type MajorChoiceStorylineProjection
+} from "./MajorChoiceStorylineAdapter";
 
 const ATTRIBUTE_IDS = [
   "jing",
@@ -82,6 +86,8 @@ export interface CreateNinePalaceMajorChoiceContextOptions {
   readonly heartKnots?: readonly string[];
   readonly flags?: Readonly<Record<string, number | boolean | string>>;
   readonly repeatedChoiceTags?: Readonly<Record<string, number>>;
+  readonly lifeStorylineState?: LifeStorylineState;
+  readonly storylineChoiceProjection?: MajorChoiceStorylineProjection;
 }
 
 export function createNinePalaceLifeEventSummary(
@@ -172,7 +178,7 @@ export function createMajorChoiceContextFromNinePalace(
   const expandedTags = expandAllTags([...summary.lifeEventBiasTags, ...summary.majorChoiceBiasTags]);
   const attributeTags = summary.majorChoiceBiasTags.filter((tag) => tag.startsWith("attrHigh:") || tag.startsWith("attrLow:"));
 
-  return deepFreeze({
+  const context = deepFreeze({
     ageMonths: options.ageMonths ?? 0,
     phaseId: options.phaseId ?? "infancy",
     recentMonthlyEventIds: options.recentMonthlyEventIds ?? [],
@@ -201,6 +207,7 @@ export function createMajorChoiceContextFromNinePalace(
     },
     repeatedChoiceTags: options.repeatedChoiceTags ?? {}
   });
+  return appendStorylineHooksToChoiceContext(context, options.storylineChoiceProjection ?? options.lifeStorylineState);
 }
 
 function toSummary(value: NinePalaceEvaluation | NinePalaceLifeEventSummary): NinePalaceLifeEventSummary {
