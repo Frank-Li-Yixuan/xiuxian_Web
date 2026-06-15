@@ -175,6 +175,27 @@ export interface LifeStorylineState {
   readonly debug?: LifeStorylineDebugInfo;
 }
 
+export interface EventThreadInitializeInput {
+  readonly activeStorylines: readonly StorylineProgress[];
+  readonly ageMonths?: number;
+  readonly signalTags?: readonly string[];
+  readonly statValues?: Readonly<Record<string, number>>;
+  readonly recentHooks?: readonly StorylineHook[];
+}
+
+export interface EventThreadAdvanceHook {
+  readonly id: string;
+  readonly threadId: Id;
+  readonly progressDelta?: number;
+  readonly tensionDelta?: number;
+  readonly clarityDelta?: number;
+  readonly riskDelta?: number;
+  readonly tags?: readonly string[];
+  readonly visibility?: StorylineHook["visibility"];
+  readonly occurredAtMonth?: number;
+  readonly weight?: number;
+}
+
 export interface LifeStorylineDebugInfo {
   readonly scoreBreakdownByStoryline: Readonly<Record<Id, ReadonlyArray<{ source: string; weight: number; note?: string }>>>;
   readonly selectedThreads: readonly Id[];
