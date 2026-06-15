@@ -13,6 +13,7 @@
     "quality:combat-screenshots": "node scripts/quality-gate-screenshots.mjs",
     "quality:character-creation-screenshots": "node scripts/quality-character-creation-screenshots.mjs",
     "telemetry:destiny-v2": "tsx tools/run-destiny-v2-telemetry-report.ts",
+    "telemetry:life-storylines": "tsx tools/run-life-storyline-telemetry-report.ts",
     "validate:data": "tsx tools/validate-data.ts",
     "validate:sim-redesign-data": "tsx tools/validate-sim-redesign-data.ts",
     "validate:world-data": "node scripts/validate_world_data.mjs",

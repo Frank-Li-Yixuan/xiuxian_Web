@@ -9,6 +9,9 @@ import type {
   WuxingInclination
 } from "./nine-palace-fate-types.v0.1";
 import type {
+  LifeStorylineState
+} from "./life-storylines-types.v0.1";
+import type {
   OriginFateNarrativeLifeEventContext,
   OriginFateNarrativeLifeEventSummary,
   OriginFateNarrativeStageTransitionContext,
@@ -241,6 +244,7 @@ export interface LifeSimulationState {
   readonly carriedItemAffinity: Readonly<Record<Id, number>>;
   readonly ninePalaceSummary?: NinePalaceLifeEventSummary;
   readonly originFateNarrativeState?: OriginFateNarrativeStateV02;
+  readonly lifeStorylineState?: LifeStorylineState;
 
   readonly flags: Readonly<Record<string, number | boolean | string>>;
 
