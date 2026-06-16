@@ -47,6 +47,101 @@ export interface LifeInterludeDefinition {
   readonly resultWritebackId: string;
 }
 
+export interface LifeInterludeModeDefinition {
+  readonly id: LifeInterludeMode;
+  readonly name: string;
+  readonly displayName: string;
+  readonly worldWrappers: readonly string[];
+  readonly recommendedAgeRange: readonly [number, number];
+  readonly defaultDurationSeconds?: number;
+  readonly defaultTurnLimit?: number;
+  readonly resultMetrics: readonly string[];
+  readonly primaryRewards: readonly string[];
+}
+
+export interface LifeInterludeModeDefinitionsDataFile {
+  readonly version: string;
+  readonly modes: readonly LifeInterludeModeDefinition[];
+}
+
+export interface LifeInterludeModePreferenceRule {
+  readonly mode: LifeInterludeMode;
+  readonly preferredTags: readonly string[];
+  readonly ageMinMonths: number;
+}
+
+export interface LifeInterludeAgeHardRule {
+  readonly ageMonths: readonly [number, number];
+  readonly allowedModes: readonly LifeInterludeMode[];
+  readonly maxDifficulty?: InterludeDifficultyTier;
+  readonly note?: string;
+}
+
+export interface LifeInterludeTriggerRulesDataFile {
+  readonly version: string;
+  readonly weightFormula: string;
+  readonly modePreferenceRules: readonly LifeInterludeModePreferenceRule[];
+  readonly ageHardRules: readonly LifeInterludeAgeHardRule[];
+}
+
+export interface LifeInterludeEventCatalogDataFile {
+  readonly version: string;
+  readonly interludes: readonly LifeInterludeDefinition[];
+}
+
+export interface LifeInterludeResultWritebackRule {
+  readonly id: string;
+  readonly outcomes: Partial<Record<LifeInterludeOutcome, readonly LifeInterludeWritebackEffect[]>>;
+}
+
+export interface LifeInterludeResultWritebackRulesDataFile {
+  readonly version: string;
+  readonly rules: readonly LifeInterludeResultWritebackRule[];
+}
+
+export interface LifeInterludeFrequencyBudgetPhase {
+  readonly phaseId: "infancy" | "childhood" | "youth" | "adolescence" | "awakening";
+  readonly ageMonths: readonly [number, number];
+  readonly maxPlayableInterludes: number;
+  readonly allowedModes: readonly LifeInterludeMode[];
+  readonly maxDifficulty?: InterludeDifficultyTier;
+}
+
+export interface LifeInterludeFrequencyBudgetFatigueRule {
+  readonly recentPlayableInterludesLast24Months: readonly [number, number];
+  readonly weightMultiplier: number;
+}
+
+export interface LifeInterludeFrequencyBudgetDataFile {
+  readonly version: string;
+  readonly lifetimeHalfYearChoices: number;
+  readonly targetManualPlayableInterludes: {
+    readonly min: number;
+    readonly target: number;
+    readonly max: number;
+  };
+  readonly agePhaseBudgets: readonly LifeInterludeFrequencyBudgetPhase[];
+  readonly cooldowns: {
+    readonly sameModeMonths: number;
+    readonly sameThreadMonths: number;
+    readonly coreStorylineInterludeMonths: number;
+  };
+  readonly fatigue: readonly LifeInterludeFrequencyBudgetFatigueRule[];
+  readonly autoResolveRules: {
+    readonly manualMaxOutcome: LifeInterludeOutcome;
+    readonly autoResolveMaxOutcome: LifeInterludeOutcome;
+    readonly abandonDefaultOutcome: "partialSuccessOrFailure" | LifeInterludeOutcome;
+  };
+}
+
+export interface LifeInterludeDataBundle {
+  readonly modeDefinitions?: LifeInterludeModeDefinitionsDataFile;
+  readonly triggerRules?: LifeInterludeTriggerRulesDataFile;
+  readonly eventCatalog?: LifeInterludeEventCatalogDataFile;
+  readonly resultWritebackRules?: LifeInterludeResultWritebackRulesDataFile;
+  readonly frequencyBudget?: LifeInterludeFrequencyBudgetDataFile;
+}
+
 export interface LifeInterludeTriggerContext {
   readonly ageMonth: number;
   readonly phaseId: string;
