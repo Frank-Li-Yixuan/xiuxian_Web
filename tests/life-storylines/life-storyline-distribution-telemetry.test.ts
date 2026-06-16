@@ -39,6 +39,12 @@ describe("LifeStorylineDistributionTelemetry", () => {
       expect(distribution!.fated.count).toBeGreaterThanOrEqual(0);
     }
     expect(sumBucketCounts(report.activeStorylineCountDistribution)).toBe(SAMPLE_COUNT);
+    expect(sumBucketCounts(report.nonDormantStorylineCountDistribution)).toBe(SAMPLE_COUNT);
+    expect(sumBucketCounts(report.downstreamActiveStorylineCountDistribution)).toBe(SAMPLE_COUNT);
+    expect(report.downstreamActiveTargetRate.count).toBeGreaterThanOrEqual(Math.ceil(SAMPLE_COUNT * 0.85));
+    expect(report.downstreamActiveTargetRate.rate).toBeGreaterThanOrEqual(0.85);
+    expect(report.systemPreludeDownstreamActive.storylineId).toBe("storyline_system_prelude");
+    expect(report.systemPreludeDownstreamActive.downstreamActive.count).toBeLessThan(SAMPLE_COUNT);
     expect(report.unsupportedFatedViolationCount).toBe(0);
     expect(report.unsupportedFatedViolations).toEqual([]);
     expect(report.systemPreludeActivation.storylineId).toBe("storyline_system_prelude");
@@ -49,9 +55,19 @@ describe("LifeStorylineDistributionTelemetry", () => {
       seed: "lst-c007-test-0",
       draftId: "draft_lst-c007-test-0_0",
       activeStorylineCount: expect.any(Number),
+      nonDormantStorylineCount: expect.any(Number),
+      downstreamActiveStorylineCount: expect.any(Number),
+      downstreamActiveStorylineIds: expect.any(Array),
       topStorylineIds: expect.any(Array),
       lifeStorylineState: expect.any(Object)
     });
+    for (const sample of report.debugSamples) {
+      expect(sample.downstreamActiveStorylineCount).toBeGreaterThanOrEqual(1);
+      expect(sample.downstreamActiveStorylineCount).toBeLessThanOrEqual(3);
+      expect(sample.lifeStorylineState.eventThreads.every((thread) =>
+        sample.downstreamActiveStorylineIds.includes(thread.storylineId)
+      )).toBe(true);
+    }
     expect(Object.isFrozen(report)).toBe(true);
     expect(Object.isFrozen(report.debugSamples[0])).toBe(true);
     expect(JSON.stringify(report)).not.toMatch(/trueName|true_name|truename|hiddenFateInternal|SHOULD_NOT_LEAK/i);
@@ -75,6 +91,9 @@ describe("LifeStorylineDistributionTelemetry", () => {
     expect(formatted).toContain("sampleCount: 256");
     expect(formatted).toContain("Storyline Status Distribution");
     expect(formatted).toContain("Active Storyline Count Distribution");
+    expect(formatted).toContain("Downstream Active Storyline Count Distribution");
+    expect(formatted).toContain("downstreamActiveTargetRate");
+    expect(formatted).toContain("systemPreludeDownstreamActive");
     expect(formatted).toContain("System Prelude Activation");
     expect(formatted).toContain("Unsupported Fated Violations");
   });

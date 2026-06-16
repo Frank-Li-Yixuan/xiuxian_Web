@@ -1,4 +1,5 @@
 import type { CharacterOriginState } from "../character/CharacterCreationTypes";
+import { initializeLifeStorylineStateFromCharacterOrigin } from "../lifeStorylines/CharacterOriginLifeStorylineAdapter";
 import type { OutgameProfileState } from "../outgame/ProfileState";
 import { SeededRng, type RngSeed } from "../sim/core/SeededRng";
 import { createNinePalaceLifeEventSummary } from "./NinePalaceLifeEventHooks";
@@ -14,6 +15,9 @@ export function createInitialLifeSimulationState(
   const ninePalaceSummary = ninePalaceEvaluation === undefined
     ? undefined
     : createNinePalaceLifeEventSummary(ninePalaceEvaluation);
+  const lifeStorylineState = initializeLifeStorylineStateFromCharacterOrigin(characterOrigin, {
+    ageMonths: 0
+  });
 
   return deepFreeze({
     profileId: profile.profileId,
@@ -52,6 +56,7 @@ export function createInitialLifeSimulationState(
     carriedItemAffinity: Object.fromEntries(characterOrigin.originFate.carriedItems.map((item) => [item.itemId, 0])),
     ...(ninePalaceSummary === undefined ? {} : { ninePalaceSummary }),
     ...(characterOrigin.originFateNarrativeState === undefined ? {} : { originFateNarrativeState: characterOrigin.originFateNarrativeState }),
+    lifeStorylineState,
     flags: {},
     monthlyLogs: []
   });

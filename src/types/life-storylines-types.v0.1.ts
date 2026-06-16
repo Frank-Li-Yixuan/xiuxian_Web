@@ -157,6 +157,16 @@ export interface EventThreadProgress {
   readonly lastEventMonth?: number;
 }
 
+export interface EventThreadSummary {
+  readonly threadId: Id;
+  readonly storylineId: Id;
+  readonly stage: EventThreadStage;
+  readonly progress: number;
+  readonly tension: number;
+  readonly clarity: number;
+  readonly risk: number;
+}
+
 export interface StorylineHook {
   readonly id: string;
   readonly sourceStorylineId: Id;
@@ -167,16 +177,24 @@ export interface StorylineHook {
 }
 
 export interface LifeStorylineState {
+  readonly storylineScores: readonly StorylineProgress[];
   readonly activeStorylines: readonly StorylineProgress[];
+  readonly downstreamActiveStorylineIds: readonly Id[];
   readonly eventThreads: readonly EventThreadProgress[];
+  readonly threadSummaries: readonly EventThreadSummary[];
   readonly recentHooks: readonly StorylineHook[];
+  readonly recentStorylineHooks: readonly StorylineHook[];
   readonly transitionCandidateHooks: readonly string[];
   readonly playInterludeCandidateHooks: readonly string[];
+  readonly interludeCandidateSeeds: readonly string[];
+  readonly stageTransitionSignals: readonly string[];
   readonly debug?: LifeStorylineDebugInfo;
 }
 
 export interface EventThreadInitializeInput {
+  readonly storylineScores?: readonly StorylineProgress[];
   readonly activeStorylines: readonly StorylineProgress[];
+  readonly downstreamActiveStorylineIds?: readonly Id[];
   readonly ageMonths?: number;
   readonly signalTags?: readonly string[];
   readonly statValues?: Readonly<Record<string, number>>;
@@ -197,6 +215,7 @@ export interface EventThreadAdvanceHook {
 }
 
 export interface LifeStorylineDebugInfo {
+  readonly source?: string;
   readonly scoreBreakdownByStoryline: Readonly<Record<Id, ReadonlyArray<{ source: string; weight: number; note?: string }>>>;
   readonly selectedThreads: readonly Id[];
   readonly suppressedStorylines: readonly Id[];

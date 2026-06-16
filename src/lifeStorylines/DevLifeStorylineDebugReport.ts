@@ -15,8 +15,10 @@ import type {
   OriginFateNarrativeStateV02
 } from "../types/origin-fate-narrative-types.v0.2";
 import type { OriginFateDraft } from "../types/origin-fate-types.v0.1";
+import { selectDownstreamActiveStorylines } from "./DownstreamStorylineSelector";
 import { EventThreadEngine } from "./EventThreadEngine";
 import { loadLifeStorylineRegistry } from "./LifeStorylineRegistry";
+import { sanitizeLifeStorylinePublicText } from "./LifeStorylinePublicSafety";
 import { StorylineScoringEngine } from "./StorylineScoringEngine";
 
 export const DEV_LIFE_STORYLINE_SAMPLE_IDS = [
@@ -24,7 +26,9 @@ export const DEV_LIFE_STORYLINE_SAMPLE_IDS = [
   "sample_waste_sword",
   "sample_yin_dream",
   "sample_thunder_talent",
-  "sample_village_calamity"
+  "sample_village_calamity",
+  "sample_cautious_seclusion",
+  "sample_forbidden_demon_heart"
 ] as const;
 
 export type DevLifeStorylineSampleId = (typeof DEV_LIFE_STORYLINE_SAMPLE_IDS)[number];
@@ -41,8 +45,12 @@ export interface DevLifeStorylinesReport {
   readonly activeStorylines: StorylineScoringEvaluation["activeStorylines"];
   readonly scoreBreakdownByStoryline: StorylineScoringEvaluation["debug"]["scoreBreakdownByStoryline"];
   readonly eventThreads: LifeStorylineState["eventThreads"];
+  readonly downstreamActiveStorylineIds: LifeStorylineState["downstreamActiveStorylineIds"];
   readonly playInterludeCandidateHooks: LifeStorylineState["playInterludeCandidateHooks"];
   readonly transitionCandidateHooks: LifeStorylineState["transitionCandidateHooks"];
+  readonly safety: {
+    readonly trueNameRevealed: false;
+  };
   readonly debug: {
     readonly signalTags: readonly string[];
     readonly selectedThreads: readonly string[];
@@ -74,35 +82,45 @@ interface DevLifeStorylineFixture extends DevLifeStorylineSample {
 export const DEV_LIFE_STORYLINE_SAMPLES: readonly DevLifeStorylineSample[] = Object.freeze([
   {
     id: "sample_alchemy_child",
-    label: "药铺丹修",
+    label: "药铺丹修型",
     summary: "药铺学徒 + 木火灵根 + 丹道奇才 + 药铺铜炉"
   },
   {
     id: "sample_waste_sword",
-    label: "废灵剑修",
-    summary: "破落修士之后 + 残破木剑 + 废灵逆命 + 前世剑魄"
+    label: "废灵剑影型",
+    summary: "破落修士之后 + 残破木剑 + 废灵逆命 + 旧剑回响"
   },
   {
     id: "sample_yin_dream",
-    label: "阴梦魂修",
-    summary: "守墓人之子 + 阴灵根 + 太阴残脉 + 黑骨短笛"
+    label: "月梦魂影型",
+    summary: "守墓人之子 + 阴灵根 + 月影余脉 + 黑骨短笛"
   },
   {
     id: "sample_thunder_talent",
-    label: "天妒雷修",
+    label: "天妒雷修型",
     summary: "山村孤儿 + 雷灵根 + 天妒英才 + 劫雷亲和"
   },
   {
     id: "sample_village_calamity",
-    label: "山村灾劫",
+    label: "山村灾劫型",
     summary: "山村孤儿 + 灾星命格 + 山贼烟尘危机"
+  },
+  {
+    id: "sample_cautious_seclusion",
+    label: "苟道潜修型",
+    summary: "道观杂役 + 清心守拙 + 旧符纸 + 静修倾向"
+  },
+  {
+    id: "sample_forbidden_demon_heart",
+    label: "魔心禁忌型",
+    summary: "守墓人之子 + 阴灵根 + 禁忌心影 + 黑骨短笛"
   }
 ]);
 
 const DEV_LIFE_STORYLINE_FIXTURES: Readonly<Record<DevLifeStorylineSampleId, DevLifeStorylineFixture>> = {
   sample_alchemy_child: {
     id: "sample_alchemy_child",
-    label: "药铺丹修",
+    label: "药铺丹修型",
     summary: "药铺学徒 + 木火灵根 + 丹道奇才 + 药铺铜炉",
     seed: "dev-life-storyline-alchemy",
     ageMonths: 108,
@@ -118,8 +136,8 @@ const DEV_LIFE_STORYLINE_FIXTURES: Readonly<Record<DevLifeStorylineSampleId, Dev
   },
   sample_waste_sword: {
     id: "sample_waste_sword",
-    label: "废灵剑修",
-    summary: "破落修士之后 + 残破木剑 + 废灵逆命 + 前世剑魄",
+    label: "废灵剑影型",
+    summary: "破落修士之后 + 残破木剑 + 废灵逆命 + 旧剑回响",
     seed: "dev-life-storyline-waste-sword",
     ageMonths: 120,
     originId: "origin_fallen_cultivator_descendant",
@@ -135,8 +153,8 @@ const DEV_LIFE_STORYLINE_FIXTURES: Readonly<Record<DevLifeStorylineSampleId, Dev
   },
   sample_yin_dream: {
     id: "sample_yin_dream",
-    label: "阴梦魂修",
-    summary: "守墓人之子 + 阴灵根 + 太阴残脉 + 黑骨短笛",
+    label: "月梦魂影型",
+    summary: "守墓人之子 + 阴灵根 + 月影余脉 + 黑骨短笛",
     seed: "dev-life-storyline-yin-dream",
     ageMonths: 132,
     originId: "origin_grave_keeper_child",
@@ -151,7 +169,7 @@ const DEV_LIFE_STORYLINE_FIXTURES: Readonly<Record<DevLifeStorylineSampleId, Dev
   },
   sample_thunder_talent: {
     id: "sample_thunder_talent",
-    label: "天妒雷修",
+    label: "天妒雷修型",
     summary: "山村孤儿 + 雷灵根 + 天妒英才 + 劫雷亲和",
     seed: "dev-life-storyline-thunder-talent",
     ageMonths: 168,
@@ -181,7 +199,7 @@ const DEV_LIFE_STORYLINE_FIXTURES: Readonly<Record<DevLifeStorylineSampleId, Dev
   },
   sample_village_calamity: {
     id: "sample_village_calamity",
-    label: "山村灾劫",
+    label: "山村灾劫型",
     summary: "山村孤儿 + 灾星命格 + 山贼烟尘危机",
     seed: "dev-life-storyline-village-calamity",
     ageMonths: 180,
@@ -206,6 +224,44 @@ const DEV_LIFE_STORYLINE_FIXTURES: Readonly<Record<DevLifeStorylineSampleId, Dev
       clarity: 12,
       risk: 40
     }]
+  },
+  sample_cautious_seclusion: {
+    id: "sample_cautious_seclusion",
+    label: "苟道潜修型",
+    summary: "道观杂役 + 清心守拙 + 旧符纸 + 静修倾向",
+    seed: "dev-life-storyline-cautious-seclusion",
+    ageMonths: 120,
+    originId: "origin_taoist_temple_helper",
+    canonicalStorylineIds: ["storyline_taoist_incense"],
+    hiddenFateId: "hidden_merit_seed",
+    carriedItemId: "item_old_talisman",
+    destinyIds: [
+      "destiny_clear_glass_heart",
+      "destiny_sitting_forgetfulness",
+      "destiny_cowardly_survivor"
+    ],
+    rootElements: { wood: 55, water: 45 },
+    rootTags: ["root:wood", "root:water"],
+    attributes: baseAttributes({ shen: 78, heart: 88, inspiration: 52, fortune: 64 }),
+    extraSignalTags: ["daoist_temple", "incense", "seclusion", "talisman"],
+    focusedThreadIds: ["thread_incense_sweeping"]
+  },
+  sample_forbidden_demon_heart: {
+    id: "sample_forbidden_demon_heart",
+    label: "魔心禁忌型",
+    summary: "守墓人之子 + 阴灵根 + 禁忌心影 + 黑骨短笛",
+    seed: "dev-life-storyline-forbidden-demon-heart",
+    ageMonths: 132,
+    originId: "origin_grave_keeper_child",
+    canonicalStorylineIds: ["storyline_yin_dream_soul"],
+    hiddenFateId: "hidden_taiyin_remnant_pulse",
+    carriedItemId: "item_black_bone_flute",
+    destinyIds: ["destiny_demon_heart_seed", "destiny_hidden_killer"],
+    rootElements: { yin: 100 },
+    rootTags: ["root:yin"],
+    attributes: baseAttributes({ shen: 90, inspiration: 80, heart: 38 }),
+    extraSignalTags: ["dream", "soul", "yin", "heart_demon", "forbidden"],
+    focusedThreadIds: ["thread_heart_demon_shadow"]
   }
 };
 
@@ -215,9 +271,16 @@ export function buildDevLifeStorylinesReport(
   const fixture = DEV_LIFE_STORYLINE_FIXTURES[sampleId];
   const input = makeScoringInput(fixture);
   const scoring = new StorylineScoringEngine().evaluateDetailed(input);
+  const downstreamActiveStorylines = selectDownstreamActiveStorylines({
+    storylines: scoring.storylines,
+    debug: scoring.debug
+  });
+  const downstreamActiveStorylineIds = downstreamActiveStorylines.map((storyline) => storyline.storylineId);
   const threadEngine = new EventThreadEngine();
   const initialState = threadEngine.initializeThreads({
+    storylineScores: scoring.storylines,
     activeStorylines: scoring.activeStorylines,
+    downstreamActiveStorylineIds,
     ageMonths: fixture.ageMonths,
     signalTags: buildThreadSignalTags(fixture, scoring),
     statValues: toStatValues(fixture.attributes)
@@ -231,8 +294,12 @@ export function buildDevLifeStorylinesReport(
     activeStorylines: scoring.activeStorylines,
     scoreBreakdownByStoryline: scoring.debug.scoreBreakdownByStoryline,
     eventThreads: storylineState.eventThreads,
+    downstreamActiveStorylineIds: storylineState.downstreamActiveStorylineIds,
     playInterludeCandidateHooks: storylineState.playInterludeCandidateHooks,
     transitionCandidateHooks: storylineState.transitionCandidateHooks,
+    safety: {
+      trueNameRevealed: false
+    },
     debug: {
       signalTags: storylineState.debug?.signalTags ?? [],
       selectedThreads: storylineState.debug?.selectedThreads ?? []
@@ -610,8 +677,8 @@ function firstRootElement(elements: Readonly<Partial<Record<ElementId, number>>>
 function toPublicSample(fixture: DevLifeStorylineFixture): DevLifeStorylineSample {
   return {
     id: fixture.id,
-    label: fixture.label,
-    summary: fixture.summary
+    label: sanitizeLifeStorylinePublicText(fixture.label),
+    summary: sanitizeLifeStorylinePublicText(fixture.summary)
   };
 }
 

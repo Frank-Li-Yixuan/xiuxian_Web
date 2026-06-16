@@ -110,7 +110,8 @@ export function createMajorChoiceStorylineProjection(
     ...sixMonthWindow.tags
   ];
 
-  const activeStorylines = input.lifeStorylineState.activeStorylines.filter((storyline) => storyline.status !== "dormant");
+  const activeStorylines = getDownstreamStorylines(input.lifeStorylineState)
+    .filter((storyline) => storyline.status !== "dormant");
   const activeStorylineIds = activeStorylines.map((storyline) => storyline.storylineId);
   const activeThreadIds = input.lifeStorylineState.eventThreads.map((thread) => thread.threadId);
 
@@ -321,6 +322,14 @@ function resolveProjection(
   return options.registry === undefined
     ? createMajorChoiceStorylineProjection(input)
     : createMajorChoiceStorylineProjection({ ...input, registry: options.registry });
+}
+
+function getDownstreamStorylines(state: LifeStorylineState) {
+  const downstreamIds = new Set(state.downstreamActiveStorylineIds);
+  if (downstreamIds.size === 0) {
+    return state.activeStorylines;
+  }
+  return state.activeStorylines.filter((storyline) => downstreamIds.has(storyline.storylineId));
 }
 
 function getMatchingStageDefinitions(

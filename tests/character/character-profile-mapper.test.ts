@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { CharacterDraftGenerator } from "../../src/character/CharacterDraftGenerator";
 import { buildCharacterOriginV02ProfileShape } from "../../src/character/CharacterCreationV02Adapter";
 import { applyCharacterDraftToProfile } from "../../src/character/CharacterProfileMapper";
+import { createInitialLifeSimulationState } from "../../src/lifeSimulation/LifeSimulationInitializer";
 import { createDefaultProfileForSlot } from "../../src/save/ProfileFactory";
 import { createSaveSlotService } from "../../src/save/SaveSlotService";
 
@@ -68,7 +69,63 @@ describe("CharacterProfileMapper", () => {
     for (const item of draft.originFate.carriedItems) {
       expect(loaded?.lifeSimulationState?.carriedItemAffinity[item.itemId]).toBe(0);
     }
+    expect(loaded?.lifeSimulationState?.lifeStorylineState).toEqual(
+      expect.objectContaining({
+        storylineScores: expect.any(Array),
+        downstreamActiveStorylineIds: expect.any(Array),
+        eventThreads: expect.any(Array),
+        threadSummaries: expect.any(Array),
+        recentHooks: [],
+        recentStorylineHooks: [],
+        interludeCandidateSeeds: [],
+        stageTransitionSignals: []
+      })
+    );
+    const lifeStorylineState = loaded?.lifeSimulationState?.lifeStorylineState;
+    expect(lifeStorylineState?.storylineScores.length).toBeGreaterThan(0);
+    expect(lifeStorylineState?.downstreamActiveStorylineIds.length).toBeGreaterThanOrEqual(1);
+    expect(lifeStorylineState?.downstreamActiveStorylineIds.length).toBeLessThanOrEqual(3);
+    expect(lifeStorylineState?.eventThreads.length).toBeGreaterThan(0);
+    expect(lifeStorylineState?.eventThreads.every((thread) =>
+      lifeStorylineState.downstreamActiveStorylineIds.includes(thread.storylineId)
+    )).toBe(true);
+    expect(JSON.stringify(lifeStorylineState)).not.toMatch(/trueName(?!Revealed)|true_name|truename|hiddenFateInternal/i);
     expect(loaded?.realm).toEqual(profile.realm);
+  });
+
+  it("initializes a deterministic fallback life storyline state for old profile origins", () => {
+    const profile = createDefaultProfileForSlot({ slotId: "slot_1", nowMs: 1_000, saveName: "Legacy Origin" });
+    const draft = new CharacterDraftGenerator({ seed: "profile-mapper-legacy-lst" }).generate({
+      slotId: "slot_1",
+      nowMs: 1_500,
+      name: "Lin Wen"
+    });
+    const confirmed = applyCharacterDraftToProfile({ profile, draft, nowMs: 2_000 });
+    if (confirmed.characterOrigin === undefined) {
+      throw new Error("test expected character origin");
+    }
+    const {
+      destinyEvaluationResults: _destinyEvaluationResults,
+      carriedItemLifecycleSummary: _carriedItemLifecycleSummary,
+      lifeStorylineInitialScores: _lifeStorylineInitialScores,
+      ...legacyOrigin
+    } = confirmed.characterOrigin;
+
+    const state = createInitialLifeSimulationState(
+      profile,
+      legacyOrigin,
+      "legacy_profile_fallback_seed"
+    );
+
+    expect(state.lifeStorylineState).toEqual(expect.objectContaining({
+      storylineScores: expect.any(Array),
+      downstreamActiveStorylineIds: expect.any(Array),
+      eventThreads: expect.any(Array)
+    }));
+    expect(state.lifeStorylineState?.debug?.source).toBe("legacy_profile_fallback");
+    expect(state.lifeStorylineState?.downstreamActiveStorylineIds.length).toBeGreaterThanOrEqual(1);
+    expect(state.lifeStorylineState?.downstreamActiveStorylineIds.length).toBeLessThanOrEqual(3);
+    expect(JSON.stringify(state.lifeStorylineState)).not.toMatch(/trueName(?!Revealed)|true_name|truename|hiddenFateInternal/i);
   });
 
   it("rejects a blank confirmed character name", () => {

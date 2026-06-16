@@ -7,6 +7,7 @@ import type {
   StorylineScoringEvaluation,
   StorylineStatus
 } from "../types/life-storylines-types.v0.1";
+import { selectDownstreamActiveStorylines } from "./DownstreamStorylineSelector";
 import { EventThreadEngine } from "./EventThreadEngine";
 import {
   loadLifeStorylineRegistry,
@@ -68,6 +69,11 @@ export interface LifeStorylineSystemPreludeActivation {
   readonly unsupportedFated: LifeStorylineDistributionBucket;
 }
 
+export interface LifeStorylineSystemPreludeDownstreamActivation {
+  readonly storylineId: typeof SYSTEM_PRELUDE_STORYLINE_ID;
+  readonly downstreamActive: LifeStorylineDistributionBucket;
+}
+
 export interface LifeStorylineTelemetryDebugSample {
   readonly seed: string;
   readonly draftId: string;
@@ -75,6 +81,9 @@ export interface LifeStorylineTelemetryDebugSample {
   readonly topStorylineIds: readonly string[];
   readonly activeStorylineIds: readonly string[];
   readonly activeStorylineCount: number;
+  readonly nonDormantStorylineCount: number;
+  readonly downstreamActiveStorylineIds: readonly string[];
+  readonly downstreamActiveStorylineCount: number;
   readonly systemPreludeStatus: StorylineStatus;
   readonly lifeStorylineState: LifeStorylineState;
 }
@@ -85,7 +94,11 @@ export interface LifeStorylineDistributionTelemetryReport {
   readonly seedPrefix: string;
   readonly storylineStatusById: Readonly<Record<string, LifeStorylineStatusDistribution>>;
   readonly activeStorylineCountDistribution: Readonly<Record<string, LifeStorylineDistributionBucket>>;
+  readonly nonDormantStorylineCountDistribution: Readonly<Record<string, LifeStorylineDistributionBucket>>;
+  readonly downstreamActiveStorylineCountDistribution: Readonly<Record<string, LifeStorylineDistributionBucket>>;
+  readonly downstreamActiveTargetRate: LifeStorylineDistributionBucket;
   readonly systemPreludeActivation: LifeStorylineSystemPreludeActivation;
+  readonly systemPreludeDownstreamActive: LifeStorylineSystemPreludeDownstreamActivation;
   readonly unsupportedFatedViolationCount: number;
   readonly unsupportedFatedViolations: readonly LifeStorylineUnsupportedFatedViolation[];
   readonly debugSamples: readonly LifeStorylineTelemetryDebugSample[];
@@ -116,10 +129,14 @@ export function buildLifeStorylineDistributionTelemetry(
   const generator = new CharacterDraftGenerator({ seed: seedPrefix });
   const statusCountsByStoryline = createStatusCountsByStoryline(registry);
   const activeStorylineCountDistribution: Record<string, number> = {};
+  const nonDormantStorylineCountDistribution: Record<string, number> = {};
+  const downstreamActiveStorylineCountDistribution: Record<string, number> = {};
   const unsupportedFatedViolations: LifeStorylineUnsupportedFatedViolation[] = [];
   const debugSamples: LifeStorylineTelemetryDebugSample[] = [];
   let unsupportedFatedViolationCount = 0;
   let unsupportedSystemPreludeFatedCount = 0;
+  let downstreamActiveTargetCount = 0;
+  let systemPreludeDownstreamActiveCount = 0;
 
   for (let index = 0; index < sampleCount; index += 1) {
     const seed = `${seedPrefix}-${index}`;
@@ -132,14 +149,31 @@ export function buildLifeStorylineDistributionTelemetry(
       originFate: draft.originFate,
       ...(draft.originFateNarrativeState === undefined ? {} : { originFateNarrativeState: draft.originFateNarrativeState })
     });
+    const downstreamActiveStorylines = selectDownstreamActiveStorylines({
+      storylines: scoring.storylines,
+      debug: scoring.debug
+    });
+    const downstreamActiveStorylineIds = downstreamActiveStorylines.map((storyline) => storyline.storylineId);
     const storylineState = eventThreadEngine.initializeThreads({
+      storylineScores: scoring.storylines,
       activeStorylines: scoring.activeStorylines,
+      downstreamActiveStorylineIds,
       ageMonths: 0,
       signalTags: buildThreadSignalTags(draft, scoring),
       statValues: toStatValues(draft.openingInnateDraft.ninePalaceEvaluation.attributes)
     });
 
-    increment(activeStorylineCountDistribution, String(scoring.activeStorylines.length));
+    const nonDormantStorylineCount = scoring.activeStorylines.length;
+    const downstreamActiveStorylineCount = downstreamActiveStorylineIds.length;
+    increment(activeStorylineCountDistribution, String(nonDormantStorylineCount));
+    increment(nonDormantStorylineCountDistribution, String(nonDormantStorylineCount));
+    increment(downstreamActiveStorylineCountDistribution, String(downstreamActiveStorylineCount));
+    if (downstreamActiveStorylineCount >= 1 && downstreamActiveStorylineCount <= 3) {
+      downstreamActiveTargetCount += 1;
+    }
+    if (downstreamActiveStorylineIds.includes(SYSTEM_PRELUDE_STORYLINE_ID)) {
+      systemPreludeDownstreamActiveCount += 1;
+    }
     for (const storyline of scoring.storylines) {
       const counts = statusCountsByStoryline[storyline.storylineId];
       if (counts === undefined) {
@@ -158,7 +192,7 @@ export function buildLifeStorylineDistributionTelemetry(
     }
 
     if (debugSamples.length < debugSampleCount) {
-      debugSamples.push(toDebugSample(seed, index, draft, scoring, storylineState));
+      debugSamples.push(toDebugSample(seed, index, draft, scoring, storylineState, downstreamActiveStorylineIds));
     }
   }
 
@@ -175,11 +209,18 @@ export function buildLifeStorylineDistributionTelemetry(
     seedPrefix,
     storylineStatusById,
     activeStorylineCountDistribution: toDistribution(activeStorylineCountDistribution, sampleCount),
+    nonDormantStorylineCountDistribution: toDistribution(nonDormantStorylineCountDistribution, sampleCount),
+    downstreamActiveStorylineCountDistribution: toDistribution(downstreamActiveStorylineCountDistribution, sampleCount),
+    downstreamActiveTargetRate: toBucket(downstreamActiveTargetCount, sampleCount),
     systemPreludeActivation: buildSystemPreludeActivation(
       statusCountsByStoryline[SYSTEM_PRELUDE_STORYLINE_ID] ?? createMutableStatusCounts(),
       unsupportedSystemPreludeFatedCount,
       sampleCount
     ),
+    systemPreludeDownstreamActive: {
+      storylineId: SYSTEM_PRELUDE_STORYLINE_ID,
+      downstreamActive: toBucket(systemPreludeDownstreamActiveCount, sampleCount)
+    },
     unsupportedFatedViolationCount,
     unsupportedFatedViolations,
     debugSamples
@@ -208,6 +249,14 @@ export function formatLifeStorylineDistributionReport(
     "## Active Storyline Count Distribution",
     ...formatDistribution(report.activeStorylineCountDistribution),
     "",
+    "## Non-Dormant Storyline Count Distribution",
+    ...formatDistribution(report.nonDormantStorylineCountDistribution),
+    "",
+    "## Downstream Active Storyline Count Distribution",
+    ...formatDistribution(report.downstreamActiveStorylineCountDistribution),
+    `downstreamActiveTargetRate: ${report.downstreamActiveTargetRate.count} (${formatRate(report.downstreamActiveTargetRate.rate)})`,
+    `systemPreludeDownstreamActive: ${report.systemPreludeDownstreamActive.downstreamActive.count} (${formatRate(report.systemPreludeDownstreamActive.downstreamActive.rate)})`,
+    "",
     "## System Prelude Activation",
     `hintedOrHigher: ${report.systemPreludeActivation.hintedOrHigher.count} (${formatRate(report.systemPreludeActivation.hintedOrHigher.rate)})`,
     `activeOrHigher: ${report.systemPreludeActivation.activeOrHigher.count} (${formatRate(report.systemPreludeActivation.activeOrHigher.rate)})`,
@@ -225,7 +274,7 @@ export function formatLifeStorylineDistributionReport(
     "",
     "## Debug Samples",
     ...report.debugSamples.map((sample) => (
-      `- ${sample.seed}: top=${sample.topStorylineIds.join(",")} activeCount=${sample.activeStorylineCount} system=${sample.systemPreludeStatus}`
+      `- ${sample.seed}: top=${sample.topStorylineIds.join(",")} activeCount=${sample.activeStorylineCount} downstream=${sample.downstreamActiveStorylineIds.join(",")} system=${sample.systemPreludeStatus}`
     ))
   ].join("\n");
 }
@@ -309,7 +358,8 @@ function toDebugSample(
   rerollIndex: number,
   draft: CharacterCreationDraft,
   scoring: StorylineScoringEvaluation,
-  lifeStorylineState: LifeStorylineState
+  lifeStorylineState: LifeStorylineState,
+  downstreamActiveStorylineIds: readonly string[]
 ): LifeStorylineTelemetryDebugSample {
   const systemPrelude = scoring.storylines.find((storyline) => storyline.storylineId === SYSTEM_PRELUDE_STORYLINE_ID);
   return {
@@ -319,6 +369,9 @@ function toDebugSample(
     topStorylineIds: scoring.storylines.slice(0, 3).map((storyline) => storyline.storylineId),
     activeStorylineIds: scoring.activeStorylines.map((storyline) => storyline.storylineId),
     activeStorylineCount: scoring.activeStorylines.length,
+    nonDormantStorylineCount: scoring.activeStorylines.length,
+    downstreamActiveStorylineIds: [...downstreamActiveStorylineIds],
+    downstreamActiveStorylineCount: downstreamActiveStorylineIds.length,
     systemPreludeStatus: systemPrelude?.status ?? "dormant",
     lifeStorylineState
   };

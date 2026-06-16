@@ -7,6 +7,7 @@ import {
   type DevLifeStorylineSampleId,
   type DevLifeStorylinesReport
 } from "../../lifeStorylines/DevLifeStorylineDebugReport";
+import { sanitizeLifeStorylinePublicText } from "../../lifeStorylines/LifeStorylinePublicSafety";
 
 export interface DevLifeStorylinesScreenProps {
   readonly initialSampleId?: DevLifeStorylineSampleId;
@@ -71,6 +72,8 @@ export function DevLifeStorylinesScreen({
         </ul>
       </section>
 
+      <HookList title="downstreamActiveStorylineIds" hooks={report.downstreamActiveStorylineIds} />
+
       <section aria-label="score breakdown" className="dev-life-storylines__section">
         <h2>score breakdown</h2>
         {Object.entries(report.scoreBreakdownByStoryline).map(([storylineId, entries]) => (
@@ -111,6 +114,7 @@ export function DevLifeStorylinesScreen({
 
       <section aria-label="Debug metadata" className="dev-life-storylines__section">
         <h2>Debug Metadata</h2>
+        <p>trueNameRevealed: {String(report.safety.trueNameRevealed)}</p>
         <p>Selected threads: {formatInlineList(report.debug.selectedThreads)}</p>
         <p>Public signal tags: {formatInlineList(report.debug.signalTags)}</p>
       </section>
@@ -151,9 +155,5 @@ function isDevLifeStorylineSampleId(value: string): value is DevLifeStorylineSam
 }
 
 function safeText(value: string): string {
-  return value
-    .replace(/trueName/gi, "[filtered]")
-    .replace(/true_name/gi, "[filtered]")
-    .replace(/truename/gi, "[filtered]")
-    .replace(/internal_hidden/gi, "[filtered]");
+  return sanitizeLifeStorylinePublicText(value);
 }

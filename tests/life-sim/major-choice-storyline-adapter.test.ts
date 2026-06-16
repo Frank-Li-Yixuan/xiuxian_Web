@@ -404,22 +404,44 @@ function makeCarriedItem(itemId: string): CarriedItemNarrativeStateV02 {
   };
 }
 
-function freezeState(state: LifeStorylineState): LifeStorylineState {
+function freezeState(
+  state: Pick<LifeStorylineState, "activeStorylines" | "eventThreads" | "recentHooks" | "transitionCandidateHooks" | "playInterludeCandidateHooks"> &
+    Partial<LifeStorylineState>
+): LifeStorylineState {
+  const downstreamActiveStorylineIds = state.downstreamActiveStorylineIds ??
+    state.activeStorylines.map((storyline) => storyline.storylineId);
+  const recentHooks = Object.freeze(state.recentHooks.map((hook) => Object.freeze({
+    ...hook,
+    tags: Object.freeze([...hook.tags])
+  })));
+  const transitionCandidateHooks = Object.freeze([...state.transitionCandidateHooks]);
+  const playInterludeCandidateHooks = Object.freeze([...state.playInterludeCandidateHooks]);
   return Object.freeze({
     ...state,
+    storylineScores: Object.freeze([...(state.storylineScores ?? state.activeStorylines)]),
     activeStorylines: Object.freeze(state.activeStorylines.map((item) => Object.freeze({
       ...item,
       tags: Object.freeze([...item.tags])
     }))),
+    downstreamActiveStorylineIds: Object.freeze([...downstreamActiveStorylineIds]),
     eventThreads: Object.freeze(state.eventThreads.map((thread) => Object.freeze({
       ...thread,
       flags: Object.freeze({ ...thread.flags })
     }))),
-    recentHooks: Object.freeze(state.recentHooks.map((hook) => Object.freeze({
-      ...hook,
-      tags: Object.freeze([...hook.tags])
-    }))),
-    transitionCandidateHooks: Object.freeze([...state.transitionCandidateHooks]),
-    playInterludeCandidateHooks: Object.freeze([...state.playInterludeCandidateHooks])
+    threadSummaries: Object.freeze((state.threadSummaries ?? state.eventThreads.map((thread) => ({
+      threadId: thread.threadId,
+      storylineId: thread.storylineId,
+      stage: thread.stage,
+      progress: thread.progress,
+      tension: thread.tension,
+      clarity: thread.clarity,
+      risk: thread.risk
+    }))).map((summary) => Object.freeze({ ...summary }))),
+    recentHooks,
+    recentStorylineHooks: Object.freeze([...(state.recentStorylineHooks ?? recentHooks)]),
+    transitionCandidateHooks,
+    playInterludeCandidateHooks,
+    interludeCandidateSeeds: Object.freeze([...(state.interludeCandidateSeeds ?? playInterludeCandidateHooks)]),
+    stageTransitionSignals: Object.freeze([...(state.stageTransitionSignals ?? transitionCandidateHooks)])
   });
 }

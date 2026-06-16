@@ -100,7 +100,7 @@ export function createMonthlyEventStorylineProjection(
   const activeStorylineIds: string[] = [];
   const activeThreadIds: string[] = [];
 
-  for (const storyline of state.activeStorylines) {
+  for (const storyline of getDownstreamStorylines(state)) {
     activeStorylineIds.push(storyline.storylineId);
     weightTags.push(storyline.storylineId, `storyline:${storyline.storylineId}`, ...storyline.tags);
     const definition = getIfPresent(() => registry.getStoryline(storyline.storylineId));
@@ -258,6 +258,14 @@ function resolveProjection(
     return projectionOrState;
   }
   return createMonthlyEventStorylineProjection(projectionOrState, options);
+}
+
+function getDownstreamStorylines(state: LifeStorylineState) {
+  const downstreamIds = new Set(state.downstreamActiveStorylineIds ?? []);
+  if (downstreamIds.size === 0) {
+    return state.activeStorylines;
+  }
+  return state.activeStorylines.filter((storyline) => downstreamIds.has(storyline.storylineId));
 }
 
 function scoreThreadForMonthlyEvent(

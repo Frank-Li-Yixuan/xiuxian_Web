@@ -46,6 +46,8 @@ export function runLifeStorylineTelemetryReport(
   log(`sampleCount=${report.sampleCount}`);
   log(`unsupportedFatedViolations=${report.unsupportedFatedViolationCount}`);
   log(`systemPreludeFatedRate=${report.systemPreludeActivation.fated.rate}`);
+  log(`downstreamActiveTargetRate=${report.downstreamActiveTargetRate.rate}`);
+  log(`systemPreludeDownstreamActiveRate=${report.systemPreludeDownstreamActive.downstreamActive.rate}`);
 
   return {
     outputDir,

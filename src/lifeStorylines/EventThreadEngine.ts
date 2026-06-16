@@ -69,12 +69,23 @@ export class EventThreadEngine {
         .filter((storyline) => storyline.status !== "dormant")
         .map((storyline) => ({ ...storyline, tags: freezeArray([...storyline.tags]) }))
     );
+    const storylineScores = freezeArray(
+      (input.storylineScores ?? input.activeStorylines)
+        .map((storyline) => ({ ...storyline, tags: freezeArray([...storyline.tags]) }))
+    );
+    const downstreamActiveStorylineIds = freezeArray(uniqueStable(
+      (input.downstreamActiveStorylineIds ?? activeStorylines.map((storyline) => storyline.storylineId))
+        .filter((storylineId) => activeStorylines.some((storyline) => storyline.storylineId === storylineId))
+    ));
+    const threadSourceStorylines = downstreamActiveStorylineIds.length === 0
+      ? activeStorylines
+      : activeStorylines.filter((storyline) => downstreamActiveStorylineIds.includes(storyline.storylineId));
     const selectedThreads: EventThreadProgress[] = [];
     const scoreBreakdownByStoryline: Record<string, ScoreBreakdownEntry[]> = {
       [EVENT_THREAD_ENGINE_SOURCE]: []
     };
 
-    for (const storyline of activeStorylines) {
+    for (const storyline of threadSourceStorylines) {
       const candidates = this.registry
         .listThreadsByStoryline(storyline.storylineId)
         .map((thread) => scoreThreadCandidate(thread, input, signals.tokenSet, ageMonths))
@@ -92,7 +103,9 @@ export class EventThreadEngine {
     }
 
     return this.buildState({
+      storylineScores,
       activeStorylines,
+      downstreamActiveStorylineIds,
       eventThreads: selectedThreads,
       recentHooks: sanitizeHooks(input.recentHooks ?? []),
       publicSignalTags: signals.publicTags,
@@ -136,7 +149,9 @@ export class EventThreadEngine {
     }
 
     return this.buildState({
+      storylineScores: state.storylineScores,
       activeStorylines: state.activeStorylines,
+      downstreamActiveStorylineIds: state.downstreamActiveStorylineIds,
       eventThreads,
       recentHooks: [
         ...sanitizeHooks(state.recentHooks),
@@ -157,7 +172,9 @@ export class EventThreadEngine {
   }
 
   private buildState(input: {
+    readonly storylineScores: readonly StorylineProgress[];
     readonly activeStorylines: readonly StorylineProgress[];
+    readonly downstreamActiveStorylineIds: readonly string[];
     readonly eventThreads: readonly EventThreadProgress[];
     readonly recentHooks: readonly StorylineHook[];
     readonly publicSignalTags: readonly string[];
@@ -175,13 +192,27 @@ export class EventThreadEngine {
       ...storyline,
       tags: [...storyline.tags]
     })));
+    const storylineScores = freezeArray(input.storylineScores.map((storyline) => deepFreeze({
+      ...storyline,
+      tags: [...storyline.tags]
+    })));
+    const transitionCandidateHooks = buildTransitionCandidateHooks(activeStorylines, eventThreads, this.registry);
+    const playInterludeCandidateHooks = buildPlayInterludeCandidateHooks(eventThreads, this.registry);
+    const recentHooks = freezeArray(input.recentHooks.map(sanitizeHook));
     return deepFreeze({
+      storylineScores,
       activeStorylines,
+      downstreamActiveStorylineIds: freezeArray([...input.downstreamActiveStorylineIds]),
       eventThreads,
-      recentHooks: freezeArray(input.recentHooks.map(sanitizeHook)),
-      transitionCandidateHooks: buildTransitionCandidateHooks(activeStorylines, eventThreads, this.registry),
-      playInterludeCandidateHooks: buildPlayInterludeCandidateHooks(eventThreads, this.registry),
+      threadSummaries: freezeArray(eventThreads.map(toThreadSummary)),
+      recentHooks,
+      recentStorylineHooks: recentHooks,
+      transitionCandidateHooks,
+      playInterludeCandidateHooks,
+      interludeCandidateSeeds: freezeArray([...playInterludeCandidateHooks]),
+      stageTransitionSignals: freezeArray([...transitionCandidateHooks]),
       debug: {
+        source: EVENT_THREAD_ENGINE_SOURCE,
         scoreBreakdownByStoryline: deepFreeze(cloneBreakdown(input.scoreBreakdownByStoryline)),
         selectedThreads: eventThreads.map((thread) => thread.threadId),
         suppressedStorylines: [],
@@ -273,6 +304,18 @@ function createInitialThreadProgress(
       initializedFromStorylineStatus: storyline.status,
       source: EVENT_THREAD_ENGINE_SOURCE
     }
+  });
+}
+
+function toThreadSummary(thread: EventThreadProgress) {
+  return deepFreeze({
+    threadId: thread.threadId,
+    storylineId: thread.storylineId,
+    stage: thread.stage,
+    progress: thread.progress,
+    tension: thread.tension,
+    clarity: thread.clarity,
+    risk: thread.risk
   });
 }
 
