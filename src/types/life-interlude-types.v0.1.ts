@@ -1,3 +1,10 @@
+import type { LifeSimulationState } from "./life-monthly-events-types.v0.1";
+import type { MajorChoiceOptionInstance } from "./major-life-choice-types.v0.1";
+import type {
+  EventThreadAdvanceHook,
+  LifeStorylineState
+} from "./life-storylines-types.v0.1";
+
 export type LifeInterludeMode = "stg" | "horde" | "deckbuilder" | "formation_auto" | "text_check";
 
 export type InterludeRealityLayer =
@@ -184,6 +191,78 @@ export interface LifeInterludeCandidate {
   readonly debug?: unknown;
 }
 
+export type LifeInterludeTriggerBlockReasonCode =
+  | "ageHardRule"
+  | "ageRange"
+  | "modeNotAllowed"
+  | "difficultyTooHigh"
+  | "realityLayerNotAllowed"
+  | "missingRequiredHook"
+  | "insufficientEvidence";
+
+export interface LifeInterludeCandidateDebug {
+  readonly source: string;
+  readonly matchedTags: readonly string[];
+  readonly matchedHooks: readonly string[];
+  readonly penalties: readonly {
+    readonly source: string;
+    readonly amount: number;
+  }[];
+  readonly fatigueMultiplier: number;
+  readonly weightBreakdown: readonly {
+    readonly source: string;
+    readonly weight: number;
+  }[];
+}
+
+export interface LifeInterludeTriggerBlockReason {
+  readonly definitionId: string;
+  readonly reason: LifeInterludeTriggerBlockReasonCode;
+  readonly message: string;
+}
+
+export interface LifeInterludeTriggerEvaluation {
+  readonly candidates: readonly LifeInterludeCandidate[];
+  readonly blocked: readonly LifeInterludeTriggerBlockReason[];
+  readonly debug: {
+    readonly source: string;
+    readonly signalTags: readonly string[];
+    readonly ageRule?: {
+      readonly ageMonths: readonly [number, number];
+      readonly allowedModes: readonly LifeInterludeMode[];
+      readonly maxDifficulty?: InterludeDifficultyTier;
+    };
+  };
+}
+
+export interface LifeInterludeRunConfigRegistryReader {
+  getInterlude(id: string): LifeInterludeDefinition;
+  getWritebackRule(id: string): LifeInterludeResultWritebackRule;
+  getMode(modeId: string): LifeInterludeModeDefinition;
+  getFrequencyBudget(): LifeInterludeFrequencyBudgetDataFile;
+}
+
+export interface LifeInterludeRunConfigFactoryInput {
+  readonly lifeSimulationState: LifeSimulationState;
+  readonly majorChoiceOption: MajorChoiceOptionInstance;
+  readonly candidate: LifeInterludeCandidate;
+  readonly seed: string;
+  readonly sourceThreadId?: string;
+  readonly registry?: LifeInterludeRunConfigRegistryReader;
+}
+
+export interface LifeInterludeRunConfigDebug {
+  readonly source: string;
+  readonly modeWrapper: string;
+  readonly ageScale: "child" | "youth" | "adolescent";
+  readonly publicTags: readonly string[];
+}
+
+export interface LifeInterludeAutoResolveFallbackInput {
+  readonly config: LifeInterludeRunConfig;
+  readonly seed: string;
+}
+
 export interface LifeInterludeRunConfig {
   readonly interludeRunId: string;
   readonly definitionId: string;
@@ -192,6 +271,7 @@ export interface LifeInterludeRunConfig {
   readonly ageMonth: number;
   readonly sourceChoiceId: string;
   readonly sourceThreadId?: string;
+  readonly resultWritebackId: string;
   readonly difficultyTier: InterludeDifficultyTier;
   readonly durationTargetSeconds?: number;
   readonly turnLimit?: number;
@@ -199,6 +279,61 @@ export interface LifeInterludeRunConfig {
   readonly scenario: LifeInterludeScenario;
   readonly rewards: LifeInterludeRewardTable;
   readonly failurePolicy: LifeInterludeFailurePolicy;
+  readonly debug?: LifeInterludeRunConfigDebug;
+}
+
+export interface LifeInterludeResultWritebackRegistryReader {
+  getWritebackRule(id: string): LifeInterludeResultWritebackRule;
+}
+
+export interface LifeInterludeEventThreadAdvancer {
+  advanceStateByHook(state: LifeStorylineState, hook: EventThreadAdvanceHook): LifeStorylineState;
+}
+
+export interface LifeInterludeResultWritebackInput {
+  readonly state: LifeSimulationState;
+  readonly runConfig: LifeInterludeRunConfig;
+  readonly result: LifeInterludeResult;
+  readonly registry?: LifeInterludeResultWritebackRegistryReader;
+  readonly eventThreadEngine?: LifeInterludeEventThreadAdvancer;
+}
+
+export interface LifeInterludeApplyEffectsInput {
+  readonly state: LifeSimulationState;
+  readonly runConfig: LifeInterludeRunConfig;
+  readonly result: LifeInterludeResult;
+  readonly effects?: readonly LifeInterludeWritebackEffect[];
+  readonly eventThreadEngine?: LifeInterludeEventThreadAdvancer;
+}
+
+export interface LifeInterludeAppliedEffect {
+  readonly effectType: LifeInterludeWritebackEffect["type"] | "destinyFailureHook";
+  readonly source: "registry" | "result" | "destinyFailureHook";
+  readonly target?: string;
+  readonly amount?: number;
+}
+
+export interface LifeInterludeSkippedEffect {
+  readonly reason: string;
+  readonly effectType?: LifeInterludeWritebackEffect["type"] | "hiddenSuccess";
+  readonly target?: string;
+}
+
+export interface LifeInterludeWritebackDebug {
+  readonly source: string;
+  readonly resultWritebackId: string;
+  readonly effectiveOutcome: LifeInterludeOutcome;
+  readonly appliedEffectCount: number;
+  readonly skippedEffectCount: number;
+  readonly generatedHooks: readonly string[];
+}
+
+export interface LifeInterludeWritebackApplication {
+  readonly nextState: LifeSimulationState;
+  readonly appliedEffects: readonly LifeInterludeAppliedEffect[];
+  readonly skippedEffects: readonly LifeInterludeSkippedEffect[];
+  readonly generatedHooks: readonly string[];
+  readonly debug: LifeInterludeWritebackDebug;
 }
 
 export interface LifeInterludePlayerProjection {
