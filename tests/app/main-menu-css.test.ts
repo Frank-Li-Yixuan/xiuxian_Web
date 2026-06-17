@@ -125,4 +125,19 @@ describe("main menu image button css", () => {
     expect(hiddenDialogRule).toContain("pointer-events: none !important");
     expect(hiddenDialogRule).toContain("visibility: hidden");
   });
+
+  it("defines LPI-C006 interlude flow surfaces and reduced-motion rules", () => {
+    expect(css).toContain(".life-interlude-confirm-marker");
+    expect(css).toContain(".life-interlude-transition");
+    expect(css).toContain(".life-interlude-result-panel");
+    expect(css).toContain(".life-interlude-seal");
+    expect(css).toContain(".life-interlude-fact-grid");
+    expect(css).toContain("@keyframes lifeInterludeSealPulse");
+
+    const interludeIndex = css.indexOf(".life-interlude-seal");
+    const reducedMotionSection = css.slice(interludeIndex).match(/@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.life-interlude-result-panel[\s\S]*?\}/)?.[0] ?? "";
+    expect(reducedMotionSection).toContain(".life-interlude-seal");
+    expect(reducedMotionSection).toContain("animation: none");
+    expect(reducedMotionSection).toContain("transition: none");
+  });
 });

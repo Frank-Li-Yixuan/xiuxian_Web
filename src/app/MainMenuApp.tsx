@@ -11,6 +11,17 @@ import {
   type MainMenuAppState
 } from "./MainMenuAppState";
 import { createSaveSlotService } from "../save/SaveSlotService";
+import {
+  buildLifeInterludeUiResultSummary,
+  type LifeInterludeUiResolutionMode,
+  type LifeInterludeUiResultSummary
+} from "./screens/life-simulation/LifeInterludeUiViewModel";
+import {
+  ensurePendingMajorChoiceWithInterludes,
+  resolvePendingLifeInterlude,
+  selectLifeSimulationMajorChoiceOption
+} from "../lifeSimulation/LifeSimulationMajorChoiceInterludeAdapter";
+import type { LifeSimulationState } from "../types/life-monthly-events-types.v0.1";
 import { CharacterCreationScreen } from "./screens/CharacterCreationScreen";
 import { CombatScreen } from "./screens/CombatScreen";
 import { LifeSimulationScreen } from "./screens/LifeSimulationScreen";
@@ -22,18 +33,64 @@ import { SettingsScreen } from "./screens/SettingsScreen";
 const BGM_VOLUME_STORAGE_KEY = "xiuxian-stg.settings.bgmVolume.v0.1";
 const DEFAULT_BGM_VOLUME = 0.56;
 
+interface LifeInterludeUiState {
+  readonly phase: "confirm" | "transition" | "result";
+  readonly resolutionMode: LifeInterludeUiResolutionMode;
+  readonly resultSummary?: LifeInterludeUiResultSummary;
+}
+
 export function MainMenuApp(): ReactElement {
   const saveService = useMemo(() => createSaveSlotService(), []);
   const [assets, setAssets] = useState<MainMenuAssetRegistry | null>(null);
   const [generatedUiAssets, setGeneratedUiAssets] = useState<GeneratedUiAssetRegistry | null>(null);
   const [assetError, setAssetError] = useState<string | null>(null);
   const [bgmVolume, setBgmVolume] = useState(() => readInitialBgmVolume());
+  const [lifeInterludeUiState, setLifeInterludeUiState] = useState<LifeInterludeUiState>({
+    phase: "confirm",
+    resolutionMode: "manualChallenge"
+  });
   const [state, dispatch] = useReducer(
     (current: MainMenuAppState, action: MainMenuAppAction) => mainMenuAppReducer(current, action),
     createInitialMainMenuAppState({ hasAnySave: saveService.hasAnySave() })
   );
 
   useMainMenuBgm(bgmVolume, state.route.screen !== "combat");
+
+  useEffect(() => {
+    if (
+      state.route.screen !== "life_simulation" ||
+      state.activeProfile === null ||
+      state.activeSaveSlotId === null ||
+      lifeInterludeUiState.phase === "result"
+    ) {
+      return;
+    }
+    const lifeSimulationState = state.activeProfile.lifeSimulationState;
+    if (
+      lifeSimulationState === undefined ||
+      lifeSimulationState.pendingMajorChoiceState !== undefined ||
+      lifeSimulationState.pendingInterlude !== undefined
+    ) {
+      return;
+    }
+    const nextLifeSimulationState = ensurePendingMajorChoiceWithInterludes({
+      state: lifeSimulationState,
+      seed: `${state.activeProfile.profileId}:${lifeSimulationState.ageMonths}:major_choice`
+    });
+    if (nextLifeSimulationState === lifeSimulationState) {
+      return;
+    }
+    writeActiveLifeSimulationState(nextLifeSimulationState);
+  }, [lifeInterludeUiState.phase, saveService, state.activeProfile, state.activeSaveSlotId, state.route.screen]);
+
+  useEffect(() => {
+    if (state.route.screen !== "life_simulation") {
+      setLifeInterludeUiState({
+        phase: "confirm",
+        resolutionMode: "manualChallenge"
+      });
+    }
+  }, [state.route.screen]);
 
   useEffect(() => {
     let cancelled = false;
@@ -82,7 +139,7 @@ export function MainMenuApp(): ReactElement {
           service={saveService}
           onBack={() => dispatch({ type: "return_to_main_menu", hasAnySave: saveService.hasAnySave() })}
           onProfileCreated={(slotId, profile) => dispatch({ type: "profile_created", slotId, profile })}
-          onProfileReady={(profile) => dispatch({ type: "profile_ready", profile })}
+          onProfileReady={(slotId, profile) => dispatch({ type: "profile_ready", slotId, profile })}
         />
       );
     case "character_creation":
@@ -104,7 +161,7 @@ export function MainMenuApp(): ReactElement {
               nowMs: saveService.nowMs()
             });
             saveService.writeProfile(state.activeSaveSlotId, completedProfile);
-            dispatch({ type: "profile_ready", profile: completedProfile });
+            dispatch({ type: "profile_ready", slotId: state.activeSaveSlotId, profile: completedProfile });
           }}
         />
       );
@@ -137,15 +194,105 @@ export function MainMenuApp(): ReactElement {
       if (state.activeProfile === null) {
         return <MainMenuScreen assets={assets} canContinue={state.canContinue} onContinue={() => dispatch({ type: "open_save_slots", mode: "continue" })} onExit={() => window.close()} onNewGame={() => dispatch({ type: "open_save_slots", mode: "new" })} onSettings={() => dispatch({ type: "open_settings" })} />;
       }
+      const activeLifeSimulationProfile = state.activeProfile;
       return (
         <LifeSimulationScreen
-          assets={generatedUiAssets}
-          profile={state.activeProfile}
-          {...(state.activeProfile.lifeSimulationState === undefined ? {} : { lifeSimulationState: state.activeProfile.lifeSimulationState })}
+          interludeResolutionMode={lifeInterludeUiState.resolutionMode}
+          interludeUiPhase={lifeInterludeUiState.phase}
+          profile={activeLifeSimulationProfile}
+          {...(activeLifeSimulationProfile.lifeSimulationState === undefined ? {} : { lifeSimulationState: activeLifeSimulationProfile.lifeSimulationState })}
+          {...(lifeInterludeUiState.resultSummary === undefined ? {} : { interludeResultSummary: lifeInterludeUiState.resultSummary })}
+          onBeginInterludeResolution={(resolutionMode) => {
+            setLifeInterludeUiState({
+              phase: "transition",
+              resolutionMode
+            });
+          }}
+          onClearInterludeResult={() => {
+            setLifeInterludeUiState({
+              phase: "confirm",
+              resolutionMode: "manualChallenge"
+            });
+          }}
+          onConfirmInterludeResolution={() => {
+            const currentLifeSimulationState = activeLifeSimulationProfile.lifeSimulationState;
+            const pendingInterlude = currentLifeSimulationState?.pendingInterlude;
+            if (currentLifeSimulationState === undefined || pendingInterlude === undefined) {
+              return;
+            }
+            const nextLifeSimulationState = resolvePendingLifeInterlude({
+              state: currentLifeSimulationState,
+              resolutionMode: lifeInterludeUiState.resolutionMode,
+              seed: `${activeLifeSimulationProfile.profileId}:${currentLifeSimulationState.ageMonths}:interlude:${lifeInterludeUiState.resolutionMode}`
+            });
+            if (nextLifeSimulationState !== currentLifeSimulationState) {
+              const resultSummary = buildLifeInterludeUiResultSummary(
+                currentLifeSimulationState,
+                nextLifeSimulationState,
+                pendingInterlude,
+                lifeInterludeUiState.resolutionMode
+              );
+              writeActiveLifeSimulationState(nextLifeSimulationState);
+              setLifeInterludeUiState({
+                phase: "result",
+                resolutionMode: lifeInterludeUiState.resolutionMode,
+                resultSummary
+              });
+            }
+          }}
+          onChoice={(optionInstanceId) => {
+            const currentLifeSimulationState = activeLifeSimulationProfile.lifeSimulationState;
+            if (currentLifeSimulationState === undefined) {
+              return;
+            }
+            const nextLifeSimulationState = selectLifeSimulationMajorChoiceOption({
+              state: currentLifeSimulationState,
+              optionInstanceId,
+              seed: `${activeLifeSimulationProfile.profileId}:${currentLifeSimulationState.ageMonths}:choice:${optionInstanceId}`
+            });
+            if (nextLifeSimulationState !== currentLifeSimulationState) {
+              writeActiveLifeSimulationState(nextLifeSimulationState);
+              setLifeInterludeUiState({
+                phase: "confirm",
+                resolutionMode: "manualChallenge"
+              });
+            }
+          }}
+          onResolveInterlude={(resolutionMode) => {
+            const currentLifeSimulationState = activeLifeSimulationProfile.lifeSimulationState;
+            if (currentLifeSimulationState === undefined) {
+              return;
+            }
+            const nextLifeSimulationState = resolvePendingLifeInterlude({
+              state: currentLifeSimulationState,
+              resolutionMode,
+              seed: `${activeLifeSimulationProfile.profileId}:${currentLifeSimulationState.ageMonths}:interlude:${resolutionMode}`
+            });
+            if (nextLifeSimulationState !== currentLifeSimulationState) {
+              writeActiveLifeSimulationState(nextLifeSimulationState);
+              setLifeInterludeUiState({
+                phase: "confirm",
+                resolutionMode: "manualChallenge"
+              });
+            }
+          }}
         />
       );
     case "combat":
       return <CombatScreen />;
+  }
+
+  function writeActiveLifeSimulationState(nextLifeSimulationState: LifeSimulationState): void {
+    if (state.activeProfile === null || state.activeSaveSlotId === null) {
+      return;
+    }
+    const nextProfile = {
+      ...state.activeProfile,
+      lifeSimulationState: nextLifeSimulationState,
+      updatedAtMs: saveService.nowMs()
+    };
+    saveService.writeProfile(state.activeSaveSlotId, nextProfile);
+    dispatch({ type: "profile_ready", slotId: state.activeSaveSlotId, profile: nextProfile });
   }
 }
 
