@@ -53,4 +53,19 @@ describe("main menu app flow", () => {
     expect(mainMenuAppReducer(characterCreation, { type: "profile_ready", profile: lifeProfile }).route).toEqual({ screen: "life_simulation" });
     expect(mainMenuAppReducer(characterCreation, { type: "profile_ready", profile: completedProfile }).route).toEqual({ screen: "outgame_home" });
   });
+
+  it("preserves the active save slot when continuing a ready profile", () => {
+    const initial = createInitialMainMenuAppState({ hasAnySave: true });
+    const profile = {
+      ...createDefaultProfileForSlot({ slotId: "slot_3", nowMs: 1_000, saveName: "Continue Slot" }),
+      stage: "life_simulation" as const,
+      lifeSimulation: { status: "simulating" as const, ageYears: 0 }
+    };
+
+    const ready = mainMenuAppReducer(initial, { type: "profile_ready", slotId: "slot_3", profile });
+
+    expect(ready.route).toEqual({ screen: "life_simulation" });
+    expect(ready.activeSaveSlotId).toBe("slot_3");
+    expect(ready.activeProfile?.profileId).toBe("local_slot_3");
+  });
 });

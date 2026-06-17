@@ -1,5 +1,7 @@
 // 《半年重大选择与成功判定系统 v0.1》类型草案
 
+import type { LifeInterludeCandidate } from "./life-interlude-types.v0.1";
+
 export type Id = string;
 
 export type LifePhaseId = "infancy" | "childhood" | "juvenile" | "youth" | "awakening";
@@ -184,6 +186,7 @@ export interface MajorChoiceOptionInstance {
   readonly successChanceLabel: string;
   readonly tags: readonly string[];
   readonly disabledReason?: string;
+  readonly interludeCandidate?: LifeInterludeCandidate;
 }
 
 export interface PendingMajorChoiceState {

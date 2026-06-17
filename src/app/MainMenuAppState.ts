@@ -22,7 +22,7 @@ export type MainMenuAppAction =
   | { readonly type: "open_settings" }
   | { readonly type: "return_to_main_menu"; readonly hasAnySave: boolean }
   | { readonly type: "profile_created"; readonly profile: OutgameProfileState; readonly slotId: SaveSlotId }
-  | { readonly type: "profile_ready"; readonly profile: OutgameProfileState }
+  | { readonly type: "profile_ready"; readonly profile: OutgameProfileState; readonly slotId?: SaveSlotId }
   | { readonly type: "enter_combat" };
 
 export interface CreateInitialMainMenuAppStateOptions {
@@ -69,7 +69,8 @@ export function mainMenuAppReducer(state: MainMenuAppState, action: MainMenuAppA
         ...state,
         route: { screen: action.profile.stage === "life_simulation" ? "life_simulation" : "outgame_home" },
         canContinue: true,
-        activeProfile: action.profile
+        activeProfile: action.profile,
+        activeSaveSlotId: action.slotId ?? state.activeSaveSlotId
       };
     case "enter_combat":
       return {

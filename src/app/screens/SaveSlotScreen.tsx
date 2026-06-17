@@ -14,7 +14,7 @@ export interface SaveSlotScreenProps {
   readonly service: SaveSlotService;
   readonly onBack: () => void;
   readonly onProfileCreated: (slotId: SaveSlotId, profile: OutgameProfileState) => void;
-  readonly onProfileReady: (profile: OutgameProfileState) => void;
+  readonly onProfileReady: (slotId: SaveSlotId, profile: OutgameProfileState) => void;
 }
 
 export function SaveSlotScreen({ assets, generatedUiAssets: _generatedUiAssets, mode, service, onBack, onProfileCreated, onProfileReady }: SaveSlotScreenProps): ReactElement {
@@ -41,7 +41,7 @@ export function SaveSlotScreen({ assets, generatedUiAssets: _generatedUiAssets, 
         if (getSaveSlotContinuationTarget(selectedSlot.profile) === "character_creation") {
           onProfileCreated(selectedSlot.slotId, selectedSlot.profile);
         } else {
-          onProfileReady(selectedSlot.profile);
+          onProfileReady(selectedSlot.slotId, selectedSlot.profile);
         }
       }
       return;

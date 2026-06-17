@@ -9,6 +9,13 @@ import type {
   WuxingInclination
 } from "./nine-palace-fate-types.v0.1";
 import type {
+  LifeInterludeCandidate,
+  LifeInterludeHistoryEntry,
+  LifeInterludeResult,
+  LifeInterludeRunConfig
+} from "./life-interlude-types.v0.1";
+import type { PendingMajorChoiceState } from "./major-life-choice-types.v0.1";
+import type {
   LifeStorylineState
 } from "./life-storylines-types.v0.1";
 import type {
@@ -205,6 +212,17 @@ export interface PendingMajorChoiceRef {
   };
 }
 
+export type PendingLifeInterludeStatus = "pending" | "resolved";
+
+export interface PendingLifeInterludeState {
+  readonly sourceMajorChoiceEventInstanceId: Id;
+  readonly sourceOptionInstanceId: Id;
+  readonly candidate: LifeInterludeCandidate;
+  readonly runConfig: LifeInterludeRunConfig;
+  readonly status: PendingLifeInterludeStatus;
+  readonly result?: LifeInterludeResult;
+}
+
 export interface NinePalaceLifeEventSummary {
   readonly attributes: NinePalaceAttributes;
   readonly derivedScores: DerivedFateScores;
@@ -250,6 +268,9 @@ export interface LifeSimulationState {
 
   readonly monthlyLogs: readonly MonthlyLifeLogEntry[];
   readonly pendingMajorChoice?: PendingMajorChoiceRef;
+  readonly pendingMajorChoiceState?: PendingMajorChoiceState;
+  readonly pendingInterlude?: PendingLifeInterludeState;
+  readonly lifeInterludeHistory?: readonly LifeInterludeHistoryEntry[];
 }
 
 export interface LifeEventContext {
